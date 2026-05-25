@@ -24,6 +24,7 @@ import {
   type DateRange,
   type GenerateResult,
   type PSetSummary,
+  type QuizAttemptSummary,
 } from "../lib/ipc";
 
 function defaultRange(): DateRange {
@@ -48,6 +49,7 @@ export default function HistoryPage() {
 
   const [subjects, setSubjects] = useState<string[]>([]);
   const [psets, setPsets] = useState<PSetSummary[]>([]);
+  const [attempts, setAttempts] = useState<QuizAttemptSummary[]>([]);
   const [busy, setBusy] = useState<string | null>(null); // pset_id currently busy
 
   const [reExportResult, setReExportResult] = useState<GenerateResult | null>(null);
@@ -59,8 +61,12 @@ export default function HistoryPage() {
   }, []);
 
   const refresh = useCallback(async () => {
-    const rows = await ipc.list_psets(subject, dateRange);
+    const [rows, attemptRows] = await Promise.all([
+      ipc.list_psets(subject, dateRange),
+      ipc.list_quiz_attempts(subject, dateRange),
+    ]);
     setPsets(rows);
+    setAttempts(attemptRows);
   }, [subject, dateRange]);
 
   useEffect(() => {
@@ -196,6 +202,41 @@ export default function HistoryPage() {
                 </li>
               ))}
             </ul>
+          )}
+
+          {attempts.length > 0 && (
+            <section className="mt-8">
+              <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-muted">
+                Quiz attempts ({attempts.length})
+              </h2>
+              <ul className="divide-y divide-border overflow-hidden rounded-lg border border-border bg-surface">
+                {attempts.map((a) => (
+                  <li
+                    key={a.attempt_id}
+                    className="flex flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
+                  >
+                    <div className="flex-1">
+                      <div className="font-mono text-sm font-medium">{a.attempt_id}</div>
+                      <div className="mt-0.5 text-xs text-muted">
+                        {formatDate(a.date_started)} ·{" "}
+                        <span className="font-medium">{a.subject ?? "(no subject)"}</span> ·{" "}
+                        {a.n_questions} question{a.n_questions === 1 ? "" : "s"}
+                        {a.template_name && <> · {a.template_name}</>}
+                        {a.total_score != null && <> · score {a.total_score.toFixed(1)}</>}
+                      </div>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => navigate(`/quiz/review/${a.attempt_id}`)}
+                    >
+                      <Wand2 className="h-4 w-4" />
+                      Review
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            </section>
           )}
         </div>
       </main>

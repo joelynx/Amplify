@@ -35,11 +35,17 @@ from app.core.stats import (
     subject_distribution,
     topic_distribution,
 )
+from app.interactive import pbs as pbs_runner
+from app.interactive import runner as nonpbs_runner
+from app.interactive import session_manager
+from app.interactive.models import QuizConfig, QuizSession
+from app.interactive.scoring import build_gradient
 from app.persistence.ingest.seed import ingest as run_ingest
 from app.persistence.ingest.seed_tags import run as run_seed_tags
 from app.persistence.repositories import configs as configs_repo
 from app.persistence.repositories import psets as psets_repo
 from app.persistence.repositories import questions as questions_repo
+from app.persistence.repositories import quizzes as quizzes_repo
 from app.persistence.repositories import subjects as subjects_repo
 from app.persistence.repositories import templates as templates_repo
 from app.tex.pdfgen import assemble, compile_to_pdf
@@ -167,6 +173,214 @@ class Api:
             "questions": [asdict(q) for q in result.questions],
             "shortfall": result.shortfall,
         }
+
+    # ---- Step 18: Phase 2 interactive practice (§5.9 / §10) -------------
+
+    def start_quiz(
+        self,
+        filters: dict[str, Any],
+        settings: dict[str, Any],
+    ) -> dict[str, Any]:
+        """Build a QuizSession from filters + settings, persist `quizzes` row,
+        register in the in-memory session_manager, return seed payload."""
+        from datetime import UTC, datetime, timedelta
+
+        template = (settings.get("template") or "FREE_ANSWERING").upper()
+        mode: str = "pbs" if template == "PBS" else "non_pbs"
+
+        # PBS: enforce numerical-only at quiz-start.
+        if mode == "pbs":
+            filters = {**filters, "types": ["numerical"]}
+
+        n = int(settings.get("n_questions", 10))
+        pool_size = int(settings.get("pbs_pool_size", n)) if mode == "pbs" else n
+        s = _resolve_subject(self._conn, filters.get("subject"))
+        try:
+            selection = pick(self._conn, filters, pool_size, subject=s)
+        except FilterError as e:
+            return {"success": False, "error": str(e)}
+        if not selection.questions:
+            return {"success": False, "error": "no questions match the current filters"}
+
+        config = QuizConfig(
+            template=template,  # type: ignore[arg-type]
+            n_questions=n,
+            time_per_question_s=settings.get("time_per_question_s"),
+            total_time_s=settings.get("total_time_s"),
+            allow_skips=bool(settings.get("allow_skips", True)),
+            show_scoring=bool(settings.get("show_scoring", True)),
+            penalize_skips_marks=settings.get("penalize_skips_marks"),
+            enable_hints=bool(settings.get("enable_hints", True)),
+            instant_scoring=bool(settings.get("instant_scoring", False)),
+            show_solutions=bool(settings.get("show_solutions", False)),
+            wait_for_correct=bool(settings.get("wait_for_correct", False)),
+            gradient_mode=settings.get("gradient_mode", "constant"),
+            max_points=float(settings.get("max_points", 10.0)),
+            pbs_num_widgets=int(settings.get("pbs_num_widgets", 3)),
+            pbs_pool_size=int(settings.get("pbs_pool_size", 10)),
+        )
+
+        gradient = build_gradient(config.gradient_mode, len(selection.questions), config.max_points)
+        base_scores = {
+            q.question_id: gradient[i] for i, q in enumerate(selection.questions)
+        }
+
+        quiz_id = quizzes_repo.new_quiz_id("PBS" if mode == "pbs" else "Quiz")
+        started_at = datetime.now(UTC)
+        deadline = (
+            started_at + timedelta(seconds=int(config.total_time_s))
+            if config.total_time_s
+            else None
+        )
+
+        if mode == "pbs":
+            num_widgets = min(config.pbs_num_widgets, len(selection.questions))
+            visible_slots: list[Any] = list(selection.questions[:num_widgets])
+            available_scores = {q.question_id: base_scores[q.question_id] for q in visible_slots}
+            pool_index = num_widgets
+        else:
+            visible_slots = [selection.questions[0]] if selection.questions else [None]
+            available_scores = {}
+            pool_index = 1
+
+        session = QuizSession(
+            quiz_id=quiz_id,
+            mode=mode,  # type: ignore[arg-type]
+            config=config,
+            pool=selection.questions,
+            started_at=started_at,
+            deadline=deadline,
+            visible_slots=visible_slots,
+            pool_index=pool_index,
+            current_index=0,
+            base_scores=base_scores,
+            available_scores=available_scores,
+            wrong_counts={},
+        )
+        session_manager.register(session)
+
+        quizzes_repo.insert_quiz(
+            self._conn,
+            quiz_id=quiz_id,
+            subject=(s.name if s else None),
+            filters=filters,
+            config=config,
+            template_name=template,
+            question_ids=[q.question_id for q in selection.questions],
+        )
+
+        if mode == "pbs":
+            initial = pbs_runner.initial_widgets(session)
+        else:
+            q = session.visible_slots[0]
+            initial = [
+                {
+                    "slot_index": 0,
+                    "question": (nonpbs_runner._question_to_dict(q) if q else None),
+                    "available_score": base_scores.get(q.question_id, 0.0) if q else 0.0,
+                }
+            ]
+
+        return {
+            "success": True,
+            "quiz_id": quiz_id,
+            "mode": mode,
+            "initial_widgets": initial,
+            "total_time_s": config.total_time_s,
+            "n_questions": len(selection.questions),
+        }
+
+    def quiz_take_widget(self, quiz_id: str, slot_index: int) -> dict[str, Any] | None:
+        session = session_manager.get(quiz_id)
+        if session is None:
+            return None
+        if session.mode == "pbs":
+            return pbs_runner.take_widget(session, slot_index)
+        q = nonpbs_runner.take_widget(session, slot_index)
+        if q is None:
+            return None
+        return {
+            "slot_index": 0,
+            "question": nonpbs_runner._question_to_dict(q),
+            "available_score": session.base_scores.get(q.question_id, 0.0),
+        }
+
+    def quiz_submit_answer(
+        self,
+        quiz_id: str,
+        slot_index: int,
+        payload: dict[str, Any],
+    ) -> dict[str, Any]:
+        session = session_manager.get(quiz_id)
+        if session is None:
+            return {"error": "quiz session not found"}
+        if session.mode == "pbs":
+            return pbs_runner.submit_answer(
+                session,
+                slot_index=int(slot_index),
+                user_answer=str(payload.get("user_answer", "")),
+                time_taken_ms=int(payload.get("time_taken_ms", 0)),
+            )
+        return nonpbs_runner.submit_answer(
+            session,
+            slot_index=int(slot_index),
+            user_answer=str(payload.get("user_answer", "")),
+            self_assessment=payload.get("self_assessment"),
+            time_taken_ms=int(payload.get("time_taken_ms", 0)),
+            hints_used=int(payload.get("hints_used", 0)),
+        )
+
+    def quiz_skip(self, quiz_id: str, slot_index: int = 0) -> dict[str, Any]:
+        session = session_manager.get(quiz_id)
+        if session is None:
+            return {"error": "quiz session not found"}
+        if session.mode == "pbs":
+            return {"error": "PBS doesn't support explicit skip"}
+        return nonpbs_runner.skip(session, slot_index)
+
+    def quiz_request_hint(self, quiz_id: str, slot_index: int) -> dict[str, Any]:
+        session = session_manager.get(quiz_id)
+        if session is None or slot_index >= len(session.visible_slots):
+            return {"hint": None, "hint_index": 0}
+        q = session.visible_slots[slot_index]
+        if q is None or not q.hints:
+            return {"hint": None, "hint_index": 0}
+        return {"hint": q.hints, "hint_index": 1}
+
+    def quiz_finish(self, quiz_id: str) -> dict[str, Any]:
+        session = session_manager.get(quiz_id)
+        if session is None:
+            return {"error": "quiz session not found"}
+        total = sum(a.score for a in session.answers)
+        attempt_id = quizzes_repo.insert_attempt(
+            self._conn,
+            quiz_id=quiz_id,
+            date_started=session.started_at.isoformat(timespec="seconds").replace("+00:00", "Z"),
+            answers=session.answers,
+            total_score=total,
+        )
+        session_manager.drop(quiz_id)
+        return {
+            "attempt_id": attempt_id,
+            "summary": {
+                "total_score": total,
+                "n_answered": len(session.answers),
+                "n_correct": sum(1 for a in session.answers if a.correct is True),
+            },
+        }
+
+    def list_quiz_attempts(
+        self,
+        subject: str | None = None,
+        date_range: dict[str, str | None] | None = None,
+    ) -> list[dict[str, Any]]:
+        dr = ((date_range or {}).get("from") or None, (date_range or {}).get("to") or None)
+        return quizzes_repo.list_attempts(
+            self._conn, subject=subject, date_from=dr[0], date_to=dr[1]
+        )
+
+    def get_quiz_attempt(self, attempt_id: str) -> dict[str, Any] | None:
+        return quizzes_repo.get_attempt(self._conn, attempt_id)
 
     # ---- Step 16: Browser (§5.7 / §8.6) ---------------------------------
 

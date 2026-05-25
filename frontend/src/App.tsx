@@ -7,6 +7,8 @@ import AboutPage from "./pages/About";
 import BrowserPage from "./pages/Browser";
 import GeneratePage from "./pages/Generate";
 import HistoryPage from "./pages/History";
+import QuizPage from "./pages/Quiz";
+import QuizReviewPage from "./pages/QuizReview";
 import SettingsPage from "./pages/Settings";
 import StatsPage from "./pages/Stats";
 import SubjectsPage from "./pages/Subjects";
@@ -87,6 +89,8 @@ export default function App() {
             <Route path="/generate" element={<GeneratePage />} />
             <Route path="/subjects" element={<SubjectsPage />} />
             <Route path="/browser" element={<BrowserPage />} />
+            <Route path="/quiz" element={<QuizPage />} />
+            <Route path="/quiz/review/:attemptId" element={<QuizReviewPage />} />
             <Route path="/themes" element={<ThemesPage />} />
             <Route path="/history" element={<HistoryPage />} />
             <Route path="/stats" element={<StatsPage />} />
@@ -105,6 +109,7 @@ export default function App() {
 const NAV: Array<{ to: string; label: string }> = [
   { to: "/", label: "Home" },
   { to: "/generate", label: "Generate" },
+  { to: "/quiz", label: "Quiz" },
   { to: "/browser", label: "Browser" },
   { to: "/history", label: "History" },
   { to: "/stats", label: "Stats" },

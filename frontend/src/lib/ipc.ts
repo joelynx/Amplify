@@ -66,6 +66,116 @@ export interface SearchResult {
   error?: string;
 }
 
+// ---- Quiz (Phase 2 interactive practice) -------------------------------
+
+export type QuizTemplate = "PBS" | "MIT_INTEGRATION_BEE" | "FREE_ANSWERING";
+export type QuizGradient = "random" | "constant" | "custom";
+
+export interface QuizSettings {
+  template: QuizTemplate;
+  n_questions: number;
+  time_per_question_s?: number | null;
+  total_time_s?: number | null;
+  allow_skips?: boolean;
+  show_scoring?: boolean;
+  penalize_skips_marks?: number | null;
+  enable_hints?: boolean;
+  instant_scoring?: boolean;
+  show_solutions?: boolean;
+  wait_for_correct?: boolean;
+  gradient_mode?: QuizGradient;
+  max_points?: number;
+  pbs_num_widgets?: number;
+  pbs_pool_size?: number;
+}
+
+export interface QuizQuestion {
+  question_id: number;
+  topic: string;
+  branch: string;
+  subtopic: string;
+  latexcode: string;
+  type: string | null;
+  hints?: string | null;
+  instructions?: string | null;
+}
+
+export interface QuizSlot {
+  slot_index: number;
+  question: QuizQuestion | null;
+  available_score: number;
+}
+
+export interface StartQuizResult {
+  success: boolean;
+  error?: string;
+  quiz_id?: string;
+  mode?: "pbs" | "non_pbs";
+  initial_widgets?: QuizSlot[];
+  total_time_s?: number | null;
+  n_questions?: number;
+}
+
+export interface QuizAnswerPayload {
+  user_answer: string;
+  self_assessment?: "got_it" | "partial" | "missed" | null;
+  time_taken_ms?: number;
+  hints_used?: number;
+}
+
+export interface QuizAnswerResult {
+  correct: boolean | null;
+  partial_score?: number;
+  canonical_answer?: string | null;
+  solution?: string | null;
+  replacement?: QuizSlot | { question_id?: number; topic?: string; branch?: string; subtopic?: string; latexcode?: string; type?: string | null } | null;
+  finished?: boolean;
+  current_total?: number;
+  error?: string;
+}
+
+export interface QuizFinishSummary {
+  total_score: number;
+  n_answered: number;
+  n_correct: number;
+}
+
+export interface QuizAttemptSummary {
+  attempt_id: string;
+  quiz_id: string;
+  date_started: string;
+  date_finished: string | null;
+  total_score: number | null;
+  subject: string | null;
+  n_questions: number;
+  template_name: string | null;
+}
+
+export interface QuizAttemptAnswer {
+  question_id: number;
+  slot_index: number;
+  user_answer: string;
+  correct: boolean | null;
+  score: number;
+  wrong_attempts: number;
+  self_assessment: string | null;
+  hints_used: number;
+  time_taken_ms: number;
+  submitted_at: string;
+}
+
+export interface QuizAttemptDetail {
+  attempt_id: string;
+  quiz_id: string;
+  date_started: string;
+  date_finished: string | null;
+  total_score: number | null;
+  subject: string | null;
+  template_name: string | null;
+  n_questions: number;
+  answers: QuizAttemptAnswer[];
+}
+
 export interface RandomQuestionsResult {
   questions: Question[];
   shortfall: number;
@@ -123,6 +233,18 @@ interface PyWebViewApi {
     action: string,
     payload?: Record<string, unknown> | null,
   ) => Promise<number>;
+  start_quiz: (filters: Filters, settings: QuizSettings) => Promise<StartQuizResult>;
+  quiz_take_widget: (quiz_id: string, slot_index: number) => Promise<QuizSlot | null>;
+  quiz_submit_answer: (
+    quiz_id: string,
+    slot_index: number,
+    payload: QuizAnswerPayload,
+  ) => Promise<QuizAnswerResult>;
+  quiz_skip: (quiz_id: string, slot_index?: number) => Promise<QuizAnswerResult>;
+  quiz_request_hint: (quiz_id: string, slot_index: number) => Promise<{ hint: string | null; hint_index: number }>;
+  quiz_finish: (quiz_id: string) => Promise<{ attempt_id: string; summary: QuizFinishSummary }>;
+  list_quiz_attempts: (subject?: string | null, date_range?: DateRange | null) => Promise<QuizAttemptSummary[]>;
+  get_quiz_attempt: (attempt_id: string) => Promise<QuizAttemptDetail | null>;
   get_topics: (subject?: string | null, in_syllabus_only?: boolean) => Promise<string[]>;
   get_branches: (subject: string | null, topic: string, in_syllabus_only?: boolean) => Promise<string[]>;
   get_subtopics: (
@@ -394,6 +516,45 @@ export const ipc = {
   ): Promise<number> {
     const api = await bridge();
     return api.mass_action(question_ids, action, payload);
+  },
+  async start_quiz(filters: Filters, settings: QuizSettings): Promise<StartQuizResult> {
+    const api = await bridge();
+    return api.start_quiz(filters, settings);
+  },
+  async quiz_take_widget(quiz_id: string, slot_index: number): Promise<QuizSlot | null> {
+    const api = await bridge();
+    return api.quiz_take_widget(quiz_id, slot_index);
+  },
+  async quiz_submit_answer(
+    quiz_id: string,
+    slot_index: number,
+    payload: QuizAnswerPayload,
+  ): Promise<QuizAnswerResult> {
+    const api = await bridge();
+    return api.quiz_submit_answer(quiz_id, slot_index, payload);
+  },
+  async quiz_skip(quiz_id: string, slot_index = 0): Promise<QuizAnswerResult> {
+    const api = await bridge();
+    return api.quiz_skip(quiz_id, slot_index);
+  },
+  async quiz_request_hint(quiz_id: string, slot_index: number) {
+    const api = await bridge();
+    return api.quiz_request_hint(quiz_id, slot_index);
+  },
+  async quiz_finish(quiz_id: string) {
+    const api = await bridge();
+    return api.quiz_finish(quiz_id);
+  },
+  async list_quiz_attempts(
+    subject: string | null = null,
+    date_range: DateRange | null = null,
+  ): Promise<QuizAttemptSummary[]> {
+    const api = await bridge();
+    return api.list_quiz_attempts(subject, date_range);
+  },
+  async get_quiz_attempt(attempt_id: string): Promise<QuizAttemptDetail | null> {
+    const api = await bridge();
+    return api.get_quiz_attempt(attempt_id);
   },
   async get_topics(subject: string | null = null, in_syllabus_only = true): Promise<string[]> {
     const api = await bridge();
