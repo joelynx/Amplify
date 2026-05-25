@@ -3,6 +3,9 @@ import { HashRouter, Link, Route, Routes, useLocation } from "react-router-dom";
 
 import { BridgeUnavailableError, ipc } from "./lib/ipc";
 import GeneratePage from "./pages/Generate";
+import HistoryPage from "./pages/History";
+import StatsPage from "./pages/Stats";
+import SubjectsPage from "./pages/Subjects";
 import WelcomePage from "./pages/Welcome";
 
 /**
@@ -57,6 +60,9 @@ export default function App() {
           <Routes>
             <Route path="/" element={<WelcomePage />} />
             <Route path="/generate" element={<GeneratePage />} />
+            <Route path="/subjects" element={<SubjectsPage />} />
+            <Route path="/history" element={<HistoryPage />} />
+            <Route path="/stats" element={<StatsPage />} />
           </Routes>
         </div>
       </div>
@@ -67,6 +73,9 @@ export default function App() {
 const NAV: Array<{ to: string; label: string }> = [
   { to: "/", label: "Home" },
   { to: "/generate", label: "Generate" },
+  { to: "/subjects", label: "Subjects" },
+  { to: "/history", label: "History" },
+  { to: "/stats", label: "Stats" },
 ];
 
 function NavBar() {

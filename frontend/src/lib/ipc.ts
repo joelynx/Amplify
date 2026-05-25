@@ -61,6 +61,36 @@ export interface RandomQuestionsResult {
 
 export type ConceptTree = Record<string, Record<string, string[]>>;
 
+/** Wire shape of a saved subject (spec §3.6). */
+export interface SubjectPayload {
+  name: string;
+  topics: string[];
+  excluded_branches: Record<string, string[]>;
+  excluded_subtopics: Record<string, Record<string, string[]>>;
+  description: string;
+  schema_version: number;
+  is_active?: boolean;
+}
+
+/** Wire shape of a saved template (spec §3.3 + the solutions column added in Step 2). */
+export interface TemplatePayload {
+  name: string;
+  subject: string | null;
+  topic_list: string[];
+  branch_list: string[];
+  subtopic_list: string[];
+  type_list: string[];
+  source_list: string[];
+  tag_list: { compulsory: string[]; optional: string[]; excluded: string[] };
+  n_questions: number;
+  reuse_questions: boolean;
+  include_sources: boolean;
+  in_syllabus_only: boolean;
+  min_difficulty: number | null;
+  save_directory: string | null;
+  solutions: string | null;
+}
+
 interface PyWebViewApi {
   ping: () => Promise<string>;
   log: (level: LogLevel, message: string) => Promise<void>;
@@ -75,15 +105,105 @@ interface PyWebViewApi {
     in_syllabus_only?: boolean,
   ) => Promise<string[]>;
   get_concept_tree: (subject?: string | null, in_syllabus_only?: boolean) => Promise<ConceptTree>;
-  get_types: () => Promise<string[]>;
-  get_sources: () => Promise<string[]>;
+  get_types: (filters?: Filters | null) => Promise<string[]>;
+  get_sources: (filters?: Filters | null) => Promise<string[]>;
   get_all_tags: (filters?: Filters | null) => Promise<string[]>;
   list_subjects: () => Promise<string[]>;
   get_active_subject: () => Promise<string | null>;
+  load_subject: (name: string) => Promise<SubjectPayload | null>;
+  save_subject: (name: string, payload: SubjectPayload) => Promise<void>;
+  delete_subject: (name: string) => Promise<void>;
+  rename_subject: (old_name: string, new_name: string) => Promise<void>;
+  subject_name_available: (name: string) => Promise<boolean>;
+  activate_subject: (name: string | null) => Promise<void>;
+  export_subject_to_file: (name: string) => Promise<string | null>;
+  import_subject_from_file: () => Promise<SubjectPayload | null>;
   list_templates: () => Promise<string[]>;
+  template_name_available: (name: string) => Promise<boolean>;
+  load_template: (name: string) => Promise<TemplatePayload | null>;
+  save_template: (name: string, payload: TemplatePayload) => Promise<void>;
+  delete_template: (name: string) => Promise<void>;
+  rename_template: (old_name: string, new_name: string) => Promise<void>;
   get_config: (key: string) => Promise<unknown>;
   set_config: (key: string, value: unknown) => Promise<void>;
   pick_save_directory: () => Promise<string | null>;
+  generate_pdf: (filters: Filters, output_settings: OutputSettings) => Promise<GenerateResult>;
+  export_tex: (filters: Filters, output_settings: OutputSettings) => Promise<ExportResult>;
+  open_file: (path: string) => Promise<void>;
+  get_stats: (subject?: string | null, date_range?: DateRange | null) => Promise<StatsBundle>;
+  get_subject_distribution: (date_range?: DateRange | null) => Promise<DistributionDatum[]>;
+  get_topic_distribution: (
+    subject?: string | null,
+    date_range?: DateRange | null,
+  ) => Promise<DistributionDatum[]>;
+  list_psets: (subject?: string | null, date_range?: DateRange | null) => Promise<PSetSummary[]>;
+  delete_pset: (pset_id: string) => Promise<void>;
+  open_pset_file: (pset_id: string) => Promise<OpenPsetResult>;
+  re_export_pset_pdf: (pset_id: string) => Promise<GenerateResult>;
+  get_pset_filters: (pset_id: string) => Promise<TemplatePayload | null>;
+}
+
+export interface OutputSettings {
+  n_questions: number;
+  reuse_questions: boolean;
+  include_sources: boolean;
+  solutions: string;
+  min_difficulty: number;
+  in_syllabus_only: boolean;
+  save_directory: string | null;
+  template_name?: string | null;
+}
+
+export interface GenerateResult {
+  success: boolean;
+  pset_id?: string;
+  path?: string | null;
+  fallback?: string | null;
+  errors?: string;
+  shortfall?: number;
+}
+
+export interface ExportResult {
+  success: boolean;
+  path?: string;
+  errors?: string;
+  shortfall?: number;
+}
+
+export interface DateRange {
+  from?: string | null;
+  to?: string | null;
+}
+
+export interface StatsBundle {
+  psets_generated: number;
+  total_questions_seen: number;
+  unique_questions_seen: number;
+  fraction_questions_seen: number;
+  max_questions_in_single_pset: number;
+  max_question_multiplicity: number;
+  avg_question_multiplicity: number;
+  avg_difficulty_rating: number | null;
+  total_questions_in_subject: number;
+}
+
+export interface DistributionDatum {
+  label: string;
+  count: number;
+}
+
+export interface PSetSummary {
+  pset_id: string;
+  date_created: string;
+  n_questions: number;
+  subject: string | null;
+  template_name: string | null;
+}
+
+export interface OpenPsetResult {
+  success: boolean;
+  path?: string;
+  errors?: string;
 }
 
 declare global {
@@ -186,13 +306,13 @@ export const ipc = {
     const api = await bridge();
     return api.get_concept_tree(subject, in_syllabus_only);
   },
-  async get_types(): Promise<string[]> {
+  async get_types(filters: Filters | null = null): Promise<string[]> {
     const api = await bridge();
-    return api.get_types();
+    return api.get_types(filters);
   },
-  async get_sources(): Promise<string[]> {
+  async get_sources(filters: Filters | null = null): Promise<string[]> {
     const api = await bridge();
-    return api.get_sources();
+    return api.get_sources(filters);
   },
   async get_all_tags(filters: Filters | null = null): Promise<string[]> {
     const api = await bridge();
@@ -206,9 +326,61 @@ export const ipc = {
     const api = await bridge();
     return api.get_active_subject();
   },
+  async load_subject(name: string): Promise<SubjectPayload | null> {
+    const api = await bridge();
+    return api.load_subject(name);
+  },
+  async save_subject(name: string, payload: SubjectPayload): Promise<void> {
+    const api = await bridge();
+    return api.save_subject(name, payload);
+  },
+  async delete_subject(name: string): Promise<void> {
+    const api = await bridge();
+    return api.delete_subject(name);
+  },
+  async rename_subject(old_name: string, new_name: string): Promise<void> {
+    const api = await bridge();
+    return api.rename_subject(old_name, new_name);
+  },
+  async subject_name_available(name: string): Promise<boolean> {
+    const api = await bridge();
+    return api.subject_name_available(name);
+  },
+  async activate_subject(name: string | null): Promise<void> {
+    const api = await bridge();
+    return api.activate_subject(name);
+  },
+  async export_subject_to_file(name: string): Promise<string | null> {
+    const api = await bridge();
+    return api.export_subject_to_file(name);
+  },
+  async import_subject_from_file(): Promise<SubjectPayload | null> {
+    const api = await bridge();
+    return api.import_subject_from_file();
+  },
   async list_templates(): Promise<string[]> {
     const api = await bridge();
     return api.list_templates();
+  },
+  async template_name_available(name: string): Promise<boolean> {
+    const api = await bridge();
+    return api.template_name_available(name);
+  },
+  async load_template(name: string): Promise<TemplatePayload | null> {
+    const api = await bridge();
+    return api.load_template(name);
+  },
+  async save_template(name: string, payload: TemplatePayload): Promise<void> {
+    const api = await bridge();
+    return api.save_template(name, payload);
+  },
+  async delete_template(name: string): Promise<void> {
+    const api = await bridge();
+    return api.delete_template(name);
+  },
+  async rename_template(old_name: string, new_name: string): Promise<void> {
+    const api = await bridge();
+    return api.rename_template(old_name, new_name);
   },
   async get_config(key: string): Promise<unknown> {
     const api = await bridge();
@@ -221,5 +393,58 @@ export const ipc = {
   async pick_save_directory(): Promise<string | null> {
     const api = await bridge();
     return api.pick_save_directory();
+  },
+  async generate_pdf(filters: Filters, output_settings: OutputSettings): Promise<GenerateResult> {
+    const api = await bridge();
+    return api.generate_pdf(filters, output_settings);
+  },
+  async export_tex(filters: Filters, output_settings: OutputSettings): Promise<ExportResult> {
+    const api = await bridge();
+    return api.export_tex(filters, output_settings);
+  },
+  async open_file(path: string): Promise<void> {
+    const api = await bridge();
+    return api.open_file(path);
+  },
+  async get_stats(
+    subject: string | null = null,
+    date_range: DateRange | null = null,
+  ): Promise<StatsBundle> {
+    const api = await bridge();
+    return api.get_stats(subject, date_range);
+  },
+  async get_subject_distribution(date_range: DateRange | null = null): Promise<DistributionDatum[]> {
+    const api = await bridge();
+    return api.get_subject_distribution(date_range);
+  },
+  async get_topic_distribution(
+    subject: string | null = null,
+    date_range: DateRange | null = null,
+  ): Promise<DistributionDatum[]> {
+    const api = await bridge();
+    return api.get_topic_distribution(subject, date_range);
+  },
+  async list_psets(
+    subject: string | null = null,
+    date_range: DateRange | null = null,
+  ): Promise<PSetSummary[]> {
+    const api = await bridge();
+    return api.list_psets(subject, date_range);
+  },
+  async delete_pset(pset_id: string): Promise<void> {
+    const api = await bridge();
+    return api.delete_pset(pset_id);
+  },
+  async open_pset_file(pset_id: string): Promise<OpenPsetResult> {
+    const api = await bridge();
+    return api.open_pset_file(pset_id);
+  },
+  async re_export_pset_pdf(pset_id: string): Promise<GenerateResult> {
+    const api = await bridge();
+    return api.re_export_pset_pdf(pset_id);
+  },
+  async get_pset_filters(pset_id: string): Promise<TemplatePayload | null> {
+    const api = await bridge();
+    return api.get_pset_filters(pset_id);
   },
 };

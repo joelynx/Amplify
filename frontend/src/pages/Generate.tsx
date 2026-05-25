@@ -11,8 +11,12 @@
  */
 
 import { useEffect, useMemo, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 import { Card } from "../components/ui/Card";
+import { Button } from "../components/ui/Button";
+import { Modal } from "../components/ui/Modal";
 import { CheckableTree } from "../components/generate/CheckableTree";
 import { TagTray } from "../components/generate/TagTray";
 import { ChipTray } from "../components/generate/ChipTray";
@@ -21,9 +25,24 @@ import { TemplatePicker } from "../components/generate/TemplatePicker";
 import { OutputSettings } from "../components/generate/OutputSettings";
 import { ActionRow } from "../components/generate/ActionRow";
 import { StatusBar } from "../components/generate/StatusBar";
+import { NameDialog } from "../components/generate/NameDialog";
+import { TemplateManager } from "../components/generate/TemplateManager";
 import { useDebounced } from "../lib/debounce";
-import { ipc, type ConceptTree } from "../lib/ipc";
-import { draftToFilters, useGenerateStore } from "../state/generate";
+import {
+  ipc,
+  type ConceptTree,
+  type ExportResult,
+  type GenerateResult,
+  type TemplatePayload,
+} from "../lib/ipc";
+import {
+  draftEqualsTemplate,
+  draftToFilters,
+  draftToOutputSettings,
+  draftToTemplate,
+  templateSubtopicsToLeaves,
+  useGenerateStore,
+} from "../state/generate";
 
 export default function GeneratePage() {
   const draft = useGenerateStore();
@@ -43,17 +62,29 @@ export default function GeneratePage() {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const [subs, tmpls, defaultN, savedDir] = await Promise.all([
+      const [subs, tmpls, defaultN, savedDir, activeSubject] = await Promise.all([
         ipc.list_subjects(),
         ipc.list_templates(),
         ipc.get_config("DEFAULT_NO_QUESTIONS"),
         ipc.get_config("FILE_SAVE_LOCATION"),
+        ipc.get_active_subject(),
       ]);
       if (cancelled) return;
       setSubjects(subs);
       setTemplates(tmpls);
       if (typeof defaultN === "number") draft.setNQuestions(defaultN);
       if (typeof savedDir === "string") draft.setSaveDirectory(savedDir);
+      // Spec §8.1: Subject combobox "defaults to active subject". Only default
+      // when the form looks untouched — otherwise we'd clobber a template /
+      // generate-similar selection that already populated the draft.
+      if (
+        activeSubject &&
+        draft.subject === null &&
+        draft.selectedLeaves.size === 0 &&
+        draft.templateName === null
+      ) {
+        draft.setSubject(activeSubject);
+      }
     })();
     return () => {
       cancelled = true;
@@ -100,13 +131,15 @@ export default function GeneratePage() {
     };
   }, [debouncedFilters]);
 
-  // Dynamic tag / source / type lists.
+  // Dynamic tag / source / type lists — every dropdown re-queries with the
+  // current filters (spec §7.3). Backend strips the self-key from filters so
+  // the offerings are "what would still match if you added this option".
   useEffect(() => {
     let cancelled = false;
     Promise.all([
       ipc.get_all_tags(debouncedFilters),
-      ipc.get_sources(),
-      ipc.get_types(),
+      ipc.get_sources(debouncedFilters),
+      ipc.get_types(debouncedFilters),
     ]).then(([t, s, ty]) => {
       if (cancelled) return;
       setTags(t);
@@ -118,17 +151,128 @@ export default function GeneratePage() {
     };
   }, [debouncedFilters]);
 
+  // --- generation state --------------------------------------------
+  const [busy, setBusy] = useState<"idle" | "generating" | "exporting">("idle");
+  const [generateResult, setGenerateResult] = useState<GenerateResult | null>(null);
+  const [exportResult, setExportResult] = useState<ExportResult | null>(null);
+
+  // --- template state ----------------------------------------------
+  const [loadedTemplate, setLoadedTemplate] = useState<TemplatePayload | null>(null);
+  const [saveDialogOpen, setSaveDialogOpen] = useState(false);
+  const [managerOpen, setManagerOpen] = useState(false);
+
+  const refreshTemplates = async () => {
+    const list = await ipc.list_templates();
+    setTemplates(list);
+  };
+
+  const applyPayload = (payload: TemplatePayload) => {
+    // Order matters: setSubject() clears leaves+tags, so call it before
+    // populating them.
+    draft.setSubject(payload.subject);
+    const leaves = templateSubtopicsToLeaves(payload.subtopic_list, tree);
+    draft.clearLeaves();
+    draft.setLeavesBulk(Array.from(leaves), true);
+    draft.clearTags();
+    for (const t of payload.tag_list.compulsory) draft.addTag(t, "compulsory");
+    for (const t of payload.tag_list.optional) draft.addTag(t, "optional");
+    for (const t of payload.tag_list.excluded) draft.addTag(t, "excluded");
+    draft.setSources(payload.source_list);
+    draft.setTypes(payload.type_list);
+    draft.setNQuestions(payload.n_questions);
+    draft.setReuseQuestions(payload.reuse_questions);
+    draft.setIncludeSources(payload.include_sources);
+    draft.setInSyllabusOnly(payload.in_syllabus_only);
+    if (payload.min_difficulty != null) draft.setMinDifficulty(payload.min_difficulty);
+    if (payload.save_directory) draft.setSaveDirectory(payload.save_directory);
+    if (payload.solutions) {
+      draft.setSolutions(payload.solutions as Parameters<typeof draft.setSolutions>[0]);
+    }
+  };
+
+  const handleSelectTemplate = async (name: string | null) => {
+    draft.setTemplate(name);
+    if (!name) {
+      setLoadedTemplate(null);
+      return;
+    }
+    const payload = await ipc.load_template(name);
+    if (!payload) return;
+    setLoadedTemplate(payload);
+    applyPayload(payload);
+  };
+
+  // Generate similar: another page navigated here with a TemplatePayload in
+  // location state. Apply it once, then clear the state so subsequent
+  // navigations don't re-apply.
+  const location = useLocation();
+  const navigate = useNavigate();
+  const pendingTemplate = (location.state as { template?: TemplatePayload } | null)?.template;
+  useEffect(() => {
+    if (!pendingTemplate) return;
+    // Wait until the concept tree has been fetched — applyPayload uses it to
+    // expand subtopic names into leaf keys.
+    if (Object.keys(tree).length === 0) return;
+    applyPayload(pendingTemplate);
+    // Generate similar deliberately leaves loadedTemplate null — there's no
+    // back-link to the source PSet (spec §8.5), and the user is expected to
+    // edit before generating.
+    draft.setTemplate(null);
+    setLoadedTemplate(null);
+    navigate("/generate", { replace: true, state: null });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pendingTemplate, tree]);
+
+  const handleSaveTemplate = () => setSaveDialogOpen(true);
+
+  const handleSaveDialogConfirm = async (name: string) => {
+    const payload = draftToTemplate(draft, name);
+    await ipc.save_template(name, payload);
+    setSaveDialogOpen(false);
+    setLoadedTemplate(payload);
+    draft.setTemplate(name);
+    await refreshTemplates();
+  };
+
+  // Save Template button greys when the form draft *exactly* matches the
+  // currently-loaded template (spec §8.1). Also greys when there's no
+  // selection at all — saving an empty template isn't useful.
+  const saveTemplateDisabled =
+    draft.selectedLeaves.size === 0 ||
+    (loadedTemplate !== null && draftEqualsTemplate(draft, loadedTemplate));
+
   // --- validation ---------------------------------------------------
   const generateDisabledReason = useMemo<string | null>(() => {
+    if (busy !== "idle") return "Working…";
     if (draft.selectedLeaves.size === 0) return "Pick at least one subtopic from the tree";
     if (draft.nQuestions < 1) return "Set the question count to at least 1";
     if (!draft.saveDirectory) return "Choose a save directory";
     return null;
-  }, [draft.selectedLeaves, draft.nQuestions, draft.saveDirectory]);
+  }, [busy, draft.selectedLeaves, draft.nQuestions, draft.saveDirectory]);
 
-  // Save Template stays grey-only-when-equal once template payloads are wired
-  // (Step 6). For now we disable it whenever there's no edits at all.
-  const saveTemplateDisabled = useMemo(() => draft.selectedLeaves.size === 0, [draft.selectedLeaves]);
+  const handleGenerate = async () => {
+    setBusy("generating");
+    try {
+      const result = await ipc.generate_pdf(draftToFilters(draft), draftToOutputSettings(draft));
+      setGenerateResult(result);
+    } catch (e) {
+      setGenerateResult({ success: false, errors: e instanceof Error ? e.message : String(e) });
+    } finally {
+      setBusy("idle");
+    }
+  };
+
+  const handleExport = async () => {
+    setBusy("exporting");
+    try {
+      const result = await ipc.export_tex(draftToFilters(draft), draftToOutputSettings(draft));
+      setExportResult(result);
+    } catch (e) {
+      setExportResult({ success: false, errors: e instanceof Error ? e.message : String(e) });
+    } finally {
+      setBusy("idle");
+    }
+  };
 
   return (
     <div className="flex h-full flex-col">
@@ -148,10 +292,8 @@ export default function GeneratePage() {
                 <TemplatePicker
                   templates={templates}
                   value={draft.templateName}
-                  onChange={draft.setTemplate}
-                  onOpenManager={() => {
-                    /* Step 6 wires the Template Manager dialog */
-                  }}
+                  onChange={handleSelectTemplate}
+                  onOpenManager={() => setManagerOpen(true)}
                 />
               </label>
               <label className="flex flex-col gap-1 text-sm">
@@ -204,20 +346,168 @@ export default function GeneratePage() {
             <ActionRow
               saveTemplateDisabled={saveTemplateDisabled}
               generateDisabledReason={generateDisabledReason}
-              onSaveTemplate={() => {
-                /* Step 6 wires save */
-              }}
-              onExportLatex={() => {
-                /* Step 5 wires .tex export */
-              }}
-              onGenerate={() => {
-                /* Step 5 wires PDF generation */
-              }}
+              onSaveTemplate={handleSaveTemplate}
+              onExportLatex={handleExport}
+              onGenerate={handleGenerate}
             />
           </Card>
         </div>
       </main>
       <StatusBar count={count} loading={countLoading} error={countError} />
+      <GenerateResultModal result={generateResult} onClose={() => setGenerateResult(null)} />
+      <ExportResultModal result={exportResult} onClose={() => setExportResult(null)} />
+      <NameDialog
+        open={saveDialogOpen}
+        title="Save template"
+        initialValue={loadedTemplate?.name ?? ""}
+        takenNames={templates.filter((n) => n !== loadedTemplate?.name)}
+        confirmLabel="Save"
+        onCancel={() => setSaveDialogOpen(false)}
+        onConfirm={handleSaveDialogConfirm}
+      />
+      <TemplateManager
+        open={managerOpen}
+        onClose={() => setManagerOpen(false)}
+        templates={templates}
+        onChange={refreshTemplates}
+        loadedName={loadedTemplate?.name ?? null}
+        onLoadedRenamed={(newName) => {
+          setLoadedTemplate((t) => (t ? { ...t, name: newName } : t));
+          draft.setTemplate(newName);
+        }}
+        onLoadedDeleted={() => {
+          setLoadedTemplate(null);
+          draft.setTemplate(null);
+        }}
+      />
     </div>
+  );
+}
+
+function GenerateResultModal({
+  result,
+  onClose,
+}: {
+  result: GenerateResult | null;
+  onClose: () => void;
+}) {
+  if (!result) return null;
+  const open = result.path != null && result.success;
+  const fellBack = !result.success && result.fallback != null;
+
+  if (result.success) {
+    return (
+      <Modal
+        open
+        onClose={onClose}
+        title="PDF generated"
+        tone="success"
+        footer={
+          <>
+            {result.path && (
+              <Button variant="outline" onClick={() => ipc.open_file(result.path!)}>
+                Open PDF
+              </Button>
+            )}
+            <Button variant="primary" onClick={onClose}>
+              OK
+            </Button>
+          </>
+        }
+      >
+        <p>
+          Saved to <code className="font-mono break-all">{result.path}</code>
+        </p>
+        {result.shortfall != null && result.shortfall > 0 && (
+          <p className="mt-2 text-warning">
+            Note: the filter matched fewer questions than requested ({result.shortfall} short).
+          </p>
+        )}
+        {void open}
+      </Modal>
+    );
+  }
+
+  return (
+    <Modal
+      open
+      onClose={onClose}
+      title={fellBack ? "Compile failed — .tex fallback saved" : "Generate failed"}
+      tone="error"
+      footer={
+        <>
+          {result.fallback && (
+            <Button variant="outline" onClick={() => ipc.open_file(result.fallback!)}>
+              Open .tex
+            </Button>
+          )}
+          <Button variant="primary" onClick={onClose}>
+            OK
+          </Button>
+        </>
+      }
+    >
+      {fellBack && result.fallback && (
+        <p className="mb-2">
+          Fallback saved to <code className="font-mono break-all">{result.fallback}</code>
+        </p>
+      )}
+      {result.errors && (
+        <pre className="max-h-40 overflow-y-auto rounded-md bg-surface p-2 text-xs whitespace-pre-wrap">
+          {result.errors}
+        </pre>
+      )}
+    </Modal>
+  );
+}
+
+function ExportResultModal({
+  result,
+  onClose,
+}: {
+  result: ExportResult | null;
+  onClose: () => void;
+}) {
+  if (!result) return null;
+  if (result.success) {
+    return (
+      <Modal
+        open
+        onClose={onClose}
+        title="LaTeX exported"
+        tone="success"
+        footer={
+          <>
+            {result.path && (
+              <Button variant="outline" onClick={() => ipc.open_file(result.path!)}>
+                Open .tex
+              </Button>
+            )}
+            <Button variant="primary" onClick={onClose}>
+              OK
+            </Button>
+          </>
+        }
+      >
+        <p>
+          Saved to <code className="font-mono break-all">{result.path}</code>
+        </p>
+      </Modal>
+    );
+  }
+  return (
+    <Modal
+      open
+      onClose={onClose}
+      title="Export failed"
+      tone="error"
+      footer={
+        <Button variant="primary" onClick={onClose}>
+          OK
+        </Button>
+      }
+    >
+      <p>{result.errors}</p>
+    </Modal>
   );
 }

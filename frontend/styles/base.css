@@ -44,3 +44,30 @@ body {
   font-family: var(--font-family);
   font-size: var(--rem);
 }
+
+/* --------------------------------------------------------------------
+ * .amplify-tooltip — themed; spec §9.3.
+ * Default Light + Default Dark variants here. Flavor themes (Step 12+)
+ * override these rules in their own theme.css.
+ * ------------------------------------------------------------------ */
+.amplify-tooltip {
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.3;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  background: var(--text);
+  color: var(--background);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 60;
+}
+.amplify-tooltip .amp-label {
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+.amplify-tooltip .amp-meta {
+  opacity: 0.85;
+}

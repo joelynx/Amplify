@@ -17,15 +17,15 @@ import { cn } from "../../lib/cn";
 import { useGenerateStore, type TagCategory } from "../../state/generate";
 import { Combobox } from "../ui/Combobox";
 import { Switch } from "../ui/Switch";
+import {
+  cascadeOnCompulsoryChange,
+  cascadeOnExcludeChange,
+  categoryFromToggles,
+  type ToggleState,
+} from "./tagToggle";
 
 interface Props {
   available: readonly string[];
-}
-
-function categoryFromToggles(compulsory: boolean, exclude: boolean): TagCategory {
-  if (exclude) return "excluded";
-  if (compulsory) return "compulsory";
-  return "optional";
 }
 
 const chipStyle: Record<TagCategory, string> = {
@@ -39,20 +39,12 @@ export function TagTray({ available }: Props) {
   const addTag = useGenerateStore((s) => s.addTag);
   const removeTag = useGenerateStore((s) => s.removeTag);
 
-  const [compulsoryOn, setCompulsoryOn] = useState(false);
-  const [excludeOn, setExcludeOn] = useState(false);
+  const [toggles, setToggles] = useState<ToggleState>({ compulsory: false, exclude: false });
 
-  const handleCompulsoryChange = (v: boolean) => {
-    setCompulsoryOn(v);
-    // Spec: turning Compulsory off while Exclude is on also turns Exclude off.
-    if (!v && excludeOn) setExcludeOn(false);
-  };
-  const handleExcludeChange = (v: boolean) => {
-    setExcludeOn(v);
-    // Spec: adding a chip while Exclude is on forces Compulsory on. Keep the
-    // toggles in sync proactively too — clicking Exclude on flips Compulsory on.
-    if (v) setCompulsoryOn(true);
-  };
+  const handleCompulsoryChange = (v: boolean) =>
+    setToggles((prev) => cascadeOnCompulsoryChange(prev, v));
+  const handleExcludeChange = (v: boolean) =>
+    setToggles((prev) => cascadeOnExcludeChange(prev, v));
 
   // The combobox lists tags that aren't already in any category.
   const allInUse = useMemo(
@@ -66,8 +58,7 @@ export function TagTray({ available }: Props) {
 
   const handlePick = (tag: string | null) => {
     if (!tag) return;
-    const category = categoryFromToggles(compulsoryOn, excludeOn);
-    addTag(tag, category);
+    addTag(tag, categoryFromToggles(toggles));
   };
 
   const allChips: Array<{ tag: string; category: TagCategory }> = [
@@ -89,10 +80,10 @@ export function TagTray({ available }: Props) {
         />
         <ToggleRow
           label="Compulsory?"
-          checked={compulsoryOn}
+          checked={toggles.compulsory}
           onChange={handleCompulsoryChange}
         />
-        <ToggleRow label="Exclude" checked={excludeOn} onChange={handleExcludeChange} />
+        <ToggleRow label="Exclude" checked={toggles.exclude} onChange={handleExcludeChange} />
       </div>
 
       {allChips.length > 0 && (

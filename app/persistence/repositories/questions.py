@@ -154,17 +154,56 @@ def concept_tree(
     return tree
 
 
-def distinct_types(conn: sqlite3.Connection) -> list[str]:
+def distinct_types(
+    conn: sqlite3.Connection,
+    filters: dict[str, Any] | None = None,
+    subject: Subject | None = None,
+) -> list[str]:
+    """Distinct `type` values that still yield ≥1 match under `filters` (spec §7.3).
+
+    When `filters` is None and no subject, returns every distinct type in the
+    DB. Callers (Api.get_types) strip the `types` key from `filters` before
+    passing so the dropdown shows "what types are still reachable" rather than
+    just the currently-selected types."""
+    if filters is None and subject is None:
+        return [
+            row[0]
+            for row in conn.execute(
+                "SELECT DISTINCT type FROM questions WHERE type IS NOT NULL ORDER BY type"
+            )
+        ]
+    payload = subject.to_payload() if subject else None
+    where, params = assemble_where(filters, payload)
     return [
         row[0]
-        for row in conn.execute("SELECT DISTINCT type FROM questions WHERE type IS NOT NULL ORDER BY type")
+        for row in conn.execute(
+            f"SELECT DISTINCT type FROM questions WHERE {where} AND type IS NOT NULL ORDER BY type",
+            params,
+        )
     ]
 
 
-def distinct_sources(conn: sqlite3.Connection) -> list[str]:
+def distinct_sources(
+    conn: sqlite3.Connection,
+    filters: dict[str, Any] | None = None,
+    subject: Subject | None = None,
+) -> list[str]:
+    """Distinct `source` values that still yield ≥1 match under `filters` (spec §7.3)."""
+    if filters is None and subject is None:
+        return [
+            row[0]
+            for row in conn.execute(
+                "SELECT DISTINCT source FROM questions WHERE source IS NOT NULL ORDER BY source"
+            )
+        ]
+    payload = subject.to_payload() if subject else None
+    where, params = assemble_where(filters, payload)
     return [
         row[0]
-        for row in conn.execute("SELECT DISTINCT source FROM questions WHERE source IS NOT NULL ORDER BY source")
+        for row in conn.execute(
+            f"SELECT DISTINCT source FROM questions WHERE {where} AND source IS NOT NULL ORDER BY source",
+            params,
+        )
     ]
 
 

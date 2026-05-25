@@ -9,7 +9,7 @@
 
 import { create } from "zustand";
 
-import type { Filters, TagFilters } from "../lib/ipc";
+import type { ConceptTree, Filters, OutputSettings, TagFilters, TemplatePayload } from "../lib/ipc";
 
 export type SolutionsValue =
   | "none"
@@ -179,4 +179,79 @@ export function draftToFilters(draft: GenerateDraft): Filters {
     reuse_questions: draft.reuseQuestions,
     in_syllabus_only: draft.inSyllabusOnly,
   };
+}
+
+/** Output-side settings the Python backend reads when assembling the PDF. */
+export function draftToOutputSettings(draft: GenerateDraft): OutputSettings {
+  return {
+    n_questions: draft.nQuestions,
+    reuse_questions: draft.reuseQuestions,
+    include_sources: draft.includeSources,
+    solutions: draft.solutions,
+    min_difficulty: draft.minDifficulty,
+    in_syllabus_only: draft.inSyllabusOnly,
+    save_directory: draft.saveDirectory,
+    template_name: draft.templateName,
+  };
+}
+
+// ---- Template (de)serialization ----------------------------------------
+
+/** Collapse the form draft into the JSON shape saved in the `templates` table.
+ * Subtopic names alone are stored (taxonomy lookups happen on load against the
+ * live concept tree). */
+export function draftToTemplate(draft: GenerateDraft, name: string): TemplatePayload {
+  const subtopics = Array.from(new Set(
+    Array.from(draft.selectedLeaves).map((k) => parseLeaf(k).subtopic),
+  )).sort();
+  return {
+    name,
+    subject: draft.subject,
+    topic_list: [],
+    branch_list: [],
+    subtopic_list: subtopics,
+    type_list: [...draft.types].sort(),
+    source_list: [...draft.sources].sort(),
+    tag_list: {
+      compulsory: [...draft.tags.compulsory].sort(),
+      optional: [...draft.tags.optional].sort(),
+      excluded: [...draft.tags.excluded].sort(),
+    },
+    n_questions: draft.nQuestions,
+    reuse_questions: draft.reuseQuestions,
+    include_sources: draft.includeSources,
+    in_syllabus_only: draft.inSyllabusOnly,
+    min_difficulty: draft.minDifficulty,
+    save_directory: draft.saveDirectory,
+    solutions: draft.solutions,
+  };
+}
+
+/** Reconstruct the leaf-key set from a template's `subtopic_list` using the
+ * current concept tree to find each subtopic's `(topic, branch)` parent.
+ *
+ * If a subtopic name appears under multiple branches (rare in practice), every
+ * occurrence is included — round-trip is then necessarily lossy, but inclusive
+ * matches user intent better than dropping the entry. */
+export function templateSubtopicsToLeaves(
+  subtopics: readonly string[],
+  tree: ConceptTree,
+): Set<string> {
+  const want = new Set(subtopics);
+  const out = new Set<string>();
+  for (const [topic, branches] of Object.entries(tree)) {
+    for (const [branch, subs] of Object.entries(branches)) {
+      for (const sub of subs) {
+        if (want.has(sub)) out.add(leafKey(topic, branch, sub));
+      }
+    }
+  }
+  return out;
+}
+
+/** Compare a draft against a saved template's payload for the spec's
+ * "Save Template greys when payload exactly matches" rule (§8.1). */
+export function draftEqualsTemplate(draft: GenerateDraft, t: TemplatePayload): boolean {
+  const a = draftToTemplate(draft, t.name);
+  return JSON.stringify(a) === JSON.stringify(t);
 }

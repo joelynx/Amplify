@@ -26,8 +26,7 @@ export function Tooltip({ content, children, className }: TooltipProps) {
         <span
           role="tooltip"
           className={cn(
-            "amplify-tooltip pointer-events-none absolute left-1/2 bottom-full mb-2 -translate-x-1/2",
-            "whitespace-nowrap rounded-md bg-text px-2 py-1 text-xs font-medium text-background shadow-lg",
+            "amplify-tooltip absolute left-1/2 bottom-full mb-2 -translate-x-1/2",
             className,
           )}
         >

@@ -29,6 +29,19 @@ def list_names(conn: sqlite3.Connection) -> list[str]:
     return [row["name"] for row in conn.execute("SELECT name FROM subjects ORDER BY name")]
 
 
+def exists(conn: sqlite3.Connection, name: str) -> bool:
+    return conn.execute("SELECT 1 FROM subjects WHERE name = ?", (name,)).fetchone() is not None
+
+
+def rename(conn: sqlite3.Connection, old_name: str, new_name: str) -> None:
+    if old_name == new_name:
+        return
+    cur = conn.execute("UPDATE subjects SET name = ? WHERE name = ?", (new_name, old_name))
+    if cur.rowcount == 0:
+        raise KeyError(f"no subject named {old_name!r}")
+    conn.commit()
+
+
 def get(conn: sqlite3.Connection, name: str) -> Subject | None:
     row = conn.execute("SELECT name, payload, is_active FROM subjects WHERE name = ?", (name,)).fetchone()
     return _row_to_subject(row) if row else None
