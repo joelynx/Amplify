@@ -64,15 +64,11 @@ export function CalendarHeatmap({ data, year, month = 0, mode = "year" }: Props)
     const tooltip = d3.select(tooltipEl);
 
     const max = Math.max(0, ...Object.values(data));
-    const color = d3
-      .scaleSequential<string>()
-      .domain([0, Math.max(1, max)])
-      .interpolator((t) => d3.interpolate("var(--surface)", "var(--primary)")(t) as string);
 
     if (mode === "year") {
-      renderYear(svg, tooltip, data, year, color);
+      renderYear(svg, tooltip, data, year, max);
     } else {
-      renderMonth(svg, tooltip, data, year, month, color);
+      renderMonth(svg, tooltip, data, year, month, max);
     }
   }, [data, year, month, mode]);
 
@@ -88,9 +84,24 @@ export function CalendarHeatmap({ data, year, month = 0, mode = "year" }: Props)
   );
 }
 
-type Color = (n: number) => string;
 type Sel = d3.Selection<SVGSVGElement, unknown, null, undefined>;
 type TipSel = d3.Selection<HTMLDivElement, unknown, null, undefined>;
+
+/** Cell color: neutral surface when empty, `--primary` with opacity scaled by
+ * value/max otherwise. CSS-variable interpolation isn't a thing D3 can do
+ * natively, and resolving via getComputedStyle would re-introduce theme-lag
+ * — opacity on a primary fill produces the right "light → dark" gradient in
+ * every theme automatically. */
+function fillFor(v: number): string {
+  return v <= 0 ? "var(--surface)" : "var(--primary)";
+}
+function opacityFor(v: number, max: number): number {
+  if (v <= 0) return 1; // surface is already opaque
+  if (max <= 0) return 1;
+  // Scale 25% → 100% so even 1× cells are visibly distinct from empty,
+  // and the max cell is fully saturated.
+  return 0.25 + 0.75 * (v / max);
+}
 
 function attachHover(
   rect: d3.Selection<SVGRectElement, Date, SVGGElement, unknown>,
@@ -120,7 +131,7 @@ function attachHover(
     });
 }
 
-function renderYear(svg: Sel, tooltip: TipSel, data: Record<string, number>, year: number, color: Color) {
+function renderYear(svg: Sel, tooltip: TipSel, data: Record<string, number>, year: number, max: number) {
   const days = dateRangeForYear(year);
   const cell = 12;
   const gap = 2;
@@ -155,7 +166,8 @@ function renderYear(svg: Sel, tooltip: TipSel, data: Record<string, number>, yea
     .attr("width", cell)
     .attr("height", cell)
     .attr("rx", 2)
-    .attr("fill", (d) => color(data[isoDate(d)] ?? 0))
+    .attr("fill", (d) => fillFor(data[isoDate(d)] ?? 0))
+    .attr("opacity", (d) => opacityFor(data[isoDate(d)] ?? 0, max))
     .attr("stroke", "var(--border)")
     .attr("stroke-width", 0.5);
   attachHover(rect, tooltip, data);
@@ -178,7 +190,7 @@ function renderMonth(
   data: Record<string, number>,
   year: number,
   month: number,
-  color: Color,
+  max: number,
 ) {
   const days = dateRangeForMonth(year, month);
   if (days.length === 0) return;
@@ -229,24 +241,24 @@ function renderMonth(
     .attr("width", cell)
     .attr("height", cell)
     .attr("rx", 6)
-    .attr("fill", (d) => color(data[isoDate(d)] ?? 0))
+    .attr("fill", (d) => fillFor(data[isoDate(d)] ?? 0))
+    .attr("opacity", (d) => opacityFor(data[isoDate(d)] ?? 0, max))
     .attr("stroke", "var(--border)")
     .attr("stroke-width", 0.5);
   attachHover(rect, tooltip, data);
 
+  // Day-of-month number. Filled cells get a high-contrast label; empty cells
+  // stay muted so the eye picks out activity.
   cells
     .append("text")
     .attr("x", 5)
     .attr("y", 13)
-    .attr("fill", (d) => {
-      const count = data[isoDate(d)] ?? 0;
-      // Use a brighter color on filled cells; mute on empties.
-      return count > 0 ? "var(--background)" : "var(--muted)";
-    })
+    .attr("fill", (d) => ((data[isoDate(d)] ?? 0) > 0 ? "var(--background)" : "var(--muted)"))
     .attr("font-size", "10px")
     .attr("font-weight", "600")
     .text((d) => d.getDate());
 
+  // Big count overlay on active days only.
   cells
     .filter((d) => (data[isoDate(d)] ?? 0) > 0)
     .append("text")
