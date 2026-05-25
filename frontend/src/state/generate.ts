@@ -47,6 +47,11 @@ export interface GenerateDraft {
   minDifficulty: number;
   inSyllabusOnly: boolean;
   saveDirectory: string | null;
+
+  /** "Generate PSet from selection" mode (spec §8.6). When non-empty, the
+   * filter SQL restricts to exactly these IDs; the rest of the form still
+   * shows but its filter dimensions are bypassed by the WHERE clause. */
+  specificQuestionIds: number[];
 }
 
 interface GenerateState extends GenerateDraft {
@@ -73,6 +78,7 @@ interface GenerateState extends GenerateDraft {
   setMinDifficulty: (n: number) => void;
   setInSyllabusOnly: (v: boolean) => void;
   setSaveDirectory: (path: string | null) => void;
+  setSpecificQuestionIds: (ids: number[]) => void;
 }
 
 const initialDraft: GenerateDraft = {
@@ -89,6 +95,7 @@ const initialDraft: GenerateDraft = {
   minDifficulty: 0,
   inSyllabusOnly: true,
   saveDirectory: null,
+  specificQuestionIds: [],
 };
 
 function removeFromAll(tags: Record<TagCategory, string[]>, tag: string): Record<TagCategory, string[]> {
@@ -157,12 +164,22 @@ export const useGenerateStore = create<GenerateState>((set) => ({
   setMinDifficulty: (n) => set({ minDifficulty: Math.max(0, Math.min(20, n)) }),
   setInSyllabusOnly: (v) => set({ inSyllabusOnly: v }),
   setSaveDirectory: (path) => set({ saveDirectory: path }),
+  setSpecificQuestionIds: (ids) => set({ specificQuestionIds: ids }),
 }));
 
 /** Convert the form draft into the `Filters` shape consumed by IPC.
  * The selected-leaves Set is unrolled into a flat list of subtopic names
  * (spec §7.2's "deepest non-empty rule" handles the rest). */
 export function draftToFilters(draft: GenerateDraft): Filters {
+  // "Generate PSet from selection" mode bypasses every other filter dimension —
+  // the backend's question_ids clause is the only restriction (spec §8.6).
+  if (draft.specificQuestionIds.length > 0) {
+    return {
+      question_ids: draft.specificQuestionIds,
+      reuse_questions: true,
+      in_syllabus_only: false,
+    };
+  }
   const subtopics = Array.from(draft.selectedLeaves).map((key) => parseLeaf(key).subtopic);
   const tags: TagFilters = {
     compulsory: draft.tags.compulsory,

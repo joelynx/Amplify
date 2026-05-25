@@ -229,6 +229,150 @@ def all_tags(
     return [row[0] for row in conn.execute(sql, params)]
 
 
+# ---- Step 16: Browser ---------------------------------------------------
+
+_SORTABLE_COLUMNS: frozenset[str] = frozenset(
+    {
+        "question_id",
+        "topic",
+        "branch",
+        "subtopic",
+        "type",
+        "source",
+        "in_syllabus",
+        "times_used",
+        "difficulty_rating",
+    }
+)
+
+
+def _parse_sort(sort_by: str) -> tuple[str, str]:
+    """Parse a sort spec like `topic_asc` / `times_used_desc` into (column, direction)."""
+    s = (sort_by or "").lower()
+    if s.endswith("_desc"):
+        col, d = s[: -len("_desc")], "DESC"
+    elif s.endswith("_asc"):
+        col, d = s[: -len("_asc")], "ASC"
+    else:
+        col, d = s, "ASC"
+    if col not in _SORTABLE_COLUMNS:
+        col, d = "question_id", "ASC"
+    return col, d
+
+
+def search(
+    conn: sqlite3.Connection,
+    filters: dict[str, Any] | None,
+    *,
+    sort_by: str = "question_id_asc",
+    page: int = 0,
+    page_size: int = 50,
+    subject: Subject | None = None,
+    text_query: str | None = None,
+) -> tuple[list[Question], int]:
+    """Paginated, sortable search for the Browser table.
+
+    `text_query` is a free-text substring on `latexcode` (case-insensitive).
+    `sort_by` is `<column>_<asc|desc>`; unknown columns fall back to
+    `question_id_asc`.
+    """
+    payload = subject.to_payload() if subject else None
+    where, params = assemble_where(filters, payload)
+    if text_query:
+        where = f"({where}) AND latexcode LIKE ?"
+        params = [*params, f"%{text_query}%"]
+
+    total = int(conn.execute(f"SELECT COUNT(*) FROM questions WHERE {where}", params).fetchone()[0])
+
+    col, direction = _parse_sort(sort_by)
+    page = max(0, int(page))
+    page_size = max(1, min(500, int(page_size)))
+
+    # NULLS LAST for the columns where it matters (type, source, difficulty).
+    # Quote the column name defensively even though _parse_sort validates it.
+    order_clause = f'"{col}" {direction}'
+    if col in ("type", "source", "difficulty_rating"):
+        nulls_pos = "NULLS LAST" if direction == "ASC" else "NULLS FIRST"
+        order_clause = f'"{col}" {direction} {nulls_pos}'
+
+    rows = list(
+        conn.execute(
+            f"SELECT {_QUESTION_COLS} FROM questions WHERE {where} "
+            f"ORDER BY {order_clause}, question_id ASC "
+            f"LIMIT ? OFFSET ?",
+            [*params, page_size, page * page_size],
+        )
+    )
+    qids = [r["question_id"] for r in rows]
+    tags = _tag_map(conn, qids)
+    questions = [_row_to_question(r, tags.get(r["question_id"], [])) for r in rows]
+    return questions, total
+
+
+def mass_action(
+    conn: sqlite3.Connection,
+    question_ids: list[int],
+    action: str,
+    payload: dict[str, Any] | None = None,
+) -> int:
+    """Spec §5.7. Returns the number of rows affected (best-effort)."""
+    if not question_ids:
+        return 0
+    ids = [int(i) for i in question_ids]
+    placeholders = ",".join(["?"] * len(ids))
+    p = payload or {}
+
+    if action == "add_tag":
+        tag = (p.get("tag") or "").strip()
+        if not tag:
+            return 0
+        affected = 0
+        try:
+            for qid in ids:
+                cur = conn.execute(
+                    "INSERT INTO question_tags (question_id, tag) VALUES (?, ?) "
+                    "ON CONFLICT(question_id, tag) DO NOTHING",
+                    (qid, tag),
+                )
+                affected += cur.rowcount if cur.rowcount > 0 else 0
+            conn.commit()
+        except Exception:
+            conn.rollback()
+            raise
+        return affected
+
+    if action == "remove_tag":
+        tag = (p.get("tag") or "").strip()
+        if not tag:
+            return 0
+        cur = conn.execute(
+            f"DELETE FROM question_tags WHERE tag = ? AND question_id IN ({placeholders})",
+            [tag, *ids],
+        )
+        conn.commit()
+        return cur.rowcount
+
+    if action == "set_in_syllabus":
+        value = int(bool(p.get("value", 1)))
+        cur = conn.execute(
+            f"UPDATE questions SET in_syllabus = ? WHERE question_id IN ({placeholders})",
+            [value, *ids],
+        )
+        conn.commit()
+        return cur.rowcount
+
+    if action == "reset_progress":
+        cur = conn.execute(
+            f"UPDATE questions SET times_used = 0, interactive_times_used = 0, "
+            f"date_last_accessed = NULL WHERE question_id IN ({placeholders})",
+            ids,
+        )
+        conn.commit()
+        return cur.rowcount
+
+    raise ValueError(f"unknown mass action: {action!r}")
+
+
 def mark_used(conn: sqlite3.Connection, question_ids: list[int]) -> None:
     """Bump `times_used` and stamp `date_last_accessed` for the listed ids.
 

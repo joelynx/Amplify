@@ -2,10 +2,16 @@ import { useEffect, useState } from "react";
 import { HashRouter, Link, Route, Routes, useLocation } from "react-router-dom";
 
 import { BridgeUnavailableError, ipc } from "./lib/ipc";
+import { applyTheme, type ThemeId } from "./lib/theme";
+import AboutPage from "./pages/About";
+import BrowserPage from "./pages/Browser";
 import GeneratePage from "./pages/Generate";
 import HistoryPage from "./pages/History";
+import SettingsPage from "./pages/Settings";
 import StatsPage from "./pages/Stats";
 import SubjectsPage from "./pages/Subjects";
+import ThemesPage from "./pages/Themes";
+import TutorialPage from "./pages/Tutorial";
 import WelcomePage from "./pages/Welcome";
 
 /**
@@ -20,7 +26,20 @@ export default function App() {
   useEffect(() => {
     ipc
       .ping()
-      .then(() => setBridgeState("ready"))
+      .then(async () => {
+        // Apply the persisted theme before the first paint of any page —
+        // CSS vars are already loaded by the bundle; this just flips the
+        // active selector.
+        try {
+          const saved = (await ipc.get_config("THEME_SELECTED")) as string | null;
+          if (saved) {
+            await applyTheme(saved as ThemeId, { persist: false });
+          }
+        } catch {
+          /* fall back to the :root defaults */
+        }
+        setBridgeState("ready");
+      })
       .catch((e: unknown) => {
         if (e instanceof BridgeUnavailableError) {
           setBridgeState("standalone");
@@ -61,8 +80,13 @@ export default function App() {
             <Route path="/" element={<WelcomePage />} />
             <Route path="/generate" element={<GeneratePage />} />
             <Route path="/subjects" element={<SubjectsPage />} />
+            <Route path="/browser" element={<BrowserPage />} />
+            <Route path="/themes" element={<ThemesPage />} />
             <Route path="/history" element={<HistoryPage />} />
             <Route path="/stats" element={<StatsPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/tutorial" element={<TutorialPage />} />
+            <Route path="/about" element={<AboutPage />} />
           </Routes>
         </div>
       </div>
@@ -73,9 +97,14 @@ export default function App() {
 const NAV: Array<{ to: string; label: string }> = [
   { to: "/", label: "Home" },
   { to: "/generate", label: "Generate" },
+  { to: "/browser", label: "Browser" },
   { to: "/subjects", label: "Subjects" },
   { to: "/history", label: "History" },
   { to: "/stats", label: "Stats" },
+  { to: "/themes", label: "Themes" },
+  { to: "/settings", label: "Settings" },
+  { to: "/tutorial", label: "Tutorial" },
+  { to: "/about", label: "About" },
 ];
 
 function NavBar() {

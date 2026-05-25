@@ -147,6 +147,78 @@ def subject_distribution(
     return [{"label": r[0], "count": int(r[1])} for r in rows]
 
 
+def question_multiplicity_dist(
+    conn: sqlite3.Connection,
+    subject: Subject | None = None,
+) -> dict[int, int]:
+    """Spec §5.6 — `{multiplicity: count}` for the histogram.
+
+    For each value of `times_used > 0`, the count of questions at that level.
+    Subject-scoped via the curricular gate (no date filtering — multiplicity is
+    a lifetime concept).
+    """
+    q_where, q_params = _question_scope(subject)
+    rows = conn.execute(
+        f"SELECT times_used, COUNT(*) FROM questions "
+        f"WHERE {q_where} AND times_used > 0 "
+        f"GROUP BY times_used ORDER BY times_used",
+        q_params,
+    )
+    return {int(r[0]): int(r[1]) for r in rows}
+
+
+def calendar_heatmap(
+    conn: sqlite3.Connection,
+    year: int | None = None,
+) -> dict[str, int]:
+    """Spec §5.6 — `{date_iso: pset_count}` for the heatmap.
+
+    `year` filters to PSets created in that calendar year. None → all years."""
+    parts: list[str] = []
+    params: list[Any] = []
+    if year is not None:
+        parts.append("strftime('%Y', date_created) = ?")
+        params.append(str(year))
+    where = " AND ".join(parts) if parts else "1=1"
+    rows = conn.execute(
+        f"SELECT date(date_created) AS d, COUNT(*) FROM psets "
+        f"WHERE {where} GROUP BY d ORDER BY d",
+        params,
+    )
+    return {r[0]: int(r[1]) for r in rows}
+
+
+def activity_line(
+    conn: sqlite3.Connection,
+    date_range: DateRange = (None, None),
+) -> list[dict[str, Any]]:
+    """Spec §5.6 — `[{date, papers, questions}]` for the line chart.
+
+    Per-day counts of psets created (`papers`) and SUM(n_questions) included
+    in those psets (`questions`). One entry per day with activity; days with
+    zero activity are omitted (callers fill gaps if needed for plotting)."""
+    df, dt = date_range
+    parts: list[str] = []
+    params: list[Any] = []
+    if df:
+        parts.append("date(date_created) >= date(?)")
+        params.append(df)
+    if dt:
+        parts.append("date(date_created) <= date(?)")
+        params.append(dt)
+    where = " AND ".join(parts) if parts else "1=1"
+    rows = conn.execute(
+        f"SELECT date(date_created) AS d, COUNT(*) AS papers, "
+        f"COALESCE(SUM(n_questions), 0) AS qs "
+        f"FROM psets WHERE {where} GROUP BY d ORDER BY d",
+        params,
+    )
+    return [
+        {"date": r[0], "papers": int(r[1]), "questions": int(r[2])}
+        for r in rows
+    ]
+
+
 def topic_distribution(
     conn: sqlite3.Connection,
     subject: Subject | None,

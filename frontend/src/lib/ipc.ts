@@ -25,6 +25,8 @@ export interface Filters {
   min_difficulty?: number;
   reuse_questions?: boolean;
   in_syllabus_only?: boolean;
+  /** One-off "Generate PSet from selection" mode (spec §8.6). */
+  question_ids?: number[];
 }
 
 /** A `Question` as projected by the questions repo for the Generate / Browser pages.
@@ -51,6 +53,17 @@ export interface Question {
   difficulty_rating: number | null;
   latex_hash: string;
   tags: string[];
+}
+
+/** A `Question` plus the cosine similarity from `get_similar_questions`. */
+export interface SimilarQuestion extends Question {
+  similarity: number;
+}
+
+export interface SearchResult {
+  rows: Question[];
+  total: number;
+  error?: string;
 }
 
 export interface RandomQuestionsResult {
@@ -96,6 +109,20 @@ interface PyWebViewApi {
   log: (level: LogLevel, message: string) => Promise<void>;
   count_matching_questions: (filters: Filters) => Promise<number>;
   get_random_questions: (filters: Filters, n: number) => Promise<RandomQuestionsResult>;
+  get_similar_questions: (question_id: number, k?: number) => Promise<SimilarQuestion[]>;
+  search_questions: (
+    filters?: Filters | null,
+    sort_by?: string,
+    page?: number,
+    page_size?: number,
+    text_query?: string | null,
+  ) => Promise<SearchResult>;
+  get_question: (question_id: number) => Promise<Question | null>;
+  mass_action: (
+    question_ids: number[],
+    action: string,
+    payload?: Record<string, unknown> | null,
+  ) => Promise<number>;
   get_topics: (subject?: string | null, in_syllabus_only?: boolean) => Promise<string[]>;
   get_branches: (subject: string | null, topic: string, in_syllabus_only?: boolean) => Promise<string[]>;
   get_subtopics: (
@@ -127,6 +154,18 @@ interface PyWebViewApi {
   get_config: (key: string) => Promise<unknown>;
   set_config: (key: string, value: unknown) => Promise<void>;
   pick_save_directory: () => Promise<string | null>;
+  list_themes: () => Promise<ThemeMeta[]>;
+  set_theme: (theme_id: string) => Promise<void>;
+  play_sound: (event: string) => Promise<void>;
+  run_seed_ingest: () => Promise<IngestResult>;
+  augment_seed_from_csv: (csv_path: string) => Promise<AugmentResult>;
+  factory_reset: () => Promise<void>;
+  reset_active_subject: () => Promise<ResetSubjectResult>;
+  get_seed_diagnostics: () => Promise<SeedDiagnostics>;
+  restart_app: () => Promise<void>;
+  pick_csv_file: () => Promise<string | null>;
+  pick_image_file: () => Promise<string | null>;
+  validate_header_text: (text: string, level: "basic" | "extended") => Promise<string | null>;
   generate_pdf: (filters: Filters, output_settings: OutputSettings) => Promise<GenerateResult>;
   export_tex: (filters: Filters, output_settings: OutputSettings) => Promise<ExportResult>;
   open_file: (path: string) => Promise<void>;
@@ -136,6 +175,9 @@ interface PyWebViewApi {
     subject?: string | null,
     date_range?: DateRange | null,
   ) => Promise<DistributionDatum[]>;
+  get_question_multiplicity_dist: (subject?: string | null) => Promise<Record<number, number>>;
+  get_calendar_heatmap: (year?: number | null) => Promise<Record<string, number>>;
+  get_activity_line: (date_range?: DateRange | null) => Promise<ActivityDatum[]>;
   list_psets: (subject?: string | null, date_range?: DateRange | null) => Promise<PSetSummary[]>;
   delete_pset: (pset_id: string) => Promise<void>;
   open_pset_file: (pset_id: string) => Promise<OpenPsetResult>;
@@ -190,6 +232,46 @@ export interface StatsBundle {
 export interface DistributionDatum {
   label: string;
   count: number;
+}
+
+export interface ActivityDatum {
+  date: string; // YYYY-MM-DD
+  papers: number;
+  questions: number;
+}
+
+export interface ThemeMeta {
+  id: string;
+  name: string;
+  description: string;
+  preview: string | null;
+}
+
+export interface SeedDiagnostics {
+  embed_model_version: string;
+  questions_total: number;
+  questions_with_embeddings: number;
+  questions_without_embeddings: number;
+  questions_with_outlines: number;
+  questions_without_outlines: number;
+}
+
+export interface AugmentResult {
+  added: number;
+  skipped: number;
+  errors: string[];
+}
+
+export interface IngestResult {
+  imported: number;
+  skipped: number;
+  embeddings_loaded: number;
+  outlines_loaded: number;
+}
+
+export interface ResetSubjectResult {
+  subject: string;
+  rows_reset: number;
 }
 
 export interface PSetSummary {
@@ -280,6 +362,32 @@ export const ipc = {
   async get_random_questions(filters: Filters, n: number): Promise<RandomQuestionsResult> {
     const api = await bridge();
     return api.get_random_questions(filters, n);
+  },
+  async get_similar_questions(question_id: number, k = 10): Promise<SimilarQuestion[]> {
+    const api = await bridge();
+    return api.get_similar_questions(question_id, k);
+  },
+  async search_questions(
+    filters: Filters | null = null,
+    sort_by = "question_id_asc",
+    page = 0,
+    page_size = 50,
+    text_query: string | null = null,
+  ): Promise<SearchResult> {
+    const api = await bridge();
+    return api.search_questions(filters, sort_by, page, page_size, text_query);
+  },
+  async get_question(question_id: number): Promise<Question | null> {
+    const api = await bridge();
+    return api.get_question(question_id);
+  },
+  async mass_action(
+    question_ids: number[],
+    action: string,
+    payload: Record<string, unknown> | null = null,
+  ): Promise<number> {
+    const api = await bridge();
+    return api.mass_action(question_ids, action, payload);
   },
   async get_topics(subject: string | null = null, in_syllabus_only = true): Promise<string[]> {
     const api = await bridge();
@@ -394,6 +502,54 @@ export const ipc = {
     const api = await bridge();
     return api.pick_save_directory();
   },
+  async list_themes(): Promise<ThemeMeta[]> {
+    const api = await bridge();
+    return api.list_themes();
+  },
+  async set_theme(theme_id: string): Promise<void> {
+    const api = await bridge();
+    return api.set_theme(theme_id);
+  },
+  async play_sound(event: string): Promise<void> {
+    const api = await bridge();
+    return api.play_sound(event);
+  },
+  async run_seed_ingest(): Promise<IngestResult> {
+    const api = await bridge();
+    return api.run_seed_ingest();
+  },
+  async augment_seed_from_csv(csv_path: string): Promise<AugmentResult> {
+    const api = await bridge();
+    return api.augment_seed_from_csv(csv_path);
+  },
+  async factory_reset(): Promise<void> {
+    const api = await bridge();
+    return api.factory_reset();
+  },
+  async reset_active_subject(): Promise<ResetSubjectResult> {
+    const api = await bridge();
+    return api.reset_active_subject();
+  },
+  async get_seed_diagnostics(): Promise<SeedDiagnostics> {
+    const api = await bridge();
+    return api.get_seed_diagnostics();
+  },
+  async restart_app(): Promise<void> {
+    const api = await bridge();
+    return api.restart_app();
+  },
+  async pick_csv_file(): Promise<string | null> {
+    const api = await bridge();
+    return api.pick_csv_file();
+  },
+  async pick_image_file(): Promise<string | null> {
+    const api = await bridge();
+    return api.pick_image_file();
+  },
+  async validate_header_text(text: string, level: "basic" | "extended"): Promise<string | null> {
+    const api = await bridge();
+    return api.validate_header_text(text, level);
+  },
   async generate_pdf(filters: Filters, output_settings: OutputSettings): Promise<GenerateResult> {
     const api = await bridge();
     return api.generate_pdf(filters, output_settings);
@@ -423,6 +579,20 @@ export const ipc = {
   ): Promise<DistributionDatum[]> {
     const api = await bridge();
     return api.get_topic_distribution(subject, date_range);
+  },
+  async get_question_multiplicity_dist(
+    subject: string | null = null,
+  ): Promise<Record<number, number>> {
+    const api = await bridge();
+    return api.get_question_multiplicity_dist(subject);
+  },
+  async get_calendar_heatmap(year: number | null = null): Promise<Record<string, number>> {
+    const api = await bridge();
+    return api.get_calendar_heatmap(year);
+  },
+  async get_activity_line(date_range: DateRange | null = null): Promise<ActivityDatum[]> {
+    const api = await bridge();
+    return api.get_activity_line(date_range);
   },
   async list_psets(
     subject: string | null = null,

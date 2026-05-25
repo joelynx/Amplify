@@ -23,16 +23,27 @@ from typing import Any
 
 import webview
 
-from app.core.filters import FilterError
+from app.core.filters import FilterError, assemble_where
 from app.core.models import Subject
 from app.core.selection import pick
-from app.core.stats import compute_stats, subject_distribution, topic_distribution
+from app.core.similarity import find_similar
+from app.core.stats import (
+    activity_line,
+    calendar_heatmap,
+    compute_stats,
+    question_multiplicity_dist,
+    subject_distribution,
+    topic_distribution,
+)
+from app.persistence.ingest.seed import ingest as run_ingest
 from app.persistence.repositories import configs as configs_repo
 from app.persistence.repositories import psets as psets_repo
 from app.persistence.repositories import questions as questions_repo
 from app.persistence.repositories import subjects as subjects_repo
 from app.persistence.repositories import templates as templates_repo
 from app.tex.pdfgen import assemble, compile_to_pdf
+from app.tex.sanitize import SanitizeError, sanitize_latex_basic, sanitize_latex_extended
+from app.theming import theme_registry
 
 _log = logging.getLogger("amplify.ipc")
 _js = logging.getLogger("amplify.js")
@@ -155,6 +166,63 @@ class Api:
             "questions": [asdict(q) for q in result.questions],
             "shortfall": result.shortfall,
         }
+
+    # ---- Step 16: Browser (§5.7 / §8.6) ---------------------------------
+
+    def search_questions(
+        self,
+        filters: dict[str, Any] | None = None,
+        sort_by: str = "question_id_asc",
+        page: int = 0,
+        page_size: int = 50,
+        text_query: str | None = None,
+    ) -> dict[str, Any]:
+        s = _resolve_subject(self._conn, (filters or {}).get("subject"))
+        try:
+            questions, total = questions_repo.search(
+                self._conn,
+                filters,
+                sort_by=sort_by,
+                page=page,
+                page_size=page_size,
+                subject=s,
+                text_query=text_query,
+            )
+        except FilterError as e:
+            return {"rows": [], "total": 0, "error": str(e)}
+        return {"rows": [asdict(q) for q in questions], "total": total}
+
+    def get_question(self, question_id: int) -> dict[str, Any] | None:
+        q = questions_repo.get_by_id(self._conn, int(question_id))
+        return asdict(q) if q else None
+
+    def mass_action(
+        self,
+        question_ids: list[int],
+        action: str,
+        payload: dict[str, Any] | None = None,
+    ) -> int:
+        return questions_repo.mass_action(self._conn, list(question_ids), action, payload)
+
+    # ---- Step 15: similarity (§5.7 / §12) -------------------------------
+
+    def get_similar_questions(self, question_id: int, k: int = 10) -> list[dict[str, Any]]:
+        """Top-k by cosine on `similarity_emb`. Each entry is a Question dict
+        plus a `similarity` field in [-1, 1]."""
+        hits = find_similar(self._conn, int(question_id), int(k))
+        if not hits:
+            return []
+        # Project the full Question objects for the hit IDs, then re-order to
+        # match the score ranking and stitch the score in.
+        out: list[dict[str, Any]] = []
+        for hit in hits:
+            q = questions_repo.get_by_id(self._conn, hit.question_id)
+            if q is None:
+                continue
+            d = asdict(q)
+            d["similarity"] = hit.score
+            out.append(d)
+        return out
 
     # ---- Step 4: subjects, templates, configs, file dialogs --------------
 
@@ -294,6 +362,193 @@ class Api:
 
     def set_config(self, key: str, value: Any) -> None:
         configs_repo.set_(self._conn, key, value)
+
+    # ---- Step 13: maintenance / settings (§5.10 / §8.7) ------------------
+
+    def run_seed_ingest(self) -> dict[str, Any]:
+        """Re-run the §4.1 seed ingest from the default paths. Idempotent."""
+        repo_root = Path(__file__).resolve().parent.parent.parent
+        csv_path = repo_root / "Files" / "TEST.csv"
+        lancedb_path = repo_root / "Files" / "Testing" / "lancedb"
+        outlines = repo_root / "app" / "data" / "seed" / "pre_db.outlines.json"
+        topic_depth = repo_root / "app" / "data" / "seed" / "pre_db.topic_depth.json"
+        result = run_ingest(
+            self._conn,
+            csv_path=csv_path,
+            lancedb_path=lancedb_path,
+            outlines_json=outlines,
+            topic_depth_json=topic_depth,
+        )
+        return {
+            "imported": result.imported,
+            "skipped": result.skipped,
+            "embeddings_loaded": result.embeddings_loaded,
+            "outlines_loaded": result.outlines_loaded,
+        }
+
+    def augment_seed_from_csv(self, csv_path: str) -> dict[str, Any]:
+        """Spec §4.2: insert new rows from `csv_path` with NULL embeddings/outline."""
+        p = Path(csv_path)
+        if not p.exists():
+            return {"added": 0, "skipped": 0, "errors": [f"file not found: {csv_path}"]}
+        try:
+            result = run_ingest(self._conn, csv_path=p, lancedb_path=None)
+        except Exception as e:
+            _log.warning("augment_seed_from_csv failed: %s", e)
+            return {"added": 0, "skipped": 0, "errors": [str(e)]}
+        return {"added": result.imported, "skipped": result.skipped, "errors": []}
+
+    def factory_reset(self) -> None:
+        """Wipe psets/templates/quizzes/subjects/configs. Preserve question content
+        (questions, question_tags, embeddings, solution_outline). Spec §5.10."""
+        self._conn.executescript(
+            """
+            DELETE FROM pset_questions;
+            DELETE FROM psets;
+            DELETE FROM templates;
+            DELETE FROM quiz_attempts;
+            DELETE FROM quiz_questions;
+            DELETE FROM quizzes;
+            DELETE FROM subjects;
+            DELETE FROM configs;
+            """
+        )
+        self._conn.commit()
+        # Re-seed config defaults so the app boots cleanly.
+        from app.persistence.ingest.seed import _seed_config_defaults
+
+        _seed_config_defaults(self._conn)
+        _log.info("factory reset complete")
+
+    def reset_active_subject(self) -> dict[str, Any]:
+        """Zero `times_used` / `interactive_times_used` / `date_last_accessed`
+        for questions in the active subject's curricular scope."""
+        active = subjects_repo.get_active(self._conn)
+        if active is None:
+            raise ValueError("no active subject")
+        where, params = assemble_where(
+            {"in_syllabus_only": False, "reuse_questions": True}, active.to_payload()
+        )
+        cur = self._conn.execute(
+            f"UPDATE questions SET times_used = 0, interactive_times_used = 0, "
+            f"date_last_accessed = NULL WHERE {where}",
+            params,
+        )
+        self._conn.commit()
+        return {"subject": active.name, "rows_reset": cur.rowcount}
+
+    def get_seed_diagnostics(self) -> dict[str, Any]:
+        """Counts for the Settings → Data card."""
+        c = self._conn
+        total = int(c.execute("SELECT COUNT(*) FROM questions").fetchone()[0])
+        with_emb = int(
+            c.execute(
+                "SELECT COUNT(*) FROM questions WHERE classification_emb IS NOT NULL"
+            ).fetchone()[0]
+        )
+        with_outline = int(
+            c.execute(
+                "SELECT COUNT(*) FROM questions WHERE solution_outline IS NOT NULL"
+            ).fetchone()[0]
+        )
+        return {
+            "embed_model_version": configs_repo.get(c, "EMBED_MODEL_VERSION", "unknown"),
+            "questions_total": total,
+            "questions_with_embeddings": with_emb,
+            "questions_without_embeddings": total - with_emb,
+            "questions_with_outlines": with_outline,
+            "questions_without_outlines": total - with_outline,
+        }
+
+    def restart_app(self) -> None:
+        """Spawn a fresh `python -m app.main` and destroy this window."""
+        _log.info("restart requested")
+        try:
+            subprocess.Popen(
+                [sys.executable, "-m", "app.main"],
+                cwd=str(Path(__file__).resolve().parent.parent.parent),
+                close_fds=True,
+            )
+        except Exception as e:
+            _log.warning("could not spawn replacement process: %s", e)
+            return
+        windows = webview.windows
+        if windows:
+            windows[0].destroy()
+
+    def pick_csv_file(self) -> str | None:
+        windows = webview.windows
+        if not windows:
+            return None
+        result = windows[0].create_file_dialog(
+            webview.OPEN_DIALOG,
+            file_types=("CSV Files (*.csv)", "All files (*.*)"),
+            allow_multiple=False,
+        )
+        if not result:
+            return None
+        path = result[0] if isinstance(result, list | tuple) else result
+        return str(path) if path else None
+
+    def pick_image_file(self) -> str | None:
+        windows = webview.windows
+        if not windows:
+            return None
+        result = windows[0].create_file_dialog(
+            webview.OPEN_DIALOG,
+            file_types=(
+                "Image Files (*.png;*.jpg;*.jpeg;*.gif;*.bmp;*.svg)",
+                "All files (*.*)",
+            ),
+            allow_multiple=False,
+        )
+        if not result:
+            return None
+        path = result[0] if isinstance(result, list | tuple) else result
+        return str(path) if path else None
+
+    def validate_header_text(self, text: str, level: str) -> str | None:
+        """Run the appropriate sanitizer; return None on OK or an error string.
+
+        `level`: 'basic' for left/right header, 'extended' for title/instructions.
+        """
+        if not text:
+            return None
+        try:
+            if level == "extended":
+                sanitize_latex_extended(text)
+            else:
+                sanitize_latex_basic(text)
+        except SanitizeError as e:
+            return str(e)
+        return None
+
+    # ---- Step 12: themes (§5.8 / §11) ------------------------------------
+
+    def list_themes(self) -> list[dict[str, Any]]:
+        return [
+            {"id": t.id, "name": t.name, "description": t.description, "preview": None}
+            for t in theme_registry.THEMES
+        ]
+
+    def set_theme(self, theme_id: str) -> None:
+        if theme_registry.get(theme_id) is None:
+            raise ValueError(f"unknown theme: {theme_id!r}")
+        configs_repo.set_(self._conn, "THEME_SELECTED", theme_id)
+
+    def play_sound(self, event: str) -> None:
+        """Resolve the active theme's sound file. No-op when the file is
+        missing (spec §11.2 fail-soft). Actual playback happens frontend-side
+        via the Web Audio API; this hook is here so a future Python-side
+        playback path can drop in without touching IPC."""
+        if not event:
+            return
+        active = configs_repo.get(self._conn, "THEME_SELECTED", "default-light") or "default-light"
+        path = theme_registry.resolve_sound_path(str(active), event)
+        if path is None:
+            _log.debug("play_sound(%s): no asset for theme %s", event, active)
+            return
+        _log.debug("play_sound(%s): %s", event, path)
 
     def pick_save_directory(self) -> str | None:
         """Open the native folder picker, return the chosen path or None."""
@@ -535,6 +790,23 @@ class Api:
         s = _resolve_subject(self._conn, subject)
         dr = ((date_range or {}).get("from") or None, (date_range or {}).get("to") or None)
         return topic_distribution(self._conn, s, dr)
+
+    # ---- Step 14: stats v2 (§5.6 / §9) -----------------------------------
+
+    def get_question_multiplicity_dist(
+        self, subject: str | None = None
+    ) -> dict[int, int]:
+        s = _resolve_subject(self._conn, subject)
+        return question_multiplicity_dist(self._conn, s)
+
+    def get_calendar_heatmap(self, year: int | None = None) -> dict[str, int]:
+        return calendar_heatmap(self._conn, year)
+
+    def get_activity_line(
+        self, date_range: dict[str, str | None] | None = None
+    ) -> list[dict[str, Any]]:
+        dr = ((date_range or {}).get("from") or None, (date_range or {}).get("to") or None)
+        return activity_line(self._conn, dr)
 
     def open_file(self, path: str) -> None:
         """Open `path` in the OS default application (file viewer)."""

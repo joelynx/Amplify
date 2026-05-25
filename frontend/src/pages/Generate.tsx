@@ -207,21 +207,29 @@ export default function GeneratePage() {
   // navigations don't re-apply.
   const location = useLocation();
   const navigate = useNavigate();
-  const pendingTemplate = (location.state as { template?: TemplatePayload } | null)?.template;
+  const navState = location.state as
+    | { template?: TemplatePayload; questionIds?: number[] }
+    | null;
+  const pendingTemplate = navState?.template;
+  const pendingQuestionIds = navState?.questionIds;
+
   useEffect(() => {
     if (!pendingTemplate) return;
-    // Wait until the concept tree has been fetched — applyPayload uses it to
-    // expand subtopic names into leaf keys.
     if (Object.keys(tree).length === 0) return;
     applyPayload(pendingTemplate);
-    // Generate similar deliberately leaves loadedTemplate null — there's no
-    // back-link to the source PSet (spec §8.5), and the user is expected to
-    // edit before generating.
     draft.setTemplate(null);
     setLoadedTemplate(null);
     navigate("/generate", { replace: true, state: null });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pendingTemplate, tree]);
+
+  useEffect(() => {
+    if (!pendingQuestionIds || pendingQuestionIds.length === 0) return;
+    draft.setSpecificQuestionIds(pendingQuestionIds);
+    draft.setNQuestions(pendingQuestionIds.length);
+    navigate("/generate", { replace: true, state: null });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pendingQuestionIds]);
 
   const handleSaveTemplate = () => setSaveDialogOpen(true);
 
@@ -242,13 +250,19 @@ export default function GeneratePage() {
     (loadedTemplate !== null && draftEqualsTemplate(draft, loadedTemplate));
 
   // --- validation ---------------------------------------------------
+  const inSelectionMode = draft.specificQuestionIds.length > 0;
   const generateDisabledReason = useMemo<string | null>(() => {
     if (busy !== "idle") return "Working…";
+    if (inSelectionMode) {
+      if (draft.nQuestions < 1) return "Set the question count to at least 1";
+      if (!draft.saveDirectory) return "Choose a save directory";
+      return null;
+    }
     if (draft.selectedLeaves.size === 0) return "Pick at least one subtopic from the tree";
     if (draft.nQuestions < 1) return "Set the question count to at least 1";
     if (!draft.saveDirectory) return "Choose a save directory";
     return null;
-  }, [busy, draft.selectedLeaves, draft.nQuestions, draft.saveDirectory]);
+  }, [busy, inSelectionMode, draft.selectedLeaves, draft.nQuestions, draft.saveDirectory]);
 
   const handleGenerate = async () => {
     setBusy("generating");
@@ -284,6 +298,23 @@ export default function GeneratePage() {
               Compose filters, watch the live count, then generate a PDF.
             </p>
           </header>
+
+          {inSelectionMode && (
+            <div className="flex items-center justify-between gap-3 rounded-md border border-primary/40 bg-primary/5 px-4 py-2 text-sm">
+              <span>
+                Using <strong>{draft.specificQuestionIds.length}</strong> specific question
+                {draft.specificQuestionIds.length === 1 ? "" : "s"} from Browser. Tree / tag /
+                filter controls are bypassed.
+              </span>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => draft.setSpecificQuestionIds([])}
+              >
+                Clear selection
+              </Button>
+            </div>
+          )}
 
           <Card title="Required">
             <div className="grid gap-3 sm:grid-cols-2">

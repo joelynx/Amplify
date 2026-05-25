@@ -61,6 +61,15 @@ def assemble_where(
     parts: list[str] = []
     params: list[Any] = []
 
+    # One-off "Generate PSet from selection" mode (spec §8.6): when a specific
+    # list of question_ids is supplied, restrict to just those rows. Other
+    # filter clauses still compose as AND below.
+    question_ids = filters.get("question_ids") or []
+    if question_ids:
+        placeholders = ",".join(["?"] * len(question_ids))
+        parts.append(f"question_id IN ({placeholders})")
+        params.extend(int(i) for i in question_ids)
+
     # Subject curricular gate (spec §3.6 / §7.2). Independent of in_syllabus_only.
     if subject_payload:
         subj_topics = subject_payload.get("topics") or []

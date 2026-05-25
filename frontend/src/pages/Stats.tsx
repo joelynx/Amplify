@@ -6,7 +6,16 @@ import { Card } from "../components/ui/Card";
 import { StatsCards } from "../components/stats/StatsCards";
 import { DistributionPie } from "../components/stats/DistributionPie";
 import { StatsFiltersDialog } from "../components/stats/StatsFiltersDialog";
-import { ipc, type DateRange, type DistributionDatum, type StatsBundle } from "../lib/ipc";
+import { MultiplicityHistogram } from "../components/stats/MultiplicityHistogram";
+import { CalendarHeatmap } from "../components/stats/CalendarHeatmap";
+import { ActivityLine } from "../components/stats/ActivityLine";
+import {
+  ipc,
+  type ActivityDatum,
+  type DateRange,
+  type DistributionDatum,
+  type StatsBundle,
+} from "../lib/ipc";
 
 function defaultRange(): DateRange {
   const today = new Date();
@@ -32,6 +41,10 @@ export default function StatsPage() {
   const [subjects, setSubjects] = useState<string[]>([]);
   const [stats, setStats] = useState<StatsBundle | null>(null);
   const [distribution, setDistribution] = useState<DistributionDatum[]>([]);
+  const [multiplicity, setMultiplicity] = useState<Record<number, number>>({});
+  const [heatmap, setHeatmap] = useState<Record<string, number>>({});
+  const [activity, setActivity] = useState<ActivityDatum[]>([]);
+  const [heatmapYear, setHeatmapYear] = useState<number>(() => new Date().getFullYear());
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -41,18 +54,24 @@ export default function StatsPage() {
   const refresh = useCallback(async () => {
     setLoading(true);
     try {
-      const [s, dist] = await Promise.all([
+      const [s, dist, mult, heat, act] = await Promise.all([
         ipc.get_stats(subject, dateRange),
         subject
           ? ipc.get_topic_distribution(subject, dateRange)
           : ipc.get_subject_distribution(dateRange),
+        ipc.get_question_multiplicity_dist(subject),
+        ipc.get_calendar_heatmap(heatmapYear),
+        ipc.get_activity_line(dateRange),
       ]);
       setStats(s);
       setDistribution(dist);
+      setMultiplicity(mult);
+      setHeatmap(heat);
+      setActivity(act);
     } finally {
       setLoading(false);
     }
-  }, [subject, dateRange]);
+  }, [subject, dateRange, heatmapYear]);
 
   useEffect(() => {
     refresh();
@@ -89,6 +108,48 @@ export default function StatsPage() {
               <p className="text-muted">No data found for the selected filters.</p>
             ) : (
               <DistributionPie data={distribution} />
+            )}
+          </Card>
+
+          <Card title="Question multiplicity">
+            {Object.keys(multiplicity).length === 0 ? (
+              <p className="text-muted">No questions used yet under the current subject filter.</p>
+            ) : (
+              <MultiplicityHistogram data={multiplicity} />
+            )}
+          </Card>
+
+          <Card
+            title={`Activity heatmap · ${heatmapYear}`}
+            actions={
+              <div className="flex items-center gap-1">
+                <Button variant="ghost" size="sm" onClick={() => setHeatmapYear((y) => y - 1)}>
+                  ◀
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setHeatmapYear(new Date().getFullYear())}
+                >
+                  Today
+                </Button>
+                <Button variant="ghost" size="sm" onClick={() => setHeatmapYear((y) => y + 1)}>
+                  ▶
+                </Button>
+              </div>
+            }
+          >
+            <CalendarHeatmap data={heatmap} year={heatmapYear} />
+            {Object.keys(heatmap).length === 0 && (
+              <p className="mt-2 text-xs text-muted">No PSets generated in {heatmapYear}.</p>
+            )}
+          </Card>
+
+          <Card title="Activity over selected range">
+            {activity.length === 0 ? (
+              <p className="text-muted">No activity in the selected date range.</p>
+            ) : (
+              <ActivityLine data={activity} />
             )}
           </Card>
         </div>
