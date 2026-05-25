@@ -23,6 +23,23 @@ from typing import Any
 
 import webview
 
+from app.core.difficulty import (
+    DEFAULT_WEIGHTS,
+    combined_rating,
+    get_all_weights,
+    pairwise_step,
+    pick_pairwise_pair,
+    recompute_all,
+    set_weights,
+    sub_scores_for,
+    weights_for_topic,
+)
+from app.core.difficulty import (
+    is_enabled as smart_difficulty_enabled,
+)
+from app.core.difficulty import (
+    set_enabled as set_smart_difficulty_enabled,
+)
 from app.core.filters import FilterError, assemble_where
 from app.core.models import Subject
 from app.core.selection import pick
@@ -32,9 +49,11 @@ from app.core.stats import (
     calendar_heatmap,
     compute_stats,
     question_multiplicity_dist,
+    source_attribution,
     subject_distribution,
     topic_distribution,
 )
+from app.core.trends import detect_trends
 from app.interactive import pbs as pbs_runner
 from app.interactive import runner as nonpbs_runner
 from app.interactive import session_manager
@@ -173,6 +192,80 @@ class Api:
             "questions": [asdict(q) for q in result.questions],
             "shortfall": result.shortfall,
         }
+
+    # ---- Step 19: Phase 2 smart difficulty (§5.10 / §13) ----------------
+
+    def recompute_difficulty(self) -> dict[str, Any]:
+        """Recompute `questions.difficulty_rating` from local sub-scores.
+        Spec §5.10. **Zero outbound network calls** — all inputs are local."""
+        result = recompute_all(self._conn)
+        return {
+            "updated": result.updated,
+            "skipped": result.skipped,
+            "avg_rating": result.avg_rating,
+            "topics_covered": result.topics_covered,
+        }
+
+    def get_difficulty_state(self) -> dict[str, Any]:
+        return {
+            "enabled": smart_difficulty_enabled(self._conn),
+            "weights_by_topic": get_all_weights(self._conn),
+            "defaults": dict(DEFAULT_WEIGHTS),
+            "topics_with_depth": list(
+                (configs_repo.get(self._conn, "TOPIC_DEPTH_MAP", {}) or {}).keys()
+            ),
+        }
+
+    def set_smart_difficulty_enabled(self, on: bool) -> None:
+        set_smart_difficulty_enabled(self._conn, bool(on))
+
+    def get_pairwise_pair(self, topic: str | None = None) -> dict[str, Any] | None:
+        pair = pick_pairwise_pair(self._conn, topic)
+        if pair is None:
+            return None
+        qid_a, qid_b, topic_name = pair
+        qa = questions_repo.get_by_id(self._conn, qid_a)
+        qb = questions_repo.get_by_id(self._conn, qid_b)
+        sa = sub_scores_for(self._conn, qid_a)
+        sb = sub_scores_for(self._conn, qid_b)
+        if qa is None or qb is None or sa is None or sb is None:
+            return None
+        w = weights_for_topic(self._conn, topic_name)
+        return {
+            "topic": topic_name,
+            "weights": w,
+            "a": {
+                "question": asdict(qa),
+                "sub_scores": sa.to_dict(),
+                "rating": combined_rating(w, sa),
+            },
+            "b": {
+                "question": asdict(qb),
+                "sub_scores": sb.to_dict(),
+                "rating": combined_rating(w, sb),
+            },
+        }
+
+    def submit_pairwise_judgment(
+        self,
+        harder_id: int,
+        easier_id: int,
+        magnitude: float = 0.5,
+    ) -> dict[str, Any] | None:
+        harder = questions_repo.get_by_id(self._conn, int(harder_id))
+        easier = questions_repo.get_by_id(self._conn, int(easier_id))
+        if harder is None or easier is None:
+            return None
+        if harder.topic != easier.topic:
+            return {"error": "pair must share a topic"}
+        hs = sub_scores_for(self._conn, int(harder_id))
+        es = sub_scores_for(self._conn, int(easier_id))
+        if hs is None or es is None:
+            return None
+        w = weights_for_topic(self._conn, harder.topic)
+        new_w = pairwise_step(w, hs, es, magnitude=float(magnitude))
+        set_weights(self._conn, harder.topic, new_w)
+        return {"topic": harder.topic, "weights": new_w}
 
     # ---- Step 18: Phase 2 interactive practice (§5.9 / §10) -------------
 
@@ -1018,6 +1111,21 @@ class Api:
         s = _resolve_subject(self._conn, subject)
         dr = ((date_range or {}).get("from") or None, (date_range or {}).get("to") or None)
         return topic_distribution(self._conn, s, dr)
+
+    def get_source_attribution(
+        self,
+        subject: str | None = None,
+        date_range: dict[str, str | None] | None = None,
+    ) -> list[dict[str, Any]]:
+        """Step 20: per-source breakdown of practiced questions (pset-scoped)."""
+        s = _resolve_subject(self._conn, subject)
+        dr = ((date_range or {}).get("from") or None, (date_range or {}).get("to") or None)
+        return source_attribution(self._conn, s, dr)
+
+    def get_trends(self, subject: str | None = None) -> list[dict[str, Any]]:
+        """Step 21: pattern detectors that surface actionable insights."""
+        s = _resolve_subject(self._conn, subject)
+        return [asdict(i) for i in detect_trends(self._conn, s)]
 
     # ---- Step 14: stats v2 (§5.6 / §9) -----------------------------------
 

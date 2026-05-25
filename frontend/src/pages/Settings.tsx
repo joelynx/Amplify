@@ -10,7 +10,8 @@
  */
 
 import { useCallback, useEffect, useState } from "react";
-import { FolderOpen, ImagePlus, RotateCw, Tag, Trash2, Upload } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Brain, FolderOpen, ImagePlus, RotateCw, Tag, Trash2, Upload } from "lucide-react";
 
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
@@ -21,7 +22,9 @@ import { Switch } from "../components/ui/Switch";
 import {
   ipc,
   type AugmentResult,
+  type DifficultyState,
   type IngestResult,
+  type RecomputeDifficultyResult,
   type ResetSubjectResult,
   type SeedDiagnostics,
   type SeedTagsResult,
@@ -76,6 +79,9 @@ export default function SettingsPage() {
   const [ingestResult, setIngestResult] = useState<IngestResult | null>(null);
   const [augmentResult, setAugmentResult] = useState<AugmentResult | null>(null);
   const [seedTagsResult, setSeedTagsResult] = useState<SeedTagsResult | null>(null);
+  const [diff, setDiff] = useState<DifficultyState | null>(null);
+  const [recomputeResult, setRecomputeResult] = useState<RecomputeDifficultyResult | null>(null);
+  const navigate = useNavigate();
   const [subjectReset, setSubjectReset] = useState<ResetSubjectResult | null>(null);
   const [factoryConfirm, setFactoryConfirm] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -106,6 +112,8 @@ export default function SettingsPage() {
     setPdf(headers);
     setPdfSaved(headers);
     setDiag(d);
+    const ds = await ipc.get_difficulty_state();
+    setDiff(ds);
   }, []);
 
   useEffect(() => {
@@ -258,6 +266,21 @@ export default function SettingsPage() {
     }
   };
 
+  const onSmartDifficultyToggle = async (on: boolean) => {
+    await ipc.set_smart_difficulty_enabled(on);
+    setDiff((prev) => (prev ? { ...prev, enabled: on } : prev));
+  };
+
+  const onRecomputeDifficulty = async () => {
+    setBusy("difficulty");
+    try {
+      const r = await ipc.recompute_difficulty();
+      setRecomputeResult(r);
+    } finally {
+      setBusy(null);
+    }
+  };
+
   return (
     <main className="h-full overflow-y-auto">
       <div className="mx-auto max-w-3xl space-y-4 px-6 py-6">
@@ -375,6 +398,44 @@ export default function SettingsPage() {
               types · <code>&lt;P&gt;</code> pset id · <code>&lt;d&gt;</code> /{" "}
               <code>&lt;D&gt;</code> dates
             </p>
+          </div>
+        </Card>
+
+        {/* Smart difficulty (Step 19) */}
+        <Card title="Smart difficulty">
+          <div className="space-y-3">
+            <Row label="Enable smart difficulty (Phase 2)">
+              <Switch
+                checked={diff?.enabled ?? false}
+                onCheckedChange={onSmartDifficultyToggle}
+                ariaLabel="Enable smart difficulty"
+              />
+            </Row>
+            <div className="flex flex-wrap gap-2">
+              <Button variant="outline" onClick={onRecomputeDifficulty} disabled={busy !== null}>
+                <RotateCw className={"h-4 w-4 " + (busy === "difficulty" ? "animate-spin" : "")} />
+                Recompute smart difficulty
+              </Button>
+              <Button variant="outline" onClick={() => navigate("/difficulty/train")}>
+                <Brain className="h-4 w-4" />
+                Train pairwise…
+              </Button>
+            </div>
+            {diff && (
+              <p className="text-xs text-muted">
+                {diff.topics_with_depth.length === 0 ? (
+                  <>
+                    <strong>TOPIC_DEPTH_MAP is empty</strong> — depth sub-score contributes 0; the
+                    combiner auto-renormalizes over length + novelty.
+                  </>
+                ) : (
+                  <>Depth values available for {diff.topics_with_depth.length} topic(s).</>
+                )}
+                {Object.keys(diff.weights_by_topic).length > 0 && (
+                  <> Trained weights on {Object.keys(diff.weights_by_topic).length} topic(s).</>
+                )}
+              </p>
+            )}
           </div>
         </Card>
 
@@ -502,6 +563,31 @@ export default function SettingsPage() {
               </pre>
             )}
           </div>
+        )}
+      </Modal>
+
+      <Modal
+        open={recomputeResult !== null}
+        onClose={() => setRecomputeResult(null)}
+        title="Difficulty recomputed"
+        tone="success"
+        footer={
+          <Button variant="primary" onClick={() => setRecomputeResult(null)}>
+            OK
+          </Button>
+        }
+      >
+        {recomputeResult && (
+          <p className="text-sm">
+            Wrote ratings for <strong>{recomputeResult.updated.toLocaleString()}</strong> questions
+            across <strong>{recomputeResult.topics_covered}</strong> topic(s).
+            {recomputeResult.skipped > 0 && (
+              <> Skipped <strong>{recomputeResult.skipped}</strong> (all sub-scores were 0).</>
+            )}
+            {recomputeResult.avg_rating != null && (
+              <> Mean rating: <strong>{recomputeResult.avg_rating.toFixed(2)}</strong>.</>
+            )}
+          </p>
         )}
       </Modal>
 

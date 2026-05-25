@@ -219,6 +219,53 @@ def activity_line(
     ]
 
 
+def source_attribution(
+    conn: sqlite3.Connection,
+    subject: Subject | None = None,
+    date_range: DateRange = (None, None),
+) -> list[dict[str, Any]]:
+    """Per-source counts among questions the user has actually pulled into PSets
+    in the selected date range — answering the braindump's "Source Fraction
+    among attempted questions".
+
+    Scope follows the **pset-side** convention: subject is matched literally on
+    `psets.subject` (not the curricular gate), and the date range applies to
+    `psets.date_created`. Each row in `pset_questions` contributes once — so a
+    question included in two PSets shows up twice, which is the intended
+    "how much of my practice came from this source" reading.
+
+    Returns rows sorted by count descending with NULL/empty sources rolled into
+    '(no source)'. `percent` is a float 0-100.
+    """
+    parts: list[str] = ["pq.pset_id = p.pset_id", "pq.question_id = q.question_id"]
+    params: list[Any] = []
+    if subject is not None:
+        parts.append("p.subject = ?")
+        params.append(subject.name)
+    df, dt = date_range
+    if df:
+        parts.append("date(p.date_created) >= date(?)")
+        params.append(df)
+    if dt:
+        parts.append("date(p.date_created) <= date(?)")
+        params.append(dt)
+    where = " AND ".join(parts)
+    rows = conn.execute(
+        f"SELECT COALESCE(NULLIF(q.source, ''), '(no source)') AS s, COUNT(*) AS c "
+        f"FROM pset_questions pq, psets p, questions q "
+        f"WHERE {where} "
+        f"GROUP BY s ORDER BY c DESC, s",
+        params,
+    ).fetchall()
+    total = sum(int(r[1]) for r in rows)
+    if total == 0:
+        return []
+    return [
+        {"label": r[0], "count": int(r[1]), "percent": (int(r[1]) / total) * 100.0}
+        for r in rows
+    ]
+
+
 def topic_distribution(
     conn: sqlite3.Connection,
     subject: Subject | None,

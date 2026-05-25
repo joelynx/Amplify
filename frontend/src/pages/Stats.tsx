@@ -16,6 +16,7 @@ import { StatsFiltersDialog } from "../components/stats/StatsFiltersDialog";
 import { MultiplicityHistogram } from "../components/stats/MultiplicityHistogram";
 import { CalendarHeatmap } from "../components/stats/CalendarHeatmap";
 import { ActivityLine } from "../components/stats/ActivityLine";
+import { TrendsPanel } from "../components/stats/TrendsPanel";
 import {
   ipc,
   type ActivityDatum,
@@ -48,6 +49,7 @@ export default function StatsPage() {
   const [subjects, setSubjects] = useState<string[]>([]);
   const [stats, setStats] = useState<StatsBundle | null>(null);
   const [distribution, setDistribution] = useState<DistributionDatum[]>([]);
+  const [sourceAttribution, setSourceAttribution] = useState<DistributionDatum[]>([]);
   const [multiplicity, setMultiplicity] = useState<Record<number, number>>({});
   const [heatmap, setHeatmap] = useState<Record<string, number>>({});
   const [activity, setActivity] = useState<ActivityDatum[]>([]);
@@ -63,17 +65,19 @@ export default function StatsPage() {
   const refresh = useCallback(async () => {
     setLoading(true);
     try {
-      const [s, dist, mult, heat, act] = await Promise.all([
+      const [s, dist, src, mult, heat, act] = await Promise.all([
         ipc.get_stats(subject, dateRange),
         subject
           ? ipc.get_topic_distribution(subject, dateRange)
           : ipc.get_subject_distribution(dateRange),
+        ipc.get_source_attribution(subject, dateRange),
         ipc.get_question_multiplicity_dist(subject),
         ipc.get_calendar_heatmap(heatmapYear),
         ipc.get_activity_line(dateRange),
       ]);
       setStats(s);
       setDistribution(dist);
+      setSourceAttribution(src);
       setMultiplicity(mult);
       setHeatmap(heat);
       setActivity(act);
@@ -159,6 +163,8 @@ export default function StatsPage() {
         <div className="mx-auto max-w-5xl space-y-6 px-6 py-6">
           <StatsCards stats={stats} />
 
+          <TrendsPanel subject={subject} />
+
           <Card title={chartTitle}>
             {loading && distribution.length === 0 ? (
               <p className="text-muted">Loading…</p>
@@ -166,6 +172,18 @@ export default function StatsPage() {
               <p className="text-muted">No data found for the selected filters.</p>
             ) : (
               <DistributionPie data={distribution} />
+            )}
+          </Card>
+
+          <Card title="Source fraction (attempted questions)">
+            {loading && sourceAttribution.length === 0 ? (
+              <p className="text-muted">Loading…</p>
+            ) : sourceAttribution.length === 0 ? (
+              <p className="text-muted">
+                No questions practiced in the selected range yet — generate a PSet to populate this.
+              </p>
+            ) : (
+              <DistributionPie data={sourceAttribution} />
             )}
           </Card>
 

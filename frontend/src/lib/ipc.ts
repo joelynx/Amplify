@@ -66,6 +66,41 @@ export interface SearchResult {
   error?: string;
 }
 
+// ---- Smart difficulty (Phase 2) ----------------------------------------
+
+export interface DifficultyWeights {
+  length: number;
+  novelty: number;
+  depth: number;
+}
+
+export interface DifficultyState {
+  enabled: boolean;
+  weights_by_topic: Record<string, DifficultyWeights>;
+  defaults: DifficultyWeights;
+  topics_with_depth: string[];
+}
+
+export interface RecomputeDifficultyResult {
+  updated: number;
+  skipped: number;
+  avg_rating: number | null;
+  topics_covered: number;
+}
+
+export interface PairwiseSide {
+  question: Question;
+  sub_scores: DifficultyWeights;
+  rating: number;
+}
+
+export interface PairwisePair {
+  topic: string;
+  weights: DifficultyWeights;
+  a: PairwiseSide;
+  b: PairwiseSide;
+}
+
 // ---- Quiz (Phase 2 interactive practice) -------------------------------
 
 export type QuizTemplate = "PBS" | "MIT_INTEGRATION_BEE" | "FREE_ANSWERING";
@@ -233,6 +268,15 @@ interface PyWebViewApi {
     action: string,
     payload?: Record<string, unknown> | null,
   ) => Promise<number>;
+  recompute_difficulty: () => Promise<RecomputeDifficultyResult>;
+  get_difficulty_state: () => Promise<DifficultyState>;
+  set_smart_difficulty_enabled: (on: boolean) => Promise<void>;
+  get_pairwise_pair: (topic?: string | null) => Promise<PairwisePair | null>;
+  submit_pairwise_judgment: (
+    harder_id: number,
+    easier_id: number,
+    magnitude: number,
+  ) => Promise<{ topic: string; weights: DifficultyWeights; error?: string } | null>;
   start_quiz: (filters: Filters, settings: QuizSettings) => Promise<StartQuizResult>;
   quiz_take_widget: (quiz_id: string, slot_index: number) => Promise<QuizSlot | null>;
   quiz_submit_answer: (
@@ -298,6 +342,11 @@ interface PyWebViewApi {
     subject?: string | null,
     date_range?: DateRange | null,
   ) => Promise<DistributionDatum[]>;
+  get_source_attribution: (
+    subject?: string | null,
+    date_range?: DateRange | null,
+  ) => Promise<DistributionDatum[]>;
+  get_trends: (subject?: string | null) => Promise<TrendInsight[]>;
   get_question_multiplicity_dist: (subject?: string | null) => Promise<Record<number, number>>;
   get_calendar_heatmap: (year?: number | null) => Promise<Record<string, number>>;
   get_activity_line: (date_range?: DateRange | null) => Promise<ActivityDatum[]>;
@@ -355,6 +404,18 @@ export interface StatsBundle {
 export interface DistributionDatum {
   label: string;
   count: number;
+  /** Optional pre-computed percent share; backend supplies this for source attribution. */
+  percent?: number;
+}
+
+/** Step 21: one row of the Trends panel. `cta_filters` is a partial
+ * TemplatePayload that the Generate page consumes via location.state.template. */
+export interface TrendInsight {
+  id: string;
+  title: string;
+  body: string;
+  cta_label: string;
+  cta_filters: Partial<TemplatePayload>;
 }
 
 export interface ActivityDatum {
@@ -516,6 +577,26 @@ export const ipc = {
   ): Promise<number> {
     const api = await bridge();
     return api.mass_action(question_ids, action, payload);
+  },
+  async recompute_difficulty(): Promise<RecomputeDifficultyResult> {
+    const api = await bridge();
+    return api.recompute_difficulty();
+  },
+  async get_difficulty_state(): Promise<DifficultyState> {
+    const api = await bridge();
+    return api.get_difficulty_state();
+  },
+  async set_smart_difficulty_enabled(on: boolean): Promise<void> {
+    const api = await bridge();
+    return api.set_smart_difficulty_enabled(on);
+  },
+  async get_pairwise_pair(topic: string | null = null): Promise<PairwisePair | null> {
+    const api = await bridge();
+    return api.get_pairwise_pair(topic);
+  },
+  async submit_pairwise_judgment(harder_id: number, easier_id: number, magnitude: number) {
+    const api = await bridge();
+    return api.submit_pairwise_judgment(harder_id, easier_id, magnitude);
   },
   async start_quiz(filters: Filters, settings: QuizSettings): Promise<StartQuizResult> {
     const api = await bridge();
@@ -750,6 +831,17 @@ export const ipc = {
   ): Promise<DistributionDatum[]> {
     const api = await bridge();
     return api.get_topic_distribution(subject, date_range);
+  },
+  async get_source_attribution(
+    subject: string | null = null,
+    date_range: DateRange | null = null,
+  ): Promise<DistributionDatum[]> {
+    const api = await bridge();
+    return api.get_source_attribution(subject, date_range);
+  },
+  async get_trends(subject: string | null = null): Promise<TrendInsight[]> {
+    const api = await bridge();
+    return api.get_trends(subject);
   },
   async get_question_multiplicity_dist(
     subject: string | null = null,
