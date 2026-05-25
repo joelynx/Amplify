@@ -1,0 +1,43 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# --- Node / frontend ---
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.tsbuildinfo
+*.log
+
+# --- App runtime data ---
+# everything under app/data/appdata/ is generated at first launch (DB, logs, caches)
+app/data/appdata/
+!app/data/appdata/.gitkeep
+
+# --- Bundled TinyTeX (download separately; too large to commit) ---
+app/resources/tinytex/*
+!app/resources/tinytex/README.md
+!app/resources/tinytex/.gitkeep
+
+# --- Generated PDFs and TeX scratch ---
+*.pdf
+*.aux
+*.out
+*.synctex.gz
+
+# --- OS / editor noise ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# --- Claude Code project settings ---
+.claude/

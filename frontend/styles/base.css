@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Default Light theme tokens — overridden by themes in ./themes/<id>/theme.css.
+   Spec §11.3. */
+:root {
+  --text: #111827;
+  --background: #ffffff;
+  --surface: #f9fafb;
+  --primary: #2563eb;
+  --secondary: #6366f1;
+  --accent: #f59e0b;
+  --border: #e5e7eb;
+  --muted: #9ca3af;
+  --success: #16a34a;
+  --warning: #d97706;
+  --error: #dc2626;
+  --font-family: "Inter", system-ui, sans-serif;
+  --rem: 16px;
+}
+
+:root.dark {
+  --text: #f3f4f6;
+  --background: #0f172a;
+  --surface: #1e293b;
+  --primary: #60a5fa;
+  --secondary: #818cf8;
+  --accent: #fbbf24;
+  --border: #334155;
+  --muted: #64748b;
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --error: #f87171;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-family);
+  font-size: var(--rem);
+}
