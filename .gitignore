@@ -21,11 +21,6 @@ frontend/.vite/
 app/data/appdata/
 !app/data/appdata/.gitkeep
 
-# --- Bundled TinyTeX (download separately; too large to commit) ---
-app/resources/tinytex/*
-!app/resources/tinytex/README.md
-!app/resources/tinytex/.gitkeep
-
 # --- Generated PDFs and TeX scratch ---
 *.pdf
 *.aux

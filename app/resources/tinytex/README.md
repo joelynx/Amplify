@@ -15,5 +15,8 @@ packages via `tlmgr install amsmath amsfonts amssymb caption graphicx fancyhdr
 geometry enumitem circuitikz chemfig pgfplots mathtools stmaryrd ulem` (the spec's
 fixed preamble; see §6.2 of `Files/AMPLIFY_BUILD_SPEC (3).md`).
 
-This directory is gitignored except for this README — bundles are large and
-platform-specific; ship them with installers, not in version control.
+Bundles are **committed to the repo** rather than fetched out-of-band, so a clean
+clone is a working install. Add per-platform subdirectories (`mac/`, `win/`,
+optionally `linux/`) when their bundle lands. The Linux fallback to system
+`xelatex` is documented in §6.1 of the spec — installers may omit the bundle on
+Linux and rely on `PATH` instead.
