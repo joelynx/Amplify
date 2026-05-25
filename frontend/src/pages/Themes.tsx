@@ -65,7 +65,7 @@ export default function ThemesPage() {
   const showA11y = isFlavorTheme(active);
 
   return (
-    <main className="flex-1 overflow-y-auto">
+    <main className="h-full overflow-y-auto">
       <div className="mx-auto max-w-4xl space-y-6 px-6 py-6">
         <header className="space-y-3">
           <div>

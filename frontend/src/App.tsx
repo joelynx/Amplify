@@ -100,17 +100,15 @@ export default function App() {
   );
 }
 
+// Daily-workflow only — Subjects/Themes/Tutorial/About live on the Welcome
+// page as cards so the nav stays tight (spec §8).
 const NAV: Array<{ to: string; label: string }> = [
   { to: "/", label: "Home" },
   { to: "/generate", label: "Generate" },
   { to: "/browser", label: "Browser" },
-  { to: "/subjects", label: "Subjects" },
   { to: "/history", label: "History" },
   { to: "/stats", label: "Stats" },
-  { to: "/themes", label: "Themes" },
   { to: "/settings", label: "Settings" },
-  { to: "/tutorial", label: "Tutorial" },
-  { to: "/about", label: "About" },
 ];
 
 function NavBar() {

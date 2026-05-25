@@ -4,7 +4,7 @@ import { Card } from "../components/ui/Card";
 
 export default function TutorialPage() {
   return (
-    <main className="flex-1 overflow-y-auto">
+    <main className="h-full overflow-y-auto">
       <div className="mx-auto max-w-3xl space-y-4 px-6 py-6">
         <header>
           <h1 className="text-2xl font-semibold">Tutorial</h1>

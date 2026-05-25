@@ -18,7 +18,7 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <main className="flex-1 overflow-y-auto">
+    <main className="h-full overflow-y-auto">
       <div className="mx-auto max-w-3xl space-y-6 px-6 py-6">
         <header>
           <h1 className="text-2xl font-semibold">About Amplify</h1>
