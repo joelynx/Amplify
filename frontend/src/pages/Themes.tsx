@@ -14,9 +14,17 @@ import { useEffect, useState } from "react";
 import { Check } from "lucide-react";
 
 import { Button } from "../components/ui/Button";
+import { Switch } from "../components/ui/Switch";
 import { cn } from "../lib/cn";
 import { ipc, type ThemeMeta } from "../lib/ipc";
-import { applyTheme, getCurrentTheme, type ThemeId } from "../lib/theme";
+import {
+  applyTheme,
+  getAccessibilityMode,
+  getCurrentTheme,
+  isFlavorTheme,
+  setAccessibilityMode,
+  type ThemeId,
+} from "../lib/theme";
 
 /** Preview swatches use the same CSS vars the theme defines. We render a
  * shadow DOM-ish trick by attaching `data-theme={id}` to the swatch container,
@@ -32,6 +40,7 @@ const SWATCH_TOKENS: readonly { key: string; label: string }[] = [
 export default function ThemesPage() {
   const [themes, setThemes] = useState<ThemeMeta[]>([]);
   const [active, setActive] = useState<ThemeId>(getCurrentTheme());
+  const [a11y, setA11y] = useState<boolean>(getAccessibilityMode());
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -48,16 +57,34 @@ export default function ThemesPage() {
     }
   };
 
+  const onToggleA11y = async (v: boolean) => {
+    await setAccessibilityMode(v);
+    setA11y(v);
+  };
+
+  const showA11y = isFlavorTheme(active);
+
   return (
     <main className="flex-1 overflow-y-auto">
       <div className="mx-auto max-w-4xl space-y-6 px-6 py-6">
-        <header>
-          <h1 className="text-2xl font-semibold">Themes</h1>
-          <p className="text-sm text-muted">
-            Default Light + Default Dark + one flavor (Pastel) so far. Switching applies live; no
-            restart required.
-          </p>
-          {error && <p className="mt-2 text-sm text-error">{error}</p>}
+        <header className="space-y-3">
+          <div>
+            <h1 className="text-2xl font-semibold">Themes</h1>
+            <p className="text-sm text-muted">
+              Two defaults (WCAG AA) plus seven flavor themes. Switching applies live; no restart
+              required.
+            </p>
+            {error && <p className="mt-2 text-sm text-error">{error}</p>}
+          </div>
+          {showA11y && (
+            <label className="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-3 py-2 text-sm">
+              <Switch checked={a11y} onCheckedChange={onToggleA11y} ariaLabel="Accessibility mode" />
+              <span className="font-medium">Accessibility mode</span>
+              <span className="text-muted">
+                — forces high-contrast text on top of the theme's background art (spec §11.4).
+              </span>
+            </label>
+          )}
         </header>
 
         <div className="grid gap-4 md:grid-cols-2">

@@ -5,6 +5,12 @@
 @import "./themes/default-light/theme.css";
 @import "./themes/default-dark/theme.css";
 @import "./themes/pastel/theme.css";
+@import "./themes/frutiger-aero/theme.css";
+@import "./themes/pixel-art/theme.css";
+@import "./themes/windows-xp/theme.css";
+@import "./themes/comic/theme.css";
+@import "./themes/ascii/theme.css";
+@import "./themes/android-kitkat/theme.css";
 
 @tailwind base;
 @tailwind components;

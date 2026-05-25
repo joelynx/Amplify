@@ -48,6 +48,36 @@ THEMES: Final[tuple[ThemeMeta, ...]] = (
         name="Pastel",
         description="Soft pastel palette with rounded edges and a pillowy tooltip.",
     ),
+    ThemeMeta(
+        id="frutiger-aero",
+        name="Frutiger Aero",
+        description="Glassy sky-blue era. Subtle blur, soft glows, orange accents.",
+    ),
+    ThemeMeta(
+        id="pixel-art",
+        name="Pixel Art",
+        description="Chunky 8/16-bit aesthetic. Monospace, square borders, drop-shadow blocks.",
+    ),
+    ThemeMeta(
+        id="windows-xp",
+        name="Windows XP",
+        description="Early-2000s desktop palette. Bevels, Tahoma, sticky-note tooltips.",
+    ),
+    ThemeMeta(
+        id="comic",
+        name="Comic",
+        description="Heavy ink borders, speech-bubble tooltips, hand-drawn type.",
+    ),
+    ThemeMeta(
+        id="ascii",
+        name="ASCII",
+        description="Monospace terminal aesthetic. Green on near-black, no rounding.",
+    ),
+    ThemeMeta(
+        id="android-kitkat",
+        name="Android KitKat",
+        description="Material 1 flat surfaces, teal primary, dark Material toast tooltip.",
+    ),
 )
 
 _BY_ID: Final[dict[str, ThemeMeta]] = {t.id: t for t in THEMES}

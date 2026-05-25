@@ -1,0 +1,48 @@
+/* Windows XP — early-2000s desktop evocation (spec §11.4). No Luna chrome,
+ * no XP wallpapers — just the era's color palette and bevels. */
+
+:root[data-theme="windows-xp"] {
+  --text: #1a1a1a;
+  --background: #ece9d8;
+  --surface: #ffffff;
+  --primary: #2a5db0;
+  --secondary: #3978c9;
+  --accent: #3a8c2a;
+  --border: #a0a0a0;
+  --muted: #555555;
+  --success: #3a8c2a;
+  --warning: #d97706;
+  --error: #c92121;
+  --font-family: "Tahoma", "Trebuchet MS", "Geneva", sans-serif;
+  --rem: 13px;
+}
+
+/* 3D-bevel cards via dual box-shadow (light from top-left). */
+:root[data-theme="windows-xp"] section[class*="rounded-lg"] {
+  border-radius: 4px;
+  border: 1px solid #7b7b7b;
+  box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #a0a0a0;
+}
+:root[data-theme="windows-xp"] button[class*="rounded-md"] {
+  border-radius: 3px;
+  background: linear-gradient(180deg, #f8f8f8 0%, #d9d9d9 100%);
+  border: 1px solid #7b7b7b;
+  color: #1a1a1a;
+  box-shadow: inset 1px 1px 0 #ffffff;
+}
+
+:root[data-theme="windows-xp"] .amplify-tooltip {
+  background: #ffffe1;
+  color: #000000;
+  border: 1px solid #000000;
+  border-radius: 0;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-family: "Tahoma", sans-serif;
+  font-weight: 400;
+}
+
+:root[data-a11y="on"][data-theme="windows-xp"] {
+  --text: #000000;
+  --background: #ffffff;
+  --muted: #2a2a2a;
+}

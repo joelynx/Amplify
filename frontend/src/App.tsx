@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { HashRouter, Link, Route, Routes, useLocation } from "react-router-dom";
 
 import { BridgeUnavailableError, ipc } from "./lib/ipc";
-import { applyTheme, type ThemeId } from "./lib/theme";
+import { applyTheme, setAccessibilityMode, type ThemeId } from "./lib/theme";
 import AboutPage from "./pages/About";
 import BrowserPage from "./pages/Browser";
 import GeneratePage from "./pages/Generate";
@@ -31,9 +31,15 @@ export default function App() {
         // CSS vars are already loaded by the bundle; this just flips the
         // active selector.
         try {
-          const saved = (await ipc.get_config("THEME_SELECTED")) as string | null;
+          const [saved, savedA11y] = await Promise.all([
+            ipc.get_config("THEME_SELECTED") as Promise<string | null>,
+            ipc.get_config("THEME_A11Y_MODE") as Promise<boolean | null>,
+          ]);
           if (saved) {
             await applyTheme(saved as ThemeId, { persist: false });
+          }
+          if (savedA11y) {
+            await setAccessibilityMode(true, { persist: false });
           }
         } catch {
           /* fall back to the :root defaults */
