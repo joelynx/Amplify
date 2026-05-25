@@ -36,6 +36,7 @@ from app.core.stats import (
     topic_distribution,
 )
 from app.persistence.ingest.seed import ingest as run_ingest
+from app.persistence.ingest.seed_tags import run as run_seed_tags
 from app.persistence.repositories import configs as configs_repo
 from app.persistence.repositories import psets as psets_repo
 from app.persistence.repositories import questions as questions_repo
@@ -384,6 +385,19 @@ class Api:
             "skipped": result.skipped,
             "embeddings_loaded": result.embeddings_loaded,
             "outlines_loaded": result.outlines_loaded,
+        }
+
+    def seed_tags_from_metadata(self) -> dict[str, Any]:
+        """Derive `question_tags` rows from each question's subtopic/type/source.
+
+        Useful when the seed bundle ships with no tags (like our TEST.csv). The
+        operation is idempotent — re-running only inserts tags for new
+        questions or new metadata.
+        """
+        result = run_seed_tags(self._conn)
+        return {
+            "questions_scanned": result.questions_scanned,
+            "rows_inserted": result.rows_inserted,
         }
 
     def augment_seed_from_csv(self, csv_path: str) -> dict[str, Any]:

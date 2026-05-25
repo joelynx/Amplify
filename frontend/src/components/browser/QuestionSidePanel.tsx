@@ -7,7 +7,9 @@
  */
 
 import { useEffect, useState } from "react";
-import { X } from "lucide-react";
+import { ChevronRight, X } from "lucide-react";
+
+import { cn } from "../../lib/cn";
 
 import { Button } from "../ui/Button";
 import { ipc, type Question, type SimilarQuestion } from "../../lib/ipc";
@@ -71,21 +73,21 @@ export function QuestionSidePanel({ question, onClose, onPickSimilar }: Props) {
         </Section>
 
         {question.solution && (
-          <Section title="Solution">
+          <Disclosure title="Solution" defaultOpen={false}>
             <LatexContent source={question.solution} />
-          </Section>
+          </Disclosure>
         )}
 
         {question.solution_outline && (
-          <Section title="Outline">
+          <Disclosure title="Outline" defaultOpen={true}>
             <LatexContent source={question.solution_outline} />
-          </Section>
+          </Disclosure>
         )}
 
         {question.hints && (
-          <Section title="Hints">
+          <Disclosure title="Hints" defaultOpen={true}>
             <LatexContent source={question.hints} />
-          </Section>
+          </Disclosure>
         )}
 
         <Section title="Similar questions">
@@ -127,6 +129,34 @@ function Section({ title, children }: { title: string; children: React.ReactNode
     <section>
       <h3 className="mb-1 text-xs font-semibold uppercase tracking-wide text-muted">{title}</h3>
       {children}
+    </section>
+  );
+}
+
+/** Collapsible section — solutions hide behind a click so the panel works
+ * as a practice surface (read question, attempt, then reveal). Outline /
+ * hints default open since they're short. */
+function Disclosure({
+  title,
+  defaultOpen,
+  children,
+}: {
+  title: string;
+  defaultOpen: boolean;
+  children: React.ReactNode;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <section>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className="flex w-full items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted hover:text-text"
+      >
+        <ChevronRight className={cn("h-3 w-3 transition-transform", open && "rotate-90")} />
+        {title}
+      </button>
+      {open && <div className="mt-2">{children}</div>}
     </section>
   );
 }
