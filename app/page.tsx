@@ -1,9 +1,7 @@
 import Link from "next/link";
 import { getServerSupabase } from "@/lib/supabase/server";
 import { getPublicStats } from "@/lib/stats";
-import { getInstitutions } from "@/lib/cached";
 import { lowerCredibilityBound } from "@/lib/mastery";
-import type { Institution } from "@/lib/db/types";
 
 type MasteryRow = {
   topic: string;
@@ -17,9 +15,8 @@ type MasteryRow = {
 export default async function Home() {
   const supabase = await getServerSupabase();
 
-  const [stats, institutions, { data: { user } }] = await Promise.all([
+  const [stats, { data: { user } }] = await Promise.all([
     getPublicStats(supabase),
-    getInstitutions(),
     supabase.auth.getUser(),
   ]);
 
@@ -60,12 +57,6 @@ export default async function Home() {
   const isFaculty =
     userRole === "faculty" || userRole === "admin" || userRole === "moderator";
 
-  const active = (institutions ?? []).filter(
-    (i) => (i as Institution).status === "active"
-  ) as Institution[];
-  const interested = (institutions ?? []).filter(
-    (i) => (i as Institution).status === "interested"
-  ) as Institution[];
 
   return (
     <main className="hero-bg">
@@ -178,12 +169,6 @@ export default async function Home() {
             >
               Browse the bank
             </Link>
-            <Link
-              href="/for-institutions"
-              className="rounded-md px-5 py-3 text-sm font-medium text-brand-600 hover:bg-brand-50"
-            >
-              For institutions →
-            </Link>
           </div>
         </div>
 
@@ -193,22 +178,6 @@ export default async function Home() {
           <Stat value={stats.contributors} label="contributors" />
         </dl>
       </section>
-
-      {/* Pilot context — honest, no aspirational scaling claims. */}
-      {active.length > 0 && (
-        <section className="border-y border-ink-200 bg-ink-50">
-          <div className="mx-auto max-w-5xl px-6 py-12">
-            <h2 className="display text-2xl font-semibold">
-              Pilot launching at IIT-AD next semester.
-            </h2>
-            <ul className="mt-5 grid gap-2 sm:grid-cols-2">
-              {active.map((i) => (
-                <InstitutionCard key={i.slug} i={i} />
-              ))}
-            </ul>
-          </div>
-        </section>
-      )}
 
       {/* Two surfaces. Anything not actually built is dropped. */}
       <section className="mx-auto max-w-5xl px-6 py-20">
@@ -268,26 +237,6 @@ function Stat({ value, label }: { value: number; label: string }) {
         {label}
       </dd>
     </div>
-  );
-}
-
-function InstitutionCard({ i }: { i: Institution }) {
-  return (
-    <li>
-      <Link
-        href={`/i/${i.slug}`}
-        className="flex items-center justify-between rounded-md border border-ink-200 bg-white px-3 py-2.5 text-sm shadow-sm hover:border-ink-400"
-      >
-        <div>
-          <div className="font-medium">{i.short_name}</div>
-          <div className="text-xs text-ink-500">{i.name}</div>
-        </div>
-        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700">
-          <span className="size-1.5 rounded-full bg-emerald-500" />
-          live
-        </span>
-      </Link>
-    </li>
   );
 }
 
