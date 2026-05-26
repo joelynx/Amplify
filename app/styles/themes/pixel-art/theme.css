@@ -1,0 +1,47 @@
+/* Pixel Art — generic 8/16-bit. No Mario/Pokémon assets (spec §11.4). */
+
+:root[data-theme="pixel-art"] {
+  --text: #e8e8e8;
+  --background: #0d1b2a;
+  --surface: #1b3a57;
+  --primary: #ffd166;
+  --secondary: #06d6a0;
+  --accent: #ef476f;
+  --border: #ffd166;
+  --muted: #8aa3b8;
+  --success: #06d6a0;
+  --warning: #ffd166;
+  --error: #ef476f;
+  --font-family: ui-monospace, "Cascadia Mono", "Courier New", monospace;
+  --rem: 14px;
+}
+
+/* Chunky pixel borders via dual box-shadow (no anti-aliasing).
+ * Buttons / cards lose rounded corners. */
+:root[data-theme="pixel-art"] section[class*="rounded-lg"],
+:root[data-theme="pixel-art"] button[class*="rounded-md"],
+:root[data-theme="pixel-art"] [class*="rounded-md"]:not(input):not(textarea) {
+  border-radius: 0 !important;
+}
+:root[data-theme="pixel-art"] section[class*="rounded-lg"] {
+  border: 2px solid var(--border);
+  box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.4);
+}
+
+:root[data-theme="pixel-art"] .amplify-tooltip {
+  background: #1b3a57;
+  color: #ffd166;
+  border: 2px solid #ffd166;
+  border-radius: 0;
+  box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.6);
+  font-family: ui-monospace, "Cascadia Mono", "Courier New", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+:root[data-a11y="on"][data-theme="pixel-art"] {
+  --text: #ffffff;
+  --background: #000000;
+  --surface: #111111;
+  --muted: #cccccc;
+}

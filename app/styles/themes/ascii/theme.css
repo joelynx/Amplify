@@ -1,0 +1,53 @@
+/* ASCII — monospace terminal aesthetic. Green-on-black, no color accents
+ * except where semantically required (error red, success green hue shift). */
+
+:root[data-theme="ascii"] {
+  --text: #cfffd1;
+  --background: #050a05;
+  --surface: #0a140a;
+  --primary: #66ff66;
+  --secondary: #cfffd1;
+  --accent: #ffff00;
+  --border: #2a4a2a;
+  --muted: #4a8a4a;
+  --success: #66ff66;
+  --warning: #ffff00;
+  --error: #ff6666;
+  --font-family: ui-monospace, "Cascadia Mono", "Consolas", "Courier New", monospace;
+  --rem: 15px;
+}
+
+/* All borders thin solid, no shadows, no rounding */
+:root[data-theme="ascii"] section[class*="rounded-lg"],
+:root[data-theme="ascii"] button[class*="rounded-md"],
+:root[data-theme="ascii"] input,
+:root[data-theme="ascii"] textarea {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+:root[data-theme="ascii"] section[class*="rounded-lg"] {
+  border: 1px solid var(--border);
+}
+:root[data-theme="ascii"] section[class*="rounded-lg"]::before {
+  content: "[ " attr(data-title) " ]";
+  display: none;
+}
+
+:root[data-theme="ascii"] .amplify-tooltip {
+  background: var(--background);
+  color: var(--text);
+  border: 1px solid var(--primary);
+  border-radius: 0;
+  box-shadow: none;
+  font-family: var(--font-family);
+  padding: 0.35rem 0.6rem;
+}
+:root[data-theme="ascii"] .amplify-tooltip .amp-label::before {
+  content: "> ";
+}
+
+:root[data-a11y="on"][data-theme="ascii"] {
+  --text: #ffffff;
+  --background: #000000;
+  --muted: #ffffff;
+}

@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "katex/dist/katex.min.css";
+
+/* ─── Joel's 9 themes (lifted from joelynx/Amplify@a1897a7) ──────────────
+ * Each defines the 12 semantic tokens on its own `:root[data-theme=...]`
+ * selector. default-light also targets bare `:root` so the page never lands
+ * with unset tokens. */
+@import "./styles/themes/default-light/theme.css";
+@import "./styles/themes/default-dark/theme.css";
+@import "./styles/themes/pastel/theme.css";
+@import "./styles/themes/frutiger-aero/theme.css";
+@import "./styles/themes/pixel-art/theme.css";
+@import "./styles/themes/windows-xp/theme.css";
+@import "./styles/themes/comic/theme.css";
+@import "./styles/themes/ascii/theme.css";
+@import "./styles/themes/android-kitkat/theme.css";
+
+:root {
+  color-scheme: light;
+}
+html[data-theme="default-dark"],
+html[data-theme="pixel-art"],
+html[data-theme="ascii"] {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-family);
+  font-size: var(--rem);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ─── Bridge layer ──────────────────────────────────────────────────────
+ * Map our existing Tailwind ink-* / bg-white / brand-* classes onto Joel's
+ * semantic tokens (--text, --background, --surface, --border, --muted,
+ * --primary). Kicks in only when html[data-theme] is set; default state
+ * (no data-theme) preserves the original light look for back-compat.
+ * Specificity bumped via the attribute selector + !important so the bridge
+ * wins over Tailwind utility classes.
+ */
+html[data-theme] {
+  /* Surfaces */
+}
+html[data-theme] .bg-white { background-color: var(--surface) !important; }
+html[data-theme] .bg-ink-50 { background-color: var(--surface) !important; }
+html[data-theme] .bg-ink-100 { background-color: color-mix(in srgb, var(--surface) 70%, var(--border)) !important; }
+html[data-theme] .bg-ink-200 { background-color: var(--border) !important; }
+html[data-theme] .bg-ink-900 { background-color: var(--text) !important; color: var(--background) !important; }
+
+/* Text */
+html[data-theme] .text-ink-900 { color: var(--text) !important; }
+html[data-theme] .text-ink-700 { color: color-mix(in srgb, var(--text) 82%, var(--muted)) !important; }
+html[data-theme] .text-ink-600 { color: color-mix(in srgb, var(--text) 60%, var(--muted)) !important; }
+html[data-theme] .text-ink-500 { color: var(--muted) !important; }
+html[data-theme] .text-ink-400 { color: color-mix(in srgb, var(--muted) 70%, var(--background)) !important; }
+html[data-theme] .text-white { color: var(--background) !important; }
+
+/* Borders */
+html[data-theme] .border-ink-100 { border-color: color-mix(in srgb, var(--border) 40%, var(--background)) !important; }
+html[data-theme] .border-ink-200 { border-color: var(--border) !important; }
+html[data-theme] .border-ink-300 { border-color: color-mix(in srgb, var(--border) 70%, var(--text)) !important; }
+html[data-theme] .border-ink-400 { border-color: color-mix(in srgb, var(--border) 50%, var(--text)) !important; }
+html[data-theme] .border-ink-900 { border-color: var(--text) !important; }
+
+/* Brand (maps to primary token) */
+html[data-theme] .bg-brand-50 { background-color: color-mix(in srgb, var(--primary) 15%, var(--surface)) !important; }
+html[data-theme] .bg-brand-500 { background-color: var(--primary) !important; }
+html[data-theme] .text-brand-700 { color: var(--primary) !important; }
+html[data-theme] .text-brand-600 { color: var(--primary) !important; }
+html[data-theme] .border-brand-200 { border-color: color-mix(in srgb, var(--primary) 40%, var(--border)) !important; }
+html[data-theme] .border-brand-600 { border-color: var(--primary) !important; }
+
+/* Semantic accents */
+html[data-theme] .bg-emerald-50 { background-color: color-mix(in srgb, var(--success) 12%, var(--surface)) !important; }
+html[data-theme] .bg-emerald-500 { background-color: var(--success) !important; }
+html[data-theme] .text-emerald-700 { color: var(--success) !important; }
+html[data-theme] .text-emerald-900 { color: var(--success) !important; }
+html[data-theme] .border-emerald-200 { border-color: color-mix(in srgb, var(--success) 30%, var(--border)) !important; }
+html[data-theme] .border-emerald-500 { border-color: var(--success) !important; }
+
+html[data-theme] .bg-red-50 { background-color: color-mix(in srgb, var(--error) 12%, var(--surface)) !important; }
+html[data-theme] .text-red-700 { color: var(--error) !important; }
+html[data-theme] .text-red-900 { color: var(--error) !important; }
+html[data-theme] .text-red-600 { color: var(--error) !important; }
+html[data-theme] .text-red-500 { color: var(--error) !important; }
+html[data-theme] .border-red-200 { border-color: color-mix(in srgb, var(--error) 30%, var(--border)) !important; }
+html[data-theme] .border-red-500 { border-color: var(--error) !important; }
+
+html[data-theme] .bg-amber-50 { background-color: color-mix(in srgb, var(--warning) 12%, var(--surface)) !important; }
+html[data-theme] .text-amber-900 { color: var(--warning) !important; }
+html[data-theme] .border-amber-200 { border-color: color-mix(in srgb, var(--warning) 30%, var(--border)) !important; }
+
+/* Hero gradient: use a soft per-theme wash (or solid for non-light themes). */
+html[data-theme] .hero-bg { background: var(--background); }
+
+/* Make KaTeX inline math wrap on narrow screens. */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.katex-display > .katex {
+  white-space: normal;
+}

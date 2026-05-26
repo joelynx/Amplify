@@ -1,0 +1,48 @@
+/* Android KitKat — Material 1 flat surfaces, teal accent, dark toast. */
+
+:root[data-theme="android-kitkat"] {
+  --text: #212121;
+  --background: #fafafa;
+  --surface: #ffffff;
+  --primary: #009688;
+  --secondary: #4db6ac;
+  --accent: #ff5252;
+  --border: #e0e0e0;
+  --muted: #616161;
+  --success: #4caf50;
+  --warning: #ffb300;
+  --error: #f44336;
+  --font-family: "Roboto", "Noto Sans", "Helvetica Neue", system-ui, sans-serif;
+  --rem: 14px;
+}
+
+/* Subtle 1-2dp Material elevation on cards. */
+:root[data-theme="android-kitkat"] section[class*="rounded-lg"] {
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+:root[data-theme="android-kitkat"] button[class*="rounded-md"] {
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-weight: 500;
+}
+
+/* Bottom-aligned toast-style tooltip — dark on light surfaces. */
+:root[data-theme="android-kitkat"] .amplify-tooltip {
+  background: #323232;
+  color: #ffffff;
+  border: none;
+  border-radius: 2px;
+  padding: 0.45rem 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.14);
+  font-family: var(--font-family);
+  letter-spacing: 0.02em;
+}
+
+:root[data-a11y="on"][data-theme="android-kitkat"] {
+  --text: #000000;
+  --background: #ffffff;
+  --muted: #212121;
+}
