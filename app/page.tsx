@@ -23,30 +23,42 @@ export default async function Home() {
     supabase.auth.getUser(),
   ]);
 
-  // For logged-in users, surface their three weakest subtopics for instant CTA.
+  // Role-aware strip: students see mastery, TAs/faculty see authoring CTA.
   let weakest: MasteryRow[] = [];
+  let userRole: string | null = null;
   if (user) {
-    const { data: mastery } = await supabase
-      .from("user_mastery")
-      .select("topic, branch, subtopic, alpha, beta, total_seen")
-      .eq("user_id", user.id);
-    weakest = ((mastery ?? []) as MasteryRow[])
-      .filter((r) => r.total_seen >= 2)
-      .sort(
-        (a, b) =>
-          lowerCredibilityBound({
-            alpha: a.alpha,
-            beta: a.beta,
-            total_seen: a.total_seen,
-          }) -
-          lowerCredibilityBound({
-            alpha: b.alpha,
-            beta: b.beta,
-            total_seen: b.total_seen,
-          })
-      )
-      .slice(0, 3);
+    const { data: profileRow } = await supabase
+      .from("user_profiles")
+      .select("role")
+      .eq("user_id", user.id)
+      .maybeSingle();
+    userRole = (profileRow as { role?: string } | null)?.role ?? "student";
+
+    if (userRole === "student") {
+      const { data: mastery } = await supabase
+        .from("user_mastery")
+        .select("topic, branch, subtopic, alpha, beta, total_seen")
+        .eq("user_id", user.id);
+      weakest = ((mastery ?? []) as MasteryRow[])
+        .filter((r) => r.total_seen >= 2)
+        .sort(
+          (a, b) =>
+            lowerCredibilityBound({
+              alpha: a.alpha,
+              beta: a.beta,
+              total_seen: a.total_seen,
+            }) -
+            lowerCredibilityBound({
+              alpha: b.alpha,
+              beta: b.beta,
+              total_seen: b.total_seen,
+            })
+        )
+        .slice(0, 3);
+    }
   }
+  const isFaculty =
+    userRole === "faculty" || userRole === "admin" || userRole === "moderator";
 
   const active = (institutions ?? []).filter(
     (i) => (i as Institution).status === "active"
@@ -57,7 +69,7 @@ export default async function Home() {
 
   return (
     <main className="hero-bg">
-      {/* Personalised dashboard strip — only for signed-in users with mastery data */}
+      {/* Personalised dashboard strip — role-aware. */}
       {user && (
         <section className="border-b border-ink-200 bg-brand-50/60">
           <div className="mx-auto max-w-5xl px-6 py-6">
@@ -66,7 +78,11 @@ export default async function Home() {
                 <div className="text-xs uppercase tracking-wider text-brand-700">
                   Welcome back, {user.email?.split("@")[0]}
                 </div>
-                {weakest.length > 0 ? (
+                {isFaculty ? (
+                  <p className="mt-1 text-sm text-ink-900">
+                    Contributor account — add new questions to the bank.
+                  </p>
+                ) : weakest.length > 0 ? (
                   <p className="mt-1 text-sm text-ink-900">
                     Your weakest right now:{" "}
                     <span className="font-medium">
@@ -80,18 +96,29 @@ export default async function Home() {
                 )}
               </div>
               <div className="flex flex-wrap gap-2">
-                <Link
-                  href="/practice"
-                  className="rounded-md bg-ink-900 px-4 py-2 text-sm font-medium text-white hover:bg-ink-700"
-                >
-                  {weakest.length > 0 ? "Practice these →" : "Start practicing →"}
-                </Link>
-                <Link
-                  href="/me"
-                  className="rounded-md border border-ink-200 bg-white px-4 py-2 text-sm font-medium hover:bg-ink-50"
-                >
-                  Full mastery
-                </Link>
+                {isFaculty ? (
+                  <Link
+                    href="/author"
+                    className="rounded-md bg-ink-900 px-4 py-2 text-sm font-medium text-white hover:bg-ink-700"
+                  >
+                    Add a question →
+                  </Link>
+                ) : (
+                  <>
+                    <Link
+                      href="/practice"
+                      className="rounded-md bg-ink-900 px-4 py-2 text-sm font-medium text-white hover:bg-ink-700"
+                    >
+                      {weakest.length > 0 ? "Practice these →" : "Start practicing →"}
+                    </Link>
+                    <Link
+                      href="/me"
+                      className="rounded-md border border-ink-200 bg-white px-4 py-2 text-sm font-medium hover:bg-ink-50"
+                    >
+                      Full mastery
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -119,10 +146,20 @@ export default async function Home() {
 
           <div className="flex flex-wrap gap-3">
             <Link
-              href={user ? "/practice" : "/auth/login?next=/practice"}
+              href={
+                isFaculty
+                  ? "/author"
+                  : user
+                    ? "/practice"
+                    : "/auth/login?next=/practice"
+              }
               className="rounded-md bg-ink-900 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-ink-700"
             >
-              {user ? "Start practicing →" : "Sign in to practice →"}
+              {isFaculty
+                ? "Add a question →"
+                : user
+                  ? "Start practicing →"
+                  : "Sign in to practice →"}
             </Link>
             <Link
               href="/q"
