@@ -1,6 +1,7 @@
 /* Comic — speech bubbles, thick borders, halftone-dot accents. */
 
-:root[data-theme="comic"] {
+:root[data-theme="comic"],
+[data-theme="comic"] {
   --text: #1a1a1a;
   --background: #fff8dc;
   --surface: #ffffff;

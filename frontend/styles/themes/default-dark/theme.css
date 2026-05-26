@@ -1,5 +1,6 @@
 /* Default Dark — same shape, dark surfaces; WCAG AA on default text/background. */
-:root[data-theme="default-dark"] {
+:root[data-theme="default-dark"],
+[data-theme="default-dark"] {
   --text: #f3f4f6;
   --background: #0f172a;
   --surface: #1e293b;

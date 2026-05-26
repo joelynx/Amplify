@@ -1,7 +1,8 @@
 /* Pastel — soft pinks/lavenders with rounder edges and a pillowy tooltip.
  * Step 12: the first end-to-end flavor theme. */
 
-:root[data-theme="pastel"] {
+:root[data-theme="pastel"],
+[data-theme="pastel"] {
   --text: #3d2f4d;
   --background: #fff5f7;
   --surface: #fde8ef;

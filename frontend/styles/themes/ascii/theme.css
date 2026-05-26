@@ -1,7 +1,8 @@
 /* ASCII — monospace terminal aesthetic. Green-on-black, no color accents
  * except where semantically required (error red, success green hue shift). */
 
-:root[data-theme="ascii"] {
+:root[data-theme="ascii"],
+[data-theme="ascii"] {
   --text: #cfffd1;
   --background: #050a05;
   --surface: #0a140a;

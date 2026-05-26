@@ -1,6 +1,7 @@
 /* Default Light — clean neutral; WCAG AA on default surfaces. */
 :root,
-:root[data-theme="default-light"] {
+:root[data-theme="default-light"],
+[data-theme="default-light"] {
   --text: #111827;
   --background: #ffffff;
   --surface: #f9fafb;

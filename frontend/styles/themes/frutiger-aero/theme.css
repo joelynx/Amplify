@@ -1,7 +1,8 @@
 /* Frutiger Aero — glassy sky-blue era (spec §11). Original asset evocation
  * only: no Microsoft / Apple chrome, no Vista wallpapers. */
 
-:root[data-theme="frutiger-aero"] {
+:root[data-theme="frutiger-aero"],
+[data-theme="frutiger-aero"] {
   --text: #0d2b40;
   --background: linear-gradient(180deg, #b3e0ff 0%, #d6f0ff 60%, #eaf6ff 100%);
   --surface: rgba(255, 255, 255, 0.72);

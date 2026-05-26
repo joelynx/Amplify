@@ -1,6 +1,7 @@
 /* Android KitKat — Material 1 flat surfaces, teal accent, dark toast. */
 
-:root[data-theme="android-kitkat"] {
+:root[data-theme="android-kitkat"],
+[data-theme="android-kitkat"] {
   --text: #212121;
   --background: #fafafa;
   --surface: #ffffff;

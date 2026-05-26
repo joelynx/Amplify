@@ -1,7 +1,8 @@
 /* Windows XP — early-2000s desktop evocation (spec §11.4). No Luna chrome,
  * no XP wallpapers — just the era's color palette and bevels. */
 
-:root[data-theme="windows-xp"] {
+:root[data-theme="windows-xp"],
+[data-theme="windows-xp"] {
   --text: #1a1a1a;
   --background: #ece9d8;
   --surface: #ffffff;

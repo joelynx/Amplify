@@ -1,6 +1,7 @@
 /* Pixel Art — generic 8/16-bit. No Mario/Pokémon assets (spec §11.4). */
 
-:root[data-theme="pixel-art"] {
+:root[data-theme="pixel-art"],
+[data-theme="pixel-art"] {
   --text: #e8e8e8;
   --background: #0d1b2a;
   --surface: #1b3a57;
