@@ -41,7 +41,7 @@ export default async function BrowsePage({
     .select("id, topic, branch, subtopic, latexcode, type, source", {
       count: "exact",
     })
-    .order("id");
+    .order("id", { ascending: false });
 
   if (sp.topic) q = q.eq("topic", sp.topic);
   if (sp.type) q = q.eq("type", sp.type);
