@@ -96,6 +96,88 @@ def get_random(
     return [_row_to_question(r, tags.get(r["question_id"], [])) for r in rows]
 
 
+def get_candidate_pool_ids(
+    conn: sqlite3.Connection,
+    filters: dict[str, Any] | None,
+    limit: int,
+    subject: Subject | None = None,
+) -> list[int]:
+    """Step 22: filter-matching question IDs, capped at `limit`, for the
+    non-random selection strategies. Returns randomly-ordered IDs so the
+    candidate set varies between runs even when the bank stays the same."""
+    payload = subject.to_payload() if subject else None
+    where, params = assemble_where(filters, payload)
+    sql = (
+        f"SELECT question_id FROM questions WHERE {where} "
+        f"ORDER BY RANDOM() LIMIT ?"
+    )
+    return [int(r[0]) for r in conn.execute(sql, [*params, int(limit)])]
+
+
+def fetch_by_ids(
+    conn: sqlite3.Connection,
+    question_ids: list[int],
+    *,
+    preserve_order: bool = True,
+) -> list[Question]:
+    """Hydrate Question objects for a known set of IDs. When `preserve_order`
+    is True the result is reordered to match the input — important for the
+    Diverse/Focused/Frontier branches that build a meaningful sequence."""
+    if not question_ids:
+        return []
+    placeholders = ",".join(["?"] * len(question_ids))
+    rows = list(
+        conn.execute(
+            f"SELECT {_QUESTION_COLS} FROM questions WHERE question_id IN ({placeholders})",
+            question_ids,
+        )
+    )
+    tags = _tag_map(conn, [r["question_id"] for r in rows])
+    qs = [_row_to_question(r, tags.get(r["question_id"], [])) for r in rows]
+    if not preserve_order:
+        return qs
+    by_id = {q.question_id: q for q in qs}
+    return [by_id[qid] for qid in question_ids if qid in by_id]
+
+
+def fetch_similarity_embeddings(
+    conn: sqlite3.Connection,
+    question_ids: list[int],
+) -> dict[int, bytes]:
+    """Return `{question_id: raw_blob}` for rows that have an embedding. IDs
+    with NULL embeddings (augmented seed rows) are silently absent — callers
+    filter on membership."""
+    if not question_ids:
+        return {}
+    placeholders = ",".join(["?"] * len(question_ids))
+    rows = conn.execute(
+        f"SELECT question_id, similarity_emb FROM questions "
+        f"WHERE question_id IN ({placeholders}) AND similarity_emb IS NOT NULL",
+        question_ids,
+    )
+    return {int(r["question_id"]): bytes(r["similarity_emb"]) for r in rows}
+
+
+def fetch_difficulty_signals(
+    conn: sqlite3.Connection,
+    question_ids: list[int],
+) -> dict[int, tuple[float | None, int]]:
+    """Return `{qid: (difficulty_rating, times_used)}` used by Frontier mode."""
+    if not question_ids:
+        return {}
+    placeholders = ",".join(["?"] * len(question_ids))
+    rows = conn.execute(
+        f"SELECT question_id, difficulty_rating, times_used FROM questions "
+        f"WHERE question_id IN ({placeholders})",
+        question_ids,
+    )
+    out: dict[int, tuple[float | None, int]] = {}
+    for r in rows:
+        diff = float(r["difficulty_rating"]) if r["difficulty_rating"] is not None else None
+        out[int(r["question_id"])] = (diff, int(r["times_used"]))
+    return out
+
+
 # ---- Dropdown helpers (spec §5.1) ----------------------------------------
 
 def _scoped_where(subject: Subject | None, in_syllabus_only: bool) -> tuple[str, list[Any]]:

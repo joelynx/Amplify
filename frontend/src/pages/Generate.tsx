@@ -454,6 +454,17 @@ function GenerateResultModal({
             Note: the filter matched fewer questions than requested ({result.shortfall} short).
           </p>
         )}
+        {result.strategy && result.strategy !== "random" && (
+          <p className="mt-2 text-xs text-muted">
+            Strategy: <span className="font-medium text-text">{result.strategy}</span>
+            {result.diversity_score != null && (
+              <> · diversity {result.diversity_score.toFixed(2)}</>
+            )}
+            {result.used_fallback && (
+              <> · fell back to random (not enough embedded candidates)</>
+            )}
+          </p>
+        )}
         {void open}
       </Modal>
     );

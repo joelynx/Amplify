@@ -93,6 +93,8 @@ class PSetSummary:
     n_questions: int
     subject: str | None = None
     template_name: str | None = None
+    generation_mode: str = "random"
+    diversity_score: float | None = None
 
 
 @dataclass(slots=True)

@@ -211,9 +211,14 @@ export interface QuizAttemptDetail {
   answers: QuizAttemptAnswer[];
 }
 
+export type GenerationStrategy = "random" | "diverse" | "focused" | "frontier";
+
 export interface RandomQuestionsResult {
   questions: Question[];
   shortfall: number;
+  strategy?: GenerationStrategy;
+  diversity_score?: number | null;
+  used_fallback?: boolean;
   error?: string;
 }
 
@@ -253,7 +258,11 @@ interface PyWebViewApi {
   ping: () => Promise<string>;
   log: (level: LogLevel, message: string) => Promise<void>;
   count_matching_questions: (filters: Filters) => Promise<number>;
-  get_random_questions: (filters: Filters, n: number) => Promise<RandomQuestionsResult>;
+  get_random_questions: (
+    filters: Filters,
+    n: number,
+    strategy?: GenerationStrategy,
+  ) => Promise<RandomQuestionsResult>;
   get_similar_questions: (question_id: number, k?: number) => Promise<SimilarQuestion[]>;
   search_questions: (
     filters?: Filters | null,
@@ -366,6 +375,7 @@ export interface OutputSettings {
   in_syllabus_only: boolean;
   save_directory: string | null;
   template_name?: string | null;
+  strategy?: GenerationStrategy;
 }
 
 export interface GenerateResult {
@@ -375,6 +385,9 @@ export interface GenerateResult {
   fallback?: string | null;
   errors?: string;
   shortfall?: number;
+  strategy?: GenerationStrategy;
+  diversity_score?: number | null;
+  used_fallback?: boolean;
 }
 
 export interface ExportResult {
@@ -469,6 +482,8 @@ export interface PSetSummary {
   n_questions: number;
   subject: string | null;
   template_name: string | null;
+  generation_mode?: GenerationStrategy;
+  diversity_score?: number | null;
 }
 
 export interface OpenPsetResult {
@@ -548,9 +563,13 @@ export const ipc = {
     const api = await bridge();
     return api.count_matching_questions(filters);
   },
-  async get_random_questions(filters: Filters, n: number): Promise<RandomQuestionsResult> {
+  async get_random_questions(
+    filters: Filters,
+    n: number,
+    strategy: GenerationStrategy = "random",
+  ): Promise<RandomQuestionsResult> {
     const api = await bridge();
-    return api.get_random_questions(filters, n);
+    return api.get_random_questions(filters, n, strategy);
   },
   async get_similar_questions(question_id: number, k = 10): Promise<SimilarQuestion[]> {
     const api = await bridge();

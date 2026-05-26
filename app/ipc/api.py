@@ -182,15 +182,23 @@ class Api:
             _log.info("count_matching_questions filter error: %s", e)
             return 0
 
-    def get_random_questions(self, filters: dict[str, Any], n: int) -> dict[str, Any]:
+    def get_random_questions(
+        self,
+        filters: dict[str, Any],
+        n: int,
+        strategy: str = "random",
+    ) -> dict[str, Any]:
         s = _resolve_subject(self._conn, filters.get("subject"))
         try:
-            result = pick(self._conn, filters, int(n), subject=s)
+            result = pick(self._conn, filters, int(n), subject=s, strategy=strategy)
         except FilterError as e:
             return {"questions": [], "shortfall": int(n), "error": str(e)}
         return {
             "questions": [asdict(q) for q in result.questions],
             "shortfall": result.shortfall,
+            "strategy": result.strategy,
+            "diversity_score": result.diversity_score,
+            "used_fallback": result.used_fallback,
         }
 
     # ---- Step 19: Phase 2 smart difficulty (§5.10 / §13) ----------------
@@ -895,8 +903,15 @@ class Api:
         save_dir = Path(save_dir_raw)
 
         s = _resolve_subject(self._conn, filters.get("subject"))
+        strategy = str(output_settings.get("strategy") or "random")
         try:
-            selection = pick(self._conn, filters, int(output_settings.get("n_questions", 10)), subject=s)
+            selection = pick(
+                self._conn,
+                filters,
+                int(output_settings.get("n_questions", 10)),
+                subject=s,
+                strategy=strategy,
+            )
         except FilterError as e:
             return {"success": False, "errors": str(e)}
 
@@ -935,6 +950,8 @@ class Api:
             output_settings=output_settings,
             template_name=output_settings.get("template_name"),
             question_ids=[q.question_id for q in selection.questions],
+            generation_mode=selection.strategy,
+            diversity_score=selection.diversity_score,
         )
 
         return {
@@ -942,6 +959,9 @@ class Api:
             "pset_id": pset_id,
             "path": str(result.path) if result.path else None,
             "shortfall": selection.shortfall,
+            "strategy": selection.strategy,
+            "diversity_score": selection.diversity_score,
+            "used_fallback": selection.used_fallback,
         }
 
     def export_tex(self, filters: dict[str, Any], output_settings: dict[str, Any]) -> dict[str, Any]:
@@ -952,8 +972,15 @@ class Api:
         save_dir = Path(save_dir_raw)
 
         s = _resolve_subject(self._conn, filters.get("subject"))
+        strategy = str(output_settings.get("strategy") or "random")
         try:
-            selection = pick(self._conn, filters, int(output_settings.get("n_questions", 10)), subject=s)
+            selection = pick(
+                self._conn,
+                filters,
+                int(output_settings.get("n_questions", 10)),
+                subject=s,
+                strategy=strategy,
+            )
         except FilterError as e:
             return {"success": False, "errors": str(e)}
 
@@ -968,7 +995,14 @@ class Api:
         save_dir.mkdir(parents=True, exist_ok=True)
         path = save_dir / f"{pset_id}.tex"
         path.write_text(tex, encoding="utf-8")
-        return {"success": True, "path": str(path), "shortfall": selection.shortfall}
+        return {
+            "success": True,
+            "path": str(path),
+            "shortfall": selection.shortfall,
+            "strategy": selection.strategy,
+            "diversity_score": selection.diversity_score,
+            "used_fallback": selection.used_fallback,
+        }
 
     # ---- Step 8: history (§5.4 / §8.5) -----------------------------------
 

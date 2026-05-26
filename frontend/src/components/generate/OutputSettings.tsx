@@ -5,8 +5,31 @@ import { Checkbox } from "../ui/Checkbox";
 import { Combobox } from "../ui/Combobox";
 import { NumberInput } from "../ui/NumberInput";
 import { Switch } from "../ui/Switch";
-import { ipc } from "../../lib/ipc";
+import { cn } from "../../lib/cn";
+import { ipc, type GenerationStrategy } from "../../lib/ipc";
 import { useGenerateStore, type SolutionsValue } from "../../state/generate";
+
+const STRATEGIES: readonly { id: GenerationStrategy; label: string; hint: string }[] = [
+  { id: "random", label: "Random", hint: "Uniform random over your filters." },
+  {
+    id: "diverse",
+    label: "Diverse",
+    hint:
+      "Maximum spread across the concept space via greedy MAP-DPP on question embeddings.",
+  },
+  {
+    id: "focused",
+    label: "Focused",
+    hint:
+      "Tight cluster around a seed question — nearest neighbours by cosine similarity.",
+  },
+  {
+    id: "frontier",
+    label: "Frontier",
+    hint:
+      "Hardest, least-attempted questions first (difficulty ÷ (1+times_used)).",
+  },
+];
 
 const SOLUTIONS_PRIMARY: readonly { id: SolutionsValue | "outline_only"; label: string }[] = [
   { id: "none", label: "None" },
@@ -56,8 +79,34 @@ export function OutputSettings() {
     }
   };
 
+  const activeStrategy = STRATEGIES.find((s) => s.id === draft.strategy) ?? STRATEGIES[0];
+
   return (
     <div className="grid gap-4 sm:grid-cols-2">
+      <FieldRow label="Strategy" className="sm:col-span-2 items-start sm:items-center">
+        <div className="flex w-full flex-col items-end gap-1">
+          <div className="inline-flex overflow-hidden rounded-md border border-border">
+            {STRATEGIES.map((s) => (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => draft.setStrategy(s.id)}
+                className={cn(
+                  "px-3 py-1.5 text-xs font-medium transition",
+                  draft.strategy === s.id
+                    ? "bg-primary text-white"
+                    : "bg-surface text-text hover:bg-primary/10",
+                )}
+                aria-pressed={draft.strategy === s.id}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+          <p className="max-w-prose text-right text-xs text-muted">{activeStrategy.hint}</p>
+        </div>
+      </FieldRow>
+
       <FieldRow label="Number of questions">
         <NumberInput
           value={draft.nQuestions}

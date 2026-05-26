@@ -155,6 +155,11 @@ export default function HistoryPage() {
                       </span>{" "}
                       · {p.n_questions} question{p.n_questions === 1 ? "" : "s"}
                       {p.template_name && <> · template <em>{p.template_name}</em></>}
+                      {p.generation_mode && p.generation_mode !== "random" && (
+                        <> · <span className="font-medium text-text">{p.generation_mode}</span>
+                          {p.diversity_score != null && <> ({p.diversity_score.toFixed(2)})</>}
+                        </>
+                      )}
                     </div>
                   </div>
                   <div className="flex flex-wrap items-center gap-1">

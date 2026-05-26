@@ -32,6 +32,8 @@ def insert_pset(
     output_settings: dict[str, Any],
     template_name: str | None,
     question_ids: list[int],
+    generation_mode: str = "random",
+    diversity_score: float | None = None,
 ) -> None:
     """Atomic write: psets row + pset_questions rows + times_used bumps."""
 
@@ -66,8 +68,9 @@ def insert_pset(
                 source_list, type_list, tag_list,
                 n_questions, reuse_questions, template_name,
                 topic_dist, subtopic_dist, solutions,
-                save_directory, include_sources
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                save_directory, include_sources,
+                generation_mode, diversity_score
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 pset_id,
@@ -87,6 +90,8 @@ def insert_pset(
                 output_settings.get("solutions"),
                 output_settings.get("save_directory"),
                 int(bool(output_settings.get("include_sources", True))),
+                generation_mode,
+                diversity_score,
             ),
         )
         for order, qid in enumerate(question_ids, start=1):
@@ -160,7 +165,8 @@ def list_summaries(
         params.append(date_to)
     where = " AND ".join(parts) if parts else "1=1"
     rows = conn.execute(
-        f"SELECT pset_id, date_created, subject, n_questions, template_name "
+        f"SELECT pset_id, date_created, subject, n_questions, template_name, "
+        f"generation_mode, diversity_score "
         f"FROM psets WHERE {where} ORDER BY date_created DESC, pset_id DESC",
         params,
     )
@@ -171,6 +177,8 @@ def list_summaries(
             n_questions=int(r["n_questions"]),
             subject=r["subject"],
             template_name=r["template_name"],
+            generation_mode=(r["generation_mode"] or "random"),
+            diversity_score=(float(r["diversity_score"]) if r["diversity_score"] is not None else None),
         )
         for r in rows
     ]

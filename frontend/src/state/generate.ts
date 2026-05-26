@@ -9,7 +9,14 @@
 
 import { create } from "zustand";
 
-import type { ConceptTree, Filters, OutputSettings, TagFilters, TemplatePayload } from "../lib/ipc";
+import type {
+  ConceptTree,
+  Filters,
+  GenerationStrategy,
+  OutputSettings,
+  TagFilters,
+  TemplatePayload,
+} from "../lib/ipc";
 
 export type SolutionsValue =
   | "none"
@@ -47,6 +54,8 @@ export interface GenerateDraft {
   minDifficulty: number;
   inSyllabusOnly: boolean;
   saveDirectory: string | null;
+  /** Selection strategy (Step 22). `random` is the historical default. */
+  strategy: GenerationStrategy;
 
   /** "Generate PSet from selection" mode (spec §8.6). When non-empty, the
    * filter SQL restricts to exactly these IDs; the rest of the form still
@@ -79,6 +88,7 @@ interface GenerateState extends GenerateDraft {
   setInSyllabusOnly: (v: boolean) => void;
   setSaveDirectory: (path: string | null) => void;
   setSpecificQuestionIds: (ids: number[]) => void;
+  setStrategy: (s: GenerationStrategy) => void;
 }
 
 const initialDraft: GenerateDraft = {
@@ -96,6 +106,7 @@ const initialDraft: GenerateDraft = {
   inSyllabusOnly: true,
   saveDirectory: null,
   specificQuestionIds: [],
+  strategy: "random",
 };
 
 function removeFromAll(tags: Record<TagCategory, string[]>, tag: string): Record<TagCategory, string[]> {
@@ -165,6 +176,7 @@ export const useGenerateStore = create<GenerateState>((set) => ({
   setInSyllabusOnly: (v) => set({ inSyllabusOnly: v }),
   setSaveDirectory: (path) => set({ saveDirectory: path }),
   setSpecificQuestionIds: (ids) => set({ specificQuestionIds: ids }),
+  setStrategy: (s) => set({ strategy: s }),
 }));
 
 /** Convert the form draft into the `Filters` shape consumed by IPC.
@@ -209,6 +221,7 @@ export function draftToOutputSettings(draft: GenerateDraft): OutputSettings {
     in_syllabus_only: draft.inSyllabusOnly,
     save_directory: draft.saveDirectory,
     template_name: draft.templateName,
+    strategy: draft.strategy,
   };
 }
 
