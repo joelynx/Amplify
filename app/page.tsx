@@ -80,7 +80,7 @@ export default async function Home() {
                 </div>
                 {isFaculty ? (
                   <p className="mt-1 text-sm text-ink-900">
-                    Contributor account — add new questions to the bank.
+                    Contributor account. Add new questions to the bank.
                   </p>
                 ) : weakest.length > 0 ? (
                   <p className="mt-1 text-sm text-ink-900">
@@ -133,15 +133,15 @@ export default async function Home() {
           </span>
 
           <h1 className="display max-w-3xl text-5xl font-semibold sm:text-6xl">
-            The problem-bank commons
+            The problem bank commons
             <br />
             <span className="text-ink-500">for university STEM.</span>
           </h1>
 
           <p className="max-w-2xl text-lg text-ink-500">
             A bank of university math, physics, and CS problems built by
-            IIT-AD&rsquo;s TAs. Mastery-tracked practice for students.
-            One-click contribution for TAs.
+            faculty and TAs. Mastery tracked practice for students.
+            One click contribution for TAs.
           </p>
 
           <div className="flex flex-wrap gap-3">
@@ -222,67 +222,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* How Diverse mode works — visual primer */}
-      <section className="mx-auto max-w-5xl px-6 py-20">
-        <h2 className="display text-3xl font-semibold">
-          Random vs Diverse — what changes.
-        </h2>
-        <p className="mt-3 max-w-2xl text-ink-500">
-          Every question gets a vector embedding. Naive selection clusters by
-          accident. Diverse mode uses a determinantal point process to pick a
-          set that maximally covers the concept space — so a 10-question
-          practice set actually spans your topic instead of repeating the
-          same skill ten times.
-        </p>
-
-        <div className="mt-10 grid gap-6 sm:grid-cols-2">
-          {/* Random — clumped */}
-          <div className="rounded-lg border border-ink-200 bg-white p-6">
-            <div className="mb-3 flex items-baseline justify-between">
-              <span className="text-sm font-semibold">Random</span>
-              <span className="text-xs text-ink-500 tabular-nums">
-                diversity 0.41
-              </span>
-            </div>
-            <svg viewBox="0 0 200 140" className="w-full">
-              <rect width="200" height="140" fill="transparent" stroke="currentColor" strokeOpacity="0.1" />
-              {/* Concept-space dots, mostly clustered */}
-              {[
-                [55, 60], [62, 65], [58, 72], [50, 58], [65, 70],
-                [60, 55], [70, 75], [54, 80], [115, 40], [140, 100],
-              ].map(([x, y], i) => (
-                <circle key={i} cx={x} cy={y} r="4" fill="var(--primary, #4759f5)" opacity="0.85" />
-              ))}
-            </svg>
-            <p className="mt-3 text-xs text-ink-500">
-              10 questions picked uniformly. Most land in one tight neighbourhood — you drill the same skill ten times.
-            </p>
-          </div>
-
-          {/* Diverse — spread */}
-          <div className="rounded-lg border border-ink-200 bg-white p-6">
-            <div className="mb-3 flex items-baseline justify-between">
-              <span className="text-sm font-semibold">Diverse (DPP)</span>
-              <span className="text-xs text-emerald-700 tabular-nums">
-                diversity 0.87
-              </span>
-            </div>
-            <svg viewBox="0 0 200 140" className="w-full">
-              <rect width="200" height="140" fill="transparent" stroke="currentColor" strokeOpacity="0.1" />
-              {[
-                [30, 30], [170, 25], [40, 110], [165, 115], [100, 70],
-                [60, 70], [140, 60], [110, 30], [95, 115], [35, 75],
-              ].map(([x, y], i) => (
-                <circle key={i} cx={x} cy={y} r="4" fill="var(--success, #16a34a)" opacity="0.85" />
-              ))}
-            </svg>
-            <p className="mt-3 text-xs text-ink-500">
-              Same 10, picked by a determinantal point process. Every region of the topic gets one — broad coverage, no redundancy.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Why this exists. */}
       <section className="border-t border-ink-200 bg-ink-50">
         <div className="mx-auto max-w-5xl px-6 py-20">
@@ -291,8 +230,8 @@ export default async function Home() {
           </h2>
           <p className="mt-6 max-w-2xl text-ink-700">
             Every STEM student practices typeset problems. Every TA writes them.
-            Nobody has a shared home for the result. The systems that exist —{" "}
-            <em>WebAssign, Pearson MyLab, ALEKS</em> — are paywalled and locked
+            Nobody has a shared home for the result. The systems that exist
+            (<em>WebAssign, Pearson MyLab, ALEKS</em>) are paywalled and locked
             to whichever textbook the publisher sells. Amplify is the
             alternative built from the inside of an actual institution.
           </p>
