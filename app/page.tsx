@@ -106,7 +106,18 @@ export default async function Home() {
                 ) : (
                   <>
                     <Link
-                      href="/practice"
+                      href={
+                        weakest.length > 0
+                          ? `/practice?subs=${encodeURIComponent(
+                              weakest
+                                .map(
+                                  (w) =>
+                                    `${w.topic}||${w.branch}||${w.subtopic}`
+                                )
+                                .join(",")
+                            )}`
+                          : "/practice"
+                      }
                       className="rounded-md bg-ink-900 px-4 py-2 text-sm font-medium text-white hover:bg-ink-700"
                     >
                       {weakest.length > 0 ? "Practice these →" : "Start practicing →"}

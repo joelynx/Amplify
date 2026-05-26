@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronRight, Search, X } from "lucide-react";
 import { getAnonKey } from "@/lib/anon";
 import { Checkbox } from "@/components/ui/Checkbox";
@@ -24,8 +24,18 @@ export function PracticeFilterForm({
   tags: string[];
 }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [selectedSubtopics, setSelectedSubtopics] = useState<Set<string>>(
-    new Set()
+    () => {
+      // Pre-fill from ?subs=topic||branch||sub,topic||branch||sub,...
+      const raw = searchParams?.get("subs");
+      if (!raw) return new Set();
+      const items = raw
+        .split(",")
+        .map((s) => s.trim())
+        .filter((s) => s.includes("||"));
+      return new Set(items);
+    }
   );
   const [selectedTypes, setSelectedTypes] = useState<Set<string>>(new Set());
   const [selectedSources, setSelectedSources] = useState<Set<string>>(new Set());

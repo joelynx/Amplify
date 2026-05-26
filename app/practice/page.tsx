@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { PracticeFilterForm } from "./filter-form";
 import { getPracticeTaxonomy } from "@/lib/cached";
@@ -27,12 +28,14 @@ export default async function PracticePage() {
     <main className="mx-auto max-w-3xl px-6 py-10">
       <h1 className="mb-8 text-3xl font-semibold tracking-tight">Practice</h1>
 
-      <PracticeFilterForm
-        tree={tree}
-        types={types}
-        sources={sources}
-        tags={tags}
-      />
+      <Suspense fallback={<p className="text-sm text-ink-500">Loading…</p>}>
+        <PracticeFilterForm
+          tree={tree}
+          types={types}
+          sources={sources}
+          tags={tags}
+        />
+      </Suspense>
     </main>
   );
 }

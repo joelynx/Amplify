@@ -130,8 +130,8 @@ export default async function AuthorPage() {
               Add to the commons
             </h1>
             <p className="mt-2 text-sm text-ink-500">
-              Submitted as a draft. Moderators review before it goes live, with
-              full attribution to you.
+              Goes live the moment you submit. Embedded, indexed, and searchable,
+              with full attribution to you.
             </p>
           </div>
         </div>
