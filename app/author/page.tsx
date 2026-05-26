@@ -1,8 +1,17 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getServerSupabase } from "@/lib/supabase/server";
+import { getAdminSupabase } from "@/lib/supabase/admin";
 import { getPracticeTaxonomy } from "@/lib/cached";
 import { AuthorForm } from "./form";
+
+type ReportRow = {
+  id: string;
+  question_id: number;
+  reason: string | null;
+  created_at: string;
+  questions: { topic: string; subtopic: string; latexcode: string } | null;
+};
 
 export default async function AuthorPage() {
   const supabase = await getServerSupabase();
@@ -55,6 +64,15 @@ export default async function AuthorPage() {
     .eq("institution_id", institutionId ?? -1)
     .order("code");
 
+  // Recent student-submitted flags. Service role so we can join to questions.
+  const admin = getAdminSupabase();
+  const { data: reportRows } = await admin
+    .from("question_reports")
+    .select("id, question_id, reason, created_at, questions(topic, subtopic, latexcode)")
+    .order("created_at", { ascending: false })
+    .limit(10);
+  const reports = (reportRows ?? []) as unknown as ReportRow[];
+
   // Existing taxonomy so the TA can pick from the current list or add their own.
   const { tree } = await getPracticeTaxonomy();
   const knownTopics = Object.keys(tree).sort();
@@ -100,6 +118,50 @@ export default async function AuthorPage() {
           knownBranches={knownBranches}
           knownSubtopics={knownSubtopics}
         />
+
+        {/* Student-submitted flags. Most recent 10. */}
+        <div className="mt-16">
+          <div className="mb-4 flex items-baseline justify-between">
+            <h2 className="text-xl font-semibold">Recent student flags</h2>
+            <span className="text-xs text-ink-500">{reports.length} pending</span>
+          </div>
+          {reports.length === 0 ? (
+            <p className="rounded-md border border-ink-200 bg-ink-50 p-4 text-sm text-ink-500">
+              No flags yet. Students can report questions from the question page.
+            </p>
+          ) : (
+            <ul className="flex flex-col gap-2">
+              {reports.map((r) => (
+                <li
+                  key={r.id}
+                  className="rounded-md border border-ink-200 bg-white p-3 text-sm"
+                >
+                  <div className="flex items-baseline justify-between gap-3">
+                    <Link
+                      href={`/q/${r.question_id}`}
+                      className="font-medium underline"
+                    >
+                      Q#{r.question_id}
+                    </Link>
+                    <span className="text-xs text-ink-500">
+                      {new Date(r.created_at).toLocaleString()}
+                    </span>
+                  </div>
+                  {r.questions && (
+                    <div className="mt-1 text-xs text-ink-500">
+                      {r.questions.topic} › {r.questions.subtopic}
+                    </div>
+                  )}
+                  {r.reason && (
+                    <p className="mt-2 rounded bg-ink-50 px-2 py-1 text-xs text-ink-700">
+                      {r.reason}
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </section>
     </main>
   );
