@@ -5,6 +5,19 @@ import { TopicChips } from "./topic-chips";
 
 const PAGE_SIZE = 20;
 
+function sourceHref(
+  source: string | null,
+  topic: string | undefined,
+  type: string | undefined
+): string {
+  const params = new URLSearchParams();
+  if (source) params.set("source", source);
+  if (topic) params.set("topic", topic);
+  if (type) params.set("type", type);
+  const qs = params.toString();
+  return qs ? `/q?${qs}` : "/q";
+}
+
 type SearchParams = Promise<{
   topic?: string;
   type?: string;
@@ -77,7 +90,11 @@ export default async function BrowsePage({
         </div>
       </div>
 
-      <TopicChips topics={topics} active={sp.topic ?? null} />
+      <TopicChips
+        topics={topics}
+        active={sp.topic ?? null}
+        preservedParams={{ source: sp.source, type: sp.type }}
+      />
 
       {sources.length > 0 && (
         <div className="mt-3">
@@ -86,7 +103,7 @@ export default async function BrowsePage({
           </div>
           <div className="flex flex-wrap gap-1.5">
             <Link
-              href="/q"
+              href={sourceHref(null, sp.topic, sp.type)}
               className={
                 "rounded-full border px-2.5 py-1 text-xs " +
                 (!sp.source
@@ -99,7 +116,7 @@ export default async function BrowsePage({
             {sources.slice(0, 24).map((s) => (
               <Link
                 key={s}
-                href={`/q?source=${encodeURIComponent(s)}`}
+                href={sourceHref(s, sp.topic, sp.type)}
                 className={
                   "rounded-full border px-2.5 py-1 text-xs " +
                   (sp.source === s
