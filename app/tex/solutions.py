@@ -38,11 +38,16 @@ class RenderedQuestion:
 
 
 def render_question_body(q: Question, index: int, include_source: bool) -> str:
-    """`\\textbf{Q{index}}` heading + body + optional source line.
+    """`\\textbf{Q{index}.}` heading inline with the body + optional source line.
 
-    `index` is 1-based question number in the set."""
-    chunks = [rf"\textbf{{Q{index}}}\\"]
-    chunks.append(q.latexcode)
+    `index` is 1-based question number in the set. The number sits on the same
+    line as the question (no trailing `\\\\`) so the page reads as a normal
+    enumerated list rather than dropping the body to a new paragraph.
+    """
+    # `~` ties the number to the first token of the body so a line break can't
+    # split them. `\noindent` keeps the question flush to the left margin even
+    # when LaTeX would otherwise indent the paragraph.
+    chunks = [rf"\noindent\textbf{{Q{index}.}}~{q.latexcode}"]
     if include_source and q.source:
         # rendered after the body, italicized and de-emphasized
         chunks.append(rf"\par\medskip {{\itshape\small Source: {q.source}}}")
@@ -64,7 +69,7 @@ def render_solution_block(q: Question, index: int, use_outline: bool) -> str | N
         text = q.solution
     if text is None or not text.strip():
         return None
-    return f"\\textbf{{Q{index}}}\\\\\n{text}"
+    return f"\\noindent\\textbf{{Q{index}.}}~{text}"
 
 
 def assemble_body(

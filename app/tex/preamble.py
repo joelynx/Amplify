@@ -16,16 +16,26 @@ from pathlib import Path
 from app.logging_setup import appdata_dir
 
 PREAMBLE_TEMPLATE = r"""\documentclass{article}
-\usepackage{amsmath}\allowdisplaybreaks
-\usepackage{amsfonts}\usepackage{amssymb}\usepackage{caption}
-\usepackage{graphicx}\graphicspath{{<image_path>}}
-\usepackage{fancyhdr}\usepackage{geometry}\usepackage{enumitem}
-\usepackage{circuitikz}\usepackage{chemfig}\usepackage{pgfplots}
-\usepackage{mathtools}\usepackage{stmaryrd}\usepackage{ulem}
+\usepackage{amsmath}
+\allowdisplaybreaks
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{caption}
+\usepackage{graphicx}
+\graphicspath{{<image_path>}}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{circuitikz}
+\usepackage{chemfig}
+\usepackage{pgfplots}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{ulem}
 % --- Deviations from spec §6.2 -----------------------------------------
 % The shipped seed solutions use \begin{proof}, \begin{theorem*}, etc. —
 % these come from amsthm. The spec's "fixed" preamble omits it; we add it
-% here so the bundled content actually compiles. starred theorem variants
+% here so the bundled content actually compiles. Starred theorem variants
 % need explicit \newtheorem*-style declarations on top of amsthm.
 \usepackage{amsthm}
 \theoremstyle{plain}
@@ -49,6 +59,8 @@ PREAMBLE_TEMPLATE = r"""\documentclass{article}
 \newtheorem*{note*}{Note}
 \newtheorem{claim}[theorem]{Claim}
 \newtheorem*{claim*}{Claim}
+\geometry{a4paper, total={170mm,257mm}, left=20mm, top=20mm}
+\setlength{\parskip}{1em}
 """
 
 

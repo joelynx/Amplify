@@ -145,6 +145,11 @@ def assemble(
     title = substitute(sanitize_latex_extended(title_raw), ctx) if title_raw else ""
     instructions = substitute(sanitize_latex_extended(instructions_raw), ctx) if instructions_raw else ""
 
+    # Topic line for the centered header — comma-joined unique topics from the
+    # actual selected questions (so it reflects the rendered set, not the
+    # subject's full curriculum).
+    topic_line = ", ".join(ctx.topic_list)
+
     pre = preamble(image_dir())
     fancy = "\n".join(
         [
@@ -154,7 +159,6 @@ def assemble(
             rf"\fancyhead[R]{{{right}}}",
             r"\fancyfoot[C]{\thepage}",
             r"\renewcommand{\headrulewidth}{0.4pt}",
-            r"\geometry{margin=1in}",
         ]
     )
 
@@ -164,11 +168,29 @@ def assemble(
         bool(output_settings.get("include_sources", True)),
     )
 
-    head_block = ""
+    # Centered title block: title / "Subject: X" / bold topic line. Each row is
+    # only emitted if its content is non-empty so an unconfigured field doesn't
+    # produce a stray blank line.
+    title_rows: list[str] = []
     if title:
-        head_block += f"\\begin{{center}}\\Large\\textbf{{{title}}}\\end{{center}}\n"
+        title_rows.append(rf"{title}\\[1ex]")
+    if subject:
+        title_rows.append(rf"Subject: {subject}\\[1ex]")
+    if topic_line:
+        title_rows.append(rf"\textbf{{{topic_line}}}\\")
+
+    head_block = ""
+    if title_rows:
+        head_block += (
+            "\\begin{large}\n\\centering\n"
+            + "\n".join(title_rows)
+            + "\n\\end{large}\n\\noindent \\rule{\\textwidth}{0.5pt}\n"
+        )
     if instructions:
         head_block += f"\\par {instructions}\\par\\bigskip\n"
+    # Display-style for inline math everywhere (matches the user's preferred
+    # template — fractions and big operators render large inside paragraphs).
+    head_block += "\\everymath{\\displaystyle}\n"
 
     return f"""{pre}{fancy}
 \\begin{{document}}
