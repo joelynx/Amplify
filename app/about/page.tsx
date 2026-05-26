@@ -1,8 +1,13 @@
 import { Card } from "@/components/ui/Card";
 import { getAllSources } from "@/lib/cached";
+import { getServerSupabase } from "@/lib/supabase/server";
 
 export default async function AboutPage() {
   const sources = await getAllSources();
+  const supabase = await getServerSupabase();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   return (
     <main className="mx-auto max-w-3xl space-y-6 px-6 py-10">
@@ -52,6 +57,24 @@ export default async function AboutPage() {
           Built by Karth Puthiyedathu and Joel Jobi at IIT Delhi Abu Dhabi.
         </p>
       </Card>
+
+      {user && (
+        <Card title="Account">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <p className="text-sm text-ink-700">
+              Signed in as <span className="font-medium">{user.email}</span>
+            </p>
+            <form action="/auth/signout" method="post">
+              <button
+                type="submit"
+                className="rounded-md border border-ink-200 bg-white px-3 py-1.5 text-sm font-medium hover:bg-ink-50"
+              >
+                Sign out
+              </button>
+            </form>
+          </div>
+        </Card>
+      )}
     </main>
   );
 }
