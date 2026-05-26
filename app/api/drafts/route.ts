@@ -3,8 +3,11 @@ import crypto from "node:crypto";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { getServerSupabase } from "@/lib/supabase/server";
 import { getAdminSupabase } from "@/lib/supabase/admin";
+import { rateLimit, clientKey } from "@/lib/rate-limit";
 
 const EMBED_MODEL = "gemini-embedding-001";
+const MAX_LATEX_BYTES = 16_000;
+const MAX_SOLUTION_BYTES = 16_000;
 
 function normalize(s: string): string {
   return s.replace(/\s+/g, " ").trim();
@@ -30,6 +33,16 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
   }
 
+  // Rate limit BEFORE doing any DB / embedding work — caps a hostile TA at
+  // 10 submissions per minute, plenty for any real authoring session.
+  const rl = rateLimit(clientKey(request, user.id) + ":drafts", 10, 60_000);
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { error: "rate limited — try again shortly" },
+      { status: 429, headers: { "Retry-After": String(Math.ceil(rl.retryAfterMs / 1000)) } }
+    );
+  }
+
   const { data: profile } = await supabase
     .from("user_profiles")
     .select("role, institution_id")
@@ -49,6 +62,33 @@ export async function POST(request: NextRequest) {
       { error: "Missing required fields (topic, branch, subtopic, latexcode)." },
       { status: 400 }
     );
+  }
+
+  // Content-length guards — reject pathological payloads that would blow up
+  // KaTeX render or Gemini embedding cost.
+  if (typeof body.latexcode !== "string" || body.latexcode.length > MAX_LATEX_BYTES) {
+    return NextResponse.json(
+      { error: `Question body exceeds ${MAX_LATEX_BYTES} chars.` },
+      { status: 413 }
+    );
+  }
+  if (
+    body.solution &&
+    (typeof body.solution !== "string" || body.solution.length > MAX_SOLUTION_BYTES)
+  ) {
+    return NextResponse.json(
+      { error: `Solution exceeds ${MAX_SOLUTION_BYTES} chars.` },
+      { status: 413 }
+    );
+  }
+  for (const f of ["topic", "branch", "subtopic", "source", "answer"]) {
+    const v = body[f];
+    if (v && (typeof v !== "string" || v.length > 200)) {
+      return NextResponse.json(
+        { error: `Field "${f}" exceeds 200 chars.` },
+        { status: 413 }
+      );
+    }
   }
 
   // Use the admin client for the live-insert path so RLS doesn't block.

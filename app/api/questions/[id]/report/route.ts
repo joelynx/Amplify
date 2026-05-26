@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { getServerSupabase } from "@/lib/supabase/server";
 import { getAdminSupabase } from "@/lib/supabase/admin";
+import { rateLimit, clientKey } from "@/lib/rate-limit";
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -19,8 +20,18 @@ export async function POST(request: NextRequest, { params }: Params) {
     return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
   }
 
+  // Cap report-spam at 5 per minute per user — anti-griefing.
+  const rl = rateLimit(clientKey(request, user.id) + ":report", 5, 60_000);
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { error: "rate limited" },
+      { status: 429, headers: { "Retry-After": String(Math.ceil(rl.retryAfterMs / 1000)) } }
+    );
+  }
+
   const body = await request.json().catch(() => ({}));
-  const reason = typeof body?.reason === "string" ? body.reason : null;
+  const reason =
+    typeof body?.reason === "string" ? body.reason.slice(0, 500) : null;
 
   const admin = getAdminSupabase();
   const { error } = await admin.from("question_reports").insert({

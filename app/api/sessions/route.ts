@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { getServerSupabase } from "@/lib/supabase/server";
 import { pickRandomQuestionIds, pickDiverseQuestionIds } from "@/lib/queries";
 import type { PracticeFilters } from "@/lib/db/types";
+import { rateLimit, clientKey } from "@/lib/rate-limit";
 
 export async function POST(request: NextRequest) {
   const body = (await request.json()) as {
@@ -19,6 +20,16 @@ export async function POST(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  // Rate limit — DPP is expensive (vector reads + greedy MAP). 20/min/user
+  // is far more than any legitimate practice cadence.
+  const rl = rateLimit(clientKey(request, user?.id ?? null) + ":sessions", 20, 60_000);
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { error: "rate limited" },
+      { status: 429, headers: { "Retry-After": String(Math.ceil(rl.retryAfterMs / 1000)) } }
+    );
+  }
 
   let ids: number[];
   let total: number;
