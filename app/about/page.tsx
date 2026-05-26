@@ -26,17 +26,6 @@ export default async function AboutPage() {
         </p>
       </Card>
 
-      <Card title="Stack">
-        <ul className="space-y-1 text-sm">
-          <li>Next.js 15, React 19, TypeScript</li>
-          <li>Supabase Postgres with pgvector (HNSW) and row-level security</li>
-          <li>Gemini text-embedding-001 truncated to 768 dimensions (Matryoshka)</li>
-          <li>Bayesian Beta posterior per (user, subtopic) for mastery</li>
-          <li>Determinantal point processes for diverse practice generation</li>
-          <li>KaTeX for math rendering, D3 for charts</li>
-        </ul>
-      </Card>
-
       <Card title="Question sources">
         {sources.length === 0 ? (
           <p className="text-sm text-muted">
