@@ -17,6 +17,7 @@
 @import "./styles/themes/comic/theme.css";
 @import "./styles/themes/ascii/theme.css";
 @import "./styles/themes/android-kitkat/theme.css";
+@import "./styles/theme-overrides.css";
 
 :root {
   color-scheme: light;
@@ -45,60 +46,76 @@ body {
  * Specificity bumped via the attribute selector + !important so the bridge
  * wins over Tailwind utility classes.
  */
-html[data-theme] {
-  /* Surfaces */
-}
-html[data-theme] .bg-white { background-color: var(--surface) !important; }
-html[data-theme] .bg-ink-50 { background-color: var(--surface) !important; }
-html[data-theme] .bg-ink-100 { background-color: color-mix(in srgb, var(--surface) 70%, var(--border)) !important; }
-html[data-theme] .bg-ink-200 { background-color: var(--border) !important; }
-html[data-theme] .bg-ink-900 { background-color: var(--text) !important; color: var(--background) !important; }
+/* Surfaces — use attribute-CONTAINS to catch every Tailwind opacity variant
+ * (bg-white, bg-white/80, bg-white/60, …). Without [class*="…"] the bridge
+ * misses the translucent nav bar and many cards. */
+html[data-theme] [class*="bg-white"] { background-color: var(--surface) !important; }
+html[data-theme] [class*="bg-ink-50"] { background-color: var(--surface) !important; }
+html[data-theme] [class*="bg-ink-100"] { background-color: color-mix(in srgb, var(--surface) 70%, var(--border)) !important; }
+html[data-theme] [class*="bg-ink-200"] { background-color: var(--border) !important; }
+html[data-theme] [class*="bg-ink-900"] { background-color: var(--text) !important; color: var(--background) !important; }
 
-/* Text */
-html[data-theme] .text-ink-900 { color: var(--text) !important; }
-html[data-theme] .text-ink-700 { color: color-mix(in srgb, var(--text) 82%, var(--muted)) !important; }
-html[data-theme] .text-ink-600 { color: color-mix(in srgb, var(--text) 60%, var(--muted)) !important; }
-html[data-theme] .text-ink-500 { color: var(--muted) !important; }
-html[data-theme] .text-ink-400 { color: color-mix(in srgb, var(--muted) 70%, var(--background)) !important; }
-html[data-theme] .text-white { color: var(--background) !important; }
+/* Text — attribute-contains catches text-ink-500/70 etc. */
+html[data-theme] [class*="text-ink-900"] { color: var(--text) !important; }
+html[data-theme] [class*="text-ink-700"] { color: color-mix(in srgb, var(--text) 82%, var(--muted)) !important; }
+html[data-theme] [class*="text-ink-600"] { color: color-mix(in srgb, var(--text) 60%, var(--muted)) !important; }
+html[data-theme] [class*="text-ink-500"] { color: var(--muted) !important; }
+html[data-theme] [class*="text-ink-400"] { color: color-mix(in srgb, var(--muted) 70%, var(--background)) !important; }
+/* `.text-white` is used on dark buttons — in flavor themes the button bg
+ * becomes var(--text), so the foreground must become var(--background)
+ * (the inverse of text) so it stays readable. */
+html[data-theme] [class*="text-white"] { color: var(--background) !important; }
 
 /* Borders */
-html[data-theme] .border-ink-100 { border-color: color-mix(in srgb, var(--border) 40%, var(--background)) !important; }
-html[data-theme] .border-ink-200 { border-color: var(--border) !important; }
-html[data-theme] .border-ink-300 { border-color: color-mix(in srgb, var(--border) 70%, var(--text)) !important; }
-html[data-theme] .border-ink-400 { border-color: color-mix(in srgb, var(--border) 50%, var(--text)) !important; }
-html[data-theme] .border-ink-900 { border-color: var(--text) !important; }
+html[data-theme] [class*="border-ink-100"] { border-color: color-mix(in srgb, var(--border) 40%, var(--background)) !important; }
+html[data-theme] [class*="border-ink-200"] { border-color: var(--border) !important; }
+html[data-theme] [class*="border-ink-300"] { border-color: color-mix(in srgb, var(--border) 70%, var(--text)) !important; }
+html[data-theme] [class*="border-ink-400"] { border-color: color-mix(in srgb, var(--border) 50%, var(--text)) !important; }
+html[data-theme] [class*="border-ink-900"] { border-color: var(--text) !important; }
 
 /* Brand (maps to primary token) */
-html[data-theme] .bg-brand-50 { background-color: color-mix(in srgb, var(--primary) 15%, var(--surface)) !important; }
-html[data-theme] .bg-brand-500 { background-color: var(--primary) !important; }
-html[data-theme] .text-brand-700 { color: var(--primary) !important; }
-html[data-theme] .text-brand-600 { color: var(--primary) !important; }
-html[data-theme] .border-brand-200 { border-color: color-mix(in srgb, var(--primary) 40%, var(--border)) !important; }
-html[data-theme] .border-brand-600 { border-color: var(--primary) !important; }
+html[data-theme] [class*="bg-brand-50"] { background-color: color-mix(in srgb, var(--primary) 15%, var(--surface)) !important; }
+html[data-theme] [class*="bg-brand-500"] { background-color: var(--primary) !important; }
+html[data-theme] [class*="text-brand-700"] { color: var(--primary) !important; }
+html[data-theme] [class*="text-brand-600"] { color: var(--primary) !important; }
+html[data-theme] [class*="border-brand-200"] { border-color: color-mix(in srgb, var(--primary) 40%, var(--border)) !important; }
+html[data-theme] [class*="border-brand-600"] { border-color: var(--primary) !important; }
 
 /* Semantic accents */
-html[data-theme] .bg-emerald-50 { background-color: color-mix(in srgb, var(--success) 12%, var(--surface)) !important; }
-html[data-theme] .bg-emerald-500 { background-color: var(--success) !important; }
-html[data-theme] .text-emerald-700 { color: var(--success) !important; }
-html[data-theme] .text-emerald-900 { color: var(--success) !important; }
-html[data-theme] .border-emerald-200 { border-color: color-mix(in srgb, var(--success) 30%, var(--border)) !important; }
-html[data-theme] .border-emerald-500 { border-color: var(--success) !important; }
+html[data-theme] [class*="bg-emerald-50"] { background-color: color-mix(in srgb, var(--success) 12%, var(--surface)) !important; }
+html[data-theme] [class*="bg-emerald-500"] { background-color: var(--success) !important; }
+html[data-theme] [class*="text-emerald-700"] { color: var(--success) !important; }
+html[data-theme] [class*="text-emerald-900"] { color: var(--success) !important; }
+html[data-theme] [class*="border-emerald-200"] { border-color: color-mix(in srgb, var(--success) 30%, var(--border)) !important; }
+html[data-theme] [class*="border-emerald-500"] { border-color: var(--success) !important; }
 
-html[data-theme] .bg-red-50 { background-color: color-mix(in srgb, var(--error) 12%, var(--surface)) !important; }
-html[data-theme] .text-red-700 { color: var(--error) !important; }
-html[data-theme] .text-red-900 { color: var(--error) !important; }
-html[data-theme] .text-red-600 { color: var(--error) !important; }
-html[data-theme] .text-red-500 { color: var(--error) !important; }
-html[data-theme] .border-red-200 { border-color: color-mix(in srgb, var(--error) 30%, var(--border)) !important; }
-html[data-theme] .border-red-500 { border-color: var(--error) !important; }
+html[data-theme] [class*="bg-red-50"] { background-color: color-mix(in srgb, var(--error) 12%, var(--surface)) !important; }
+html[data-theme] [class*="text-red-700"] { color: var(--error) !important; }
+html[data-theme] [class*="text-red-900"] { color: var(--error) !important; }
+html[data-theme] [class*="text-red-600"] { color: var(--error) !important; }
+html[data-theme] [class*="text-red-500"] { color: var(--error) !important; }
+html[data-theme] [class*="border-red-200"] { border-color: color-mix(in srgb, var(--error) 30%, var(--border)) !important; }
+html[data-theme] [class*="border-red-500"] { border-color: var(--error) !important; }
 
-html[data-theme] .bg-amber-50 { background-color: color-mix(in srgb, var(--warning) 12%, var(--surface)) !important; }
-html[data-theme] .text-amber-900 { color: var(--warning) !important; }
-html[data-theme] .border-amber-200 { border-color: color-mix(in srgb, var(--warning) 30%, var(--border)) !important; }
+html[data-theme] [class*="bg-amber-50"] { background-color: color-mix(in srgb, var(--warning) 12%, var(--surface)) !important; }
+html[data-theme] [class*="text-amber-900"] { color: var(--warning) !important; }
+html[data-theme] [class*="border-amber-200"] { border-color: color-mix(in srgb, var(--warning) 30%, var(--border)) !important; }
 
-/* Hero gradient: use a soft per-theme wash (or solid for non-light themes). */
-html[data-theme] .hero-bg { background: var(--background); }
+/* Hero gradient: solid per-theme wash so we don't sit on a hardcoded blue. */
+html[data-theme] .hero-bg { background: var(--background) !important; }
+
+/* Critical contrast guarantee: in every theme, ANY element using `text-white`
+ * inside a NON-dark surface (i.e. not on .bg-ink-900) must be readable.
+ * The default text-white → var(--background) mapping above already handles
+ * the common dark-button case. */
+
+/* Top progress bar — slides a 30%-wide chip across the top edge. Used by
+ * <TopProgressBar /> in app/layout.tsx for every client-side nav. */
+@keyframes amp-top-bar {
+  0%   { left: -35%; width: 30%; }
+  60%  { left: 70%;  width: 30%; }
+  100% { left: 105%; width: 0%; }
+}
 
 /* Make KaTeX inline math wrap on narrow screens. */
 .katex-display {

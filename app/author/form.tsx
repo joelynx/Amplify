@@ -2,10 +2,21 @@
 
 import { useState } from "react";
 import { LatexBlock } from "@/components/latex-block";
+import { Card } from "@/components/ui/Card";
 
 type CourseOpt = { id: number; code: string; name: string; slug: string };
 
-export function AuthorForm({ courses }: { courses: CourseOpt[] }) {
+export function AuthorForm({
+  courses,
+  knownTopics,
+  knownBranches,
+  knownSubtopics,
+}: {
+  courses: CourseOpt[];
+  knownTopics: string[];
+  knownBranches: string[];
+  knownSubtopics: string[];
+}) {
   const [topic, setTopic] = useState("");
   const [branch, setBranch] = useState("");
   const [subtopic, setSubtopic] = useState("");
@@ -20,6 +31,9 @@ export function AuthorForm({ courses }: { courses: CourseOpt[] }) {
     courses[0]?.id ?? null
   );
   const [submitting, setSubmitting] = useState(false);
+  const [stage, setStage] = useState<
+    "idle" | "saving" | "vectorizing" | "indexing"
+  >("idle");
   const [done, setDone] = useState<string | null>(null);
   const [error, setError] = useState<string>("");
 
@@ -27,6 +41,11 @@ export function AuthorForm({ courses }: { courses: CourseOpt[] }) {
     e.preventDefault();
     setError("");
     setSubmitting(true);
+    setStage("saving");
+    // Server-side: insert → tags → embed → index. We advance the stage label
+    // on a timer so the user sees the steps even though the endpoint is one call.
+    const stageTimer1 = setTimeout(() => setStage("vectorizing"), 350);
+    const stageTimer2 = setTimeout(() => setStage("indexing"), 1100);
     try {
       const res = await fetch("/api/drafts", {
         method: "POST",
@@ -48,7 +67,7 @@ export function AuthorForm({ courses }: { courses: CourseOpt[] }) {
         throw new Error(j.error || `HTTP ${res.status}`);
       }
       const json = await res.json();
-      setDone(`Draft #${json.id} submitted. Moderators will review shortly.`);
+      setDone(`Question #${json.id} is live. Embedded, tagged, and searchable.`);
       // Reset for the next submission.
       setTopic("");
       setBranch("");
@@ -60,9 +79,25 @@ export function AuthorForm({ courses }: { courses: CourseOpt[] }) {
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
     } finally {
+      clearTimeout(stageTimer1);
+      clearTimeout(stageTimer2);
       setSubmitting(false);
+      setStage("idle");
     }
   }
+
+  const stageLabel: Record<typeof stage, string> = {
+    idle: "Add to the bank",
+    saving: "Saving the question…",
+    vectorizing: "Vectorizing with Gemini…",
+    indexing: "Indexing for similarity search…",
+  };
+  const stagePct: Record<typeof stage, number> = {
+    idle: 0,
+    saving: 25,
+    vectorizing: 65,
+    indexing: 90,
+  };
 
   if (done) {
     return (
@@ -87,29 +122,47 @@ export function AuthorForm({ courses }: { courses: CourseOpt[] }) {
           <Field label="Topic" required>
             <input
               required
+              list="known-topics"
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              placeholder="e.g. Calculus"
+              placeholder="Pick or type a new one"
               className="input"
             />
+            <datalist id="known-topics">
+              {knownTopics.map((t) => (
+                <option key={t} value={t} />
+              ))}
+            </datalist>
           </Field>
           <Field label="Branch" required>
             <input
               required
+              list="known-branches"
               value={branch}
               onChange={(e) => setBranch(e.target.value)}
-              placeholder="e.g. Single Variable…"
+              placeholder="Pick or type a new one"
               className="input"
             />
+            <datalist id="known-branches">
+              {knownBranches.map((b) => (
+                <option key={b} value={b} />
+              ))}
+            </datalist>
           </Field>
           <Field label="Subtopic" required>
             <input
               required
+              list="known-subtopics"
               value={subtopic}
               onChange={(e) => setSubtopic(e.target.value)}
-              placeholder="e.g. Mean Value Theorem"
+              placeholder="Pick or type a new one"
               className="input"
             />
+            <datalist id="known-subtopics">
+              {knownSubtopics.map((s) => (
+                <option key={s} value={s} />
+              ))}
+            </datalist>
           </Field>
         </div>
 
@@ -167,16 +220,38 @@ export function AuthorForm({ courses }: { courses: CourseOpt[] }) {
           />
         </Field>
 
-        <Field label="Answer (optional)">
+        <Card
+          title="Answer"
+          actions={
+            <span className="text-[10px] font-normal normal-case tracking-normal text-ink-400">
+              optional · recommended for numerical
+            </span>
+          }
+        >
+          <p className="mb-2 text-xs text-ink-500">
+            Used by the auto-grader for instant feedback during practice.
+            Leave blank for proof / explanation questions.
+          </p>
           <input
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
-            placeholder="$\\tfrac{1}{3}$ — leave blank for non-numerical"
+            placeholder="e.g. $\\tfrac{1}{3}$ or 42 or $e^{i\\pi}$"
             className="input"
           />
-        </Field>
+        </Card>
 
-        <Field label="Solution (LaTeX)">
+        <Card
+          title="Solution"
+          actions={
+            <span className="text-[10px] font-normal normal-case tracking-normal text-ink-400">
+              optional · shown on Reveal
+            </span>
+          }
+        >
+          <p className="mb-2 text-xs text-ink-500">
+            The worked-out solution in LaTeX. Renders in the &ldquo;Reveal
+            solution&rdquo; toggle on the question page.
+          </p>
           <textarea
             value={solution}
             onChange={(e) => setSolution(e.target.value)}
@@ -184,7 +259,7 @@ export function AuthorForm({ courses }: { courses: CourseOpt[] }) {
             placeholder="By the power rule, $\\int_0^1 x^2 \\, dx = \\left[\\tfrac{x^3}{3}\\right]_0^1 = \\tfrac{1}{3}$."
             className="input font-mono text-sm"
           />
-        </Field>
+        </Card>
 
         <Field label="Source (optional)">
           <input
@@ -197,13 +272,32 @@ export function AuthorForm({ courses }: { courses: CourseOpt[] }) {
 
         {error && <p className="text-sm text-red-600">{error}</p>}
 
+        {submitting && (
+          <div className="rounded-md border border-brand-200 bg-brand-50 p-3">
+            <div className="mb-2 flex items-center justify-between text-xs">
+              <span className="font-medium text-brand-700">
+                {stageLabel[stage]}
+              </span>
+              <span className="text-brand-600 tabular-nums">
+                {stagePct[stage]}%
+              </span>
+            </div>
+            <div className="h-1 overflow-hidden rounded-full bg-brand-100">
+              <div
+                className="h-full bg-brand-500 transition-all duration-500 ease-out"
+                style={{ width: `${stagePct[stage]}%` }}
+              />
+            </div>
+          </div>
+        )}
+
         <div className="flex gap-3">
           <button
             type="submit"
             disabled={submitting}
             className="rounded-md bg-ink-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-ink-700 disabled:opacity-50"
           >
-            {submitting ? "Submitting…" : "Submit for review"}
+            {submitting ? stageLabel[stage] : "Submit to the bank"}
           </button>
         </div>
       </div>
@@ -265,14 +359,19 @@ export function AuthorForm({ courses }: { courses: CourseOpt[] }) {
         :global(.input) {
           width: 100%;
           border-radius: 0.375rem;
-          border: 1px solid #d6d8de;
+          border: 1px solid var(--border, #d6d8de);
           padding: 0.5rem 0.75rem;
           font-size: 0.875rem;
-          background: white;
+          background: var(--surface, #ffffff);
+          color: var(--text, #0a0c14);
+        }
+        :global(.input::placeholder) {
+          color: var(--muted, #7a8090);
+          opacity: 0.7;
         }
         :global(.input:focus) {
           outline: none;
-          border-color: #52596b;
+          border-color: var(--primary, #52596b);
         }
       `}</style>
     </form>

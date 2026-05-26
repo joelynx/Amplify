@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getServerSupabase } from "@/lib/supabase/server";
 import { LatexBlock } from "@/components/latex-block";
 import { SolutionToggle } from "./solution-toggle";
+import { ReportButton } from "./report-button";
 import type { Question } from "@/lib/db/types";
 
 type SimilarRow = {
@@ -23,28 +24,21 @@ export default async function QuestionPage({ params }: Props) {
   if (!Number.isFinite(numericId)) notFound();
 
   const supabase = await getServerSupabase();
-  const { data, error } = await supabase
-    .from("questions")
-    .select("*")
-    .eq("id", numericId)
-    .maybeSingle();
+  // All three queries are independent (only need `numericId`), so run them in
+  // parallel to keep the slowest Supabase round-trip as the wall-clock cost.
+  const [questionResult, tagsResult, similarResult] = await Promise.all([
+    supabase.from("questions").select("*").eq("id", numericId).maybeSingle(),
+    supabase.from("question_tags").select("tag").eq("question_id", numericId),
+    supabase.rpc("match_questions", {
+      source_id: numericId,
+      match_count: 6,
+    }),
+  ]);
 
-  if (error || !data) notFound();
-  const q = data as Question;
-
-  const { data: tagRows } = await supabase
-    .from("question_tags")
-    .select("tag")
-    .eq("question_id", numericId);
-  const tags = (tagRows ?? []).map((r) => r.tag as string);
-
-  // Cosine-KNN similar questions via pgvector. Returns [] if this question has
-  // no embedding yet (graceful — section just doesn't render).
-  const { data: similarRows } = await supabase.rpc("match_questions", {
-    source_id: numericId,
-    match_count: 6,
-  });
-  const similar = (similarRows ?? []) as SimilarRow[];
+  if (questionResult.error || !questionResult.data) notFound();
+  const q = questionResult.data as Question;
+  const tags = (tagsResult.data ?? []).map((r) => r.tag as string);
+  const similar = (similarResult.data ?? []) as SimilarRow[];
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-10">
@@ -69,19 +63,34 @@ export default async function QuestionPage({ params }: Props) {
         <LatexBlock src={q.latexcode} className="text-lg leading-relaxed" />
       </article>
 
-      <div className="mt-6 flex flex-wrap gap-2 text-xs">
+      <div className="mt-6 flex flex-wrap items-center gap-2 text-xs">
         <span className="rounded border border-ink-200 px-2 py-1 text-ink-600">
           {q.type}
         </span>
         {q.source && (
-          <span className="rounded border border-ink-200 px-2 py-1 text-ink-600">
+          <Link
+            href={`/q?source=${encodeURIComponent(q.source as string)}`}
+            className="rounded border border-ink-200 px-2 py-1 text-ink-600 hover:bg-ink-50"
+          >
             {q.source}
             {q.subsource ? ` · ${q.subsource}` : ""}
-          </span>
+          </Link>
         )}
         {q.difficulty_rating > 0 && (
           <span className="rounded border border-ink-200 px-2 py-1 text-ink-600">
             difficulty {q.difficulty_rating.toFixed(1)}
+          </span>
+        )}
+        {(q as Question & { submitted_by?: string }).submitted_by && (
+          <span className="rounded-full bg-brand-50 px-2 py-1 text-brand-700">
+            submitted by{" "}
+            <span className="font-medium">
+              {
+                (
+                  q as Question & { submitted_by: string }
+                ).submitted_by.split("@")[0]
+              }
+            </span>
           </span>
         )}
         {tags.map((t) => (
@@ -92,6 +101,7 @@ export default async function QuestionPage({ params }: Props) {
             #{t}
           </span>
         ))}
+        <ReportButton questionId={q.id} />
       </div>
 
       {q.solution && (

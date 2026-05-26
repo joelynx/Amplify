@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getServerSupabase } from "@/lib/supabase/server";
 import { getPublicStats } from "@/lib/stats";
+import { getInstitutions } from "@/lib/cached";
 import { lowerCredibilityBound } from "@/lib/mastery";
 import type { Institution } from "@/lib/db/types";
 
@@ -16,19 +17,9 @@ type MasteryRow = {
 export default async function Home() {
   const supabase = await getServerSupabase();
 
-  const [
-    stats,
-    { data: institutions },
-    {
-      data: { user },
-    },
-  ] = await Promise.all([
+  const [stats, institutions, { data: { user } }] = await Promise.all([
     getPublicStats(supabase),
-    supabase
-      .from("institutions")
-      .select("*")
-      .order("status", { ascending: true })
-      .order("short_name"),
+    getInstitutions(),
     supabase.auth.getUser(),
   ]);
 
@@ -121,18 +112,17 @@ export default async function Home() {
           </h1>
 
           <p className="max-w-2xl text-lg text-ink-500">
-            A peer-reviewed, open bank of university math, physics, and CS
-            problems. Mastery-tracked practice for students. Overleaf-grade
-            authoring for professors. Assessment infrastructure for
-            institutions. Free for individuals, forever.
+            A bank of university math, physics, and CS problems built by
+            IIT-AD&rsquo;s TAs. Mastery-tracked practice for students.
+            One-click contribution for TAs.
           </p>
 
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/practice"
+              href={user ? "/practice" : "/auth/login?next=/practice"}
               className="rounded-md bg-ink-900 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-ink-700"
             >
-              Start practicing →
+              {user ? "Start practicing →" : "Sign in to practice →"}
             </Link>
             <Link
               href="/q"
@@ -149,122 +139,132 @@ export default async function Home() {
           </div>
         </div>
 
-        {/* Public stats */}
-        <dl className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          <Stat value={stats.questions} label="curated questions" />
-          <Stat value={stats.institutions} label="active institutions" />
-          <Stat value={stats.contributors} label="faculty contributors" />
-          <Stat value={stats.sessionsThisWeek} label="sessions this week" />
+        {/* Public stats — only show counters that reflect ground truth. */}
+        <dl className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-2">
+          <Stat value={stats.questions} label="questions in the bank" />
+          <Stat value={stats.contributors} label="contributors" />
         </dl>
       </section>
 
-      {/* Universities — the IIT system → global story */}
-      <section className="border-y border-ink-200 bg-ink-50">
-        <div className="mx-auto max-w-5xl px-6 py-16">
-          <h2 className="display text-3xl font-semibold">
-            Live at IIT-AD. Scaling to every IIT. Then everywhere.
-          </h2>
-          <p className="mt-3 max-w-2xl text-ink-500">
-            The IIT system is 23 campuses and 16,000 STEM students per year.
-            Amplify started at the Abu Dhabi campus. We&apos;re working with
-            faculty to expand across the system, then to engineering colleges
-            across India, then globally.
-          </p>
-
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            <div>
-              <h3 className="mb-3 text-xs font-medium uppercase tracking-wider text-emerald-700">
-                Live now
-              </h3>
-              <ul className="space-y-2">
-                {active.map((i) => (
-                  <InstitutionCard key={i.slug} i={i} />
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="mb-3 text-xs font-medium uppercase tracking-wider text-ink-500">
-                Coming next — IIT campuses we&apos;re talking to
-              </h3>
-              <ul className="space-y-2">
-                {interested.slice(0, 9).map((i) => (
-                  <li
-                    key={i.slug}
-                    className="flex items-center justify-between rounded-md border border-dashed border-ink-200 bg-white/60 px-3 py-2 text-sm"
-                  >
-                    <span>{i.name}</span>
-                    <span className="text-xs text-ink-400">{i.short_name}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      {/* Pilot context — honest, no aspirational scaling claims. */}
+      {active.length > 0 && (
+        <section className="border-y border-ink-200 bg-ink-50">
+          <div className="mx-auto max-w-5xl px-6 py-12">
+            <h2 className="display text-2xl font-semibold">
+              Pilot launching at IIT-AD next semester.
+            </h2>
+            <ul className="mt-5 grid gap-2 sm:grid-cols-2">
+              {active.map((i) => (
+                <InstitutionCard key={i.slug} i={i} />
+              ))}
+            </ul>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* Three pillars */}
+      {/* Two surfaces. Anything not actually built is dropped. */}
       <section className="mx-auto max-w-5xl px-6 py-20">
         <h2 className="display text-3xl font-semibold">
-          One commons. Three surfaces.
+          One bank. Two surfaces.
         </h2>
-        <div className="mt-10 grid gap-8 sm:grid-cols-3">
+        <div className="mt-10 grid gap-8 sm:grid-cols-2">
           <Pillar
             title="For students"
             subtitle="Practice"
-            body="Browse-friendly LaTeX in the browser. Filter by subtopic. Grade yourself. Watch your mastery score climb. No PDFs, no installs."
+            body="LaTeX rendered in the browser. Filter by subtopic. Diverse generation via DPP. Per-subtopic Bayesian mastery so you actually know where you're weak."
             href="/practice"
             cta="Start practicing"
           />
           <Pillar
-            title="For professors"
+            title="For TAs"
             subtitle="Authoring"
-            body="Write questions in LaTeX with live KaTeX preview. Peer-review queue. Revision history. Your contributions live in the commons under your name."
+            body="One form to add a question with live LaTeX preview. Auto-embedded via Gemini, indexed for similarity search the moment you submit."
             href="/author"
             cta="Contribute a question"
-          />
-          <Pillar
-            title="For institutions"
-            subtitle="Adopt"
-            body="Get a branded problem-bank for your university. Faculty dashboards. Cohort mastery analytics. SSO, LMS integration, exams — coming."
-            href="/for-institutions"
-            cta="Bring Amplify to your campus"
           />
         </div>
       </section>
 
-      {/* Why now */}
+      {/* How Diverse mode works — visual primer */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <h2 className="display text-3xl font-semibold">
+          Random vs Diverse — what changes.
+        </h2>
+        <p className="mt-3 max-w-2xl text-ink-500">
+          Every question gets a vector embedding. Naive selection clusters by
+          accident. Diverse mode uses a determinantal point process to pick a
+          set that maximally covers the concept space — so a 10-question
+          practice set actually spans your topic instead of repeating the
+          same skill ten times.
+        </p>
+
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          {/* Random — clumped */}
+          <div className="rounded-lg border border-ink-200 bg-white p-6">
+            <div className="mb-3 flex items-baseline justify-between">
+              <span className="text-sm font-semibold">Random</span>
+              <span className="text-xs text-ink-500 tabular-nums">
+                diversity 0.41
+              </span>
+            </div>
+            <svg viewBox="0 0 200 140" className="w-full">
+              <rect width="200" height="140" fill="transparent" stroke="currentColor" strokeOpacity="0.1" />
+              {/* Concept-space dots, mostly clustered */}
+              {[
+                [55, 60], [62, 65], [58, 72], [50, 58], [65, 70],
+                [60, 55], [70, 75], [54, 80], [115, 40], [140, 100],
+              ].map(([x, y], i) => (
+                <circle key={i} cx={x} cy={y} r="4" fill="var(--primary, #4759f5)" opacity="0.85" />
+              ))}
+            </svg>
+            <p className="mt-3 text-xs text-ink-500">
+              10 questions picked uniformly. Most land in one tight neighbourhood — you drill the same skill ten times.
+            </p>
+          </div>
+
+          {/* Diverse — spread */}
+          <div className="rounded-lg border border-ink-200 bg-white p-6">
+            <div className="mb-3 flex items-baseline justify-between">
+              <span className="text-sm font-semibold">Diverse (DPP)</span>
+              <span className="text-xs text-emerald-700 tabular-nums">
+                diversity 0.87
+              </span>
+            </div>
+            <svg viewBox="0 0 200 140" className="w-full">
+              <rect width="200" height="140" fill="transparent" stroke="currentColor" strokeOpacity="0.1" />
+              {[
+                [30, 30], [170, 25], [40, 110], [165, 115], [100, 70],
+                [60, 70], [140, 60], [110, 30], [95, 115], [35, 75],
+              ].map(([x, y], i) => (
+                <circle key={i} cx={x} cy={y} r="4" fill="var(--success, #16a34a)" opacity="0.85" />
+              ))}
+            </svg>
+            <p className="mt-3 text-xs text-ink-500">
+              Same 10, picked by a determinantal point process. Every region of the topic gets one — broad coverage, no redundancy.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Why this exists. */}
       <section className="border-t border-ink-200 bg-ink-50">
         <div className="mx-auto max-w-5xl px-6 py-20">
           <h2 className="display text-3xl font-semibold">
-            Why this didn&apos;t exist already.
+            Why this exists.
           </h2>
-          <div className="mt-8 grid gap-8 sm:grid-cols-2">
-            <p className="text-ink-700">
-              Every STEM student practices typeset problems. Every STEM
-              professor sets typeset problem sets. None of it has a canonical
-              home. The systems that exist —{" "}
-              <em>WebAssign, Pearson MyLab, ALEKS</em> — are paywalled, hated by
-              students, and locked to whichever textbook the publisher sells.
-            </p>
-            <p className="text-ink-700">
-              We&apos;re building the alternative: an open commons of
-              peer-reviewed problems, with practice and assessment apps on top.
-              Universities pay; students and professors don&apos;t. Funded by
-              institutional licenses, governed by faculty contributors.
-            </p>
-          </div>
+          <p className="mt-6 max-w-2xl text-ink-700">
+            Every STEM student practices typeset problems. Every TA writes them.
+            Nobody has a shared home for the result. The systems that exist —{" "}
+            <em>WebAssign, Pearson MyLab, ALEKS</em> — are paywalled and locked
+            to whichever textbook the publisher sells. Amplify is the
+            alternative built from the inside of an actual institution.
+          </p>
         </div>
       </section>
 
       <footer className="border-t border-ink-200">
         <div className="mx-auto max-w-5xl px-6 py-10 text-xs text-ink-500">
-          Built at IIT-Delhi Abu Dhabi · MIT licensed · open source on{" "}
-          <a
-            href="https://github.com/joelynx/Amplify"
-            className="underline hover:text-ink-900"
-          >
-            GitHub
-          </a>
+          Built at IIT-Delhi Abu Dhabi by Karth Puthiyedathu and Joel Jobi.
         </div>
       </footer>
     </main>

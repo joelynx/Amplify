@@ -39,12 +39,18 @@ export default async function BrowsePage({
     offset + PAGE_SIZE - 1
   );
 
-  // For the topic chip strip.
-  const { data: allTopics } = await supabase
+  // For the topic chip strip + source filter.
+  const { data: allMeta } = await supabase
     .from("questions")
-    .select("topic");
-  const topicSet = new Set((allTopics ?? []).map((t) => t.topic as string));
+    .select("topic, source");
+  const topicSet = new Set((allMeta ?? []).map((t) => t.topic as string));
   const topics = [...topicSet].sort();
+  const sourceSet = new Set(
+    (allMeta ?? [])
+      .map((t) => t.source as string | null)
+      .filter((s): s is string => !!s)
+  );
+  const sources = [...sourceSet].sort();
 
   const totalPages = Math.max(1, Math.ceil((count ?? 0) / PAGE_SIZE));
 
@@ -72,6 +78,41 @@ export default async function BrowsePage({
       </div>
 
       <TopicChips topics={topics} active={sp.topic ?? null} />
+
+      {sources.length > 0 && (
+        <div className="mt-3">
+          <div className="mb-1 text-xs font-medium uppercase tracking-wider text-ink-500">
+            Source
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            <Link
+              href="/q"
+              className={
+                "rounded-full border px-2.5 py-1 text-xs " +
+                (!sp.source
+                  ? "border-ink-900 bg-ink-900 text-white"
+                  : "border-ink-200 text-ink-700 hover:border-ink-400")
+              }
+            >
+              All
+            </Link>
+            {sources.slice(0, 24).map((s) => (
+              <Link
+                key={s}
+                href={`/q?source=${encodeURIComponent(s)}`}
+                className={
+                  "rounded-full border px-2.5 py-1 text-xs " +
+                  (sp.source === s
+                    ? "border-ink-900 bg-ink-900 text-white"
+                    : "border-ink-200 text-ink-700 hover:border-ink-400")
+                }
+              >
+                {s.startsWith("user:") ? `from ${s.slice(5).split("@")[0]}` : s}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
 
       <ul className="mt-6 flex flex-col gap-3">
         {(rows ?? []).map((r) => (

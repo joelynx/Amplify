@@ -1,0 +1,175 @@
+/* ─── Per-theme structural overrides — adapted from Joel's flavor themes ──
+ * Joel's theme CSS targets his class structure (section[class*="rounded-lg"],
+ * button[class*="rounded-md"], etc.). Our app uses a mix of rounded-md /
+ * rounded-lg / rounded-full on cards, sections, and buttons. These rules
+ * widen each theme's structural CSS to hit our patterns too, so the *look*
+ * (not just the colors) actually switches when the user picks a theme.
+ *
+ * Each block uses `!important` to win against Tailwind utility classes.
+ */
+
+/* ─── Universal: force the per-theme font on EVERYTHING ──────────────────
+ * Without this, body inherits Inter (set in layout.tsx) and child elements
+ * with font-sans (Tailwind utility) override the body's font-family.
+ */
+html[data-theme] body,
+html[data-theme] body * {
+  font-family: var(--font-family) !important;
+}
+/* KaTeX rendered math should keep its own math font even under flavor themes. */
+html[data-theme] .katex,
+html[data-theme] .katex * {
+  font-family: KaTeX_Main, KaTeX_Math, "Times New Roman", serif !important;
+}
+/* Code blocks keep monospace. */
+html[data-theme] code,
+html[data-theme] pre,
+html[data-theme] .font-mono,
+html[data-theme] .font-mono * {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace !important;
+}
+
+/* ─── Default Light / Default Dark — no structural overrides ─────────── */
+
+/* ─── Pastel — soft, rounder edges + pillowy buttons ─────────────────── */
+html[data-theme="pastel"] section,
+html[data-theme="pastel"] [class*="rounded-md"]:not(input):not(textarea):not(.katex *),
+html[data-theme="pastel"] [class*="rounded-lg"] {
+  border-radius: 18px !important;
+}
+html[data-theme="pastel"] [class*="rounded-full"] {
+  border-radius: 9999px !important;
+}
+
+/* ─── Frutiger Aero — glassy translucent surfaces, inner highlight ──── */
+html[data-theme="frutiger-aero"] body {
+  background-attachment: fixed !important;
+}
+html[data-theme="frutiger-aero"] section[class*="rounded"],
+html[data-theme="frutiger-aero"] [class*="rounded-lg"],
+html[data-theme="frutiger-aero"] .bg-white,
+html[data-theme="frutiger-aero"] .bg-ink-50 {
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 8px 24px rgba(13, 43, 64, 0.08) !important;
+}
+html[data-theme="frutiger-aero"] button[class*="rounded-md"] {
+  background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(217,239,255,0.9) 100%) !important;
+  border: 1px solid rgba(13, 43, 64, 0.25) !important;
+  color: #0d2b40 !important;
+}
+html[data-theme="frutiger-aero"] .bg-ink-900 {
+  background: linear-gradient(180deg, #0aa6e0 0%, #0788bd 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(13, 43, 64, 0.4) !important;
+}
+
+/* ─── Pixel Art — chunky, zero radius, dark hard-shadow ──────────────── */
+html[data-theme="pixel-art"] *,
+html[data-theme="pixel-art"] *::before,
+html[data-theme="pixel-art"] *::after {
+  border-radius: 0 !important;
+}
+html[data-theme="pixel-art"] section[class*="rounded"],
+html[data-theme="pixel-art"] [class*="rounded-lg"] {
+  border: 2px solid var(--border) !important;
+  box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.4) !important;
+}
+html[data-theme="pixel-art"] button[class*="rounded-md"]:not(input):not(textarea) {
+  border: 2px solid var(--border) !important;
+  box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.5) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ─── Windows XP — 3D inset bevel, classic Luna-era buttons ──────────── */
+html[data-theme="windows-xp"] section[class*="rounded"],
+html[data-theme="windows-xp"] [class*="rounded-lg"],
+html[data-theme="windows-xp"] .bg-white,
+html[data-theme="windows-xp"] .bg-ink-50 {
+  border-radius: 4px !important;
+  border: 1px solid #7b7b7b !important;
+  box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #a0a0a0 !important;
+}
+html[data-theme="windows-xp"] button[class*="rounded-md"]:not(input):not(textarea) {
+  border-radius: 3px !important;
+  background: linear-gradient(180deg, #f8f8f8 0%, #d9d9d9 100%) !important;
+  border: 1px solid #7b7b7b !important;
+  color: #1a1a1a !important;
+  box-shadow: inset 1px 1px 0 #ffffff !important;
+}
+html[data-theme="windows-xp"] .bg-ink-900 {
+  background: linear-gradient(180deg, #4a8de8 0%, #2a5db0 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid #1c3a73 !important;
+}
+
+/* ─── Comic — heavy ink borders, hard offset shadow, speech-bubble vibe */
+html[data-theme="comic"] [class*="rounded-md"]:not(input):not(textarea):not(button),
+html[data-theme="comic"] [class*="rounded-lg"],
+html[data-theme="comic"] [class*="bg-white"],
+html[data-theme="comic"] [class*="bg-ink-50"],
+html[data-theme="comic"] [class*="bg-ink-100"] {
+  border: 3px solid #1a1a1a !important;
+  border-radius: 18px !important;
+  box-shadow: 6px 6px 0 0 #1a1a1a !important;
+}
+html[data-theme="comic"] button[class*="rounded-md"]:not(input):not(textarea) {
+  border: 2px solid var(--border) !important;
+  border-radius: 999px !important;
+  box-shadow: 3px 3px 0 0 var(--border) !important;
+  font-weight: 700 !important;
+}
+html[data-theme="comic"] [class*="rounded-full"] {
+  border: 2px solid var(--border) !important;
+  box-shadow: 2px 2px 0 0 var(--border) !important;
+}
+
+/* ─── ASCII — terminal aesthetic: no radius, no shadow, sharp green ──── */
+html[data-theme="ascii"] *,
+html[data-theme="ascii"] *::before,
+html[data-theme="ascii"] *::after {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+html[data-theme="ascii"] section[class*="rounded"],
+html[data-theme="ascii"] [class*="rounded-lg"],
+html[data-theme="ascii"] .bg-white,
+html[data-theme="ascii"] .bg-ink-50 {
+  border: 1px solid var(--border) !important;
+  background: var(--surface) !important;
+}
+html[data-theme="ascii"] button[class*="rounded-md"]:not(input):not(textarea) {
+  border: 1px solid var(--primary) !important;
+  background: var(--background) !important;
+  color: var(--primary) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+html[data-theme="ascii"] .bg-ink-900 {
+  background: var(--primary) !important;
+  color: var(--background) !important;
+}
+html[data-theme="ascii"] a {
+  color: var(--primary) !important;
+  text-decoration: underline !important;
+}
+
+/* ─── Android KitKat — flat Material 1, tiny radius, subtle elevation ── */
+html[data-theme="android-kitkat"] section[class*="rounded"],
+html[data-theme="android-kitkat"] [class*="rounded-lg"],
+html[data-theme="android-kitkat"] .bg-white {
+  border-radius: 2px !important;
+  border: none !important;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.12),
+    0 1px 3px rgba(0, 0, 0, 0.08) !important;
+}
+html[data-theme="android-kitkat"] button[class*="rounded-md"]:not(input):not(textarea) {
+  border-radius: 2px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-weight: 500;
+}

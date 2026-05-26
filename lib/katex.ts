@@ -101,6 +101,12 @@ function preprocessEnvironments(src: string): string {
   s = wrapBracedCommand(s, "emph", EM_OPEN, EM_CLOSE);
   s = wrapBracedCommand(s, "underline", U_OPEN, U_CLOSE);
   s = wrapBracedCommand(s, "texttt", TT_OPEN, TT_CLOSE);
+  // \text{X} — strip the wrapper, keep the inner content. Inside math mode
+  // KaTeX would render it natively; outside math it was leaking visibly.
+  s = wrapBracedCommand(s, "text", "", "");
+  // \mathrm{X} and \mathit{X} — same treatment as \text outside math mode.
+  s = wrapBracedCommand(s, "mathrm", "", "");
+  s = wrapBracedCommand(s, "mathit", "", "");
 
   // Strip pure-spacing commands (no useful HTML equivalent).
   for (const cmd of STRIP_COMMANDS) {

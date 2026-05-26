@@ -35,6 +35,17 @@ export default async function MePage() {
     redirect("/auth/login?next=/me");
   }
 
+  // TAs / faculty land on /author, not the student mastery view.
+  const { data: profile } = await supabase
+    .from("user_profiles")
+    .select("role")
+    .eq("user_id", user.id)
+    .maybeSingle();
+  const role = (profile as { role?: string } | null)?.role;
+  if (role === "faculty" || role === "admin" || role === "moderator") {
+    redirect("/author");
+  }
+
   const { data: mastery } = await supabase
     .from("user_mastery")
     .select("topic, branch, subtopic, alpha, beta, total_seen")

@@ -5,9 +5,6 @@ export default function TutorialPage() {
     <main className="mx-auto max-w-3xl space-y-4 px-6 py-10">
       <header>
         <h1 className="text-3xl font-semibold tracking-tight">Tutorial</h1>
-        <p className="mt-1 text-sm text-muted">
-          Quick orientation to every page in the app.
-        </p>
       </header>
 
       <Card title="Practice">
@@ -23,15 +20,6 @@ export default function TutorialPage() {
           <em>Diverse</em> = DPP-selected for broad coverage across the topic
           space. The Diversity badge on each session shows mean pairwise
           dissimilarity of the selected set.
-        </p>
-      </Card>
-
-      <Card title="PBS — Parallel Burst Session">
-        <p className="text-sm leading-relaxed">
-          Three numerical-only questions visible at once. Each starts at 20
-          points; wrong attempts <em>halve</em> the available score (min 1).
-          A correct answer dequeues the widget and pulls the next from the
-          pool. Beat the 5-minute clock.
         </p>
       </Card>
 

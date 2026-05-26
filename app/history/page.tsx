@@ -22,6 +22,16 @@ export default async function HistoryPage() {
   if (!user) {
     redirect("/auth/login?next=/history");
   }
+  // TA / faculty don't have practice history — bounce to /author.
+  const { data: profileRow } = await supabase
+    .from("user_profiles")
+    .select("role")
+    .eq("user_id", user.id)
+    .maybeSingle();
+  const r = (profileRow as { role?: string } | null)?.role;
+  if (r === "faculty" || r === "admin" || r === "moderator") {
+    redirect("/author");
+  }
 
   const { data: rows } = await supabase
     .from("practice_sessions")
@@ -58,10 +68,7 @@ export default async function HistoryPage() {
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-10">
-      <h1 className="text-3xl font-semibold tracking-tight">History</h1>
-      <p className="mb-8 mt-1 text-sm text-ink-500">
-        Your past practice sessions, newest first. Up to 50 shown.
-      </p>
+      <h1 className="mb-8 text-3xl font-semibold tracking-tight">History</h1>
 
       {sessions.length === 0 ? (
         <div className="rounded-md border border-ink-200 bg-ink-50 p-6 text-sm">

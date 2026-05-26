@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getServerSupabase } from "@/lib/supabase/server";
+import { getPracticeTaxonomy } from "@/lib/cached";
 import { AuthorForm } from "./form";
 
 export default async function AuthorPage() {
@@ -21,24 +22,10 @@ export default async function AuthorPage() {
   if (role !== "faculty" && role !== "admin" && role !== "moderator") {
     return (
       <main className="mx-auto max-w-2xl px-6 py-16">
-        <h1 className="display text-3xl font-semibold">
-          Authoring is faculty-gated
-        </h1>
+        <h1 className="display text-3xl font-semibold">Authoring is TA-gated</h1>
         <p className="mt-3 text-ink-700">
-          Every question in the bank has a peer-reviewed author. That trust
-          model is what makes the commons valuable — so authoring is open to
-          faculty, moderators, and admins.
-        </p>
-        <p className="mt-3 text-ink-500">
-          You&apos;re signed in as <strong>{user.email}</strong>. To request
-          faculty access at your institution, email{" "}
-          <a
-            href="mailto:24a1cseb0015@iitdabudhabi.ac.ae?subject=Faculty%20access%20request"
-            className="underline"
-          >
-            us
-          </a>{" "}
-          from your institution&apos;s email address.
+          You&apos;re signed in as a student. To contribute questions, sign up
+          again with the <strong>TA</strong> role selected.
         </p>
         <div className="mt-8 flex gap-3">
           <Link
@@ -48,10 +35,10 @@ export default async function AuthorPage() {
             Practice instead
           </Link>
           <Link
-            href="/"
+            href="/auth/signout"
             className="rounded-md border border-ink-200 px-4 py-2 text-sm font-medium hover:bg-ink-50"
           >
-            Home
+            Sign out
           </Link>
         </div>
       </main>
@@ -67,6 +54,22 @@ export default async function AuthorPage() {
     .select("id, code, name, slug")
     .eq("institution_id", institutionId ?? -1)
     .order("code");
+
+  // Existing taxonomy so the TA can pick from the current list or add their own.
+  const { tree } = await getPracticeTaxonomy();
+  const knownTopics = Object.keys(tree).sort();
+  const knownBranches = [
+    ...new Set(
+      Object.values(tree).flatMap((branches) => Object.keys(branches))
+    ),
+  ].sort();
+  const knownSubtopics = [
+    ...new Set(
+      Object.values(tree).flatMap((branches) =>
+        Object.values(branches).flat()
+      )
+    ),
+  ].sort();
 
   return (
     <main className="hero-bg">
@@ -93,6 +96,9 @@ export default async function AuthorPage() {
             name: c.name as string,
             slug: c.slug as string,
           }))}
+          knownTopics={knownTopics}
+          knownBranches={knownBranches}
+          knownSubtopics={knownSubtopics}
         />
       </section>
     </main>

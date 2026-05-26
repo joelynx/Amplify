@@ -19,6 +19,7 @@ export async function Nav() {
   }
 
   const isFaculty = role === "faculty" || role === "admin" || role === "moderator";
+  const isStudent = role === "student" || role === null;
 
   return (
     <header className="sticky top-0 z-20 border-b border-ink-200 bg-white/80 backdrop-blur">
@@ -33,11 +34,14 @@ export async function Nav() {
           Amplify
         </Link>
         <nav className="flex items-center gap-1 text-sm">
-          <NavLink href="/practice">Practice</NavLink>
-          <NavLink href="/pbs">PBS</NavLink>
+          {/* TAs / faculty / admins → contributor surface only.
+            * Students (and anonymous visitors) → practice surface.
+            * Both groups can browse + read static pages. */}
+          {!isFaculty && <NavLink href="/practice">Practice</NavLink>}
           <NavLink href="/q">Browse</NavLink>
-          <NavLink href="/stats">Stats</NavLink>
-          {user && <NavLink href="/history">History</NavLink>}
+          {!isFaculty && user && <NavLink href="/stats">Stats</NavLink>}
+          {!isFaculty && user && <NavLink href="/history">History</NavLink>}
+          {user && isFaculty && <NavLink href="/author">Author</NavLink>}
           <NavLink href="/tutorial">Tutorial</NavLink>
           <NavLink href="/about">About</NavLink>
           {isFaculty && <NavLink href="/faculty">Faculty</NavLink>}

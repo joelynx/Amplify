@@ -1,27 +1,13 @@
 import { Card } from "@/components/ui/Card";
-import { getServerSupabase } from "@/lib/supabase/server";
+import { getAllSources } from "@/lib/cached";
 
 export default async function AboutPage() {
-  const supabase = await getServerSupabase();
-  const { data: sourceRows } = await supabase
-    .from("questions")
-    .select("source");
-  const sources = [
-    ...new Set(
-      (sourceRows ?? [])
-        .map((r) => (r as { source: string | null }).source)
-        .filter((s): s is string => !!s)
-    ),
-  ].sort();
+  const sources = await getAllSources();
 
   return (
     <main className="mx-auto max-w-3xl space-y-6 px-6 py-10">
       <header>
-        <h1 className="text-3xl font-semibold tracking-tight">About Amplify</h1>
-        <p className="mt-1 text-sm text-muted">
-          The problem-bank commons for university STEM. Built at IIT-Delhi Abu
-          Dhabi.
-        </p>
+        <h1 className="text-3xl font-semibold tracking-tight">About</h1>
       </header>
 
       <Card title="What this is">

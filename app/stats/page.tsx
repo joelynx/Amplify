@@ -1,4 +1,5 @@
 import { getServerSupabase } from "@/lib/supabase/server";
+import { getBankStats } from "@/lib/cached";
 import { Card } from "@/components/ui/Card";
 import { StatsCards } from "@/components/stats/StatsCards";
 import { DistributionPie } from "@/components/stats/DistributionPie";
@@ -18,17 +19,34 @@ function isoDay(d: Date): string {
   return `${y}-${m}-${day}`;
 }
 
+import { redirect } from "next/navigation";
+
 export default async function StatsPage() {
   const supabase = await getServerSupabase();
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  if (!user) redirect("/auth/login?next=/stats");
+  // TA surfaces only — bounce contributors to /author.
+  const { data: profile } = await supabase
+    .from("user_profiles")
+    .select("role")
+    .eq("user_id", user.id)
+    .maybeSingle();
+  const taRole = (profile as { role?: string } | null)?.role;
+  if (
+    taRole === "faculty" ||
+    taRole === "admin" ||
+    taRole === "moderator"
+  ) {
+    redirect("/author");
+  }
 
-  // ── Sessions scoped to user (if signed in) or global. ────────────────────
-  let sessionQ = supabase
+  // Stats are per-user only — the page is auth-gated above, so user is non-null here.
+  const sessionQ = supabase
     .from("practice_sessions")
-    .select("id, n_target, created_at");
-  if (user) sessionQ = sessionQ.eq("user_id", user.id);
+    .select("id, n_target, created_at")
+    .eq("user_id", user!.id);
   const { data: sessions } = await sessionQ;
   const sessionRows = (sessions ?? []) as {
     id: string;
@@ -76,15 +94,10 @@ export default async function StatsPage() {
     }
   }
 
-  // ── Bank-level question stats. ──────────────────────────────────────────
-  const { data: qStats } = await supabase
-    .from("questions")
-    .select("times_used, difficulty_rating, topic");
-  const qRows = (qStats ?? []) as {
-    times_used: number;
-    difficulty_rating: number | null;
-    topic: string;
-  }[];
+  // ── Bank-level question stats — cached for 5 min via lib/cached.
+  // Bank composition only changes when new questions are seeded, so we don't
+  // need to re-fetch every visit.
+  const qRows = await getBankStats();
 
   const totalQuestionsInBank = qRows.length;
   let maxMult = 0;
@@ -154,11 +167,6 @@ export default async function StatsPage() {
     <main className="mx-auto max-w-5xl px-6 py-10">
       <header className="mb-8">
         <h1 className="text-3xl font-semibold tracking-tight">Stats</h1>
-        <p className="mt-1 text-sm text-muted">
-          {user
-            ? `Scoped to ${user.email}`
-            : "Global bank stats — sign in for per-user numbers"}
-        </p>
       </header>
 
       {/* The 8 cards */}
