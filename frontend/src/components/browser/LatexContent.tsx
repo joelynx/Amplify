@@ -26,11 +26,12 @@
  * markup and a fixed set of structural tags ever land in the output.
  */
 
-import { useMemo } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import katex from "katex";
 import "katex/dist/katex.min.css";
 
 import { cn } from "../../lib/cn";
+import { ipc } from "../../lib/ipc";
 
 interface Props {
   source: string;
@@ -57,6 +58,9 @@ const U_OPEN = "@@AMP_U_OPEN@@";
 const U_CLOSE = "@@AMP_U_CLOSE@@";
 const TT_OPEN = "@@AMP_TT_OPEN@@";
 const TT_CLOSE = "@@AMP_TT_CLOSE@@";
+
+const IMG_SENTINEL_PREFIX = "@@AMP_IMG@@";
+const IMG_SENTINEL_SUFFIX = "@@/AMP_IMG@@";
 
 const STRIP_COMMANDS = [
   "hfill",
@@ -96,10 +100,29 @@ const TEXT_ENVS = [
   "quote",
 ];
 
+// --- Image extraction ---------------------------------------------------
+
+function extractImageNames(src: string): string[] {
+  const re = /\\includegraphics\s*(?:\[[^\]]*\])?\s*\{([^}]+)\}/g;
+  const names: string[] = [];
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(src)) !== null) {
+    const name = m[1].trim();
+    if (name && !names.includes(name)) names.push(name);
+  }
+  return names;
+}
+
 // --- Preprocess ---------------------------------------------------------
 
 function preprocessEnvironments(src: string): string {
   let s = src;
+
+  // 0) Images: \includegraphics[opts]{name} → sentinel-wrapped filename.
+  s = s.replace(
+    /\\includegraphics\s*(?:\[[^\]]*\])?\s*\{([^}]+)\}/g,
+    (_m, name: string) => `${IMG_SENTINEL_PREFIX}${name.trim()}${IMG_SENTINEL_SUFFIX}`,
+  );
   // Optional [...] arg that follows \begin{env} (e.g. \begin{enumerate}[label=…]).
   const OPT_ARG = "(?:\\s*\\[[^\\]]*\\])?";
 
@@ -217,6 +240,20 @@ function reEscape(s: string): string {
 
 function postprocessEnvironments(html: string): string {
   let s = html;
+
+  // Images: replace sentinel with <img> placeholder. The `data-img` attr is
+  // used for resolution; the src is set by the component after IPC resolves.
+  const imgRe = new RegExp(
+    `${reEscape(IMG_SENTINEL_PREFIX)}([\\s\\S]*?)${reEscape(IMG_SENTINEL_SUFFIX)}`,
+    "g",
+  );
+  s = s.replace(imgRe, (_m, name: string) => {
+    const trimmed = name.trim();
+    return (
+      `<span class="amp-img-placeholder" data-img="${trimmed}">` +
+      `<span class="text-muted text-xs">[Loading image…]</span></span>`
+    );
+  });
 
   // Theorem-like envs → labeled left-border block. Capitalize the name.
   const envBlock = new RegExp(
@@ -340,9 +377,55 @@ export function renderLatex(src: string): string {
 }
 
 export function LatexContent({ source, className }: Props) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [imageMap, setImageMap] = useState<Record<string, string>>({});
+
+  // Extract unique image filenames from source.
+  const imageNames = useMemo(() => extractImageNames(source), [source]);
+
+  // Fetch image data URLs via IPC.
+  useEffect(() => {
+    if (imageNames.length === 0) {
+      setImageMap({});
+      return;
+    }
+    let cancelled = false;
+    ipc.resolve_images(imageNames).then((map) => {
+      if (!cancelled) setImageMap(map);
+    }).catch(() => {
+      // IPC unavailable (e.g. browser preview); silently degrade.
+    });
+    return () => { cancelled = true; };
+  }, [imageNames]);
+
   const html = useMemo(() => renderLatex(source), [source]);
+
+  // After render, replace placeholder spans with resolved <img> tags.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const placeholders = el.querySelectorAll<HTMLSpanElement>(".amp-img-placeholder");
+    placeholders.forEach((span) => {
+      const name = span.getAttribute("data-img");
+      if (!name) return;
+      const dataUrl = imageMap[name];
+      if (dataUrl) {
+        const img = document.createElement("img");
+        img.src = dataUrl;
+        img.alt = name;
+        img.className = "my-2 max-w-full rounded";
+        img.style.maxHeight = "400px";
+        span.replaceWith(img);
+      } else if (Object.keys(imageMap).length > 0 || imageNames.length === 0) {
+        // Images were fetched but this one wasn't found — show a subtle missing indicator.
+        span.innerHTML = `<span class="inline-flex items-center gap-1 rounded border border-border px-2 py-1 text-xs text-muted"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="m21 15-5-5L5 21" /></svg>${name}</span>`;
+      }
+    });
+  }, [html, imageMap, imageNames]);
+
   return (
     <div
+      ref={containerRef}
       className={cn("text-sm leading-relaxed", className)}
       // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: html }}

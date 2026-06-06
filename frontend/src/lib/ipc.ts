@@ -364,6 +364,7 @@ interface PyWebViewApi {
   open_pset_file: (pset_id: string) => Promise<OpenPsetResult>;
   re_export_pset_pdf: (pset_id: string) => Promise<GenerateResult>;
   get_pset_filters: (pset_id: string) => Promise<TemplatePayload | null>;
+  resolve_images: (filenames: string[]) => Promise<Record<string, string>>;
 }
 
 export interface OutputSettings {
@@ -457,6 +458,7 @@ export interface AugmentResult {
   added: number;
   skipped: number;
   errors: string[];
+  warnings: string[];
 }
 
 export interface SeedTagsResult {
@@ -469,6 +471,7 @@ export interface IngestResult {
   skipped: number;
   embeddings_loaded: number;
   outlines_loaded: number;
+  warnings: string[];
 }
 
 export interface ResetSubjectResult {
@@ -898,5 +901,9 @@ export const ipc = {
   async get_pset_filters(pset_id: string): Promise<TemplatePayload | null> {
     const api = await bridge();
     return api.get_pset_filters(pset_id);
+  },
+  async resolve_images(filenames: string[]): Promise<Record<string, string>> {
+    const api = await bridge();
+    return (await api.resolve_images(filenames)) ?? {};
   },
 };

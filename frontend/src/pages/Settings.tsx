@@ -526,7 +526,7 @@ export default function SettingsPage() {
         open={ingestResult !== null}
         onClose={() => setIngestResult(null)}
         title="Seed ingest complete"
-        tone="success"
+        tone={ingestResult?.warnings?.length ? "default" : "success"}
         footer={
           <Button variant="primary" onClick={() => setIngestResult(null)}>
             OK
@@ -534,9 +534,24 @@ export default function SettingsPage() {
         }
       >
         {ingestResult && (
-          <pre className="rounded-md bg-surface p-2 text-xs">
-            {JSON.stringify(ingestResult, null, 2)}
-          </pre>
+          <div className="space-y-2 text-sm">
+            <p>
+              Imported: <strong>{ingestResult.imported.toLocaleString()}</strong> · Skipped:{" "}
+              <strong>{ingestResult.skipped.toLocaleString()}</strong> · Embeddings:{" "}
+              <strong>{ingestResult.embeddings_loaded.toLocaleString()}</strong> · Outlines:{" "}
+              <strong>{ingestResult.outlines_loaded.toLocaleString()}</strong>
+            </p>
+            {ingestResult.warnings?.length > 0 && (
+              <div className="space-y-1 rounded-md border border-warning/30 bg-warning/5 p-2">
+                <p className="text-xs font-semibold text-warning">Warnings</p>
+                {ingestResult.warnings.map((w, i) => (
+                  <p key={i} className="text-xs text-warning">
+                    ⚠ {w}
+                  </p>
+                ))}
+              </div>
+            )}
+          </div>
         )}
       </Modal>
 
@@ -561,6 +576,16 @@ export default function SettingsPage() {
               <pre className="max-h-40 overflow-y-auto rounded-md bg-surface p-2 text-xs whitespace-pre-wrap">
                 {augmentResult.errors.join("\n")}
               </pre>
+            )}
+            {augmentResult.warnings?.length > 0 && (
+              <div className="space-y-1 rounded-md border border-warning/30 bg-warning/5 p-2">
+                <p className="text-xs font-semibold text-warning">Warnings</p>
+                {augmentResult.warnings.map((w, i) => (
+                  <p key={i} className="text-xs text-warning">
+                    ⚠ {w}
+                  </p>
+                ))}
+              </div>
             )}
           </div>
         )}

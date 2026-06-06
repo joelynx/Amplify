@@ -45,6 +45,12 @@ def _parser() -> argparse.ArgumentParser:
         default=None,
         help="SQLite DB path (defaults to app/data/appdata/amplify.db)",
     )
+    p.add_argument(
+        "--images-dir",
+        type=Path,
+        default=None,
+        help="Directory of image files to copy into teximages/ (e.g. Files/images)",
+    )
     return p
 
 
@@ -64,6 +70,7 @@ def main(argv: list[str] | None = None) -> int:
             lancedb_path=args.lancedb,
             outlines_json=args.outlines,
             topic_depth_json=args.topic_depth,
+            images_source_dir=args.images_dir,
         )
     finally:
         conn.close()
@@ -72,6 +79,10 @@ def main(argv: list[str] | None = None) -> int:
         f"imported={result.imported} skipped={result.skipped} "
         f"embeddings_loaded={result.embeddings_loaded} outlines_loaded={result.outlines_loaded}"
     )
+    if result.warnings:
+        print(f"\nWarnings ({len(result.warnings)}):")
+        for w in result.warnings:
+            print(f"  [WARNING]  {w}")
     return 0
 
 

@@ -688,18 +688,21 @@ class Api:
         lancedb_path = repo_root / "Files" / "Testing" / "lancedb"
         outlines = repo_root / "app" / "data" / "seed" / "pre_db.outlines.json"
         topic_depth = repo_root / "app" / "data" / "seed" / "pre_db.topic_depth.json"
+        images_dir = repo_root / "Files" / "images"
         result = run_ingest(
             self._conn,
             csv_path=csv_path,
             lancedb_path=lancedb_path,
             outlines_json=outlines,
             topic_depth_json=topic_depth,
+            images_source_dir=images_dir if images_dir.exists() else None,
         )
         return {
             "imported": result.imported,
             "skipped": result.skipped,
             "embeddings_loaded": result.embeddings_loaded,
             "outlines_loaded": result.outlines_loaded,
+            "warnings": result.warnings,
         }
 
     def seed_tags_from_metadata(self) -> dict[str, Any]:
@@ -715,17 +718,32 @@ class Api:
             "rows_inserted": result.rows_inserted,
         }
 
-    def augment_seed_from_csv(self, csv_path: str) -> dict[str, Any]:
-        """Spec §4.2: insert new rows from `csv_path` with NULL embeddings/outline."""
+    def augment_seed_from_csv(
+        self, csv_path: str, images_dir: str | None = None,
+    ) -> dict[str, Any]:
+        """Spec §4.2: insert new rows from `csv_path` with NULL embeddings/outline.
+
+        Supports incomplete CSVs (missing taxonomy defaults to 'Uncategorized').
+        If `images_dir` is provided, copies image files to teximages.
+        """
         p = Path(csv_path)
         if not p.exists():
-            return {"added": 0, "skipped": 0, "errors": [f"file not found: {csv_path}"]}
+            return {"added": 0, "skipped": 0, "errors": [f"file not found: {csv_path}"], "warnings": []}
+        img_dir = Path(images_dir) if images_dir else None
         try:
-            result = run_ingest(self._conn, csv_path=p, lancedb_path=None)
+            result = run_ingest(
+                self._conn, csv_path=p, lancedb_path=None,
+                images_source_dir=img_dir,
+            )
         except Exception as e:
             _log.warning("augment_seed_from_csv failed: %s", e)
-            return {"added": 0, "skipped": 0, "errors": [str(e)]}
-        return {"added": result.imported, "skipped": result.skipped, "errors": []}
+            return {"added": 0, "skipped": 0, "errors": [str(e)], "warnings": []}
+        return {
+            "added": result.imported,
+            "skipped": result.skipped,
+            "errors": [],
+            "warnings": result.warnings,
+        }
 
     def factory_reset(self) -> None:
         """Wipe psets/templates/quizzes/subjects/configs. Preserve question content
@@ -835,6 +853,70 @@ class Api:
             return None
         path = result[0] if isinstance(result, list | tuple) else result
         return str(path) if path else None
+
+    def resolve_images(self, filenames: list[str]) -> dict[str, str]:
+        """Resolve image filenames to base64 data-URLs for frontend display.
+
+        Each `filename` is typically an extension-less basename from a
+        ``\\includegraphics{...}`` command. The method looks in
+        ``teximages/`` for matching files (trying .jpg, .png, .jpeg).
+        Returns ``{filename: "data:image/...;base64,..."}`` for found images.
+        """
+        import base64
+        from app.tex.preamble import image_dir
+
+        if not filenames:
+            return {}
+
+        tex_imgs = image_dir()
+        result: dict[str, str] = {}
+        for name in filenames:
+            if name in result:
+                continue
+            # Try with and without common extensions.
+            candidates = [tex_imgs / name]
+            for ext in (".jpg", ".png", ".jpeg"):
+                candidates.append(tex_imgs / (name + ext))
+                # Also try if name already has an extension.
+                base_name = tex_imgs / name
+                if base_name.suffix.lower() in (".jpg", ".png", ".jpeg"):
+                    candidates.insert(0, base_name)
+            for candidate in candidates:
+                if candidate.is_file():
+                    try:
+                        data = candidate.read_bytes()
+                        ext = candidate.suffix.lower()
+                        mime = {
+                            ".jpg": "image/jpeg",
+                            ".jpeg": "image/jpeg",
+                            ".png": "image/png",
+                            ".gif": "image/gif",
+                            ".bmp": "image/bmp",
+                            ".svg": "image/svg+xml",
+                        }.get(ext, "image/jpeg")
+                        b64 = base64.b64encode(data).decode("ascii")
+                        result[name] = f"data:{mime};base64,{b64}"
+                    except OSError as e:
+                        _log.debug("resolve_images: failed to read %s: %s", candidate, e)
+                    break
+        return result
+
+    def copy_question_images(self, source_dir: str) -> dict[str, Any]:
+        """Copy all image files from `source_dir` to the teximages directory.
+
+        Returns ``{copied: N, skipped: M}`` where skipped counts files already
+        present in teximages.
+        """
+        from app.persistence.ingest.seed import _copy_images
+
+        src = Path(source_dir)
+        if not src.exists() or not src.is_dir():
+            return {"copied": 0, "skipped": 0, "error": f"directory not found: {source_dir}"}
+        copied = _copy_images(src)
+        total_images = sum(1 for f in src.iterdir() if f.is_file() and f.suffix.lower() in (
+            ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".svg",
+        ))
+        return {"copied": copied, "skipped": total_images - copied}
 
     def validate_header_text(self, text: str, level: str) -> str | None:
         """Run the appropriate sanitizer; return None on OK or an error string.
