@@ -5,6 +5,9 @@
  * regardless").
  */
 
+/**
+ * @deprecated Kept for backward compatibility with old quiz attempts.
+ */
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";

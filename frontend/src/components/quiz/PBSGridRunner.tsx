@@ -7,6 +7,9 @@
  * at any time — implicit skip, no advance penalty.
  */
 
+/**
+ * @deprecated Replaced by TraverseRunner and DiscoverRunner.
+ */
 import { useEffect, useState } from "react";
 import { Send } from "lucide-react";
 

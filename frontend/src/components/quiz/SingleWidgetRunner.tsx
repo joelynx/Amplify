@@ -4,6 +4,9 @@
  * non-auto-gradable answer types.
  */
 
+/**
+ * @deprecated Replaced by TraverseRunner and DiscoverRunner.
+ */
 import { useEffect, useState } from "react";
 import { Lightbulb, Send, SkipForward } from "lucide-react";
 

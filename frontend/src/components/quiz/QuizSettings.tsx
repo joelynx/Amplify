@@ -9,6 +9,10 @@
  * that don't apply when chosen; the rest are user-driven.
  */
 
+/**
+ * @deprecated Replaced by the new Traverse and Discover setup in pages/Quiz.tsx.
+ * Kept for reference.
+ */
 import { useEffect, useMemo, useState } from "react";
 
 import { Button } from "../ui/Button";

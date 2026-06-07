@@ -41,7 +41,7 @@ from app.core.difficulty import (
     set_enabled as set_smart_difficulty_enabled,
 )
 from app.core.filters import FilterError, assemble_where
-from app.core.models import Subject
+from app.core.models import Subject, Question
 from app.core.selection import pick
 from app.core.similarity import find_similar
 from app.core.stats import (
@@ -57,7 +57,7 @@ from app.core.trends import detect_trends
 from app.interactive import pbs as pbs_runner
 from app.interactive import runner as nonpbs_runner
 from app.interactive import session_manager
-from app.interactive.models import QuizConfig, QuizSession
+from app.interactive.models import QuizConfig, QuizSession, TraverseSession
 from app.interactive.scoring import build_gradient
 from app.persistence.ingest.seed import ingest as run_ingest
 from app.persistence.ingest.seed_tags import run as run_seed_tags
@@ -482,6 +482,93 @@ class Api:
 
     def get_quiz_attempt(self, attempt_id: str) -> dict[str, Any] | None:
         return quizzes_repo.get_attempt(self._conn, attempt_id)
+
+    # ---- Traverse & Discover Quiz Modes ---------------------------------
+
+    def quiz_traverse_start(self, filters: dict[str, Any]) -> dict[str, Any]:
+        s = _resolve_subject(self._conn, filters.get("subject"))
+        pool_ids = questions_repo.get_candidate_pool_ids(
+            self._conn, filters, 200, subject=s
+        )
+        if not pool_ids:
+            return {"success": False, "error": "No questions match your filters"}
+        
+        import random
+        from datetime import datetime, timezone
+        import uuid
+        
+        first_id = random.choice(pool_ids)
+        quiz_id = str(uuid.uuid4())
+        session = TraverseSession(
+            quiz_id=quiz_id,
+            pool_ids=pool_ids,
+            seen_ids={first_id},
+            current_question_id=first_id,
+            started_at=datetime.now(timezone.utc),
+        )
+        session_manager.register(session)
+        
+        q = questions_repo.get_by_id(self._conn, first_id)
+        return {
+            "success": True,
+            "quiz_id": quiz_id,
+            "question": _question_full_dict(q),
+            "pool_size": len(pool_ids),
+        }
+
+    def quiz_traverse_next(self, quiz_id: str, current_question_id: int, diversity: float) -> dict[str, Any]:
+        session = session_manager.get(quiz_id)
+        if not isinstance(session, TraverseSession):
+            return {"success": False, "error": "Session not found or invalid type"}
+        
+        unseen = [qid for qid in session.pool_ids if qid not in session.seen_ids]
+        if not unseen:
+            return {"success": True, "question": None, "remaining": 0}
+            
+        import random
+        import math
+        
+        def pick_next() -> int:
+            if diversity <= 0.05:
+                return random.choice(unseen)
+                
+            hits = find_similar(self._conn, current_question_id, k=len(session.pool_ids))
+            
+            unseen_hits = []
+            for hit in hits:
+                if hit.question_id in unseen:
+                    unseen_hits.append(hit.question_id)
+            
+            if not unseen_hits:
+                return random.choice(unseen)
+                
+            idx = math.floor((1.0 - diversity) * len(unseen_hits))
+            if idx >= len(unseen_hits):
+                idx = len(unseen_hits) - 1
+            if idx < 0:
+                idx = 0
+                
+            return unseen_hits[idx]
+            
+        next_id = pick_next()
+        session.seen_ids.add(next_id)
+        session.current_question_id = next_id
+        
+        q = questions_repo.get_by_id(self._conn, next_id)
+        return {
+            "success": True,
+            "question": _question_full_dict(q),
+            "remaining": len(unseen) - 1,
+        }
+
+    def quiz_discover(self, filters: dict[str, Any], n: int) -> dict[str, Any]:
+        s = _resolve_subject(self._conn, filters.get("subject"))
+        sel = pick(self._conn, filters, n, subject=s, strategy="diverse")
+        return {
+            "success": True,
+            "questions": [_question_full_dict(q) for q in sel.questions],
+            "diversity_score": sel.diversity_score,
+        }
 
     # ---- Step 16: Browser (§5.7 / §8.6) ---------------------------------
 
@@ -1275,3 +1362,23 @@ class Api:
                 subprocess.Popen(["xdg-open", str(p)])
         except Exception as e:
             _log.warning("open_file failed for %s: %s", p, e)
+
+
+def _question_full_dict(q: Question) -> dict[str, Any]:
+    from dataclasses import asdict
+    d = asdict(q)
+    return {
+        "question_id": d["question_id"],
+        "topic": d["topic"],
+        "branch": d["branch"],
+        "subtopic": d["subtopic"],
+        "latexcode": d["latexcode"],
+        "type": d["type"],
+        "hints": d["hints"],
+        "answer": d["answer"],
+        "solution": d["solution"],
+        "instructions": d["instructions"],
+        "source": d["source"],
+        "difficulty_rating": d["difficulty_rating"],
+        "tags": d["tags"],
+    }

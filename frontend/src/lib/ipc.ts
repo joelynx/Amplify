@@ -141,6 +141,44 @@ export interface QuizSlot {
   available_score: number;
 }
 
+export interface QuizQuestionFull {
+  question_id: number;
+  topic: string;
+  branch: string;
+  subtopic: string;
+  latexcode: string;
+  type: string | null;
+  hints: string | null;
+  answer: string | null;
+  solution: string | null;
+  instructions: string | null;
+  source: string | null;
+  difficulty_rating: number | null;
+  tags: string[];
+}
+
+export interface TraverseStartResult {
+  success: boolean;
+  error?: string;
+  quiz_id?: string;
+  question?: QuizQuestionFull;
+  pool_size?: number;
+}
+
+export interface TraverseNextResult {
+  success: boolean;
+  error?: string;
+  question?: QuizQuestionFull | null;
+  remaining?: number;
+}
+
+export interface DiscoverResult {
+  success: boolean;
+  error?: string;
+  questions?: QuizQuestionFull[];
+  diversity_score?: number | null;
+}
+
 export interface StartQuizResult {
   success: boolean;
   error?: string;
@@ -298,6 +336,9 @@ interface PyWebViewApi {
   quiz_finish: (quiz_id: string) => Promise<{ attempt_id: string; summary: QuizFinishSummary }>;
   list_quiz_attempts: (subject?: string | null, date_range?: DateRange | null) => Promise<QuizAttemptSummary[]>;
   get_quiz_attempt: (attempt_id: string) => Promise<QuizAttemptDetail | null>;
+  quiz_traverse_start: (filters: Filters) => Promise<TraverseStartResult>;
+  quiz_traverse_next: (quiz_id: string, current_question_id: number, diversity: number) => Promise<TraverseNextResult>;
+  quiz_discover: (filters: Filters, n: number) => Promise<DiscoverResult>;
   get_topics: (subject?: string | null, in_syllabus_only?: boolean) => Promise<string[]>;
   get_branches: (subject: string | null, topic: string, in_syllabus_only?: boolean) => Promise<string[]>;
   get_subtopics: (
@@ -658,6 +699,18 @@ export const ipc = {
   async get_quiz_attempt(attempt_id: string): Promise<QuizAttemptDetail | null> {
     const api = await bridge();
     return api.get_quiz_attempt(attempt_id);
+  },
+  async quiz_traverse_start(filters: Filters): Promise<TraverseStartResult> {
+    const api = await bridge();
+    return api.quiz_traverse_start(filters);
+  },
+  async quiz_traverse_next(quiz_id: string, current_question_id: number, diversity: number): Promise<TraverseNextResult> {
+    const api = await bridge();
+    return api.quiz_traverse_next(quiz_id, current_question_id, diversity);
+  },
+  async quiz_discover(filters: Filters, n: number): Promise<DiscoverResult> {
+    const api = await bridge();
+    return api.quiz_discover(filters, n);
   },
   async get_topics(subject: string | null = null, in_syllabus_only = true): Promise<string[]> {
     const api = await bridge();

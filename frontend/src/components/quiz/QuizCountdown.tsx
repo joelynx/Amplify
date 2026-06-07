@@ -1,3 +1,6 @@
+/**
+ * @deprecated Replaced by ElapsedTime in the new Quiz Traverse/Discover setup.
+ */
 import { useEffect, useState } from "react";
 
 import { cn } from "../../lib/cn";

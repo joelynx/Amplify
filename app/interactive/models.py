@@ -87,3 +87,11 @@ class QuizSession:
     wrong_counts: dict[int, int] = field(default_factory=dict)        # question_id → attempts so far
     base_scores: dict[int, float] = field(default_factory=dict)       # question_id → starting points
     finished: bool = False
+
+@dataclass(slots=True)
+class TraverseSession:
+    quiz_id: str
+    pool_ids: list[int]
+    seen_ids: set[int]
+    current_question_id: int
+    started_at: datetime
