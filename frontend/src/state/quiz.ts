@@ -7,6 +7,11 @@ export interface QuizState {
   diversity: number;
   nQuestions: number;
   
+  // Seed state
+  useSeed: boolean;
+  seedId: number | null;
+  seedDiversity: number;
+  
   // Filter state is managed by useGenerateStore now
   
   // Active quiz state
@@ -27,6 +32,10 @@ export interface QuizState {
   setDiversity: (diversity: number) => void;
   setNQuestions: (n: number) => void;
   
+  setUseSeed: (v: boolean) => void;
+  setSeedId: (id: number | null) => void;
+  setSeedDiversity: (div: number) => void;
+  
   setIsStarted: (started: boolean) => void;
   setQuestions: (questions: QuizQuestionFull[]) => void;
   setCurrentIndex: (index: number) => void;
@@ -46,6 +55,10 @@ export const useQuizStore = create<QuizState>((set) => ({
   diversity: 0.5,
   nQuestions: 10,
   
+  useSeed: false,
+  seedId: null,
+  seedDiversity: 0.5,
+  
   isStarted: false,
   questions: [],
   currentIndex: 0,
@@ -60,8 +73,11 @@ export const useQuizStore = create<QuizState>((set) => ({
   setMode: (mode) => set({ mode }),
   setDiversity: (diversity) => set({ diversity }),
   setNQuestions: (nQuestions) => set({ nQuestions }),
-
-    
+  
+  setUseSeed: (useSeed) => set({ useSeed }),
+  setSeedId: (seedId) => set({ seedId }),
+  setSeedDiversity: (seedDiversity) => set({ seedDiversity }),
+  
   setIsStarted: (isStarted) => set({ isStarted }),
   setQuestions: (questions) => set({ questions }),
   setCurrentIndex: (currentIndex) => set({ currentIndex }),

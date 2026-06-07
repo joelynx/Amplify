@@ -485,7 +485,23 @@ class Api:
 
     # ---- Traverse & Discover Quiz Modes ---------------------------------
 
-    def quiz_traverse_start(self, filters: dict[str, Any]) -> dict[str, Any]:
+    def quiz_traverse_check_seed(self, question_id: int, filters: dict[str, Any]) -> dict[str, Any]:
+        s = _resolve_subject(self._conn, filters.get("subject"))
+        check_filters = {**filters, "reuse_questions": True}
+        payload = s.to_payload() if s else None
+        
+        from app.core.filters import assemble_where
+        where, params = assemble_where(check_filters, payload)
+        
+        sql = f"SELECT times_used FROM questions WHERE question_id = ? AND {where}"
+        row = self._conn.execute(sql, [question_id, *params]).fetchone()
+        
+        if row is None:
+            return {"valid": False, "is_used": False, "reason": "Question does not exist or does not match filters."}
+            
+        return {"valid": True, "is_used": row["times_used"] > 0}
+
+    def quiz_traverse_start(self, filters: dict[str, Any], seed_id: int | None = None, seed_diversity: float = 0.5) -> dict[str, Any]:
         s = _resolve_subject(self._conn, filters.get("subject"))
         pool_ids = questions_repo.get_candidate_pool_ids(
             self._conn, filters, 200, subject=s
@@ -496,13 +512,43 @@ class Api:
         import random
         from datetime import datetime, timezone
         import uuid
+        import math
+        from app.interactive.similarity import find_similar
         
-        first_id = random.choice(pool_ids)
+        seen_ids = set()
+        first_id = None
+        
+        if seed_id is not None:
+            seen_ids.add(seed_id)
+            if seed_id in pool_ids:
+                first_id = seed_id
+            else:
+                unseen = [qid for qid in pool_ids if qid not in seen_ids]
+                if not unseen:
+                    return {"success": False, "error": "No unseen questions match your filters"}
+                
+                if seed_diversity <= 0.05:
+                    first_id = random.choice(unseen)
+                else:
+                    hits = find_similar(self._conn, seed_id, k=len(pool_ids))
+                    unseen_hits = [hit.question_id for hit in hits if hit.question_id in unseen]
+                    
+                    if not unseen_hits:
+                        first_id = random.choice(unseen)
+                    else:
+                        idx = math.floor((1.0 - seed_diversity) * len(unseen_hits))
+                        idx = max(0, min(idx, len(unseen_hits) - 1))
+                        first_id = unseen_hits[idx]
+        
+        if first_id is None:
+            first_id = random.choice(pool_ids)
+            seen_ids.add(first_id)
+            
         quiz_id = str(uuid.uuid4())
         session = TraverseSession(
             quiz_id=quiz_id,
             pool_ids=pool_ids,
-            seen_ids={first_id},
+            seen_ids=seen_ids,
             current_question_id=first_id,
             started_at=datetime.now(timezone.utc),
         )

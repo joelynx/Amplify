@@ -336,7 +336,8 @@ interface PyWebViewApi {
   quiz_finish: (quiz_id: string) => Promise<{ attempt_id: string; summary: QuizFinishSummary }>;
   list_quiz_attempts: (subject?: string | null, date_range?: DateRange | null) => Promise<QuizAttemptSummary[]>;
   get_quiz_attempt: (attempt_id: string) => Promise<QuizAttemptDetail | null>;
-  quiz_traverse_start: (filters: Filters) => Promise<TraverseStartResult>;
+  quiz_traverse_check_seed: (question_id: number, filters: Filters) => Promise<{valid: boolean; is_used: boolean; reason?: string}>;
+  quiz_traverse_start: (filters: Filters, seed_id?: number | null, seed_diversity?: number) => Promise<TraverseStartResult>;
   quiz_traverse_next: (quiz_id: string, current_question_id: number, diversity: number) => Promise<TraverseNextResult>;
   quiz_discover: (filters: Filters, n: number) => Promise<DiscoverResult>;
   get_topics: (subject?: string | null, in_syllabus_only?: boolean) => Promise<string[]>;
@@ -700,9 +701,13 @@ export const ipc = {
     const api = await bridge();
     return api.get_quiz_attempt(attempt_id);
   },
-  async quiz_traverse_start(filters: Filters): Promise<TraverseStartResult> {
+  async quiz_traverse_check_seed(question_id: number, filters: Filters): Promise<{valid: boolean; is_used: boolean; reason?: string}> {
     const api = await bridge();
-    return api.quiz_traverse_start(filters);
+    return api.quiz_traverse_check_seed(question_id, filters);
+  },
+  async quiz_traverse_start(filters: Filters, seed_id?: number | null, seed_diversity?: number): Promise<TraverseStartResult> {
+    const api = await bridge();
+    return api.quiz_traverse_start(filters, seed_id, seed_diversity);
   },
   async quiz_traverse_next(quiz_id: string, current_question_id: number, diversity: number): Promise<TraverseNextResult> {
     const api = await bridge();

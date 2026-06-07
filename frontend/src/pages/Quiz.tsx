@@ -12,7 +12,7 @@ import { TraverseRunner } from "../components/quiz/TraverseRunner";
 import { DiscoverRunner } from "../components/quiz/DiscoverRunner";
 
 import { ipc, type ConceptTree } from "../lib/ipc";
-import { Map, Zap } from "lucide-react";
+import { Map, Zap, Loader2 } from "lucide-react";
 
 export default function QuizPage() {
   const {
@@ -20,6 +20,11 @@ export default function QuizPage() {
     setMode,
     nQuestions,
     setNQuestions,
+    useSeed,
+    setUseSeed,
+    setSeedId,
+    seedDiversity,
+    setSeedDiversity,
     isStarted,
     setIsStarted,
     resetQuizState
@@ -33,6 +38,11 @@ export default function QuizPage() {
   const [tags, setTags] = useState<string[]>([]);
   const [sources, setSources] = useState<string[]>([]);
   const [types, setTypes] = useState<string[]>([]);
+
+  const [seedInput, setSeedInput] = useState<string>("");
+  const debouncedSeedInput = useDebounced(seedInput, 300);
+  const [seedValidating, setSeedValidating] = useState(false);
+  const [seedValidation, setSeedValidation] = useState<{valid: boolean; is_used: boolean; reason?: string} | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -67,6 +77,33 @@ export default function QuizPage() {
     });
     return () => { cancelled = true; };
   }, [debouncedFilters]);
+
+  useEffect(() => {
+    if (!useSeed || !debouncedSeedInput.trim()) {
+      setSeedValidation(null);
+      setSeedId(null);
+      return;
+    }
+    const id = parseInt(debouncedSeedInput.trim());
+    if (isNaN(id)) {
+      setSeedValidation({valid: false, is_used: false, reason: "Invalid ID format"});
+      setSeedId(null);
+      return;
+    }
+    setSeedValidating(true);
+    let cancelled = false;
+    ipc.quiz_traverse_check_seed(id, debouncedFilters).then((res) => {
+      if (cancelled) return;
+      setSeedValidation(res);
+      if (res.valid) {
+        setSeedId(id);
+      } else {
+        setSeedId(null);
+      }
+      setSeedValidating(false);
+    });
+    return () => { cancelled = true; };
+  }, [useSeed, debouncedSeedInput, debouncedFilters, setSeedId]);
 
 
   if (isStarted) {
@@ -212,12 +249,78 @@ export default function QuizPage() {
               />
             </div>
           )}
+
+          {mode === "traverse" && (
+            <div className="pt-4 border-t border-border space-y-4">
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="useSeed"
+                  checked={useSeed}
+                  onChange={(e) => setUseSeed(e.target.checked)}
+                  className="rounded border-border text-primary focus:ring-primary h-4 w-4"
+                />
+                <label htmlFor="useSeed" className="text-sm font-medium text-text">Seed Question?</label>
+              </div>
+              
+              {useSeed && (
+                <div className="pl-6 space-y-4">
+                  <div>
+                    <label htmlFor="seedIdInput" className="block text-sm text-text mb-1">Question ID</label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        id="seedIdInput"
+                        type="text"
+                        value={seedInput}
+                        onChange={(e) => setSeedInput(e.target.value)}
+                        placeholder="e.g. 1234"
+                        className="w-32 rounded-md border border-border bg-background px-3 py-1.5 text-sm outline-none focus:border-primary"
+                      />
+                      {seedValidating && <Loader2 className="w-4 h-4 animate-spin text-muted" />}
+                      {!seedValidating && seedValidation && (
+                        <span className={`text-sm ${seedValidation.valid ? "text-success" : "text-error"}`}>
+                          {seedValidation.valid ? "Valid" : seedValidation.reason}
+                        </span>
+                      )}
+                    </div>
+                    {seedValidation?.valid && seedValidation.is_used && !draft.reuseQuestions && (
+                      <p className="text-xs text-warning mt-1">
+                        Question is already used. It will be used as a seed to find the next question.
+                      </p>
+                    )}
+                  </div>
+                  
+                  <div>
+                    <div className="flex justify-between items-center mb-1 max-w-xs">
+                      <label htmlFor="seedDiversity" className="text-sm text-text">Seed Diversity</label>
+                      <span className="text-xs text-muted">{(seedDiversity * 100).toFixed(0)}%</span>
+                    </div>
+                    <div className="flex items-center gap-3 max-w-xs">
+                      <span className="text-xs text-muted">Random</span>
+                      <input
+                        id="seedDiversity"
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        value={seedDiversity}
+                        onChange={(e) => setSeedDiversity(parseFloat(e.target.value))}
+                        className="flex-1 accent-primary"
+                      />
+                      <span className="text-xs text-muted">Similar</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="flex justify-end pt-4">
           <button
             onClick={() => setIsStarted(true)}
-            className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors"
+            disabled={useSeed && (!seedValidation?.valid || seedValidating)}
+            className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Start {mode === "traverse" ? "Traverse" : "Discover"} Session
           </button>

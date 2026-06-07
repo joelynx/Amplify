@@ -19,6 +19,9 @@ export function TraverseRunner() {
     questionStartTime,
     setQuestionStartTime,
     resetToggles,
+    useSeed,
+    seedId,
+    seedDiversity,
   } = useQuizStore();
 
   const draft = useGenerateStore();
@@ -37,7 +40,11 @@ export function TraverseRunner() {
       try {
         setLoading(true);
         const filters = draftToFilters(draft);
-        const res = await ipc.quiz_traverse_start(filters);
+        const res = await ipc.quiz_traverse_start(
+          filters,
+          useSeed ? seedId : null,
+          useSeed ? seedDiversity : undefined
+        );
         
         if (!active) return;
         
