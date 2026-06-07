@@ -455,6 +455,22 @@ def mass_action(
     raise ValueError(f"unknown mass action: {action!r}")
 
 
+def increment_interactive_times_used(conn: sqlite3.Connection, question_ids: list[int]) -> None:
+    if not question_ids:
+        return
+    placeholders = ",".join("?" * len(question_ids))
+    try:
+        conn.execute(
+            f"UPDATE questions SET interactive_times_used = interactive_times_used + 1 "
+            f"WHERE question_id IN ({placeholders})",
+            question_ids,
+        )
+        conn.commit()
+    except Exception:
+        conn.rollback()
+        raise
+
+
 def mark_used(conn: sqlite3.Connection, question_ids: list[int]) -> None:
     """Bump `times_used` and stamp `date_last_accessed` for the listed ids.
 

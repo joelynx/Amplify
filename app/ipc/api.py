@@ -369,6 +369,15 @@ class Api:
             template_name=template,
             question_ids=[q.question_id for q in selection.questions],
         )
+        
+        quizzes_repo.insert_partial_attempt(
+            self._conn,
+            quiz_id=quiz_id,
+            date_started=started_at.isoformat(timespec="seconds").replace("+00:00", "Z")
+        )
+        
+        visible_ids = [q.question_id for q in visible_slots if q is not None]
+        questions_repo.increment_interactive_times_used(self._conn, visible_ids)
 
         if mode == "pbs":
             initial = pbs_runner.initial_widgets(session)
@@ -396,10 +405,14 @@ class Api:
         if session is None:
             return None
         if session.mode == "pbs":
-            return pbs_runner.take_widget(session, slot_index)
+            result = pbs_runner.take_widget(session, slot_index)
+            if result and "question" in result and result["question"]:
+                questions_repo.increment_interactive_times_used(self._conn, [result["question"]["question_id"]])
+            return result
         q = nonpbs_runner.take_widget(session, slot_index)
         if q is None:
             return None
+        questions_repo.increment_interactive_times_used(self._conn, [q.question_id])
         return {
             "slot_index": 0,
             "question": nonpbs_runner._question_to_dict(q),
@@ -453,10 +466,9 @@ class Api:
         if session is None:
             return {"error": "quiz session not found"}
         total = sum(a.score for a in session.answers)
-        attempt_id = quizzes_repo.insert_attempt(
+        attempt_id = quizzes_repo.update_attempt_finish(
             self._conn,
             quiz_id=quiz_id,
-            date_started=session.started_at.isoformat(timespec="seconds").replace("+00:00", "Z"),
             answers=session.answers,
             total_score=total,
         )
@@ -545,6 +557,24 @@ class Api:
             seen_ids.add(first_id)
             
         quiz_id = str(uuid.uuid4())
+        
+        config = QuizConfig(template="TRAVERSE")
+        quizzes_repo.insert_quiz(
+            self._conn,
+            quiz_id=quiz_id,
+            subject=(s.name if s else None),
+            filters=filters,
+            config=config,
+            template_name="TRAVERSE",
+            question_ids=pool_ids,
+        )
+        quizzes_repo.insert_partial_attempt(
+            self._conn,
+            quiz_id=quiz_id,
+            date_started=datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+        )
+        questions_repo.increment_interactive_times_used(self._conn, [first_id])
+        
         session = TraverseSession(
             quiz_id=quiz_id,
             pool_ids=pool_ids,
@@ -600,16 +630,39 @@ class Api:
         session.seen_ids.add(next_id)
         session.current_question_id = next_id
         
+        questions_repo.increment_interactive_times_used(self._conn, [next_id])
+        
         q = questions_repo.get_by_id(self._conn, next_id)
         return {
             "success": True,
             "question": _question_full_dict(q),
-            "remaining": len(unseen) - 1,
+            "remaining": len(session.pool_ids) - len(session.seen_ids),
         }
 
     def quiz_discover(self, filters: dict[str, Any], n: int) -> dict[str, Any]:
         s = _resolve_subject(self._conn, filters.get("subject"))
         sel = pick(self._conn, filters, n, subject=s, strategy="diverse")
+        
+        if sel.questions:
+            from datetime import UTC, datetime
+            quiz_id = str(uuid.uuid4())
+            config = QuizConfig(template="DISCOVER", n_questions=len(sel.questions))
+            quizzes_repo.insert_quiz(
+                self._conn,
+                quiz_id=quiz_id,
+                subject=(s.name if s else None),
+                filters=filters,
+                config=config,
+                template_name="DISCOVER",
+                question_ids=[q.question_id for q in sel.questions],
+            )
+            quizzes_repo.insert_partial_attempt(
+                self._conn,
+                quiz_id=quiz_id,
+                date_started=datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
+            )
+            questions_repo.increment_interactive_times_used(self._conn, [q.question_id for q in sel.questions])
+
         return {
             "success": True,
             "questions": [_question_full_dict(q) for q in sel.questions],
@@ -1327,15 +1380,17 @@ class Api:
         self,
         subject: str | None = None,
         date_range: dict[str, str | None] | None = None,
+        mode: str = "generate",
     ) -> dict[str, Any]:
         s = _resolve_subject(self._conn, subject)
         dr = (
             (date_range or {}).get("from") or None,
             (date_range or {}).get("to") or None,
         )
-        bundle = compute_stats(self._conn, s, dr)
+        bundle = compute_stats(self._conn, s, dr, mode=mode)
         return {
-            "psets_generated": bundle.psets_generated,
+            "sessions_completed": bundle.sessions_completed,
+            "sessions_partial": bundle.sessions_partial,
             "total_questions_seen": bundle.total_questions_seen,
             "unique_questions_seen": bundle.unique_questions_seen,
             "fraction_questions_seen": bundle.fraction_questions_seen,
@@ -1347,51 +1402,56 @@ class Api:
         }
 
     def get_subject_distribution(
-        self, date_range: dict[str, str | None] | None = None
+        self, date_range: dict[str, str | None] | None = None, mode: str = "generate"
     ) -> list[dict[str, Any]]:
         dr = ((date_range or {}).get("from") or None, (date_range or {}).get("to") or None)
-        return subject_distribution(self._conn, dr)
+        return subject_distribution(self._conn, dr, mode=mode)
 
     def get_topic_distribution(
         self,
         subject: str | None = None,
         date_range: dict[str, str | None] | None = None,
+        mode: str = "generate",
     ) -> list[dict[str, Any]]:
         s = _resolve_subject(self._conn, subject)
         dr = ((date_range or {}).get("from") or None, (date_range or {}).get("to") or None)
-        return topic_distribution(self._conn, s, dr)
+        return topic_distribution(self._conn, s, dr, mode=mode)
 
     def get_source_attribution(
         self,
         subject: str | None = None,
         date_range: dict[str, str | None] | None = None,
+        mode: str = "generate",
     ) -> list[dict[str, Any]]:
         """Step 20: per-source breakdown of practiced questions (pset-scoped)."""
         s = _resolve_subject(self._conn, subject)
         dr = ((date_range or {}).get("from") or None, (date_range or {}).get("to") or None)
-        return source_attribution(self._conn, s, dr)
+        return source_attribution(self._conn, s, dr, mode=mode)
 
-    def get_trends(self, subject: str | None = None) -> list[dict[str, Any]]:
+    def get_trends(self, subject: str | None = None, mode: str = "generate") -> list[dict[str, Any]]:
         """Step 21: pattern detectors that surface actionable insights."""
+        # Trends could theoretically be mode-dependent but detect_trends is hardcoded for PSets currently.
+        # We can just run it without mode, or we would need to update `detect_trends` as well.
+        # For now, `detect_trends` doesn't take a mode parameter, so we just ignore mode.
         s = _resolve_subject(self._conn, subject)
         return [asdict(i) for i in detect_trends(self._conn, s)]
 
     # ---- Step 14: stats v2 (§5.6 / §9) -----------------------------------
 
     def get_question_multiplicity_dist(
-        self, subject: str | None = None
+        self, subject: str | None = None, mode: str = "generate"
     ) -> dict[int, int]:
         s = _resolve_subject(self._conn, subject)
-        return question_multiplicity_dist(self._conn, s)
+        return question_multiplicity_dist(self._conn, s, mode=mode)
 
-    def get_calendar_heatmap(self, year: int | None = None) -> dict[str, int]:
-        return calendar_heatmap(self._conn, year)
+    def get_calendar_heatmap(self, year: int | None = None, mode: str = "generate") -> dict[str, int]:
+        return calendar_heatmap(self._conn, year, mode=mode)
 
     def get_activity_line(
-        self, date_range: dict[str, str | None] | None = None
+        self, date_range: dict[str, str | None] | None = None, mode: str = "generate"
     ) -> list[dict[str, Any]]:
         dr = ((date_range or {}).get("from") or None, (date_range or {}).get("to") or None)
-        return activity_line(self._conn, dr)
+        return activity_line(self._conn, dr, mode=mode)
 
     def open_file(self, path: str) -> None:
         """Open `path` in the OS default application (file viewer)."""

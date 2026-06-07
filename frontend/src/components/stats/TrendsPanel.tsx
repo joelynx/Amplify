@@ -15,21 +15,22 @@ import { ipc, type TrendInsight } from "../../lib/ipc";
 
 interface Props {
   subject: string | null;
+  mode: "generate" | "quiz";
 }
 
-export function TrendsPanel({ subject }: Props) {
+export function TrendsPanel({ subject, mode }: Props) {
   const navigate = useNavigate();
   const [insights, setInsights] = useState<TrendInsight[]>([]);
 
   useEffect(() => {
     let cancelled = false;
-    ipc.get_trends(subject).then((rows) => {
+    ipc.get_trends(subject, mode).then((rows) => {
       if (!cancelled) setInsights(rows);
     });
     return () => {
       cancelled = true;
     };
-  }, [subject]);
+  }, [subject, mode]);
 
   if (insights.length === 0) return null;
 

@@ -387,20 +387,22 @@ interface PyWebViewApi {
   generate_pdf: (filters: Filters, output_settings: OutputSettings) => Promise<GenerateResult>;
   export_tex: (filters: Filters, output_settings: OutputSettings) => Promise<ExportResult>;
   open_file: (path: string) => Promise<void>;
-  get_stats: (subject?: string | null, date_range?: DateRange | null) => Promise<StatsBundle>;
-  get_subject_distribution: (date_range?: DateRange | null) => Promise<DistributionDatum[]>;
+  get_stats: (subject?: string | null, date_range?: DateRange | null, mode?: "generate" | "quiz") => Promise<StatsBundle>;
+  get_subject_distribution: (date_range?: DateRange | null, mode?: "generate" | "quiz") => Promise<DistributionDatum[]>;
   get_topic_distribution: (
     subject?: string | null,
     date_range?: DateRange | null,
+    mode?: "generate" | "quiz",
   ) => Promise<DistributionDatum[]>;
   get_source_attribution: (
     subject?: string | null,
     date_range?: DateRange | null,
+    mode?: "generate" | "quiz",
   ) => Promise<DistributionDatum[]>;
-  get_trends: (subject?: string | null) => Promise<TrendInsight[]>;
-  get_question_multiplicity_dist: (subject?: string | null) => Promise<Record<number, number>>;
-  get_calendar_heatmap: (year?: number | null) => Promise<Record<string, number>>;
-  get_activity_line: (date_range?: DateRange | null) => Promise<ActivityDatum[]>;
+  get_trends: (subject?: string | null, mode?: "generate" | "quiz") => Promise<TrendInsight[]>;
+  get_question_multiplicity_dist: (subject?: string | null, mode?: "generate" | "quiz") => Promise<Record<number, number>>;
+  get_calendar_heatmap: (year?: number | null, mode?: "generate" | "quiz") => Promise<Record<string, number>>;
+  get_activity_line: (date_range?: DateRange | null, mode?: "generate" | "quiz") => Promise<ActivityDatum[]>;
   list_psets: (subject?: string | null, date_range?: DateRange | null) => Promise<PSetSummary[]>;
   delete_pset: (pset_id: string) => Promise<void>;
   open_pset_file: (pset_id: string) => Promise<OpenPsetResult>;
@@ -446,7 +448,8 @@ export interface DateRange {
 }
 
 export interface StatsBundle {
-  psets_generated: number;
+  sessions_completed: number;
+  sessions_partial: number;
   total_questions_seen: number;
   unique_questions_seen: number;
   fraction_questions_seen: number;
@@ -897,45 +900,61 @@ export const ipc = {
   async get_stats(
     subject: string | null = null,
     date_range: DateRange | null = null,
+    mode?: "generate" | "quiz",
   ): Promise<StatsBundle> {
     const api = await bridge();
-    return api.get_stats(subject, date_range);
+    return api.get_stats(subject, date_range, mode);
   },
-  async get_subject_distribution(date_range: DateRange | null = null): Promise<DistributionDatum[]> {
+  async get_subject_distribution(
+    date_range: DateRange | null = null,
+    mode?: "generate" | "quiz",
+  ): Promise<DistributionDatum[]> {
     const api = await bridge();
-    return api.get_subject_distribution(date_range);
+    return api.get_subject_distribution(date_range, mode);
   },
   async get_topic_distribution(
     subject: string | null = null,
     date_range: DateRange | null = null,
+    mode?: "generate" | "quiz",
   ): Promise<DistributionDatum[]> {
     const api = await bridge();
-    return api.get_topic_distribution(subject, date_range);
+    return api.get_topic_distribution(subject, date_range, mode);
   },
   async get_source_attribution(
     subject: string | null = null,
     date_range: DateRange | null = null,
+    mode?: "generate" | "quiz",
   ): Promise<DistributionDatum[]> {
     const api = await bridge();
-    return api.get_source_attribution(subject, date_range);
+    return api.get_source_attribution(subject, date_range, mode);
   },
-  async get_trends(subject: string | null = null): Promise<TrendInsight[]> {
+  async get_trends(
+    subject: string | null = null,
+    mode?: "generate" | "quiz",
+  ): Promise<TrendInsight[]> {
     const api = await bridge();
-    return api.get_trends(subject);
+    return api.get_trends(subject, mode);
   },
   async get_question_multiplicity_dist(
     subject: string | null = null,
+    mode?: "generate" | "quiz",
   ): Promise<Record<number, number>> {
     const api = await bridge();
-    return api.get_question_multiplicity_dist(subject);
+    return api.get_question_multiplicity_dist(subject, mode);
   },
-  async get_calendar_heatmap(year: number | null = null): Promise<Record<string, number>> {
+  async get_calendar_heatmap(
+    year: number | null = null,
+    mode?: "generate" | "quiz",
+  ): Promise<Record<string, number>> {
     const api = await bridge();
-    return api.get_calendar_heatmap(year);
+    return api.get_calendar_heatmap(year, mode);
   },
-  async get_activity_line(date_range: DateRange | null = null): Promise<ActivityDatum[]> {
+  async get_activity_line(
+    date_range: DateRange | null = null,
+    mode?: "generate" | "quiz",
+  ): Promise<ActivityDatum[]> {
     const api = await bridge();
-    return api.get_activity_line(date_range);
+    return api.get_activity_line(date_range, mode);
   },
   async list_psets(
     subject: string | null = null,

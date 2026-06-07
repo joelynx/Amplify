@@ -97,15 +97,35 @@ def insert_quiz(
         raise
 
 
-def insert_attempt(
+def insert_partial_attempt(
     conn: sqlite3.Connection,
     *,
     quiz_id: str,
     date_started: str,
+) -> str:
+    attempt_id = new_attempt_id(quiz_id)
+    try:
+        conn.execute(
+            """
+            INSERT INTO quiz_attempts (attempt_id, quiz_id, date_started, date_finished, total_score, summary)
+            VALUES (?, ?, ?, NULL, 0, '{}')
+            """,
+            (attempt_id, quiz_id, date_started),
+        )
+        conn.commit()
+    except Exception:
+        conn.rollback()
+        raise
+    return attempt_id
+
+
+def update_attempt_finish(
+    conn: sqlite3.Connection,
+    *,
+    quiz_id: str,
     answers: list[AnswerRecord],
     total_score: float,
 ) -> str:
-    attempt_id = new_attempt_id(quiz_id)
     summary = {
         "answers": [
             {
@@ -127,18 +147,14 @@ def insert_attempt(
     try:
         conn.execute(
             """
-            INSERT INTO quiz_attempts (attempt_id, quiz_id, date_started, date_finished, total_score, summary)
-            VALUES (?, ?, ?, ?, ?, ?)
+            UPDATE quiz_attempts 
+            SET date_finished = ?, total_score = ?, summary = ?
+            WHERE quiz_id = ?
             """,
-            (
-                attempt_id,
-                quiz_id,
-                date_started,
-                _iso_now(),
-                float(total_score),
-                json.dumps(summary),
-            ),
+            (_iso_now(), float(total_score), json.dumps(summary), quiz_id),
         )
+        row = conn.execute("SELECT attempt_id FROM quiz_attempts WHERE quiz_id = ?", (quiz_id,)).fetchone()
+        attempt_id = row[0] if row else ""
         conn.commit()
     except Exception:
         conn.rollback()

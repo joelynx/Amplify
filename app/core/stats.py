@@ -25,7 +25,8 @@ DateRange = tuple[str | None, str | None]  # (from_iso, to_iso); inclusive bound
 
 @dataclass(slots=True)
 class StatsBundle:
-    psets_generated: int
+    sessions_completed: int
+    sessions_partial: int
     total_questions_seen: int
     unique_questions_seen: int
     fraction_questions_seen: float  # percent, 0-100
@@ -72,7 +73,82 @@ def compute_stats(
     conn: sqlite3.Connection,
     subject: Subject | None = None,
     date_range: DateRange = (None, None),
+    mode: str = "generate",
 ) -> StatsBundle:
+    if mode == "quiz":
+        # Quiz mode: count attempts in `quiz_attempts` table
+        pset_where, pset_params = _pset_scope(subject, date_range)
+        # Modify the scope slightly because we're joining `quiz_attempts a` and `quizzes q`
+        # Subject and date filtering apply to quizzes/attempts respectively
+        parts: list[str] = ["a.quiz_id = q.quiz_id"]
+        params: list[Any] = []
+        if subject is not None:
+            parts.append("q.subject = ?")
+            params.append(subject.name)
+        date_from, date_to = date_range
+        if date_from:
+            parts.append("date(a.date_started) >= date(?)")
+            params.append(date_from)
+        if date_to:
+            parts.append("date(a.date_started) <= date(?)")
+            params.append(date_to)
+        quiz_where = " AND ".join(parts) if parts else "1=1"
+
+        completed = int(conn.execute(
+            f"SELECT COUNT(*) FROM quiz_attempts a, quizzes q WHERE {quiz_where} AND a.date_finished IS NOT NULL", params
+        ).fetchone()[0])
+        partial = int(conn.execute(
+            f"SELECT COUNT(*) FROM quiz_attempts a, quizzes q WHERE {quiz_where} AND a.date_finished IS NULL", params
+        ).fetchone()[0])
+        max_q_row = conn.execute(
+            f"SELECT COALESCE(MAX(q.n_questions), 0) FROM quiz_attempts a, quizzes q WHERE {quiz_where}", params
+        ).fetchone()
+        max_questions_in_pset = int(max_q_row[0])
+
+        q_where, q_params = _question_scope(subject)
+        
+        total_seen = int(
+            conn.execute(
+                f"SELECT COALESCE(SUM(interactive_times_used), 0) FROM questions WHERE {q_where}", q_params
+            ).fetchone()[0]
+        )
+        unique_seen = int(
+            conn.execute(
+                f"SELECT COUNT(*) FROM questions WHERE interactive_times_used > 0 AND {q_where}", q_params
+            ).fetchone()[0]
+        )
+        total_in_subject = int(
+            conn.execute(f"SELECT COUNT(*) FROM questions WHERE {q_where}", q_params).fetchone()[0]
+        )
+        max_multiplicity = int(
+            conn.execute(
+                f"SELECT COALESCE(MAX(interactive_times_used), 0) FROM questions WHERE {q_where}", q_params
+            ).fetchone()[0]
+        )
+        avg_diff_row = conn.execute(
+            f"SELECT AVG(difficulty_rating) FROM questions "
+            f"WHERE interactive_times_used > 0 AND difficulty_rating IS NOT NULL AND {q_where}",
+            q_params,
+        ).fetchone()
+        avg_difficulty = float(avg_diff_row[0]) if avg_diff_row and avg_diff_row[0] is not None else None
+
+        fraction = (unique_seen / total_in_subject * 100.0) if total_in_subject > 0 else 0.0
+        avg_mult = (total_seen / unique_seen) if unique_seen > 0 else 0.0
+
+        return StatsBundle(
+            sessions_completed=completed,
+            sessions_partial=partial,
+            total_questions_seen=total_seen,
+            unique_questions_seen=unique_seen,
+            fraction_questions_seen=fraction,
+            max_questions_in_single_pset=max_questions_in_pset,
+            max_question_multiplicity=max_multiplicity,
+            avg_question_multiplicity=avg_mult,
+            avg_difficulty_rating=avg_difficulty,
+            total_questions_in_subject=total_in_subject,
+        )
+
+    # Generate Mode (Default)
     pset_where, pset_params = _pset_scope(subject, date_range)
     q_where, q_params = _question_scope(subject)
 
@@ -113,7 +189,8 @@ def compute_stats(
     avg_mult = (total_seen / unique_seen) if unique_seen > 0 else 0.0
 
     return StatsBundle(
-        psets_generated=psets_generated,
+        sessions_completed=psets_generated,
+        sessions_partial=0,
         total_questions_seen=total_seen,
         unique_questions_seen=unique_seen,
         fraction_questions_seen=fraction,
@@ -128,40 +205,48 @@ def compute_stats(
 def subject_distribution(
     conn: sqlite3.Connection,
     date_range: DateRange = (None, None),
+    mode: str = "generate",
 ) -> list[dict[str, Any]]:
     """Pset count per `psets.subject` (uses '(no subject)' for NULL rows)."""
     parts: list[str] = []
     params: list[Any] = []
     if date_range[0]:
-        parts.append("date(date_created) >= date(?)")
+        date_col = "date_started" if mode == "quiz" else "date_created"
+        parts.append(f"date({date_col}) >= date(?)")
         params.append(date_range[0])
     if date_range[1]:
-        parts.append("date(date_created) <= date(?)")
+        date_col = "date_started" if mode == "quiz" else "date_created"
+        parts.append(f"date({date_col}) <= date(?)")
         params.append(date_range[1])
     where = " AND ".join(parts) if parts else "1=1"
-    rows = conn.execute(
-        f"SELECT COALESCE(subject, '(no subject)') AS s, COUNT(*) AS c "
-        f"FROM psets WHERE {where} GROUP BY s ORDER BY c DESC, s",
-        params,
-    )
+    
+    if mode == "quiz":
+        rows = conn.execute(
+            f"SELECT COALESCE(q.subject, '(no subject)') AS s, COUNT(*) AS c "
+            f"FROM quiz_attempts a JOIN quizzes q ON a.quiz_id = q.quiz_id "
+            f"WHERE {where} GROUP BY s ORDER BY c DESC, s",
+            params,
+        )
+    else:
+        rows = conn.execute(
+            f"SELECT COALESCE(subject, '(no subject)') AS s, COUNT(*) AS c "
+            f"FROM psets WHERE {where} GROUP BY s ORDER BY c DESC, s",
+            params,
+        )
     return [{"label": r[0], "count": int(r[1])} for r in rows]
 
 
 def question_multiplicity_dist(
     conn: sqlite3.Connection,
     subject: Subject | None = None,
+    mode: str = "generate",
 ) -> dict[int, int]:
-    """Spec §5.6 — `{multiplicity: count}` for the histogram.
-
-    For each value of `times_used > 0`, the count of questions at that level.
-    Subject-scoped via the curricular gate (no date filtering — multiplicity is
-    a lifetime concept).
-    """
     q_where, q_params = _question_scope(subject)
+    col = "interactive_times_used" if mode == "quiz" else "times_used"
     rows = conn.execute(
-        f"SELECT times_used, COUNT(*) FROM questions "
-        f"WHERE {q_where} AND times_used > 0 "
-        f"GROUP BY times_used ORDER BY times_used",
+        f"SELECT {col}, COUNT(*) FROM questions "
+        f"WHERE {q_where} AND {col} > 0 "
+        f"GROUP BY {col} ORDER BY {col}",
         q_params,
     )
     return {int(r[0]): int(r[1]) for r in rows}
@@ -170,18 +255,19 @@ def question_multiplicity_dist(
 def calendar_heatmap(
     conn: sqlite3.Connection,
     year: int | None = None,
+    mode: str = "generate",
 ) -> dict[str, int]:
-    """Spec §5.6 — `{date_iso: pset_count}` for the heatmap.
-
-    `year` filters to PSets created in that calendar year. None → all years."""
     parts: list[str] = []
     params: list[Any] = []
+    date_col = "date_started" if mode == "quiz" else "date_created"
     if year is not None:
-        parts.append("strftime('%Y', date_created) = ?")
+        parts.append(f"strftime('%Y', {date_col}) = ?")
         params.append(str(year))
     where = " AND ".join(parts) if parts else "1=1"
+    
+    table = "quiz_attempts" if mode == "quiz" else "psets"
     rows = conn.execute(
-        f"SELECT date(date_created) AS d, COUNT(*) FROM psets "
+        f"SELECT date({date_col}) AS d, COUNT(*) FROM {table} "
         f"WHERE {where} GROUP BY d ORDER BY d",
         params,
     )
@@ -191,28 +277,36 @@ def calendar_heatmap(
 def activity_line(
     conn: sqlite3.Connection,
     date_range: DateRange = (None, None),
+    mode: str = "generate",
 ) -> list[dict[str, Any]]:
-    """Spec §5.6 — `[{date, papers, questions}]` for the line chart.
-
-    Per-day counts of psets created (`papers`) and SUM(n_questions) included
-    in those psets (`questions`). One entry per day with activity; days with
-    zero activity are omitted (callers fill gaps if needed for plotting)."""
     df, dt = date_range
     parts: list[str] = []
     params: list[Any] = []
+    date_col = "a.date_started" if mode == "quiz" else "date_created"
     if df:
-        parts.append("date(date_created) >= date(?)")
+        parts.append(f"date({date_col}) >= date(?)")
         params.append(df)
     if dt:
-        parts.append("date(date_created) <= date(?)")
+        parts.append(f"date({date_col}) <= date(?)")
         params.append(dt)
-    where = " AND ".join(parts) if parts else "1=1"
-    rows = conn.execute(
-        f"SELECT date(date_created) AS d, COUNT(*) AS papers, "
-        f"COALESCE(SUM(n_questions), 0) AS qs "
-        f"FROM psets WHERE {where} GROUP BY d ORDER BY d",
-        params,
-    )
+    
+    if mode == "quiz":
+        parts.append("a.quiz_id = q.quiz_id")
+        where = " AND ".join(parts) if parts else "1=1"
+        rows = conn.execute(
+            f"SELECT date(a.date_started) AS d, COUNT(*) AS papers, "
+            f"COALESCE(SUM(q.n_questions), 0) AS qs "
+            f"FROM quiz_attempts a, quizzes q WHERE {where} GROUP BY d ORDER BY d",
+            params,
+        )
+    else:
+        where = " AND ".join(parts) if parts else "1=1"
+        rows = conn.execute(
+            f"SELECT date(date_created) AS d, COUNT(*) AS papers, "
+            f"COALESCE(SUM(n_questions), 0) AS qs "
+            f"FROM psets WHERE {where} GROUP BY d ORDER BY d",
+            params,
+        )
     return [
         {"date": r[0], "papers": int(r[1]), "questions": int(r[2])}
         for r in rows
@@ -223,40 +317,52 @@ def source_attribution(
     conn: sqlite3.Connection,
     subject: Subject | None = None,
     date_range: DateRange = (None, None),
+    mode: str = "generate",
 ) -> list[dict[str, Any]]:
-    """Per-source counts among questions the user has actually pulled into PSets
-    in the selected date range — answering the braindump's "Source Fraction
-    among attempted questions".
-
-    Scope follows the **pset-side** convention: subject is matched literally on
-    `psets.subject` (not the curricular gate), and the date range applies to
-    `psets.date_created`. Each row in `pset_questions` contributes once — so a
-    question included in two PSets shows up twice, which is the intended
-    "how much of my practice came from this source" reading.
-
-    Returns rows sorted by count descending with NULL/empty sources rolled into
-    '(no source)'. `percent` is a float 0-100.
-    """
-    parts: list[str] = ["pq.pset_id = p.pset_id", "pq.question_id = q.question_id"]
+    parts: list[str] = []
     params: list[Any] = []
-    if subject is not None:
-        parts.append("p.subject = ?")
-        params.append(subject.name)
-    df, dt = date_range
-    if df:
-        parts.append("date(p.date_created) >= date(?)")
-        params.append(df)
-    if dt:
-        parts.append("date(p.date_created) <= date(?)")
-        params.append(dt)
-    where = " AND ".join(parts)
-    rows = conn.execute(
-        f"SELECT COALESCE(NULLIF(q.source, ''), '(no source)') AS s, COUNT(*) AS c "
-        f"FROM pset_questions pq, psets p, questions q "
-        f"WHERE {where} "
-        f"GROUP BY s ORDER BY c DESC, s",
-        params,
-    ).fetchall()
+    
+    if mode == "quiz":
+        parts.extend(["a.quiz_id = q.quiz_id", "q.quiz_id = qq.quiz_id", "qq.question_id = qs.question_id"])
+        if subject is not None:
+            parts.append("q.subject = ?")
+            params.append(subject.name)
+        df, dt = date_range
+        if df:
+            parts.append("date(a.date_started) >= date(?)")
+            params.append(df)
+        if dt:
+            parts.append("date(a.date_started) <= date(?)")
+            params.append(dt)
+        where = " AND ".join(parts)
+        rows = conn.execute(
+            f"SELECT COALESCE(NULLIF(qs.source, ''), '(no source)') AS s, COUNT(*) AS c "
+            f"FROM quiz_attempts a, quizzes q, quiz_questions qq, questions qs "
+            f"WHERE {where} "
+            f"GROUP BY s ORDER BY c DESC, s",
+            params,
+        ).fetchall()
+    else:
+        parts.extend(["pq.pset_id = p.pset_id", "pq.question_id = q.question_id"])
+        if subject is not None:
+            parts.append("p.subject = ?")
+            params.append(subject.name)
+        df, dt = date_range
+        if df:
+            parts.append("date(p.date_created) >= date(?)")
+            params.append(df)
+        if dt:
+            parts.append("date(p.date_created) <= date(?)")
+            params.append(dt)
+        where = " AND ".join(parts)
+        rows = conn.execute(
+            f"SELECT COALESCE(NULLIF(q.source, ''), '(no source)') AS s, COUNT(*) AS c "
+            f"FROM pset_questions pq, psets p, questions q "
+            f"WHERE {where} "
+            f"GROUP BY s ORDER BY c DESC, s",
+            params,
+        ).fetchall()
+        
     total = sum(int(r[1]) for r in rows)
     if total == 0:
         return []
@@ -270,19 +376,15 @@ def topic_distribution(
     conn: sqlite3.Connection,
     subject: Subject | None,
     date_range: DateRange = (None, None),
+    mode: str = "generate",
 ) -> list[dict[str, Any]]:
-    """Per-topic SUM(times_used) within the subject's curricular bundle.
-
-    Date range is intentionally **not** applied here — multiplicity is a
-    lifetime concept (spec §9.1). The Stats v2 line graph (Step 14) is where
-    date scoping shows up for per-day activity.
-    """
     _ = date_range
     q_where, q_params = _question_scope(subject)
+    col = "interactive_times_used" if mode == "quiz" else "times_used"
     rows = conn.execute(
-        f"SELECT topic, SUM(times_used) FROM questions "
-        f"WHERE {q_where} AND times_used > 0 "
-        f"GROUP BY topic ORDER BY SUM(times_used) DESC, topic",
+        f"SELECT topic, SUM({col}) FROM questions "
+        f"WHERE {q_where} AND {col} > 0 "
+        f"GROUP BY topic ORDER BY SUM({col}) DESC, topic",
         q_params,
     )
     return [{"label": r[0], "count": int(r[1])} for r in rows]

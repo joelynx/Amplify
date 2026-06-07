@@ -46,6 +46,7 @@ export default function StatsPage() {
   const [dateRange, setDateRange] = useState<DateRange>(defaultRange);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
+  const [mode, setMode] = useState<"generate" | "quiz">("generate");
   const [subjects, setSubjects] = useState<string[]>([]);
   const [stats, setStats] = useState<StatsBundle | null>(null);
   const [distribution, setDistribution] = useState<DistributionDatum[]>([]);
@@ -66,14 +67,14 @@ export default function StatsPage() {
     setLoading(true);
     try {
       const [s, dist, src, mult, heat, act] = await Promise.all([
-        ipc.get_stats(subject, dateRange),
+        ipc.get_stats(subject, dateRange, mode),
         subject
-          ? ipc.get_topic_distribution(subject, dateRange)
-          : ipc.get_subject_distribution(dateRange),
-        ipc.get_source_attribution(subject, dateRange),
-        ipc.get_question_multiplicity_dist(subject),
-        ipc.get_calendar_heatmap(heatmapYear),
-        ipc.get_activity_line(dateRange),
+          ? ipc.get_topic_distribution(subject, dateRange, mode)
+          : ipc.get_subject_distribution(dateRange, mode),
+        ipc.get_source_attribution(subject, dateRange, mode),
+        ipc.get_question_multiplicity_dist(subject, mode),
+        ipc.get_calendar_heatmap(heatmapYear, mode),
+        ipc.get_activity_line(dateRange, mode),
       ]);
       setStats(s);
       setDistribution(dist);
@@ -84,7 +85,7 @@ export default function StatsPage() {
     } finally {
       setLoading(false);
     }
-  }, [subject, dateRange, heatmapYear]);
+  }, [subject, dateRange, heatmapYear, mode]);
 
   useEffect(() => {
     refresh();
@@ -142,6 +143,20 @@ export default function StatsPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <div className="flex bg-muted rounded-md p-1 mr-2 text-sm font-medium">
+            <button
+              className={`px-3 py-1 rounded-sm transition-colors ${mode === "generate" ? "bg-surface shadow-sm text-foreground" : "text-muted hover:text-foreground"}`}
+              onClick={() => setMode("generate")}
+            >
+              Generate
+            </button>
+            <button
+              className={`px-3 py-1 rounded-sm transition-colors ${mode === "quiz" ? "bg-surface shadow-sm text-foreground" : "text-muted hover:text-foreground"}`}
+              onClick={() => setMode("quiz")}
+            >
+              Quizzes
+            </button>
+          </div>
           <Button
             variant="ghost"
             size="sm"
@@ -161,9 +176,9 @@ export default function StatsPage() {
 
       <main className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-5xl space-y-6 px-6 py-6">
-          <StatsCards stats={stats} />
+          <StatsCards stats={stats} mode={mode} />
 
-          <TrendsPanel subject={subject} />
+          <TrendsPanel subject={subject} mode={mode} />
 
           <Card title={chartTitle}>
             {loading && distribution.length === 0 ? (
@@ -180,7 +195,7 @@ export default function StatsPage() {
               <p className="text-muted">Loading…</p>
             ) : sourceAttribution.length === 0 ? (
               <p className="text-muted">
-                No questions practiced in the selected range yet — generate a PSet to populate this.
+                No questions practiced in the selected range yet — {mode === "generate" ? "generate a PSet" : "take a quiz"} to populate this.
               </p>
             ) : (
               <DistributionPie data={sourceAttribution} />
@@ -239,7 +254,7 @@ export default function StatsPage() {
             />
             {Object.keys(heatmap).length === 0 && (
               <p className="mt-2 text-xs text-muted">
-                No PSets generated in {heatmapMode === "year" ? heatmapYear : monthLabel}.
+                No {mode === "generate" ? "PSets generated" : "quizzes taken"} in {heatmapMode === "year" ? heatmapYear : monthLabel}.
               </p>
             )}
           </Card>
