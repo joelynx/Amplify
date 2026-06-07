@@ -29,11 +29,11 @@ class SimilarityHit:
 
 
 def _decode(blob: bytes | memoryview | None) -> np.ndarray | None:
-    """Decode a BLOB into a 3072-element float32 vector, or None if malformed."""
+    """Decode a BLOB into a float32 vector, or None if malformed."""
     if blob is None:
         return None
     raw = bytes(blob)
-    if len(raw) != _VECTOR_BYTES:
+    if len(raw) % 4 != 0:
         return None
     return np.frombuffer(raw, dtype="<f4")
 
