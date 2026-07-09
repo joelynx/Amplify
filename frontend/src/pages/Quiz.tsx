@@ -1,17 +1,21 @@
 import { useEffect, useState, useMemo } from "react";
 import { useQuizStore } from "../state/quiz";
-import { useGenerateStore, draftToFilters } from "../state/generate";
+import { useGenerateStore, draftToFilters, draftToTemplate, templateSubtopicsToLeaves } from "../state/generate";
 import { useDebounced } from "../lib/debounce";
 
 import { CheckableTree } from "../components/generate/CheckableTree";
 import { TagTray } from "../components/generate/TagTray";
 import { ChipTray } from "../components/generate/ChipTray";
 import { SubjectPicker } from "../components/generate/SubjectPicker";
+import { TemplatePicker } from "../components/generate/TemplatePicker";
+import { NameDialog } from "../components/generate/NameDialog";
+import { TemplateManager } from "../components/generate/TemplateManager";
+import { Button } from "../components/ui/Button";
 
 import { TraverseRunner } from "../components/quiz/TraverseRunner";
 import { DiscoverRunner } from "../components/quiz/DiscoverRunner";
 
-import { ipc, type ConceptTree } from "../lib/ipc";
+import { ipc, type ConceptTree, type TemplatePayload } from "../lib/ipc";
 import { Map, Zap, Loader2 } from "lucide-react";
 
 export default function QuizPage() {
@@ -59,6 +63,61 @@ export default function QuizPage() {
     });
     return () => { cancelled = true; };
   }, [draft.subject, draft.inSyllabusOnly]);
+
+  const [templates, setTemplates] = useState<string[]>([]);
+  const [managerOpen, setManagerOpen] = useState(false);
+  const [saveDialogOpen, setSaveDialogOpen] = useState(false);
+  const [loadedTemplate, setLoadedTemplate] = useState<any>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    ipc.list_templates().then((tmpls) => {
+      if (!cancelled) setTemplates(tmpls);
+    });
+    return () => { cancelled = true; };
+  }, []);
+
+  const refreshTemplates = async () => {
+    const tmpls = await ipc.list_templates();
+    setTemplates(tmpls);
+  };
+
+  const applyPayload = (payload: TemplatePayload) => {
+    draft.setSubject(payload.subject);
+    const leaves = templateSubtopicsToLeaves(payload.subtopic_list, tree);
+    draft.clearLeaves();
+    draft.setLeavesBulk(Array.from(leaves), true);
+    draft.clearTags();
+    for (const t of payload.tag_list.compulsory) draft.addTag(t, "compulsory");
+    for (const t of payload.tag_list.optional) draft.addTag(t, "optional");
+    for (const t of payload.tag_list.excluded) draft.addTag(t, "excluded");
+    draft.setSources(payload.source_list);
+    draft.setTypes(payload.type_list);
+    draft.setNQuestions(payload.n_questions);
+    draft.setReuseQuestions(payload.reuse_questions);
+    draft.setInSyllabusOnly(payload.in_syllabus_only);
+  };
+
+  const handleSelectTemplate = async (name: string | null) => {
+    draft.setTemplate(name);
+    if (!name) {
+      setLoadedTemplate(null);
+      return;
+    }
+    const payload = await ipc.load_template(name);
+    if (!payload) return;
+    setLoadedTemplate(payload);
+    applyPayload(payload);
+  };
+
+  const handleSaveDialogConfirm = async (name: string) => {
+    const payload = draftToTemplate(draft, name);
+    await ipc.save_template(name, payload);
+    setSaveDialogOpen(false);
+    setLoadedTemplate(payload);
+    draft.setTemplate(name);
+    await refreshTemplates();
+  };
 
   const filters = useMemo(() => draftToFilters(draft), [draft]);
   const debouncedFilters = useDebounced(filters, 150);
@@ -169,12 +228,23 @@ export default function QuizPage() {
         <div className="bg-surface rounded-lg border border-border p-5 space-y-5">
           <div className="flex items-center justify-between">
             <h3 className="font-medium text-text">Subject Filters</h3>
-            <div className="w-64">
-              <SubjectPicker
-                subjects={subjects}
-                value={draft.subject}
-                onChange={draft.setSubject}
+            <div className="flex items-center gap-2">
+              <TemplatePicker
+                templates={templates}
+                value={draft.templateName}
+                onChange={handleSelectTemplate}
+                onOpenManager={() => setManagerOpen(true)}
               />
+              <Button variant="secondary" onClick={() => setSaveDialogOpen(true)}>
+                Save template
+              </Button>
+              <div className="w-64 ml-4">
+                <SubjectPicker
+                  subjects={subjects}
+                  value={draft.subject}
+                  onChange={draft.setSubject}
+                />
+              </div>
             </div>
           </div>
           
@@ -326,6 +396,31 @@ export default function QuizPage() {
           </button>
         </div>
       </div>
+
+      <NameDialog
+        open={saveDialogOpen}
+        title="Save template"
+        initialValue={loadedTemplate?.name ?? ""}
+        takenNames={templates.filter((n) => n !== loadedTemplate?.name)}
+        confirmLabel="Save"
+        onCancel={() => setSaveDialogOpen(false)}
+        onConfirm={handleSaveDialogConfirm}
+      />
+      <TemplateManager
+        open={managerOpen}
+        onClose={() => setManagerOpen(false)}
+        templates={templates}
+        onChange={refreshTemplates}
+        loadedName={loadedTemplate?.name ?? null}
+        onLoadedRenamed={(newName) => {
+          setLoadedTemplate((t: any) => (t ? { ...t, name: newName } : t));
+          draft.setTemplate(newName);
+        }}
+        onLoadedDeleted={() => {
+          setLoadedTemplate(null);
+          draft.setTemplate(null);
+        }}
+      />
     </main>
   );
 }

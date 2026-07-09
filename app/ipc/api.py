@@ -525,7 +525,6 @@ class Api:
         from datetime import datetime, timezone
         import uuid
         import math
-        from app.interactive.similarity import find_similar
         
         seen_ids = set()
         first_id = None
@@ -566,7 +565,7 @@ class Api:
             filters=filters,
             config=config,
             template_name="TRAVERSE",
-            question_ids=pool_ids,
+            question_ids=[first_id],
         )
         quizzes_repo.insert_partial_attempt(
             self._conn,
@@ -630,6 +629,9 @@ class Api:
         session.seen_ids.add(next_id)
         session.current_question_id = next_id
         
+        quizzes_repo.append_traverse_question(
+            self._conn, quiz_id, next_id, len(session.seen_ids)
+        )
         questions_repo.increment_interactive_times_used(self._conn, [next_id])
         
         q = questions_repo.get_by_id(self._conn, next_id)

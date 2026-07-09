@@ -96,6 +96,21 @@ def insert_quiz(
         conn.rollback()
         raise
 
+def append_traverse_question(conn: sqlite3.Connection, quiz_id: str, question_id: int, order: int) -> None:
+    try:
+        conn.execute(
+            "INSERT INTO quiz_questions (quiz_id, question_id, question_order) VALUES (?, ?, ?)",
+            (quiz_id, question_id, order)
+        )
+        conn.execute(
+            "UPDATE quizzes SET n_questions = n_questions + 1 WHERE quiz_id = ?",
+            (quiz_id,)
+        )
+        conn.commit()
+    except Exception:
+        conn.rollback()
+        raise
+
 
 def insert_partial_attempt(
     conn: sqlite3.Connection,

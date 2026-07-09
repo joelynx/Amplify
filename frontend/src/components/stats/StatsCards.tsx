@@ -14,39 +14,39 @@ interface CardSpec {
 const CARDS: readonly CardSpec[] = [
   {
     label: (mode) => mode === "generate" ? "PSets Generated" : "Completed Quizzes",
-    value: (s) => s.sessions_completed.toLocaleString(),
+    value: (s) => (s.sessions_completed ?? (s as any).psets_generated ?? 0).toLocaleString(),
   },
   {
     label: (mode) => mode === "generate" ? "Partial PSets" : "Partial Quizzes",
-    value: (s) => s.sessions_partial.toLocaleString(),
+    value: (s) => (s.sessions_partial ?? 0).toLocaleString(),
   },
   {
     label: () => "Total Questions Seen",
-    value: (s) => s.total_questions_seen.toLocaleString(),
+    value: (s) => (s.total_questions_seen ?? 0).toLocaleString(),
   },
   {
     label: () => "Unique Questions Seen",
-    value: (s) => s.unique_questions_seen.toLocaleString(),
+    value: (s) => (s.unique_questions_seen ?? 0).toLocaleString(),
     hint: (s) =>
-      s.total_questions_in_subject > 0
-        ? `of ${s.total_questions_in_subject.toLocaleString()} in scope`
+      (s.total_questions_in_subject ?? 0) > 0
+        ? `of ${(s.total_questions_in_subject ?? 0).toLocaleString()} in scope`
         : null,
   },
   {
     label: () => "Fraction Seen",
-    value: (s) => `${s.fraction_questions_seen.toFixed(1)}%`,
+    value: (s) => `${(s.fraction_questions_seen ?? 0).toFixed(1)}%`,
   },
   {
     label: (mode) => mode === "generate" ? "Max in single PSet" : "Max in single Quiz",
-    value: (s) => s.max_questions_in_single_pset.toLocaleString(),
+    value: (s) => (s.max_questions_in_single_pset ?? 0).toLocaleString(),
   },
   {
     label: () => "Max Multiplicity",
-    value: (s) => s.max_question_multiplicity.toLocaleString(),
+    value: (s) => (s.max_question_multiplicity ?? 0).toLocaleString(),
   },
   {
     label: () => "Avg Multiplicity",
-    value: (s) => s.avg_question_multiplicity.toFixed(2),
+    value: (s) => (s.avg_question_multiplicity ?? 0).toFixed(2),
   },
   {
     label: () => "Avg Difficulty",
