@@ -6,16 +6,22 @@
  *   1. `preprocessEnvironments` rewrites document-level LaTeX constructs the
  *      KaTeX inline parser can't handle:
  *        - `\begin{align|equation|gather|multline}` → wrap in `$$…$$`
- *          (KaTeX handles them inside display math)
+ *          (KaTeX handles them inside display math; done by the sanitizer,
+ *          in prose only)
  *        - `\begin{proof|theorem|lemma|definition|example|remark|corollary|
  *           claim|exercise|solution|proposition|quote}` → sentinel-marked
  *          labeled block, rendered as a left-border note after KaTeX runs
  *        - `\begin{itemize|enumerate}` + `\item` → sentinel-marked HTML lists
  *        - text-mode `\textbf` / `\textit` / `\emph` / `\underline` / `\texttt`
- *          → sentinel-marked HTML tags (balanced-brace argument parser so
- *          nested braces survive)
+ *          → sentinel-marked HTML tags (done by the sanitizer below, in
+ *          prose only; KaTeX handles them inside math)
  *        - strip pure-spacing commands (`\hfill`, `\noindent`, `\smallskip`,
  *          `\medskip`, `\bigskip`, `\vfill`, `\par`, `\newline`, `\linebreak`)
+ *        - `sanitizeForWeb` (latexWebSanitize.ts) rewrites the remaining
+ *          PDF-only constructs: figure/center/table scaffolding, tabular →
+ *          HTML table, sectioning, captions, footnotes, TikZ placeholders,
+ *          text symbols and escapes, `\\` in prose → line break, bare brace
+ *          groups. Render-time only; the stored LaTeX is never changed.
  *   2. chunker walks the result, sending `$…$` / `$$…$$` / `\(…\)` / `\[…\]`
  *      regions through KaTeX, HTML-escaping the prose in between.
  *   3. `postprocessEnvironments` swaps sentinels for real HTML.
@@ -32,6 +38,18 @@ import "katex/dist/katex.min.css";
 
 import { cn } from "../../lib/cn";
 import { ipc } from "../../lib/ipc";
+import {
+  EM_CLOSE,
+  EM_OPEN,
+  STRONG_CLOSE,
+  STRONG_OPEN,
+  TT_CLOSE,
+  TT_OPEN,
+  U_CLOSE,
+  U_OPEN,
+  postprocessWebSentinels,
+  sanitizeForWeb,
+} from "./latexWebSanitize";
 
 interface Props {
   source: string;
@@ -50,15 +68,6 @@ const ENV_OPEN = "@@AMP_ENV_OPEN@@";
 const ENV_DELIM = "@@AMP_ENV_DELIM@@";
 const ENV_CLOSE = "@@AMP_ENV_CLOSE@@";
 
-const STRONG_OPEN = "@@AMP_STRONG_OPEN@@";
-const STRONG_CLOSE = "@@AMP_STRONG_CLOSE@@";
-const EM_OPEN = "@@AMP_EM_OPEN@@";
-const EM_CLOSE = "@@AMP_EM_CLOSE@@";
-const U_OPEN = "@@AMP_U_OPEN@@";
-const U_CLOSE = "@@AMP_U_CLOSE@@";
-const TT_OPEN = "@@AMP_TT_OPEN@@";
-const TT_CLOSE = "@@AMP_TT_CLOSE@@";
-
 const IMG_SENTINEL_PREFIX = "@@AMP_IMG@@";
 const IMG_SENTINEL_SUFFIX = "@@/AMP_IMG@@";
 
@@ -72,17 +81,6 @@ const STRIP_COMMANDS = [
   "bigskip",
   "vfill",
   "par",
-];
-
-const MATH_ENVS = [
-  "align",
-  "align*",
-  "equation",
-  "equation*",
-  "gather",
-  "gather*",
-  "multline",
-  "multline*",
 ];
 
 const TEXT_ENVS = [
@@ -126,15 +124,9 @@ function preprocessEnvironments(src: string): string {
   // Optional [...] arg that follows \begin{env} (e.g. \begin{enumerate}[label=…]).
   const OPT_ARG = "(?:\\s*\\[[^\\]]*\\])?";
 
-  // 1) Math envs → wrap in $$…$$ so the chunker hands them to KaTeX.
-  for (const env of MATH_ENVS) {
-    const envEsc = env.replace(/\*/g, "\\*");
-    const re = new RegExp(
-      `\\\\begin\\{${envEsc}\\}${OPT_ARG}([\\s\\S]*?)\\\\end\\{${envEsc}\\}`,
-      "g",
-    );
-    s = s.replace(re, (_m, content: string) => `$$\\begin{${env}}${content}\\end{${env}}$$`);
-  }
+  // 1) Math envs (align, equation, gather, ...) outside math are wrapped in
+  // $$…$$ by the sanitizer in step 5. Doing it here, blindly, used to nest
+  // delimiters when the source already had the env inside \[…\] or $…$.
 
   // 2) Theorem-like envs (including starred variants like \begin{theorem*}).
   for (const env of TEXT_ENVS) {
@@ -146,30 +138,40 @@ function preprocessEnvironments(src: string): string {
       .replace(new RegExp(`\\\\end\\{${env}\\*?\\}`, "g"), ENV_CLOSE);
   }
 
-  // 3) Text-mode formatting (balanced-brace parser).
-  s = wrapBracedCommand(s, "textbf", STRONG_OPEN, STRONG_CLOSE);
-  s = wrapBracedCommand(s, "textit", EM_OPEN, EM_CLOSE);
-  s = wrapBracedCommand(s, "emph", EM_OPEN, EM_CLOSE);
-  s = wrapBracedCommand(s, "underline", U_OPEN, U_CLOSE);
-  s = wrapBracedCommand(s, "texttt", TT_OPEN, TT_CLOSE);
+  // 3) Text-mode formatting (\textbf, \textit, \emph, \underline, \texttt)
+  // is handled by the sanitizer in step 5, which only touches prose: inside
+  // math KaTeX renders these commands itself, and wrapping them there used
+  // to leak sentinels into the formula.
 
   for (const cmd of STRIP_COMMANDS) {
     s = s.replace(new RegExp(`\\\\${cmd}\\b`, "g"), "");
   }
 
-  // 4) Lists. \begin{itemize|enumerate}[opts] → sentinel pair.
+  // 4) Lists. \begin{itemize|enumerate|description}[opts] → sentinel pair.
   s = s
     .replace(new RegExp(`\\\\begin\\{itemize\\}${OPT_ARG}`, "g"), MARK_UL_OPEN)
     .replace(/\\end\{itemize\}/g, MARK_UL_CLOSE)
     .replace(new RegExp(`\\\\begin\\{enumerate\\}${OPT_ARG}`, "g"), MARK_OL_OPEN)
-    .replace(/\\end\{enumerate\}/g, MARK_OL_CLOSE);
+    .replace(/\\end\{enumerate\}/g, MARK_OL_CLOSE)
+    .replace(new RegExp(`\\\\begin\\{description\\}${OPT_ARG}`, "g"), MARK_UL_OPEN)
+    .replace(/\\end\{description\}/g, MARK_UL_CLOSE)
+    .replace(/\\begin\{list\}(?:\s*\{[^{}]*\}){0,2}/g, MARK_UL_OPEN)
+    .replace(/\\end\{list\}/g, MARK_UL_CLOSE);
+  // \item[label] (description lists): bold run-in label.
+  s = s.replace(/\\item\s*\[([^\]\n]*)\][ \t]*/g, (_m, label: string) =>
+    label.trim() ? `${MARK_LI_OPEN}${STRONG_OPEN}${label.trim()}${STRONG_CLOSE} ` : MARK_LI_OPEN,
+  );
   // Braced \item{…} (handle nested braces).
   s = wrapBracedCommand(s, "item", MARK_LI_OPEN, MARK_LI_CLOSE);
   // Bare \item with no braces — pseudo-open; closed in postprocess.
   s = s.replace(/\\item\b/g, MARK_LI_OPEN);
 
-  // NOTE: \\ (LaTeX line-break) is *not* preprocessed — it's a legitimate
-  // row separator inside matrix/align math, and KaTeX handles it natively.
+  // 5) Everything else that only XeLaTeX understands (figure/table
+  // scaffolding, tabular, spacing, sectioning, symbols, escapes, bare brace
+  // groups, TikZ, ...) is rewritten for the web by the sanitizer. It is
+  // math-aware: `\\` stays a row separator inside matrix/align math and
+  // becomes a line break only in prose.
+  s = sanitizeForWeb(s);
   return s;
 }
 
@@ -293,8 +295,11 @@ function postprocessEnvironments(html: string): string {
     )
     .replace(new RegExp(reEscape(TT_CLOSE), "g"), `</code>`);
 
+  // Sentinels produced by the web sanitizer (tables, headings, captions, ...).
+  s = postprocessWebSentinels(s);
+
   // Final safety net: nuke any sentinel that slipped through (malformed source).
-  s = s.replace(/@@AMP_[A-Z_]+@@/g, "");
+  s = s.replace(/@@\/?AMP_[A-Z_]+@@/g, "");
   return s;
 }
 
