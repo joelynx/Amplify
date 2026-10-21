@@ -53,3 +53,5 @@ pipeline/progress.json
 pipeline/*.log
 pipeline/*.err
 pipeline/*.out
+.env.local
+.env

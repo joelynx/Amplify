@@ -69,6 +69,27 @@ The ingest pipeline handles CSVs with missing data gracefully:
 | `Instructions` | ❌ | Special instructions |
 | `Tags` | ❌ | Python list literal of tags, e.g. `['tag1', 'tag2']` |
 
+## Embeddings
+
+`questions.similarity_emb` / `questions.classification_emb` hold the same Gemini
+`gemini-embedding-2` vector (3072 float32, little-endian, unit norm), computed
+from the task prefix + question text + best available solution
+(`generated_solution` with its attribution line stripped, else `solution`) plus
+the referenced images. `emb_text_hash` / `emb_model` (migration 006) record
+exactly what produced the stored vector, so the tool only embeds rows whose text
+is new or has changed:
+
+```bash
+# GOOGLE_API_KEY in .env.local (git-ignored)
+uv run python -m app.tools.reembed --dry-run              # rows pending + cost estimate
+uv run python -m app.tools.reembed --run --mode batch     # Batch API, half price, 250-row jobs
+uv run python -m app.tools.reembed --run                  # synchronous, ~1 row/s
+```
+
+Keep the prompt in `app/tools/reembed.py` byte-identical between runs, or the
+new vectors will not be comparable with the stored ones (the 2026-10-21 A/B test
+in `app/tools/embed_ab_test.py` found no better prompt).
+
 ## Image support
 
 Questions with `\includegraphics{filename}` commands in their LaTeX source are fully supported.
