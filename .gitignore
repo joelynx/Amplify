@@ -36,3 +36,20 @@ Thumbs.db
 
 # --- Claude Code project settings ---
 .claude/
+
+# --- Solution pipeline (generated at run time) ---
+pipeline/outputs/
+pipeline/canary_runs/
+pipeline/pipeline.db
+pipeline/pipeline.db-*
+pipeline/current_batch.json
+pipeline/meta.json
+pipeline/scripts/_render_bundle.mjs
+pipeline/archive/
+pipeline/.anthropic_key
+pipeline/reports/
+pipeline/raw/
+pipeline/progress.json
+pipeline/*.log
+pipeline/*.err
+pipeline/*.out

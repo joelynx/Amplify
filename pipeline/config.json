@@ -1,0 +1,84 @@
+{
+  "prompt_version": "v5",
+  "paths": {
+    "app_db": "app/data/appdata/amplify.db",
+    "teximages": "app/data/appdata/teximages"
+  },
+  "sources_note": "Priority order: questions are processed source by source in this order (owner to confirm the ordering).",
+  "sources": [
+    "Peter Winkler's Mathematical Puzzles",
+    "Creative Puzzles To Ignite Your Mind (Springer)",
+    "Erikson's AHA! Solutions",
+    "Yaglom & Yaglom's Challenging Mathematical Problems with Elementary Solutions I",
+    "Mosteller's 50 Challenging Problems In Probability",
+    "Levitin & Levitin's Algorithmic Puzzles"
+  ],
+  "solver": {
+    "model": "claude-opus-5-5",
+    "effort": "medium",
+    "max_tokens": 32000
+  },
+  "submissions_closed": true,
+  "submissions_closed_note": "Owner decision 2026-10-21: no more API submissions; the 585 retries and 514 unsolved questions stay as they are. run.py submit/loop refuse to send while this is true (dry runs still work).",
+  "max_attempts": 2,
+  "max_api_failures": 3,
+  "api_batch_size": 500,
+  "max_inflight_batches": 1,
+  "poll_seconds": 120,
+  "cache_ttl": "1h",
+  "tex_engine": "xelatex",
+  "solution_length_bounds_chars": {
+    "min": 800,
+    "max": null
+  },
+  "hint_length_bounds_chars": {
+    "min": 40,
+    "max": 600
+  },
+  "empty_answer_sentinels": [
+    "N/A",
+    "NA",
+    "None",
+    "-"
+  ],
+  "app_db_writes": true,
+  "generated_solution_column": "generated_solution",
+  "model_display_names": {
+    "claude-opus-5-5": "Claude Opus 5.5",
+    "claude-sonnet-5-5": "Claude Sonnet 5.5",
+    "claude-fable-5-1": "Claude Fable 5.1",
+    "claude-haiku-5-5": "Claude Haiku 5.5"
+  },
+  "prices_note": "USD per million tokens, standard tier, from the Claude API reference cached 2026-10-06; verify against the pricing page. Batch requests are billed at batch_discount times these. cache_write is the 1-hour TTL rate (2x input).",
+  "prices_usd_per_mtok": {
+    "claude-opus-5-5": {
+      "input": 4.0,
+      "output": 20.0,
+      "cache_read": 0.2,
+      "cache_write": 8.0
+    },
+    "claude-sonnet-5-5": {
+      "input": 2.0,
+      "output": 10.0,
+      "cache_read": 0.2,
+      "cache_write": 4.0
+    },
+    "claude-fable-5-1": {
+      "input": 10.0,
+      "output": 50.0,
+      "cache_read": 0.25,
+      "cache_write": 20.0
+    },
+    "claude-haiku-5-5": {
+      "input": 0.1,
+      "output": 0.5,
+      "cache_read": 0.01,
+      "cache_write": 0.2
+    }
+  },
+  "batch_discount": 0.5,
+  "min_batch_size": 25,
+  "judge_workers": 1,
+  "judge_poll_seconds": 60,
+  "preview_pdf": false
+}

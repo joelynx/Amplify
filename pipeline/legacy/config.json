@@ -1,0 +1,108 @@
+{
+  "prompt_version": "v4",
+  "paths": {
+    "app_db": "app/data/appdata/amplify.db",
+    "teximages": "app/data/appdata/teximages"
+  },
+  "sources": [
+    "Stirzaker and Grimmett's One Thousand Exercises In Probability",
+    "Engel's Problem Solving Strategies",
+    "Cambridge Tripos",
+    "David M. Burton's Elementary Number Theory",
+    "AIME",
+    "Berkeley Problems in Mathematics (Springer-Verlag)",
+    "IITD",
+    "Kaczor and Nowak",
+    "Sedrakyan's Stair Step Approach in Mathematics",
+    "Selection Tests in Number Theory For Mathematical Olympiads",
+    "IITK",
+    "Mladenovic's Combinatorics - A Problem Based Approach",
+    "Peter Winkler's Mathematical Puzzles",
+    "A Mathematical Orchard",
+    "Joshi's Concepts and Practice of Mathematical Finance",
+    "Hungarian Problem Books",
+    "IITG",
+    "IITD-AD",
+    "OpenQuant Archives",
+    "Stefanica's Primer for the Mathematics of Financial Mathematics",
+    "Indiana Collegiate Mathematics Competitions",
+    "Creative Puzzles To Ignite Your Mind (Springer)",
+    "Levitin & Levitin's Algorithmic Puzzles",
+    "University of Toronto Mathematics Competitions",
+    "Austrian-Polish Mathematics Competition",
+    "Stefanica's Linear Algebra Primer for Financial Engineering",
+    "Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection",
+    "Sederberg and Chang's Over and Over Again",
+    "IITR",
+    "Erikson's AHA! Solutions",
+    "Yaglom & Yaglom's Challenging Mathematical Problems with Elementary Solutions I",
+    "Miklos Schweitzer Competitions by GJ Szekely",
+    "Mathematics for Machine Learning",
+    "Mosteller's 50 Challenging Problems In Probability",
+    "Schwarz' 40 Puzzles and Problems in Mathematical Statistics",
+    "IITM"
+  ],
+  "triage_method": "heuristic",
+  "triage_thresholds": {
+    "routine_max_chars": 600,
+    "moderate_max_chars": 1800
+  },
+  "solver": {
+    "ROUTINE": {
+      "model": "sonnet",
+      "effort": "medium"
+    },
+    "MODERATE": {
+      "model": "opus",
+      "effort": "high"
+    },
+    "INSIGHT": {
+      "model": "fable",
+      "effort": "max"
+    },
+    "ESCALATE": {
+      "model": "fable",
+      "effort": "max"
+    }
+  },
+  "router": {
+    "model": "haiku",
+    "effort": "low"
+  },
+  "reviewer": {
+    "model": "fable",
+    "effort": "max"
+  },
+  "hint": {
+    "model": "sonnet",
+    "effort": "low"
+  },
+  "tex_engine": "xelatex",
+  "batch_size": 15,
+  "parallel_subagents": 4,
+  "canary_ids": [],
+  "canary_every_n_questions": 100,
+  "solution_length_bounds_chars": {
+    "min": null,
+    "max": null
+  },
+  "hint_length_bounds_chars": {
+    "min": 40,
+    "max": 600
+  },
+  "empty_answer_sentinels": [
+    "N/A",
+    "NA",
+    "None",
+    "-"
+  ],
+  "app_db_writes": true,
+  "spawn_wrapper": "Your complete instructions are in the file {prompt_path}. Read that file in full and follow it exactly; it is your entire task. Do not read any other file unless those instructions tell you to. When you are finished, reply with only the one-line status those instructions specify.",
+  "generated_solution_column": "generated_solution",
+  "model_display_names": {
+    "sonnet": "Claude Sonnet 5.5",
+    "opus": "Claude Opus 5.5",
+    "fable": "Claude Fable 5.1",
+    "haiku": "Claude Haiku 5.5"
+  }
+}

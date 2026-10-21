@@ -20,6 +20,10 @@ dev = [
     "pytest>=8.3",
     "ruff>=0.7",
 ]
+pipeline = [
+    "anthropic>=1.15.0",
+    "sympy>=1.14.0",
+]
 
 [project.scripts]
 amplify = "app.main:main"

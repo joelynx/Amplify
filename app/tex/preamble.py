@@ -23,6 +23,10 @@ PREAMBLE_TEMPLATE = r"""\documentclass{article}
 \usepackage{caption}
 \usepackage{graphicx}
 \graphicspath{{<image_path>}}
+% 1,349 seed questions use \includegraphics[max width=...]; that key comes from
+% adjustbox's graphicx export, not graphicx itself. Without it every such
+% question fails to compile.
+\usepackage[export]{adjustbox}
 \usepackage{fancyhdr}
 \usepackage{geometry}
 \usepackage{enumitem}
