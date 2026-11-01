@@ -6,16 +6,31 @@ See `Files/AMPLIFY_BUILD_SPEC (3).md` for the authoritative product spec and `Fi
 
 ## Quick start (dev)
 
-```bash
-# Python side
-uv sync
-uv run python -m app.main
+Two terminals. Start the Vite dev server first, then the PyWebView shell with
+`AMPLIFY_DEV=1` so it loads `http://localhost:5173/` (hot reload + devtools):
 
-# Frontend side
+```bash
+# Terminal 1 — frontend
 cd frontend
 npm install
 npm run dev
 ```
+
+```bash
+# Terminal 2 — repo root
+uv sync
+AMPLIFY_DEV=1 uv run python -m app.main        # PowerShell: $env:AMPLIFY_DEV = "1"; uv run python -m app.main
+```
+
+Without `AMPLIFY_DEV`, the app loads the built `frontend/dist/index.html` instead,
+so rebuild after frontend changes:
+
+```bash
+cd frontend && npm run build && cd ..
+uv run python -m app.main                      # or: uv run amplify
+```
+
+Migrations run automatically on startup; `amplify.db` lives in `app/data/appdata/`.
 
 ## Data ingestion
 
