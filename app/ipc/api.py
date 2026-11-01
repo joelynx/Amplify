@@ -17,6 +17,8 @@ import os
 import sqlite3
 import subprocess
 import sys
+import threading
+from collections.abc import Callable
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any
@@ -100,10 +102,26 @@ def _resolve_subject(conn: sqlite3.Connection, name: str | None) -> Subject | No
 
 
 class Api:
-    """The PyWebView js_api. Methods become `window.pywebview.api.<name>`."""
+    """The PyWebView js_api. Methods become `window.pywebview.api.<name>`.
 
-    def __init__(self, conn: sqlite3.Connection) -> None:
-        self._conn = conn
+    PyWebView runs every js_api call on its own thread, so calls overlap (a page
+    load fires several at once). Concurrent use of one sqlite3 connection
+    corrupts cursors — `InterfaceError: bad parameter or other API misuse`, or
+    silently returns another query's row — so each thread gets its own
+    connection from `connect`. It is closed (and any uncommitted transaction
+    rolled back) when the thread exits; every write path commits itself.
+    """
+
+    def __init__(self, connect: Callable[[], sqlite3.Connection]) -> None:
+        self._connect = connect
+        self._local = threading.local()
+
+    @property
+    def _conn(self) -> sqlite3.Connection:
+        conn = getattr(self._local, "conn", None)
+        if conn is None:
+            conn = self._local.conn = self._connect()
+        return conn
 
     # ---- Step 1: health + logging ----------------------------------------
 
