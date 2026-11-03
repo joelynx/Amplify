@@ -1,0 +1,1064 @@
+[
+ {
+  "key": "8.18",
+  "field": "latexcode",
+  "page": 56,
+  "kind": "structure",
+  "note": "page break split the sentence into two paragraphs",
+  "old": "If we assume that \\(\\pi(t)\\) is\n\nself-financing",
+  "new": "If we assume that \\(\\pi(t)\\) is\nself-financing"
+ },
+ {
+  "key": "9.5",
+  "field": "latexcode",
+  "page": 59,
+  "kind": "structure",
+  "note": "page break split the sentence into two paragraphs",
+  "old": "There is an interesting\n\nprobabilistic",
+  "new": "There is an interesting\nprobabilistic"
+ },
+ {
+  "key": "2.7",
+  "field": "solution",
+  "page": 88,
+  "kind": "structure",
+  "note": "the claims (i), (ii) and the two cases a), b) belong to the proof of part b); they were split off as top-level lists, the cases reading like the exercise's own parts",
+  "old": "  \\begin{itemize}\n    \\item[(i)] Either \\(F_{x} \\cap F_{y}=\\emptyset\\) or \\(F_{x}=F_{y}\\).\n  \\end{itemize}\n\\end{itemize}\nTo prove this we argue by contradiction: Assume that we both have\n\n\\begin{itemize}\n  \\item[(ii)] \\(F_{x} \\cap F_{y} \\neq \\emptyset\\) and \\(F_{x} \\neq F_{y}\\), e.g. \\(F_{x} \\backslash F_{y} \\neq \\emptyset\\).\n\\end{itemize}\nThen there are at most two possibilities:\n\n\\begin{itemize}\n  \\item[a)] \\(x \\in F_{x} \\cap F_{y}\\)\\\\\nThen \\(F_{x} \\cap F_{y}\\) is a set in \\(\\mathcal{F}\\) containing \\(x\\) and \\(F_{x} \\cap F_{y}\\) is strictly smaller than \\(F_{x}\\). This is impossible.\n  \\item[b)] \\(x \\in F_{x} \\backslash F_{y}\\)\\\\\nThen \\(F_{x} \\backslash F_{y}\\) is a set in \\(\\mathcal{F}\\) containing \\(x\\) and \\(F_{x} \\backslash F_{y}\\) is strictly smaller than \\(F_{x}\\). This is again impossible.\n\\end{itemize}\nHence the claim (i) is proved. Therefore there exist \\(x_{1}, \\ldots, x_{m} \\in \\Omega\\) such that\n\n\\[\nF_{x_{1}}, F_{x_{2}}, \\ldots, F_{x_{m}}\n\\]\n\nforms a partition of \\(\\Omega\\). Hence any \\(F \\in \\mathcal{F}\\) is a disjoint union of some of these \\(F_{x_{i}}\\) 's. Therefore \\(\\mathcal{F}\\) is of the form \\(\\mathcal{G}\\) described in a). \\(\\square\\)\n\n",
+  "new": "  \\begin{itemize}\n    \\item[(i)] Either \\(F_{x} \\cap F_{y}=\\emptyset\\) or \\(F_{x}=F_{y}\\).\n  \\end{itemize}\nTo prove this we argue by contradiction: Assume that we both have\n  \\begin{itemize}\n    \\item[(ii)] \\(F_{x} \\cap F_{y} \\neq \\emptyset\\) and \\(F_{x} \\neq F_{y}\\), e.g. \\(F_{x} \\backslash F_{y} \\neq \\emptyset\\).\n  \\end{itemize}\nThen there are at most two possibilities:\n  \\begin{itemize}\n    \\item[a)] \\(x \\in F_{x} \\cap F_{y}\\)\\\\\nThen \\(F_{x} \\cap F_{y}\\) is a set in \\(\\mathcal{F}\\) containing \\(x\\) and \\(F_{x} \\cap F_{y}\\) is strictly smaller than \\(F_{x}\\). This is impossible.\n    \\item[b)] \\(x \\in F_{x} \\backslash F_{y}\\)\\\\\nThen \\(F_{x} \\backslash F_{y}\\) is a set in \\(\\mathcal{F}\\) containing \\(x\\) and \\(F_{x} \\backslash F_{y}\\) is strictly smaller than \\(F_{x}\\). This is again impossible.\n  \\end{itemize}\nHence the claim (i) is proved. Therefore there exist \\(x_{1}, \\ldots, x_{m} \\in \\Omega\\) such that\n\n\\[\nF_{x_{1}}, F_{x_{2}}, \\ldots, F_{x_{m}}\n\\]\n\nforms a partition of \\(\\Omega\\). Hence any \\(F \\in \\mathcal{F}\\) is a disjoint union of some of these \\(F_{x_{i}}\\) 's. Therefore \\(\\mathcal{F}\\) is of the form \\(\\mathcal{G}\\) described in a). \\(\\square\\)\n\\end{itemize}\n\n"
+ },
+ {
+  "key": "2.2",
+  "field": "latexcode",
+  "page": 2,
+  "kind": "math",
+  "note": "bold R (the real line) read as plain text R",
+  "old": "measurable function on R.",
+  "new": "measurable function on \\(\\mathbf{R}\\)."
+ },
+ {
+  "key": "2.2",
+  "field": "latexcode",
+  "page": 2,
+  "kind": "punct",
+  "note": "missing comma after E[g(X)] display",
+  "old": "g(x) d F(x)",
+  "new": "g(x) d F(x) ,"
+ },
+ {
+  "key": "2.2",
+  "field": "latexcode",
+  "page": 2,
+  "kind": "punct",
+  "note": "missing final period after 'for all x'",
+  "old": "p(y) d y \\quad \\text { for all } x",
+  "new": "p(y) d y \\quad \\text { for all } x ."
+ },
+ {
+  "key": "2.17",
+  "field": "latexcode",
+  "page": 5,
+  "kind": "punct",
+  "note": "missing comma after Y(t,omega) display",
+  "old": "\\left(\\Delta B_{k}(\\omega)\\right)^{2}",
+  "new": "\\left(\\Delta B_{k}(\\omega)\\right)^{2} ,"
+ },
+ {
+  "key": "3.1",
+  "field": "latexcode",
+  "page": 7,
+  "kind": "punct",
+  "note": "missing final period after display",
+  "old": "-\\int_{0}^{t} B_{s} d s",
+  "new": "-\\int_{0}^{t} B_{s} d s ."
+ },
+ {
+  "key": "3.2",
+  "field": "latexcode",
+  "page": 8,
+  "kind": "punct",
+  "note": "missing final period after display",
+  "old": "-\\int_{0}^{t} B_{s} d s",
+  "new": "-\\int_{0}^{t} B_{s} d s ."
+ },
+ {
+  "key": "3.7",
+  "field": "latexcode",
+  "page": 8,
+  "kind": "math",
+  "note": "iterated integral lost its outer integrals and opening brackets: book has n! int ... ( int ( int dB_u1 ) dB_u2 ) ... dB_un",
+  "old": "\\left.\\left.n!\\int_{0 \\leq u_{1} \\leq \\cdots \\leq u_{n} \\leq t} d B_{u_{1}}\\right) d B_{u_{2}}\\right)",
+  "new": "n!\\int \\cdots\\left(\\int\\left(\\int_{0 \\leq u_{1} \\leq \\cdots \\leq u_{n} \\leq t} d B_{u_{1}}\\right) d B_{u_{2}}\\right)"
+ },
+ {
+  "key": "3.13",
+  "field": "latexcode",
+  "page": 11,
+  "kind": "punct",
+  "note": "missing final period after hint display",
+  "old": "\\left(X_{t}-X_{t_{j}^{(n)}}\\right)^{2} d t\\right]\\right)",
+  "new": "\\left(X_{t}-X_{t_{j}^{(n)}}\\right)^{2} d t\\right]\\right) ."
+ },
+ {
+  "key": "3.14",
+  "field": "latexcode",
+  "page": 11,
+  "kind": "punct",
+  "note": "extra period after the ellipsis 'k=1,2,...'",
+  "old": "k=1,2, \\ldots\\).",
+  "new": "k=1,2, \\ldots\\)"
+ },
+ {
+  "key": "3.14",
+  "field": "latexcode",
+  "page": 11,
+  "kind": "punct",
+  "note": "stray space in 'Corollary C.9'",
+  "old": "Corollary C. 9",
+  "new": "Corollary C.9"
+ },
+ {
+  "key": "3.15",
+  "field": "latexcode",
+  "page": 11,
+  "kind": "punct",
+  "note": "missing final period after 'for a.a. omega in Omega'",
+  "old": "\\text { for a.a. } \\omega \\in \\Omega",
+  "new": "\\text { for a.a. } \\omega \\in \\Omega ."
+ },
+ {
+  "key": "3.17",
+  "field": "latexcode",
+  "page": 12,
+  "kind": "punct",
+  "note": "missing final period after part b) display",
+  "old": "{P\\left(G_{i}\\right)} \\quad \\text { for } \\omega \\in G_{i}",
+  "new": "{P\\left(G_{i}\\right)} \\quad \\text { for } \\omega \\in G_{i} ."
+ },
+ {
+  "key": "3.18",
+  "field": "latexcode",
+  "page": 12,
+  "kind": "punct",
+  "note": "stray spaces in 'Theorem B.2'",
+  "old": "Theorem B. 2 e), Theorem B. 2 d)",
+  "new": "Theorem B.2 e), Theorem B.2 d)"
+ },
+ {
+  "key": "4.2",
+  "field": "latexcode",
+  "page": 13,
+  "kind": "punct",
+  "note": "missing final period after display",
+  "old": "-\\int_{0}^{t} B_{s} d s",
+  "new": "-\\int_{0}^{t} B_{s} d s ."
+ },
+ {
+  "key": "4.3",
+  "field": "latexcode",
+  "page": 13,
+  "kind": "math",
+  "note": "bold R (the real line) read as plain text R",
+  "old": "processes in R.",
+  "new": "processes in \\(\\mathbf{R}\\)."
+ },
+ {
+  "key": "4.4",
+  "field": "latexcode",
+  "page": 14,
+  "kind": "punct",
+  "note": "missing final period in Novikov condition (4.3.10)",
+  "old": "\\right)\\right]<\\infty \\tag{4.3.10}",
+  "new": "\\right)\\right]<\\infty . \\tag{4.3.10}"
+ },
+ {
+  "key": "4.5",
+  "field": "latexcode",
+  "page": 14,
+  "kind": "punct",
+  "note": "missing final period after recursion display",
+  "old": "; \\quad k \\geq 2",
+  "new": "; \\quad k \\geq 2 ."
+ },
+ {
+  "key": "4.7",
+  "field": "latexcode",
+  "page": 15,
+  "kind": "punct",
+  "note": "missing period after 'is a martingale' display",
+  "old": "\\quad \\text { is a martingale }",
+  "new": "\\quad \\text { is a martingale } ."
+ },
+ {
+  "key": "4.12",
+  "field": "latexcode",
+  "page": 18,
+  "kind": "punct",
+  "note": "missing period at end of hint display",
+  "old": "\\text { for all } s \\geq t",
+  "new": "\\text { for all } s \\geq t ."
+ },
+ {
+  "key": "4.13",
+  "field": "latexcode",
+  "page": 19,
+  "kind": "punct",
+  "note": "missing period after dQ display",
+  "old": "d Q=M_{T} d P \\quad(T<\\infty)",
+  "new": "d Q=M_{T} d P \\quad(T<\\infty) ."
+ },
+ {
+  "key": "4.14",
+  "field": "latexcode",
+  "page": 19,
+  "kind": "punct",
+  "note": "missing period after representation display",
+  "old": "\\int_{0}^{T} f(t, \\omega) d B_{t}(\\omega)",
+  "new": "\\int_{0}^{T} f(t, \\omega) d B_{t}(\\omega) ."
+ },
+ {
+  "key": "4.15",
+  "field": "latexcode",
+  "page": 19,
+  "kind": "punct",
+  "note": "missing period after dX_t display",
+  "old": "; \\quad X_{0}=x",
+  "new": "; \\quad X_{0}=x ."
+ },
+ {
+  "key": "4.16",
+  "field": "latexcode",
+  "page": 20,
+  "kind": "punct",
+  "note": "missing period after M_t representation display",
+  "old": "d B(s) ; \\quad t \\in[0, T]",
+  "new": "d B(s) ; \\quad t \\in[0, T] ."
+ },
+ {
+  "key": "4.17",
+  "field": "latexcode",
+  "page": 20,
+  "kind": "punct",
+  "note": "missing period in (4.3.14)",
+  "old": "f(t) d B(t) \\tag{4.3.14}",
+  "new": "f(t) d B(t) . \\tag{4.3.14}"
+ },
+ {
+  "key": "4.17",
+  "field": "latexcode",
+  "page": 20,
+  "kind": "punct",
+  "note": "missing period at end of part a) display",
+  "old": "d s ; t \\in\\left[t_{k-1}, t_{k}\\right]",
+  "new": "d s ; t \\in\\left[t_{k-1}, t_{k}\\right] ."
+ },
+ {
+  "key": "4.17",
+  "field": "latexcode",
+  "page": 21,
+  "kind": "punct",
+  "note": "missing period at end of hint display",
+  "old": "d B(s)\n\\end{aligned}",
+  "new": "d B(s) .\n\\end{aligned}"
+ },
+ {
+  "key": "5.13",
+  "field": "latexcode",
+  "page": 26,
+  "kind": "punct",
+  "note": "missing comma after y_t:=x_t' in (5.3.7)",
+  "old": "y_{t}:=x_{t}^{\\prime} \\tag{5.3.7}",
+  "new": "y_{t}:=x_{t}^{\\prime}, \\tag{5.3.7}"
+ },
+ {
+  "key": "5.16",
+  "field": "latexcode",
+  "page": 28,
+  "kind": "punct",
+  "note": "missing period at end of (5.3.12)",
+  "old": "c^{2}(s) d s\\right) \\tag{5.3.12}",
+  "new": "c^{2}(s) d s\\right) . \\tag{5.3.12}"
+ },
+ {
+  "key": "6.1",
+  "field": "latexcode",
+  "page": 31,
+  "kind": "punct",
+  "note": "missing period at end of (6.3.7)",
+  "old": "G^{2}(s) d s} \\tag{6.3.7}",
+  "new": "G^{2}(s) d s} . \\tag{6.3.7}"
+ },
+ {
+  "key": "6.6",
+  "field": "latexcode",
+  "page": 33,
+  "kind": "punct",
+  "note": "missing period after M_t = hat X_t in (6.3.16)",
+  "old": "M_{t}=\\widehat{X}_{t}",
+  "new": "M_{t}=\\widehat{X}_{t} ."
+ },
+ {
+  "key": "6.7",
+  "field": "latexcode",
+  "page": 34,
+  "kind": "punct",
+  "note": "missing period at end of final display",
+  "old": "\\right] d Z_{t}",
+  "new": "\\right] d Z_{t} ."
+ },
+ {
+  "key": "6.15",
+  "field": "latexcode",
+  "page": 37,
+  "kind": "punct",
+  "note": "missing period at end of (6.3.24)",
+  "old": "d s+B_{t} \\tag{6.3.24}",
+  "new": "d s+B_{t} . \\tag{6.3.24}"
+ },
+ {
+  "key": "6.15",
+  "field": "latexcode",
+  "page": 37,
+  "kind": "punct",
+  "note": "missing period at end of display in part f)",
+  "old": "\\sigma X_{t} d \\widetilde{B}_{t}",
+  "new": "\\sigma X_{t} d \\widetilde{B}_{t} ."
+ },
+ {
+  "key": "7.6",
+  "field": "latexcode",
+  "page": 40,
+  "kind": "punct",
+  "note": "extra period after ellipsis (book: 'k = 1, 2, ... Then')",
+  "old": "k=1,2, \\ldots\\). Then",
+  "new": "k=1,2, \\ldots\\) Then"
+ },
+ {
+  "key": "7.9",
+  "field": "latexcode",
+  "page": 41,
+  "kind": "punct",
+  "note": "missing final period after E^x[tau] display",
+  "old": "{r-\\frac{1}{2} \\alpha^{2}}",
+  "new": "{r-\\frac{1}{2} \\alpha^{2}} ."
+ },
+ {
+  "key": "7.11",
+  "field": "latexcode",
+  "page": 42,
+  "kind": "punct",
+  "note": "missing comma after display (before 'where')",
+  "old": "=E^{x}\\left[g\\left(X_{\\tau}\\right)\\right]",
+  "new": "=E^{x}\\left[g\\left(X_{\\tau}\\right)\\right] ,"
+ },
+ {
+  "key": "7.13",
+  "field": "latexcode",
+  "page": 43,
+  "kind": "math",
+  "note": "stray '-' in subscript: book has F_{t wedge tau}-martingale",
+  "old": "\\mathcal{F}_{t \\wedge \\tau-}",
+  "new": "\\mathcal{F}_{t \\wedge \\tau}"
+ },
+ {
+  "key": "7.15",
+  "field": "latexcode",
+  "page": 44,
+  "kind": "punct",
+  "note": "missing final period in (7.5.6)",
+  "old": "d x \\tag{7.5.6}",
+  "new": "d x . \\tag{7.5.6}"
+ },
+ {
+  "key": "7.16",
+  "field": "latexcode",
+  "page": 44,
+  "kind": "punct",
+  "note": "missing final period in (7.5.7)",
+  "old": "d x \\tag{7.5.7}",
+  "new": "d x . \\tag{7.5.7}"
+ },
+ {
+  "key": "7.17",
+  "field": "latexcode",
+  "page": 45,
+  "kind": "punct",
+  "note": "missing final period in (7.5.8)",
+  "old": "X_{0}=x \\tag{7.5.8}",
+  "new": "X_{0}=x . \\tag{7.5.8}"
+ },
+ {
+  "key": "8.2",
+  "field": "latexcode",
+  "page": 48,
+  "kind": "punct",
+  "note": "missing final period after t>0",
+  "old": "d y ; \\quad t>0",
+  "new": "d y ; \\quad t>0 ."
+ },
+ {
+  "key": "8.3",
+  "field": "latexcode",
+  "page": 49,
+  "kind": "punct",
+  "note": "missing final period in (8.6.34)",
+  "old": "f \\in C_{0}^{2} \\tag{8.6.34}",
+  "new": "f \\in C_{0}^{2} . \\tag{8.6.34}"
+ },
+ {
+  "key": "8.3",
+  "field": "latexcode",
+  "page": 49,
+  "kind": "punct",
+  "note": "missing final period in hint display",
+  "old": "d y d s ; \\quad f \\in C_{0}^{2}",
+  "new": "d y d s ; \\quad f \\in C_{0}^{2} ."
+ },
+ {
+  "key": "8.5",
+  "field": "latexcode",
+  "page": 50,
+  "kind": "punct",
+  "note": "missing final period after dy",
+  "old": "{2 t}\\right) d y",
+  "new": "{2 t}\\right) d y ."
+ },
+ {
+  "key": "8.6",
+  "field": "latexcode",
+  "page": 50,
+  "kind": "punct",
+  "note": "missing final period after t>0",
+  "old": "d y ; \\quad t>0",
+  "new": "d y ; \\quad t>0 ."
+ },
+ {
+  "key": "8.9",
+  "field": "latexcode",
+  "page": 51,
+  "kind": "punct",
+  "note": "missing final period after display",
+  "old": "r d \\widetilde{B}_{r}",
+  "new": "r d \\widetilde{B}_{r} ."
+ },
+ {
+  "key": "8.10",
+  "field": "latexcode",
+  "page": 51,
+  "kind": "math",
+  "note": "plain-text R should be bold R (math)",
+  "old": "Brownian motion in R. Show",
+  "new": "Brownian motion in \\(\\mathbf{R}\\). Show"
+ },
+ {
+  "key": "8.14",
+  "field": "latexcode",
+  "page": 52,
+  "kind": "punct",
+  "note": "missing word space between R^+ and 'we'",
+  "old": "J \\subset \\mathbf{R}^{+}\\)we",
+  "new": "J \\subset \\mathbf{R}^{+}\\) we"
+ },
+ {
+  "key": "8.14",
+  "field": "latexcode",
+  "page": 53,
+  "kind": "punct",
+  "note": "missing comma after Rf display (before 'where')",
+  "old": "f(t, x) d t d x",
+  "new": "f(t, x) d t d x ,"
+ },
+ {
+  "key": "8.15",
+  "field": "latexcode",
+  "page": 54,
+  "kind": "punct",
+  "note": "display in a) ends with a comma in the book",
+  "old": "d s\\right) f\\left(B_{t}\\right)\\right]",
+  "new": "d s\\right) f\\left(B_{t}\\right)\\right],"
+ },
+ {
+  "key": "8.15",
+  "field": "latexcode",
+  "page": 54,
+  "kind": "punct",
+  "note": "display in b) ends with a period in the book",
+  "old": "\\exp \\left(\\gamma\\left(B_{t}\\right)\\right) f\\left(B_{t}\\right)\\right]",
+  "new": "\\exp \\left(\\gamma\\left(B_{t}\\right)\\right) f\\left(B_{t}\\right)\\right] ."
+ },
+ {
+  "key": "8.16",
+  "field": "latexcode",
+  "page": 54,
+  "kind": "punct",
+  "note": "(8.6.43) ends with a comma in the book",
+  "old": "\\cdot f\\left(B_{t}\\right)\\right] \\tag{8.6.43}",
+  "new": "\\cdot f\\left(B_{t}\\right)\\right], \\tag{8.6.43}"
+ },
+ {
+  "key": "8.18",
+  "field": "latexcode",
+  "page": 55,
+  "kind": "structure",
+  "note": "close the (i)/(ii) list after (ii): the assumptions, problem statement and parts a)-c) are at exercise level, not under (ii)",
+  "old": "S_{1}(0)>0 .\n\\]\nWe assume",
+  "new": "S_{1}(0)>0 .\n\\]\n\\end{itemize}\nWe assume"
+ },
+ {
+  "key": "8.18",
+  "field": "latexcode",
+  "page": 57,
+  "kind": "structure",
+  "note": "drop the now-extra outer \\end{itemize} (pairs with the fix closing the (i)/(ii) list)",
+  "old": "given in b) above.\n  \\end{itemize}\n\\end{itemize}",
+  "new": "given in b) above.\n  \\end{itemize}"
+ },
+ {
+  "key": "8.18",
+  "field": "latexcode",
+  "page": 57,
+  "kind": "punct",
+  "note": "F(pi*) display in b) ends with a comma in the book",
+  "old": "d t\\right)\n\\]\nwhich is attained",
+  "new": "d t\\right),\n\\]\nwhich is attained"
+ },
+ {
+  "key": "8.18",
+  "field": "latexcode",
+  "page": 57,
+  "kind": "punct",
+  "note": "Novikov condition display ends with a period in the book",
+  "old": "\\pi^{2}(t) d t\\right)\\right]<\\infty",
+  "new": "\\pi^{2}(t) d t\\right)\\right]<\\infty ."
+ },
+ {
+  "key": "9.7",
+  "field": "latexcode",
+  "page": 61,
+  "kind": "figure",
+  "note": "the ball-with-slit figure at the top of p.207 illustrates the region U of 9.7 d) (unit ball minus the segment {(x1,0,0); x1>=0}); it belongs here, not in 9.8",
+  "old": "x_{1} \\geq 0\\right\\} .\n\\]\n\\end{itemize}",
+  "new": "x_{1} \\geq 0\\right\\} .\n\\]\n\\begin{center}\n\\includegraphics[max width=\\textwidth, alt={}]{f61ace0f-f73c-4d50-af1f-8d1acdfbcbdd-061_428_567_186_489}\n\\end{center}\n\\end{itemize}"
+ },
+ {
+  "key": "9.8",
+  "field": "latexcode",
+  "page": 61,
+  "kind": "figure",
+  "note": "remove the 9.7 d) figure (ball with the removed segment) from 9.8; it does not illustrate 9.8",
+  "old": "for \\(X_{t}\\).\n\\end{itemize}\n\\begin{center}\n\\includegraphics[max width=\\textwidth, alt={}]{f61ace0f-f73c-4d50-af1f-8d1acdfbcbdd-061_428_567_186_489}\n\\end{center}\n\n\\begin{itemize}\n  \\item[b)]",
+  "new": "for \\(X_{t}\\).\n  \\item[b)]"
+ },
+ {
+  "key": "9.11",
+  "field": "latexcode",
+  "page": 62,
+  "kind": "punct",
+  "note": "Poisson formula display ends with a period in the book",
+  "old": "h\\left(e^{i t}\\right) d t",
+  "new": "h\\left(e^{i t}\\right) d t ."
+ },
+ {
+  "key": "9.11",
+  "field": "latexcode",
+  "page": 62,
+  "kind": "punct",
+  "note": "exit-probability display ends with a period in the book",
+  "old": "\\text { where } z=r e^{i \\theta}",
+  "new": "\\text { where } z=r e^{i \\theta} ."
+ },
+ {
+  "key": "9.11",
+  "field": "latexcode",
+  "page": 62,
+  "kind": "punct",
+  "note": "harmonic-measure display in b) ends with a period in the book",
+  "old": "\\frac{f(\\phi(z))}{z} d z",
+  "new": "\\frac{f(\\phi(z))}{z} d z ."
+ },
+ {
+  "key": "9.12",
+  "field": "latexcode",
+  "page": 63,
+  "kind": "structure",
+  "note": "the Freidlin (1985) sentence is a chapter-level remark set flush left between 9.12 and 9.13, not part of exercise 9.12",
+  "old": "Theorem 8.2.1 b).\n\nFor more information on stochastic solutions of boundary value problems see Freidlin (1985).",
+  "new": "Theorem 8.2.1 b)."
+ },
+ {
+  "key": "10.2",
+  "field": "latexcode",
+  "page": 67,
+  "kind": "math",
+  "note": "bold R (the real line) read as plain text R",
+  "old": "functions in R are",
+  "new": "functions in \\(\\mathbf{R}\\) are"
+ },
+ {
+  "key": "10.2",
+  "field": "latexcode",
+  "page": 67,
+  "kind": "punct",
+  "note": "missing final period in f_gamma cases display",
+  "old": "|x|<1\\end{cases}",
+  "new": "|x|<1 .\\end{cases}"
+ },
+ {
+  "key": "10.9",
+  "field": "latexcode",
+  "page": 69,
+  "kind": "punct",
+  "note": "missing final period after Phi display",
+  "old": "e^{-\\rho \\tau} B_{\\tau}^{2}\\right]",
+  "new": "e^{-\\rho \\tau} B_{\\tau}^{2}\\right] ."
+ },
+ {
+  "key": "10.14",
+  "field": "latexcode",
+  "page": 72,
+  "kind": "punct",
+  "note": "missing final period after Phi display in hint",
+  "old": "\\left[-\\int_{0}^{\\tau} e^{-\\rho(s+t)} P_{t} d t-C e^{-\\rho(s+\\tau)}\\right]",
+  "new": "\\left[-\\int_{0}^{\\tau} e^{-\\rho(s+t)} P_{t} d t-C e^{-\\rho(s+\\tau)}\\right] ."
+ },
+ {
+  "key": "10.17",
+  "field": "latexcode",
+  "page": 72,
+  "kind": "punct",
+  "note": "missing final period after 'for all x'",
+  "old": "\\text { for all } x",
+  "new": "\\text { for all } x ."
+ },
+ {
+  "key": "11.2",
+  "field": "latexcode",
+  "page": 73,
+  "kind": "punct",
+  "note": "missing comma at end of dX_t display",
+  "old": "B_{t} \\in \\mathbf{R}^{m}",
+  "new": "B_{t} \\in \\mathbf{R}^{m},"
+ },
+ {
+  "key": "11.3",
+  "field": "latexcode",
+  "page": 74,
+  "kind": "punct",
+  "note": "missing comma after Phi display",
+  "old": "f_{0}\\left(X_{t}\\right) d t\\right]",
+  "new": "f_{0}\\left(X_{t}\\right) d t\\right],"
+ },
+ {
+  "key": "11.4",
+  "field": "latexcode",
+  "page": 74,
+  "kind": "punct",
+  "note": "spurious paragraph break mid-sentence at page break",
+  "old": "without assuming\n\nthat",
+  "new": "without assuming that"
+ },
+ {
+  "key": "11.6",
+  "field": "latexcode",
+  "page": 75,
+  "kind": "structure",
+  "note": "parts a)-d) are nested under item 2); in the book they are at the same level as 1), 2) (open)",
+  "old": "Brownian motions.\n  \\begin{itemize}\n    \\item[a)]",
+  "new": "Brownian motions.\n  \\item[a)]"
+ },
+ {
+  "key": "11.6",
+  "field": "latexcode",
+  "page": 76,
+  "kind": "structure",
+  "note": "parts a)-d) are nested under item 2); in the book they are at the same level as 1), 2) (close)",
+  "old": "c).\n  \\end{itemize}\n\\end{itemize}",
+  "new": "c).\n\\end{itemize}"
+ },
+ {
+  "key": "11.9",
+  "field": "latexcode",
+  "page": 77,
+  "kind": "punct",
+  "note": "missing final period in sign z cases display",
+  "old": "z \\leq 0\\end{cases}",
+  "new": "z \\leq 0 .\\end{cases}"
+ },
+ {
+  "key": "11.10",
+  "field": "latexcode",
+  "page": 77,
+  "kind": "punct",
+  "note": "missing period after 'x > 1' in the definition of f-hat",
+  "old": "\\begin{cases}x & \\text { for } 0 \\leq x \\leq 1 \\\\ \\sqrt{x} & \\text { for } x>1\\end{cases}",
+  "new": "\\begin{cases}x & \\text { for } 0 \\leq x \\leq 1 \\\\ \\sqrt{x} & \\text { for } x>1 .\\end{cases}"
+ },
+ {
+  "key": "12.10",
+  "field": "latexcode",
+  "page": 84,
+  "kind": "punct",
+  "note": "missing final period after the display",
+  "old": "X(T, \\omega)=z+\\int_{0}^{T} \\phi(t, \\omega) d B(t)",
+  "new": "X(T, \\omega)=z+\\int_{0}^{T} \\phi(t, \\omega) d B(t) ."
+ },
+ {
+  "key": "2.4",
+  "field": "solution",
+  "page": 87,
+  "kind": "punct",
+  "note": "missing period after display and end-of-part box after a)",
+  "old": "\\lambda^{p} P(A)\n\\]",
+  "new": "\\lambda^{p} P(A) .\n\\]\n\\(\\square\\)"
+ },
+ {
+  "key": "2.4",
+  "field": "solution",
+  "page": 87,
+  "kind": "punct",
+  "note": "missing end-of-proof box after b)",
+  "old": "E[\\exp (k|X|)] .\n\\end{aligned}\n\\]",
+  "new": "E[\\exp (k|X|)] .\n\\end{aligned}\n\\]\n\\(\\square\\)"
+ },
+ {
+  "key": "2.6",
+  "field": "solution",
+  "page": 87,
+  "kind": "punct",
+  "note": "missing end-of-proof box",
+  "old": "A_{k}\\right\\}\\right)=0 .\n\\end{aligned}\n\\]",
+  "new": "A_{k}\\right\\}\\right)=0 .\n\\end{aligned}\n\\]\n\n\\(\\square\\)"
+ },
+ {
+  "key": "2.13",
+  "field": "solution",
+  "page": 88,
+  "kind": "punct",
+  "note": "missing period after display",
+  "old": "e^{-\\frac{x^{2}+y^{2}}{2 t}} d x d y",
+  "new": "e^{-\\frac{x^{2}+y^{2}}{2 t}} d x d y ."
+ },
+ {
+  "key": "2.14",
+  "field": "solution",
+  "page": 89,
+  "kind": "punct",
+  "note": "missing comma after display",
+  "old": "d y=0",
+  "new": "d y=0,"
+ },
+ {
+  "key": "2.15",
+  "field": "solution",
+  "page": 89,
+  "kind": "math",
+  "note": "book has a single integral sign, not a double one",
+  "old": "=\\iint_{U^{-1} F_{1}",
+  "new": "=\\int_{U^{-1} F_{1}"
+ },
+ {
+  "key": "3.1",
+  "field": "solution",
+  "page": 90,
+  "kind": "punct",
+  "note": "missing period after display",
+  "old": "\\Delta t_{j} \\rightarrow 0",
+  "new": "\\Delta t_{j} \\rightarrow 0 ."
+ },
+ {
+  "key": "3.4",
+  "field": "solution",
+  "page": 91,
+  "kind": "punct",
+  "note": "missing period after display in (iii)",
+  "old": "r B_{r} d r=X_{t}",
+  "new": "r B_{r} d r=X_{t} ."
+ },
+ {
+  "key": "4.2",
+  "field": "solution",
+  "page": 93,
+  "kind": "punct",
+  "note": "missing period after display",
+  "old": "+\\int_{0}^{t} B_{s} d s",
+  "new": "+\\int_{0}^{t} B_{s} d s ."
+ },
+ {
+  "key": "4.3",
+  "field": "solution",
+  "page": 93,
+  "kind": "punct",
+  "note": "missing period after display",
+  "old": "=Y_{t} d X_{t}+X_{t} d Y_{t}+d X_{t} d Y_{t}",
+  "new": "=Y_{t} d X_{t}+X_{t} d Y_{t}+d X_{t} d Y_{t} ."
+ },
+ {
+  "key": "4.11",
+  "field": "solution",
+  "page": 93,
+  "kind": "punct",
+  "note": "missing period after display in b)",
+  "old": "\\quad=e^{\\frac{1}{2} t} \\cos B_{t} d B_{t}",
+  "new": "\\quad=e^{\\frac{1}{2} t} \\cos B_{t} d B_{t} ."
+ },
+ {
+  "key": "4.14",
+  "field": "solution",
+  "page": 93,
+  "kind": "punct",
+  "note": "missing end-of-part box after a)",
+  "old": "1 \\cdot d B_{t}\\).",
+  "new": "1 \\cdot d B_{t}\\). \\(\\square\\)"
+ },
+ {
+  "key": "4.14",
+  "field": "solution",
+  "page": 94,
+  "kind": "punct",
+  "note": "missing end-of-part box after b)",
+  "old": "\\int_{0}^{T}(T-t) d B_{t} .\n\\]",
+  "new": "\\int_{0}^{T}(T-t) d B_{t} .\n\\]\n\\(\\square\\)"
+ },
+ {
+  "key": "4.14",
+  "field": "solution",
+  "page": 94,
+  "kind": "punct",
+  "note": "missing period after display and end-of-part box after c)",
+  "old": "2 B_{t} d B_{t}\n\\]",
+  "new": "2 B_{t} d B_{t} .\n\\]\n\\(\\square\\)"
+ },
+ {
+  "key": "4.14",
+  "field": "solution",
+  "page": 94,
+  "kind": "punct",
+  "note": "missing period after display in d)",
+  "old": "+3 B_{t} d t",
+  "new": "+3 B_{t} d t ."
+ },
+ {
+  "key": "4.14",
+  "field": "solution",
+  "page": 94,
+  "kind": "punct",
+  "note": "missing period after display in d)",
+  "old": "+3(T-t)\\right) d B_{t}",
+  "new": "+3(T-t)\\right) d B_{t} ."
+ },
+ {
+  "key": "4.14",
+  "field": "solution",
+  "page": 94,
+  "kind": "punct",
+  "note": "missing period after display and end-of-part box after e)",
+  "old": "e^{B_{t}+\\frac{1}{2}(T-t)} d B_{t}\n\\]",
+  "new": "e^{B_{t}+\\frac{1}{2}(T-t)} d B_{t} .\n\\]\n\\(\\square\\)"
+ },
+ {
+  "key": "4.14",
+  "field": "solution",
+  "page": 94,
+  "kind": "punct",
+  "note": "missing period after display in f)",
+  "old": "\\sin B_{T}=\\int_{0}^{T} e^{\\frac{1}{2} t} \\cos B_{t} d B_{t}",
+  "new": "\\sin B_{T}=\\int_{0}^{T} e^{\\frac{1}{2} t} \\cos B_{t} d B_{t} ."
+ },
+ {
+  "key": "4.14",
+  "field": "solution",
+  "page": 94,
+  "kind": "punct",
+  "note": "missing period after display and end-of-part box after f)",
+  "old": "e^{\\frac{1}{2}(t-T)} \\cos B_{t} d B_{t}\n\\]",
+  "new": "e^{\\frac{1}{2}(t-T)} \\cos B_{t} d B_{t} .\n\\]\n\\(\\square\\)"
+ },
+ {
+  "key": "5.4",
+  "field": "solution",
+  "page": 95,
+  "kind": "punct",
+  "note": "missing comma after first line of (i)",
+  "old": "+t+B_{1}(t)",
+  "new": "+t+B_{1}(t),"
+ },
+ {
+  "key": "5.6",
+  "field": "solution",
+  "page": 95,
+  "kind": "punct",
+  "note": "missing period after final display",
+  "old": "\\frac{1}{2} \\alpha^{2}(t-s)\\right) d s",
+  "new": "\\frac{1}{2} \\alpha^{2}(t-s)\\right) d s ."
+ },
+ {
+  "key": "5.8",
+  "field": "solution",
+  "page": 96,
+  "kind": "punct",
+  "note": "missing comma at end of X_1(t) formula",
+  "old": "\\beta \\sin (t-s) d B_{2}(s)",
+  "new": "\\beta \\sin (t-s) d B_{2}(s) ,"
+ },
+ {
+  "key": "5.8",
+  "field": "solution",
+  "page": 96,
+  "kind": "punct",
+  "note": "missing period at end of X_2(t) formula",
+  "old": "\\cos (t-s) d B_{2}(s)",
+  "new": "\\cos (t-s) d B_{2}(s) ."
+ },
+ {
+  "key": "5.12",
+  "field": "solution",
+  "page": 96,
+  "kind": "punct",
+  "note": "missing comma after display",
+  "old": "-\\epsilon L X(t) d B_{t}",
+  "new": "-\\epsilon L X(t) d B_{t} ,"
+ },
+ {
+  "key": "5.12",
+  "field": "solution",
+  "page": 97,
+  "kind": "punct",
+  "note": "missing period after final display",
+  "old": "+\\epsilon \\int_{0}^{t}(r-t) y(r) d B_{r}",
+  "new": "+\\epsilon \\int_{0}^{t}(r-t) y(r) d B_{r} ."
+ },
+ {
+  "key": "6.15",
+  "field": "solution",
+  "page": 98,
+  "kind": "punct",
+  "note": "missing period after N_t display in c)",
+  "old": "N_{t}=\\xi_{t}-\\int_{0}^{t} \\widehat{\\mu}(s) d s",
+  "new": "N_{t}=\\xi_{t}-\\int_{0}^{t} \\widehat{\\mu}(s) d s ."
+ },
+ {
+  "key": "6.15",
+  "field": "solution",
+  "page": 98,
+  "kind": "punct",
+  "note": "missing period after first display in e)",
+  "old": "\\sigma^{-2} \\xi_{t}}{\\theta+\\sigma^{-2} t} d t",
+  "new": "\\sigma^{-2} \\xi_{t}}{\\theta+\\sigma^{-2} t} d t ."
+ },
+ {
+  "key": "6.15",
+  "field": "solution",
+  "page": 98,
+  "kind": "punct",
+  "note": "missing comma after xi_t display in e)",
+  "old": "\\frac{d \\widetilde{B}_{s}}{\\sigma^{2} \\theta+s}",
+  "new": "\\frac{d \\widetilde{B}_{s}}{\\sigma^{2} \\theta+s} ,"
+ },
+ {
+  "key": "7.18",
+  "field": "solution",
+  "page": 100,
+  "kind": "punct",
+  "note": "missing comma after Dynkin display",
+  "old": "d t\\right]=w(x)",
+  "new": "d t\\right]=w(x) ,"
+ },
+ {
+  "key": "9.2",
+  "field": "solution",
+  "page": 102,
+  "kind": "punct",
+  "note": "missing comma after u(s,x) display",
+  "old": "B_{t}^{x}\\right) d t\\right]",
+  "new": "B_{t}^{x}\\right) d t\\right],"
+ },
+ {
+  "key": "9.15",
+  "field": "solution",
+  "page": 103,
+  "kind": "structure",
+  "note": "general solution paragraph is nested under condition (2); in the book it is at the a) level after (1), (2) (open)",
+  "old": "h(b)=\\psi(b)\\)\n",
+  "new": "h(b)=\\psi(b)\\)\n  \\end{itemize}\n"
+ },
+ {
+  "key": "9.15",
+  "field": "solution",
+  "page": 103,
+  "kind": "structure",
+  "note": "general solution paragraph is nested under condition (2); in the book it is at the a) level after (1), (2) (close)",
+  "old": "uniquely.\n  \\end{itemize}\n  \\item[b)]",
+  "new": "uniquely.\n  \\item[b)]"
+ },
+ {
+  "key": "10.2",
+  "field": "solution",
+  "page": 104,
+  "kind": "math",
+  "note": "bold R (the real line) read as plain text R",
+  "old": "also works for R. Therefore",
+  "new": "also works for \\(\\mathbf{R}\\). Therefore"
+ },
+ {
+  "key": "10.13",
+  "field": "solution",
+  "page": 105,
+  "kind": "punct",
+  "note": "missing comma after '< 0' in the gamma_1 display",
+  "old": "2 \\rho \\beta^{2}}\\right]<0",
+  "new": "2 \\rho \\beta^{2}}\\right]<0,"
+ },
+ {
+  "key": "10.14",
+  "field": "solution",
+  "page": 106,
+  "kind": "punct",
+  "note": "missing comma after Phi display",
+  "old": "{\\rho-\\alpha}+\\Psi(s, p)",
+  "new": "{\\rho-\\alpha}+\\Psi(s, p),"
+ },
+ {
+  "key": "10.14",
+  "field": "solution",
+  "page": 106,
+  "kind": "punct",
+  "note": "missing final period after Psi display",
+  "old": "-C e^{-\\rho(s+\\tau)}\\right]",
+  "new": "-C e^{-\\rho(s+\\tau)}\\right]."
+ },
+ {
+  "key": "10.14",
+  "field": "solution",
+  "page": 107,
+  "kind": "text",
+  "note": "book has the remark '(see (10.3.7)).' after the U display, not an equation tag (10.3.7)",
+  "old": "U=\\{y ; L g(y)+f(y)>0\\} \\tag{10.3.7}",
+  "new": "U=\\{y ; L g(y)+f(y)>0\\} \\quad \\text { (see (10.3.7)). }"
+ },
+ {
+  "key": "11.12",
+  "field": "solution",
+  "page": 112,
+  "kind": "punct",
+  "note": "missing final period in (2)",
+  "old": "x \\in \\mathbf{R} \\tag{2}",
+  "new": "x \\in \\mathbf{R} . \\tag{2}"
+ },
+ {
+  "key": "11.13",
+  "field": "solution",
+  "page": 113,
+  "kind": "punct",
+  "note": "missing comma after Phi display",
+  "old": "u_{t}\\right) d t\\right]",
+  "new": "u_{t}\\right) d t\\right],"
+ },
+ {
+  "key": "12.16",
+  "field": "solution",
+  "page": 115,
+  "kind": "punct",
+  "note": "missing final period after the 'iff' display",
+  "old": "\\sigma(s) d \\widetilde{B}(s)",
+  "new": "\\sigma(s) d \\widetilde{B}(s) ."
+ }
+]
