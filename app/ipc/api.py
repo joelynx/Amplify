@@ -663,6 +663,7 @@ class Api:
         sel = pick(self._conn, filters, n, subject=s, strategy="diverse")
         
         if sel.questions:
+            import uuid
             from datetime import UTC, datetime
             quiz_id = str(uuid.uuid4())
             config = QuizConfig(template="DISCOVER", n_questions=len(sel.questions))
