@@ -376,7 +376,6 @@ interface PyWebViewApi {
   play_sound: (event: string) => Promise<void>;
   run_seed_ingest: () => Promise<IngestResult>;
   augment_seed_from_csv: (csv_path: string) => Promise<AugmentResult>;
-  seed_tags_from_metadata: () => Promise<SeedTagsResult>;
   factory_reset: () => Promise<void>;
   reset_active_subject: () => Promise<ResetSubjectResult>;
   get_seed_diagnostics: () => Promise<SeedDiagnostics>;
@@ -504,11 +503,6 @@ export interface AugmentResult {
   skipped: number;
   errors: string[];
   warnings: string[];
-}
-
-export interface SeedTagsResult {
-  questions_scanned: number;
-  rows_inserted: number;
 }
 
 export interface IngestResult {
@@ -852,10 +846,6 @@ export const ipc = {
   async augment_seed_from_csv(csv_path: string): Promise<AugmentResult> {
     const api = await bridge();
     return api.augment_seed_from_csv(csv_path);
-  },
-  async seed_tags_from_metadata(): Promise<SeedTagsResult> {
-    const api = await bridge();
-    return api.seed_tags_from_metadata();
   },
   async factory_reset(): Promise<void> {
     const api = await bridge();

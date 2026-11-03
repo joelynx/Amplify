@@ -1,0 +1,1166 @@
+question_id,source,flags,figure_missing,note
+413,IITD,broken_text,0,Support condition lacks y>0; solution assumes it.
+415,IITD,mismatch;key_conflict,0,Solution says geometric fails; checks binomial instead.
+447,IITK,mismatch,0,
+448,IITK,mismatch,0,
+449,IITK,mismatch,0,
+1331,AIME,,1,
+1445,Berkeley Problems in Mathematics (Springer-Verlag),key_conflict,0,"Solution shows claim fails for some a, contradicting statement"
+1564,Berkeley Problems in Mathematics (Springer-Verlag),broken_text,0,Typo: coefficient b missing in target relation
+1973,Kaczor and Nowak,broken_text,0,recursion printed with a typo
+1974,Kaczor and Nowak,key_conflict,0,statement says increasing; solution shows decreasing
+1977,Kaczor and Nowak,key_conflict,0,statement says AGM; solution proves geometric mean
+1998,Kaczor and Nowak,broken_text,0,denominator exponent misprinted
+2003,Kaczor and Nowak,mismatch,0,Solution repairs the recursion to a+b-ab/a_{n-1}
+2017,University Physics Competition,needs_data,0,Open-ended estimate; no material data or solution given.
+2034,IITD,broken_text,0,Wording garbled; solution reads it as meeting.
+2037,IITD,broken_text,0,Second problem (item 19) pasted in; solution covers both.
+2064,IITD,broken_text,0,Printed R(t) lacks t; solution corrects it.
+2089,IITD,broken_text,0,Stated pdf rate 0.0001 conflicts with alpha 0.001.
+2095,IITD,,1,
+2108,IITD,mismatch,0,Solution assumes iid; question says only independent.
+2110,IITD,broken_text,0,Three unrelated problems merged into one block.
+2112,IITD,broken_text,0,Stray '= 1' in limit statement; solution calls it a typo.
+2113,IITD,broken_text,0,Two unrelated problems merged into one block.
+2117,IITD,broken_text,0,Three unrelated problems merged into one block.
+2146,IITD,key_conflict,0,Stated covariance drops the constant 1; solution gives 1+st+s^2t^2.
+2147,IITD,mismatch,0,Says second-order process; solution proves weak stationarity.
+2162,IITD,needs_data,0,Refers to missing Problem 1; solution assumes a model.
+2190,IITD,key_conflict,0,Stated identity fails for i!=j; solution proves F_ij/(1-F_jj).
+2196,IITD,needs_data,0,Chain not given; solution assumes an urn model.
+2207,IITD,key_conflict,0,Stated binomial has i and n swapped; solution derives the Yule formula.
+2211,IITD,broken_text,0,P_ii(j)=1 is a typo for P_ii(0)=1.
+2222,IITD,key_conflict,0,Stated parameter lacks mu; solution uses q_t.
+2224,IITD,key_conflict,0,Stated Bessel argument omits x; solution proves corrected form.
+2247,IITD,broken_text,0,Hypothesis typed as P(intersection > 0); read as P(intersection) > 0.
+2304,IITD,broken_text,0,Statement reads b=a*mu with a undefined; solved as b=mu.
+2314,IITD,broken_text,0,Question statement garbled; solution proves the standard Chernoff bound.
+2345,IITD,mismatch,0,Literal statement trivial; solution proves memoryless characterization
+2418,IITR,broken_text,0,Printed mixed-derivative term garbled; solution uses standard spherical Laplacian operator.
+2422,IITR,mismatch,0,Printed statement lacks alpha; solution proves a corrected version.
+2446,IITR,mismatch,0,Statement says sphere surface; solution uses the solid ball.
+2455,IITR,mismatch,0,Printed x^3 term is false; solution proves x^2 version.
+2456,IITR,broken_text,0,No explicit ask; assumed linearization and error bound.
+2457,IITR,mismatch;broken_text,0,Question reads y sin x; solution integrates x sin x.
+2458,IITR,broken_text,0,No explicit ask; assumed absolute extrema on the ellipse region.
+2459,IITR,broken_text,0,No explicit ask; assumed extrema of xy on the ellipse.
+2460,IITR,broken_text,0,"Bare matrix, no task; solution assumes eigen task"
+2464,IITR,broken_text,0,Function u not defined; solution infers cos u is homogeneous.
+2467,IITR,broken_text,0,Second function written g(x); no explicit ask; dependence assumed.
+2468,IITR,broken_text,0,"Question reads only min{f,g,h}; solution assumes formula."
+2471,IITR,broken_text,0,No explicit ask; assumed partials-exist-but-discontinuous claim.
+2473,IITR,broken_text,0,Only the definition is given; regularity ladder assumed.
+2474,IITR,broken_text,0,"Bare matrix, no task; solution assumes RREF"
+2475,IITR,broken_text,0,"Bare vector set, no task; solution assumes basis check"
+2492,IITR,needs_data,0,Needs result of problem 3 of an earlier assignment (ratio test).
+2495,IITR,needs_data,0,Needs Problem 6 of an earlier assignment (contractive sequences).
+2757,IITK,broken_text,0,Clairaut equation; no listed subtopic fits; part 2 garbled
+3104,David M. Burton's Elementary Number Theory,needs_data,0,Needs the reader own birth date
+3221,David M. Burton's Elementary Number Theory,needs_data,0,Relies on previous Problem 9 theorem.
+3246,David M. Burton's Elementary Number Theory,needs_data,0,Refers to previous problem's Jacobi symbol definition.
+3258,David M. Burton's Elementary Number Theory,needs_data,0,Baudot code table not given.
+3259,David M. Burton's Elementary Number Theory,needs_data,0,Baudot code table not given.
+3318,David M. Burton's Elementary Number Theory,needs_data,0,Refers to previous problem not shown
+3447,Berkeley Problems in Mathematics (Springer-Verlag),key_conflict,0,Stated expansion omits linear term; solution disagrees
+3534,Berkeley Problems in Mathematics (Springer-Verlag),broken_text,0,Statement says symmetric; should be skew-symmetric
+3748,IITD,broken_text,0,Part 4 garbled: 'z<1' likely means |z|<1
+3755,IITD,mismatch,0,"Solution proves the version with 1-conj(w)z, not 1-zw as asked."
+3778,IITD,key_conflict,0,"Stated hypothesis gives radius 1/R, not R."
+3793,IITD,broken_text,0,Statement needs distinct a_n; solution assumes it.
+3801,IITD,broken_text,0,Lower limit printed as infinity; reads as minus infinity.
+3812,IITG,broken_text,0,Prime missing on x'; solution assumes x' = Ax + f
+3829,IITG,broken_text,0,Printed L(f) lacks f in -2 term; solver assumed -2f
+3841,IITG,broken_text,0,Printed denominator xM - yM; solution proves version with xM - yN
+3998,P.C. Sen's Principles of Electric Machines and Power Electronics,key_conflict,0,Solution says answer key differs; key text cut off
+4026,P.C. Sen's Principles of Electric Machines and Power Electronics,needs_data,0,Refers to Problem 4.3; its parameters not given
+4027,P.C. Sen's Principles of Electric Machines and Power Electronics,needs_data,0,Refers to Problem 4.3; its parameters not given
+4028,P.C. Sen's Principles of Electric Machines and Power Electronics,needs_data,0,Refers to Problem 4.3; its parameters not given
+4029,P.C. Sen's Principles of Electric Machines and Power Electronics,needs_data,0,Refers to Problem 4.6; its parameters not given
+4031,P.C. Sen's Principles of Electric Machines and Power Electronics,needs_data,0,Refers to Problem 4.10; its parameters not given
+4034,P.C. Sen's Principles of Electric Machines and Power Electronics,needs_data,0,Refers to Problem 4.13; its parameters not given
+4037,P.C. Sen's Principles of Electric Machines and Power Electronics,key_conflict,0,Key 168.3 vs solution 168.02; solution blames rounding
+4039,P.C. Sen's Principles of Electric Machines and Power Electronics,needs_data,0,Refers to Problem 4.13; armature resistance not given
+4040,P.C. Sen's Principles of Electric Machines and Power Electronics,needs_data,0,Refers to Problem 4.13; its parameters not given
+4041,P.C. Sen's Principles of Electric Machines and Power Electronics,needs_data,0,Refers to Problem 4.13; its parameters not given
+4042,P.C. Sen's Principles of Electric Machines and Power Electronics,needs_data,0,Refers to Problem 4.22; its parameters not given
+4047,P.C. Sen's Principles of Electric Machines and Power Electronics,needs_data,0,Refers to Problem 4.13; its parameters not given
+4075,P.C. Sen's Principles of Electric Machines and Power Electronics,broken_text,0,Rating 280 V vs test 208 V; test labels ambiguous
+4083,P.C. Sen's Principles of Electric Machines and Power Electronics,mismatch,0,"Solution uses slip -0.025, question states -25 percent"
+4101,P.C. Sen's Principles of Electric Machines and Power Electronics,needs_data,0,"Refers to operating conditions of Problem 6.4, not given"
+4103,P.C. Sen's Principles of Electric Machines and Power Electronics,broken_text,0,Garbled resistance and reactance sentence; solution assumes 1.5 and 15 ohm
+4143,P.C. Sen's Principles of Electric Machines and Power Electronics,mismatch,0,"Solution uses Ra 0.5 ohm, question states 0.4 ohm"
+4145,P.C. Sen's Principles of Electric Machines and Power Electronics,key_conflict,0,Solution says answer key lists speed where torque is asked
+4153,P.C. Sen's Principles of Electric Machines and Power Electronics,broken_text,0,Stray power-electronics sentence inside the question text
+4160,P.C. Sen's Principles of Electric Machines and Power Electronics,broken_text,0,Battery voltage v_b2 truncated; v_b1 text garbled
+4845,P.K. Nag's Power Plant Engineering,mismatch;needs_data,0,"Solution uses water electrolysis, not the cited reaction"
+4952,P.K. Nag's Power Plant Engineering,mismatch,0,Solution replaces boiler efficiency 0.42 with 0.92
+4977,P.K. Nag's Power Plant Engineering,broken_text,0,Subject of question garbled ('R supercritical')
+4981,P.K. Nag's Power Plant Engineering,mismatch,0,Solution derives V_B^2; text says key is 2V_B^2
+4982,P.K. Nag's Power Plant Engineering,broken_text,0,"Stem garbled ('2-raw', 'curtain features')"
+5034,P.K. Nag's Power Plant Engineering,mismatch,0,Solution assumes two heaters; text says one
+5042,P.K. Nag's Power Plant Engineering,mismatch,0,Solution switches to 5% moisture to match given answers
+5053,P.K. Nag's Power Plant Engineering,broken_text,0,Process load given as 1.4 kW; unit implausible
+5069,P.K. Nag's Power Plant Engineering,mismatch,0,Solution reinterprets residue carbon basis to match answer
+5087,P.K. Nag's Power Plant Engineering,broken_text,0,Mean particle size 483 mm is implausible; likely um
+5089,P.K. Nag's Power Plant Engineering,broken_text,0,Firing rate unit uW/m2 is implausible
+5097,P.K. Nag's Power Plant Engineering,broken_text,0,Effectiveness inconsistent with equal flows and gas outlet
+5099,P.K. Nag's Power Plant Engineering,broken_text,0,"Pump suction 350 C at 140 bar is superheated, impossible"
+5105,P.K. Nag's Power Plant Engineering,needs_data,0,
+5124,P.K. Nag's Power Plant Engineering,broken_text,0,"Outlet blade angle 160 deg implausible, likely typo"
+5138,P.K. Nag's Power Plant Engineering,needs_data,0,Fission energy from mass defect; U-235 and neutron masses not given
+5141,P.K. Nag's Power Plant Engineering,needs_data,0,"Boron absorption rate; flux not given, solution per unit flux"
+5142,P.K. Nag's Power Plant Engineering,mismatch,0,Asks kW/m2; solution gives only kW/m3
+5145,P.K. Nag's Power Plant Engineering,needs_data,0,"Fuel mass estimate; fission cross section assumed, not given"
+5152,P.K. Nag's Power Plant Engineering,mismatch,0,Solution corrects u and Vr given as three times too large
+5158,P.K. Nag's Power Plant Engineering,mismatch,0,Solution uses 200 rpm; question states 20 rpm
+5165,P.K. Nag's Power Plant Engineering,mismatch,0,Solution changes given 50 rpm to 200 rpm
+5209,P.K. Nag's Power Plant Engineering,broken_text,0,Blowdown from impurity balance; question opening is cut off
+5211,P.K. Nag's Power Plant Engineering,needs_data,0,Preheater tube length and count; flue gas flow from earlier problem
+5234,P.K. Nag's Power Plant Engineering,broken_text,0,Question opens mid-sentence (reheat clause)
+5262,P.K. Nag's Power Plant Engineering,broken_text,0,Question opens mid-sentence (stage description missing)
+5264,P.K. Nag's Power Plant Engineering,broken_text,0,Question opens mid-sentence (nozzle clause missing)
+5280,P.K. Nag's Power Plant Engineering,broken_text,0,Question opens mid-sentence (givens cut)
+5305,P.K. Nag's Power Plant Engineering,broken_text,0,Question opens mid-sentence (inlet diameter clause)
+5311,P.K. Nag's Power Plant Engineering,broken_text,0,Question opens mid-sentence (engine type cut)
+5312,P.K. Nag's Power Plant Engineering,broken_text,0,Question opens mid-sentence (velocity clause)
+5691,V. Raghavan's Materials Science and Engineering: A First Course,mismatch,0,Question premise is false; solution rejects it
+5884,V. Raghavan's Materials Science and Engineering: A First Course,needs_data,0,Electron density of silver not given
+5885,V. Raghavan's Materials Science and Engineering: A First Course,needs_data,0,Electron density of aluminium not given
+5886,V. Raghavan's Materials Science and Engineering: A First Course,needs_data,0,Temperature coefficients not given
+5887,V. Raghavan's Materials Science and Engineering: A First Course,needs_data,0,Temperature coefficients not given
+5894,V. Raghavan's Materials Science and Engineering: A First Course,needs_data,0,Band gaps of diamond and silicon not given
+5895,V. Raghavan's Materials Science and Engineering: A First Course,needs_data,0,Germanium band gap not given
+5899,V. Raghavan's Materials Science and Engineering: A First Course,needs_data,0,Mobility of germanium not given
+5903,V. Raghavan's Materials Science and Engineering: A First Course,needs_data,0,Germanium carrier mobilities not given
+5904,V. Raghavan's Materials Science and Engineering: A First Course,needs_data,0,Hole mobility of germanium not given
+5905,V. Raghavan's Materials Science and Engineering: A First Course,needs_data,0,Electron mobility in germanium not given
+5910,V. Raghavan's Materials Science and Engineering: A First Course,needs_data,0,GaAs band gap not given in question
+5927,Stephen J. Chapman's Electric Machinery Fundamentals,mismatch,0,Solution uses 10 N; question says 5 N
+5929,Stephen J. Chapman's Electric Machinery Fundamentals,mismatch,0,Solution text says 0.003 Wb; calc uses 0.005 Wb
+5930,Stephen J. Chapman's Electric Machinery Fundamentals,mismatch,0,Solution uses mu_r 2000; question says 1500
+5938,Stephen J. Chapman's Electric Machinery Fundamentals,needs_data,0,Turns (500) not stated in question
+5963,Stephen J. Chapman's Electric Machinery Fundamentals,,1,
+5964,Stephen J. Chapman's Electric Machinery Fundamentals,,1,
+5970,Stephen J. Chapman's Electric Machinery Fundamentals,mismatch,0,Question asks rms voltage; solution computes average
+5972,Stephen J. Chapman's Electric Machinery Fundamentals,,1,
+5981,Stephen J. Chapman's Electric Machinery Fundamentals,,1,
+6076,Stephen J. Chapman's Electric Machinery Fundamentals,mismatch,0,"Solution's impedances match slip 0.025, not stated 0.778"
+6120,V. Raghavan's Materials Science and Engineering: A First Course,,1,"Sketch, peritectic-type reaction, lever-rule fractions"
+6208,P.C. Sen's Principles of Electric Machines and Power Electronics,,1,
+6257,P.K. Nag's Power Plant Engineering,,1,
+6723,R.K. Rajput's Power Plant Engineering,mismatch,0,Solution changes given flue gas temperature from 25 C to 250 C.
+6741,R.K. Rajput's Power Plant Engineering,needs_data,0,Mass flow not in question; solution assumes 0.2 kg/s.
+6793,R.K. Rajput's Power Plant Engineering,broken_text,0,"Coal consumption printed as 4,0000 kg/hr; solution assumes 4000."
+6821,R.K. Rajput's Power Plant Engineering,needs_data,0,Refers to a data table absent from the question.
+6824,R.K. Rajput's Power Plant Engineering,mismatch,0,Solution replaces polytropic index 1.8 with 1.3.
+6831,R.K. Rajput's Power Plant Engineering,needs_data,0,Air-fuel ratio and fuel CV not given in question.
+6833,R.K. Rajput's Power Plant Engineering,mismatch,0,Solution treats the stated BMEP as IMEP.
+6953,R.K. Rajput's Power Plant Engineering,mismatch,0,Solution changes max load 120 MW to 100 MW to match answers
+6956,R.K. Rajput's Power Plant Engineering,mismatch,0,Solution corrects Station 2 running cost typo (2.122 to 0.022)
+6963,R.K. Rajput's Power Plant Engineering,mismatch,0,Solution changes standby annual output to match answers
+6966,R.K. Rajput's Power Plant Engineering,broken_text,0,Question unit ratings (kW vs MW) inconsistent; solution assumes MW
+6973,R.K. Rajput's Power Plant Engineering,mismatch,0,Solution reassigns O&M percentage base to match answers
+6977,R.K. Rajput's Power Plant Engineering,mismatch,0,Solution changes nuclear capital cost to match answer
+6987,R.K. Rajput's Power Plant Engineering,mismatch,0,Solution changes capital cost (Rs 30000) to match answer
+6988,R.K. Rajput's Power Plant Engineering,mismatch,0,"Solution uses 5 p/kWh steam operating cost, not 0.5 p"
+7231,R.K. Rajput's Power Plant Engineering,mismatch,0,Asks octane for diesel; solution answers cetane
+7327,R.K. Rajput's Power Plant Engineering,mismatch,0,Key says (b) Italy; solution text concludes (d) California
+7534,R.K. Rajput's Power Plant Engineering,mismatch,0,"Solution answers binding-energy mass curve, not hydrology mass curve"
+7630,Callister and Rethwisch' Material Science and Engineering: An Introduction,needs_data,0,Lead crystal structure not stated
+7659,Callister and Rethwisch' Material Science and Engineering: An Introduction,needs_data,0,Copper atomic radius not given
+7660,Callister and Rethwisch' Material Science and Engineering: An Introduction,needs_data,0,Molybdenum atomic radius not given
+7662,Callister and Rethwisch' Material Science and Engineering: An Introduction,needs_data,0,Nickel lattice parameter not given
+7673,Callister and Rethwisch' Material Science and Engineering: An Introduction,needs_data,0,"Depends on Problem 4.6(a) result, not given"
+7678,Callister and Rethwisch' Material Science and Engineering: An Introduction,needs_data,0,Chromium density not given
+7679,Callister and Rethwisch' Material Science and Engineering: An Introduction,needs_data,0,Silicon density not given
+7680,Callister and Rethwisch' Material Science and Engineering: An Introduction,needs_data,0,"Element densities for Ti, Al, V not given"
+7685,Callister and Rethwisch' Material Science and Engineering: An Introduction,needs_data,0,Silicon density not given
+7688,Callister and Rethwisch' Material Science and Engineering: An Introduction,needs_data,0,Silicon density not given
+7704,Callister and Rethwisch' Material Science and Engineering: An Introduction,needs_data,0,D0 and Qd for C in Fe not given
+7716,Callister and Rethwisch' Material Science and Engineering: An Introduction,needs_data,0,Copper elastic modulus not given
+7718,Callister and Rethwisch' Material Science and Engineering: An Introduction,needs_data,0,Nickel elastic modulus not given
+7721,Callister and Rethwisch' Material Science and Engineering: An Introduction,needs_data,0,Equation 6.30 not included in question
+7732,Callister and Rethwisch' Material Science and Engineering: An Introduction,needs_data,0,Problem 6.17 data not given
+7743,Callister and Rethwisch' Material Science and Engineering: An Introduction,needs_data,0,Cu and Fe lattice parameters not given
+8146,Miklos Schweitzer Competitions by GJ Szekely,broken_text,0,solution has missing OCR chunk
+8201,Selection Tests in Number Theory For Mathematical Olympiads,key_conflict,0,"Solution shows cube-free, not squarefree"
+8235,Selection Tests in Number Theory For Mathematical Olympiads,key_conflict,0,Statement misprinted; solution proves corrected claim
+8364,Selection Tests in Number Theory For Mathematical Olympiads,broken_text,0,Exponent garbled in statement; solution restates it
+8384,Selection Tests in Number Theory For Mathematical Olympiads,broken_text,0,Statement garbled; solution states intended version
+8403,Selection Tests in Number Theory For Mathematical Olympiads,broken_text,0,two separate problems merged in one question
+8428,Selection Tests in Number Theory For Mathematical Olympiads,broken_text,0,printed exponent not an integer; typo
+8438,Selection Tests in Number Theory For Mathematical Olympiads,broken_text,0,exponent garbled; intended 2^n-1
+8450,Selection Tests in Number Theory For Mathematical Olympiads,broken_text,0,typo: k reused as the integer to find
+8452,Selection Tests in Number Theory For Mathematical Olympiads,broken_text,0,unrelated second problem pasted into question
+8458,Selection Tests in Number Theory For Mathematical Olympiads,broken_text,0,unrelated second problem pasted into question
+8470,Selection Tests in Number Theory For Mathematical Olympiads,broken_text,0,unrelated second problem pasted into question
+8478,Selection Tests in Number Theory For Mathematical Olympiads,broken_text,0,"Set bound printed as L/L, should be p/t."
+8491,Selection Tests in Number Theory For Mathematical Olympiads,broken_text,0,Stray E stands for p in the statement.
+8626,Selection Tests in Number Theory For Mathematical Olympiads,mismatch,0,solution is for 2^x=5^y+3
+8676,Selection Tests in Number Theory For Mathematical Olympiads,broken_text,0,fraction in question garbled
+8691,Selection Tests in Number Theory For Mathematical Olympiads,broken_text,0,hypothesis garbled in transcription
+8692,Selection Tests in Number Theory For Mathematical Olympiads,broken_text,0,typo in last term of sum
+8712,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,Needs FRED GDP and population data not given
+8728,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,Needs BEA table values not given
+8729,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,Needs FRED and Census data not given
+8739,"Macroeconomics by Dornbusch, Fischer, and Startz",broken_text,0,Exponents printed as 5; likely 0.5
+8742,"Macroeconomics by Dornbusch, Fischer, and Startz",broken_text,0,Exponents printed as 5; likely 0.5
+8743,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,Needs FRED data not given
+8744,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,Needs FRED employment data not given
+8756,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,Needs BLS manufacturing series not given
+8764,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,Needs FRED CPI energy chart not given
+8765,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,Needs FRED GDP and deflator data not given
+8774,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,Needs BLS country data not given
+8786,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,2009 labor-force shares missing from the table
+8787,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,Needs Economic Report duration tables not given
+8788,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,1,Needs Australian unemployment and RGDP data not given
+8790,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,Needs FRED series not given
+8800,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,Needs Penn World Tables data not given
+8814,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,Needs FRED GDP and prime rate data not given
+8840,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,Needs FRED exchange-rate data not given
+8841,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,Needs FRED and ECB yield data not given
+8858,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,Needs BEA NIPA table data not given
+8877,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,
+8878,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,1,
+8890,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,
+8891,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,
+8904,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,
+8919,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,
+8975,"Macroeconomics by Dornbusch, Fischer, and Startz",needs_data,0,
+9024,Society Of Actuaries,broken_text,0,Deductible amount missing from question; solution uses 2
+9043,Society Of Actuaries,broken_text,0,Variance value missing from question; solution uses 1
+9072,Society Of Actuaries,,1,
+9087,Society Of Actuaries,,1,
+9155,Society Of Actuaries,broken_text,0,"Deductible printed as 10, (truncated); solution uses 10,000."
+9195,Society Of Actuaries,broken_text,0,"Standard deviation printed as 4, (truncated); solution uses 4,500."
+9207,Society Of Actuaries,broken_text,0,End time truncated (7:); solution uses 7:30.
+9213,Society Of Actuaries,broken_text,0,Benefit limit value cut off; solution implies 100.
+9226,Society Of Actuaries,broken_text,0,Deductible value truncated; solution does not use it.
+9242,Society Of Actuaries,broken_text,0,Stray second question text inserted; solution matches first.
+9255,Society Of Actuaries,mismatch,0,Appended solution for Fire/Theft variance is another question
+9256,Society Of Actuaries,broken_text,0,Mean value missing from question text
+9288,Society Of Actuaries,key_conflict,0,Solution writes 0.75; algebra gives 0.075 (option A)
+9303,Society Of Actuaries,broken_text,0,Mean value digits missing; solution uses 2000
+9325,Society Of Actuaries,broken_text,0,Mean digits truncated in question text
+9343,Society Of Actuaries,broken_text,0,Deductible value missing; solution uses 20
+9363,Society Of Actuaries,broken_text,0,Poisson variance value missing; solution uses 1
+9372,Society Of Actuaries,mismatch,0,Appended solution for a different density question
+9387,Society Of Actuaries,mismatch,0,Appended solution for E|X-2| is another question
+9405,Society Of Actuaries,key_conflict,0,Final 0.8449 is an arithmetic slip; the formula gives 0.0845 (B)
+9412,Society Of Actuaries,key_conflict,0,Solution's 0.6474 is a slip; the formula gives 0.0647 (D)
+9417,Society Of Actuaries,mismatch;key_conflict,0,Trailing 'Solution: A' is from another question; 1.418 is C
+9425,Society Of Actuaries,key_conflict,0,Solution's 15.29 is a slip; 100(0.19)(0.81)=15.39 is A
+9459,Society Of Actuaries,broken_text,0,Type II cost is cut off; the Type I cost of 750 suffices
+9463,Society Of Actuaries,broken_text,0,X's standard deviation is missing; solution implies 4
+9468,Society Of Actuaries,broken_text,0,Mean's unit is cut off; solution reads 100 as thousand
+9478,Society Of Actuaries,broken_text,0,Threshold for event A is cut off; solution assumes less than 5
+9502,Society Of Actuaries,mismatch;key_conflict,0,Stray 'Solution: E' from another question; derived e^(-1/3) is B
+9516,Society Of Actuaries,broken_text,0,Quarterly SD is missing; solution uses 24
+9518,Society Of Actuaries,broken_text,0,Both standard deviations missing; solution uses 40 and 30
+9519,Society Of Actuaries,broken_text,0,Homeowners SD is missing; solution uses 300
+9523,Society Of Actuaries,broken_text,0,Annual SD is missing; solution uses 3
+9530,Society Of Actuaries,broken_text,0,Poisson mean is cut off; solution uses 12
+9566,Society Of Actuaries,broken_text,0,Poisson mean missing from question text
+9592,Society Of Actuaries,broken_text,0,Year 2 reimbursement percent garbled in question text
+9602,Society Of Actuaries,,1,
+9608,Society Of Actuaries,broken_text,0,Normal mean missing from question text
+9612,Society Of Actuaries,broken_text,0,Normal standard deviations missing from question text
+9615,Society Of Actuaries,,1,
+9621,Society Of Actuaries,broken_text,0,Density formula garbled; solution uses exponential density
+9628,Society Of Actuaries,mismatch,0,Solution text includes an unrelated hypergeometric solution
+9631,Society Of Actuaries,,1,
+9636,Society Of Actuaries,broken_text,0,Normal mean missing from question text
+9637,Society Of Actuaries,key_conflict,0,Solution's 0.541 is not an option; e^(-35/12)=0.054 (B)
+9801,Stirzaker and Grimmett's One Thousand Exercises In Probability,needs_data,0,"refers to Exercise 3.1.1, reconstructed by solution"
+9818,Stirzaker and Grimmett's One Thousand Exercises In Probability,needs_data,0,Refers to Exercise 3.3.8 not given
+9966,Stirzaker and Grimmett's One Thousand Exercises In Probability,needs_data,0,Depends on model of previous football exercise
+10103,Stirzaker and Grimmett's One Thousand Exercises In Probability,key_conflict,0,stated 5/8 is for obtuse triangle; angle at O gives 1/2
+10197,Stirzaker and Grimmett's One Thousand Exercises In Probability,broken_text,0,"Printed polynomial has a typo, noted in solution."
+10297,Stirzaker and Grimmett's One Thousand Exercises In Probability,key_conflict,0,"Printed limit has 4, solution derives 2"
+10375,Stirzaker and Grimmett's One Thousand Exercises In Probability,needs_data,0,"Refers to Theorem 6.2.3, not given"
+10388,Stirzaker and Grimmett's One Thousand Exercises In Probability,needs_data,0,"Refers to earlier exercises, not given"
+10443,Stirzaker and Grimmett's One Thousand Exercises In Probability,needs_data,0,Depends on previous exercise generator
+10464,Stirzaker and Grimmett's One Thousand Exercises In Probability,needs_data,0,Depends on previous exercise
+10466,Stirzaker and Grimmett's One Thousand Exercises In Probability,needs_data,0,Depends on Exercise 6.11.5
+10467,Stirzaker and Grimmett's One Thousand Exercises In Probability,needs_data,0,Depends on Exercise 6.11.6
+10477,Stirzaker and Grimmett's One Thousand Exercises In Probability,needs_data,0,Refers to Exercise 6.13.3 not given
+10499,Stirzaker and Grimmett's One Thousand Exercises In Probability,needs_data,0,Cancer model 6.12.12 not given
+10756,Stirzaker and Grimmett's One Thousand Exercises In Probability,needs_data,0,refers to problem 8.10.7 not given
+10927,Stirzaker and Grimmett's One Thousand Exercises In Probability,needs_data,0,
+11005,Schwarz' 40 Puzzles and Problems in Mathematical Statistics,needs_data,0,Refers to Problem 1.9 assumptions
+11302,Hungarian Problem Books,broken_text,0,
+11373,Hungarian Problem Books,broken_text,0,exponent 8 misprint for 3
+11375,Hungarian Problem Books,broken_text,0,exponent 8 misprint for 3
+11390,Hungarian Problem Books,broken_text,0,Typo: x+y=p^z intended
+11392,Hungarian Problem Books,,1,
+11425,Sedrakyan's Stair Step Approach in Mathematics,broken_text,0,Statement has 11 primes; solution says 211 intended
+11456,Sedrakyan's Stair Step Approach in Mathematics,broken_text,0,operator missing in the equation statement
+11575,Sedrakyan's Stair Step Approach in Mathematics,mismatch,0,Solution addresses an exponential inequality instead
+11599,Sedrakyan's Stair Step Approach in Mathematics,broken_text,0,misprint y^2 for z^2 in third equation
+11728,Sedrakyan's Stair Step Approach in Mathematics,broken_text,0,missing word after 'unique'
+11731,Sedrakyan's Stair Step Approach in Mathematics,broken_text,0,"Last numerator printed 999, pattern says 1000"
+11737,Sedrakyan's Stair Step Approach in Mathematics,broken_text,0,missing word after 'only one real'
+11840,Sedrakyan's Stair Step Approach in Mathematics,,1,
+11868,Sedrakyan's Stair Step Approach in Mathematics,,1,
+11884,Sedrakyan's Stair Step Approach in Mathematics,,1,
+12008,Mladenovic's Combinatorics - A Problem Based Approach,broken_text,0,Question text merged with an unrelated game problem
+12015,Mladenovic's Combinatorics - A Problem Based Approach,needs_data,0,Setup of experiments not given
+12016,Mladenovic's Combinatorics - A Problem Based Approach,needs_data,0,Setup of experiments not given
+12017,Mladenovic's Combinatorics - A Problem Based Approach,needs_data,0,Setup of experiments not given
+12018,Mladenovic's Combinatorics - A Problem Based Approach,needs_data,0,Setup of experiments not given
+12019,Mladenovic's Combinatorics - A Problem Based Approach,needs_data,0,Setup of experiments not given
+12020,Mladenovic's Combinatorics - A Problem Based Approach,needs_data,0,Setup of experiments not given
+12021,Mladenovic's Combinatorics - A Problem Based Approach,needs_data,0,Setup of experiments not given
+12104,Mladenovic's Combinatorics - A Problem Based Approach,key_conflict,0,Sum as printed fails n=1; solution starts at k=0
+12183,Mladenovic's Combinatorics - A Problem Based Approach,broken_text,0,Statement prints |T|>=16 but means <=16
+12200,Mladenovic's Combinatorics - A Problem Based Approach,needs_data,0,Refers to experiments set up in a previous exercise
+12204,Mladenovic's Combinatorics - A Problem Based Approach,key_conflict,0,Printed right side is false; solution derives n*2^(n+1)+1
+12254,Mladenovic's Combinatorics - A Problem Based Approach,needs_data,0,"Sizes of S1,S2 not given; solution assumes them."
+12256,Mladenovic's Combinatorics - A Problem Based Approach,needs_data,0,Refers to Exercise 4.8 definition of pi.
+12280,Mladenovic's Combinatorics - A Problem Based Approach,key_conflict,0,Solution says stated bound 40 is false; proves 22.
+12313,Mladenovic's Combinatorics - A Problem Based Approach,broken_text,0,Stray solution fragment appended to question.
+12317,Mladenovic's Combinatorics - A Problem Based Approach,key_conflict,0,Solution says stated bound |D|>k+1 is false.
+12331,Mladenovic's Combinatorics - A Problem Based Approach,broken_text,0,Unrelated CLT text appended to question.
+12352,Mladenovic's Combinatorics - A Problem Based Approach,broken_text,0,Statement misreads A_i cap A_j; should be A_i cap B_j
+12384,Mladenovic's Combinatorics - A Problem Based Approach,mismatch,0,"Solution shows literal claim false, proves weaker strong-orientation claim"
+12644,Grade Five Competition from the Leningrad Mathematical Olympiad,,1,
+12662,Grade Five Competition from the Leningrad Mathematical Olympiad,,1,
+12663,Grade Five Competition from the Leningrad Mathematical Olympiad,,1,
+12677,Grade Five Competition from the Leningrad Mathematical Olympiad,,1,
+12683,Grade Five Competition from the Leningrad Mathematical Olympiad,,1,
+12691,Grade Five Competition from the Leningrad Mathematical Olympiad,,1,
+12717,Mosteller's 50 Challenging Problems In Probability,broken_text,0,penny diameter garbled in statement
+12748,Mosteller's 50 Challenging Problems In Probability,broken_text,0,wins 3 of the plays garbled; solution reads 2/3
+12766,Mosteller's 50 Challenging Problems In Probability,broken_text,0,question length garbled
+12897,OpenQuant Archives,broken_text,0,RANSAC sample count; p wording garbled
+13101,Kaczor and Nowak,mismatch,0,Printed inequality direction wrong; solution proves corrected version
+13192,Kaczor and Nowak,needs_data,0,Refers to preceding problem not given
+13213,Kaczor and Nowak,needs_data,0,
+13218,Kaczor and Nowak,needs_data,0,
+13219,Kaczor and Nowak,needs_data,0,
+13224,Kaczor and Nowak,needs_data,0,
+13232,Kaczor and Nowak,needs_data,0,
+13235,Kaczor and Nowak,needs_data,0,
+13248,Kaczor and Nowak,needs_data,0,
+13317,Kaczor and Nowak,needs_data,0,Refers to unstated 1.7.2; solution assumes its content
+13366,Kaczor and Nowak,needs_data,0,
+13391,Kaczor and Nowak,needs_data,0,
+13396,Kaczor and Nowak,needs_data,0,
+13461,Kaczor and Nowak,needs_data,0,Refers to unstated theorem 2.3.20
+13467,Kaczor and Nowak,needs_data,0,Previous problem not given; solution assumed translation continuity
+13481,Kaczor and Nowak,needs_data,0,"Solution refers to example 1.2.5, not given"
+13498,Kaczor and Nowak,needs_data,0,Refers to preceding problem's conditions
+13500,Kaczor and Nowak,needs_data,0,Refers to problem 2.4.20
+13525,Kaczor and Nowak,needs_data,0,Refers to unseen statement 2.5.4
+13697,Creative Puzzles To Ignite Your Mind (Springer),,1,true/false labels on boxes
+13777,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,needs_data,0,trivia; great-circle distance to Africa
+13778,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,needs_data,0,"US geography trivia, not mathematics"
+13780,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,needs_data,0,farthest points on Earth via great circles
+13781,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,needs_data,0,due south from Key West; geography
+13782,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,needs_data,0,state-name etymology trivia
+13783,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,needs_data,0,US city-name population trivia
+13784,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,needs_data,0,state borders trivia
+13785,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,needs_data,0,state borders trivia
+13786,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,needs_data,0,geography trivia
+13787,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,needs_data,0,census trivia
+13788,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,needs_data,0,city latitude trivia
+13789,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,needs_data,0,city population trivia
+13790,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,needs_data,0,driving route through states; geography
+13802,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,broken_text,0,question text cut off mid-sentence
+13819,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,broken_text,0,Question never states the task.
+13834,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,broken_text,0,Question text cut off.
+13838,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,open_problem,0,Collatz conjecture.
+13839,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,open_problem,0,"Chvatal-Sankoff problem, subadditivity limit."
+13840,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,open_problem,0,Toeplitz inscribed square problem.
+13843,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,open_problem,0,Duerer's unfolding problem.
+13845,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,open_problem,0,Conway's thrackle conjecture.
+13846,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,broken_text,0,Random traffic model on grid; no question stated.
+13848,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,open_problem,0,Venn diagram extension conjecture.
+13849,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,open_problem,0,General winning strategy unknown.
+13851,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,open_problem,0,Soifer's packing conjecture.
+13852,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,open_problem,0,Frankl's union-closed conjecture.
+14148,Peter Winkler's Mathematical Puzzles,needs_data,0,Depends on earlier Colosseum puzzle setup
+14243,Erikson's AHA! Solutions,,1,
+14334,Levitin & Levitin's Algorithmic Puzzles,,1,
+14348,Levitin & Levitin's Algorithmic Puzzles,,1,
+14351,Levitin & Levitin's Algorithmic Puzzles,,1,
+14358,Levitin & Levitin's Algorithmic Puzzles,,1,
+14367,Levitin & Levitin's Algorithmic Puzzles,,1,Algorithm design puzzle
+14398,Levitin & Levitin's Algorithmic Puzzles,,1,
+14413,Levitin & Levitin's Algorithmic Puzzles,,1,
+14422,Levitin & Levitin's Algorithmic Puzzles,,1,
+14443,Levitin & Levitin's Algorithmic Puzzles,,1,
+14444,Levitin & Levitin's Algorithmic Puzzles,,1,
+14469,Levitin & Levitin's Algorithmic Puzzles,,1,
+14519,Engel's Problem Solving Strategies,needs_data,0,Answer depends on computer rounding output
+14522,Engel's Problem Solving Strategies,,1,
+14543,Engel's Problem Solving Strategies,,1,
+14546,Engel's Problem Solving Strategies,,1,
+14547,Engel's Problem Solving Strategies,,1,
+14551,Engel's Problem Solving Strategies,,1,
+14561,Engel's Problem Solving Strategies,mismatch,0,Solution text belongs to another problem
+14602,Engel's Problem Solving Strategies,broken_text,0,Printed condition typo; intended point on rays/extension
+14605,Engel's Problem Solving Strategies,needs_data,0,Refers to E8 and omits the seating condition
+14675,Engel's Problem Solving Strategies,mismatch,1,"Solution is about rings covering points, not the ditch walk."
+14677,Engel's Problem Solving Strategies,mismatch,0,"Solution is about parallel chords of an n-gon, not powers of 2"
+14734,Engel's Problem Solving Strategies,,1,Figures missing; solution absent.
+14794,Engel's Problem Solving Strategies,broken_text,0,Question is a bare expression with no task
+14887,Engel's Problem Solving Strategies,broken_text,0,
+14959,Engel's Problem Solving Strategies,,1,maximise x y^2 z^3 on x+y+z=1
+15114,Engel's Problem Solving Strategies,broken_text,0,Statement incomplete; sequence definition missing
+15366,Engel's Problem Solving Strategies,,1,
+15369,Engel's Problem Solving Strategies,,1,
+15401,Engel's Problem Solving Strategies,needs_data,0,Refers to a preceding problem not given
+15429,Engel's Problem Solving Strategies,,1,
+15529,Engel's Problem Solving Strategies,broken_text,0,"statement typo, intended AB parallel DE"
+15641,Engel's Problem Solving Strategies,needs_data,0,refers to preceding sequence
+16008,Gnadig's 200 More Puzzling Problems in Physics,,1,
+16249,Mathematics for Machine Learning,,1,
+16264,Mathematics for Machine Learning,,1,
+16265,Mathematics for Machine Learning,,1,
+16282,Stefanica's Linear Algebra Primer for Financial Engineering,needs_data,0,
+16283,Stefanica's Linear Algebra Primer for Financial Engineering,needs_data,0,
+16309,Stefanica's Linear Algebra Primer for Financial Engineering,key_conflict,0,Claimed nonsingular; payoff matrix is singular
+16310,Stefanica's Linear Algebra Primer for Financial Engineering,needs_data,0,
+16311,Stefanica's Linear Algebra Primer for Financial Engineering,needs_data,0,
+16378,Stefanica's Linear Algebra Primer for Financial Engineering,needs_data,0,Data file not given; solution gives method only.
+16394,Stefanica's Linear Algebra Primer for Financial Engineering,needs_data,0,Spreadsheet not given; method only.
+16436,Paul Wilmott Introduces Quantitative Finance,needs_data,0,Needs the student's own daily price data; none given
+16437,Paul Wilmott Introduces Quantitative Finance,needs_data,0,Needs interest rate and share price data; none given
+16480,Paul Wilmott Introduces Quantitative Finance,needs_data,0,Needs real daily price data; none given
+16481,Paul Wilmott Introduces Quantitative Finance,needs_data,0,Needs real option market data; none given
+16563,Sederberg and Chang's Over and Over Again,needs_data,0,c(n) undefined in the question
+16564,Sederberg and Chang's Over and Over Again,needs_data,0,Theorem not stated; no content
+16617,Sederberg and Chang's Over and Over Again,needs_data,0,Theorem 24.1 not quoted
+16618,Sederberg and Chang's Over and Over Again,mismatch,0,v.d. means variation diminishing; solution read diagonalizable
+16619,Sederberg and Chang's Over and Over Again,needs_data,0,matrix (24.9) not given
+16624,Sederberg and Chang's Over and Over Again,needs_data,0,relies on exercises 24.11 and 24.12
+16631,Sederberg and Chang's Over and Over Again,needs_data,0,Theorem 25.6 not given
+16639,Sederberg and Chang's Over and Over Again,needs_data,0,Refers to Theorem 3 of previous chapter
+16640,Sederberg and Chang's Over and Over Again,needs_data,0,"Equations 26.12, 26.13 not given"
+16647,Sederberg and Chang's Over and Over Again,needs_data,0,Operator S undefined in question
+16648,Sederberg and Chang's Over and Over Again,needs_data,0,Operator S undefined in question
+16651,Sederberg and Chang's Over and Over Again,needs_data,0,system (29.32) not given
+16652,Sederberg and Chang's Over and Over Again,needs_data,0,"equations (29.32), (29.33) not given"
+16653,Sederberg and Chang's Over and Over Again,needs_data,0,Cites Theorem 29.2 and Theorem 4 not given
+16662,Sederberg and Chang's Over and Over Again,broken_text,0,coefficient array garbled
+16949,Cambridge Tripos,,1,
+17004,Gregory's Classical Mechanics,,1,
+17005,Gregory's Classical Mechanics,,1,
+17006,Gregory's Classical Mechanics,,1,
+17007,Gregory's Classical Mechanics,,1,
+17022,Gregory's Classical Mechanics,,1,
+17062,Gregory's Classical Mechanics,,1,
+17088,Gregory's Classical Mechanics,broken_text,0,
+17092,Gregory's Classical Mechanics,,1,
+17133,Gregory's Classical Mechanics,,1,
+17137,Gregory's Classical Mechanics,,1,
+17138,Gregory's Classical Mechanics,,1,
+17142,Gregory's Classical Mechanics,,1,
+17145,Gregory's Classical Mechanics,,1,
+17189,Gregory's Classical Mechanics,,1,
+17230,Gregory's Classical Mechanics,,1,
+17231,Gregory's Classical Mechanics,,1,
+17252,Gregory's Classical Mechanics,needs_data,0,"Estimate uses book Table 2 values, not given"
+17253,Gregory's Classical Mechanics,,1,
+17258,Gregory's Classical Mechanics,,1,
+17882,Joshi's Concepts and Practice of Mathematical Finance,needs_data,0,Theorems 2.7 and 2.10 not given; assumed CRR and Black-Scholes
+17889,Joshi's Concepts and Practice of Mathematical Finance,broken_text,0,Payoff formula garbled; read as weighted sum of stock prices.
+17918,Joshi's Concepts and Practice of Mathematical Finance,broken_text,0,Option B strike in table garbled; solution infers values.
+17934,Joshi's Concepts and Practice of Mathematical Finance,broken_text,0,Typo in X_0 subscript; read as X_0^(1)=X_0^(2).
+17961,Joshi's Concepts and Practice of Mathematical Finance,broken_text,0,Typo W_r^4 read as W_t^4; reversed-time query unclear.
+17993,Joshi's Concepts and Practice of Mathematical Finance,broken_text,0,"Notation typos (X_I, [0,t]); solution reads it as max over [0,T]"
+18010,Joshi's Concepts and Practice of Mathematical Finance,needs_data,0,Refers to a chapter not given; solution assumes its content
+18018,Joshi's Concepts and Practice of Mathematical Finance,broken_text,0,Drift term missing dt; solution corrects it
+18020,Joshi's Concepts and Practice of Mathematical Finance,needs_data,0,rho_XY not given; Y drift in X measure not computable
+18029,Joshi's Concepts and Practice of Mathematical Finance,broken_text,0,Strike missing from payoff; solution assumes a call strike K
+18049,Joshi's Concepts and Practice of Mathematical Finance,needs_data,0,"Refers to Theorem 15.1, not given; solution assumes its content"
+18050,Joshi's Concepts and Practice of Mathematical Finance,needs_data,0,Exercise 15.1 not given; solution invents the two-asset setup
+18061,Joshi's Concepts and Practice of Mathematical Finance,needs_data,0,"Refers to Chapter 10, not given; solution assumes its content"
+18064,Joshi's Concepts and Practice of Mathematical Finance,needs_data,0,"Refers to Chapter 10, not given; solution assumes its content"
+18228,S.K Som's Introduction To Heat Transfer,,1,
+18253,S.K Som's Introduction To Heat Transfer,broken_text,0,question cut off: part (b) missing from text
+18291,S.K Som's Introduction To Heat Transfer,broken_text,0,text says air flow; fluid is engine oil
+18321,S.K Som's Introduction To Heat Transfer,mismatch,0,"Solution gives epsilon-NTU observations, not the fouling factor."
+18373,S.K Som's Introduction To Heat Transfer,,1,
+18375,S.K Som's Introduction To Heat Transfer,,1,
+18392,S.K Som's Introduction To Heat Transfer,needs_data,0,"Aluminium properties taken from Problem 4.2, not given."
+18396,S.K Som's Introduction To Heat Transfer,needs_data,0,"Aluminium properties taken from Problem 4.2, not given."
+18397,S.K Som's Introduction To Heat Transfer,needs_data,0,"Aluminium properties taken from Problem 4.2, not given."
+18402,S.K Som's Introduction To Heat Transfer,needs_data,0,"Egg properties taken from Problem 4.17, not given."
+18417,S.K Som's Introduction To Heat Transfer,needs_data;broken_text,0,Temperature profile formula missing; refers to Problem 5.2.
+18418,S.K Som's Introduction To Heat Transfer,needs_data;broken_text,0,Nusselt correlation missing; air properties from Problem 5.3.
+18419,S.K Som's Introduction To Heat Transfer,needs_data,0,"Air properties taken from Problem 5.3, not given."
+18420,S.K Som's Introduction To Heat Transfer,broken_text,0,Heat transfer coefficient expression and water properties missing.
+18422,S.K Som's Introduction To Heat Transfer,broken_text,0,Heat transfer coefficient relation missing from text.
+18423,S.K Som's Introduction To Heat Transfer,broken_text,0,Heat transfer coefficient relation missing from text.
+18424,S.K Som's Introduction To Heat Transfer,mismatch;broken_text;needs_data,0,Solution is a friction-factor derivation; question cut; refers to Example 5.9.
+18427,S.K Som's Introduction To Heat Transfer,broken_text,0,Velocity expression missing from text.
+18435,S.K Som's Introduction To Heat Transfer,broken_text,0,Velocity profile formula missing from text.
+18436,S.K Som's Introduction To Heat Transfer,broken_text,0,Question block contains stray correlation text from another problem.
+18440,S.K Som's Introduction To Heat Transfer,broken_text,0,Temperature profile formula missing from text.
+18455,S.K Som's Introduction To Heat Transfer,needs_data,0,"Refers to Problem 7.18, which is not in this block."
+18519,S.K Som's Introduction To Heat Transfer,needs_data,0,Henry's law constant for CO2 not given
+18635,F.M White's Fluid Mechanics,,1,
+18646,F.M White's Fluid Mechanics,,1,
+18647,F.M White's Fluid Mechanics,,1,
+18662,F.M White's Fluid Mechanics,needs_data,0,curve fit of tabulated water density [re-filed after tree change]
+18670,F.M White's Fluid Mechanics,,1,
+18671,F.M White's Fluid Mechanics,needs_data,0,needs Table A-1 water viscosity data
+18691,F.M White's Fluid Mechanics,,1,
+18693,F.M White's Fluid Mechanics,,1,
+18694,F.M White's Fluid Mechanics,,1,
+18701,F.M White's Fluid Mechanics,,1,
+18705,F.M White's Fluid Mechanics,,1,
+18721,F.M White's Fluid Mechanics,,1,
+18722,F.M White's Fluid Mechanics,,1,
+18723,F.M White's Fluid Mechanics,,1,
+18724,F.M White's Fluid Mechanics,,1,stress transformation: solid mechanics [re-filed]
+18725,F.M White's Fluid Mechanics,,1,stress transformation: solid mechanics [re-filed]
+18734,F.M White's Fluid Mechanics,,1,
+18735,F.M White's Fluid Mechanics,,1,
+18736,F.M White's Fluid Mechanics,,1,
+18737,F.M White's Fluid Mechanics,,1,
+18740,F.M White's Fluid Mechanics,,1,
+18741,F.M White's Fluid Mechanics,,1,
+18744,F.M White's Fluid Mechanics,,1,
+18745,F.M White's Fluid Mechanics,,1,
+18746,F.M White's Fluid Mechanics,,1,
+18754,F.M White's Fluid Mechanics,,1,
+18755,F.M White's Fluid Mechanics,,1,
+18757,F.M White's Fluid Mechanics,,1,
+18760,F.M White's Fluid Mechanics,,1,
+18761,F.M White's Fluid Mechanics,,1,
+18763,F.M White's Fluid Mechanics,,1,
+18764,F.M White's Fluid Mechanics,,1,
+18767,F.M White's Fluid Mechanics,,1,
+18768,F.M White's Fluid Mechanics,,1,
+18772,F.M White's Fluid Mechanics,,1,
+18776,F.M White's Fluid Mechanics,,1,
+18779,F.M White's Fluid Mechanics,,1,
+18782,F.M White's Fluid Mechanics,,1,
+18783,F.M White's Fluid Mechanics,,1,
+18784,F.M White's Fluid Mechanics,,1,
+18785,F.M White's Fluid Mechanics,,1,
+18786,F.M White's Fluid Mechanics,,1,
+18787,F.M White's Fluid Mechanics,,1,Also qualitative tipping and seepage question
+18789,F.M White's Fluid Mechanics,,1,
+18791,F.M White's Fluid Mechanics,,1,
+18792,F.M White's Fluid Mechanics,,1,
+18796,F.M White's Fluid Mechanics,,1,
+18797,F.M White's Fluid Mechanics,,1,
+18801,F.M White's Fluid Mechanics,,1,
+18803,F.M White's Fluid Mechanics,,1,
+18805,F.M White's Fluid Mechanics,,1,
+18806,F.M White's Fluid Mechanics,,1,
+18807,F.M White's Fluid Mechanics,,1,
+18808,F.M White's Fluid Mechanics,,1,
+18810,F.M White's Fluid Mechanics,,1,
+18811,F.M White's Fluid Mechanics,,1,
+18812,F.M White's Fluid Mechanics,,1,
+18813,F.M White's Fluid Mechanics,,1,
+18814,F.M White's Fluid Mechanics,,1,
+18816,F.M White's Fluid Mechanics,,1,
+18819,F.M White's Fluid Mechanics,,1,
+18821,F.M White's Fluid Mechanics,,1,
+18825,F.M White's Fluid Mechanics,,1,
+18836,F.M White's Fluid Mechanics,,1,
+18837,F.M White's Fluid Mechanics,,1,
+18842,F.M White's Fluid Mechanics,,1,
+18843,F.M White's Fluid Mechanics,,1,Definition of a and b in figure
+18848,F.M White's Fluid Mechanics,,1,
+18849,F.M White's Fluid Mechanics,,1,
+18852,F.M White's Fluid Mechanics,,1,
+18853,F.M White's Fluid Mechanics,,1,Cone dimensions given only in figure
+18863,F.M White's Fluid Mechanics,,1,Tank dimensions in figure
+18864,F.M White's Fluid Mechanics,,1,Tank geometry in figure
+18867,F.M White's Fluid Mechanics,,1,
+18868,F.M White's Fluid Mechanics,,1,
+18870,F.M White's Fluid Mechanics,,1,Wheel radius from figure
+18872,F.M White's Fluid Mechanics,,1,U-tube geometry in figure
+18876,F.M White's Fluid Mechanics,,1,Radii and level difference in figure
+18894,F.M White's Fluid Mechanics,,1,Pipe diameters only in figure
+18901,F.M White's Fluid Mechanics,,1,
+18904,F.M White's Fluid Mechanics,needs_data,0,"Duct size b, h not given; solution assumes 10 cm"
+18910,F.M White's Fluid Mechanics,,1,Cone half-angle in figure
+18917,F.M White's Fluid Mechanics,,1,Bellows geometry in figure
+18920,F.M White's Fluid Mechanics,,1,Given conditions only in figure
+18926,F.M White's Fluid Mechanics,,1,Jet diameter and speed in figure
+18927,F.M White's Fluid Mechanics,,1,
+18931,F.M White's Fluid Mechanics,,1,Jet diameter in figure
+18935,F.M White's Fluid Mechanics,,1,
+18936,F.M White's Fluid Mechanics,,1,
+18942,F.M White's Fluid Mechanics,,1,
+18943,F.M White's Fluid Mechanics,,1,
+18944,F.M White's Fluid Mechanics,,1,
+18947,F.M White's Fluid Mechanics,,1,
+18950,F.M White's Fluid Mechanics,,1,
+18951,F.M White's Fluid Mechanics,,1,
+18952,F.M White's Fluid Mechanics,,1,
+18956,F.M White's Fluid Mechanics,,1,
+18957,F.M White's Fluid Mechanics,,1,
+18959,F.M White's Fluid Mechanics,,1,
+18963,F.M White's Fluid Mechanics,,1,
+18964,F.M White's Fluid Mechanics,,1,
+18970,F.M White's Fluid Mechanics,,1,
+18972,F.M White's Fluid Mechanics,needs_data,0,depends on Prob 3.36 data
+18975,F.M White's Fluid Mechanics,,1,
+18978,F.M White's Fluid Mechanics,,1,
+18982,F.M White's Fluid Mechanics,,1,
+18984,F.M White's Fluid Mechanics,needs_data,0,refers to Ex. 3.10 data
+18985,F.M White's Fluid Mechanics,,1,rocket equation; rockets see Mechanics [rocket: moved per taxonomy decision]
+18995,F.M White's Fluid Mechanics,needs_data,0,needs Prob 3.35 rocket thrust
+18997,F.M White's Fluid Mechanics,needs_data,0,refers to Prob 3.60 data
+19000,F.M White's Fluid Mechanics,,1,
+19001,F.M White's Fluid Mechanics,,1,
+19002,F.M White's Fluid Mechanics,,1,
+19005,F.M White's Fluid Mechanics,needs_data,0,refers to Prob 3.78 setup
+19007,F.M White's Fluid Mechanics,,1,
+19008,F.M White's Fluid Mechanics,needs_data,0,builds on Prob 3.46
+19009,F.M White's Fluid Mechanics,,1,
+19011,F.M White's Fluid Mechanics,,1,
+19016,F.M White's Fluid Mechanics,,1,
+19017,F.M White's Fluid Mechanics,,1,
+19023,F.M White's Fluid Mechanics,,1,
+19025,F.M White's Fluid Mechanics,,1,
+19032,F.M White's Fluid Mechanics,,1,
+19039,F.M White's Fluid Mechanics,,1,
+19040,F.M White's Fluid Mechanics,,1,
+19041,F.M White's Fluid Mechanics,,1,
+19043,F.M White's Fluid Mechanics,,1,
+19044,F.M White's Fluid Mechanics,,1,
+19046,F.M White's Fluid Mechanics,,1,
+19049,F.M White's Fluid Mechanics,,1,
+19053,F.M White's Fluid Mechanics,,1,
+19054,F.M White's Fluid Mechanics,,1,
+19055,F.M White's Fluid Mechanics,,1,
+19057,F.M White's Fluid Mechanics,,1,
+19058,F.M White's Fluid Mechanics,,1,
+19059,F.M White's Fluid Mechanics,,1,
+19061,F.M White's Fluid Mechanics,,1,
+19062,F.M White's Fluid Mechanics,,1,
+19063,F.M White's Fluid Mechanics,,1,
+19068,F.M White's Fluid Mechanics,,1,
+19075,F.M White's Fluid Mechanics,,1,
+19079,F.M White's Fluid Mechanics,needs_data,0,"uses velocity field of Prob 4.3, given only in solution"
+19081,F.M White's Fluid Mechanics,,1,
+19086,F.M White's Fluid Mechanics,,1,
+19096,F.M White's Fluid Mechanics,,1,
+19099,F.M White's Fluid Mechanics,,1,
+19110,F.M White's Fluid Mechanics,,1,Fig. P4.35 not needed
+19112,F.M White's Fluid Mechanics,,1,
+19113,F.M White's Fluid Mechanics,,1,
+19117,F.M White's Fluid Mechanics,,1,
+19119,F.M White's Fluid Mechanics,,1,
+19120,F.M White's Fluid Mechanics,,1,
+19130,F.M White's Fluid Mechanics,,1,
+19135,F.M White's Fluid Mechanics,,1,
+19137,F.M White's Fluid Mechanics,,1,
+19139,F.M White's Fluid Mechanics,,1,
+19149,F.M White's Fluid Mechanics,,1,
+19156,F.M White's Fluid Mechanics,,1,
+19161,F.M White's Fluid Mechanics,,1,
+19162,F.M White's Fluid Mechanics,,1,
+19170,F.M White's Fluid Mechanics,,1,
+19190,F.M White's Fluid Mechanics,,1,
+19195,F.M White's Fluid Mechanics,,1,
+19210,F.M White's Fluid Mechanics,,1,
+19218,F.M White's Fluid Mechanics,,1,
+19219,F.M White's Fluid Mechanics,,1,
+19221,F.M White's Fluid Mechanics,,1,
+19227,F.M White's Fluid Mechanics,,1,Rod length and diameter only in figure
+19233,F.M White's Fluid Mechanics,,1,
+19239,F.M White's Fluid Mechanics,,1,V-notch flow correlation by dimensional analysis
+19241,F.M White's Fluid Mechanics,,1,
+19255,F.M White's Fluid Mechanics,,1,
+19256,F.M White's Fluid Mechanics,,1,
+19258,F.M White's Fluid Mechanics,,1,Needs Fig P5.61 curve fits
+19259,F.M White's Fluid Mechanics,needs_data,0,Needs Example 5.7 correlation
+19260,F.M White's Fluid Mechanics,needs_data,0,Needs Example 5.7 correlation
+19261,F.M White's Fluid Mechanics,needs_data,0,Needs Prob 5.90 correlation
+19263,F.M White's Fluid Mechanics,,1,
+19285,F.M White's Fluid Mechanics,,1,Pipe length and head only in figure
+19287,F.M White's Fluid Mechanics,,1,Gutter depth and pipe length in figure
+19291,F.M White's Fluid Mechanics,,1,Tube length and heights in figure
+19292,F.M White's Fluid Mechanics,,1,Depends on Prob 6.25 figure
+19293,F.M White's Fluid Mechanics,,1,"Quasi-steady laminar draining via capillary, symbolic"
+19294,F.M White's Fluid Mechanics,,1,
+19296,F.M White's Fluid Mechanics,,1,Pipe length and elevation in figure
+19298,F.M White's Fluid Mechanics,,1,Pressures and pipe length in figure
+19304,F.M White's Fluid Mechanics,,1,
+19308,F.M White's Fluid Mechanics,,1,
+19313,F.M White's Fluid Mechanics,,1,
+19315,F.M White's Fluid Mechanics,,1,
+19317,F.M White's Fluid Mechanics,,1,
+19318,F.M White's Fluid Mechanics,,1,
+19319,F.M White's Fluid Mechanics,,1,
+19321,F.M White's Fluid Mechanics,,1,
+19326,F.M White's Fluid Mechanics,needs_data,0,Needs Laufer data from Prob C6.6; table given in solution
+19328,F.M White's Fluid Mechanics,,1,
+19329,F.M White's Fluid Mechanics,,1,
+19334,F.M White's Fluid Mechanics,,1,
+19339,F.M White's Fluid Mechanics,,1,
+19340,F.M White's Fluid Mechanics,,1,
+19342,F.M White's Fluid Mechanics,,1,
+19344,F.M White's Fluid Mechanics,,1,
+19346,F.M White's Fluid Mechanics,,1,Pump curve in figure; solution gives 80-20Q^2
+19347,F.M White's Fluid Mechanics,,1,Pump curve in figure; solution gives 80-20Q^2
+19348,F.M White's Fluid Mechanics,,1,Pump curve in figure; solution gives 80-20Q^2
+19349,F.M White's Fluid Mechanics,,1,
+19351,F.M White's Fluid Mechanics,,1,Pump curve in figure; solution gives 80-20Q^2
+19356,F.M White's Fluid Mechanics,,1,
+19371,F.M White's Fluid Mechanics,,1,
+19372,F.M White's Fluid Mechanics,,1,
+19377,F.M White's Fluid Mechanics,,1,
+19381,F.M White's Fluid Mechanics,,1,
+19382,F.M White's Fluid Mechanics,,1,"square ducts in series, blower power"
+19383,F.M White's Fluid Mechanics,,1,
+19390,F.M White's Fluid Mechanics,,1,
+19391,F.M White's Fluid Mechanics,,1,butterfly valve K from chart
+19392,F.M White's Fluid Mechanics,,1,
+19402,F.M White's Fluid Mechanics,,1,
+19407,F.M White's Fluid Mechanics,,1,number of holes in figure
+19409,F.M White's Fluid Mechanics,,1,
+19410,F.M White's Fluid Mechanics,,1,
+19411,F.M White's Fluid Mechanics,,1,orifice in pipe between reservoirs
+19415,F.M White's Fluid Mechanics,,1,
+19418,F.M White's Fluid Mechanics,,1,two connected tanks
+19419,F.M White's Fluid Mechanics,,1,
+19420,F.M White's Fluid Mechanics,,1,validity range of venturi standard
+19421,F.M White's Fluid Mechanics,,1,
+19425,F.M White's Fluid Mechanics,needs_data,0,butterfly valve curve fit from Fig 6.19b
+19426,F.M White's Fluid Mechanics,,1,compressible venturi
+19429,F.M White's Fluid Mechanics,,1,"write eight governing equations, no solution"
+19447,F.M White's Fluid Mechanics,,1,
+19455,F.M White's Fluid Mechanics,,1,"Profile data, not Blasius"
+19463,F.M White's Fluid Mechanics,,1,
+19468,F.M White's Fluid Mechanics,,1,Mixed laminar-turbulent triangular plate
+19495,F.M White's Fluid Mechanics,,1,"Filter of fibers, drag-based pressure drop"
+19514,F.M White's Fluid Mechanics,,1,Sphere on string in stream
+19518,F.M White's Fluid Mechanics,,1,Ball suspended in air jet
+19521,F.M White's Fluid Mechanics,,1,
+19522,F.M White's Fluid Mechanics,,1,
+19525,F.M White's Fluid Mechanics,,1,Cup anemometer rotation vs wind
+19527,F.M White's Fluid Mechanics,,1,Cone drag table
+19530,F.M White's Fluid Mechanics,,1,Half-tube drag values from Table 7.2
+19531,F.M White's Fluid Mechanics,needs_data,0,Fit coastdown data by least squares
+19533,F.M White's Fluid Mechanics,,1,Ball geometry in figure
+19535,F.M White's Fluid Mechanics,,1,
+19538,F.M White's Fluid Mechanics,,1,Needs wave-drag chart Fig 7.19
+19539,F.M White's Fluid Mechanics,,1,
+19540,F.M White's Fluid Mechanics,,1,
+19543,F.M White's Fluid Mechanics,,1,
+19549,F.M White's Fluid Mechanics,,1,
+19550,F.M White's Fluid Mechanics,needs_data,0,Needs airplane data of Prob 7.116
+19551,F.M White's Fluid Mechanics,needs_data,1,Needs airplane data of Prob 7.116
+19552,F.M White's Fluid Mechanics,,1,
+19564,F.M White's Fluid Mechanics,,1,
+19573,F.M White's Fluid Mechanics,needs_data,1,Hole velocity absent; solution leaves Q unevaluated
+19577,F.M White's Fluid Mechanics,,1,
+19579,F.M White's Fluid Mechanics,,1,
+19585,F.M White's Fluid Mechanics,,1,
+19588,F.M White's Fluid Mechanics,,1,
+19589,F.M White's Fluid Mechanics,,1,
+19593,F.M White's Fluid Mechanics,,1,
+19606,F.M White's Fluid Mechanics,needs_data,0,Needs stream data of Prob 8.43
+19607,F.M White's Fluid Mechanics,needs_data,0,Needs stream data of Prob 8.43
+19611,F.M White's Fluid Mechanics,,1,
+19614,F.M White's Fluid Mechanics,,1,
+19621,F.M White's Fluid Mechanics,,1,
+19623,F.M White's Fluid Mechanics,,1,
+19632,F.M White's Fluid Mechanics,,1,
+19633,F.M White's Fluid Mechanics,,1,
+19635,F.M White's Fluid Mechanics,,1,
+19638,F.M White's Fluid Mechanics,,1,
+19643,F.M White's Fluid Mechanics,,1,
+19644,F.M White's Fluid Mechanics,truncated_solution,1,solution ends before numeric result
+19651,F.M White's Fluid Mechanics,,1,
+19652,F.M White's Fluid Mechanics,,1,
+19653,F.M White's Fluid Mechanics,,1,
+19662,F.M White's Fluid Mechanics,,1,lift read from chart
+19666,F.M White's Fluid Mechanics,,1,
+19669,F.M White's Fluid Mechanics,no_solution,1,
+19680,F.M White's Fluid Mechanics,needs_data,1,needs NACA 4412 data of Prob 8.83
+19694,F.M White's Fluid Mechanics,needs_data,0,needs surface velocity data of Prob 8.84
+19702,F.M White's Fluid Mechanics,,1,data from figure
+19705,F.M White's Fluid Mechanics,,1,manometer reading from figure
+19712,F.M White's Fluid Mechanics,,1,manometer reading from figure
+19715,F.M White's Fluid Mechanics,,1,
+19726,F.M White's Fluid Mechanics,needs_data,0,Depends on results of Prob 9.43
+19729,F.M White's Fluid Mechanics,,1,
+19737,F.M White's Fluid Mechanics,,1,Areas given in missing figure
+19743,F.M White's Fluid Mechanics,,1,Exit area 3 cm2 and tank layout in figure
+19745,F.M White's Fluid Mechanics,,1,Throat/exit areas and tank pressures in figure
+19750,F.M White's Fluid Mechanics,needs_data,0,Relies on Prob 9.70 results
+19757,F.M White's Fluid Mechanics,,1,Hole dimensions and pressures in figure
+19763,F.M White's Fluid Mechanics,,1,"Inlet Mach, pressure, temperature in figure"
+19771,F.M White's Fluid Mechanics,needs_data,0,Relies on Prob 9.91 geometry
+19773,F.M White's Fluid Mechanics,needs_data,0,Uses data from Prob 9.86
+19778,F.M White's Fluid Mechanics,,1,Compressor curve given as equation in solution only
+19779,F.M White's Fluid Mechanics,needs_data,0,Compressor curve from Prob 9.99
+19790,F.M White's Fluid Mechanics,needs_data,0,Builds on Prob 9.110 Rayleigh line
+19793,F.M White's Fluid Mechanics,no_solution,0,Combined friction and heat transfer; solution omitted
+19797,F.M White's Fluid Mechanics,,1,
+19799,F.M White's Fluid Mechanics,,1,
+19801,F.M White's Fluid Mechanics,,1,Upstream Mach and pressure from figure
+19803,F.M White's Fluid Mechanics,,1,Wave angle 60 deg only in figure
+19807,F.M White's Fluid Mechanics,,1,"Mach, pressure and geometry in figure"
+19811,F.M White's Fluid Mechanics,,1,Blunt-edge case uses normal shock
+19814,F.M White's Fluid Mechanics,,1,Upstream state from figure
+19817,F.M White's Fluid Mechanics,,1,Overexpanded jet edge angle gives oblique shock pressure ratio
+19819,F.M White's Fluid Mechanics,needs_data,0,Relies on Prob 9.122 numbers
+19820,F.M White's Fluid Mechanics,,1,Upstream pressure from figure
+19821,F.M White's Fluid Mechanics,truncated_solution,0,Solution only in image sketches
+19826,F.M White's Fluid Mechanics,,1,
+19828,F.M White's Fluid Mechanics,needs_data,0,Requires Example 9.21 geometry and conditions
+19835,F.M White's Fluid Mechanics,,1,
+19836,F.M White's Fluid Mechanics,truncated_solution,0,Solution only outlines proof
+19841,F.M White's Fluid Mechanics,needs_data,0,References Prob C9.5 results
+19842,F.M White's Fluid Mechanics,,1,"Pitot-shock Mach from stagnation pressure, compare with area ratio"
+19846,F.M White's Fluid Mechanics,,1,Piezometer tubes vs open-channel flow; hydraulic grade line
+19847,F.M White's Fluid Mechanics,,1,
+19854,F.M White's Fluid Mechanics,,1,"Laminar sheet flow, compare with friction factor"
+19857,F.M White's Fluid Mechanics,,1,Cross section in figure
+19858,F.M White's Fluid Mechanics,,1,Cross section in figure
+19865,F.M White's Fluid Mechanics,,1,
+19867,F.M White's Fluid Mechanics,,1,"Max Q and V versus depth, triangle"
+19868,F.M White's Fluid Mechanics,,1,
+19873,F.M White's Fluid Mechanics,,1,Cross section in figure
+19875,F.M White's Fluid Mechanics,needs_data,0,Needs flow rate from Prob 10.32
+19879,F.M White's Fluid Mechanics,,1,
+19882,F.M White's Fluid Mechanics,,1,
+19884,F.M White's Fluid Mechanics,needs_data,0,"Needs n, slope and Q from Prob 10.39"
+19889,F.M White's Fluid Mechanics,,1,Refers to text Fig 10.8b
+19891,F.M White's Fluid Mechanics,needs_data,0,"Needs Prob 10.34 flow, n and slope"
+19895,F.M White's Fluid Mechanics,needs_data,0,Needs q and depth from Prob 10.48
+19898,F.M White's Fluid Mechanics,,1,Triangular duct geometry in figure
+19899,F.M White's Fluid Mechanics,,1,Triangular duct geometry in figure
+19902,F.M White's Fluid Mechanics,needs_data,0,Uses n and slope from Prob 10.59
+19905,F.M White's Fluid Mechanics,,1,
+19906,F.M White's Fluid Mechanics,,1,
+19907,F.M White's Fluid Mechanics,,1,Numerical ODE integration of bump profile
+19908,F.M White's Fluid Mechanics,,1,
+19909,F.M White's Fluid Mechanics,,1,
+19912,F.M White's Fluid Mechanics,,1,
+19913,F.M White's Fluid Mechanics,,1,
+19914,F.M White's Fluid Mechanics,,1,
+19915,F.M White's Fluid Mechanics,,1,
+19916,F.M White's Fluid Mechanics,,1,
+19919,F.M White's Fluid Mechanics,,1,Needs drowned-gate chart Fig P10.77
+19926,F.M White's Fluid Mechanics,,1,
+19930,F.M White's Fluid Mechanics,,1,"Chain: jump, sluice gate, critical depth"
+19933,F.M White's Fluid Mechanics,,1,Sloped jump weight term; curve-fit correlation
+19935,F.M White's Fluid Mechanics,,1,
+19936,F.M White's Fluid Mechanics,,1,
+19937,F.M White's Fluid Mechanics,,1,
+19943,F.M White's Fluid Mechanics,,1,
+19944,F.M White's Fluid Mechanics,,1,
+19946,F.M White's Fluid Mechanics,,1,
+19956,F.M White's Fluid Mechanics,,1,Venturi flume choking
+19957,F.M White's Fluid Mechanics,,1,
+19961,F.M White's Fluid Mechanics,broken_text,1,Question lacks explicit task; curve fit of Cd data
+19968,F.M White's Fluid Mechanics,,1,V-notch weir then backwater ODE
+19979,F.M White's Fluid Mechanics,,1,
+19980,F.M White's Fluid Mechanics,,1,
+19983,F.M White's Fluid Mechanics,,1,
+19984,F.M White's Fluid Mechanics,,1,
+19989,F.M White's Fluid Mechanics,,1,
+19990,F.M White's Fluid Mechanics,,1,
+19995,F.M White's Fluid Mechanics,,1,Impeller dimensions in figure partly restated
+19999,F.M White's Fluid Mechanics,,1,
+20000,F.M White's Fluid Mechanics,,1,
+20001,F.M White's Fluid Mechanics,,1,
+20010,F.M White's Fluid Mechanics,,1,
+20014,F.M White's Fluid Mechanics,,1,
+20019,F.M White's Fluid Mechanics,,1,
+20023,F.M White's Fluid Mechanics,,1,
+20024,F.M White's Fluid Mechanics,,1,
+20027,F.M White's Fluid Mechanics,,1,
+20030,F.M White's Fluid Mechanics,,1,
+20031,F.M White's Fluid Mechanics,,1,
+20032,F.M White's Fluid Mechanics,,1,
+20033,F.M White's Fluid Mechanics,,1,
+20034,F.M White's Fluid Mechanics,,1,
+20036,F.M White's Fluid Mechanics,,1,
+20037,F.M White's Fluid Mechanics,,1,
+20042,F.M White's Fluid Mechanics,,1,
+20047,F.M White's Fluid Mechanics,,1,
+20048,F.M White's Fluid Mechanics,,1,
+20053,F.M White's Fluid Mechanics,,1,
+20055,F.M White's Fluid Mechanics,,1,
+20056,F.M White's Fluid Mechanics,,1,
+20060,F.M White's Fluid Mechanics,,1,
+20062,F.M White's Fluid Mechanics,,1,
+20064,F.M White's Fluid Mechanics,,1,
+20065,F.M White's Fluid Mechanics,,1,
+20067,F.M White's Fluid Mechanics,,1,
+20071,F.M White's Fluid Mechanics,,1,
+20072,F.M White's Fluid Mechanics,,1,
+20076,F.M White's Fluid Mechanics,,1,
+20078,F.M White's Fluid Mechanics,,1,
+20081,F.M White's Fluid Mechanics,,1,
+20088,Kern's Process Heat Transfer,mismatch,1,Question is a plane wall; solution is pipe insulation
+20091,Kern's Process Heat Transfer,needs_data,0,Refers to previous example for the heat rate and k values
+20095,Kern's Process Heat Transfer,,1,
+20096,Kern's Process Heat Transfer,needs_data,0,"Uses series from Example 2.13 (another block), not given here"
+20097,Kern's Process Heat Transfer,needs_data,0,"Refers to Example 2.14, which is not given"
+20099,Kern's Process Heat Transfer,,1,
+20108,Kern's Process Heat Transfer,needs_data,0,"Refers to previous example's equation (1), not given here"
+20111,Kern's Process Heat Transfer,needs_data,0,Refers to Example 3.14 for Ra; data not given here
+20113,Kern's Process Heat Transfer,needs_data,0,"Uses h from previous example, not given here"
+20115,Kern's Process Heat Transfer,needs_data,0,"Uses h from Illustrative Example 3.18, not given"
+20124,Kern's Process Heat Transfer,broken_text,0,"Units and value garbled; solution uses 13,000 Btu/hr"
+20125,Kern's Process Heat Transfer,needs_data,0,Refers to Example 4.8; its Q and temperatures not given here
+20129,Kern's Process Heat Transfer,needs_data,0,Refers to Example 4.7; its F_eps and area not given here
+20131,Kern's Process Heat Transfer,key_conflict,0,Solution shows AM 45 F but (79-11)/2 = 34 F
+20132,Kern's Process Heat Transfer,key_conflict,0,"Counter/cocurrent LMTD values swapped; correct 123.3 counter, 108.2 cocurrent"
+20133,Kern's Process Heat Transfer,broken_text,0,No explicit question; implied LMTD comparison of flow types
+20140,Kern's Process Heat Transfer,needs_data,0,"Refers to previous example's U, not given here"
+20143,Kern's Process Heat Transfer,needs_data,0,"Refers to previous example's resistances, not given here"
+20151,Kern's Process Heat Transfer,needs_data,0,"Refers to previous example's areas, not given here"
+20152,Kern's Process Heat Transfer,,1,
+20153,Kern's Process Heat Transfer,needs_data,0,"Refers to previous example's length (31.5 ft), not given here"
+20154,Kern's Process Heat Transfer,key_conflict,0,Energy balance fails: 2000(300-114) != 1000(153-60)
+20156,Kern's Process Heat Transfer,needs_data,0,"Refers to previous example's data, not given here"
+20161,Kern's Process Heat Transfer,needs_data,0,Needs full Table 6.3 and Figure 6.12 plot; not given
+20163,Kern's Process Heat Transfer,needs_data,0,Needs benzene and toluene properties from Appendix or Perry's
+20167,Kern's Process Heat Transfer,broken_text,0,"Inlet temperatures garbled; cold inlet 100 F implied from R, P"
+20168,Kern's Process Heat Transfer,,1,
+20169,Kern's Process Heat Transfer,key_conflict,0,P should be 75/300 = 0.25; solution uses 350
+20170,Kern's Process Heat Transfer,key_conflict,0,dT in K (310.6) wrongly used; 37.4 gives A = 15.0 m2
+20173,Kern's Process Heat Transfer,needs_data,0,"Refers to previous example's Q and LMTD*, not given here"
+20175,Kern's Process Heat Transfer,needs_data;key_conflict,1,1-4 row repeats 1-2 F; more passes should raise F
+20176,Kern's Process Heat Transfer,needs_data,0,"Uses cases from Example 7.4, not given in this question"
+20178,Kern's Process Heat Transfer,open_problem,0,Solution gives no equation; left as exercise
+20179,Kern's Process Heat Transfer,needs_data,0,"Refers to Example 6.16 analysis, not given here"
+20181,Kern's Process Heat Transfer,needs_data,0,"Refers to Examples 6.16 and 7.16, not given here"
+20183,Kern's Process Heat Transfer,needs_data,0,"Summarizes Examples 7.16-7.19, not given here"
+20184,Kern's Process Heat Transfer,broken_text,0,Question's ask is cut off; likely checks exchanger design
+20186,Kern's Process Heat Transfer,needs_data,0,"Water flow 41,600 lb/hr used in solution, not in question"
+20187,Kern's Process Heat Transfer,,1,
+20188,Kern's Process Heat Transfer,needs_data,0,"Refers to previous fin-area example, not given here"
+20189,Kern's Process Heat Transfer,,1,
+20193,Kern's Process Heat Transfer,needs_data,0,Number of micro-fins not given; total cannot be computed
+20195,Kern's Process Heat Transfer,needs_data,0,Refers to Example 8.8; its Q_f and Q_w/o not given here
+20196,Kern's Process Heat Transfer,needs_data,0,"Refers to Example 8.8 tube and fin data, not given here"
+20199,Kern's Process Heat Transfer,needs_data,0,"Refers to previous fin results, not given here"
+20200,Kern's Process Heat Transfer,needs_data,0,Refers to triangular-fin example; Q_f = 108.9 W not given
+20202,Kern's Process Heat Transfer,needs_data,0,"Uses per-fin area and Q_f from previous example, not given"
+20204,Kern's Process Heat Transfer,needs_data,0,Refers to previous fin example; its fin heat rate not given
+20205,Kern's Process Heat Transfer,,1,
+20207,Kern's Process Heat Transfer,mismatch,0,Solution discusses reboiler and sublimation; never identifies the non-exchanger
+20210,Kern's Process Heat Transfer,needs_data,0,"Refers to previous example's steam state, not given here"
+20217,Kern's Process Heat Transfer,,1,
+20219,Kern's Process Heat Transfer,,1,
+20222,Kern's Process Heat Transfer,,1,
+20224,Kern's Process Heat Transfer,,1,
+20227,Kern's Process Heat Transfer,broken_text,0,question garbled: 8001.5 in. ID tubes read as 800 tubes
+20236,Kern's Process Heat Transfer,,1,
+20242,Kern's Process Heat Transfer,,1,
+20289,Srinath's Advanced Mechanics of Solids,,1,
+20302,Srinath's Advanced Mechanics of Solids,,1,
+20303,Srinath's Advanced Mechanics of Solids,,1,
+20310,Srinath's Advanced Mechanics of Solids,,1,
+20328,Srinath's Advanced Mechanics of Solids,,1,
+20330,Srinath's Advanced Mechanics of Solids,,1,
+20390,Srinath's Advanced Mechanics of Solids,broken_text,0,Question has spliced text from theories-of-failure section
+20397,Srinath's Advanced Mechanics of Solids,needs_data;broken_text,0,Refers to Problem 4.4 data not given; text spliced
+20419,Srinath's Advanced Mechanics of Solids,broken_text;needs_data,0,"Refers to Example 5.12, not given; methods text spliced"
+20422,Srinath's Advanced Mechanics of Solids,broken_text,0,"Moment given as 1.1550 kgf cm and 1133 Nm, inconsistent"
+20452,Srinath's Advanced Mechanics of Solids,needs_data,0,"Refers to previous problem's data, not given"
+20453,Srinath's Advanced Mechanics of Solids,needs_data,0,"Refers to Example 8.1, data not given"
+20459,Srinath's Advanced Mechanics of Solids,needs_data,0,"Refers to Problem 8.7 data, not given"
+20460,Srinath's Advanced Mechanics of Solids,needs_data,0,"Moduli and Poisson ratios refer to Problem 8, not given"
+20482,Srinath's Advanced Mechanics of Solids,broken_text,0,Deflection-curve form missing from block
+20486,Srinath's Advanced Mechanics of Solids,needs_data,0,"Constants refer to Example 11.5, not given"
+20487,Srinath's Advanced Mechanics of Solids,needs_data,0,"Laminates refer to Problem 11.4, not given"
+20488,Srinath's Advanced Mechanics of Solids,needs_data,0,"Data from Example 11.6, not given"
+20492,Srinath's Advanced Mechanics of Solids,needs_data,0,"Refers to Example 11.11, not given"
+20493,Srinath's Advanced Mechanics of Solids,needs_data,0,"Refers to Example 11.11, not given"
+20501,Srinath's Advanced Mechanics of Solids,needs_data,0,"Refers to Problem 12.7, not given"
+20582,Kamal's 1000 Solved Problems in Classical Physics,,1,
+20612,Kamal's 1000 Solved Problems in Classical Physics,needs_data,0,Setup of problem (2.45) not restated in block
+20672,Kamal's 1000 Solved Problems in Classical Physics,mismatch,0,"Stated 30 deg; solution gives sin(theta)=2/3, 41.8 deg"
+20684,Kamal's 1000 Solved Problems in Classical Physics,,1,
+20704,Kamal's 1000 Solved Problems in Classical Physics,,1,Maxwell yo-yo with two cords
+20709,Kamal's 1000 Solved Problems in Classical Physics,,1,Rod with two masses released from horizontal
+20781,Kamal's 1000 Solved Problems in Classical Physics,mismatch,0,Question's stated formula lacks the cube; solution gives cube
+20799,Kamal's 1000 Solved Problems in Classical Physics,needs_data,0,Refers to problem 5.49 for the cardioid orbit
+20811,Kamal's 1000 Solved Problems in Classical Physics,mismatch,0,Solution tail answers a different spring problem (M = 1.6 kg)
+20850,Kamal's 1000 Solved Problems in Classical Physics,needs_data,0,Refers to problem 6.46 for the coupled-pendulum equations
+20883,Kamal's 1000 Solved Problems in Classical Physics,mismatch,0,Question is a rod; solution treats a point-mass pendulum
+20901,Kamal's 1000 Solved Problems in Classical Physics,needs_data,0,Refers to problem 7.12 for the double pendulum equations
+20902,Kamal's 1000 Solved Problems in Classical Physics,needs_data,0,Refers to problem 6.46 for the coupled-pendulum set-up
+20932,Kamal's 1000 Solved Problems in Classical Physics,,1,
+20935,Kamal's 1000 Solved Problems in Classical Physics,needs_data,0,"Uses amplitude, frequency, speed from prob 8.29 not stated here"
+20969,Kamal's 1000 Solved Problems in Classical Physics,mismatch,0,Question gives 2x10^5 N/m2; solution uses 2x10^-5
+21004,Kamal's 1000 Solved Problems in Classical Physics,,1,
+21009,Kamal's 1000 Solved Problems in Classical Physics,needs_data,0,"Relies on range formula from prob 9.17, not stated here"
+21020,Kamal's 1000 Solved Problems in Classical Physics,needs_data,0,Tube data from problem 9.28 not restated here
+21060,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,Stated 7.1 K; solution derives 7.66 K
+21091,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,"Part b: solution's own formula gives E=5.12e11, not e18"
+21114,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,Printed result drops 1/y; own steps give q/(2 pi eps0 y sqrt(4y^2+L^2))
+21119,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,Stated q/m 8.6e-10; solution gets 8.65e-9; correct is 8.6e-11
+21129,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,Stated 1.259e-11 J; formula gives 1.26e-10 J (787 MeV)
+21130,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,(iii) uses d=0.1 mm; 0.01 mm gives 6.75e-3 N/C
+21131,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,"Own formula gives q=4 pi eps0 r^2 E=5.6e-10 C, V=5000 V"
+21133,Kamal's 1000 Solved Problems in Classical Physics,,1,
+21134,Kamal's 1000 Solved Problems in Classical Physics,,1,
+21143,Kamal's 1000 Solved Problems in Classical Physics,,1,"Hollow sphere; region b wording garbled, result fine"
+21144,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,(b) wrong: enclosed charge is rho pi r^2 h; E=rho r/(2 eps0)
+21149,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,"r must be 0.05 m: q=5.6e-7 C, not 1.11e-5 C"
+21150,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,Printed dU has Q in denominator; derivation gives 16 pi eps0 a
+21152,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,"Diameter 100 mm means r=0.05 m: V=2.5e5 V, U about 0.17 J"
+21156,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,(ii) wrong: enclosed charge is pi r^2 L rho; E=rho r/(2 eps0)
+21165,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,Battery 240 V but solution uses 260 V; charge should be 221.5 uC
+21170,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,Printed F has d; derivation gives eps0 A V^2/(2 d^2)
+21177,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,"(ii) U is 9.7e-3 J, not 0.097 J; part (i) ln(10/9) slightly off"
+21183,Kamal's 1000 Solved Problems in Classical Physics,,1,Question writes r for t; solution truncated
+21185,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,"(i) q0 = C*900 V = 0.45 C, not 100 C"
+21186,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,"(iii) U = 1.7e-18 J, not 1.7e-19 J"
+21187,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,Stated V has Qd/b and extra eps0; own steps give (E0/a) ln(1+ad/b)
+21188,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,"Gravitational Gauss law; stated -rho/G, derivation gives -4 pi G rho"
+21194,Kamal's 1000 Solved Problems in Classical Physics,mismatch,0,Solution gives D-F resistance; question asks A-B
+21201,Kamal's 1000 Solved Problems in Classical Physics,needs_data,0,Battery emf not given; solution assumes 2 V
+21212,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,"Own equation has no positive root; R=5 gives 13.3 ohm, not 160"
+21226,Kamal's 1000 Solved Problems in Classical Physics,,1,
+21244,Kamal's 1000 Solved Problems in Classical Physics,mismatch,0,Solution tail is Lenz-law text from another section.
+21245,Kamal's 1000 Solved Problems in Classical Physics,mismatch,0,Alpha charge is 2e; solution uses e.
+21246,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,"Proton K: solution gives 2.17e-13 J and 13.56 MeV; inconsistent, ~6.8 MeV."
+21253,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,Energy uses B=0.325 T; solution's own B is 0.656 T.
+21259,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,"qB dr = 6.4e-23, not 6.4e-21; V is about 8e2 V."
+21262,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,"Pitch: 5.93e5 x 0.5 x 3.57e-8 is about 0.011 m, not 0.1 m."
+21283,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,Part (ii) formula gives 1.33e-4 T; solution states 1.33e-6 T.
+21286,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,Labelled square/triangle ratio is inverted; correct value is 0.84.
+21289,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,"Part (c) uses radius 0.1 m, part (b) 0.01 m; flux off by 100."
+21290,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,"(a) at 50 mm and 3 A gives 1.2e-5 T, not 1.2e-7 T."
+21295,Kamal's 1000 Solved Problems in Classical Physics,key_conflict;broken_text,0,"Sign flips vs intermediate -1e4 k; field point equals proton position, R unexplained."
+21318,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,Solution's result (l/2)sqrt(R^2-(l/2)^2) differs from stated formula.
+21333,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,Solution states 1.125e-7 Hz; its own formula gives 1.125e7 Hz.
+21346,Kamal's 1000 Solved Problems in Classical Physics,mismatch,0,Question says RC series; solution treats an LC circuit.
+21347,Kamal's 1000 Solved Problems in Classical Physics,mismatch,0,Question says parallel; solution derives series RLC equation.
+21357,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,Solution's C=1.013e-9 F; its own formula gives 1.013e-10 F.
+21358,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,Solution uses C=5 uF but question gives 0.0005 uF.
+21380,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,Solution gives 0.066 W/m2; its own formula gives 3.32.
+21393,Kamal's 1000 Solved Problems in Classical Physics,key_conflict,0,Stated 1.23e-4 m (0.123 mm) conflicts with 3.88 um.
+21409,Kamal's 1000 Solved Problems in Classical Physics,,1,
+21482,Kamal's 1000 Solved Problems in Classical Physics,mismatch,0,Solution uses 5460 A but question states 5400 A
+21507,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21508,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,1,
+21509,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21510,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21511,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21512,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21513,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21514,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21515,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21516,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21517,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21518,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21519,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21520,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21521,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21522,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21523,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21524,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21525,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21526,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,variable-area meters
+21527,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21528,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21529,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21530,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,dilution calibration of flowmeters [re-filed after tree change]
+21531,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21532,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,siphon transfer time
+21533,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,siphon vapour-block limit
+21534,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21535,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,inflow with orifice outflow
+21536,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21537,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21538,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21539,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,equilibrium depth
+21540,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21541,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21542,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21543,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21544,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21545,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21546,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21547,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21548,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21549,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21550,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21551,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21552,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21553,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21554,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,tapered pipe friction loss
+21555,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21556,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21557,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21558,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21559,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21560,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21561,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21562,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21563,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,pump selection flowchart
+21564,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21565,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21566,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21567,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21568,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21569,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21570,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21571,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21572,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21573,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21574,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21575,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21576,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21577,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21578,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21579,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21580,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution;broken_text,0,question lacks stated unknown
+21581,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21582,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21583,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21584,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21585,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21586,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21587,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21588,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21589,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21590,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21591,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21592,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21593,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21594,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21595,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21596,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21597,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21598,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21599,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21600,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21601,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21602,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21603,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21604,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21605,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21606,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21607,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21608,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21609,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21610,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21611,Schaschke's Solved Practical Problems in Fluid Mechanics,no_solution,0,
+21616,Schaschke's Solved Practical Problems in Fluid Mechanics,broken_text,0,question statement cut off before the ask
+21648,Schaschke's Solved Practical Problems in Fluid Mechanics,broken_text,0,U0 and delta values missing from question
+21654,Schaschke's Solved Practical Problems in Fluid Mechanics,needs_data,0,Depends on previous problem's pump table
+21668,Schaschke's Solved Practical Problems in Fluid Mechanics,truncated_solution,0,
+21670,Schaschke's Solved Practical Problems in Fluid Mechanics,truncated_solution,0,
+21671,Schaschke's Solved Practical Problems in Fluid Mechanics,truncated_solution,0,
+21673,Schaschke's Solved Practical Problems in Fluid Mechanics,truncated_solution,0,
+21677,Schaschke's Solved Practical Problems in Fluid Mechanics,needs_data,0,Power number read from chart
+21680,Schaschke's Solved Practical Problems in Fluid Mechanics,truncated_solution,0,
+21683,Schaschke's Solved Practical Problems in Fluid Mechanics,truncated_solution,0,
+21685,Schaschke's Solved Practical Problems in Fluid Mechanics,truncated_solution,0,Solution uses 1000 not 900 kg/m3 for oil density
+21686,Schaschke's Solved Practical Problems in Fluid Mechanics,truncated_solution,0,
+21690,Schaschke's Solved Practical Problems in Fluid Mechanics,truncated_solution,0,
+21691,Schaschke's Solved Practical Problems in Fluid Mechanics,truncated_solution,0,

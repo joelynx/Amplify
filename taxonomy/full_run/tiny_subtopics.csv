@@ -1,0 +1,72 @@
+subject,topic,branch,subtopic,questions,toc_match,model_check,merge_into,reason
+Linear Algebra and Differential Equations,Linear Algebra,Systems of Linear Equations,Elementary Matrices and Row Equivalence,2,,keep,,"Standard linear algebra section (elementary matrices, row equivalence)."
+Linear Algebra and Differential Equations,Linear Algebra,Orthogonality,Least Squares Approximation,2,,keep,,Standard orthogonality section in every linear algebra text.
+Linear Algebra and Differential Equations,Differential Equations,Series Solutions,Power Series Solutions,2,,keep,,Standard ODE section on series solutions about ordinary points.
+Linear Algebra and Differential Equations,Differential Equations,Series Solutions,Legendre Polynomials,1,,keep,,Legendre's equation and polynomials are a standard ODE section.
+Linear Algebra and Differential Equations,Differential Equations,Partial Differential Equations,Separation of Variables,1,,keep,,Core PDE textbook section.
+Linear Algebra and Differential Equations,Differential Equations,Partial Differential Equations,Fundamental Solution of the Heat Equation,1,,keep,,Heat kernel on the line is a standard PDE section.
+Linear Algebra and Differential Equations,Differential Equations,Partial Differential Equations,d'Alembert's Solution of the Wave Equation,0,,keep,,Standard PDE section on the wave equation on the line.
+Linear Algebra and Differential Equations,Differential Equations,Partial Differential Equations,First-Order PDEs and Characteristics,1,,keep,,Method of characteristics is a standard PDE section.
+Linear Algebra and Differential Equations,Differential Equations,Calculus of Variations,Constrained Variational Problems,0,,keep,,Isoperimetric problems are a standard calculus of variations section.
+Algebra,Algebraic Inequalities,Cauchy-Schwarz and Related Inequalities,Hölder's Inequality,1,,keep,,Hölder is a standard section in inequality textbooks.
+Algebra,Algebraic Inequalities,Ordering and Convexity Inequalities,Schur's Inequality,1,,keep,,Schur is a standard section in olympiad inequality texts.
+Abstract Algebra,Ring and Field Theory,Rings and Ideals,Algebraic Integers and Number Rings,2,,merge,"Rings, Subrings and Units",Number-theory grab bag; both questions concern subrings and units.
+Number Theory,Elementary Number Theory,Divisibility and Greatest Common Divisor,Zero-Sum Subsets Modulo n,1,,merge,Division Algorithm and Residue Forms,Niche olympiad result; residue-class pigeonhole arguments fit residue forms.
+Geometry,Solid Geometry,Polyhedra,Prisms and Pyramids,2,,keep,,Standard solid geometry section.
+Geometry,Solid Geometry,Polyhedra,Nets and Unfoldings,2,,keep,,Nets of solids are a standard solid geometry section.
+Statistics,Mathematical Statistics,Interval Estimation,Confidence Intervals for Variances,2,,keep,,Chi-squared and F intervals are a standard statistics section.
+Statistics,Mathematical Statistics,Interval Estimation,Large-Sample Confidence Intervals,1,,keep,,Standard interval estimation section (e.g. Wackerly).
+Statistics,Mathematical Statistics,Bayesian Inference and Decision Theory,"Loss, Risk and Admissibility",1,,keep,,Standard decision theory section.
+Quantitative Finance,Derivatives Pricing,Volatility Modeling,Stochastic Volatility Models,2,,keep,,Standard chapter in derivatives pricing texts.
+Quantitative Finance,Fixed Income,Interest Rate Derivatives,Bonds with Embedded Options,2,,keep,,Callable/puttable/convertible bonds are a standard fixed income section.
+Quantitative Finance,Portfolio Theory and Risk Management,Mean-Variance Portfolio Theory,Capital Asset Pricing Model,2,Paul Wilmott Introduces Quantitative Finance: Capital Asset Pricing Model,,,
+Economics,Macroeconomics,"Money, Banking and Financial Markets",Term Structure of Interest Rates,2,,keep,,Standard money and banking section.
+Mechanics,Classical Mechanics,Newton's Laws of Motion,Variable Forces in One Dimension,2,,keep,,Rectilinear motion under F(x) or F(t) is a standard mechanics section.
+Mechanics,Solid Mechanics,Bending of Beams,Beam Deflection,1,,keep,,Core mechanics of materials section.
+Mechanics,Solid Mechanics,Torsion,Torsion of Solid Sections,1,Advanced Mechanics of Solids: Torsion of General Prismatic Bars: Solid Sections,,,
+Mechanics,Solid Mechanics,Elastic Stability,Euler Buckling,2,,keep,,Core elastic stability section.
+Electromagnetism and Special Relativity,Optics,Geometrical Optics,Prisms and Dispersion,2,,keep,,Standard geometrical optics section.
+Electromagnetism and Special Relativity,Optics,Geometrical Optics,Optical Instruments,2,,keep,,Standard geometrical optics section.
+Electromagnetism and Special Relativity,Optics,Diffraction,Circular Apertures and Zone Plates,2,,keep,,Circular aperture and Fresnel zone plate are standard diffraction sections.
+Electromagnetism and Special Relativity,Special Relativity,Relativistic Dynamics,Relativistic Energy and Momentum,1,,keep,,Core special relativity section.
+Quantum Mechanics,"Quantum, Atomic and Nuclear Physics",Wave-Particle Duality,Compton Scattering,2,,keep,,Standard modern physics section.
+Quantum Mechanics,"Quantum, Atomic and Nuclear Physics",Wave-Particle Duality,De Broglie Waves,1,,keep,,Standard modern physics section.
+Quantum Mechanics,"Quantum, Atomic and Nuclear Physics",Atoms and Nuclei,Bohr Model and Hydrogen-Like Atoms,1,,keep,,Standard atomic physics section.
+Quantum Mechanics,"Quantum, Atomic and Nuclear Physics",Atoms and Nuclei,Radioactive Decay,2,Power Plant Engineering (Rajput): Radioactive Decay,,,
+Quantum Mechanics,"Quantum, Atomic and Nuclear Physics",Atoms and Nuclei,Nuclear Fission and Fusion,1,,keep,,Standard nuclear physics section.
+Thermodynamics,Heat and Thermodynamics,Temperature and Calorimetry,Thermometry and Temperature Scales,1,,keep,,Standard opening section of heat and thermodynamics texts.
+Thermodynamics,Heat and Thermodynamics,Phase Change and Moist Air,Humidity and Psychrometrics,1,,keep,,Psychrometrics is a standard engineering thermodynamics chapter.
+Heat Transfer,Heat and Mass Transfer,Mass Transfer,Simultaneous Heat and Mass Transfer,2,,keep,,"Standard heat and mass transfer section (analogy, evaporative cooling)."
+Fluid Mechanics,Fluid Mechanics,Navier-Stokes Equations and Exact Solutions,Rotating and Oscillating Viscous Flows,2,,keep,,Rotating cylinders and Stokes' oscillating plate are standard exact-solution sections.
+Fluid Mechanics,Fluid Mechanics,Viscous Flow in Pipes and Ducts,Flow Measurement Methods,2,Fluid Mechanics: Flow Measurement and Control by Weirs,,,
+Electrical Machinery,Electric Machines,Magnetic Circuits,Inductance of Wound Cores,2,,keep,,Flux linkage and inductance is a standard magnetic circuits section.
+Electrical Machinery,Electric Machines,Electromechanical Energy Conversion,Field Energy and Coenergy,2,,keep,,Energy and coenergy is a standard electromechanical conversion section.
+Electrical Machinery,Electric Machines,Electromechanical Energy Conversion,Linear DC Machine,2,Electric Machinery Fundamentals: The Linear DC Machine: A Simple Example,,,
+Electrical Machinery,Electric Machines,AC Machine Fundamentals,Rotating Magnetic Field,2,Electric Machinery Fundamentals: The Rotating Magnetic Field,,,
+Electrical Machinery,Electric Machines,Synchronous Machines,Capability Curves,1,Electric Machinery Fundamentals: ynchronous Generator Capability Curves,,,
+Electrical Machinery,Electric Machines,Synchronous Machines,Power-Factor Correction with Synchronous Motors,2,Electric Machinery Fundamentals: he Synchronous Motor and Power-Factor Correction,,,
+Electrical Machinery,Electric Machines,Induction Machines,Speed Control of Induction Motors,2,Electric Machinery Fundamentals: Speed Control of Induction Motors,,,
+Electrical Machinery,Electric Machines,Induction Machines,Deep-Bar and Double-Cage Rotors,2,,keep,,Standard induction machine section on rotor designs.
+Electrical Machinery,Electric Machines,DC Machines,DC Machine Losses and Efficiency,2,,keep,,Standard DC machines section on losses and efficiency.
+Electrical Machinery,Electric Machines,Single-Phase Motors,Universal Motors,2,Electric Machinery Fundamentals: The Universal Motor,,,
+Electrical Machinery,Electric Machines,Special Machines,Servomotors,2,Principles of Electric Machines and Power Electronics: Servomotors,,,
+Electrical Machinery,Electric Machines,Special Machines,Synchros,2,Principles of Electric Machines and Power Electronics: Synchros,,,
+Electrical Machinery,Electric Machines,Special Machines,Switched Reluctance Motors,1,Principles of Electric Machines and Power Electronics: Switched Reluctance Motors (SRM),,,
+Power Systems and Power Electronics,Power Electronics,Power Semiconductor Devices,Power Switching Devices,0,,keep,,Device characteristics are a core power electronics section.
+Power Systems and Power Electronics,Power Electronics,Power Semiconductor Devices,Forced Commutation,2,,keep,,Thyristor commutation is a standard power electronics section.
+Power Systems and Power Electronics,Power Electronics,Power Converters,Cycloconverters,1,Electric Machinery Fundamentals: Cycloconverters,,,
+Power Systems and Power Electronics,Power Electronics,Electric Drives,Converter-Fed Induction Motor Drives,2,Electric Machinery Fundamentals: Solid-State Induction Motor Drives,,,
+Power Systems and Power Electronics,Power Systems,AC Power and Three-Phase Circuits,Wye and Delta Connections,2,,keep,,Standard three-phase circuits section.
+Power Systems and Power Electronics,Power Systems,AC Power and Three-Phase Circuits,Balanced Three-Phase Power,2,,keep,,Standard three-phase circuits section.
+Power Systems and Power Electronics,Power Systems,AC Power and Three-Phase Circuits,One-Line Diagrams and Per-Phase Analysis,2,,keep,,Standard power systems section.
+Material Science,Mechanical Behavior of Materials,Elastic and Viscoelastic Behavior,Elastic Deformation,1,Materials Science and Engineering: An Introduction: Elastic Recovery After Plastic Deformation,,,
+Material Science,"Electrical, Magnetic, Optical and Thermal Properties",Semiconductors,Hall Effect,2,Materials Science and Engineering: An Introduction: The Hall Effect,,,
+Material Science,"Electrical, Magnetic, Optical and Thermal Properties",Electrical and Dielectric Properties,Ferroelectricity and Piezoelectricity,2,,keep,,Standard dielectric properties sections (e.g. Callister).
+Material Science,"Electrical, Magnetic, Optical and Thermal Properties",Magnetic Materials,Hard Magnetic Materials,2,Materials Science and Engineering: A First Course: Hard Magnetic Materials,,,
+Material Science,"Electrical, Magnetic, Optical and Thermal Properties",Optical Properties,Refractive Index and Reflectivity of Solids,2,,keep,,Refraction and reflection are standard optical properties sections.
+Material Science,"Electrical, Magnetic, Optical and Thermal Properties",Thermal Properties,Thermal Conductivity of Materials,2,,keep,,Standard thermal properties section.
+Material Science,Engineering Materials,Ceramics and Glasses,Silicate and Carbon Structures,2,,keep,,Silicate ceramics and carbon are standard ceramics structure sections.
+Material Science,Engineering Materials,Composites,Particle-Reinforced Composites,2,,keep,,Standard composites section.
+Material Science,Engineering Materials,Composites,Laminar Composites and Sandwich Panels,1,,keep,,Laminar composites and sandwich panels are standard composites sections.
+Material Science,Engineering Materials,Metal Alloys and Fabrication,Metal Forming and Casting,2,,keep,,Forming and casting are standard metal fabrication sections.
+Material Science,Engineering Materials,Corrosion and Oxidation,Forms of Corrosion,2,Materials Science and Engineering: An Introduction: Forms of Corrosion,,,

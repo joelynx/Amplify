@@ -21,6 +21,9 @@ _QUESTION_COLS = (
     "date_last_accessed, times_used, interactive_times_used, difficulty_rating, latex_hash"
 )
 
+# Migration 007: technique tags are 'key' or 'supporting'; task tags are 'task'.
+TAG_ROLES: tuple[str, ...] = ("key", "supporting", "task")
+
 
 def _row_to_question(row: sqlite3.Row, tags: list[str] | None = None) -> Question:
     return Question(
@@ -408,13 +411,16 @@ def mass_action(
         tag = (p.get("tag") or "").strip()
         if not tag:
             return 0
+        role = (p.get("role") or "key").strip()
+        if role not in TAG_ROLES:
+            raise ValueError(f"tag role must be one of {TAG_ROLES}, got {role!r}")
         affected = 0
         try:
             for qid in ids:
                 cur = conn.execute(
-                    "INSERT INTO question_tags (question_id, tag) VALUES (?, ?) "
+                    "INSERT INTO question_tags (question_id, tag, role) VALUES (?, ?, ?) "
                     "ON CONFLICT(question_id, tag) DO NOTHING",
-                    (qid, tag),
+                    (qid, tag, role),
                 )
                 affected += cur.rowcount if cur.rowcount > 0 else 0
             conn.commit()

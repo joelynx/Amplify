@@ -1,0 +1,71 @@
+question_id,source,subject,how,note
+2014,University Physics Competition,Material Science,opus,Radiation shielding design; tree not given
+2021,University Physics Competition,Mechanics,agree,Biological body-size model; no matching mechanics subtopic
+2027,University Physics Competition,Mechanics,agree,Biological scaling on another planet; no matching subtopic
+2705,IITK,Linear Algebra and Differential Equations,agree,Clairaut equations and singular solutions; no subtopic covers them
+2757,IITK,Linear Algebra and Differential Equations,agree,Clairaut equation; no listed subtopic fits; part 2 garbled
+3834,IITG,Linear Algebra and Differential Equations,agree,"ODE order, degree and linearity basics; no subtopic covers them"
+5010,P.K. Nag's Power Plant Engineering,Conventional Energy Technologies,opus,
+8117,Miklos Schweitzer Competitions by GJ Szekely,Abstract Algebra,agree,Distributive lattices; no lattice theory subtopic
+8120,Miklos Schweitzer Competitions by GJ Szekely,Abstract Algebra,opus,lattice theory
+8125,Miklos Schweitzer Competitions by GJ Szekely,Abstract Algebra,opus,"lattice identities, convex sets, Caratheodory"
+8133,Miklos Schweitzer Competitions by GJ Szekely,Abstract Algebra,agree,Lattice theory: modular lattices; no matching subtopic
+8155,Miklos Schweitzer Competitions by GJ Szekely,Abstract Algebra,opus,lattice of graph contractions; long cycles
+9344,Society Of Actuaries,Statistics,opus,Mode of survey frequencies; Statistics tree not given
+12456,A Mathematical Orchard,Number Theory,agree,"digit-arrangement maximisation puzzle, no subtopic fits"
+12881,OpenQuant Archives,Quantitative Finance,opus,Coding interview problem
+12900,OpenQuant Archives,Quantitative Finance,opus,Coding interview problem (data structure)
+12901,OpenQuant Archives,Combinatorics,agree,"SQL query task, no mathematical subtopic"
+12912,OpenQuant Archives,Combinatorics,agree,"SQL query task, no mathematical subtopic"
+12927,OpenQuant Archives,Combinatorics,agree,"SQL query task, no mathematical subtopic"
+12928,OpenQuant Archives,Combinatorics,agree,"SQL query task, no mathematical subtopic"
+12953,A Practical Guide to Quantitative Finance,Combinatorics,opus,Dice-digit construction; loose fit
+13639,Creative Puzzles To Ignite Your Mind (Springer),Number Theory,agree,Comparing sizes of power arrangements of three 4s; no subtopic fits
+13722,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,Combinatorics,agree,riddle about triplets; no subtopic fits
+13741,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,Number Theory,agree,Alphabetical order of English number names; no matching subtopic
+13778,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,Geometry,agree,"US geography trivia, not mathematics"
+13779,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,Geometry,agree,"time-zone wording riddle, not mathematics"
+13782,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,Geometry,agree,state-name etymology trivia
+13783,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,Geometry,agree,US city-name population trivia
+13784,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,Geometry,agree,state borders trivia
+13785,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,Geometry,agree,state borders trivia
+13786,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,Geometry,agree,geography trivia
+13787,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,Geometry,agree,census trivia
+13788,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,Geometry,agree,city latitude trivia
+13789,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,Geometry,agree,city population trivia
+13846,Peter Winkler's Mathematical Puzzles: A Connoisseur's Collection,Probability and Stochastic Processes,agree,Random traffic model on grid; no question stated.
+13853,Peter Winkler's Mathematical Puzzles,Algebra,agree,Growth-chart estimation; no matching subtopic.
+13854,Peter Winkler's Mathematical Puzzles,Combinatorics,agree,Verbal multiplication riddle; no counting subtopic fits.
+13869,Peter Winkler's Mathematical Puzzles,Geometry,agree,Compass-point bearing; no geometry subtopic fits.
+13873,Peter Winkler's Mathematical Puzzles,Probability and Stochastic Processes,opus,Asks probability; invariant shows certainty; no subtopic fits.
+13978,Peter Winkler's Mathematical Puzzles,Combinatorics,agree,"wordplay riddle about twins, no mathematical subtopic"
+13983,Peter Winkler's Mathematical Puzzles,Number Theory,agree,Alphabetical order of English number names; no matching subtopic
+13987,Peter Winkler's Mathematical Puzzles,Combinatorics,opus,edge-matching tile arrangement puzzle; no subtopic fits
+13988,Peter Winkler's Mathematical Puzzles,Combinatorics,opus,edge-matching tile arrangement puzzle; no subtopic fits
+14073,Peter Winkler's Mathematical Puzzles,Combinatorics,agree,"Time-zone wordplay riddle, no mathematical subtopic"
+14086,Peter Winkler's Mathematical Puzzles,Combinatorics,agree,"Lateral-thinking riddle about worms, no mathematical subtopic"
+14100,Peter Winkler's Mathematical Puzzles,Combinatorics,agree,"Family-relationship riddle, no mathematical subtopic"
+14117,Peter Winkler's Mathematical Puzzles,Combinatorics,agree,"Bookshelf trick riddle, no mathematical subtopic"
+14125,Peter Winkler's Mathematical Puzzles,Combinatorics,agree,picture hanging is free-group topology; no subtopic fits
+14150,Peter Winkler's Mathematical Mind Benders,Combinatorics,agree,"Wordplay riddle, not mathematics"
+14152,Peter Winkler's Mathematical Mind Benders,Combinatorics,agree,"Visual sequence riddle, not mathematics"
+14153,Peter Winkler's Mathematical Mind Benders,Combinatorics,agree,"Language wordplay riddle, not mathematics"
+14161,Peter Winkler's Mathematical Mind Benders,Combinatorics,agree,"Engineering puzzle, no matching subtopic"
+14168,Peter Winkler's Mathematical Mind Benders,Combinatorics,agree,"Termination of rewriting, no matching subtopic"
+14190,Peter Winkler's Mathematical Mind Benders,Geometry,agree,Trick puzzle about tennis lines; no matching geometry subtopic.
+14234,Erikson's AHA! Solutions,Algebra,agree,"pattern-guessing sequences, no matching subtopic"
+14794,Engel's Problem Solving Strategies,Combinatorics,agree,Question is a bare expression with no task
+16414,Paul Wilmott Introduces Quantitative Finance,Quantitative Finance,agree,Stock split; no corporate-action subtopic in tree
+16564,Sederberg and Chang's Over and Over Again,Algebra,agree,Theorem not stated; no content
+16612,Sederberg and Chang's Over and Over Again,Linear Algebra and Differential Equations,agree,variation-diminishing matrices; no matching subtopic
+16616,Sederberg and Chang's Over and Over Again,Linear Algebra and Differential Equations,agree,variation-diminishing matrices; no matching subtopic
+16618,Sederberg and Chang's Over and Over Again,Linear Algebra and Differential Equations,agree,v.d. means variation diminishing; solution read diagonalizable
+16619,Sederberg and Chang's Over and Over Again,Linear Algebra and Differential Equations,agree,matrix (24.9) not given
+16623,Sederberg and Chang's Over and Over Again,Linear Algebra and Differential Equations,agree,sign-alternating vectors for variation-diminishing theory
+16624,Sederberg and Chang's Over and Over Again,Linear Algebra and Differential Equations,agree,relies on exercises 24.11 and 24.12
+19978,F.M White's Fluid Mechanics,Fluid Mechanics,pilot,"Torque converter, not in pump subtopics"
+20116,Kern's Process Heat Transfer,Fluid Mechanics,agree,Buoyant plume rise in atmosphere; no subtopic fits
+21692,Schaschke's Solved Practical Problems in Fluid Mechanics,Fluid Mechanics,pilot,Pneumatic conveying (gas-solid transport) has no subtopic
+10284,Stirzaker and Grimmett's One Thousand Exercises In Probability,Probability and Stochastic Processes,no subtopic,gcd 1 gives signed combinations; probability setting is incidental
+11109,Indiana Collegiate Mathematics Competitions,Calculus,no subtopic,
+16984,Gregory's Classical Mechanics,Calculus,no subtopic,Crystal lattice reciprocal basis; Material Science tree not given

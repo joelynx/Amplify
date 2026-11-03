@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quantum Mechanics Review</title>
+<style>
+:root {
+  --bg: #f7f7f5; --card: #ffffff; --ink: #1d1d1b; --muted: #6b6b66; --line: #e3e2dd;
+  --accent: #2f5d8a; --accent-soft: #e6eef6; --key: #2f5d8a; --sup: #6b6b66; --task: #7a4a8c;
+  --high: #2e7d4f; --medium: #a66a00; --low: #b23a3a; --flag: #b23a3a; --mark: #fff4d6;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161615; --card: #1f1f1d; --ink: #ecebe6; --muted: #a3a29b; --line: #34332f;
+    --accent: #8db8e3; --accent-soft: #23303d; --key: #8db8e3; --sup: #a3a29b; --task: #c9a0dc;
+    --high: #6cc28f; --medium: #e0a94a; --low: #e57c7c; --flag: #e57c7c; --mark: #3a3320;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+header { padding: 20px 16px 8px; max-width: 1100px; margin: 0 auto; }
+h1 { font-size: 22px; margin: 0 0 4px; }
+.sub { color: var(--muted); margin: 0; }
+.stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px; }
+.stat { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; min-width: 120px; }
+.stat b { display: block; font-size: 18px; }
+.stat span { color: var(--muted); font-size: 12px; }
+main { max-width: 1100px; margin: 0 auto; padding: 0 16px 40px; }
+.bar { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 10px 0; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+select, input[type=search], input[type=text], button { font: inherit; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; }
+select { max-width: 100%; }
+#subSel { flex: 1 1 320px; min-width: 0; }
+#q { flex: 1 1 180px; min-width: 0; }
+button { cursor: pointer; }
+button.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.count { color: var(--muted); font-size: 13px; }
+details.cov { margin: 12px 0; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; }
+details.cov table { border-collapse: collapse; width: 100%; font-size: 13px; }
+details.cov td { padding: 2px 6px; border-top: 1px solid var(--line); }
+details.cov td.n { text-align: right; font-variant-numeric: tabular-nums; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
+.card.marked { background: var(--mark); }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; font-size: 13px; color: var(--muted); }
+.meta .id { color: var(--ink); font-weight: 600; }
+.path { margin: 4px 0; font-weight: 600; }
+.path .alt { font-weight: 400; color: var(--muted); font-size: 13px; }
+.badge { display: inline-block; border-radius: 99px; padding: 0 8px; font-size: 12px; border: 1px solid currentColor; }
+.high { color: var(--high); } .medium { color: var(--medium); } .low { color: var(--low); }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; margin: 4px 0; }
+.chip { font-size: 12px; border-radius: 4px; padding: 1px 6px; border: 1px solid var(--line); }
+.chip.key { color: var(--key); border-color: var(--key); font-weight: 600; }
+.chip.sup { color: var(--sup); }
+.chip.task { color: var(--task); border-color: var(--task); }
+.chip.flag { color: var(--flag); border-color: var(--flag); }
+.qtext { margin: 8px 0; overflow-x: auto; overflow-y: hidden; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; }
+.qtext ol, .qtext ul { margin: 4px 0; padding-left: 22px; }
+.fig { color: var(--muted); font-style: italic; }
+details.sol summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+details.sol div { font-size: 14px; color: var(--muted); overflow-x: auto; white-space: pre-wrap; }
+.note { font-size: 13px; color: var(--muted); }
+.markrow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+.markrow input[type=text] { flex: 1 1 220px; min-width: 0; }
+.pager { display: flex; gap: 8px; align-items: center; justify-content: center; margin: 16px 0; }
+.empty { color: var(--muted); text-align: center; padding: 40px 0; }
+</style>
+<script>
+window.MathJax = { tex: { inlineMath: [["$", "$"], ["\\(", "\\)"]], displayMath: [["$$", "$$"], ["\\[", "\\]"]] },
+                   options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "select", "option"] }, startup: { typeset: false } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js" async></script>
+</head>
+<body>
+<header>
+  <h1>Review: Quantum Mechanics</h1>
+  <p class="sub">12 questions filed here by the full run. The path chip under each id says how the label was decided. Mark anything wrong, write the right subtopic or tag in the box, then press “Copy corrections” and paste the result back to Claude. Marks are saved in this browser.</p>
+  <div class="stats" id="stats"></div>
+</header>
+<main>
+  <details class="cov"><summary>Questions per subtopic</summary><table id="cov"></table></details>
+  <div class="bar">
+    <select id="subSel" aria-label="Subtopic"></select>
+    <select id="confSel" aria-label="Confidence"><option value="">All confidence</option><option>high</option><option>medium</option><option>low</option></select>
+    <select id="typeSel" aria-label="Type"><option value="">All types</option></select>
+    <select id="howSel" aria-label="Decided by"><option value="">Any decision path</option></select>
+    <select id="flagSel" aria-label="Flag"><option value="">Any flags</option></select>
+    <select id="tagSel" aria-label="Tag"><option value="">Any tag</option></select>
+    <input type="search" id="q" placeholder="Search text or id">
+    <label class="count"><input type="checkbox" id="markedOnly"> marked only</label>
+    <button class="primary" id="copyBtn">Copy corrections</button>
+    <span class="count" id="count"></span>
+  </div>
+  <div id="list"></div>
+  <div class="pager"><button id="prev">Previous</button><span class="count" id="page"></span><button id="next">Next</button></div>
+</main>
+<script id="data" type="application/json">{"rows": [{"id": 5678, "src": "V. Raghavan's Materials Science and Engineering: A First Course", "ch": null, "q": "Find the minimum uncertainty in determining the position of a particle, if the uncertainty in its momentum $\\Delta p$ is not to exceed $10^{-30} \\mathrm{~kg} \\mathrm{~m} \\mathrm{~s}^{-1}$.", "sol": "\\textbf{Principle:}\nThis problem is solved using the Heisenberg Uncertainty Principle, which is a fundamental concept in quantum mechanics. The principle states that there is a fundamental limit to the precision with which certain pairs of physical properties of a particle, known as complementary variables, can be known simultaneously. The most common pair of such variables is position ($x$) and momentum ($p$).\n\n\\textbf{Mathematical Formulation:}\nThe uncertainty principle for position and momentum is expressed mathematically as:\n\\[\n\\Delta x \\cdot \\Delta p \\ge \\frac{\\hbar}{2}\n\\]\nwhere:\n\\begin{itemize}\n    \\item $\\Delta x$ is the uncertainty in the position of the particle.\n    \\item $\\Delta p", "subject": "Quantum Mechanics", "topic": "Quantum, Atomic and Nuclear Physics", "branch": "Wave-Particle Duality", "sub": "Uncertainty Principle", "conf": "high", "alt": null, "type": "numerical", "key": [], "sup": [], "task": null, "flags": [], "note": "", "how": "agree"}, {"id": 5679, "src": "V. Raghavan's Materials Science and Engineering: A First Course", "ch": null, "q": "Using the rest mass of the electron and the mass of a cricket ball, calculate the uncertainty in the velocity of each for $\\Delta p=10^{-30} \\mathrm{~kg} \\mathrm{~m} \\mathrm{~s}^{-1}$.", "sol": "This problem applies the relationship between momentum ($p$), mass ($m$), and velocity ($v$), which is given by $p = mv$. The uncertainty in momentum ($\\Delta p$) is therefore related to the uncertainty in velocity ($\\Delta v$) by the equation:\n\\begin{align*}\n    \\Delta p = m \\Delta v\n\\end{align*}\nTo find the uncertainty in velocity, we can rearrange this formula:\n\\begin{align*}\n    \\Delta v = \\frac{\\Delta p}{m}\n\\end{align*}\nWe are given the uncertainty in momentum, $\\Delta p = 10^{-30} \\mathrm{~kg} \\mathrm{~m} \\mathrm{~s}^{-1}$, for both the electron and the cricket ball. We need to use the respective mass of each object to calculate its uncertainty in velocity.\n\n\\textbf{Calculation for the", "subject": "Quantum Mechanics", "topic": "Quantum, Atomic and Nuclear Physics", "branch": "Wave-Particle Duality", "sub": "Uncertainty Principle", "conf": "high", "alt": null, "type": "numerical", "key": [], "sup": [], "task": null, "flags": [], "note": "", "how": "agree"}, {"id": 5877, "src": "V. Raghavan's Materials Science and Engineering: A First Course", "ch": null, "q": "Calculate the kinetic energy and the de Broglie wavelength of an electron that falls through a potential of:\n\\begin{enumerate}\n    \\item 500 V\n    \\item 5000 V\n    \\item 50000 V\n\\end{enumerate}", "sol": "This problem requires calculating the kinetic energy and the de Broglie wavelength of an electron accelerated through different electric potentials. The solution involves two main physical principles: the work-energy theorem for a charge in an electric field and the de Broglie hypothesis of wave-particle duality.\n\n\\textbf{Fundamental Principles}\n\\begin{itemize}\n    \\item \\textbf{Kinetic Energy (KE):} When an electron (with elementary charge $e$) is accelerated from rest through a potential difference $V$, the potential energy it loses ($eV$) is completely converted into kinetic energy.\n    \\begin{align*}\n        KE = eV\n    \\end{align*}\n    The unit electron-volt (eV) is conveniently defined", "subject": "Quantum Mechanics", "topic": "Quantum, Atomic and Nuclear Physics", "branch": "Wave-Particle Duality", "sub": "De Broglie Waves", "conf": "high", "alt": null, "type": "numerical", "key": [], "sup": [], "task": null, "flags": [], "note": "", "how": "agree"}, {"id": 15984, "src": "Gnadig's 200 Puzzling Problems in Physics", "ch": null, "q": "The energy released by the fission of uranium nuclei would be higher if the uranium nucleus split into three parts rather than into two. Despite this, the fission of uranium only produces two nuclei. Why is this?", "sol": "It is not correct in quantum mechanics to describe processes in terms of their various parts occurring in a particular order, nor to describe classically conserved quantities as being 'borrowed'. However, the 'classical' description of a quantum effect usually gives a qualitatively correct picture if the 'borrowing' of a quantity is interpreted as meaning that the more of it that is borrowed, the less likely the process is to occur.\n\nThe volume of the uranium nucleus is equal to the sum of the volumes of its fission products, but the total surface area of the fission products is greater than that of the original uranium nucleus. This means there is a temporary loss of (binding) energy when t", "subject": "Quantum Mechanics", "topic": "Quantum, Atomic and Nuclear Physics", "branch": "Atoms and Nuclei", "sub": "Nuclear Fission and Fusion", "conf": "high", "alt": null, "type": "explanation/reasoning", "key": ["Scaling Argument"], "sup": ["Conservation of Energy"], "task": null, "flags": [], "note": "", "how": "high"}, {"id": 15985, "src": "Gnadig's 200 Puzzling Problems in Physics", "ch": null, "q": "\\({ }^{7} \\mathrm{Be}\\) is a radioactive element with a half-life of 53.37 days. When isotope 7 of beryllium is heated to a few thousand degrees, its half-life changes. What is the explanation for this?", "sol": "Even if atoms are heated to a few thousand degrees, their thermal energy is still much smaller than their binding energy per nucleon. For this reason the rate of nuclear reactions is usually independent of temperature.\n\nHowever, the isotope \\({ }^{7} \\mathrm{Be}\\) transforms into \\({ }^{7} \\mathrm{Li}\\) via K-capture (the capture of an electron from the innermost K shell). At a temperature of a few thousand degrees the quantum of thermal energy \\(k T\\) is comparable with the ionisation energy of the two innermost electrons of the Be atom (consider the tail of the Maxwell velocity distribution). If some fraction of the beryllium atoms becomes ionised, the probability of nuclear electron captu", "subject": "Quantum Mechanics", "topic": "Quantum, Atomic and Nuclear Physics", "branch": "Atoms and Nuclei", "sub": "Radioactive Decay", "conf": "high", "alt": null, "type": "explanation/reasoning", "key": ["Order-of-Magnitude Estimate"], "sup": [], "task": null, "flags": [], "note": "", "how": "agree"}, {"id": 15986, "src": "Gnadig's 200 Puzzling Problems in Physics", "ch": null, "q": "Part of the series of isotopes produced by the decay of thorium232 , together with the corresponding half-lives, is given below:\n\n\\[\n{ }_{90}^{232} \\mathrm{Th} \\underset{1.41 \\times 10^{10} \\mathrm{y}}{{ }_{88}^{228} \\mathrm{Ra}} \\underset{5.7 \\mathrm{y}}{\\longrightarrow}{ }_{89}^{228} \\mathrm{Ac} \\underset{6.13 \\mathrm{~h}}{\\longrightarrow}{ }_{90}^{228} \\mathrm{Th} \\underset{1.91 \\mathrm{y}}{\\longrightarrow}{ }_{88}^{224} \\mathrm{Ra} \\underset{3.64 \\mathrm{~d}}{\\longrightarrow}{ }_{86}^{220} \\mathrm{Rn} \\underset{56 \\mathrm{~s}}{\\longrightarrow} \\cdots\n\\]\n\nThorium-232 and thorium-228 in equilibrium are extracted from an ore and purified by a chemical process. Sketch the form of the variation in the number of atoms of radon- 220 you would expect to be present in \\(10^{-3} \\mathrm{~kg}\\) of this material over a (logarithmic) range from \\(10^{-3}\\) to \\(10^{3}\\) years.", "sol": "In equilibrium, abundances are proportional to half-lives. In \\(10^{-3} \\mathrm{~kg}\\) of thorium, almost exclusively \\({ }^{232} \\mathrm{Th}\\), there will be\n\n\\[\n\\frac{6.02 \\times 10^{23}}{232}=2.595 \\times 10^{21}\n\\]\n\natoms of thorium. Consequently, there will be\n\n\\[\n2.595 \\times 10^{21} \\times \\frac{56 \\mathrm{~s}}{1.41 \\times 10^{10} \\mathrm{y}} \\approx 3.3 \\times 10^{5}\n\\]\n\natoms of radon.\\\\\nOver the stated time span both isotopes of thorium will contribute to the radon population. Each contributes an amount which first increases at a rate governed by the slowest decay rate in the relevant intermediate decay chain, then remains steady at the equilibrium value, and finally decays at a ra", "subject": "Quantum Mechanics", "topic": "Quantum, Atomic and Nuclear Physics", "branch": "Atoms and Nuclei", "sub": "Radioactive Decay", "conf": "high", "alt": null, "type": "explanation/reasoning", "key": ["Superposition"], "sup": [], "task": null, "flags": [], "note": "", "how": "high"}, {"id": 15990, "src": "Gnadig's 200 Puzzling Problems in Physics", "ch": null, "q": "In an experiment on Compton scattering, stationary electrons are bombarded by photons whose energy is equal to the rest energy of an electron. For events in which the scattered photon and the recoil electron have momenta of the same magnitude, find the angle between them. What is the speed of the recoil electron in this case?", "sol": "The general equations of conservation of energy and momentum for Compton scattering are:\n\n\\[\n\\begin{gathered}\nh f_{0}+m_{0} c^{2}=h f+m c^{2} \\\\\n\\frac{h f_{0}}{c}=\\frac{h f}{c} \\cos \\alpha+p \\cos \\beta \\\\\n\\frac{h f}{c} \\sin \\alpha=p \\sin \\beta \\\\\n\\left(m c^{2}\\right)^{2}=\\left(m_{0} c^{2}\\right)^{2}+p^{2} c^{2}\n\\end{gathered}\n\\]\n\nwhere \\(f_{0}\\) and \\(f\\) denote the frequencies of the incident and scattered photon respectively, \\(\\alpha\\) and \\(\\beta\\) are the photon and electron scattering angles (see figure) and \\(m_{0}\\) is the rest mass of the electron.\\\\\n\\includegraphics[max width=\\textwidth, alt={}, center]{4cab045c-312b-4b35-bd87-7c26c5c01690-253_296_506_1096_479}\n\nFor the special cas", "subject": "Quantum Mechanics", "topic": "Quantum, Atomic and Nuclear Physics", "branch": "Wave-Particle Duality", "sub": "Compton Scattering", "conf": "high", "alt": null, "type": "numerical", "key": ["Conservation of Energy", "Conservation of Momentum"], "sup": [], "task": null, "flags": [], "note": "Compton scattering; Quantum Mechanics tree not given", "how": "opus"}, {"id": 15991, "src": "Gnadig's 200 Puzzling Problems in Physics", "ch": null, "q": "X-ray photons are scattered through an angle of \\(90^{\\circ}\\) by electrons initially at rest. What is the change in the wavelength of the photons?", "sol": "The energy of a photon of frequency \\(f\\) is \\(h f\\), while its momentum is \\(h f / c\\), where \\(h\\) is Planck's constant and \\(c\\) the velocity of light. The energy of the photon decreases to \\(h f^{\\prime}\\) after the collision, and its momentum, of magnitude \\(h f^{\\prime} / c\\), is perpendicular to the original momentum.\\\\\n\\includegraphics[max width=\\textwidth, alt={}, center]{4cab045c-312b-4b35-bd87-7c26c5c01690-254_487_517_388_468}\n\nIt follows from momentum conservation that, as shown in the figure, the components of the electron's final momentum are \\(p_{x}=h f / c\\) and \\(p_{y}=h f^{\\prime} / c\\). Using the principle of conservation of energy in its relativistic form, \\(E^{2}= E_{0}^", "subject": "Quantum Mechanics", "topic": "Quantum, Atomic and Nuclear Physics", "branch": "Wave-Particle Duality", "sub": "Compton Scattering", "conf": "high", "alt": null, "type": "numerical", "key": ["Conservation of Energy", "Conservation of Momentum"], "sup": [], "task": null, "flags": [], "note": "Compton scattering; Quantum Mechanics tree not given", "how": "opus"}, {"id": 15993, "src": "Gnadig's 200 Puzzling Problems in Physics", "ch": null, "q": "An electron is enclosed in a large rectangular box. Estimate the order of magnitude of the thickness of the layer (at the bottom of the box) which, as a result of gravitational effects, is occupied by the electron.", "sol": "Assume that the electron occupies a horizontal layer of thickness \\(H\\) just above the bottom of the box. Its vertical coordinate is then known with accuracy \\(H\\). Therefore the uncertainty in its vertical momentum has to be at least \\(\\Delta p=\\hbar / \\Delta x=\\hbar / H\\), where the quantity \\(\\hbar\\) is \\(1 /(2 \\pi)\\) times the Planck constant. In such circumstances, the electron has a potential energy of\n\n\\[\nE_{\\text {potential }}=m g x_{\\text {average }} \\approx m g \\frac{H}{2},\n\\]\n\nand a kinetic energy of\n\n\\[\nE_{\\text {kinetic }}=\\frac{\\Delta p^{2}}{2 m} \\approx \\frac{\\hbar^{2}}{2 m H^{2}}\n\\]\n\nThus its total energy is\n\n\\[\nE(H)=E_{\\text {potential }}(H)+E_{\\text {kinetic }}(H)=A H+B \\fr", "subject": "Quantum Mechanics", "topic": "Quantum, Atomic and Nuclear Physics", "branch": "Wave-Particle Duality", "sub": "Uncertainty Principle", "conf": "high", "alt": null, "type": "numerical", "key": ["Order-of-Magnitude Estimate"], "sup": ["Energy Method"], "task": null, "flags": [], "note": "", "how": "high"}, {"id": 15994, "src": "Gnadig's 200 Puzzling Problems in Physics", "ch": null, "q": "Classically, the Coulomb field of an atomic nucleus could confine an electron to that nucleus. However, the Heisenberg uncertainty principle prescribes such a high kinetic energy for an electron enclosed in such a small space that it would escape from the nucleus in any case. What would be the atomic number of a transuranic element able to confine an electron within its nucleus for a significant time, if only the element itself were sufficiently stable?", "sol": "If a nucleus of atomic number \\(Z\\) restricts an electron to a sphere of radius \\(r\\), then the electrostatic energy of the electron is \\(E_{\\mathrm{el}} \\approx-k Z e^{2} / r\\) and its momentum can be estimated to be \\(\\hbar / r\\). If \\(Z \\gg 1\\) (i.e. the nucleus is a heavy one), the kinetic energy of the strongly bound electron can be calculated using the relativistic formula\n\n\\[\nE_{\\mathrm{kin}}=\\sqrt{p^{2} c^{2}+m^{2} c^{4}}-m c^{2} \\approx p c\n\\]\n\nwhere \\(c\\) is the velocity of light and \\(\\hbar\\) is the Planck constant divided by \\(2 \\pi\\). The total energy of the electron is\n\n\\[\nE(r)=E_{\\mathrm{el}}(r)+E_{\\mathrm{kin}}(r)=-\\frac{1}{4 \\pi \\varepsilon_{0}} \\frac{Z e^{2}}{r}+\\frac{\\hbar", "subject": "Quantum Mechanics", "topic": "Quantum, Atomic and Nuclear Physics", "branch": "Wave-Particle Duality", "sub": "Uncertainty Principle", "conf": "high", "alt": null, "type": "numerical", "key": ["Limiting Cases"], "sup": ["Order-of-Magnitude Estimate"], "task": null, "flags": [], "note": "", "how": "high"}, {"id": 16194, "src": "Gnadig's 200 More Puzzling Problems in Physics", "ch": null, "q": "Estimate the pressure exerted on the walls of a small cubical box, which has edges of length \\(d\\), by a neutron enclosed within the box.", "sol": "Solution 1. A particle of mass \\(m\\) enclosed in a 'box' of finite size cannot be at rest because of quantum effects, and it must have linear momentum of some average magnitude \\(p\\). According to Heisenberg's uncertainty relationship\n\n\n\\begin{equation*}\n\\Delta x \\Delta p \\geq \\frac{h}{4 \\pi} \\tag{1}\n\\end{equation*}\n\n\nwhere \\(\\Delta x \\approx d\\) is the uncertainty in the neutron's position and \\(\\Delta p \\approx p\\) is the uncertainty in its linear momentum.\n\nNotes. 1. We might have written \\(h, h / 2\\) or some other similar expression on the right-hand side of inequality (1), since we need only the order of magnitude of the uncertainty. More precise values would make sense if the uncertain", "subject": "Quantum Mechanics", "topic": "Quantum, Atomic and Nuclear Physics", "branch": "Wave-Particle Duality", "sub": "Uncertainty Principle", "conf": "high", "alt": null, "type": "numerical", "key": ["Order-of-Magnitude Estimate"], "sup": [], "task": "Estimate", "flags": [], "note": "uncertainty principle estimate", "how": "second"}, {"id": 16195, "src": "Gnadig's 200 More Puzzling Problems in Physics", "ch": null, "q": "Positronium is a system consisting of an electron and its antiparticle, a positron, bound together into an exotic 'atom' by their electrostatic attraction. \\({ }^{12}\\) The orbit and energy levels of the two particles are similar to those of the hydrogen atom. Find - within the framework of a Bohr model - the energies of positronium's ground and excited states.", "sol": "The electron, with mass \\(m\\) and charge \\(-e\\), and the positron, with the same mass but opposite charge, both orbit with velocity \\(v\\) around the same circular trajectory, of radius \\(r\\) and centred on their common centre of mass. Their common equation of motion is\n\n\\[\n\\frac{m v^{2}}{r}=k_{\\mathrm{e}} \\frac{e^{2}}{(2 r)^{2}},\n\\]\n\nwhere \\(k_{\\mathrm{e}}=1 /\\left(4 \\pi \\varepsilon_{0}\\right)\\) is the constant in Coulomb's law, and the generalised Bohr's quantum condition states that\n\n\\[\n2 m r v=n \\hbar \\quad(n=1,2, \\ldots) .\n\\]\n\nUsing these two equations, the orbital radius, corresponding to the \\(n\\)th quantum state, can be calculated as\n\n\\[\nr_{n}=\\left(\\frac{\\hbar^{2}}{m k_{\\mathrm{e}} e", "subject": "Quantum Mechanics", "topic": "Quantum, Atomic and Nuclear Physics", "branch": "Atoms and Nuclei", "sub": "Bohr Model and Hydrogen-Like Atoms", "conf": "high", "alt": null, "type": "numerical", "key": [], "sup": [], "task": null, "flags": [], "note": "", "how": "high"}], "stats": {"n": 12, "subj": [["Quantum Mechanics", 12]], "conf": [["high", 12]], "type": [["numerical", 9], ["explanation/reasoning", 3]], "wb": 0, "tagged": 8, "tasked": 1, "flags": [], "subs": [["Quantum, Atomic and Nuclear Physics", "Wave-Particle Duality", "Compton Scattering", 2], ["Quantum, Atomic and Nuclear Physics", "Wave-Particle Duality", "De Broglie Waves", 1], ["Quantum, Atomic and Nuclear Physics", "Wave-Particle Duality", "Uncertainty Principle", 5], ["Quantum, Atomic and Nuclear Physics", "Atoms and Nuclei", "Bohr Model and Hydrogen-Like Atoms", 1], ["Quantum, Atomic and Nuclear Physics", "Atoms and Nuclei", "Radioactive Decay", 2], ["Quantum, Atomic and Nuclear Physics", "Atoms and Nuclei", "Nuclear Fission and Fusion", 1]]}, "subject": "Quantum Mechanics", "slug": "quantum-mechanics", "howNames": {"pilot": "pilot (Sonnet)", "pilot-rerun": "pilot, re-run with this tree", "high": "first pass, high confidence", "agree": "two models agreed", "second": "second model (first had no fit)", "opus": "Opus decided", "pending": "pending"}}</script>
+<script>
+const D = JSON.parse(document.getElementById("data").textContent);
+const rows = D.rows, S = D.stats, PER = 30;
+const SUBJ = D.subject;
+const KEY = "amplify-review-" + D.slug + "-v1";
+let marks = {};
+try { marks = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { marks = {}; }
+function saveMarks() { try { localStorage.setItem(KEY, JSON.stringify(marks)); } catch (e) {} }
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+function tex(s) {
+  s = esc(s);
+  s = s.replace(/\\includegraphics(\[[^\]]*\])?\{[^}]*\}/g, '<span class="fig">[figure]</span>');
+  s = s.replace(/\\begin\{(center|figure|minipage)\}(\[[^\]]*\]|\{[^}]*\})*|\\end\{(center|figure|minipage)\}|\\centering|\\caption\{[^}]*\}/g, "");
+  s = s.replace(/\\begin\{enumerate\}(\[[^\]]*\])?/g, "<ol>").replace(/\\end\{enumerate\}/g, "</ol>");
+  s = s.replace(/\\begin\{itemize\}(\[[^\]]*\])?/g, "<ul>").replace(/\\end\{itemize\}/g, "</ul>");
+  s = s.replace(/\\item\s*\[([^\]]*)\]/g, "<li><b>$1</b> ").replace(/\\item\s*\{?/g, "<li>");
+  s = s.replace(/\\textbf\{([^{}]*)\}/g, "<b>$1</b>").replace(/\\(emph|textit)\{([^{}]*)\}/g, "<i>$2</i>");
+  s = s.replace(/\\(url|href)\{([^{}]*)\}/g, "$2");
+  return s;
+}
+// stats
+const pct = (a, b) => Math.round(100 * a / b) + "%";
+const confMap = Object.fromEntries(S.conf);
+const statItems = [
+  [S.n, "questions"],
+  [pct(confMap.high || 0, S.n), "high confidence"],
+  [(confMap.medium || 0) + " / " + (confMap.low || 0), "medium / low"],
+  [S.subj.filter(x => x[0] !== SUBJ).reduce((a, x) => a + x[1], 0), "other subjects"],
+  [S.wb, "wastebasket"],
+  [pct(S.tagged, S.n), "have a technique tag"],
+  [pct(S.tasked, S.n), "have a task tag"],
+];
+$("stats").innerHTML = statItems.map(([b, s]) => `<div class="stat"><b>${esc(b)}</b><span>${esc(s)}</span></div>`).join("");
+// coverage
+let cov = "", lastB = "";
+for (const [t, b, s, n] of S.subs) {
+  if (b !== lastB) { cov += `<tr><td colspan="2"><b>${esc(t)} › ${esc(b)}</b></td></tr>`; lastB = b; }
+  cov += `<tr><td>${esc(s)}</td><td class="n">${n}</td></tr>`;
+}
+$("cov").innerHTML = cov;
+// filters
+let opts = `<option value="">All subtopics (${rows.length})</option>`, curB = "";
+const nSub = {}; rows.forEach(r => { const k = r.subject === SUBJ ? r.sub : "OTHER:" + r.subject; nSub[k] = (nSub[k] || 0) + 1; });
+for (const [t, b, s] of S.subs) {
+  if (b !== curB) { if (curB) opts += "</optgroup>"; opts += `<optgroup label="${esc(t + " › " + b)}">`; curB = b; }
+  opts += `<option value="${esc(s)}">${esc(s)} (${nSub[s] || 0})</option>`;
+}
+opts += `</optgroup><optgroup label="Elsewhere"><option value="WASTEBASKET">Wastebasket (${nSub.WASTEBASKET || 0})</option>`;
+for (const k of Object.keys(nSub).filter(k => k.startsWith("OTHER:"))) opts += `<option value="${esc(k)}">${esc(k.slice(6))} (${nSub[k]})</option>`;
+$("subSel").innerHTML = opts + "</optgroup>";
+const uniq = a => [...new Set(a)].sort();
+uniq(rows.map(r => r.type)).forEach(t => $("typeSel").add(new Option(t, t)));
+uniq(rows.flatMap(r => r.flags)).forEach(t => $("flagSel").add(new Option(t, t)));
+uniq(rows.map(r => r.how)).forEach(t => $("howSel").add(new Option(D.howNames[t] || t, t)));
+const tagCount = {};
+rows.forEach(r => { r.key.forEach(t => tagCount["key: " + t] = (tagCount["key: " + t] || 0) + 1);
+                    r.sup.forEach(t => tagCount["supporting: " + t] = (tagCount["supporting: " + t] || 0) + 1);
+                    if (r.task) tagCount["task: " + r.task] = (tagCount["task: " + r.task] || 0) + 1; });
+Object.keys(tagCount).sort().forEach(t => $("tagSel").add(new Option(`${t} (${tagCount[t]})`, t)));
+
+let page = 0, view = [];
+function matches(r) {
+  const sv = $("subSel").value, cv = $("confSel").value, tv = $("typeSel").value, fv = $("flagSel").value, gv = $("tagSel").value;
+  const q = $("q").value.trim().toLowerCase();
+  if (sv) { const k = r.subject === SUBJ ? r.sub : "OTHER:" + r.subject; if (k !== sv) return false; }
+  if (cv && r.conf !== cv) return false;
+  if (tv && r.type !== tv) return false;
+  if (fv && !r.flags.includes(fv)) return false;
+  const hv = $("howSel").value; if (hv && r.how !== hv) return false;
+  if (gv) { const [role, ...rest] = gv.split(": "); const t = rest.join(": ");
+    if (role === "key" && !r.key.includes(t)) return false;
+    if (role === "supporting" && !r.sup.includes(t)) return false;
+    if (role === "task" && r.task !== t) return false; }
+  if ($("markedOnly").checked && !(marks[r.id] && (marks[r.id].wrong || marks[r.id].fix))) return false;
+  if (q && !(String(r.id) === q || r.q.toLowerCase().includes(q))) return false;
+  return true;
+}
+function card(r) {
+  const m = marks[r.id] || {};
+  const path = r.subject === SUBJ
+    ? (r.sub === "WASTEBASKET" ? "Wastebasket" : `${esc(r.topic)} › ${esc(r.branch)} › ${esc(r.sub)}`)
+    : `Other subject: ${esc(r.subject)}`;
+  const chips = [...r.key.map(t => `<span class="chip key" title="key technique">${esc(t)}</span>`),
+                 ...r.sup.map(t => `<span class="chip sup" title="supporting technique">${esc(t)}</span>`),
+                 ...(r.task ? [`<span class="chip task" title="task">${esc(r.task)}</span>`] : []),
+                 ...r.flags.map(f => `<span class="chip flag">${esc(f)}</span>`)].join("");
+  return `<article class="card${m.wrong || m.fix ? " marked" : ""}" data-id="${r.id}">
+    <div class="meta"><span class="id">#${r.id}</span><span>${esc(r.src)}${r.ch ? " ch. " + r.ch : ""}</span><span>${esc(r.type)}</span><span class="badge ${r.conf}">${r.conf}</span><span title="how this label was decided">${esc(D.howNames[r.how] || r.how)}</span></div>
+    <div class="path">${path}${r.alt ? ` <span class="alt">· alt: ${esc(r.alt)}</span>` : ""}</div>
+    ${chips ? `<div class="chips">${chips}</div>` : ""}
+    ${r.note ? `<div class="note">${esc(r.note)}</div>` : ""}
+    <div class="qtext">${tex(r.q)}</div>
+    ${r.sol ? `<details class="sol"><summary>Solution (start)</summary><div>${tex(r.sol)}</div></details>` : ""}
+    <div class="markrow"><label><input type="checkbox" class="wrong" ${m.wrong ? "checked" : ""}> wrong</label>
+      <input type="text" class="fix" placeholder="Right subtopic, tag or comment" value="${esc(m.fix || "")}"></div>
+  </article>`;
+}
+function render(resetPage) {
+  if (resetPage) page = 0;
+  view = rows.filter(matches);
+  const pages = Math.max(1, Math.ceil(view.length / PER));
+  page = Math.min(page, pages - 1);
+  const slice = view.slice(page * PER, page * PER + PER);
+  $("list").innerHTML = slice.length ? slice.map(card).join("") : `<div class="empty">Nothing matches these filters.</div>`;
+  $("count").textContent = `${view.length} shown · ${Object.values(marks).filter(m => m.wrong || m.fix).length} marked`;
+  $("page").textContent = `Page ${page + 1} of ${pages}`;
+  $("prev").disabled = page === 0; $("next").disabled = page >= pages - 1;
+  if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([$("list")]).catch(() => {});
+}
+["subSel", "confSel", "typeSel", "howSel", "flagSel", "tagSel", "markedOnly"].forEach(id => $(id).addEventListener("change", () => render(true)));
+$("q").addEventListener("input", () => render(true));
+$("prev").onclick = () => { page--; render(); window.scrollTo(0, 0); };
+$("next").onclick = () => { page++; render(); window.scrollTo(0, 0); };
+$("list").addEventListener("change", e => {
+  const card = e.target.closest(".card"); if (!card) return;
+  const id = card.dataset.id; const m = marks[id] || {};
+  if (e.target.classList.contains("wrong")) m.wrong = e.target.checked;
+  if (e.target.classList.contains("fix")) m.fix = e.target.value.trim();
+  marks[id] = m; saveMarks();
+  card.classList.toggle("marked", !!(m.wrong || m.fix));
+  $("count").textContent = `${view.length} shown · ${Object.values(marks).filter(m => m.wrong || m.fix).length} marked`;
+});
+$("copyBtn").onclick = async () => {
+  const byId = Object.fromEntries(rows.map(r => [r.id, r]));
+  const out = Object.entries(marks).filter(([, m]) => m.wrong || m.fix).map(([id, m]) => {
+    const r = byId[id]; return { id: +id, current: r.subject === SUBJ ? r.sub : r.subject, wrong: !!m.wrong, fix: m.fix || "" };
+  });
+  const text = SUBJ + " corrections (" + out.length + "):\n" + JSON.stringify(out);
+  try { await navigator.clipboard.writeText(text); $("copyBtn").textContent = "Copied " + out.length; }
+  catch (e) { prompt("Copy this:", text); }
+  setTimeout(() => $("copyBtn").textContent = "Copy corrections", 2500);
+};
+window.addEventListener("load", () => render(true));
+render(true);
+</script>
+</body>
+</html>

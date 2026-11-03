@@ -11,7 +11,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Brain, FolderOpen, ImagePlus, RotateCw, Tag, Trash2, Upload } from "lucide-react";
+import { Brain, FolderOpen, ImagePlus, RotateCw, Trash2, Upload } from "lucide-react";
 
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
@@ -27,7 +27,6 @@ import {
   type RecomputeDifficultyResult,
   type ResetSubjectResult,
   type SeedDiagnostics,
-  type SeedTagsResult,
 } from "../lib/ipc";
 
 interface PdfHeaders {
@@ -78,7 +77,6 @@ export default function SettingsPage() {
   const [diag, setDiag] = useState<SeedDiagnostics | null>(null);
   const [ingestResult, setIngestResult] = useState<IngestResult | null>(null);
   const [augmentResult, setAugmentResult] = useState<AugmentResult | null>(null);
-  const [seedTagsResult, setSeedTagsResult] = useState<SeedTagsResult | null>(null);
   const [diff, setDiff] = useState<DifficultyState | null>(null);
   const [recomputeResult, setRecomputeResult] = useState<RecomputeDifficultyResult | null>(null);
   const navigate = useNavigate();
@@ -249,17 +247,6 @@ export default function SettingsPage() {
     try {
       const r = await ipc.augment_seed_from_csv(path);
       setAugmentResult(r);
-      await refresh();
-    } finally {
-      setBusy(null);
-    }
-  };
-
-  const onSeedTags = async () => {
-    setBusy("seed-tags");
-    try {
-      const r = await ipc.seed_tags_from_metadata();
-      setSeedTagsResult(r);
       await refresh();
     } finally {
       setBusy(null);
@@ -451,10 +438,6 @@ export default function SettingsPage() {
                 <Upload className="h-4 w-4" />
                 Augment seed from CSV…
               </Button>
-              <Button variant="outline" onClick={onSeedTags} disabled={busy !== null}>
-                <Tag className="h-4 w-4" />
-                Seed tags from metadata
-              </Button>
             </div>
             {diag && (
               <div className="rounded-md border border-border bg-background p-3 text-sm">
@@ -612,26 +595,6 @@ export default function SettingsPage() {
             {recomputeResult.avg_rating != null && (
               <> Mean rating: <strong>{recomputeResult.avg_rating.toFixed(2)}</strong>.</>
             )}
-          </p>
-        )}
-      </Modal>
-
-      <Modal
-        open={seedTagsResult !== null}
-        onClose={() => setSeedTagsResult(null)}
-        title="Tags seeded"
-        tone="success"
-        footer={
-          <Button variant="primary" onClick={() => setSeedTagsResult(null)}>
-            OK
-          </Button>
-        }
-      >
-        {seedTagsResult && (
-          <p className="text-sm">
-            Scanned <strong>{seedTagsResult.questions_scanned.toLocaleString()}</strong>{" "}
-            questions; inserted <strong>{seedTagsResult.rows_inserted.toLocaleString()}</strong>{" "}
-            new tag rows. Re-running only adds tags for new questions or new metadata.
           </p>
         )}
       </Modal>
