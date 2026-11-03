@@ -1,0 +1,2981 @@
+[
+ {
+  "key": "1.55",
+  "field": "latexcode",
+  "page": 16,
+  "kind": "math",
+  "note": "Unicode times sign as maths",
+  "old": "8 × 8",
+  "new": "\\(8 \\times 8\\)"
+ },
+ {
+  "key": "9.6",
+  "field": "latexcode",
+  "page": 133,
+  "kind": "punct",
+  "note": "comma misread as period; list of heights as a display",
+  "old": "was collected. and the following values were recorded (in centimeters):\n\n\\begin{itemize}\n  \\item[] \\(164, \\quad 167, \\quad 163, \\quad 158, \\quad 170, \\quad 183, \\quad 176, \\quad 159, \\quad 170, \\quad 167\\).\n\\end{itemize}",
+  "new": "was collected, and the following values were recorded (in centimeters):\n\n\\[\n164, \\quad 167, \\quad 163, \\quad 158, \\quad 170, \\quad 183, \\quad 176, \\quad 159, \\quad 170, \\quad 167 .\n\\]"
+ },
+ {
+  "key": "1.1",
+  "field": "latexcode",
+  "page": 1,
+  "kind": "punct",
+  "note": "comma between the two laws",
+  "old": "A^{c} \\cap B^{c} . \\quad",
+  "new": "A^{c} \\cap B^{c}, \\quad"
+ },
+ {
+  "key": "1.3",
+  "field": "solution",
+  "page": 1,
+  "kind": "punct",
+  "note": "comma",
+  "old": "Conversely. if",
+  "new": "Conversely, if"
+ },
+ {
+  "key": "1.3",
+  "field": "solution",
+  "page": 1,
+  "kind": "punct",
+  "note": "comma",
+  "old": "on the right. then",
+  "new": "on the right, then"
+ },
+ {
+  "key": "1.3",
+  "field": "solution",
+  "page": 1,
+  "kind": "punct",
+  "note": "comma",
+  "old": "belongs to \\(A\\). then",
+  "new": "belongs to \\(A\\), then"
+ },
+ {
+  "key": "1.3",
+  "field": "solution",
+  "page": 1,
+  "kind": "punct",
+  "note": "comma",
+  "old": "Otherwise. \\(x\\)",
+  "new": "Otherwise, \\(x\\)"
+ },
+ {
+  "key": "1.4",
+  "field": "latexcode",
+  "page": 1,
+  "kind": "punct",
+  "note": "comma",
+  "old": "uncountable. i.e.,",
+  "new": "uncountable, i.e.,"
+ },
+ {
+  "key": "1.4",
+  "field": "solution",
+  "page": 1,
+  "kind": "punct",
+  "note": "interval [0, 1]",
+  "old": "in [0.1] can",
+  "new": "in [0, 1] can"
+ },
+ {
+  "key": "1.4",
+  "field": "solution",
+  "page": 2,
+  "kind": "math",
+  "note": "set written as maths",
+  "old": "belongs to \\{0,1,...,9\\}.",
+  "new": "belongs to \\(\\{0,1, \\ldots, 9\\}\\)."
+ },
+ {
+  "key": "1.11",
+  "field": "solution",
+  "page": 3,
+  "kind": "punct",
+  "note": "comma",
+  "old": "\\leq 1\\). which",
+  "new": "\\leq 1\\), which"
+ },
+ {
+  "key": "1.19",
+  "field": "latexcode",
+  "page": 5,
+  "kind": "punct",
+  "note": "comma",
+  "old": "filing cabinet. which",
+  "new": "filing cabinet, which"
+ },
+ {
+  "key": "1.19",
+  "field": "latexcode",
+  "page": 5,
+  "kind": "punct",
+  "note": "comma",
+  "old": "drawer \\(i\\). the probability",
+  "new": "drawer \\(i\\), the probability"
+ },
+ {
+  "key": "1.19",
+  "field": "latexcode",
+  "page": 5,
+  "kind": "punct",
+  "note": "comma",
+  "old": "particular drawer. say",
+  "new": "particular drawer, say"
+ },
+ {
+  "key": "1.19",
+  "field": "latexcode",
+  "page": 5,
+  "kind": "punct",
+  "note": "commas in display",
+  "old": "d_{i}} . \\quad \\text { if } j \\neq i . \\quad",
+  "new": "d_{i}}, \\quad \\text { if } j \\neq i, \\quad"
+ },
+ {
+  "key": "1.20",
+  "field": "latexcode",
+  "page": 5,
+  "kind": "punct",
+  "note": "comma",
+  "old": "playing styles. timid",
+  "new": "playing styles, timid"
+ },
+ {
+  "key": "1.20",
+  "field": "latexcode",
+  "page": 5,
+  "kind": "punct",
+  "note": "comma",
+  "old": "in each game. no matter",
+  "new": "in each game, no matter"
+ },
+ {
+  "key": "1.20",
+  "field": "latexcode",
+  "page": 5,
+  "kind": "punct",
+  "note": "comma",
+  "old": "With timid play. he",
+  "new": "With timid play, he"
+ },
+ {
+  "key": "1.20",
+  "field": "latexcode",
+  "page": 5,
+  "kind": "punct",
+  "note": "missing comma",
+  "old": "ahead in the score and play",
+  "new": "ahead in the score, and play"
+ },
+ {
+  "key": "1.20",
+  "field": "latexcode",
+  "page": 5,
+  "kind": "punct",
+  "note": "comma",
+  "old": "\\(p_{d}\\). Boris",
+  "new": "\\(p_{d}\\), Boris"
+ },
+ {
+  "key": "1.25",
+  "field": "latexcode",
+  "page": 6,
+  "kind": "punct",
+  "note": "comma",
+  "old": "repeatedly. let",
+  "new": "repeatedly, let"
+ },
+ {
+  "key": "1.28",
+  "field": "latexcode",
+  "page": 7,
+  "kind": "math",
+  "note": "subscript is i, not 2",
+  "old": "B \\cap C_{2}\\right)",
+  "new": "B \\cap C_{i}\\right)"
+ },
+ {
+  "key": "1.30",
+  "field": "latexcode",
+  "page": 8,
+  "kind": "punct",
+  "note": "comma",
+  "old": "each dog. independent",
+  "new": "each dog, independent"
+ },
+ {
+  "key": "1.34",
+  "field": "latexcode",
+  "page": 9,
+  "kind": "punct",
+  "note": "commas",
+  "old": "point \\(A\\). ends at point \\(B\\). and",
+  "new": "point \\(A\\), ends at point \\(B\\), and"
+ },
+ {
+  "key": "1.34",
+  "field": "latexcode",
+  "page": 9,
+  "kind": "punct",
+  "note": "comma in caption",
+  "old": "subsystems 1. 2, and 3",
+  "new": "subsystems 1, 2, and 3"
+ },
+ {
+  "key": "1.35",
+  "field": "latexcode",
+  "page": 9,
+  "kind": "punct",
+  "note": "comma",
+  "old": "probability \\(p\\). independent",
+  "new": "probability \\(p\\), independent"
+ },
+ {
+  "key": "1.42",
+  "field": "solution",
+  "page": 11,
+  "kind": "punct",
+  "note": "comma",
+  "old": "F^{c}\\right) . \\quad 0<k<n,",
+  "new": "F^{c}\\right), \\quad 0<k<n,"
+ },
+ {
+  "key": "1.42",
+  "field": "solution",
+  "page": 11,
+  "kind": "punct",
+  "note": "commas in cases",
+  "old": "p \\neq q . \\\\ k w_{1} . &",
+  "new": "p \\neq q, \\\\ k w_{1}, &"
+ },
+ {
+  "key": "1.42",
+  "field": "solution",
+  "page": 11,
+  "kind": "punct",
+  "note": "comma in cases",
+  "old": "\\frac{1}{n} . &",
+  "new": "\\frac{1}{n}, &"
+ },
+ {
+  "key": "1.43",
+  "field": "solution",
+  "page": 12,
+  "kind": "punct",
+  "note": "comma (sentence continues with 'so')",
+  "old": "\\mathbf{P}(A) \\mathbf{P}\\left(B^{c}\\right) .",
+  "new": "\\mathbf{P}(A) \\mathbf{P}\\left(B^{c}\\right),"
+ },
+ {
+  "key": "1.43",
+  "field": "solution",
+  "page": 12,
+  "kind": "punct",
+  "note": "comma",
+  "old": "\\(B\\). then on",
+  "new": "\\(B\\), then on"
+ },
+ {
+  "key": "1.44",
+  "field": "latexcode",
+  "page": 12,
+  "kind": "punct",
+  "note": "commas",
+  "old": "Let \\(A . B\\). and \\(C\\)",
+  "new": "Let \\(A, B\\), and \\(C\\)"
+ },
+ {
+  "key": "1.47",
+  "field": "solution",
+  "page": 14,
+  "kind": "punct",
+  "note": "commas in cases",
+  "old": "n-1 . \\\\ 1 . &",
+  "new": "n-1, \\\\ 1, &"
+ },
+ {
+  "key": "1.48",
+  "field": "solution",
+  "page": 15,
+  "kind": "punct",
+  "note": "comma",
+  "old": "=-\\infty\\). or",
+  "new": "=-\\infty\\), or"
+ },
+ {
+  "key": "1.48",
+  "field": "solution",
+  "page": 15,
+  "kind": "punct",
+  "note": "missing comma at end of display",
+  "old": "\\mathbf{P}\\left(L_{n}\\right)=0\n\\]",
+  "new": "\\mathbf{P}\\left(L_{n}\\right)=0,\n\\]"
+ },
+ {
+  "key": "1.50",
+  "field": "latexcode",
+  "page": 16,
+  "kind": "punct",
+  "note": "comma",
+  "old": "the year. independent",
+  "new": "the year, independent"
+ },
+ {
+  "key": "1.51",
+  "field": "latexcode",
+  "page": 16,
+  "kind": "punct",
+  "note": "comma",
+  "old": "comes up. we remove",
+  "new": "comes up, we remove"
+ },
+ {
+  "key": "1.51",
+  "field": "latexcode",
+  "page": 16,
+  "kind": "punct",
+  "note": "comma",
+  "old": "are red. using",
+  "new": "are red, using"
+ },
+ {
+  "key": "1.54",
+  "field": "latexcode",
+  "page": 16,
+  "kind": "punct",
+  "note": "comma",
+  "old": "twenty spaces. all in a row",
+  "new": "twenty spaces, all in a row"
+ },
+ {
+  "key": "1.54",
+  "field": "latexcode",
+  "page": 16,
+  "kind": "punct",
+  "note": "comma",
+  "old": "varying schedules. so",
+  "new": "varying schedules, so"
+ },
+ {
+  "key": "1.56",
+  "field": "latexcode",
+  "page": 16,
+  "kind": "punct",
+  "note": "comma",
+  "old": "\\ldots . H_{10}",
+  "new": "\\ldots, H_{10}"
+ },
+ {
+  "key": "1.56",
+  "field": "latexcode",
+  "page": 16,
+  "kind": "punct",
+  "note": "comma",
+  "old": "level courses. and 3",
+  "new": "level courses, and 3"
+ },
+ {
+  "key": "1.56",
+  "field": "latexcode",
+  "page": 16,
+  "kind": "punct",
+  "note": "commas",
+  "old": "prerequisites. i.e.. any",
+  "new": "prerequisites, i.e., any"
+ },
+ {
+  "key": "1.58",
+  "field": "latexcode",
+  "page": 17,
+  "kind": "punct",
+  "note": "comma",
+  "old": "exactly 3 aces. or",
+  "new": "exactly 3 aces, or"
+ },
+ {
+  "key": "1.61",
+  "field": "latexcode",
+  "page": 17,
+  "kind": "punct",
+  "note": "comma",
+  "old": "at random. without",
+  "new": "at random, without"
+ },
+ {
+  "key": "1.61",
+  "field": "solution",
+  "page": 17,
+  "kind": "punct",
+  "note": "comma",
+  "old": "to occur. we have",
+  "new": "to occur, we have"
+ },
+ {
+  "key": "1.62",
+  "field": "latexcode",
+  "page": 17,
+  "kind": "punct",
+  "note": "comma",
+  "old": "ABC. ACB",
+  "new": "ABC, ACB"
+ },
+ {
+  "key": "1.62",
+  "field": "latexcode",
+  "page": 17,
+  "kind": "punct",
+  "note": "comma",
+  "old": "DAD. DDA.",
+  "new": "DAD, DDA."
+ },
+ {
+  "key": "1.62",
+  "field": "solution",
+  "page": 18,
+  "kind": "math",
+  "note": "factorial belongs inside maths",
+  "old": "\\(k_{i}\\) ! indistinguishable",
+  "new": "\\(k_{i}!\\) indistinguishable"
+ },
+ {
+  "key": "2.1",
+  "field": "latexcode",
+  "page": 19,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "first game. and a 0.7",
+  "new": "first game, and a 0.7"
+ },
+ {
+  "key": "2.1",
+  "field": "latexcode",
+  "page": 19,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "win or tie. independent",
+  "new": "win or tie, independent"
+ },
+ {
+  "key": "2.1",
+  "field": "latexcode",
+  "page": 19,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "1 for a tie. and 0",
+  "new": "1 for a tie, and 0"
+ },
+ {
+  "key": "2.2",
+  "field": "latexcode",
+  "page": 19,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "(For simplicity. exclude",
+  "new": "(For simplicity, exclude"
+ },
+ {
+  "key": "2.3",
+  "field": "latexcode",
+  "page": 19,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "successive draws. the match",
+  "new": "successive draws, the match"
+ },
+ {
+  "key": "2.3",
+  "field": "latexcode",
+  "page": 19,
+  "kind": "punct",
+  "note": "commas OCR'd as periods",
+  "old": "probability 0.4 . is won by Spassky with probability 0.3 . and is a draw with probability 0.3 . independent",
+  "new": "probability 0.4, is won by Spassky with probability 0.3, and is a draw with probability 0.3, independent"
+ },
+ {
+  "key": "2.4",
+  "field": "latexcode",
+  "page": 19,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "at a given time. each customer",
+  "new": "at a given time, each customer"
+ },
+ {
+  "key": "2.7",
+  "field": "latexcode",
+  "page": 20,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "look identical. so to open",
+  "new": "look identical, so to open"
+ },
+ {
+  "key": "2.7",
+  "field": "latexcode",
+  "page": 20,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "unsuccessful trial. you mark",
+  "new": "unsuccessful trial, you mark"
+ },
+ {
+  "key": "2.7",
+  "field": "latexcode",
+  "page": 20,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "try it again. and (2)",
+  "new": "try it again, and (2)"
+ },
+ {
+  "key": "2.8",
+  "field": "latexcode",
+  "page": 20,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "(1-p)^{n}\\). and then",
+  "new": "(1-p)^{n}\\), and then"
+ },
+ {
+  "key": "2.8",
+  "field": "latexcode",
+  "page": 20,
+  "kind": "punct",
+  "note": "missing comma before ellipsis",
+  "old": "k=0,1 \\ldots, n-1",
+  "new": "k=0,1, \\ldots, n-1"
+ },
+ {
+  "key": "2.11",
+  "field": "solution",
+  "page": 21,
+  "kind": "punct",
+  "note": "comma before range OCR'd as period",
+  "old": "\\mathbf{P}\\left(R_{k}\\right) . \\quad k=0,1, \\ldots, n .",
+  "new": "\\mathbf{P}\\left(R_{k}\\right), \\quad k=0,1, \\ldots, n ."
+ },
+ {
+  "key": "2.11",
+  "field": "solution",
+  "page": 21,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "is a success. or",
+  "new": "is a success, or"
+ },
+ {
+  "key": "2.11",
+  "field": "solution",
+  "page": 21,
+  "kind": "punct",
+  "note": "comma before range OCR'd as period",
+  "old": "\\right)^{2 n-k} . \\quad k=0,1, \\ldots, n .",
+  "new": "\\right)^{2 n-k}, \\quad k=0,1, \\ldots, n ."
+ },
+ {
+  "key": "2.11",
+  "field": "solution",
+  "page": 21,
+  "kind": "punct",
+  "note": "commas OCR'd as periods",
+  "old": "By symmetry. \\(\\mathbf{P}\\left(L_{k}\\right)=\\mathbf{P}\\left(R_{k}\\right)\\). so",
+  "new": "By symmetry, \\(\\mathbf{P}\\left(L_{k}\\right)=\\mathbf{P}\\left(R_{k}\\right)\\), so"
+ },
+ {
+  "key": "2.11",
+  "field": "solution",
+  "page": 21,
+  "kind": "punct",
+  "note": "commas OCR'd as periods in k=0,1,...,n",
+  "old": "\\right)^{2 n-k} . \\quad k=0.1, \\ldots . n .",
+  "new": "\\right)^{2 n-k}, \\quad k=0,1, \\ldots, n ."
+ },
+ {
+  "key": "2.11",
+  "field": "solution",
+  "page": 21,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "similar reasoning. we obtain",
+  "new": "similar reasoning, we obtain"
+ },
+ {
+  "key": "2.11",
+  "field": "solution",
+  "page": 21,
+  "kind": "punct",
+  "note": "commas OCR'd as periods in k=0,1,...,n",
+  "old": "(1-p)^{n-k}, \\quad k=0.1, \\ldots . n .",
+  "new": "(1-p)^{n-k}, \\quad k=0,1, \\ldots, n ."
+ },
+ {
+  "key": "2.11",
+  "field": "solution",
+  "page": 21,
+  "kind": "punct",
+  "note": "comma before range OCR'd as period",
+  "old": "(1-p)^{n} . \\quad k=0,1, \\ldots, n",
+  "new": "(1-p)^{n}, \\quad k=0,1, \\ldots, n"
+ },
+ {
+  "key": "2.11",
+  "field": "solution",
+  "page": 21,
+  "kind": "punct",
+  "note": "commas OCR'd as periods",
+  "old": "(1-p)^{n+1}\\right) . \\quad k=0.1, \\ldots . n .",
+  "new": "(1-p)^{n+1}\\right), \\quad k=0,1, \\ldots, n ."
+ },
+ {
+  "key": "2.12",
+  "field": "latexcode",
+  "page": 21,
+  "kind": "punct",
+  "note": "sentence continues 'while np is fixed'; comma",
+  "old": "p \\rightarrow 0 .",
+  "new": "p \\rightarrow 0,"
+ },
+ {
+  "key": "2.12",
+  "field": "solution",
+  "page": 22,
+  "kind": "punct",
+  "note": "missing comma before k",
+  "old": "j=1, \\ldots k",
+  "new": "j=1, \\ldots, k"
+ },
+ {
+  "key": "2.12",
+  "field": "solution",
+  "page": 22,
+  "kind": "punct",
+  "note": "comma OCR'd as period between limits",
+  "old": "\\frac{n-k+j}{n} \\rightarrow 1 .",
+  "new": "\\frac{n-k+j}{n} \\rightarrow 1,"
+ },
+ {
+  "key": "2.12",
+  "field": "solution",
+  "page": 22,
+  "kind": "punct",
+  "note": "comma OCR'd as period between limits",
+  "old": "\\right)^{-k} \\rightarrow 1 .",
+  "new": "\\right)^{-k} \\rightarrow 1,"
+ },
+ {
+  "key": "2.24",
+  "field": "latexcode",
+  "page": 24,
+  "kind": "punct",
+  "note": "commas OCR'd as periods",
+  "old": "of A and B. respectively. over a certain time period. and assume",
+  "new": "of A and B, respectively, over a certain time period, and assume"
+ },
+ {
+  "key": "2.25",
+  "field": "latexcode",
+  "page": 24,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "\\(1 . \\ldots, m\\)",
+  "new": "\\(1, \\ldots, m\\)"
+ },
+ {
+  "key": "2.25",
+  "field": "latexcode",
+  "page": 24,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "question \\(j\\). if submitted",
+  "new": "question \\(j\\), if submitted"
+ },
+ {
+  "key": "2.26",
+  "field": "latexcode",
+  "page": 24,
+  "kind": "punct",
+  "note": "commas OCR'd as periods",
+  "old": "On a given day. your golf score takes values from the range 101 to 110. with",
+  "new": "On a given day, your golf score takes values from the range 101 to 110, with"
+ },
+ {
+  "key": "2.27",
+  "field": "latexcode",
+  "page": 24,
+  "kind": "punct",
+  "note": "commas OCR'd as periods",
+  "old": "\\(1, \\ldots . r\\). is rolled",
+  "new": "\\(1, \\ldots, r\\), is rolled"
+ },
+ {
+  "key": "2.27",
+  "field": "latexcode",
+  "page": 24,
+  "kind": "math",
+  "note": "subscript is X_1,...,X_r with commas",
+  "old": "p_{X_{1} \\ldots X_{r}}",
+  "new": "p_{X_{1}, \\ldots, X_{r}}"
+ },
+ {
+  "key": "2.27",
+  "field": "solution",
+  "page": 25,
+  "kind": "math",
+  "note": "subscript is X_1,...,X_r with commas",
+  "old": "p_{X_{1} \\ldots X_{r}}",
+  "new": "p_{X_{1}, \\ldots, X_{r}}"
+ },
+ {
+  "key": "2.27",
+  "field": "solution",
+  "page": 25,
+  "kind": "math",
+  "note": "lowercase j",
+  "old": "Y_{J, k}",
+  "new": "Y_{j, k}"
+ },
+ {
+  "key": "2.28",
+  "field": "latexcode",
+  "page": 25,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "probability \\(p_{i}\\). and the person",
+  "new": "probability \\(p_{i}\\), and the person"
+ },
+ {
+  "key": "2.28",
+  "field": "solution",
+  "page": 25,
+  "kind": "punct",
+  "note": "comma OCR'd as period in L'",
+  "old": "j, i . i_{k+2}",
+  "new": "j, i, i_{k+2}"
+ },
+ {
+  "key": "2.30",
+  "field": "solution",
+  "page": 27,
+  "kind": "punct",
+  "note": "comma between list of equations",
+  "old": "=\\frac{(n-2)!}{n!} .",
+  "new": "=\\frac{(n-2)!}{n!},"
+ },
+ {
+  "key": "2.32",
+  "field": "latexcode",
+  "page": 28,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "later time. let",
+  "new": "later time, let"
+ },
+ {
+  "key": "2.33",
+  "field": "solution",
+  "page": 28,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "cumbersome. so we argue",
+  "new": "cumbersome, so we argue"
+ },
+ {
+  "key": "2.33",
+  "field": "solution",
+  "page": 28,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "two relations. collecting",
+  "new": "two relations, collecting"
+ },
+ {
+  "key": "2.34",
+  "field": "solution",
+  "page": 29,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "A_{2}\\right]\\). and similarly",
+  "new": "A_{2}\\right]\\), and similarly"
+ },
+ {
+  "key": "2.34",
+  "field": "solution",
+  "page": 29,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "expectation theorem. we obtain",
+  "new": "expectation theorem, we obtain"
+ },
+ {
+  "key": "2.34",
+  "field": "solution",
+  "page": 30,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "Generalizing. we obtain",
+  "new": "Generalizing, we obtain"
+ },
+ {
+  "key": "2.36",
+  "field": "solution",
+  "page": 32,
+  "kind": "math",
+  "note": "missing comma in subscript X_1,...,X_n",
+  "old": "p_{X_{1} \\ldots, X_{n}}",
+  "new": "p_{X_{1}, \\ldots, X_{n}}"
+ },
+ {
+  "key": "2.36",
+  "field": "solution",
+  "page": 32,
+  "kind": "math",
+  "note": "missing commas in subscript X_1,...,X_{n-1}",
+  "old": "p_{X_{n} \\mid X_{1} \\ldots X_{n-1}}",
+  "new": "p_{X_{n} \\mid X_{1}, \\ldots, X_{n-1}}"
+ },
+ {
+  "key": "2.37",
+  "field": "latexcode",
+  "page": 32,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "\\(1-p\\). independent",
+  "new": "\\(1-p\\), independent"
+ },
+ {
+  "key": "2.37",
+  "field": "solution",
+  "page": 32,
+  "kind": "punct",
+  "note": "comma OCR'd as period in X=n, Y=m",
+  "old": "\\mathbf{P}(X=n . Y=m) & =\\mathbf{P}(X=n . Y=m \\mid",
+  "new": "\\mathbf{P}(X=n, Y=m) & =\\mathbf{P}(X=n, Y=m \\mid"
+ },
+ {
+  "key": "2.37",
+  "field": "solution",
+  "page": 32,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "Thus.",
+  "new": "Thus,"
+ },
+ {
+  "key": "2.38",
+  "field": "latexcode",
+  "page": 32,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "green or red. independent",
+  "new": "green or red, independent"
+ },
+ {
+  "key": "2.39",
+  "field": "latexcode",
+  "page": 32,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "given morning. the number",
+  "new": "given morning, the number"
+ },
+ {
+  "key": "2.39",
+  "field": "latexcode",
+  "page": 32,
+  "kind": "number",
+  "note": "list is 1, 2, 3, 4, 5, not decimals 1.2 and 3.4",
+  "old": "\\(1.2,3.4,5\\)",
+  "new": "\\(1,2,3,4,5\\)"
+ },
+ {
+  "key": "2.40",
+  "field": "latexcode",
+  "page": 33,
+  "kind": "punct",
+  "note": "comma OCR'd as period in grade set",
+  "old": "B+. B",
+  "new": "B+, B"
+ },
+ {
+  "key": "2.41",
+  "field": "latexcode",
+  "page": 33,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "a ticket. but you got",
+  "new": "a ticket, but you got"
+ },
+ {
+  "key": "2.42",
+  "field": "latexcode",
+  "page": 33,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "\\(S_{n}\\). it is sufficient",
+  "new": "\\(S_{n}\\), it is sufficient"
+ },
+ {
+  "key": "2.44",
+  "field": "solution",
+  "page": 34,
+  "kind": "math",
+  "note": "sum index set is {y | h(y)=v}",
+  "old": "\\sum_{\\{x \\mid h(y)=v\\}}",
+  "new": "\\sum_{\\{y \\mid h(y)=v\\}}"
+ },
+ {
+  "key": "2.45",
+  "field": "solution",
+  "page": 35,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "X_{i}\\right]\\). we see",
+  "new": "X_{i}\\right]\\), we see"
+ },
+ {
+  "key": "2.46",
+  "field": "latexcode",
+  "page": 35,
+  "kind": "punct",
+  "note": "comma OCR'd as period; missing comma after x_1",
+  "old": "\\(n\\) values. \\(x_{1} \\ldots, x_{n}\\)",
+  "new": "\\(n\\) values, \\(x_{1}, \\ldots, x_{n}\\)"
+ },
+ {
+  "key": "2.46",
+  "field": "latexcode",
+  "page": 36,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "For example. it can",
+  "new": "For example, it can"
+ },
+ {
+  "key": "2.46",
+  "field": "latexcode",
+  "page": 36,
+  "kind": "punct",
+  "note": "commas OCR'd as periods / missing",
+  "old": "\\(X_{1}, X_{2}, \\ldots X_{n}\\). then. with a suitable strategy. \\(k / n\\)",
+  "new": "\\(X_{1}, X_{2}, \\ldots, X_{n}\\), then, with a suitable strategy, \\(k / n\\)"
+ },
+ {
+  "key": "2.46",
+  "field": "latexcode",
+  "page": 36,
+  "kind": "punct",
+  "note": "commas OCR'd as periods / missing",
+  "old": "\\(q_{1} \\ldots . q_{n}\\)",
+  "new": "\\(q_{1}, \\ldots, q_{n}\\)"
+ },
+ {
+  "key": "2.46",
+  "field": "latexcode",
+  "page": 36,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "\\(\\alpha>0\\). which holds",
+  "new": "\\(\\alpha>0\\), which holds"
+ },
+ {
+  "key": "2.46",
+  "field": "latexcode",
+  "page": 36,
+  "kind": "punct",
+  "note": "comma OCR'd as period in subscript X,Y",
+  "old": "p_{X . Y}(x, y) \\log \\left(\\frac{p_{X . Y}(x, y)}",
+  "new": "p_{X, Y}(x, y) \\log \\left(\\frac{p_{X, Y}(x, y)}"
+ },
+ {
+  "key": "2.46",
+  "field": "latexcode",
+  "page": 36,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "\\(I(X . Y)=0\\)",
+  "new": "\\(I(X, Y)=0\\)"
+ },
+ {
+  "key": "2.46",
+  "field": "latexcode",
+  "page": 36,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "I(X . Y)=H(X)+H(Y)",
+  "new": "I(X, Y)=H(X)+H(Y)"
+ },
+ {
+  "key": "2.46",
+  "field": "latexcode",
+  "page": 36,
+  "kind": "punct",
+  "note": "commas OCR'd as periods in H(X,Y) definition",
+  "old": "H(X . Y)=-\\sum_{x} \\sum_{y} p_{X . Y}(x . y) \\log p_{X . Y}(x . y) \\\\",
+  "new": "H(X, Y)=-\\sum_{x} \\sum_{y} p_{X, Y}(x, y) \\log p_{X, Y}(x, y), \\\\"
+ },
+ {
+  "key": "2.46",
+  "field": "latexcode",
+  "page": 36,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "I(X . Y)=H(X)-H(X \\mid Y)",
+  "new": "I(X, Y)=H(X)-H(X \\mid Y)"
+ },
+ {
+  "key": "2.46",
+  "field": "latexcode",
+  "page": 36,
+  "kind": "punct",
+  "note": "commas OCR'd as periods",
+  "old": "that is. the entropy of the conditional distribution of \\(X\\). given",
+  "new": "that is, the entropy of the conditional distribution of \\(X\\), given"
+ },
+ {
+  "key": "2.46",
+  "field": "latexcode",
+  "page": 37,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "Thus. the quantity",
+  "new": "Thus, the quantity"
+ },
+ {
+  "key": "2.46",
+  "field": "latexcode",
+  "page": 37,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "conveyed by \\(Y\\). and is called",
+  "new": "conveyed by \\(Y\\), and is called"
+ },
+ {
+  "key": "2.46",
+  "field": "solution",
+  "page": 37,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "inequality is true. write",
+  "new": "inequality is true, write"
+ },
+ {
+  "key": "2.46",
+  "field": "solution",
+  "page": 37,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "for \\(\\alpha>1\\). and write",
+  "new": "for \\(\\alpha>1\\), and write"
+ },
+ {
+  "key": "2.46",
+  "field": "solution",
+  "page": 37,
+  "kind": "punct",
+  "note": "sentence continues 'with equality'; comma",
+  "old": "-1\\right)=0 .",
+  "new": "-1\\right)=0,"
+ },
+ {
+  "key": "2.46",
+  "field": "solution",
+  "page": 37,
+  "kind": "punct",
+  "note": "comma OCR'd as period",
+  "old": "\\log p \\ln 2\\). we obtain",
+  "new": "\\log p \\ln 2\\), we obtain"
+ },
+ {
+  "key": "2.46",
+  "field": "solution",
+  "page": 37,
+  "kind": "punct",
+  "note": "commas OCR'd as periods in p_{X,Y}(x,y)",
+  "old": "\\sum_{x} \\sum_{y} p_{X . Y}(x . y) \\log \\left(p_{X . Y}(x, y)\\right) \\geq \\sum_{x} \\sum_{y} p_{X . Y}(x . y) \\log",
+  "new": "\\sum_{x} \\sum_{y} p_{X, Y}(x, y) \\log \\left(p_{X, Y}(x, y)\\right) \\geq \\sum_{x} \\sum_{y} p_{X, Y}(x, y) \\log"
+ },
+ {
+  "key": "2.46",
+  "field": "solution",
+  "page": 37,
+  "kind": "punct",
+  "note": "comma OCR'd as period in subscript X,Y",
+  "old": "p_{X . Y}(x, y) \\log \\left(p_{X}(x) p_{Y}(y)\\right)=",
+  "new": "p_{X, Y}(x, y) \\log \\left(p_{X}(x) p_{Y}(y)\\right)="
+ },
+ {
+  "key": "2.46",
+  "field": "solution",
+  "page": 37,
+  "kind": "punct",
+  "note": "comma OCR'd as period in subscript X,Y",
+  "old": "p_{X . Y}(x, y) \\log p_{X}(x)",
+  "new": "p_{X, Y}(x, y) \\log p_{X}(x)"
+ },
+ {
+  "key": "2.46",
+  "field": "solution",
+  "page": 37,
+  "kind": "punct",
+  "note": "comma OCR'd as period in subscript X,Y",
+  "old": "p_{X . Y}(x, y) \\log p_{Y}(y)",
+  "new": "p_{X, Y}(x, y) \\log p_{Y}(y)"
+ },
+ {
+  "key": "3.4",
+  "field": "solution",
+  "page": 40,
+  "kind": "punct",
+  "note": "comma, not period, before 'where'",
+  "old": "g(x)=g^{+}(x)-g^{-}(x) .",
+  "new": "g(x)=g^{+}(x)-g^{-}(x),"
+ },
+ {
+  "key": "3.4",
+  "field": "solution",
+  "page": 40,
+  "kind": "punct",
+  "note": "comma before 'and'",
+  "old": "\\max \\{g(x), 0\\}\\). and",
+  "new": "\\max \\{g(x), 0\\}\\), and"
+ },
+ {
+  "key": "3.4",
+  "field": "solution",
+  "page": 40,
+  "kind": "punct",
+  "note": "max{-g(x), 0}",
+  "old": "\\max \\{-g(x) .0\\}",
+  "new": "\\max \\{-g(x), 0\\}"
+ },
+ {
+  "key": "3.4",
+  "field": "solution",
+  "page": 40,
+  "kind": "punct",
+  "note": "comma",
+  "old": "In particular. for any",
+  "new": "In particular, for any"
+ },
+ {
+  "key": "3.7",
+  "field": "latexcode",
+  "page": 41,
+  "kind": "punct",
+  "note": "comma",
+  "old": "the mean. and the variance",
+  "new": "the mean, and the variance"
+ },
+ {
+  "key": "3.8",
+  "field": "latexcode",
+  "page": 41,
+  "kind": "punct",
+  "note": "comma after (1-p)lambda e^{-lambda x}",
+  "old": "(1-p) \\lambda e^{-\\lambda x} . & \\text { if } x \\geq 0",
+  "new": "(1-p) \\lambda e^{-\\lambda x}, & \\text { if } x \\geq 0"
+ },
+ {
+  "key": "3.9",
+  "field": "latexcode",
+  "page": 41,
+  "kind": "punct",
+  "note": "comma",
+  "old": "its CDF is given. using",
+  "new": "its CDF is given, using"
+ },
+ {
+  "key": "3.10",
+  "field": "latexcode",
+  "page": 43,
+  "kind": "punct",
+  "note": "interval (0,1) and comma",
+  "old": "for any \\(u \\in(0.1)\\). there is",
+  "new": "for any \\(u \\in(0,1)\\), there is"
+ },
+ {
+  "key": "3.10",
+  "field": "solution",
+  "page": 43,
+  "kind": "punct",
+  "note": "interval (0,1)",
+  "old": "we should generate values \\(u \\in(0.1)\\)",
+  "new": "we should generate values \\(u \\in(0,1)\\)"
+ },
+ {
+  "key": "3.10",
+  "field": "solution",
+  "page": 43,
+  "kind": "punct",
+  "note": "interval (0,1)",
+  "old": "To any \\(u \\in(0.1)\\)",
+  "new": "To any \\(u \\in(0,1)\\)"
+ },
+ {
+  "key": "3.10",
+  "field": "solution",
+  "page": 43,
+  "kind": "punct",
+  "note": "commas",
+  "old": "We then have. for every integer \\(k\\).",
+  "new": "We then have, for every integer \\(k\\),"
+ },
+ {
+  "key": "3.17",
+  "field": "latexcode",
+  "page": 45,
+  "kind": "punct",
+  "note": "missing comma after Y_1",
+  "old": "Let \\(Y_{1} \\ldots, Y_{n}\\)",
+  "new": "Let \\(Y_{1}, \\ldots, Y_{n}\\)"
+ },
+ {
+  "key": "3.22",
+  "field": "latexcode",
+  "page": 46,
+  "kind": "punct",
+  "note": "comma",
+  "old": "right end of the stick. at a random",
+  "new": "right end of the stick, at a random"
+ },
+ {
+  "key": "3.23",
+  "field": "latexcode",
+  "page": 46,
+  "kind": "punct",
+  "note": "vertex (1,0)",
+  "old": "\\((0,0),(0,1)\\), and (1.0).",
+  "new": "\\((0,0),(0,1)\\), and \\((1,0)\\)."
+ },
+ {
+  "key": "3.24",
+  "field": "latexcode",
+  "page": 47,
+  "kind": "punct",
+  "note": "point (1,0)",
+  "old": "(0, 0), (1.0), and (0, 2)",
+  "new": "(0, 0), (1, 0), and (0, 2)"
+ },
+ {
+  "key": "3.25",
+  "field": "latexcode",
+  "page": 47,
+  "kind": "punct",
+  "note": "comma",
+  "old": "from the origin. find",
+  "new": "from the origin, find"
+ },
+ {
+  "key": "3.26",
+  "field": "latexcode",
+  "page": 47,
+  "kind": "punct",
+  "note": "missing comma after \\ldots",
+  "old": "Let \\(X_{1}, \\ldots X_{n}\\)",
+  "new": "Let \\(X_{1}, \\ldots, X_{n}\\)"
+ },
+ {
+  "key": "3.26",
+  "field": "latexcode",
+  "page": 47,
+  "kind": "math",
+  "note": "product of X_i, not X_2",
+  "old": "\\prod_{i=1}^{n} X_{2}\\right)",
+  "new": "\\prod_{i=1}^{n} X_{i}\\right)"
+ },
+ {
+  "key": "3.27",
+  "field": "latexcode",
+  "page": 47,
+  "kind": "punct",
+  "note": "subscript X,Y|C",
+  "old": "f_{X . Y \\mid C}(x, y)=",
+  "new": "f_{X, Y \\mid C}(x, y)="
+ },
+ {
+  "key": "3.27",
+  "field": "latexcode",
+  "page": 47,
+  "kind": "punct",
+  "note": "subscript X,Y",
+  "old": "\\frac{f_{X . Y}(x, y)}",
+  "new": "\\frac{f_{X, Y}(x, y)}"
+ },
+ {
+  "key": "3.27",
+  "field": "latexcode",
+  "page": 47,
+  "kind": "punct",
+  "note": "subscript X,Y|C",
+  "old": "Show that \\(f_{X . Y \\mid C}\\)",
+  "new": "Show that \\(f_{X, Y \\mid C}\\)"
+ },
+ {
+  "key": "3.27",
+  "field": "latexcode",
+  "page": 47,
+  "kind": "punct",
+  "note": "(X, Y)",
+  "old": "\\left\\{(X . Y) \\in A_{i}\\right\\}",
+  "new": "\\left\\{(X, Y) \\in A_{i}\\right\\}"
+ },
+ {
+  "key": "3.28",
+  "field": "latexcode",
+  "page": 48,
+  "kind": "punct",
+  "note": "genuine hyphen lost at line break",
+  "old": "(onesided)",
+  "new": "(one-sided)"
+ },
+ {
+  "key": "3.28",
+  "field": "solution",
+  "page": 48,
+  "kind": "punct",
+  "note": "comma",
+  "old": "conditioned on \\(A^{c}\\). the random",
+  "new": "conditioned on \\(A^{c}\\), the random"
+ },
+ {
+  "key": "3.29",
+  "field": "latexcode",
+  "page": 49,
+  "kind": "punct",
+  "note": "comma",
+  "old": "Let \\(X, Y\\). and \\(Z\\)",
+  "new": "Let \\(X, Y\\), and \\(Z\\)"
+ },
+ {
+  "key": "3.30",
+  "field": "solution",
+  "page": 51,
+  "kind": "punct",
+  "note": "B(alpha+1, beta+1)",
+  "old": "\\mathrm{B}(\\alpha+1 . \\beta+1)",
+  "new": "\\mathrm{B}(\\alpha+1, \\beta+1)"
+ },
+ {
+  "key": "3.31",
+  "field": "latexcode",
+  "page": 51,
+  "kind": "punct",
+  "note": "comma",
+  "old": "\\([a, b]\\). and",
+  "new": "\\([a, b]\\), and"
+ },
+ {
+  "key": "3.31",
+  "field": "latexcode",
+  "page": 51,
+  "kind": "math",
+  "note": "Y_i, not Y_2",
+  "old": "Let \\(Y_{2}, i=1",
+  "new": "Let \\(Y_{i}, i=1"
+ },
+ {
+  "key": "3.31",
+  "field": "latexcode",
+  "page": 51,
+  "kind": "punct",
+  "note": "comma between corners",
+  "old": "(b, 0) .(a, c)",
+  "new": "(b, 0),(a, c)"
+ },
+ {
+  "key": "3.33",
+  "field": "latexcode",
+  "page": 52,
+  "kind": "math",
+  "note": "X_i, not X_2",
+  "old": "that the \\(X_{2}\\) are",
+  "new": "that the \\(X_{i}\\) are"
+ },
+ {
+  "key": "4.1",
+  "field": "latexcode",
+  "page": 55,
+  "kind": "punct",
+  "note": "comma, not period, after 1",
+  "old": "1. find the PDF",
+  "new": "1, find the PDF"
+ },
+ {
+  "key": "4.11",
+  "field": "latexcode",
+  "page": 56,
+  "kind": "punct",
+  "note": "comma before respectively",
+  "old": "\\(\\mu\\). respectively",
+  "new": "\\(\\mu\\), respectively"
+ },
+ {
+  "key": "4.12",
+  "field": "latexcode",
+  "page": 56,
+  "kind": "punct",
+  "note": "X, Y, and Z",
+  "old": "\\(X, Y\\). and",
+  "new": "\\(X, Y\\), and"
+ },
+ {
+  "key": "4.14",
+  "field": "latexcode",
+  "page": 56,
+  "kind": "punct",
+  "note": "min{X, Y}",
+  "old": "\\min \\{X . Y\\}",
+  "new": "\\min \\{X, Y\\}"
+ },
+ {
+  "key": "4.15",
+  "field": "solution",
+  "page": 56,
+  "kind": "punct",
+  "note": "missing comma after infinity",
+  "old": "\\(\\infty\\) as \\(X\\) ranges",
+  "new": "\\(\\infty\\), as \\(X\\) ranges"
+ },
+ {
+  "key": "4.15",
+  "field": "solution",
+  "page": 56,
+  "kind": "punct",
+  "note": "comma before display",
+  "old": "for all scalars \\(y\\).",
+  "new": "for all scalars \\(y\\),"
+ },
+ {
+  "key": "4.15",
+  "field": "solution",
+  "page": 56,
+  "kind": "punct",
+  "note": "comma before which",
+  "old": "CDF of \\(X\\). which",
+  "new": "CDF of \\(X\\), which"
+ },
+ {
+  "key": "4.15",
+  "field": "solution",
+  "page": 56,
+  "kind": "punct",
+  "note": "commas, not periods",
+  "old": "\\(1 /\\left(1+y^{2}\\right)\\). we have for all \\(y\\).",
+  "new": "\\(1 /\\left(1+y^{2}\\right)\\), we have for all \\(y\\),"
+ },
+ {
+  "key": "4.15",
+  "field": "solution",
+  "page": 56,
+  "kind": "punct",
+  "note": "comma before display",
+  "old": "We have for \\(-\\pi / 2 \\leq x \\leq \\pi / 2\\).",
+  "new": "We have for \\(-\\pi / 2 \\leq x \\leq \\pi / 2\\),"
+ },
+ {
+  "key": "4.15",
+  "field": "solution",
+  "page": 57,
+  "kind": "punct",
+  "note": "display ends with comma",
+  "old": "d y=\\infty\n\\]",
+  "new": "d y=\\infty,\n\\]"
+ },
+ {
+  "key": "4.15",
+  "field": "solution",
+  "page": 57,
+  "kind": "punct",
+  "note": "comma after As a result",
+  "old": "As a result. the",
+  "new": "As a result, the"
+ },
+ {
+  "key": "4.16",
+  "field": "solution",
+  "page": 57,
+  "kind": "punct",
+  "note": "f_{X,Y}(x,y)",
+  "old": "f_{X . Y}(x . y)",
+  "new": "f_{X, Y}(x, y)"
+ },
+ {
+  "key": "4.16",
+  "field": "solution",
+  "page": 57,
+  "kind": "punct",
+  "note": "interval [0,2pi] and comma",
+  "old": "\\theta \\in[0.2 \\pi]\\). and",
+  "new": "\\theta \\in[0,2 \\pi]\\), and"
+ },
+ {
+  "key": "4.16",
+  "field": "solution",
+  "page": 57,
+  "kind": "punct",
+  "note": "comma",
+  "old": "radius \\(r\\). with",
+  "new": "radius \\(r\\), with"
+ },
+ {
+  "key": "4.16",
+  "field": "solution",
+  "page": 57,
+  "kind": "punct",
+  "note": "F_{R,Theta}",
+  "old": "F_{R . \\Theta}(r, \\theta) & =",
+  "new": "F_{R, \\Theta}(r, \\theta) & ="
+ },
+ {
+  "key": "4.16",
+  "field": "solution",
+  "page": 58,
+  "kind": "punct",
+  "note": "commas in subscripts/arguments and before r >= 0",
+  "old": "f_{R . \\Theta}(r . \\theta)=\\frac{\\partial^{2} F_{R . \\Theta}}{\\partial r \\partial \\theta}(r . \\theta)=\\frac{r}{2 \\pi} e^{-r^{2} / 2} . \\quad",
+  "new": "f_{R, \\Theta}(r, \\theta)=\\frac{\\partial^{2} F_{R, \\Theta}}{\\partial r \\partial \\theta}(r, \\theta)=\\frac{r}{2 \\pi} e^{-r^{2} / 2}, \\quad"
+ },
+ {
+  "key": "4.16",
+  "field": "solution",
+  "page": 58,
+  "kind": "punct",
+  "note": "f_{R,Theta}; display ends with period",
+  "old": "\\int_{0}^{2 \\pi} f_{R . \\Theta}(r, \\theta) d \\theta=r e^{-r^{2} / 2}, \\quad r \\geq 0",
+  "new": "\\int_{0}^{2 \\pi} f_{R, \\Theta}(r, \\theta) d \\theta=r e^{-r^{2} / 2}, \\quad r \\geq 0 ."
+ },
+ {
+  "key": "4.16",
+  "field": "solution",
+  "page": 58,
+  "kind": "punct",
+  "note": "comma",
+  "old": "variable \\(R\\). it follows",
+  "new": "variable \\(R\\), it follows"
+ },
+ {
+  "key": "4.16",
+  "field": "solution",
+  "page": 58,
+  "kind": "punct",
+  "note": "display continues with 'where', comma",
+  "old": "d u=e^{-t / 2}\n\\]",
+  "new": "d u=e^{-t / 2},\n\\]"
+ },
+ {
+  "key": "4.18",
+  "field": "latexcode",
+  "page": 58,
+  "kind": "punct",
+  "note": "commas",
+  "old": "Consider four random variables. \\(W . X . Y, Z\\), with",
+  "new": "Consider four random variables, \\(W, X, Y, Z\\), with"
+ },
+ {
+  "key": "4.18",
+  "field": "latexcode",
+  "page": 58,
+  "kind": "punct",
+  "note": "display continues with 'and assume'",
+  "old": "\\operatorname{var}(Z)=1 .",
+  "new": "\\operatorname{var}(Z)=1,"
+ },
+ {
+  "key": "4.18",
+  "field": "latexcode",
+  "page": 58,
+  "kind": "punct",
+  "note": "comma",
+  "old": "\\(W, X, Y . Z\\)",
+  "new": "\\(W, X, Y, Z\\)"
+ },
+ {
+  "key": "4.18",
+  "field": "latexcode",
+  "page": 58,
+  "kind": "punct",
+  "note": "rho(R,S), rho(R,T)",
+  "old": "\\rho(R . S)\\) and \\(\\rho(R . T)\\)",
+  "new": "\\rho(R, S)\\) and \\(\\rho(R, T)\\)"
+ },
+ {
+  "key": "4.18",
+  "field": "latexcode",
+  "page": 58,
+  "kind": "punct",
+  "note": "comma",
+  "old": "S=X+Y\\). and",
+  "new": "S=X+Y\\), and"
+ },
+ {
+  "key": "4.19",
+  "field": "latexcode",
+  "page": 58,
+  "kind": "punct",
+  "note": "commas between moments; display continues 'and let'",
+  "old": "\\mathbf{E}[X]=0 . \\quad \\mathbf{E}\\left[X^{2}\\right]=1, \\quad \\mathbf{E}\\left[X^{3}\\right]=0 . \\quad \\mathbf{E}\\left[X^{4}\\right]=3 .",
+  "new": "\\mathbf{E}[X]=0, \\quad \\mathbf{E}\\left[X^{2}\\right]=1, \\quad \\mathbf{E}\\left[X^{3}\\right]=0, \\quad \\mathbf{E}\\left[X^{4}\\right]=3,"
+ },
+ {
+  "key": "4.20",
+  "field": "latexcode",
+  "page": 59,
+  "kind": "punct",
+  "note": "comma",
+  "old": "\\(Y\\). we have",
+  "new": "\\(Y\\), we have"
+ },
+ {
+  "key": "4.20",
+  "field": "solution",
+  "page": 59,
+  "kind": "punct",
+  "note": "commas",
+  "old": "probability 1. and hence \\(\\mathbf{E}[X Y]=0\\). so the",
+  "new": "probability 1, and hence \\(\\mathbf{E}[X Y]=0\\), so the"
+ },
+ {
+  "key": "4.21",
+  "field": "latexcode",
+  "page": 59,
+  "kind": "punct",
+  "note": "comma",
+  "old": "(or negative. respectively)",
+  "new": "(or negative, respectively)"
+ },
+ {
+  "key": "4.25",
+  "field": "solution",
+  "page": 61,
+  "kind": "punct",
+  "note": "display ends with period",
+  "old": "& =g(y) \\mathbf{E}[X \\mid Y=y]\n\\end{aligned}",
+  "new": "& =g(y) \\mathbf{E}[X \\mid Y=y] .\n\\end{aligned}"
+ },
+ {
+  "key": "4.27",
+  "field": "latexcode",
+  "page": 62,
+  "kind": "math",
+  "note": "X_i, not X_2",
+  "old": "Let \\(X_{2}\\) be",
+  "new": "Let \\(X_{i}\\) be"
+ },
+ {
+  "key": "4.27",
+  "field": "latexcode",
+  "page": 62,
+  "kind": "math",
+  "note": "part (a): E[X_i], not E[X_2]",
+  "old": "\\mathbf{E}\\left[X_{2}\\right]",
+  "new": "\\mathbf{E}\\left[X_{i}\\right]"
+ },
+ {
+  "key": "4.28",
+  "field": "latexcode",
+  "page": 63,
+  "kind": "punct",
+  "note": "display ends with comma",
+  "old": "c e^{-q(x, y)}\n\\]",
+  "new": "c e^{-q(x, y)},\n\\]"
+ },
+ {
+  "key": "4.28",
+  "field": "solution",
+  "page": 64,
+  "kind": "punct",
+  "note": "comma before 'and'",
+  "old": "\\right)^{2} . \\quad \\text { and }",
+  "new": "\\right)^{2}, \\quad \\text { and }"
+ },
+ {
+  "key": "4.28",
+  "field": "solution",
+  "page": 64,
+  "kind": "punct",
+  "note": "display ends with period",
+  "old": "\\int_{-\\infty}^{\\infty} e^{-q_{1}(x, y)} d x\n\\]",
+  "new": "\\int_{-\\infty}^{\\infty} e^{-q_{1}(x, y)} d x .\n\\]"
+ },
+ {
+  "key": "4.28",
+  "field": "solution",
+  "page": 64,
+  "kind": "punct",
+  "note": "display ends with period",
+  "old": "\\sqrt{2 \\pi}\n\\]\n\nThus,",
+  "new": "\\sqrt{2 \\pi} .\n\\]\n\nThus,"
+ },
+ {
+  "key": "4.28",
+  "field": "solution",
+  "page": 64,
+  "kind": "punct",
+  "note": "display ends with period",
+  "old": "e^{-y^{2} / 2 \\sigma_{y}^{2}}\n\\]",
+  "new": "e^{-y^{2} / 2 \\sigma_{y}^{2}} .\n\\]"
+ },
+ {
+  "key": "4.28",
+  "field": "solution",
+  "page": 64,
+  "kind": "punct",
+  "note": "display continues 'which implies', comma",
+  "old": "\\frac{1}{\\sqrt{2 \\pi} \\sigma_{y}} .\n\\]",
+  "new": "\\frac{1}{\\sqrt{2 \\pi} \\sigma_{y}},\n\\]"
+ },
+ {
+  "key": "4.28",
+  "field": "solution",
+  "page": 65,
+  "kind": "punct",
+  "note": "comma",
+  "old": "\\right) y\\). and",
+  "new": "\\right) y\\), and"
+ },
+ {
+  "key": "4.28",
+  "field": "solution",
+  "page": 65,
+  "kind": "punct",
+  "note": "rho(X,Y)",
+  "old": "\\rho(X . Y)\\) is equal",
+  "new": "\\rho(X, Y)\\) is equal"
+ },
+ {
+  "key": "4.28",
+  "field": "solution",
+  "page": 65,
+  "kind": "punct",
+  "note": "cov(X,Y)",
+  "old": "\\operatorname{cov}(X . Y)",
+  "new": "\\operatorname{cov}(X, Y)"
+ },
+ {
+  "key": "4.28",
+  "field": "solution",
+  "page": 65,
+  "kind": "punct",
+  "note": "f_{X,Y}",
+  "old": "f_{X . Y}(x, y)=\\)",
+  "new": "f_{X, Y}(x, y)=\\)"
+ },
+ {
+  "key": "4.28",
+  "field": "solution",
+  "page": 65,
+  "kind": "punct",
+  "note": "comma",
+  "old": "From part (d). we",
+  "new": "From part (d), we"
+ },
+ {
+  "key": "4.28",
+  "field": "solution",
+  "page": 65,
+  "kind": "punct",
+  "note": "i.e., before display",
+  "old": "i.e..",
+  "new": "i.e.,"
+ },
+ {
+  "key": "4.28",
+  "field": "solution",
+  "page": 65,
+  "kind": "punct",
+  "note": "comma",
+  "old": "of \\(Y\\). it follows",
+  "new": "of \\(Y\\), it follows"
+ },
+ {
+  "key": "4.29",
+  "field": "latexcode",
+  "page": 65,
+  "kind": "punct",
+  "note": "comma after 1",
+  "old": "values 1. 2, and 3",
+  "new": "values 1, 2, and 3"
+ },
+ {
+  "key": "4.29",
+  "field": "latexcode",
+  "page": 65,
+  "kind": "punct",
+  "note": "comma between probabilities",
+  "old": "\\frac{1}{4} . \\quad",
+  "new": "\\frac{1}{4}, \\quad"
+ },
+ {
+  "key": "4.29",
+  "field": "latexcode",
+  "page": 65,
+  "kind": "punct",
+  "note": "comma between moments",
+  "old": "\\mathbf{E}[X] . \\mathbf{E}",
+  "new": "\\mathbf{E}[X], \\mathbf{E}"
+ },
+ {
+  "key": "4.34",
+  "field": "latexcode",
+  "page": 66,
+  "kind": "math",
+  "note": "subscript i, not l",
+  "old": "\\(p_{l}\\)",
+  "new": "\\(p_{i}\\)"
+ },
+ {
+  "key": "4.37",
+  "field": "latexcode",
+  "page": 66,
+  "kind": "punct",
+  "note": "comma",
+  "old": "single pizza. with",
+  "new": "single pizza, with"
+ },
+ {
+  "key": "4.37",
+  "field": "latexcode",
+  "page": 66,
+  "kind": "punct",
+  "note": "comma",
+  "old": "M_{K}(\\cdot)\\). for",
+  "new": "M_{K}(\\cdot)\\), for"
+ },
+ {
+  "key": "4.38",
+  "field": "solution",
+  "page": 67,
+  "kind": "punct",
+  "note": "display ends with period",
+  "old": "e^{k s}\n\\]",
+  "new": "e^{k s} .\n\\]"
+ },
+ {
+  "key": "4.38",
+  "field": "solution",
+  "page": 67,
+  "kind": "punct",
+  "note": "display ends with comma",
+  "old": "e^{\\lambda\\left(e^{s}-1\\right)}\n\\]",
+  "new": "e^{\\lambda\\left(e^{s}-1\\right)},\n\\]"
+ },
+ {
+  "key": "4.39",
+  "field": "solution",
+  "page": 67,
+  "kind": "punct",
+  "note": "missing comma after a+1",
+  "old": "k=a, a+1 \\ldots, b",
+  "new": "k=a, a+1, \\ldots, b"
+ },
+ {
+  "key": "4.40",
+  "field": "latexcode",
+  "page": 68,
+  "kind": "math",
+  "note": "garbled; book has a_{i-bar} r_{i-bar}^k",
+  "old": "\\(a_{i}^{-r} \\frac{k}{i}\\)",
+  "new": "\\(a_{\\bar{i}} r_{\\bar{i}}^{k}\\)"
+ },
+ {
+  "key": "4.40",
+  "field": "latexcode",
+  "page": 68,
+  "kind": "punct",
+  "note": "display ends with period",
+  "old": "0, & \\text { otherwise }\\end{cases}",
+  "new": "0, & \\text { otherwise } .\\end{cases}"
+ },
+ {
+  "key": "4.40",
+  "field": "solution",
+  "page": 68,
+  "kind": "punct",
+  "note": "display ends with period",
+  "old": "e^{2 s}+\\cdots\n\\]",
+  "new": "e^{2 s}+\\cdots .\n\\]"
+ },
+ {
+  "key": "4.40",
+  "field": "solution",
+  "page": 69,
+  "kind": "math",
+  "note": "a_i, not a_2",
+  "old": "\\(a_{2}\\) are nonnegative",
+  "new": "\\(a_{i}\\) are nonnegative"
+ },
+ {
+  "key": "4.40",
+  "field": "solution",
+  "page": 69,
+  "kind": "punct",
+  "note": "display ends with period",
+  "old": "0, & \\text { otherwise }\\end{cases}",
+  "new": "0, & \\text { otherwise } .\\end{cases}"
+ },
+ {
+  "key": "4.44",
+  "field": "latexcode",
+  "page": 70,
+  "kind": "punct",
+  "note": "comma before X_1",
+  "old": "K_{2}, \\ldots . X_{1}",
+  "new": "K_{2}, \\ldots, X_{1}"
+ },
+ {
+  "key": "4.45",
+  "field": "latexcode",
+  "page": 70,
+  "kind": "punct",
+  "note": "comma",
+  "old": "independent. identically",
+  "new": "independent, identically"
+ },
+ {
+  "key": "5.2",
+  "field": "solution",
+  "page": 72,
+  "kind": "punct",
+  "note": "display continues 'from which', comma",
+  "old": "\\mathbf{P}(X \\leq a) .\n\\]\n\nfrom which",
+  "new": "\\mathbf{P}(X \\leq a),\n\\]\n\nfrom which"
+ },
+ {
+  "key": "5.3",
+  "field": "latexcode",
+  "page": 74,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "the function. that is,",
+  "new": "the function, that is,"
+ },
+ {
+  "key": "5.3",
+  "field": "latexcode",
+  "page": 74,
+  "kind": "punct",
+  "note": "display ends with comma (sentence continues 'for every a and x')",
+  "old": "f(a)+(x-a) \\frac{d f}{d x}(a) \\leq f(x) .",
+  "new": "f(a)+(x-a) \\frac{d f}{d x}(a) \\leq f(x),"
+ },
+ {
+  "key": "5.4",
+  "field": "latexcode",
+  "page": 75,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "estimate \\(f\\). the true",
+  "new": "estimate \\(f\\), the true"
+ },
+ {
+  "key": "5.5",
+  "field": "latexcode",
+  "page": 75,
+  "kind": "punct",
+  "note": "interval [-1,1]",
+  "old": "over [-1.1].",
+  "new": "over \\([-1,1]\\)."
+ },
+ {
+  "key": "5.5",
+  "field": "latexcode",
+  "page": 75,
+  "kind": "punct",
+  "note": "missing comma before dots",
+  "old": "\\(Y_{1}, Y_{2} \\ldots\\)",
+  "new": "\\(Y_{1}, Y_{2}, \\ldots\\)"
+ },
+ {
+  "key": "5.6",
+  "field": "latexcode",
+  "page": 75,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "\\(X_{1} . X_{2}, \\ldots\\)",
+  "new": "\\(X_{1}, X_{2}, \\ldots\\)"
+ },
+ {
+  "key": "5.6",
+  "field": "latexcode",
+  "page": 75,
+  "kind": "punct",
+  "note": "list separated by commas, not periods",
+  "old": "\\(c X_{n} . X_{n}+Y_{n} . \\max \\left\\{0, X_{n}\\right\\} .\\left|X_{n}\\right|\\). and",
+  "new": "\\(c X_{n}, X_{n}+Y_{n}, \\max \\left\\{0, X_{n}\\right\\},\\left|X_{n}\\right|\\), and"
+ },
+ {
+  "key": "5.6",
+  "field": "solution",
+  "page": 75,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "converges to zero. thus establishing",
+  "new": "converges to zero, thus establishing"
+ },
+ {
+  "key": "5.6",
+  "field": "solution",
+  "page": 75,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "To bound this probability. we note that for \\(\\left|X_{n}+Y_{n}",
+  "new": "To bound this probability, we note that for \\(\\left|X_{n}+Y_{n}"
+ },
+ {
+  "key": "5.6",
+  "field": "solution",
+  "page": 75,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "in terms of events. we have",
+  "new": "in terms of events, we have"
+ },
+ {
+  "key": "5.6",
+  "field": "solution",
+  "page": 76,
+  "kind": "punct",
+  "note": "max{0, X_n}",
+  "old": "\\max \\left\\{0 . X_{n}\\right\\}",
+  "new": "\\max \\left\\{0, X_{n}\\right\\}"
+ },
+ {
+  "key": "5.6",
+  "field": "solution",
+  "page": 76,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "in probability. the last probability",
+  "new": "in probability, the last probability"
+ },
+ {
+  "key": "5.6",
+  "field": "solution",
+  "page": 76,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "To bound this probability. we note that for \\(\\left|\\left(X_{n}",
+  "new": "To bound this probability, we note that for \\(\\left|\\left(X_{n}"
+ },
+ {
+  "key": "5.7",
+  "field": "solution",
+  "page": 76,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "Taking the limit as \\(n \\rightarrow \\infty\\). we obtain",
+  "new": "Taking the limit as \\(n \\rightarrow \\infty\\), we obtain"
+ },
+ {
+  "key": "5.7",
+  "field": "solution",
+  "page": 76,
+  "kind": "punct",
+  "note": "display ends with comma",
+  "old": "\\right| \\geq \\epsilon\\right)=0\n\\]",
+  "new": "\\right| \\geq \\epsilon\\right)=0,\n\\]"
+ },
+ {
+  "key": "5.8",
+  "field": "latexcode",
+  "page": 77,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "between 1 and 36. and count",
+  "new": "between 1 and 36, and count"
+ },
+ {
+  "key": "5.9",
+  "field": "latexcode",
+  "page": 77,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "During each day. the probability",
+  "new": "During each day, the probability"
+ },
+ {
+  "key": "5.10",
+  "field": "latexcode",
+  "page": 77,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "on day \\(n\\). where",
+  "new": "on day \\(n\\), where"
+ },
+ {
+  "key": "5.11",
+  "field": "latexcode",
+  "page": 77,
+  "kind": "punct",
+  "note": "missing comma before dots",
+  "old": "\\(X_{1}, Y_{1}, X_{2}, Y_{2} \\ldots\\)",
+  "new": "\\(X_{1}, Y_{1}, X_{2}, Y_{2}, \\ldots\\)"
+ },
+ {
+  "key": "5.11",
+  "field": "latexcode",
+  "page": 77,
+  "kind": "punct",
+  "note": "interval [0,1]",
+  "old": "unit interval [0.1], and",
+  "new": "unit interval \\([0,1]\\), and"
+ },
+ {
+  "key": "5.12",
+  "field": "solution",
+  "page": 79,
+  "kind": "punct",
+  "note": "final display ends with a period",
+  "old": "M_{Z_{n}}(s)=e^{s^{2} / 2}\n\\]",
+  "new": "M_{Z_{n}}(s)=e^{s^{2} / 2} .\n\\]"
+ },
+ {
+  "key": "5.13",
+  "field": "solution",
+  "page": 79,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "Therefore. \\(\\mathbf{P}",
+  "new": "Therefore, \\(\\mathbf{P}"
+ },
+ {
+  "key": "5.14",
+  "field": "latexcode",
+  "page": 79,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "\\(X_{1} . X_{2}, \\ldots\\)",
+  "new": "\\(X_{1}, X_{2}, \\ldots\\)"
+ },
+ {
+  "key": "5.14",
+  "field": "solution",
+  "page": 79,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "\\(\\mathbf{E}[Y]\\). respectively",
+  "new": "\\(\\mathbf{E}[Y]\\), respectively"
+ },
+ {
+  "key": "5.16",
+  "field": "solution",
+  "page": 80,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "Indeed. if it had",
+  "new": "Indeed, if it had"
+ },
+ {
+  "key": "5.18",
+  "field": "latexcode",
+  "page": 81,
+  "kind": "punct",
+  "note": "missing comma before dots",
+  "old": "\\(X_{1}, X_{2} \\ldots\\)",
+  "new": "\\(X_{1}, X_{2}, \\ldots\\)"
+ },
+ {
+  "key": "6.4",
+  "field": "solution",
+  "page": 83,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "Furthermore.",
+  "new": "Furthermore,"
+ },
+ {
+  "key": "6.4",
+  "field": "solution",
+  "page": 83,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "Hence. the desired",
+  "new": "Hence, the desired"
+ },
+ {
+  "key": "6.4",
+  "field": "solution",
+  "page": 83,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "less than \\(r\\). which is",
+  "new": "less than \\(r\\), which is"
+ },
+ {
+  "key": "6.4",
+  "field": "solution",
+  "page": 83,
+  "kind": "punct",
+  "note": "comma before range, not period",
+  "old": "(1-p)^{r+i-1-k} . \\quad",
+  "new": "(1-p)^{r+i-1-k}, \\quad"
+ },
+ {
+  "key": "6.5",
+  "field": "latexcode",
+  "page": 84,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "with probability \\(p\\). independent",
+  "new": "with probability \\(p\\), independent"
+ },
+ {
+  "key": "6.5",
+  "field": "solution",
+  "page": 84,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "Thus. \\(L+1\\)",
+  "new": "Thus, \\(L+1\\)"
+ },
+ {
+  "key": "6.5",
+  "field": "solution",
+  "page": 84,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "Hence.",
+  "new": "Hence,"
+ },
+ {
+  "key": "6.5",
+  "field": "solution",
+  "page": 84,
+  "kind": "punct",
+  "note": "book: i p^2(1-p)^{i-1}, i = 1, 2, ...",
+  "old": "i p^{2}(1-p)^{i-1} . \\quad i=1,2 \\ldots \\ldots",
+  "new": "i p^{2}(1-p)^{i-1}, \\quad i=1,2, \\ldots"
+ },
+ {
+  "key": "6.6",
+  "field": "latexcode",
+  "page": 84,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "X_{N}\\). where",
+  "new": "X_{N}\\), where"
+ },
+ {
+  "key": "6.6",
+  "field": "latexcode",
+  "page": 84,
+  "kind": "punct",
+  "note": "missing comma before dots",
+  "old": "\\(N, X_{1}, X_{2} \\ldots\\)",
+  "new": "\\(N, X_{1}, X_{2}, \\ldots\\)"
+ },
+ {
+  "key": "6.6",
+  "field": "latexcode",
+  "page": 84,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "Show. without",
+  "new": "Show, without"
+ },
+ {
+  "key": "6.6",
+  "field": "solution",
+  "page": 84,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "using transforms. but",
+  "new": "using transforms, but"
+ },
+ {
+  "key": "6.6",
+  "field": "solution",
+  "page": 84,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "\\(X_{1} . X_{1}+X_{2}\\)",
+  "new": "\\(X_{1}, X_{1}+X_{2}\\)"
+ },
+ {
+  "key": "6.7",
+  "field": "latexcode",
+  "page": 84,
+  "kind": "punct",
+  "note": "missing comma before dots",
+  "old": "\\(X_{1}, X_{2} \\ldots\\)",
+  "new": "\\(X_{1}, X_{2}, \\ldots\\)"
+ },
+ {
+  "key": "6.7",
+  "field": "solution",
+  "page": 85,
+  "kind": "punct",
+  "note": "interval [1/2, 1]",
+  "old": "[1 / 2.1]",
+  "new": "[1 / 2,1]"
+ },
+ {
+  "key": "6.7",
+  "field": "solution",
+  "page": 85,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "X_{1}=0 . X_{2}=0",
+  "new": "X_{1}=0, X_{2}=0"
+ },
+ {
+  "key": "6.7",
+  "field": "solution",
+  "page": 85,
+  "kind": "punct",
+  "note": "interval endpoints separated by comma",
+  "old": "\\left[(i-1) / 2^{k} . i / 2^{k}\\right]\\), where",
+  "new": "\\left[(i-1) / 2^{k}, i / 2^{k}\\right]\\), where"
+ },
+ {
+  "key": "6.7",
+  "field": "solution",
+  "page": 85,
+  "kind": "punct",
+  "note": "interval endpoints separated by comma",
+  "old": "\\left[(i-1) / 2^{k} . i / 2^{k}\\right]\\) for",
+  "new": "\\left[(i-1) / 2^{k}, i / 2^{k}\\right]\\) for"
+ },
+ {
+  "key": "6.7",
+  "field": "solution",
+  "page": 85,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "\\(i / 2^{k}\\). we have",
+  "new": "\\(i / 2^{k}\\), we have"
+ },
+ {
+  "key": "6.7",
+  "field": "solution",
+  "page": 85,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "\\(\\mathbf{P}(Y \\leq y)=y\\). for every",
+  "new": "\\(\\mathbf{P}(Y \\leq y)=y\\), for every"
+ },
+ {
+  "key": "6.7",
+  "field": "solution",
+  "page": 85,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "(b) As in part (a). we observe",
+  "new": "(b) As in part (a), we observe"
+ },
+ {
+  "key": "6.7",
+  "field": "solution",
+  "page": 85,
+  "kind": "punct",
+  "note": "missing comma after dots",
+  "old": "\\(X_{1}, \\ldots X_{k}\\), corresponds",
+  "new": "\\(X_{1}, \\ldots, X_{k}\\), corresponds"
+ },
+ {
+  "key": "6.8",
+  "field": "latexcode",
+  "page": 85,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "During rush hour. from",
+  "new": "During rush hour, from"
+ },
+ {
+  "key": "6.14",
+  "field": "latexcode",
+  "page": 86,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "Beginning at time \\(t=0\\). we start",
+  "new": "Beginning at time \\(t=0\\), we start"
+ },
+ {
+  "key": "6.14",
+  "field": "latexcode",
+  "page": 87,
+  "kind": "punct",
+  "note": "missing comma after condition",
+  "old": "e^{-x}, & \\text { if } x \\geq 0 \\\\",
+  "new": "e^{-x}, & \\text { if } x \\geq 0, \\\\"
+ },
+ {
+  "key": "6.14",
+  "field": "latexcode",
+  "page": 87,
+  "kind": "punct",
+  "note": "missing comma after condition",
+  "old": "3 e^{-3 x}, & \\text { if } x \\geq 0 \\\\",
+  "new": "3 e^{-3 x}, & \\text { if } x \\geq 0, \\\\"
+ },
+ {
+  "key": "6.16",
+  "field": "latexcode",
+  "page": 88,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "driveway. you would",
+  "new": "driveway, you would"
+ },
+ {
+  "key": "6.18",
+  "field": "solution",
+  "page": 88,
+  "kind": "punct",
+  "note": "interval [a, b]",
+  "old": "\\mathbf{P}(T \\in[a . b] \\mid A)=\\frac{\\mathbf{P}",
+  "new": "\\mathbf{P}(T \\in[a, b] \\mid A)=\\frac{\\mathbf{P}"
+ },
+ {
+  "key": "6.18",
+  "field": "solution",
+  "page": 88,
+  "kind": "punct",
+  "note": "interval [a, b] and P(1, l)",
+  "old": "\\mathbf{P}(T \\in[a . b] \\mid A)=\\frac{P(1 . l)",
+  "new": "\\mathbf{P}(T \\in[a, b] \\mid A)=\\frac{P(1, l)"
+ },
+ {
+  "key": "6.18",
+  "field": "solution",
+  "page": 88,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "\\cup(b, t]\\). of total length",
+  "new": "\\cup(b, t]\\), of total length"
+ },
+ {
+  "key": "6.19",
+  "field": "latexcode",
+  "page": 88,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "exponentially distributed. with",
+  "new": "exponentially distributed, with"
+ },
+ {
+  "key": "6.19",
+  "field": "latexcode",
+  "page": 88,
+  "kind": "punct",
+  "note": "max{X_1, X_2}",
+  "old": "\\max \\left\\{X_{1} . X_{2}\\right\\}",
+  "new": "\\max \\left\\{X_{1}, X_{2}\\right\\}"
+ },
+ {
+  "key": "6.19",
+  "field": "solution",
+  "page": 89,
+  "kind": "punct",
+  "note": "comma, not period",
+  "old": "Concerning \\(S\\). there",
+  "new": "Concerning \\(S\\), there"
+ },
+ {
+  "key": "6.19",
+  "field": "solution",
+  "page": 89,
+  "kind": "punct",
+  "note": "display ends with comma (followed by 'where')",
+  "old": "\\cdot \\mathbf{E}[S] .\n\\]",
+  "new": "\\cdot \\mathbf{E}[S],\n\\]"
+ },
+ {
+  "key": "6.20",
+  "field": "solution",
+  "page": 90,
+  "kind": "punct",
+  "note": "final line ends with a period",
+  "old": "& =\\lambda\n\\end{aligned}",
+  "new": "& =\\lambda .\n\\end{aligned}"
+ },
+ {
+  "key": "6.22",
+  "field": "latexcode",
+  "page": 91,
+  "kind": "punct",
+  "note": "missing comma before the ellipsis: book has N, X1, X2, ...",
+  "old": "\\(N, X_{1}, X_{2} \\ldots\\)",
+  "new": "\\(N, X_{1}, X_{2}, \\ldots\\)"
+ },
+ {
+  "key": "6.25",
+  "field": "latexcode",
+  "page": 92,
+  "kind": "punct",
+  "note": "book: range 1, 2, ..., n (comma before n)",
+  "old": "\\(1,2, \\ldots n\\)",
+  "new": "\\(1,2, \\ldots, n\\)"
+ },
+ {
+  "key": "6.26",
+  "field": "solution",
+  "page": 93,
+  "kind": "punct",
+  "note": "period for comma after 'respectively'",
+  "old": "(respectively. \\(\\mathcal{P}_{2}^{\\prime}\\) )",
+  "new": "(respectively, \\(\\mathcal{P}_{2}^{\\prime}\\) )"
+ },
+ {
+  "key": "6.26",
+  "field": "solution",
+  "page": 93,
+  "kind": "punct",
+  "note": "period for comma before 'or'",
+  "old": "(with probability \\(p\\) ). or",
+  "new": "(with probability \\(p\\) ), or"
+ },
+ {
+  "key": "7.3",
+  "field": "latexcode",
+  "page": 95,
+  "kind": "punct",
+  "note": "period for comma after 'Fig. 7.2'",
+  "old": "as in Fig. 7.2. and assume",
+  "new": "as in Fig. 7.2, and assume"
+ },
+ {
+  "key": "7.19",
+  "field": "solution",
+  "page": 102,
+  "kind": "punct",
+  "note": "display ends with a comma (sentence continues with 'and')",
+  "old": "\\leq\\left(1-\\beta^{2}\\right)^{2} .",
+  "new": "\\leq\\left(1-\\beta^{2}\\right)^{2} ,"
+ },
+ {
+  "key": "7.23",
+  "field": "latexcode",
+  "page": 107,
+  "kind": "punct",
+  "note": "book uses a semicolon in item (i), as in (ii) and (iii)",
+  "old": "arrives: this happens",
+  "new": "arrives; this happens"
+ },
+ {
+  "key": "7.23",
+  "field": "latexcode",
+  "page": 107,
+  "kind": "math",
+  "note": "subscript is i, not l",
+  "old": "\\(b_{l}>0\\)",
+  "new": "\\(b_{i}>0\\)"
+ },
+ {
+  "key": "7.23",
+  "field": "latexcode",
+  "page": 107,
+  "kind": "punct",
+  "note": "period for comma: b_i > 0 for i < m, and b_m = 0",
+  "old": "\\(i<m\\). and",
+  "new": "\\(i<m\\), and"
+ },
+ {
+  "key": "7.23",
+  "field": "solution",
+  "page": 107,
+  "kind": "punct",
+  "note": "book: pi_i b_i = pi_{i+1} d_{i+1},  i = 0, 1, ..., m-1.",
+  "old": "d_{i+1} . \\quad i=0.1 \\ldots \\ldots m-1 .",
+  "new": "d_{i+1}, \\quad i=0,1, \\ldots, m-1 ."
+ },
+ {
+  "key": "7.26",
+  "field": "solution",
+  "page": 110,
+  "kind": "punct",
+  "note": "OCR dropped the hyphen of 'steady-state' at a line break",
+  "old": "converge to the steadystate probabilities",
+  "new": "converge to the steady-state probabilities"
+ },
+ {
+  "key": "7.28",
+  "field": "latexcode",
+  "page": 111,
+  "kind": "figure",
+  "note": "Figure 7.24 belongs to Problem 29, not 28; move it to 7.29",
+  "old": "\\end{itemize}\n\n\\begin{figure}[h]\n\\begin{center}\n  \\includegraphics[alt={},max width=\\textwidth]{14a9333a-09d7-483c-889a-817c3f3adc17-111_281_522_128_452}\n\\captionsetup{labelformat=empty}\n\\caption{Figure 7.24: Transition probability graph for Problem 29.}\n\\end{center}\n\\end{figure}",
+  "new": "\\end{itemize}"
+ },
+ {
+  "key": "7.29",
+  "field": "latexcode",
+  "page": 111,
+  "kind": "figure",
+  "note": "Figure 7.24 (moved from 7.28) belongs here; book prints it directly above Problem 29",
+  "old": "Consider the Markov chain specified in Fig. 7.24. The",
+  "new": "\\begin{figure}[h]\n\\begin{center}\n  \\includegraphics[alt={},max width=\\textwidth]{14a9333a-09d7-483c-889a-817c3f3adc17-111_281_522_128_452}\n\\captionsetup{labelformat=empty}\n\\caption{Figure 7.24: Transition probability graph for Problem 29.}\n\\end{center}\n\\end{figure}\n\nConsider the Markov chain specified in Fig. 7.24. The"
+ },
+ {
+  "key": "7.29",
+  "field": "latexcode",
+  "page": 111,
+  "kind": "punct",
+  "note": "commas between the four values, period only after the last",
+  "old": "\\pi_{1}=\\frac{6}{31} . \\quad \\pi_{2}=\\frac{9}{31} . \\quad \\pi_{3}=\\frac{6}{31} . \\quad",
+  "new": "\\pi_{1}=\\frac{6}{31}, \\quad \\pi_{2}=\\frac{9}{31}, \\quad \\pi_{3}=\\frac{6}{31}, \\quad"
+ },
+ {
+  "key": "7.30",
+  "field": "latexcode",
+  "page": 111,
+  "kind": "punct",
+  "note": "period read for comma",
+  "old": "which ones. if any are periodic",
+  "new": "which ones, if any are periodic"
+ },
+ {
+  "key": "7.31",
+  "field": "solution",
+  "page": 112,
+  "kind": "math",
+  "note": "a_i, not a_2",
+  "old": "that the \\(a_{2}\\) satisfy",
+  "new": "that the \\(a_{i}\\) satisfy"
+ },
+ {
+  "key": "7.31",
+  "field": "solution",
+  "page": 112,
+  "kind": "punct",
+  "note": "missing final period of display",
+  "old": "\\text { for all transient } i\n\\]",
+  "new": "\\text { for all transient } i .\n\\]"
+ },
+ {
+  "key": "7.31",
+  "field": "solution",
+  "page": 112,
+  "kind": "punct",
+  "note": "missing comma after A in the last line of the display",
+  "old": "\\left(X_{1} \\notin A \\ldots, X_{m}",
+  "new": "\\left(X_{1} \\notin A, \\ldots, X_{m}"
+ },
+ {
+  "key": "7.34",
+  "field": "solution",
+  "page": 116,
+  "kind": "punct",
+  "note": "period read for comma",
+  "old": "mean recurrence time of \\(s\\). and let",
+  "new": "mean recurrence time of \\(s\\), and let"
+ },
+ {
+  "key": "7.35",
+  "field": "solution",
+  "page": 118,
+  "kind": "punct",
+  "note": "period read for comma",
+  "old": "unit interval [0, 1]. let",
+  "new": "unit interval [0, 1], let"
+ },
+ {
+  "key": "7.39",
+  "field": "solution",
+  "page": 119,
+  "kind": "punct",
+  "note": "missing comma after m and final period",
+  "old": "\\pi_{k} q_{k j}, \\quad j=1, \\ldots, m \\\\\n1 & =\\sum_{k=1}^{m} \\pi_{k}\n",
+  "new": "\\pi_{k} q_{k j}, \\quad j=1, \\ldots, m, \\\\\n1 & =\\sum_{k=1}^{m} \\pi_{k} .\n"
+ },
+ {
+  "key": "7.39",
+  "field": "solution",
+  "page": 119,
+  "kind": "punct",
+  "note": "missing comma after m and final period",
+  "old": "\\pi_{k} p_{k j}, \\quad j=1, \\ldots, m \\\\\n1 & =\\sum_{k=1}^{m} \\pi_{k}\n",
+  "new": "\\pi_{k} p_{k j}, \\quad j=1, \\ldots, m, \\\\\n1 & =\\sum_{k=1}^{m} \\pi_{k} .\n"
+ },
+ {
+  "key": "7.39",
+  "field": "solution",
+  "page": 120,
+  "kind": "punct",
+  "note": "missing comma at end of display",
+  "old": "=\\sum_{k \\neq j} \\pi_{k} p_{k j}\n\\]\n\nor",
+  "new": "=\\sum_{k \\neq j} \\pi_{k} p_{k j},\n\\]\n\nor"
+ },
+ {
+  "key": "7.39",
+  "field": "solution",
+  "page": 120,
+  "kind": "punct",
+  "note": "comma before j=1,...,m (not period); period at end",
+  "old": "\\pi_{k} p_{k j} . \\quad j=1, \\ldots, m",
+  "new": "\\pi_{k} p_{k j}, \\quad j=1, \\ldots, m ."
+ },
+ {
+  "key": "8.1",
+  "field": "latexcode",
+  "page": 121,
+  "kind": "punct",
+  "note": "period read for comma",
+  "old": "To verify this. she",
+  "new": "To verify this, she"
+ },
+ {
+  "key": "8.1",
+  "field": "latexcode",
+  "page": 121,
+  "kind": "punct",
+  "note": "period read for comma",
+  "old": "is 1\\%. what is",
+  "new": "is 1\\%, what is"
+ },
+ {
+  "key": "8.2",
+  "field": "latexcode",
+  "page": 121,
+  "kind": "punct",
+  "note": "periods read for commas",
+  "old": "Nefeli. a student in a probability class. takes",
+  "new": "Nefeli, a student in a probability class, takes"
+ },
+ {
+  "key": "8.2",
+  "field": "latexcode",
+  "page": 121,
+  "kind": "punct",
+  "note": "period read for comma",
+  "old": "For each question. there",
+  "new": "For each question, there"
+ },
+ {
+  "key": "8.2",
+  "field": "latexcode",
+  "page": 121,
+  "kind": "punct",
+  "note": "period read for comma",
+  "old": "the question correctly. or else",
+  "new": "the question correctly, or else"
+ },
+ {
+  "key": "8.3",
+  "field": "latexcode",
+  "page": 121,
+  "kind": "punct",
+  "note": "interval is [0, 1/5] (comma, not decimal point); commas after 10 theta and after 0",
+  "old": "10 \\theta . & \\text { if } \\theta \\in[0.1 / 5], \\\\ 0 . & \\text { otherwise } .",
+  "new": "10 \\theta, & \\text { if } \\theta \\in[0,1 / 5], \\\\ 0, & \\text { otherwise } ."
+ },
+ {
+  "key": "8.3",
+  "field": "latexcode",
+  "page": 121,
+  "kind": "punct",
+  "note": "periods read for commas",
+  "old": "Following his Monday experience. Alvin decides to estimate \\(\\Theta\\) more accurately. and records",
+  "new": "Following his Monday experience, Alvin decides to estimate \\(\\Theta\\) more accurately, and records"
+ },
+ {
+  "key": "8.3",
+  "field": "latexcode",
+  "page": 121,
+  "kind": "punct",
+  "note": "periods read for commas in the list of waiting times",
+  "old": "These are 30. 25. 15. 40. and 20 minutes",
+  "new": "These are 30, 25, 15, 40, and 20 minutes"
+ },
+ {
+  "key": "8.6",
+  "field": "latexcode",
+  "page": 122,
+  "kind": "punct",
+  "note": "missing commas after 60 and after otherwise",
+  "old": "c_{1} e^{-0.04 x}, & \\text { if } 5 \\leq x \\leq 60 \\\\ 0 & \\text { otherwise }",
+  "new": "c_{1} e^{-0.04 x}, & \\text { if } 5 \\leq x \\leq 60, \\\\ 0 & \\text { otherwise, }"
+ },
+ {
+  "key": "8.6",
+  "field": "latexcode",
+  "page": 122,
+  "kind": "punct",
+  "note": "missing commas after 60 and after otherwise",
+  "old": "c_{2} e^{-0.16 x}, & \\text { if } 5 \\leq x \\leq 60 \\\\ 0 & \\text { otherwise }",
+  "new": "c_{2} e^{-0.16 x}, & \\text { if } 5 \\leq x \\leq 60, \\\\ 0 & \\text { otherwise, }"
+ },
+ {
+  "key": "8.20",
+  "field": "latexcode",
+  "page": 127,
+  "kind": "math",
+  "note": "book has capital Theta in E[Theta | X=x]",
+  "old": "such that \\(\\mathbf{E}[\\theta \\mid X=x]\\)",
+  "new": "such that \\(\\mathbf{E}[\\Theta \\mid X=x]\\)"
+ },
+ {
+  "key": "8.22",
+  "field": "solution",
+  "page": 129,
+  "kind": "math",
+  "note": "book has partial a_i evaluated at a_i^*, b^* (subscript 2 and \\cdot are OCR errors)",
+  "old": "\\frac{\\partial h}{\\partial a_{2}}\\right|_{a_{i}^{*} \\cdot b^{*}}",
+  "new": "\\frac{\\partial h}{\\partial a_{i}}\\right|_{a_{i}^{*}, b^{*}}"
+ },
+ {
+  "key": "8.22",
+  "field": "solution",
+  "page": 129,
+  "kind": "punct",
+  "note": "display ends with a period in the book",
+  "old": "a_{i}^{*}-1=-\\frac{b^{*}}{\\mu}\n\\]",
+  "new": "a_{i}^{*}-1=-\\frac{b^{*}}{\\mu} .\n\\]"
+ },
+ {
+  "key": "8.24",
+  "field": "solution",
+  "page": 131,
+  "kind": "math",
+  "note": "book: estimator of the form Theta_L-hat + alpha X_i",
+  "old": "\\alpha X_{l}\\)",
+  "new": "\\alpha X_{i}\\)"
+ },
+ {
+  "key": "9.4",
+  "field": "latexcode",
+  "page": 133,
+  "kind": "punct",
+  "note": "missing comma after X_1",
+  "old": "X_{1} \\ldots, X_{n}\\)",
+  "new": "X_{1}, \\ldots, X_{n}\\)"
+ },
+ {
+  "key": "9.10",
+  "field": "latexcode",
+  "page": 134,
+  "kind": "punct",
+  "note": "book: k = 0, 1, 2, ..., (period for comma)",
+  "old": "k=0.1,2, \\ldots .",
+  "new": "k=0,1,2, \\ldots,"
+ },
+ {
+  "key": "9.12",
+  "field": "solution",
+  "page": 136,
+  "kind": "punct",
+  "note": "display ends with a comma in the book",
+  "old": "(1-\\theta)^{n-q(x)}\n\\]",
+  "new": "(1-\\theta)^{n-q(x)},\n\\]"
+ },
+ {
+  "key": "9.14",
+  "field": "latexcode",
+  "page": 137,
+  "kind": "punct",
+  "note": "display ends with a period in the book",
+  "old": "]>0\n\\]",
+  "new": "]>0 .\n\\]"
+ },
+ {
+  "key": "9.14",
+  "field": "solution",
+  "page": 137,
+  "kind": "math",
+  "note": "closing bracket lost: book has E_theta[(g-hat(X) - theta)^2],",
+  "old": "\\geq \\mathbf{E}_{\\theta}\\left[(\\hat{g}(X)-\\theta)^{2},\\right.",
+  "new": "\\geq \\mathbf{E}_{\\theta}\\left[(\\hat{g}(X)-\\theta)^{2}\\right],"
+ },
+ {
+  "key": "9.15",
+  "field": "solution",
+  "page": 138,
+  "kind": "punct",
+  "note": "display ends with a period in the book",
+  "old": "=\\frac{(n+1)^{2}}{n(n+2)} \\theta^{2}\n\\end{aligned}",
+  "new": "=\\frac{(n+1)^{2}}{n(n+2)} \\theta^{2} .\n\\end{aligned}"
+ },
+ {
+  "key": "9.18",
+  "field": "solution",
+  "page": 141,
+  "kind": "math",
+  "note": "book has (x_i - x-bar)^2, not x_2",
+  "old": "\\sum_{i=1}^{n}\\left(x_{2}-\\bar{x}\\right)^{2}+n \\bar{x}^{2}",
+  "new": "\\sum_{i=1}^{n}\\left(x_{i}-\\bar{x}\\right)^{2}+n \\bar{x}^{2}"
+ },
+ {
+  "key": "9.21",
+  "field": "latexcode",
+  "page": 143,
+  "kind": "math",
+  "note": "garbled set-builder/absolute-value bars; book: R = {x | |x - 60| > gamma}",
+  "old": "R=\\{x| | x-60 \\mid>\\gamma\\}",
+  "new": "R=\\{x \\mid |x-60|>\\gamma\\}"
+ },
+ {
+  "key": "9.21",
+  "field": "latexcode",
+  "page": 143,
+  "kind": "math",
+  "note": "garbled set-builder/absolute-value bars; book: {(x_1,...,x_n) | |(x_1+...+x_n)/n - 60| > gamma}",
+  "old": "R=\\left\\{\\left.\\left(x_{1}, \\ldots, x_{n}\\right)| | \\frac{x_{1}+\\cdots+x_{n}}{n}-60 \\right\\rvert\\,>\\gamma\\right\\},",
+  "new": "R=\\left\\{\\left(x_{1}, \\ldots, x_{n}\\right) \\mid\\left|\\frac{x_{1}+\\cdots+x_{n}}{n}-60\\right|>\\gamma\\right\\},"
+ },
+ {
+  "key": "9.27",
+  "field": "latexcode",
+  "page": 145,
+  "kind": "punct",
+  "note": "comma read as period",
+  "old": "=29\\). respectively",
+  "new": "=29\\), respectively"
+ },
+ {
+  "key": "9.27",
+  "field": "latexcode",
+  "page": 145,
+  "kind": "punct",
+  "note": "comma read as period",
+  "old": "\\mu_{Y}\\). based",
+  "new": "\\mu_{Y}\\), based"
+ },
+ {
+  "key": "9.28",
+  "field": "latexcode",
+  "page": 145,
+  "kind": "punct",
+  "note": "comma read as period",
+  "old": "When tested. 28",
+  "new": "When tested, 28"
+ },
+ {
+  "key": "9.28",
+  "field": "latexcode",
+  "page": 145,
+  "kind": "punct",
+  "note": "comma read as period",
+  "old": "3 percent. at",
+  "new": "3 percent, at"
+ },
+ {
+  "key": "9.29",
+  "field": "latexcode",
+  "page": 145,
+  "kind": "punct",
+  "note": "data list: 34, 35, 29, 31, and 30",
+  "old": "29. 31",
+  "new": "29, 31"
+ },
+ {
+  "key": "9.30",
+  "field": "latexcode",
+  "page": 145,
+  "kind": "punct",
+  "note": "comma read as period",
+  "old": "X=\\theta+W\\). where",
+  "new": "X=\\theta+W\\), where"
+ },
+ {
+  "key": "9.30",
+  "field": "latexcode",
+  "page": 145,
+  "kind": "punct",
+  "note": "book has a comma after (b)",
+  "old": "Repeat part (b) using",
+  "new": "Repeat part (b), using"
+ }
+]
