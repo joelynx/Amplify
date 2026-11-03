@@ -728,10 +728,28 @@ class Api:
 
     # ---- Step 15: similarity (§5.7 / §12) -------------------------------
 
-    def get_similar_questions(self, question_id: int, k: int = 10) -> list[dict[str, Any]]:
+    def get_similar_questions(
+        self,
+        question_id: int,
+        k: int = 10,
+        filters: dict[str, Any] | None = None,
+        text_query: str | None = None,
+    ) -> list[dict[str, Any]]:
         """Top-k by cosine on `similarity_emb`. Each entry is a Question dict
-        plus a `similarity` field in [-1, 1]."""
-        hits = find_similar(self._conn, int(question_id), int(k))
+        plus a `similarity` field in [-1, 1].
+
+        With `filters` (the Browser's "Apply filters" option), candidates are
+        limited to the questions the Browser table would list for the same
+        filters and `text_query`; without them every question is a candidate."""
+        where, params = None, []
+        if filters is not None:
+            s = _resolve_subject(self._conn, filters.get("subject"))
+            try:
+                where, params = questions_repo.browser_where(filters, subject=s, text_query=text_query)
+            except FilterError as e:
+                _log.info("get_similar_questions filter error: %s", e)
+                return []
+        hits = find_similar(self._conn, int(question_id), int(k), where, params)
         if not hits:
             return []
         # Project the full Question objects for the hit IDs, then re-order to

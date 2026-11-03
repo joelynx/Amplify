@@ -424,6 +424,8 @@ export default function BrowserPage() {
 
       <QuestionSidePanel
         question={opened}
+        filters={filters}
+        textQuery={textQuery}
         onClose={() => setOpened(null)}
         onPickSimilar={openRow}
       />

@@ -11,6 +11,7 @@ import sqlite3
 import numpy as np
 
 from app.core.similarity import find_similar
+from app.ipc.api import Api
 
 
 def _vec_blob(dim: int, hot_index: int | None = None) -> bytes:
@@ -93,3 +94,27 @@ def test_k_zero_or_negative_returns_empty(seeded_conn: sqlite3.Connection):
     _set_emb(seeded_conn, 2, _vec_blob(3072, hot_index=0))
     assert find_similar(seeded_conn, 1, k=0) == []
     assert find_similar(seeded_conn, 1, k=-3) == []
+
+
+def test_where_limits_candidates_not_the_query(seeded_conn: sqlite3.Connection):
+    for qid in (1, 2, 3, 4):
+        _set_emb(seeded_conn, qid, _vec_blob(3072, hot_index=0))
+    # Q4 (Linear Algebra) is the query; only Calculus rows may be returned.
+    hits = find_similar(seeded_conn, 4, k=10, where="topic = ?", params=["Calculus"])
+    assert sorted(h.question_id for h in hits) == [1, 2, 3]
+
+
+def test_api_similar_questions_apply_filters(seeded_conn: sqlite3.Connection):
+    for qid in range(1, 7):
+        _set_emb(seeded_conn, qid, _vec_blob(3072, hot_index=0))
+    api = Api(lambda: seeded_conn)
+
+    def ids(hits: list[dict]) -> list[int]:
+        return sorted(h["question_id"] for h in hits)
+
+    # Unchecked: every question is a candidate.
+    assert ids(api.get_similar_questions(1, 10)) == [2, 3, 4, 5, 6]
+    # Checked: the Browser's filters (Q5 is off syllabus) and its search text.
+    f = {"topics": ["Linear Algebra"], "in_syllabus_only": True, "reuse_questions": True}
+    assert ids(api.get_similar_questions(1, 10, f)) == [4, 6]
+    assert ids(api.get_similar_questions(1, 10, f, "Orthogonal")) == [6]

@@ -13,8 +13,9 @@ seed sizes we target.
 from __future__ import annotations
 
 import sqlite3
+from collections.abc import Sequence
 from dataclasses import dataclass
-from typing import Final
+from typing import Any, Final
 
 import numpy as np
 
@@ -46,8 +47,14 @@ def find_similar(
     conn: sqlite3.Connection,
     question_id: int,
     k: int = 10,
+    where: str | None = None,
+    params: Sequence[Any] = (),
 ) -> list[SimilarityHit]:
     """Top-k most similar questions to `question_id` by cosine on `similarity_emb`.
+
+    `where` (with its `params`) is an optional SQL condition on `questions`
+    that candidates must meet, e.g. the Browser's filters; the query question
+    itself need not meet it.
 
     Returns an empty list when the query question is missing, has a NULL
     embedding, or has a degenerate (all-zero) vector. Skips augmented (NULL)
@@ -71,11 +78,13 @@ def find_similar(
     qn_inv = 1.0 / qn
 
     scored: list[tuple[float, int]] = []
-    cur = conn.execute(
+    sql = (
         "SELECT question_id, similarity_emb FROM questions "
-        "WHERE similarity_emb IS NOT NULL AND question_id != ?",
-        (question_id,),
+        "WHERE similarity_emb IS NOT NULL AND question_id != ?"
     )
+    if where:
+        sql += f" AND ({where})"
+    cur = conn.execute(sql, [question_id, *params])
     for qid, blob in cur:
         cand = _decode(blob)
         if cand is None:

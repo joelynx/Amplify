@@ -301,7 +301,12 @@ interface PyWebViewApi {
     n: number,
     strategy?: GenerationStrategy,
   ) => Promise<RandomQuestionsResult>;
-  get_similar_questions: (question_id: number, k?: number) => Promise<SimilarQuestion[]>;
+  get_similar_questions: (
+    question_id: number,
+    k?: number,
+    filters?: Filters | null,
+    text_query?: string | null,
+  ) => Promise<SimilarQuestion[]>;
   search_questions: (
     filters?: Filters | null,
     sort_by?: string,
@@ -613,9 +618,16 @@ export const ipc = {
     const api = await bridge();
     return api.get_random_questions(filters, n, strategy);
   },
-  async get_similar_questions(question_id: number, k = 10): Promise<SimilarQuestion[]> {
+  /** `filters` / `text_query` limit the candidates to what the Browser lists
+   * for them; leave them null to search every question. */
+  async get_similar_questions(
+    question_id: number,
+    k = 10,
+    filters: Filters | null = null,
+    text_query: string | null = null,
+  ): Promise<SimilarQuestion[]> {
     const api = await bridge();
-    return api.get_similar_questions(question_id, k);
+    return api.get_similar_questions(question_id, k, filters, text_query);
   },
   async search_questions(
     filters: Filters | null = null,

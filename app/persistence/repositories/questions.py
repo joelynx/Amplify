@@ -345,6 +345,22 @@ def _parse_sort(sort_by: str) -> tuple[str, str]:
     return col, d
 
 
+def browser_where(
+    filters: dict[str, Any] | None,
+    *,
+    subject: Subject | None = None,
+    text_query: str | None = None,
+) -> tuple[str, list[Any]]:
+    """The Browser's WHERE clause: the filters plus the free-text substring on
+    `latexcode`. Shared by `search` and the filtered similar-questions list."""
+    payload = subject.to_payload() if subject else None
+    where, params = assemble_where(filters, payload)
+    if text_query:
+        where = f"({where}) AND latexcode LIKE ?"
+        params = [*params, f"%{text_query}%"]
+    return where, list(params)
+
+
 def search(
     conn: sqlite3.Connection,
     filters: dict[str, Any] | None,
@@ -361,11 +377,7 @@ def search(
     `sort_by` is `<column>_<asc|desc>`; unknown columns fall back to
     `question_id_asc`.
     """
-    payload = subject.to_payload() if subject else None
-    where, params = assemble_where(filters, payload)
-    if text_query:
-        where = f"({where}) AND latexcode LIKE ?"
-        params = [*params, f"%{text_query}%"]
+    where, params = browser_where(filters, subject=subject, text_query=text_query)
 
     total = int(conn.execute(f"SELECT COUNT(*) FROM questions WHERE {where}", params).fetchone()[0])
 

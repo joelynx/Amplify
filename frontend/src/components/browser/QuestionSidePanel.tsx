@@ -2,8 +2,10 @@
  * Side panel for the Browser (spec §8.6).
  *
  * Renders question / solution / hints / solution_outline (KaTeX'd), plus a
- * "similar questions" list driven by `get_similar_questions`. Read-only —
- * no edit / new / delete affordances anywhere.
+ * "similar questions" list driven by `get_similar_questions`. With "Apply
+ * filters" checked, that list only draws from questions matching the
+ * Browser's filters and search text. Read-only — no edit / new / delete
+ * affordances anywhere.
  */
 
 import { useEffect, useState } from "react";
@@ -12,18 +14,27 @@ import { ChevronRight, X } from "lucide-react";
 import { cn } from "../../lib/cn";
 
 import { Button } from "../ui/Button";
-import { ipc, type Question, type SimilarQuestion } from "../../lib/ipc";
+import { Checkbox } from "../ui/Checkbox";
+import { ipc, type Filters, type Question, type SimilarQuestion } from "../../lib/ipc";
 import { LatexContent } from "./LatexContent";
 
 interface Props {
   question: Question | null;
+  /** The Browser's current filters and search text, used when "Apply filters" is on. */
+  filters: Filters;
+  textQuery: string;
   onClose: () => void;
   onPickSimilar: (qid: number) => void;
 }
 
-export function QuestionSidePanel({ question, onClose, onPickSimilar }: Props) {
+export function QuestionSidePanel({ question, filters, textQuery, onClose, onPickSimilar }: Props) {
   const [similar, setSimilar] = useState<SimilarQuestion[]>([]);
   const [loadingSimilar, setLoadingSimilar] = useState(false);
+  const [applyFilters, setApplyFilters] = useState(false);
+
+  // Null while "Apply filters" is off, so Browser filter edits don't refetch then.
+  const scopeFilters = applyFilters ? filters : null;
+  const scopeText = applyFilters && textQuery ? textQuery : null;
 
   useEffect(() => {
     if (!question) {
@@ -33,7 +44,7 @@ export function QuestionSidePanel({ question, onClose, onPickSimilar }: Props) {
     let cancelled = false;
     setLoadingSimilar(true);
     ipc
-      .get_similar_questions(question.question_id, 8)
+      .get_similar_questions(question.question_id, 8, scopeFilters, scopeText)
       .then((hits) => {
         if (!cancelled) setSimilar(hits);
       })
@@ -43,7 +54,7 @@ export function QuestionSidePanel({ question, onClose, onPickSimilar }: Props) {
     return () => {
       cancelled = true;
     };
-  }, [question]);
+  }, [question, scopeFilters, scopeText]);
 
   if (!question) {
     return (
@@ -90,11 +101,27 @@ export function QuestionSidePanel({ question, onClose, onPickSimilar }: Props) {
           </Disclosure>
         )}
 
-        <Section title="Similar questions">
+        <Section
+          title="Similar questions"
+          aside={
+            <label
+              className="inline-flex items-center gap-1.5 text-xs text-muted"
+              title="Only suggest questions that match the Browser's filters and search text"
+            >
+              <Checkbox
+                state={applyFilters ? "checked" : "unchecked"}
+                onChange={() => setApplyFilters((v) => !v)}
+              />
+              <span>Apply filters</span>
+            </label>
+          }
+        >
           {loadingSimilar && <p className="text-xs text-muted">Loading…</p>}
           {!loadingSimilar && similar.length === 0 && (
             <p className="text-xs text-muted">
-              No similar questions — this row may have no embedding (augmented seed).
+              {applyFilters
+                ? "No similar questions match the Browser's filters."
+                : "No similar questions — this row may have no embedding (augmented seed)."}
             </p>
           )}
           {similar.length > 0 && (
@@ -124,10 +151,22 @@ export function QuestionSidePanel({ question, onClose, onPickSimilar }: Props) {
   );
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({
+  title,
+  aside,
+  children,
+}: {
+  title: string;
+  /** Optional control shown at the right of the heading. */
+  aside?: React.ReactNode;
+  children: React.ReactNode;
+}) {
   return (
     <section>
-      <h3 className="mb-1 text-xs font-semibold uppercase tracking-wide text-muted">{title}</h3>
+      <div className="mb-1 flex items-center justify-between gap-2">
+        <h3 className="text-xs font-semibold uppercase tracking-wide text-muted">{title}</h3>
+        {aside}
+      </div>
       {children}
     </section>
   );
