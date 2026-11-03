@@ -17,7 +17,7 @@ from app.core.models import Question, Subject
 # are deliberately omitted — see module docstring.
 _QUESTION_COLS = (
     "question_id, semester, topic, branch, subtopic, latexcode, type, in_syllabus, "
-    "source, subsource, answer, solution, solution_outline, hints, instructions, "
+    "source, subsource, answer, solution, generated_solution, solution_outline, hints, instructions, "
     "date_last_accessed, times_used, interactive_times_used, difficulty_rating, latex_hash"
 )
 
@@ -39,6 +39,7 @@ def _row_to_question(row: sqlite3.Row, tags: list[str] | None = None) -> Questio
         subsource=row["subsource"],
         answer=row["answer"],
         solution=row["solution"],
+        generated_solution=row["generated_solution"],
         solution_outline=row["solution_outline"],
         hints=row["hints"],
         instructions=row["instructions"],

@@ -1507,7 +1507,7 @@ def _question_full_dict(q: Question) -> dict[str, Any]:
         "type": d["type"],
         "hints": d["hints"],
         "answer": d["answer"],
-        "solution": d["solution"],
+        "solution": q.best_solution(),
         "instructions": d["instructions"],
         "source": d["source"],
         "difficulty_rating": d["difficulty_rating"],

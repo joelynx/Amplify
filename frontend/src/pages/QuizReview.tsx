@@ -16,7 +16,7 @@ import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
 import { LatexContent } from "../components/browser/LatexContent";
 import { cn } from "../lib/cn";
-import { ipc, type QuizAttemptDetail, type Question } from "../lib/ipc";
+import { bestSolution, ipc, type QuizAttemptDetail, type Question } from "../lib/ipc";
 
 export default function QuizReviewPage() {
   const { attemptId } = useParams<{ attemptId: string }>();
@@ -122,12 +122,12 @@ export default function QuizReviewPage() {
                       <Detail label="Time taken" value={`${(a.time_taken_ms / 1000).toFixed(1)}s`} />
                     )}
                   </dl>
-                  {q.solution && (
+                  {bestSolution(q) && (
                     <div className="mt-3 border-t border-border pt-3">
                       <div className="mb-1 text-xs font-medium uppercase tracking-wide text-muted">
                         Solution
                       </div>
-                      <LatexContent source={q.solution} />
+                      <LatexContent source={bestSolution(q) ?? ""} />
                     </div>
                   )}
                 </>

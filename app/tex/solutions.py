@@ -13,6 +13,9 @@ Four placement modes feed into the body assembly:
 The spec stores the combobox as a single value; the UI uses `outline_only` plus
 a sub-toggle, but by the time we get here it's already collapsed to the two
 `outline_*` variants above.
+
+"Full solution" is `Question.best_solution()`: the generated (Claude) solution
+when there is one, else the source's own.
 """
 
 from __future__ import annotations
@@ -64,9 +67,9 @@ def render_solution_block(q: Question, index: int, use_outline: bool) -> str | N
                 "outline missing for question_id=%d; falling back to full solution",
                 q.question_id,
             )
-            text = q.solution
+            text = q.best_solution()
     else:
-        text = q.solution
+        text = q.best_solution()
     if text is None or not text.strip():
         return None
     return f"\\noindent\\textbf{{Q{index}.}}~{text}"

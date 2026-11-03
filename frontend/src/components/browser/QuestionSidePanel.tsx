@@ -1,7 +1,9 @@
 /**
  * Side panel for the Browser (spec §8.6).
  *
- * Renders question / solution / hints / solution_outline (KaTeX'd), plus a
+ * Renders question / solution / hints / solution_outline (KaTeX'd); the
+ * solution is the generated one when there is one, with the source's own
+ * under "Original solution". Plus a
  * "similar questions" list driven by `get_similar_questions`. With "Apply
  * filters" checked, that list only draws from questions matching the
  * Browser's filters and search text. Read-only — no edit / new / delete
@@ -15,7 +17,7 @@ import { cn } from "../../lib/cn";
 
 import { Button } from "../ui/Button";
 import { Checkbox } from "../ui/Checkbox";
-import { ipc, type Filters, type Question, type SimilarQuestion } from "../../lib/ipc";
+import { bestSolution, ipc, type Filters, type Question, type SimilarQuestion } from "../../lib/ipc";
 import { LatexContent } from "./LatexContent";
 
 interface Props {
@@ -66,6 +68,8 @@ export function QuestionSidePanel({ question, filters, textQuery, onClose, onPic
     );
   }
 
+  const solution = bestSolution(question);
+
   return (
     <aside className="w-[420px] flex-none overflow-y-auto border-l border-border bg-surface">
       <header className="sticky top-0 z-10 flex items-center justify-between border-b border-border bg-surface px-4 py-2">
@@ -83,8 +87,15 @@ export function QuestionSidePanel({ question, filters, textQuery, onClose, onPic
           <LatexContent source={question.latexcode} />
         </Section>
 
-        {question.solution && (
+        {solution && (
           <Disclosure title="Solution" defaultOpen={false}>
+            <LatexContent source={solution} />
+          </Disclosure>
+        )}
+
+        {/* The source's own solution, when the generated one is shown above. */}
+        {solution !== question.solution && question.solution?.trim() && (
+          <Disclosure title="Original solution" defaultOpen={false}>
             <LatexContent source={question.solution} />
           </Disclosure>
         )}

@@ -33,11 +33,19 @@ class Question:
     subsource: str | None = None
     answer: str | None = None
     solution: str | None = None
+    # Solution written by the solution pipeline (Claude); `solution` is the source's own.
+    generated_solution: str | None = None
     solution_outline: str | None = None
     hints: str | None = None
     instructions: str | None = None
     date_last_accessed: str | None = None
     difficulty_rating: float | None = None
+
+    def best_solution(self) -> str | None:
+        """The solution to show: the generated one when there is one, else `solution`."""
+        if self.generated_solution and self.generated_solution.strip():
+            return self.generated_solution
+        return self.solution
 
 
 @dataclass(slots=True)

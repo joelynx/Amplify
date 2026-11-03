@@ -43,7 +43,10 @@ export interface Question {
   source: string | null;
   subsource: string | null;
   answer: string | null;
+  /** The source's own solution. */
   solution: string | null;
+  /** Solution written by the solution pipeline (Claude), when there is one. */
+  generated_solution: string | null;
   solution_outline: string | null;
   hints: string | null;
   instructions: string | null;
@@ -53,6 +56,12 @@ export interface Question {
   difficulty_rating: number | null;
   latex_hash: string;
   tags: string[];
+}
+
+/** The solution to show: the generated one when there is one, else the source's
+ * (mirrors `Question.best_solution()` in Python). */
+export function bestSolution(q: Pick<Question, "solution" | "generated_solution">): string | null {
+  return q.generated_solution?.trim() ? q.generated_solution : q.solution;
 }
 
 /** A `Question` plus the cosine similarity from `get_similar_questions`. */

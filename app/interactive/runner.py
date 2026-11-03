@@ -150,7 +150,7 @@ def submit_answer(
         "correct": correct,
         "partial_score": score,
         "canonical_answer": q.answer,
-        "solution": q.solution if session.config.show_solutions else None,
+        "solution": q.best_solution() if session.config.show_solutions else None,
         "replacement": _question_to_dict(replacement) if replacement else None,
         "finished": finished,
         "current_total": sum(a.score for a in session.answers),
