@@ -1,0 +1,2234 @@
+[
+ {
+  "key": "4.4.35",
+  "field": "tex",
+  "page": 246,
+  "kind": "structure",
+  "note": "problem 35 read as problem 3",
+  "old": "  \\item[3] (MATLAB) Factor",
+  "new": "  \\item[35] (MATLAB) Factor"
+ },
+ {
+  "key": "3.1/1-8",
+  "field": "note",
+  "page": 131,
+  "kind": "layout",
+  "note": "the eight rules are one list in the book; Mathpix split it and mixed rules 6-8 with the margin notes",
+  "old": "    \\item[(5)] 1 times \\(\\boldsymbol{x}\\) equals \\(\\boldsymbol{x}\\)\n  \\end{itemize}\n\n(1) to (4) about \\(\\boldsymbol{x}+\\boldsymbol{y}\\)\\\\\n(5) to (6) about \\(c \\boldsymbol{x}\\)\\\\\n(6) \\(\\left(c_{1} c_{2}\\right) \\boldsymbol{x}=c_{1}\\left(c_{2} \\boldsymbol{x}\\right)\\)\\\\\n(7) \\(c(\\boldsymbol{x}+\\boldsymbol{y})=c \\boldsymbol{x}+c \\boldsymbol{y}\\)\\\\\n(7) to (8) connects them\\\\\n(8) \\(\\left(c_{1}+c_{2}\\right) \\boldsymbol{x}=c_{1} \\boldsymbol{x}+c_{2} \\boldsymbol{x}\\).",
+  "new": "    \\item[(5)] 1 times \\(\\boldsymbol{x}\\) equals \\(\\boldsymbol{x}\\)\n    \\item[(6)] \\(\\left(c_{1} c_{2}\\right) \\boldsymbol{x}=c_{1}\\left(c_{2} \\boldsymbol{x}\\right)\\)\n    \\item[(7)] \\(c(\\boldsymbol{x}+\\boldsymbol{y})=c \\boldsymbol{x}+c \\boldsymbol{y}\\)\n    \\item[(8)] \\(\\left(c_{1}+c_{2}\\right) \\boldsymbol{x}=c_{1} \\boldsymbol{x}+c_{2} \\boldsymbol{x}\\).\n  \\end{itemize}\n\n(1) to (4) about \\(\\boldsymbol{x}+\\boldsymbol{y}\\); (5) to (6) about \\(c \\boldsymbol{x}\\); (7) to (8) connects them."
+ },
+ {
+  "key": "11.3/22-25",
+  "field": "note",
+  "page": 533,
+  "kind": "layout",
+  "note": "the two pseudocode boxes as math arrays (the web view shows lstlisting literally, $ signs and all); Mathpix also lost the comment \"improvement this step\"",
+  "old": "\\begin{lstlisting}[mathescape=true]\nArnoldi Iteration\n$\\boldsymbol{q}_{1}=\\boldsymbol{b} /\\|\\boldsymbol{b}\\|$\nfor $n=1$ to $N-1$\n    $\\boldsymbol{v}=A \\boldsymbol{q}_{n}$\n    for $j=1$ to $n$\n        $h_{j n}=\\boldsymbol{q}_{j}^{\\mathrm{T}} \\boldsymbol{v}$\n        $\\boldsymbol{v}=\\boldsymbol{v}-h_{j n} \\boldsymbol{q}_{j}$\n    $h_{n+1, n}=\\|\\boldsymbol{v}\\|$\n    $\\boldsymbol{q}_{n+1}=\\boldsymbol{v} / h_{n+1, n}$\n\\end{lstlisting}\n\\begin{lstlisting}[mathescape=true]\nConjugate Gradient Iteration for Positive Definite $A$\n$\\boldsymbol{x}_{0}=0, \\boldsymbol{r}_{0}=\\boldsymbol{b}, \\boldsymbol{d}_{0}=\\boldsymbol{r}_{0}$\nfor $n=1$ to $N$\n    $\\alpha_{n}=\\left(\\boldsymbol{r}_{n-1}^{\\mathrm{T}} \\boldsymbol{r}_{n-1}\\right) /\\left(\\boldsymbol{d}_{n-1}^{\\mathrm{T}} \\boldsymbol{A} \\boldsymbol{d}_{n-1}\\right) \\quad$ step length $\\boldsymbol{x}_{n-1}$ to $\\boldsymbol{x}_{n}$\n    $\\boldsymbol{x}_{n}=\\boldsymbol{x}_{n-1}+\\alpha_{n} \\boldsymbol{d}_{n-1} \\quad$ approximate solution\n    $\\boldsymbol{r}_{n}=\\boldsymbol{r}_{n-1}-\\alpha_{n} A \\boldsymbol{d}_{n-1} \\quad \\quad$ new residual $\\boldsymbol{b}-A \\boldsymbol{x}_{n}$\n    $\\beta_{n}=\\left(\\boldsymbol{r}_{n}^{\\mathrm{T}} \\boldsymbol{r}_{n}\\right) /\\left(\\boldsymbol{r}_{n-1}^{\\mathrm{T}} \\boldsymbol{r}_{n-1}\\right)$\n    $\\boldsymbol{d}_{n}=\\boldsymbol{r}_{n}+\\beta_{n} \\boldsymbol{d}_{n-1} \\quad$ next search direction\n% Notice: only 1 matrix-vector multiplication Aq and Ad\n\\end{lstlisting}",
+  "new": "\\textbf{Arnoldi Iteration}\n\\[\n\\begin{array}{l}\n\\boldsymbol{q}_{1}=\\boldsymbol{b} /\\|\\boldsymbol{b}\\| \\\\\n\\textbf{for } n=1 \\textbf{ to } N-1 \\\\\n\\quad \\boldsymbol{v}=A \\boldsymbol{q}_{n} \\\\\n\\quad \\textbf{for } j=1 \\textbf{ to } n \\\\\n\\qquad h_{j n}=\\boldsymbol{q}_{j}^{\\mathrm{T}} \\boldsymbol{v} \\\\\n\\qquad \\boldsymbol{v}=\\boldsymbol{v}-h_{j n} \\boldsymbol{q}_{j} \\\\\n\\quad h_{n+1, n}=\\|\\boldsymbol{v}\\| \\\\\n\\quad \\boldsymbol{q}_{n+1}=\\boldsymbol{v} / h_{n+1, n}\n\\end{array}\n\\]\n\n\\textbf{Conjugate Gradient Iteration for Positive Definite} \\(A\\)\n\\[\n\\begin{array}{ll}\n\\multicolumn{2}{l}{\\boldsymbol{x}_{0}=0, \\boldsymbol{r}_{0}=\\boldsymbol{b}, \\boldsymbol{d}_{0}=\\boldsymbol{r}_{0}} \\\\\n\\multicolumn{2}{l}{\\textbf{for } n=1 \\textbf{ to } N} \\\\\n\\quad \\alpha_{n}=\\left(\\boldsymbol{r}_{n-1}^{\\mathrm{T}} \\boldsymbol{r}_{n-1}\\right) /\\left(\\boldsymbol{d}_{n-1}^{\\mathrm{T}} A \\boldsymbol{d}_{n-1}\\right) & \\text{step length } \\boldsymbol{x}_{n-1} \\text{ to } \\boldsymbol{x}_{n} \\\\\n\\quad \\boldsymbol{x}_{n}=\\boldsymbol{x}_{n-1}+\\alpha_{n} \\boldsymbol{d}_{n-1} & \\text{approximate solution} \\\\\n\\quad \\boldsymbol{r}_{n}=\\boldsymbol{r}_{n-1}-\\alpha_{n} A \\boldsymbol{d}_{n-1} & \\text{new residual } \\boldsymbol{b}-A \\boldsymbol{x}_{n} \\\\\n\\quad \\beta_{n}=\\left(\\boldsymbol{r}_{n}^{\\mathrm{T}} \\boldsymbol{r}_{n}\\right) /\\left(\\boldsymbol{r}_{n-1}^{\\mathrm{T}} \\boldsymbol{r}_{n-1}\\right) & \\text{improvement this step} \\\\\n\\quad \\boldsymbol{d}_{n}=\\boldsymbol{r}_{n}+\\beta_{n} \\boldsymbol{d}_{n-1} & \\text{next search direction} \\\\\n\\multicolumn{2}{l}{\\text{\\% \\textit{Notice: only 1 matrix-vector multiplication} } A\\boldsymbol{q} \\text{ \\textit{and} } A\\boldsymbol{d}}\n\\end{array}\n\\]"
+ },
+ {
+  "key": "1.2.27",
+  "field": "latexcode",
+  "page": 21,
+  "kind": "layout",
+  "note": "norm expression split over two math spans with mis-paired \\left\\| ... \\right\\|; join into one clean expression",
+  "old": "\\(\\| \\boldsymbol{v}+\\) \\(\\boldsymbol{w}\\left\\|^{2}+\\right\\| \\boldsymbol{v}-\\boldsymbol{w} \\|^{2}\\)",
+  "new": "\\(\\|\\boldsymbol{v}+\\boldsymbol{w}\\|^{2}+\\|\\boldsymbol{v}-\\boldsymbol{w}\\|^{2}\\)"
+ },
+ {
+  "key": "1.3.1",
+  "field": "latexcode",
+  "page": 29,
+  "kind": "math",
+  "note": "dot product written as a text bullet character; use \\cdot",
+  "old": " • \\(\\boldsymbol{x}\\)",
+  "new": " \\(\\cdot \\boldsymbol{x}\\)"
+ },
+ {
+  "key": "1.3.2",
+  "field": "latexcode",
+  "page": 29,
+  "kind": "math",
+  "note": "first unknown vector is a column (y1, y2, y3), not a row: missing row breaks",
+  "old": "y_{1} y_{2} y_{3}\n\\end{array}\\right]=\\left[\\begin{array}{l}\n1 \\\\\n1",
+  "new": "y_{1} \\\\\ny_{2} \\\\\ny_{3}\n\\end{array}\\right]=\\left[\\begin{array}{l}\n1 \\\\\n1"
+ },
+ {
+  "key": "1.3.2",
+  "field": "latexcode",
+  "page": 29,
+  "kind": "math",
+  "note": "second unknown vector is a column (y1, y2, y3), not a row: missing row breaks",
+  "old": "y_{1} y_{2} y_{3}",
+  "new": "y_{1} \\\\\ny_{2} \\\\\ny_{3}"
+ },
+ {
+  "key": "1.3.3",
+  "field": "latexcode",
+  "page": 29,
+  "kind": "math",
+  "note": "y is a column vector, not a row: missing row breaks",
+  "old": "y_{1} y_{2} y_{3}",
+  "new": "y_{1} \\\\\ny_{2} \\\\\ny_{3}"
+ },
+ {
+  "key": "1.3.3",
+  "field": "latexcode",
+  "page": 29,
+  "kind": "math",
+  "note": "c is a column vector, not a row: missing row breaks",
+  "old": "c_{1} c_{2} c_{3}",
+  "new": "c_{1} \\\\\nc_{2} \\\\\nc_{3}"
+ },
+ {
+  "key": "1.3.7",
+  "field": "latexcode",
+  "page": 30,
+  "kind": "math",
+  "note": "x is a column vector, not a row: missing row breaks",
+  "old": "x_{1} x_{2} x_{3}",
+  "new": "x_{1} \\\\\nx_{2} \\\\\nx_{3}"
+ },
+ {
+  "key": "1.3.8",
+  "field": "latexcode",
+  "page": 30,
+  "kind": "math",
+  "note": "x is a column vector, not a row: missing row breaks",
+  "old": "x_{1} x_{2} x_{3} x_{4}",
+  "new": "x_{1} \\\\\nx_{2} \\\\\nx_{3} \\\\\nx_{4}"
+ },
+ {
+  "key": "1.3.8",
+  "field": "latexcode",
+  "page": 30,
+  "kind": "math",
+  "note": "b is a column vector, not a row: missing row breaks",
+  "old": "b_{1} b_{2} b_{3} b_{4}",
+  "new": "b_{1} \\\\\nb_{2} \\\\\nb_{3} \\\\\nb_{4}"
+ },
+ {
+  "key": "1.3.10",
+  "field": "latexcode",
+  "page": 30,
+  "kind": "math",
+  "note": "z is a column vector, not a row: missing row breaks",
+  "old": "z_{1} z_{2} z_{3}",
+  "new": "z_{1} \\\\\nz_{2} \\\\\nz_{3}"
+ },
+ {
+  "key": "1.3.10",
+  "field": "latexcode",
+  "page": 30,
+  "kind": "math",
+  "note": "result vector has three rows z2-z1, z3-z2, 0-z3: missing row break after z2-z1",
+  "old": "z_{2}-z_{1} z_{3}-z_{2}",
+  "new": "z_{2}-z_{1} \\\\\nz_{3}-z_{2}"
+ },
+ {
+  "key": "1.3.10",
+  "field": "latexcode",
+  "page": 30,
+  "kind": "math",
+  "note": "b is a column vector, not a row: missing row breaks",
+  "old": "b_{1} b_{2} b_{3}",
+  "new": "b_{1} \\\\\nb_{2} \\\\\nb_{3}"
+ },
+ {
+  "key": "2.1.1",
+  "field": "latexcode",
+  "page": 41,
+  "kind": "math",
+  "note": "column vector (x, y, z) collapsed into one row",
+  "old": "x y z\n\\end{array}",
+  "new": "x \\\\\ny \\\\\nz\n\\end{array}"
+ },
+ {
+  "key": "2.1.2",
+  "field": "latexcode",
+  "page": 41,
+  "kind": "math",
+  "note": "column vector (x, y, z) collapsed into one row",
+  "old": "x y z\n\\end{array}",
+  "new": "x \\\\\ny \\\\\nz\n\\end{array}"
+ },
+ {
+  "key": "2.1.12",
+  "field": "latexcode",
+  "page": 42,
+  "kind": "math",
+  "note": "column vector (x, y, z) collapsed into one row",
+  "old": "x y z\n\\end{array}",
+  "new": "x \\\\\ny \\\\\nz\n\\end{array}"
+ },
+ {
+  "key": "2.1.24",
+  "field": "latexcode",
+  "page": 43,
+  "kind": "math",
+  "note": "A*v was turned into an italic marker",
+  "old": "from A\\textit{v and",
+  "new": "from \\(\\mathrm{A} * \\mathrm{v}\\) and"
+ },
+ {
+  "key": "2.1.24",
+  "field": "latexcode",
+  "page": 43,
+  "kind": "math",
+  "note": "v*A was turned into an italic marker",
+  "old": "ask for v}A,",
+  "new": "ask for \\(\\mathrm{v} * \\mathrm{A}\\),"
+ },
+ {
+  "key": "2.1.29",
+  "field": "latexcode",
+  "page": 44,
+  "kind": "missing",
+  "note": "blank after u_2 = A u_1 = is missing",
+  "old": "A \\boldsymbol{u}_{1}=\\_\\quad",
+  "new": "A \\boldsymbol{u}_{1}=\\_\\_\\_\\_ \\quad"
+ },
+ {
+  "key": "2.1.29",
+  "field": "latexcode",
+  "page": 44,
+  "kind": "missing",
+  "note": "blank after u_3 = A u_2 = is missing",
+  "old": "A \\boldsymbol{u}_{2}=.",
+  "new": "A \\boldsymbol{u}_{2}=\\_\\_\\_\\_ ."
+ },
+ {
+  "key": "2.1.35",
+  "field": "latexcode",
+  "page": 45,
+  "kind": "math",
+  "note": "garbled 1, ..., 9",
+  "old": "numbers 1, . . , , 9 in",
+  "new": "numbers \\(1, \\ldots, 9\\) in"
+ },
+ {
+  "key": "2.2.14",
+  "field": "latexcode",
+  "page": 55,
+  "kind": "math",
+  "note": "rows 2 and 3 of the system merged into one line",
+  "old": "z=2 y-z=3 .",
+  "new": "z=2 \\\\\ny-z=3 ."
+ },
+ {
+  "key": "2.2.15",
+  "field": "latexcode",
+  "page": 55,
+  "kind": "math",
+  "note": "three equations merged into one aligned row",
+  "old": "x+b y & =0 x-2 y-z & =0 y+z & =0 .",
+  "new": "x+b y & =0 \\\\\nx-2 y-z & =0 \\\\\ny+z & =0 ."
+ },
+ {
+  "key": "2.2.19",
+  "field": "latexcode",
+  "page": 56,
+  "kind": "math",
+  "note": "rows 1 and 2 of the system merged into one line",
+  "old": "z=1 x+7 y",
+  "new": "z=1 \\\\\nx+7 y"
+ },
+ {
+  "key": "2.2.21",
+  "field": "latexcode",
+  "page": 56,
+  "kind": "math",
+  "note": "four rows of the two systems merged into one array row",
+  "old": "2 x+y & =0 & 2 x-y & =0 x+2 y+z & =0 & -x+2 y-z & =0 y+2 z+t & =0 & -y+2 z-t & =0 z+2 t & =5 & -z+2 t & =5 .",
+  "new": "2 x+y & =0 & 2 x-y & =0 \\\\\nx+2 y+z & =0 & -x+2 y-z & =0 \\\\\ny+2 z+t & =0 & -y+2 z-t & =0 \\\\\nz+2 t & =5 & -z+2 t & =5 ."
+ },
+ {
+  "key": "2.2.25",
+  "field": "latexcode",
+  "page": 56,
+  "kind": "math",
+  "note": "3 by 3 matrix rows merged into one row",
+  "old": "a & 2 & 3 a & a & 4 a & a & a",
+  "new": "a & 2 & 3 \\\\\na & a & 4 \\\\\na & a & a"
+ },
+ {
+  "key": "2.2.26",
+  "field": "latexcode",
+  "page": 56,
+  "kind": "math",
+  "note": "2 by 2 matrix rows merged into one row",
+  "old": "a & b c & d",
+  "new": "a & b \\\\\nc & d"
+ },
+ {
+  "key": "2.2.26",
+  "field": "latexcode",
+  "page": 56,
+  "kind": "math",
+  "note": "the four sum equations merged into one row",
+  "old": "a+c=2 c+d=8",
+  "new": "a+c=2 \\\\\nc+d=8"
+ },
+ {
+  "key": "2.3.18",
+  "field": "latexcode",
+  "page": 67,
+  "kind": "math",
+  "note": "matrix E lost its row separators (3 by 3, rows 1 0 0 / a 1 0 / b 0 1)",
+  "old": "1 & 0 & 0 a & 1 & 0 b & 0 & 1",
+  "new": "1 & 0 & 0 \\\\\na & 1 & 0 \\\\\nb & 0 & 1"
+ },
+ {
+  "key": "2.3.24",
+  "field": "latexcode",
+  "page": 68,
+  "kind": "math",
+  "note": "column vector (x1, x2) lost its row separator",
+  "old": "x_{1} x_{2}",
+  "new": "x_{1} \\\\\nx_{2}"
+ },
+ {
+  "key": "2.3.25",
+  "field": "latexcode",
+  "page": 68,
+  "kind": "math",
+  "note": "column vector (x, y, z) lost its row separators",
+  "old": "x y z",
+  "new": "x \\\\\ny \\\\\nz"
+ },
+ {
+  "key": "2.3.26",
+  "field": "latexcode",
+  "page": 68,
+  "kind": "math",
+  "note": "column vector (x, y) lost its row separator",
+  "old": "x y",
+  "new": "x \\\\\ny"
+ },
+ {
+  "key": "2.3.26",
+  "field": "latexcode",
+  "page": 68,
+  "kind": "math",
+  "note": "column vector (u, v) lost its row separator",
+  "old": "u v",
+  "new": "u \\\\\nv"
+ },
+ {
+  "key": "2.4.1",
+  "field": "latexcode",
+  "page": 77,
+  "kind": "math",
+  "note": "DC is a matrix product like the others, put it in math",
+  "old": "DC\\\\",
+  "new": "\\(D C\\)\\\\"
+ },
+ {
+  "key": "2.4.8",
+  "field": "latexcode",
+  "page": 78,
+  "kind": "math",
+  "note": "A = [a b; c d] lost its row separator",
+  "old": "a & b c & d",
+  "new": "a & b \\\\\nc & d"
+ },
+ {
+  "key": "2.4.9",
+  "field": "latexcode",
+  "page": 78,
+  "kind": "layout",
+  "note": "the word 'and' belongs in the display, before the second line (E A) F = ...",
+  "old": "\\((E A) F\\) : and\\\\",
+  "new": "\\((E A) F\\) :\\\\"
+ },
+ {
+  "key": "2.4.9",
+  "field": "latexcode",
+  "page": 78,
+  "kind": "layout",
+  "note": "'and' starts the second display line in the book",
+  "old": "(E A) F & =(E A)",
+  "new": "\\text { and } \\quad (E A) F & =(E A)"
+ },
+ {
+  "key": "2.4.9",
+  "field": "latexcode",
+  "page": 78,
+  "kind": "math",
+  "note": "A = [a b; c d] lost its row separator",
+  "old": "a & b c & d",
+  "new": "a & b \\\\\nc & d"
+ },
+ {
+  "key": "2.4.9",
+  "field": "latexcode",
+  "page": 78,
+  "kind": "math",
+  "note": "EA = [a b; a+c b+d] lost its row separator",
+  "old": "a & b a+c & b+d",
+  "new": "a & b \\\\\na+c & b+d"
+ },
+ {
+  "key": "2.4.9",
+  "field": "latexcode",
+  "page": 78,
+  "kind": "math",
+  "note": "(EA)F = [a a+b; a+c a+c+b+d] lost its row separator",
+  "old": "a & a+b a+c & a+c+b+d",
+  "new": "a & a+b \\\\\na+c & a+c+b+d"
+ },
+ {
+  "key": "2.4.10",
+  "field": "latexcode",
+  "page": 78,
+  "kind": "math",
+  "note": "EA = [a b; a+c b+d] lost its row separator",
+  "old": "a & b a+c & b+d",
+  "new": "a & b \\\\\na+c & b+d"
+ },
+ {
+  "key": "2.4.10",
+  "field": "latexcode",
+  "page": 78,
+  "kind": "math",
+  "note": "F(EA) = [2a+c 2b+d; a+c b+d] lost its row separator",
+  "old": "2 a+c & 2 b+d a+c & b+d",
+  "new": "2 a+c & 2 b+d \\\\\na+c & b+d"
+ },
+ {
+  "key": "2.4.13",
+  "field": "latexcode",
+  "page": 79,
+  "kind": "math",
+  "note": "A = [a b; c d] lost its row separator",
+  "old": "a & b c & d",
+  "new": "a & b \\\\\nc & d"
+ },
+ {
+  "key": "2.4.21",
+  "field": "latexcode",
+  "page": 80,
+  "kind": "math",
+  "note": "column vector v = (x, y, z, t) lost its row separators",
+  "old": "x y z t",
+  "new": "x \\\\\ny \\\\\nz \\\\\nt"
+ },
+ {
+  "key": "2.4.26",
+  "field": "latexcode",
+  "page": 81,
+  "kind": "missing",
+  "note": "book has '+ ____ = ____ .' (two full blanks); OCR has one short blank and no second blank",
+  "old": "+\\_=",
+  "new": "+\\_\\_\\_\\_=\\_\\_\\_\\_ ."
+ },
+ {
+  "key": "2.5.3",
+  "field": "latexcode",
+  "page": 92,
+  "kind": "math",
+  "note": "column vector (x, y) collapsed into one row",
+  "old": "x y",
+  "new": "x \\\\ y"
+ },
+ {
+  "key": "2.5.3",
+  "field": "latexcode",
+  "page": 92,
+  "kind": "math",
+  "note": "column vector (t, z) collapsed into one row",
+  "old": "t z",
+  "new": "t \\\\ z"
+ },
+ {
+  "key": "2.5.4",
+  "field": "latexcode",
+  "page": 92,
+  "kind": "math",
+  "note": "column vector (x, y) collapsed into one row",
+  "old": "x y",
+  "new": "x \\\\ y"
+ },
+ {
+  "key": "2.5.14",
+  "field": "latexcode",
+  "page": 93,
+  "kind": "punct",
+  "note": "CJK full stop after the blank",
+  "old": "\\_\\_\\_\\_。",
+  "new": "\\_\\_\\_\\_."
+ },
+ {
+  "key": "2.5.19",
+  "field": "latexcode",
+  "page": 93,
+  "kind": "math",
+  "note": "4 by 4 inverse matrix: row breaks lost",
+  "old": "a & b & b & b b & a & b & b b & b & a & b b & b & b & a",
+  "new": "a & b & b & b \\\\ b & a & b & b \\\\ b & b & a & b \\\\ b & b & b & a"
+ },
+ {
+  "key": "2.5.23",
+  "field": "latexcode",
+  "page": 94,
+  "kind": "math",
+  "note": "[A I] misread as [A L I]",
+  "old": "\\([A L I]\\)",
+  "new": "\\([A I]\\)"
+ },
+ {
+  "key": "2.5.23",
+  "field": "latexcode",
+  "page": 94,
+  "kind": "punct",
+  "note": "missing final period after the matrix",
+  "old": "0 & 1 & 2 & 0 & 0 & 1\n\\end{array}\\right]",
+  "new": "0 & 1 & 2 & 0 & 0 & 1\n\\end{array}\\right] ."
+ },
+ {
+  "key": "2.5.30",
+  "field": "latexcode",
+  "page": 95,
+  "kind": "math",
+  "note": "matrix A: row breaks lost",
+  "old": "a & b & b a & a & b a & a & a",
+  "new": "a & b & b \\\\ a & a & b \\\\ a & a & a"
+ },
+ {
+  "key": "2.5.30",
+  "field": "latexcode",
+  "page": 95,
+  "kind": "math",
+  "note": "matrix C: row break lost between rows 1 and 2",
+  "old": "2 & c & c c & c & c \\\\",
+  "new": "2 & c & c \\\\ c & c & c \\\\"
+ },
+ {
+  "key": "2.5.31",
+  "field": "latexcode",
+  "page": 95,
+  "kind": "punct",
+  "note": "missing final period",
+  "old": "=(1,1,1,1)",
+  "new": "=(1,1,1,1) ."
+ },
+ {
+  "key": "2.5.41",
+  "field": "latexcode",
+  "page": 96,
+  "kind": "missing",
+  "note": "first difference factor of T is 3 by 3; third row 0, -1, 1 missing",
+  "old": "\\begin{array}{rr}\n1 & \\\\\n-1 & 1\n\\end{array}",
+  "new": "\\begin{array}{rrr}\n1 & & \\\\\n-1 & 1 & \\\\\n0 & -1 & 1\n\\end{array}"
+ },
+ {
+  "key": "2.5.43",
+  "field": "latexcode",
+  "page": 96,
+  "kind": "math",
+  "note": "block matrix [A B; C D] garbled",
+  "old": "\\(\\left[\\begin{array}{llll}A & B & ; & C \\\\ & D\\end{array}\\right]\\)",
+  "new": "\\([A B ; C D]\\)"
+ },
+ {
+  "key": "2.6.1",
+  "field": "latexcode",
+  "page": 104,
+  "kind": "math",
+  "note": "triangular system: row break lost between x+y=5 and y=2",
+  "old": "x+y & =\\mathbf{5} y & =\\mathbf{2}",
+  "new": "x+y & =\\mathbf{5} \\\\ y & =\\mathbf{2}"
+ },
+ {
+  "key": "2.6.3",
+  "field": "latexcode",
+  "page": 104,
+  "kind": "math",
+  "note": "three 3-equation systems garbled into one row plus junk",
+  "old": "\\begin{array}{rlrl}\nx+y+z & =5 & x+y+z & =5 x+2 y+3 z & =7 & y+2 z & =2 x+3 y+6 z & =11 & 2 y+5 z & =6\n\\end{array} \\quad x+y+z=5 . r=2(z=2 z)",
+  "new": "\\begin{array}{rlrlrl}\nx+y+z & =5 & x+y+z & =5 & x+y+z & =5 \\\\\nx+2 y+3 z & =7 & y+2 z & =2 & y+2 z & =2 \\\\\nx+3 y+6 z & =11 & 2 y+5 z & =6 & z & =2\n\\end{array}"
+ },
+ {
+  "key": "2.6.3",
+  "field": "latexcode",
+  "page": 104,
+  "kind": "missing",
+  "note": "last row [0 0 1 2] garbled and 'in U and c' missing",
+  "old": "and [ 0011 .\\\\",
+  "new": "and [0 0 1 2] in \\(U\\) and \\(\\boldsymbol{c}\\) :\\\\"
+ },
+ {
+  "key": "2.6.8",
+  "field": "latexcode",
+  "page": 105,
+  "kind": "math",
+  "note": "matrix A = L: row breaks lost",
+  "old": "1 & 0 & 0 a & 1 & 0 b & c & 1",
+  "new": "1 & 0 & 0 \\\\ a & 1 & 0 \\\\ b & c & 1"
+ },
+ {
+  "key": "2.6.9",
+  "field": "latexcode",
+  "page": 105,
+  "kind": "math",
+  "note": "lower triangular factor: row break lost between rows 2 and 3",
+  "old": "\\ell & 1 & m & n & 1",
+  "new": "\\ell & 1 & \\\\ m & n & 1"
+ },
+ {
+  "key": "2.6.13",
+  "field": "latexcode",
+  "page": 106,
+  "kind": "math",
+  "note": "4 by 4 matrix A: row breaks lost",
+  "old": "a & a & a & a a & b & b & b a & b & c & c a & b & c & d",
+  "new": "a & a & a & a \\\\ a & b & b & b \\\\ a & b & c & c \\\\ a & b & c & d"
+ },
+ {
+  "key": "2.6.14",
+  "field": "latexcode",
+  "page": 106,
+  "kind": "math",
+  "note": "4 by 4 matrix A: row breaks lost",
+  "old": "a & r & r & r a & b & s & s a & b & c & t a & b & c & d",
+  "new": "a & r & r & r \\\\ a & b & s & s \\\\ a & b & c & t \\\\ a & b & c & d"
+ },
+ {
+  "key": "2.6.19",
+  "field": "latexcode",
+  "page": 107,
+  "kind": "math",
+  "note": "second matrix A: row break lost between rows 1 and 2",
+  "old": "a & a & 0 a & a+b & b",
+  "new": "a & a & 0 \\\\ a & a+b & b"
+ },
+ {
+  "key": "2.6.21",
+  "field": "latexcode",
+  "page": 107,
+  "kind": "math",
+  "note": "matrix A: row break lost between rows 1 and 2",
+  "old": "x & x & x & x x & x & x & 0",
+  "new": "x & x & x & x \\\\ x & x & x & 0"
+ },
+ {
+  "key": "2.6.21",
+  "field": "latexcode",
+  "page": 107,
+  "kind": "math",
+  "note": "matrix B: row breaks lost in rows 1-3",
+  "old": "x & x & x & 0 x & x & 0 & x x & 0 & x & x",
+  "new": "x & x & x & 0 \\\\ x & x & 0 & x \\\\ x & 0 & x & x"
+ },
+ {
+  "key": "2.7.1",
+  "field": "latexcode",
+  "page": 117,
+  "kind": "math",
+  "note": "second matrix lost its row break; book has rows [1 c] and [c 0]",
+  "old": "1 & c c & 0",
+  "new": "1 & c \\\\\nc & 0"
+ },
+ {
+  "key": "2.7.5",
+  "field": "latexcode",
+  "page": 118,
+  "kind": "missing",
+  "note": "the blank after = is missing in (a); stray period moved inside the display",
+  "old": "\\right]=\n\\]\n.",
+  "new": "\\right]=\\_\\_\\_\\_ .\n\\]"
+ },
+ {
+  "key": "2.7.20",
+  "field": "latexcode",
+  "page": 119,
+  "kind": "math",
+  "note": "second matrix lost its row break; book has rows [1 b] and [b c]",
+  "old": "1 & b b & c",
+  "new": "1 & b \\\\\nb & c"
+ },
+ {
+  "key": "2.7.21",
+  "field": "latexcode",
+  "page": 119,
+  "kind": "math",
+  "note": "second matrix lost its row breaks; book has rows [1 b c], [b d e], [c e f]",
+  "old": "1 & b & c b & d & e c & e & f",
+  "new": "1 & b & c \\\\\nb & d & e \\\\\nc & e & f"
+ },
+ {
+  "key": "2.7.29",
+  "field": "latexcode",
+  "page": 120,
+  "kind": "math",
+  "note": "column vector y lost its row breaks",
+  "old": "y_{B C} y_{C S} y_{B S}",
+  "new": "y_{B C} \\\\\ny_{C S} \\\\\ny_{B S}"
+ },
+ {
+  "key": "2.7.29",
+  "field": "latexcode",
+  "page": 120,
+  "kind": "math",
+  "note": "column vector x lost its row breaks",
+  "old": "x_{B} x_{C} x_{S}",
+  "new": "x_{B} \\\\\nx_{C} \\\\\nx_{S}"
+ },
+ {
+  "key": "3.1.15",
+  "field": "latexcode",
+  "page": 133,
+  "kind": "math",
+  "note": "cx is a math expression, typed as plain text",
+  "old": "and cx are in",
+  "new": "and \\(c \\boldsymbol{x}\\) are in"
+ },
+ {
+  "key": "3.1.22",
+  "field": "latexcode",
+  "page": 133,
+  "kind": "math",
+  "note": "first system: column vectors x and b lost their row breaks",
+  "old": "x_{1} x_{2} x_{3}\n\\end{array}\\right]=\\left[\\begin{array}{l}\nb_{1} b_{2} b_{3}\n\\end{array}\\right] \\quad",
+  "new": "x_{1} \\\\\nx_{2} \\\\\nx_{3}\n\\end{array}\\right]=\\left[\\begin{array}{l}\nb_{1} \\\\\nb_{2} \\\\\nb_{3}\n\\end{array}\\right] \\quad"
+ },
+ {
+  "key": "3.1.22",
+  "field": "latexcode",
+  "page": 133,
+  "kind": "math",
+  "note": "second system: column vectors x and b lost their row breaks",
+  "old": "x_{1} x_{2} x_{3}\n\\end{array}\\right]=\\left[\\begin{array}{l}\nb_{1} b_{2} b_{3}\n\\end{array}\\right]}",
+  "new": "x_{1} \\\\\nx_{2} \\\\\nx_{3}\n\\end{array}\\right]=\\left[\\begin{array}{l}\nb_{1} \\\\\nb_{2} \\\\\nb_{3}\n\\end{array}\\right]}"
+ },
+ {
+  "key": "3.1.22",
+  "field": "latexcode",
+  "page": 133,
+  "kind": "math",
+  "note": "third system: column vectors x and b lost their row breaks",
+  "old": "x_{1} x_{2} x_{3}\n\\end{array}\\right]=\\left[\\begin{array}{l}\nb_{1} b_{2} b_{3}\n\\end{array}\\right] .",
+  "new": "x_{1} \\\\\nx_{2} \\\\\nx_{3}\n\\end{array}\\right]=\\left[\\begin{array}{l}\nb_{1} \\\\\nb_{2} \\\\\nb_{3}\n\\end{array}\\right] ."
+ },
+ {
+  "key": "3.2.13",
+  "field": "latexcode",
+  "page": 143,
+  "kind": "layout",
+  "note": "vector (x, y, z) was set as one row; it is a 3-entry column",
+  "old": "x y z",
+  "new": "x \\\\\ny \\\\\nz"
+ },
+ {
+  "key": "3.2.13",
+  "field": "latexcode",
+  "page": 143,
+  "kind": "missing",
+  "note": "first vector has a blank top entry (to be filled in), then 0, 0",
+  "old": "=\\left[\\begin{array}{l}\n0 \\\\\n0\n\\end{array}",
+  "new": "=\\left[\\begin{array}{l}\n{} \\\\\n0 \\\\\n0\n\\end{array}"
+ },
+ {
+  "key": "3.2.13",
+  "field": "latexcode",
+  "page": 143,
+  "kind": "missing",
+  "note": "y-vector has a blank top entry, then 1, 0",
+  "old": "+y\\left[\\begin{array}{l}\n1 \\\\\n0",
+  "new": "+y\\left[\\begin{array}{l}\n{} \\\\\n1 \\\\\n0"
+ },
+ {
+  "key": "3.2.13",
+  "field": "latexcode",
+  "page": 143,
+  "kind": "math",
+  "note": "z-vector is (blank, 0, 1); the extraction had an extra 0 on top",
+  "old": "+z\\left[\\begin{array}{l}\n0 \\\\\n0 \\\\\n1",
+  "new": "+z\\left[\\begin{array}{l}\n{} \\\\\n0 \\\\\n1"
+ },
+ {
+  "key": "3.2.39",
+  "field": "latexcode",
+  "page": 146,
+  "kind": "layout",
+  "note": "M is 2 by 2 [a b; c blank]; row break missing",
+  "old": "a & b c &",
+  "new": "a & b \\\\\nc &"
+ },
+ {
+  "key": "3.2.46",
+  "field": "latexcode",
+  "page": 146,
+  "kind": "layout",
+  "note": "C is 2 by 2 [1 b; c bc]; row break missing",
+  "old": "1 & b c & b c",
+  "new": "1 & b \\\\\nc & b c"
+ },
+ {
+  "key": "3.3.1",
+  "field": "latexcode",
+  "page": 158,
+  "kind": "layout",
+  "note": "b = (b1, b2, b3) is a column; entries were set in one row",
+  "old": "b_{1} b_{2} b_{3}",
+  "new": "b_{1} \\\\\nb_{2} \\\\\nb_{3}"
+ },
+ {
+  "key": "3.3.2",
+  "field": "latexcode",
+  "page": 158,
+  "kind": "layout",
+  "note": "b = (b1, b2, b3) is a column; entries were set in one row",
+  "old": "b_{1} b_{2} b_{3}",
+  "new": "b_{1} \\\\\nb_{2} \\\\\nb_{3}"
+ },
+ {
+  "key": "3.3.4",
+  "field": "latexcode",
+  "page": 159,
+  "kind": "layout",
+  "note": "unknown vector (x, y, z, t) is a column; entries were set in one row",
+  "old": "x y z t",
+  "new": "x \\\\\ny \\\\\nz \\\\\nt"
+ },
+ {
+  "key": "3.3.4",
+  "field": "latexcode",
+  "page": 159,
+  "kind": "punct",
+  "note": "book ends the display with a period",
+  "old": "1\n\\end{array}\\right]\n\\]",
+  "new": "1\n\\end{array}\\right] .\n\\]"
+ },
+ {
+  "key": "3.3.6",
+  "field": "latexcode",
+  "page": 159,
+  "kind": "layout",
+  "note": "right side (b1..b4) of the first system is a column",
+  "old": "b_{1} b_{2} b_{3} b_{4}\n\\end{array}\\right] \\quad",
+  "new": "b_{1} \\\\\nb_{2} \\\\\nb_{3} \\\\\nb_{4}\n\\end{array}\\right] \\quad"
+ },
+ {
+  "key": "3.3.6",
+  "field": "latexcode",
+  "page": 159,
+  "kind": "layout",
+  "note": "right side (b1..b4) of the second system is a column",
+  "old": "b_{1} b_{2} b_{3} b_{4}\n\\end{array}\\right] .",
+  "new": "b_{1} \\\\\nb_{2} \\\\\nb_{3} \\\\\nb_{4}\n\\end{array}\\right] ."
+ },
+ {
+  "key": "3.3.6",
+  "field": "latexcode",
+  "page": 159,
+  "kind": "layout",
+  "note": "unknown (x1, x2) is a column",
+  "old": "x_{1} x_{2}\n",
+  "new": "x_{1} \\\\\nx_{2}\n"
+ },
+ {
+  "key": "3.3.6",
+  "field": "latexcode",
+  "page": 159,
+  "kind": "layout",
+  "note": "unknown (x1, x2, x3) is a column",
+  "old": "x_{1} x_{2} x_{3}",
+  "new": "x_{1} \\\\\nx_{2} \\\\\nx_{3}"
+ },
+ {
+  "key": "3.3.23",
+  "field": "latexcode",
+  "page": 161,
+  "kind": "layout",
+  "note": "B is 2 by 3 [3 1 3; q 2 q]; row break missing",
+  "old": "3 & 1 & 3 q & 2 & q",
+  "new": "3 & 1 & 3 \\\\\nq & 2 & q"
+ },
+ {
+  "key": "3.3.30",
+  "field": "latexcode",
+  "page": 162,
+  "kind": "layout",
+  "note": "unknown (x1, x2, x3, x4) is a column; entries were set in one row",
+  "old": "x_{1} x_{2} x_{3} x_{4}",
+  "new": "x_{1} \\\\\nx_{2} \\\\\nx_{3} \\\\\nx_{4}"
+ },
+ {
+  "key": "3.4.17",
+  "field": "latexcode",
+  "page": 177,
+  "kind": "math",
+  "note": "U is the 2 by 5 matrix [1 0 1 0 1; 0 1 0 1 0]; OCR garbled it into a 3-row matrix with a stray dot",
+  "old": "\\(U=\\left[\\begin{array}{llll}\\mathbf{1} & 0 & \\mathbf{1} & \\mathbf{0} \\\\ \\mathbf{0} & \\mathbf{1} & \\mathbf{0} & \\mathbf{1} \\\\ \\mathbf{0} & \\mathbf{0} & \\text {. }\\end{array}\\right]\\)",
+  "new": "\\(U=\\left[\\begin{array}{lllll}1 & 0 & 1 & 0 & 1 \\\\ 0 & 1 & 0 & 1 & 0\\end{array}\\right]\\)"
+ },
+ {
+  "key": "3.4.25",
+  "field": "latexcode",
+  "page": 178,
+  "kind": "math",
+  "note": "B is 2 by 2 [c d; d c]; the row separator was lost",
+  "old": "c & d d & c",
+  "new": "c & d \\\\ d & c"
+ },
+ {
+  "key": "3.5.5",
+  "field": "latexcode",
+  "page": 190,
+  "kind": "math",
+  "note": "the spanning vectors are (1,1,1) and (2,1,0); the print overlaps the glyphs and OCR dropped digits",
+  "old": "( 11, 1) and ( 21, 0)",
+  "new": "\\((1,1,1)\\) and \\((2,1,0)\\)"
+ },
+ {
+  "key": "3.5.21",
+  "field": "latexcode",
+  "page": 192,
+  "kind": "math",
+  "note": "u = z = (1,0,0) (overprinted '1,0' read as '10')",
+  "old": "=(10,0)\\)",
+  "new": "=(1,0,0)\\)"
+ },
+ {
+  "key": "3.5.21",
+  "field": "latexcode",
+  "page": 192,
+  "kind": "math",
+  "note": "v = w = (0,0,1) (overprinted '0,0' read as one 0)",
+  "old": "=(0,1)\\)",
+  "new": "=(0,0,1)\\)"
+ },
+ {
+  "key": "3.5.22",
+  "field": "latexcode",
+  "page": 192,
+  "kind": "math",
+  "note": "column space basis (1,2,4), (2,2,1); row space basis (1,0), (1,1); OCR mangled the overprinted vectors",
+  "old": "( 12,4 ), ( ,2,1) and whose row space has basis ( 10), ( 1,).",
+  "new": "\\((1,2,4)\\), \\((2,2,1)\\) and whose row space has basis \\((1,0)\\), \\((1,1)\\)."
+ },
+ {
+  "key": "3.5.27",
+  "field": "latexcode",
+  "page": 193,
+  "kind": "math",
+  "note": "chess matrix C has 5 printed rows (r n b q k b n r / p...p / four zero rows / p...p / r n b q k b n r); OCR merged rows and lost separators",
+  "old": "r & n & b & q & k & b & n & r p & p & p & p & p & p & p & p \\\\\n& \\text { four zero rows } & & p & p & p & p & p & p & p & p r & n & b & q & k & b & n & r",
+  "new": "r & n & b & q & k & b & n & r \\\\\np & p & p & p & p & p & p & p \\\\\n& & & \\text { four zero rows } & & & & \\\\\np & p & p & p & p & p & p & p \\\\\nr & n & b & q & k & b & n & r"
+ },
+ {
+  "key": "3.5.30",
+  "field": "latexcode",
+  "page": 193,
+  "kind": "layout",
+  "note": "the paragraph '(a) finds the nullspace ...' follows the list in the book; it was made a third list item labelled (a)",
+  "old": "for some matrix \\(X\\) ?\n    \\item[(a)] finds the",
+  "new": "for some matrix \\(X\\) ?\n  \\end{itemize}\n\n(a) finds the"
+ },
+ {
+  "key": "3.5.30",
+  "field": "latexcode",
+  "page": 193,
+  "kind": "layout",
+  "note": "remove the now-duplicate end of the list",
+  "old": "add to \\((n-r)+r=9\\) ?\n  \\end{itemize}",
+  "new": "add to \\((n-r)+r=9\\) ?"
+ },
+ {
+  "key": "4.1.17",
+  "field": "latexcode",
+  "page": 204,
+  "kind": "punct",
+  "note": "missing space before 'and'",
+  "old": "(1, 1, 1)and (1, 1, -1)",
+  "new": "(1, 1, 1) and (1, 1, -1)"
+ },
+ {
+  "key": "4.1.31",
+  "field": "latexcode",
+  "page": 205,
+  "kind": "text",
+  "note": "the word 'command' was put inside math as an operator name",
+  "old": "Then the \\(\\operatorname{command} B=\\operatorname{null}",
+  "new": "Then the command \\(B=\\operatorname{null}"
+ },
+ {
+  "key": "4.2.33",
+  "field": "latexcode",
+  "page": 218,
+  "kind": "layout",
+  "note": "spurious underline (print artifact) under the denominator 1000",
+  "old": "\\frac{1}{\\underline{1000}}",
+  "new": "\\frac{1}{1000}"
+ },
+ {
+  "key": "4.3.13",
+  "field": "latexcode",
+  "page": 230,
+  "kind": "math",
+  "note": "minus sign 'b - (noise ...)' was left outside math as a hyphen",
+  "old": "\\(A \\boldsymbol{x}=\\boldsymbol{b}\\)-(noise",
+  "new": "\\(A \\boldsymbol{x}=\\boldsymbol{b}-\\) (noise"
+ },
+ {
+  "key": "4.3.16",
+  "field": "latexcode",
+  "page": 231,
+  "kind": "missing",
+  "note": "the blank before x-hat_9 in the display was read as \\ldots",
+  "old": "b_{10}+\\ldots \\widehat{x}_{9}",
+  "new": "b_{10}+\\text{\\_\\_\\_\\_} \\widehat{x}_{9}"
+ },
+ {
+  "key": "4.4.12",
+  "field": "latexcode",
+  "page": 243,
+  "kind": "math",
+  "note": "column vector x1, x2, x3 lost its row breaks",
+  "old": "x_{1} x_{2} x_{3}",
+  "new": "x_{1} \\\\ x_{2} \\\\ x_{3}"
+ },
+ {
+  "key": "4.4.25",
+  "field": "latexcode",
+  "page": 245,
+  "kind": "math",
+  "note": "2 by 2 matrix [a b; c d] lost its row break",
+  "old": "a & b c & d",
+  "new": "a & b \\\\ c & d"
+ },
+ {
+  "key": "4.4.25",
+  "field": "latexcode",
+  "page": 245,
+  "kind": "math",
+  "note": "Q matrix lost its row break, and each factor is divided by sqrt(a^2+c^2) in the book (one denominator was missing)",
+  "old": "=\\frac{\\left[\\begin{array}{lr}\na & -c c & a\n\\end{array}\\right]\\left[",
+  "new": "=\\frac{\\left[\\begin{array}{lr}\na & -c \\\\ c & a\n\\end{array}\\right]}{\\sqrt{a^{2}+c^{2}}} \\frac{\\left["
+ },
+ {
+  "key": "4.4.31",
+  "field": "latexcode",
+  "page": 246,
+  "kind": "punct",
+  "note": "period after the matrix",
+  "old": "\\end{array}\\right]\n\\]\nProject",
+  "new": "\\end{array}\\right] .\n\\]\nProject"
+ },
+ {
+  "key": "5.1.15",
+  "field": "latexcode",
+  "page": 256,
+  "kind": "math",
+  "note": "3 by 3 matrix [1 t t^2; t 1 t; t^2 t 1] lost its row breaks",
+  "old": "t^{2} t & 1 & t t^{2} & t & 1",
+  "new": "t^{2} \\\\ t & 1 & t \\\\ t^{2} & t & 1"
+ },
+ {
+  "key": "5.1.20",
+  "field": "latexcode",
+  "page": 256,
+  "kind": "math",
+  "note": "matrix [a b; c d] lost its row break",
+  "old": "a & b c & d",
+  "new": "a & b \\\\ c & d"
+ },
+ {
+  "key": "5.1.20",
+  "field": "latexcode",
+  "page": 256,
+  "kind": "math",
+  "note": "second matrix lost its row break",
+  "old": "b-L d c-l a",
+  "new": "b-L d \\\\ c-l a"
+ },
+ {
+  "key": "5.1.21",
+  "field": "latexcode",
+  "page": 256,
+  "kind": "math",
+  "note": "determinant |c d; a b| lost its row break",
+  "old": "c & d a & b",
+  "new": "c & d \\\\ a & b"
+ },
+ {
+  "key": "5.1.21",
+  "field": "latexcode",
+  "page": 256,
+  "kind": "math",
+  "note": "determinant |a b; c d| lost its row break",
+  "old": "a & b c & d",
+  "new": "a & b \\\\ c & d"
+ },
+ {
+  "key": "5.1.27",
+  "field": "latexcode",
+  "page": 257,
+  "kind": "math",
+  "note": "A = [0 a 0; 0 0 b; c 0 0] lost a row break",
+  "old": "0 & 0 & b c & 0 & 0",
+  "new": "0 & 0 & b \\\\ c & 0 & 0"
+ },
+ {
+  "key": "5.1.27",
+  "field": "latexcode",
+  "page": 257,
+  "kind": "math",
+  "note": "B lost the row break before its last row (d 0 0 0)",
+  "old": "0 & 0 & 0 & c d & 0 & 0 & 0",
+  "new": "0 & 0 & 0 & c \\\\ d & 0 & 0 & 0"
+ },
+ {
+  "key": "5.1.27",
+  "field": "latexcode",
+  "page": 257,
+  "kind": "math",
+  "note": "C = [a a a; a b b; a b c] lost its row breaks",
+  "old": "a & a & a a & b & b a & b & c",
+  "new": "a & a & a \\\\ a & b & b \\\\ a & b & c"
+ },
+ {
+  "key": "5.1.31",
+  "field": "latexcode",
+  "page": 257,
+  "kind": "punct",
+  "note": "ellipsis is three dots",
+  "old": "hilb(2), . . , hilb(10)",
+  "new": "hilb(2), \\(\\ldots\\), hilb(10)"
+ },
+ {
+  "key": "5.2.11",
+  "field": "latexcode",
+  "page": 267,
+  "kind": "math",
+  "note": "A = [a b; c d] lost its row break",
+  "old": "a & b c & d",
+  "new": "a & b \\\\ c & d"
+ },
+ {
+  "key": "5.2.18",
+  "field": "latexcode",
+  "page": 269,
+  "kind": "math",
+  "note": "third determinant: the trailing 0 belongs to row 1 (first row is [1 0 ... 0]), as in the other two determinants",
+  "old": "\\left|\\begin{array}{rrr}\n1 & 0 & \\\\\n-1 & & 0 \\\\\n0 & A_{n-1} &\n\\end{array}\\right|",
+  "new": "\\left|\\begin{array}{rrrr}\n1 & 0 & & 0 \\\\\n-1 & & & \\\\\n0 & & A_{n-1} &\n\\end{array}\\right|"
+ },
+ {
+  "key": "5.2.34",
+  "field": "latexcode",
+  "page": 272,
+  "kind": "math",
+  "note": "first two rows of x's ran together (5 by 5 matrix)",
+  "old": "& x & x x & x &",
+  "new": "& x & x \\\\\n x & x &"
+ },
+ {
+  "key": "5.3.1",
+  "field": "latexcode",
+  "page": 283,
+  "kind": "math",
+  "note": "(a): the two equations were merged into one row; restore the row break",
+  "old": "2 x_{1}+5 x_{2} & =1 x_{1}+4 x_{2} & =2",
+  "new": "2 x_{1}+5 x_{2} & =1 \\\\ x_{1}+4 x_{2} & =2"
+ },
+ {
+  "key": "5.3.1",
+  "field": "latexcode",
+  "page": 283,
+  "kind": "math",
+  "note": "(b): the three equations were merged into one row; restore the row breaks",
+  "old": "& =1 x_{1}+2 x_{2}+x_{3} & =0 x_{2}+2 x_{3} & =0 .",
+  "new": "& =1 \\\\ x_{1}+2 x_{2}+x_{3} & =0 \\\\ x_{2}+2 x_{3} & =0 ."
+ },
+ {
+  "key": "5.3.3",
+  "field": "latexcode",
+  "page": 283,
+  "kind": "text",
+  "note": "OCR dropped the (dotless in print) i of 'lines'",
+  "old": "(parallel lnes)",
+  "new": "(parallel lines)"
+ },
+ {
+  "key": "5.3.14",
+  "field": "latexcode",
+  "page": 284,
+  "kind": "math",
+  "note": "L: matrix rows merged into one row; restore row breaks",
+  "old": "a & 0 & 0 b & c & 0 d & e & f",
+  "new": "a & 0 & 0 \\\\ b & c & 0 \\\\ d & e & f"
+ },
+ {
+  "key": "5.3.14",
+  "field": "latexcode",
+  "page": 284,
+  "kind": "math",
+  "note": "S: matrix rows merged into one row; restore row breaks",
+  "old": "a & b & d b & c & e d & e & f",
+  "new": "a & b & d \\\\ b & c & e \\\\ d & e & f"
+ },
+ {
+  "key": "6.1.17",
+  "field": "latexcode",
+  "page": 300,
+  "kind": "math",
+  "note": "A = [a b; c d]: rows merged into one row; restore row break",
+  "old": "a & b c & d",
+  "new": "a & b \\\\ c & d"
+ },
+ {
+  "key": "6.1.30",
+  "field": "latexcode",
+  "page": 302,
+  "kind": "math",
+  "note": "A = [a b; c d]: rows merged into one row; restore row break",
+  "old": "a & b c & d",
+  "new": "a & b \\\\ c & d"
+ },
+ {
+  "key": "6.2.1",
+  "field": "latexcode",
+  "page": 314,
+  "kind": "missing",
+  "note": "blank factors ( )( )( ) dropped in part (b)",
+  "old": "\\(A^{3}=\\) and \\(A^{-1}=\\)\\\\\n.",
+  "new": "\\(A^{3}=(\\quad)(\\quad)(\\quad)\\) and \\(A^{-1}=(\\quad)(\\quad)(\\quad)\\)."
+ },
+ {
+  "key": "6.2.3",
+  "field": "latexcode",
+  "page": 314,
+  "kind": "missing",
+  "note": "book has three blank factors ( )( )( )^{-1}; only one kept",
+  "old": "\\(A+2 I=\\)\\\\\n\\((\\quad)^{-1}\\).",
+  "new": "\\(A+2 I=(\\quad)(\\quad)(\\quad)^{-1}\\)."
+ },
+ {
+  "key": "6.2.5",
+  "field": "latexcode",
+  "page": 314,
+  "kind": "text",
+  "note": "line-break hyphen kept",
+  "old": "eigen-vector",
+  "new": "eigenvector"
+ },
+ {
+  "key": "6.2.9",
+  "field": "latexcode",
+  "page": 315,
+  "kind": "math",
+  "note": "middle matrix is a blank bracket with a single A, not the column [A; A]",
+  "old": "=\\left[\\begin{array}{l}\nA \\\\\nA\n\\end{array}\\right]",
+  "new": "=\\left[\\begin{array}{c}\n\\quad A \\quad\n\\end{array}\\right]"
+ },
+ {
+  "key": "6.2.21",
+  "field": "latexcode",
+  "page": 316,
+  "kind": "math",
+  "note": "rows of X ran together",
+  "old": "a & b c & d",
+  "new": "a & b \\\\\nc & d"
+ },
+ {
+  "key": "6.2.21",
+  "field": "latexcode",
+  "page": 316,
+  "kind": "math",
+  "note": "rows of Y ran together",
+  "old": "q & r s & t",
+  "new": "q & r \\\\\ns & t"
+ },
+ {
+  "key": "6.2.23",
+  "field": "latexcode",
+  "page": 316,
+  "kind": "math",
+  "note": "lower-right block is 2A, not 2",
+  "old": "\\mathbf{0} & \\mathbf{2}\\end{array}",
+  "new": "\\mathbf{0} & \\mathbf{2} \\boldsymbol{A}\\end{array}"
+ },
+ {
+  "key": "6.3.9",
+  "field": "latexcode",
+  "page": 333,
+  "kind": "math",
+  "note": "rows of the eigenvector (1, i) ran together (twice)",
+  "old": "\\left[\\begin{array}{l}\n1 i\n\\end{array}\\right]=i\\left[\\begin{array}{l}\n1 i\n\\end{array}\\right]",
+  "new": "\\left[\\begin{array}{l}\n1 \\\\\ni\n\\end{array}\\right]=i\\left[\\begin{array}{l}\n1 \\\\\ni\n\\end{array}\\right]"
+ },
+ {
+  "key": "6.3.10",
+  "field": "latexcode",
+  "page": 333,
+  "kind": "math",
+  "note": "display garbled: vector rows ran together, blank 2x2 matrix broken, stray \\end{array}\\right.",
+  "old": "y^{\\prime} y^{\\prime \\prime}\n\\end{array}\\right]=\\left[\\begin{array}{l}\n\\quad]\\left[\\begin{array}{c}\ny y^{\\prime}\n\\end{array}\\right]=A \\boldsymbol{u} .\n\\end{array}\\right.",
+  "new": "y^{\\prime} \\\\\ny^{\\prime \\prime}\n\\end{array}\\right]=\\left[\\begin{array}{cc}\n\\quad & \\quad \\\\\n\\quad & \\quad\n\\end{array}\\right]\\left[\\begin{array}{c}\ny \\\\\ny^{\\prime}\n\\end{array}\\right]=A \\boldsymbol{u} ."
+ },
+ {
+  "key": "6.3.11",
+  "field": "latexcode",
+  "page": 333,
+  "kind": "math",
+  "note": "rows of (y, y') ran together",
+  "old": "\\frac{d}{d t}\\left[\\begin{array}{c}\ny y^{\\prime}",
+  "new": "\\frac{d}{d t}\\left[\\begin{array}{c}\ny \\\\\ny^{\\prime}"
+ },
+ {
+  "key": "6.3.11",
+  "field": "latexcode",
+  "page": 333,
+  "kind": "math",
+  "note": "rows of (y, y') ran together",
+  "old": "\\right]\\left[\\begin{array}{c}\ny y^{\\prime}",
+  "new": "\\right]\\left[\\begin{array}{c}\ny \\\\\ny^{\\prime}"
+ },
+ {
+  "key": "6.3.11",
+  "field": "latexcode",
+  "page": 333,
+  "kind": "math",
+  "note": "rows of (y, y') ran together",
+  "old": "solution }\\left[\\begin{array}{l}\ny y^{\\prime}",
+  "new": "solution }\\left[\\begin{array}{l}\ny \\\\\ny^{\\prime}"
+ },
+ {
+  "key": "6.3.11",
+  "field": "latexcode",
+  "page": 333,
+  "kind": "math",
+  "note": "rows of (y(0), y'(0)) ran together",
+  "old": "y(0) y^{\\prime}(0)",
+  "new": "y(0) \\\\\ny^{\\prime}(0)"
+ },
+ {
+  "key": "6.3.12",
+  "field": "latexcode",
+  "page": 333,
+  "kind": "math",
+  "note": "rows of (y, y') ran together",
+  "old": "\\frac{d}{d t}\\left[\\begin{array}{c}\ny y^{\\prime}",
+  "new": "\\frac{d}{d t}\\left[\\begin{array}{c}\ny \\\\\ny^{\\prime}"
+ },
+ {
+  "key": "6.3.12",
+  "field": "latexcode",
+  "page": 333,
+  "kind": "math",
+  "note": "rows of (y, y') ran together",
+  "old": "\\right]\\left[\\begin{array}{c}\ny y^{\\prime}",
+  "new": "\\right]\\left[\\begin{array}{c}\ny \\\\\ny^{\\prime}"
+ },
+ {
+  "key": "6.3.13",
+  "field": "latexcode",
+  "page": 334,
+  "kind": "math",
+  "note": "rows of u = (y, y') ran together",
+  "old": "\\boldsymbol{u}=\\left[\\begin{array}{c}\ny y^{\\prime}",
+  "new": "\\boldsymbol{u}=\\left[\\begin{array}{c}\ny \\\\\ny^{\\prime}"
+ },
+ {
+  "key": "6.3.13",
+  "field": "latexcode",
+  "page": 334,
+  "kind": "math",
+  "note": "rows of (y', y'') ran together",
+  "old": "y^{\\prime} y^{\\prime \\prime}",
+  "new": "y^{\\prime} \\\\\ny^{\\prime \\prime}"
+ },
+ {
+  "key": "6.3.13",
+  "field": "latexcode",
+  "page": 334,
+  "kind": "math",
+  "note": "rows of (y, y') ran together",
+  "old": "\\right]\\left[\\begin{array}{c}\ny y^{\\prime}",
+  "new": "\\right]\\left[\\begin{array}{c}\ny \\\\\ny^{\\prime}"
+ },
+ {
+  "key": "6.3.14",
+  "field": "latexcode",
+  "page": 334,
+  "kind": "math",
+  "note": "rows 2 and 3 of the skew-symmetric matrix ran together",
+  "old": "-c & 0 & a b & -a & 0",
+  "new": "-c & 0 & a \\\\\nb & -a & 0"
+ },
+ {
+  "key": "6.3.27",
+  "field": "latexcode",
+  "page": 335,
+  "kind": "math",
+  "note": "the two original equations ran together into one line",
+  "old": "\\begin{aligned}\nd x / d t=0 x-4 y d y / d t=-2 x+2 y\n\\end{aligned}",
+  "new": "\\begin{aligned}\n& d x / d t=0 x-4 y \\\\\n& d y / d t=-2 x+2 y\n\\end{aligned}"
+ },
+ {
+  "key": "6.4.12",
+  "field": "latexcode",
+  "page": 346,
+  "kind": "math",
+  "note": "rotation matrix written as plain text '[0-1; 1 0]'; book has [0 -1; 1 0] in math",
+  "old": "[0-1; 1 0]",
+  "new": "\\([0 \\;\\; -1 ; \\;\\; 1 \\;\\; 0]\\)"
+ },
+ {
+  "key": "6.4.21",
+  "field": "latexcode",
+  "page": 347,
+  "kind": "math",
+  "note": "rows 1 and 2 of S ran together (lost row break)",
+  "old": "0 & d & 0 d & 0 & 0 \\\\",
+  "new": "0 & d & 0 \\\\\nd & 0 & 0 \\\\"
+ },
+ {
+  "key": "6.4.31",
+  "field": "latexcode",
+  "page": 348,
+  "kind": "math",
+  "note": "variable n not in math",
+  "old": "The test for n orthonormal",
+  "new": "The test for \\(n\\) orthonormal"
+ },
+ {
+  "key": "6.4.37",
+  "field": "latexcode",
+  "page": 349,
+  "kind": "math",
+  "note": "rows of S = [a b; b c] ran together (lost row break)",
+  "old": "a & b b & c",
+  "new": "a & b \\\\\nb & c"
+ },
+ {
+  "key": "6.5.3",
+  "field": "latexcode",
+  "page": 358,
+  "kind": "math",
+  "note": "rows of first S = [1 b; b 9] ran together",
+  "old": "1 & b b & 9",
+  "new": "1 & b \\\\\nb & 9"
+ },
+ {
+  "key": "6.5.3",
+  "field": "latexcode",
+  "page": 358,
+  "kind": "math",
+  "note": "rows of third S = [c b; b c] ran together",
+  "old": "c & b b & c",
+  "new": "c & b \\\\\nb & c"
+ },
+ {
+  "key": "6.5.4",
+  "field": "latexcode",
+  "page": 358,
+  "kind": "math",
+  "note": "column vector [x; y] ran into one row",
+  "old": "{l}\nx y\n",
+  "new": "{l}\nx \\\\\ny\n"
+ },
+ {
+  "key": "6.5.9",
+  "field": "latexcode",
+  "page": 359,
+  "kind": "math",
+  "note": "column vector [x1; x2; x3] ran into one row",
+  "old": "x_{1} x_{2} x_{3}",
+  "new": "x_{1} \\\\\nx_{2} \\\\\nx_{3}"
+ },
+ {
+  "key": "6.5.14",
+  "field": "latexcode",
+  "page": 359,
+  "kind": "punct",
+  "note": "CJK full stop instead of period",
+  "old": "\\_\\_\\_\\_。",
+  "new": "\\_\\_\\_\\_."
+ },
+ {
+  "key": "6.5.16",
+  "field": "latexcode",
+  "page": 359,
+  "kind": "math",
+  "note": "column vector [x1; x2; x3] ran into one row",
+  "old": "x_{1} x_{2} x_{3}",
+  "new": "x_{1} \\\\\nx_{2} \\\\\nx_{3}"
+ },
+ {
+  "key": "6.5.16",
+  "field": "latexcode",
+  "page": 359,
+  "kind": "missing",
+  "note": "book shows three blank slots ( , , ); extraction has only two",
+  "old": "(\\quad, \\quad)",
+  "new": "(\\quad, \\quad, \\quad)"
+ },
+ {
+  "key": "6.5.27",
+  "field": "latexcode",
+  "page": 361,
+  "kind": "math",
+  "note": "rows of [a b; b c] ran together",
+  "old": "a & b b & c",
+  "new": "a & b \\\\\nb & c"
+ },
+ {
+  "key": "6.5.27",
+  "field": "latexcode",
+  "page": 361,
+  "kind": "math",
+  "note": "first column vector [x; y] ran into one row",
+  "old": "{l}\nx y\n\\end{array}\\right]=",
+  "new": "{l}\nx \\\\\ny\n\\end{array}\\right]="
+ },
+ {
+  "key": "6.5.27",
+  "field": "latexcode",
+  "page": 361,
+  "kind": "math",
+  "note": "rows of L = [1 0; b/a 1] ran together",
+  "old": "1 & 0 b / a & 1",
+  "new": "1 & 0 \\\\\nb / a & 1"
+ },
+ {
+  "key": "6.5.27",
+  "field": "latexcode",
+  "page": 361,
+  "kind": "math",
+  "note": "last column vector [x; y] ran into one row",
+  "old": "{l}\nx y\n\\end{array}\\right] .",
+  "new": "{l}\nx \\\\\ny\n\\end{array}\\right] ."
+ },
+ {
+  "key": "6.5.27",
+  "field": "latexcode",
+  "page": 361,
+  "kind": "math",
+  "note": "book has a blank ____ before y^2, not \\ldots",
+  "old": "+\\ldots y^{2}",
+  "new": "+\\) \\_\\_\\_\\_ \\(y^{2}"
+ },
+ {
+  "key": "6.5.31",
+  "field": "latexcode",
+  "page": 361,
+  "kind": "extra",
+  "note": "boxed passage 'The Minimum of a Function F(x, y, z)' (main-text box printed after Problem 31) leaked into the problem; drop it",
+  "old": "\\\\\n\\textbackslash section*\\{The Minimum of a Function \\(\\boldsymbol{F}(\\boldsymbol{x}, \\boldsymbol{y}, \\boldsymbol{z})\\)\\}\\\\\nWhat tests would you expect for a minimum point? First come zero slopes:\\\\\nFirst derivatives are zero \\(\\frac{\\partial F}{\\partial x}=\\frac{\\partial F}{\\partial y}=\\frac{\\partial F}{\\partial z}=0\\) at the minimum point.\\\\\nNext comes the linear algebra version of the usual calculus test \\(d^{2} f / d x^{2}>0\\) :\\\\\nSecond derivative matrix \\(S\\) is positive definite \\(S=\\left[\\begin{array}{lll}F_{x x} & F_{x y} & F_{x z} \\\\ F_{y x} & F_{y y} & F_{y z} \\\\ F_{z x} & F_{z y} & F_{z z}\\end{array}\\right]\\)\\\\\nHere \\(\\boldsymbol{F}_{\\boldsymbol{x} \\boldsymbol{y}}=\\frac{\\partial}{\\partial x}\\left(\\frac{\\partial F}{\\partial y}\\right)=\\frac{\\partial}{\\partial y}\\left(\\frac{\\partial F}{\\partial x}\\right)=\\boldsymbol{F}_{\\boldsymbol{y} \\boldsymbol{x}}\\) is a 'mixed\" second derivative.",
+  "new": ""
+ },
+ {
+  "key": "6.5.37",
+  "field": "latexcode",
+  "page": 362,
+  "kind": "math",
+  "note": "all three rows of S ran together into one row (lost row breaks)",
+  "old": "a & a & a a & a+c & a-c a & a-c & a+c",
+  "new": "a & a & a \\\\\na & a+c & a-c \\\\\na & a-c & a+c"
+ },
+ {
+  "key": "7.1.6",
+  "field": "latexcode",
+  "page": 370,
+  "kind": "math",
+  "note": "vector (1, -2) left as plain text; put in math like (1,2)",
+  "old": "and (1, -2) of",
+  "new": "and \\((1,-2)\\) of"
+ },
+ {
+  "key": "7.3.6",
+  "field": "latexcode",
+  "page": 391,
+  "kind": "layout",
+  "note": "S matrix rows ran together: row break after s_13",
+  "old": "s_{13} s_{12}",
+  "new": "s_{13} \\\\ s_{12}"
+ },
+ {
+  "key": "7.3.6",
+  "field": "latexcode",
+  "page": 391,
+  "kind": "layout",
+  "note": "S matrix rows ran together: row break after s_23",
+  "old": "s_{23} s_{13}",
+  "new": "s_{23} \\\\ s_{13}"
+ },
+ {
+  "key": "7.3.6",
+  "field": "latexcode",
+  "page": 391,
+  "kind": "layout",
+  "note": "DSD matrix rows ran together: row break after c_13",
+  "old": "c_{13} c_{12}",
+  "new": "c_{13} \\\\ c_{12}"
+ },
+ {
+  "key": "7.3.6",
+  "field": "latexcode",
+  "page": 391,
+  "kind": "layout",
+  "note": "DSD matrix rows ran together: row break after c_23",
+  "old": "c_{23} c_{13}",
+  "new": "c_{23} \\\\ c_{13}"
+ },
+ {
+  "key": "7.4.4",
+  "field": "latexcode",
+  "page": 398,
+  "kind": "punct",
+  "note": "missing space after math",
+  "old": "\\(\\Sigma^{+}\\)contains",
+  "new": "\\(\\Sigma^{+}\\) contains"
+ },
+ {
+  "key": "7.4.4",
+  "field": "latexcode",
+  "page": 398,
+  "kind": "punct",
+  "note": "missing space after math",
+  "old": "\\(A A^{+}\\)on",
+  "new": "\\(A A^{+}\\) on"
+ },
+ {
+  "key": "7.4.10",
+  "field": "latexcode",
+  "page": 399,
+  "kind": "math",
+  "note": "row matrix split across math and text",
+  "old": "\\(A=[3\\) 4 0\\(]\\)",
+  "new": "\\(A=\\left[\\begin{array}{lll}3 & 4 & 0\\end{array}\\right]\\)"
+ },
+ {
+  "key": "7.4.11",
+  "field": "latexcode",
+  "page": 399,
+  "kind": "punct",
+  "note": "missing space after math",
+  "old": "\\(A A^{+}\\)and",
+  "new": "\\(A A^{+}\\) and"
+ },
+ {
+  "key": "7.4.11",
+  "field": "latexcode",
+  "page": 399,
+  "kind": "math",
+  "note": "variable A set as plain text",
+  "old": "of A. Compute",
+  "new": "of \\(A\\). Compute"
+ },
+ {
+  "key": "7.4.12",
+  "field": "latexcode",
+  "page": 399,
+  "kind": "punct",
+  "note": "missing space after math",
+  "old": "\\(A^{+}\\)is",
+  "new": "\\(A^{+}\\) is"
+ },
+ {
+  "key": "7.4.13",
+  "field": "latexcode",
+  "page": 399,
+  "kind": "punct",
+  "note": "missing space after math",
+  "old": "\\(A^{+}\\)have",
+  "new": "\\(A^{+}\\) have"
+ },
+ {
+  "key": "7.4.15",
+  "field": "latexcode",
+  "page": 400,
+  "kind": "punct",
+  "note": "missing space after math",
+  "old": "\\(\\boldsymbol{x}^{+}\\)to",
+  "new": "\\(\\boldsymbol{x}^{+}\\) to"
+ },
+ {
+  "key": "7.4.15",
+  "field": "latexcode",
+  "page": 400,
+  "kind": "punct",
+  "note": "missing space after math",
+  "old": "\\(\\boldsymbol{x}^{+}\\)is shorter",
+  "new": "\\(\\boldsymbol{x}^{+}\\) is shorter"
+ },
+ {
+  "key": "7.4.16",
+  "field": "latexcode",
+  "page": 400,
+  "kind": "punct",
+  "note": "missing space after math",
+  "old": "\\boldsymbol{x}^{+}\\)is in",
+  "new": "\\boldsymbol{x}^{+}\\) is in"
+ },
+ {
+  "key": "7.4.17",
+  "field": "latexcode",
+  "page": 400,
+  "kind": "missing",
+  "note": "the four answer blanks after each = are missing",
+  "old": "\\[\nA A^{+} \\boldsymbol{p}=\\quad A A^{+} \\boldsymbol{e}=\\quad A^{+} A \\boldsymbol{x}^{+}=\\quad A^{+} A \\boldsymbol{x}_{n}=\n\\]",
+  "new": "\\(A A^{+} \\boldsymbol{p}=\\) \\_\\_\\_\\_ \\(\\quad A A^{+} \\boldsymbol{e}=\\) \\_\\_\\_\\_ \\(\\quad A^{+} A \\boldsymbol{x}^{+}=\\) \\_\\_\\_\\_ \\(\\quad A^{+} A \\boldsymbol{x}_{n}=\\) \\_\\_\\_\\_"
+ },
+ {
+  "key": "7.4.18",
+  "field": "latexcode",
+  "page": 400,
+  "kind": "punct",
+  "note": "missing space after math",
+  "old": "Find \\(A^{+}\\)and",
+  "new": "Find \\(A^{+}\\) and"
+ },
+ {
+  "key": "7.4.18",
+  "field": "latexcode",
+  "page": 400,
+  "kind": "punct",
+  "note": "missing space after math",
+  "old": "\\(A A^{+}\\)and",
+  "new": "\\(A A^{+}\\) and"
+ },
+ {
+  "key": "7.4.18",
+  "field": "latexcode",
+  "page": 400,
+  "kind": "punct",
+  "note": "missing space after math",
+  "old": "\\(\\boldsymbol{x}^{+}\\)for",
+  "new": "\\(\\boldsymbol{x}^{+}\\) for"
+ },
+ {
+  "key": "7.4.21",
+  "field": "latexcode",
+  "page": 400,
+  "kind": "punct",
+  "note": "missing space after math",
+  "old": "\\(A^{+}\\)show",
+  "new": "\\(A^{+}\\) show"
+ },
+ {
+  "key": "8.1.4",
+  "field": "latexcode",
+  "page": 408,
+  "kind": "missing",
+  "note": "(b): the book has three answer blanks, not ellipses",
+  "old": "\\[\nT\\left(S\\left(\\boldsymbol{v}_{1}+\\boldsymbol{v}_{2}\\right)\\right)=T(\\ldots)=\\ldots+\\ldots .\n\\]",
+  "new": "\\(T\\left(S\\left(\\boldsymbol{v}_{1}+\\boldsymbol{v}_{2}\\right)\\right)=T(\\) \\_\\_\\_\\_ \\()=\\) \\_\\_\\_\\_ \\(+\\) \\_\\_\\_\\_."
+ },
+ {
+  "key": "8.1.11",
+  "field": "latexcode",
+  "page": 408,
+  "kind": "text",
+  "note": "book says 'nullspace' (one word)",
+  "old": "null space of",
+  "new": "nullspace of"
+ },
+ {
+  "key": "8.1.18",
+  "field": "latexcode",
+  "page": 409,
+  "kind": "math",
+  "note": "middle factor is the single entry [M], not a column (M, 0)",
+  "old": "\\left[\\begin{array}{l}\\mathbf{M} \\\\ \\mathbf{0}\\end{array}\\right]",
+  "new": "\\left[\\begin{array}{l}M\\end{array}\\right]"
+ },
+ {
+  "key": "8.1.19",
+  "field": "latexcode",
+  "page": 409,
+  "kind": "punct",
+  "note": "empty parentheses of the form ( ) M ( ) lost their space",
+  "old": "in the form ( ) \\(M()\\).",
+  "new": "in the form \\((\\quad) M(\\quad)\\)."
+ },
+ {
+  "key": "9.1.7",
+  "field": "latexcode",
+  "page": 436,
+  "kind": "math",
+  "note": "matrix rows ran together: [a -b; b a]",
+  "old": "a & -b b & a",
+  "new": "a & -b \\\\ b & a"
+ },
+ {
+  "key": "9.1.7",
+  "field": "latexcode",
+  "page": 436,
+  "kind": "math",
+  "note": "column vector rows ran together: [c; d]",
+  "old": "c d",
+  "new": "c \\\\ d"
+ },
+ {
+  "key": "9.1.7",
+  "field": "latexcode",
+  "page": 436,
+  "kind": "layout",
+  "note": "right side is an empty 2-row bracket in the book",
+  "old": "\\end{array}\\right]=\\left[\\begin{array}{l}",
+  "new": "\\end{array}\\right]=\\left[\\begin{array}{l}\n\\quad \\\\\n\\quad"
+ },
+ {
+  "key": "9.1.8",
+  "field": "latexcode",
+  "page": 436,
+  "kind": "layout",
+  "note": "labels 'Complex n by n / Real 2n by 2n' and the empty block matrix are one display in the book",
+  "old": "\\text { Complex } n \\text { by } n\n\\]\nReal \\(\\mathbf{2} \\boldsymbol{n}\\) by \\(\\mathbf{2} \\boldsymbol{n}\\)\\\\\n\n\\[\n[\\quad]",
+  "new": "\\begin{array}{l}\n\\text { Complex } n \\text { by } n \\\\\n\\text { Real } 2 n \\text { by } 2 n\n\\end{array} \\qquad \\left[\\begin{array}{ll}\n\\quad & \\quad \\\\\n\\quad & \\quad\n\\end{array}\\right]"
+ },
+ {
+  "key": "9.1.12",
+  "field": "latexcode",
+  "page": 437,
+  "kind": "math",
+  "note": "matrix rows ran together: [a-lambda b; c d-lambda]",
+  "old": "a-\\lambda & b c & d-\\lambda",
+  "new": "a-\\lambda & b \\\\ c & d-\\lambda"
+ },
+ {
+  "key": "9.1.14",
+  "field": "latexcode",
+  "page": 437,
+  "kind": "math",
+  "note": "column vector rows ran together: [x; ix]",
+  "old": "\\right]\\left[\\begin{array}{c}\n\\boldsymbol{x} i \\boldsymbol{x}",
+  "new": "\\right]\\left[\\begin{array}{c}\n\\boldsymbol{x} \\\\ i \\boldsymbol{x}"
+ },
+ {
+  "key": "9.1.14",
+  "field": "latexcode",
+  "page": 437,
+  "kind": "math",
+  "note": "column vector rows ran together: [x; ix]",
+  "old": "i \\lambda\\left[\\begin{array}{c}\n\\boldsymbol{x} i \\boldsymbol{x}",
+  "new": "i \\lambda\\left[\\begin{array}{c}\n\\boldsymbol{x} \\\\ i \\boldsymbol{x}"
+ },
+ {
+  "key": "9.2.8",
+  "field": "latexcode",
+  "page": 443,
+  "kind": "math",
+  "note": "matrix rows 2 and 3 ran together: [0 i 0; 0 0 i; i 0 0]",
+  "old": "0 & 0 & i i & 0 & 0",
+  "new": "0 & 0 & i \\\\ i & 0 & 0"
+ },
+ {
+  "key": "9.2.14",
+  "field": "latexcode",
+  "page": 444,
+  "kind": "math",
+  "note": "matrix rows ran together: [0 1-i; i+1 1]",
+  "old": "0 & 1-i i+1 & 1",
+  "new": "0 & 1-i \\\\ i+1 & 1"
+ },
+ {
+  "key": "9.2.14",
+  "field": "latexcode",
+  "page": 444,
+  "kind": "math",
+  "note": "matrix rows ran together: [2 1+i; i-1 3]",
+  "old": "2 & 1+i i-1 & 3",
+  "new": "2 & 1+i \\\\ i-1 & 3"
+ },
+ {
+  "key": "9.3.13",
+  "field": "latexcode",
+  "page": 451,
+  "kind": "math",
+  "note": "circulant rows ran together (row 1 / row 2)",
+  "old": "c_{3} c_{3}",
+  "new": "c_{3} \\\\ c_{3}"
+ },
+ {
+  "key": "9.3.13",
+  "field": "latexcode",
+  "page": 451,
+  "kind": "math",
+  "note": "circulant rows ran together (row 2 / row 3)",
+  "old": "c_{2} c_{2}",
+  "new": "c_{2} \\\\ c_{2}"
+ },
+ {
+  "key": "9.3.13",
+  "field": "latexcode",
+  "page": 451,
+  "kind": "math",
+  "note": "circulant rows ran together (row 3 / row 4)",
+  "old": "c_{1} c_{1}",
+  "new": "c_{1} \\\\ c_{1}"
+ },
+ {
+  "key": "9.3.13",
+  "field": "latexcode",
+  "page": 451,
+  "kind": "math",
+  "note": "column vector rows ran together: (1, i, i^2, i^3)",
+  "old": "C\\left[\\begin{array}{c}\n1 i i^{2} i^{3}",
+  "new": "C\\left[\\begin{array}{c}\n1 \\\\ i \\\\ i^{2} \\\\ i^{3}"
+ },
+ {
+  "key": "9.3.13",
+  "field": "latexcode",
+  "page": 451,
+  "kind": "math",
+  "note": "column vector rows ran together: (1, i, i^2, i^3)",
+  "old": "1 i i^{2} i^{3}",
+  "new": "1 \\\\ i \\\\ i^{2} \\\\ i^{3}"
+ },
+ {
+  "key": "10.3.2",
+  "field": "latexcode",
+  "page": 480,
+  "kind": "missing",
+  "note": "missing display A = [ ][1 .75][ ] (diagonalization template)",
+  "old": "eigenvector:\\\\\nWhat is the limit",
+  "new": "eigenvector:\\\\\n\n\\[\nA=\\left[\\begin{array}{ll}\n\\quad & \\quad \\\\\n\\quad & \\quad\n\\end{array}\\right]\\left[\\begin{array}{ll}\n1 & \\\\\n & .75\n\\end{array}\\right]\\left[\\begin{array}{ll}\n\\quad & \\quad \\\\\n\\quad & \\quad\n\\end{array}\\right] .\n\\]\nWhat is the limit"
+ },
+ {
+  "key": "10.3.2",
+  "field": "latexcode",
+  "page": 480,
+  "kind": "math",
+  "note": "entry is .75^k (OCR split it as .7 times 5^k)",
+  "old": ".7 \\mathbf{5}^{\\mathrm{k}}",
+  "new": ".75^{k}"
+ },
+ {
+  "key": "11.1.10",
+  "field": "latexcode",
+  "page": 516,
+  "kind": "math",
+  "note": "column vector (x1, x2) lost its row break",
+  "old": "x_{1} x_{2}",
+  "new": "x_{1} \\\\ x_{2}"
+ },
+ {
+  "key": "11.1.17",
+  "field": "latexcode",
+  "page": 517,
+  "kind": "math",
+  "note": "column vector (x, y) lost its row break",
+  "old": "x y\n",
+  "new": "x \\\\ y\n"
+ },
+ {
+  "key": "11.2.1",
+  "field": "latexcode",
+  "page": 522,
+  "kind": "math",
+  "note": "first matrix entry is .5, not 5",
+  "old": "5 & 0 \\\\",
+  "new": ".5 & 0 \\\\"
+ },
+ {
+  "key": "11.3.23",
+  "field": "latexcode",
+  "page": 534,
+  "kind": "math",
+  "note": "H matrix: rows 1 and 2 ran together (lost row break)",
+  "old": "h_{1 N} h_{21}",
+  "new": "h_{1 N} \\\\ h_{21}"
+ },
+ {
+  "key": "12.1.10",
+  "field": "latexcode",
+  "page": 545,
+  "kind": "extra",
+  "note": "underline under 16 is a print artifact (broken fraction bar), not part of the math",
+  "old": "\\frac{1}{\\underline{16}}",
+  "new": "\\frac{1}{16}"
+ },
+ {
+  "key": "12.1.12",
+  "field": "latexcode",
+  "page": 545,
+  "kind": "math",
+  "note": "the middle integral is a double integral in the book",
+  "old": "=\\int_{-\\infty}^{\\infty} e^{-\\left(x^{2}+y^{2}\\right) / 2}",
+  "new": "=\\iint_{-\\infty}^{\\infty} e^{-\\left(x^{2}+y^{2}\\right) / 2}"
+ },
+ {
+  "key": "12.2.7",
+  "field": "latexcode",
+  "page": 554,
+  "kind": "math",
+  "note": "P matrix: rows 1 and 2 ran together (lost row break)",
+  "old": "p_{12} p_{21}",
+  "new": "p_{12} \\\\ p_{21}"
+ },
+ {
+  "key": "12.3.8",
+  "field": "latexcode",
+  "page": 561,
+  "kind": "math",
+  "note": "column vector (x0, x1) lost its row break",
+  "old": "x_{0} x_{1}",
+  "new": "x_{0} \\\\ x_{1}"
+ },
+ {
+  "key": "12.3.8",
+  "field": "latexcode",
+  "page": 561,
+  "kind": "math",
+  "note": "right side (b0, 0, b1): rows 0 and b1 ran together",
+  "old": "0 b_{1}",
+  "new": "0 \\\\ b_{1}"
+ },
+ {
+  "key": "12.3.8",
+  "field": "latexcode",
+  "page": 561,
+  "kind": "math",
+  "note": "variances (sigma^2, s^2, sigma^2): rows 1 and 2 ran together",
+  "old": "\\sigma^{2} s^{2}",
+  "new": "\\sigma^{2} \\\\ s^{2}"
+ },
+ {
+  "key": "1.2.26",
+  "field": "drop",
+  "page": 21,
+  "kind": "book",
+  "note": "the book prints the start of Problem 27 as a separate Problem 26 ('(Recommended) Draw a parallelogram'); joined to 27",
+  "old": "",
+  "new": ""
+ },
+ {
+  "key": "1.2.27",
+  "field": "latexcode",
+  "page": 21,
+  "kind": "book",
+  "note": "joined with the fragment printed as Problem 26",
+  "old": "Parallelogram with two sides",
+  "new": "(Recommended) Draw a parallelogram with two sides"
+ },
+ {
+  "key": "2.3.31",
+  "field": "latexcode",
+  "page": 69,
+  "kind": "book",
+  "note": "the matrix shown is the lower triangular matrix with -a, -b, -c, not K, and the steps take it to I",
+  "old": "to change \\(K\\) into \\(U\\) :",
+  "new": "to change this lower triangular matrix into \\(I\\) :"
+ },
+ {
+  "key": "2.6.1",
+  "field": "latexcode",
+  "page": 104,
+  "kind": "book",
+  "note": "stray subscript: the unknown is x = (x, y)",
+  "old": "\\boldsymbol{x}_{1}=\\left[\\begin{array}{l}5",
+  "new": "\\boldsymbol{x}=\\left[\\begin{array}{l}5"
+ },
+ {
+  "key": "2.7.31",
+  "field": "latexcode",
+  "page": 121,
+  "kind": "book",
+  "note": "the trucks and planes are in Problem 30 (this is Problem 31)",
+  "old": "in Problem 31. Find",
+  "new": "in Problem 30. Find"
+ },
+ {
+  "key": "3.2.36",
+  "field": "latexcode",
+  "page": 145,
+  "kind": "book",
+  "note": "typo",
+  "old": "Is is true",
+  "new": "Is it true"
+ },
+ {
+  "key": "3.2.57",
+  "field": "latexcode",
+  "page": 148,
+  "kind": "book",
+  "note": "the formula disagrees with the words ('the reduced row echelon form of R^T'), which give the intended answer Z = [I 0; 0 0]",
+  "old": "Z=\\left(\\operatorname{rref}\\left(A^{\\mathrm{T}}\\right)\\right)^{\\mathrm{T}}",
+  "new": "Z=\\left(\\operatorname{rref}\\left(R^{\\mathrm{T}}\\right)\\right)^{\\mathrm{T}}"
+ },
+ {
+  "key": "3.3.9",
+  "field": "latexcode",
+  "page": 159,
+  "kind": "book",
+  "note": "Worked Example 3.3 A (book p. 158) has x_p = (7, 0, -3, 0); -9 and 3 are from the 4th edition",
+  "old": "the numbers -9 and 3 in",
+  "new": "the numbers 7 and -3 in"
+ },
+ {
+  "key": "6.3.29",
+  "field": "latexcode",
+  "page": 336,
+  "kind": "book",
+  "note": "y'' = -1000000y has omega = 1000; leapfrog needs omega*dt <= 2, so dt > .002",
+  "old": "\\(\\Delta t>.0002\\)",
+  "new": "\\(\\Delta t>.002\\)"
+ },
+ {
+  "key": "6.5.1",
+  "field": "latexcode",
+  "page": 358,
+  "kind": "book",
+  "note": "both parts were labelled (i)",
+  "old": "\\item[(i)] That sign",
+  "new": "\\item[(ii)] That sign"
+ },
+ {
+  "key": "6.5.3",
+  "field": "latexcode",
+  "page": 358,
+  "kind": "book",
+  "note": "the matrices are called S",
+  "old": "factor each \\(A\\) into",
+  "new": "factor each \\(S\\) into"
+ },
+ {
+  "key": "6.5.8",
+  "field": "latexcode",
+  "page": 359,
+  "kind": "book",
+  "note": "the matrix is called S",
+  "old": "pivots of \\(A\\) are 3 and 4",
+  "new": "pivots of \\(S\\) are 3 and 4"
+ },
+ {
+  "key": "6.5.25",
+  "field": "latexcode",
+  "page": 361,
+  "kind": "book",
+  "note": "the matrix being factored is S",
+  "old": "factorization \\(A=C^{\\mathrm{T}} C\\)",
+  "new": "factorization \\(S=C^{\\mathrm{T}} C\\)"
+ },
+ {
+  "key": "7.4.3",
+  "field": "latexcode",
+  "page": 398,
+  "kind": "book",
+  "note": "A = QS gives A^T A = S Q^T Q S = S^2; S^2 is not A",
+  "old": "Test \\(S^{2}=A\\).",
+  "new": "Test \\(S^{2}=A^{\\mathrm{T}} A\\)."
+ },
+ {
+  "key": "7.4.20",
+  "field": "latexcode",
+  "page": 400,
+  "kind": "book",
+  "note": "the count of numbers in each factorization is Problem 19",
+  "old": "Following Problem 18,",
+  "new": "Following Problem 19,"
+ },
+ {
+  "key": "8.1.25",
+  "field": "latexcode",
+  "page": 410,
+  "kind": "book",
+  "note": "the spaces in the MATLAB axis limits were lost in typesetting",
+  "old": "\\operatorname{axis}([-1010-1010])",
+  "new": "\\operatorname{axis}([-10 \\ 10 \\ -10 \\ 10])"
+ },
+ {
+  "key": "8.3.10",
+  "field": "latexcode",
+  "page": 429,
+  "kind": "book",
+  "note": "f has period 2 pi and is given on -pi <= x <= pi",
+  "old": "L \\leq|x| \\leq 2 \\pi",
+  "new": "L \\leq|x| \\leq \\pi"
+ },
+ {
+  "key": "9.1/9-16",
+  "field": "range",
+  "page": 436,
+  "kind": "book",
+  "note": "Problems 15-16 are about the form r e^{i theta} (the next heading, Questions 15-22)",
+  "old": "9-16",
+  "new": "9-14"
+ },
+ {
+  "key": "9.1/9-16",
+  "field": "note",
+  "page": 436,
+  "kind": "book",
+  "note": "Problems 15-16 are about the form r e^{i theta} (the next heading, Questions 15-22)",
+  "old": "Questions 9-16 are about the conjugate",
+  "new": "Questions 9-14 are about the conjugate"
+ },
+ {
+  "key": "9.2.14",
+  "field": "latexcode",
+  "page": 444,
+  "kind": "book",
+  "note": "a Hermitian matrix has the conjugate 1-i below 1+i",
+  "old": "i-1 & 3",
+  "new": "1-i & 3"
+ },
+ {
+  "key": "10.4.3",
+  "field": "latexcode",
+  "page": 489,
+  "kind": "book",
+  "note": "x1 + 2x3 is never negative when x >= 0; with x1 - 2x3 the cost is unbounded below (x1 = 4 + x3, x2 = 0 gives 4 - x3)",
+  "old": "the cost \\(x_{1}+2 x_{3}\\)",
+  "new": "the cost \\(x_{1}-2 x_{3}\\)"
+ },
+ {
+  "key": "11.2.20",
+  "field": "latexcode",
+  "page": 523,
+  "kind": "book",
+  "note": "the argument is j pi/(n+1)",
+  "old": "\\cos (j \\pi / n+1)",
+  "new": "\\cos (j \\pi /(n+1))"
+ },
+ {
+  "key": "11.3.25",
+  "field": "latexcode",
+  "page": 534,
+  "kind": "book",
+  "note": "x_i = i(101-i)/2 solves Ax = ones(100,1); that is (ih - i^2 h^2)/(2h^2), not /2",
+  "old": "x_{i}=\\left(i h-i^{2} h^{2}\\right) / 2\\)",
+  "new": "x_{i}=\\frac{i h-i^{2} h^{2}}{2 h^{2}}\\)"
+ },
+ {
+  "key": "12.1.9",
+  "field": "latexcode",
+  "page": 545,
+  "kind": "book",
+  "note": "A_N has standard deviation 1/(2 sqrt N), so the standardized X multiplies by 2 sqrt N",
+  "old": "X=\\left(A_{N}-\\frac{1}{2}\\right) / 2 \\sqrt{N}",
+  "new": "X=2 \\sqrt{N}\\left(A_{N}-\\frac{1}{2}\\right)"
+ },
+ {
+  "key": "12.2.5",
+  "field": "latexcode",
+  "page": 554,
+  "kind": "book",
+  "note": "the sum rule needs the weights Prob(X = x_i)",
+  "old": "\\operatorname{Prob}\\left(Y=y_{j} \\mid X=x_{i}\\right) .",
+  "new": "\\operatorname{Prob}\\left(Y=y_{j} \\mid X=x_{i}\\right) \\operatorname{Prob}\\left(X=x_{i}\\right) ."
+ },
+ {
+  "key": "12.2.9",
+  "field": "latexcode",
+  "page": 554,
+  "kind": "book",
+  "note": "Bayes' theorem gives the conditional Prob(Y = y_j | X = x_i); the joint probability is the product rule",
+  "old": "\\operatorname{Prob}\\left(Y=y_{j} \\text { and } X=x_{i}\\right)=\\frac",
+  "new": "\\operatorname{Prob}\\left(Y=y_{j} \\mid X=x_{i}\\right)=\\frac"
+ },
+ {
+  "key": "12.3.5",
+  "field": "latexcode",
+  "page": 561,
+  "kind": "book",
+  "note": "the Gaussian exponent is -(1/2)(x-m)^T V^{-1}(x-m)",
+  "old": "the exponent \\(-(\\boldsymbol{x}-\\boldsymbol{m})",
+  "new": "the exponent \\(-\\frac{1}{2}(\\boldsymbol{x}-\\boldsymbol{m})"
+ }
+]
