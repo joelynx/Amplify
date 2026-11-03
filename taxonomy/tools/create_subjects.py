@@ -1,10 +1,11 @@
 """Create the 22 app subjects (curricular bundles) from taxonomy/taxonomy.json.
 
-Usage: python taxonomy/tools/create_subjects.py [--apply]   (without --apply: dry run, no writes)
+Usage: python taxonomy/tools/create_subjects.py [--apply] [--replace]   (without --apply: dry run, no writes)
 
 Each subject gets every topic its nodes sit under, plus any branches borrowed from another subject
 (EXTRA_BRANCHES); a borrowed branch brings its topic in with that topic's other branches excluded.
-Existing subjects with the same name get their payload replaced (the active flag is kept).
+Subjects that already exist are skipped, so edits made in the app survive a rerun. --replace overwrites
+them with the taxonomy.json version instead (the active flag is kept).
 """
 import collections, json, sqlite3, sys
 from pathlib import Path
@@ -88,7 +89,7 @@ def build() -> list[Subject]:
     return out
 
 
-def main(apply: bool) -> None:
+def main(apply: bool, replace: bool) -> None:
     sys.stdout.reconfigure(encoding="utf-8")
     subjects = build()
     conn = sqlite3.connect(DB)
@@ -96,12 +97,14 @@ def main(apply: bool) -> None:
         conn.execute("BEGIN")
         before = {r[0] for r in conn.execute("SELECT name FROM subjects")}
         for s in subjects:
+            if s.name in before and not replace:
+                print(f"skipped {s.name}: already exists (--replace to overwrite)"); continue
             conn.execute("INSERT INTO subjects (name, payload, is_active) VALUES (?, ?, 0) "
                          "ON CONFLICT(name) DO UPDATE SET payload = excluded.payload",
                          (s.name, json.dumps(s.to_payload())))
             where, params = assemble_where({"in_syllabus_only": False, "reuse_questions": True}, s.to_payload())
             n = conn.execute(f"SELECT COUNT(*) FROM questions WHERE {where}", params).fetchone()[0]
-            print(f"{'updated' if s.name in before else 'created'} {s.name}: {len(s.topics)} topics, {n:,} questions")
+            print(f"{'replaced' if s.name in before else 'created'} {s.name}: {len(s.topics)} topics, {n:,} questions")
         if apply:
             conn.commit(); print("committed")
         else:
@@ -113,4 +116,4 @@ def main(apply: bool) -> None:
 
 
 if __name__ == "__main__":
-    main("--apply" in sys.argv[1:])
+    main("--apply" in sys.argv[1:], "--replace" in sys.argv[1:])
