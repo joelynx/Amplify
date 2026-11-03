@@ -1,0 +1,1523 @@
+[
+ {
+  "key": "2.7",
+  "field": "latexcode",
+  "page": 4,
+  "kind": "math",
+  "note": "rejoin P(A cup B)=0.5, split by the line break",
+  "old": "\\(P(A \\cup B)=\\) 0.5.",
+  "new": "\\(P(A \\cup B)=0.5\\)."
+ },
+ {
+  "key": "3.1",
+  "field": "latexcode",
+  "page": 7,
+  "kind": "punct",
+  "note": "missing period after 'elsewhere' in the display",
+  "old": "\\text { elsewhere }\\end{cases}",
+  "new": "\\text { elsewhere } .\\end{cases}"
+ },
+ {
+  "key": "3.2",
+  "field": "latexcode",
+  "page": 7,
+  "kind": "punct",
+  "note": "missing comma after 'otherwise' (sentence continues 'where c>0')",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "3.12",
+  "field": "latexcode",
+  "page": 9,
+  "kind": "punct",
+  "note": "missing period after 'elsewhere' in the display",
+  "old": "\\text { elsewhere }\\end{cases}",
+  "new": "\\text { elsewhere } .\\end{cases}"
+ },
+ {
+  "key": "3.14",
+  "field": "latexcode",
+  "page": 9,
+  "kind": "math",
+  "note": "rejoin Y=max(0,-X), split by the line break",
+  "old": "\\(Y=\\) \\(\\max (0,-X)\\)",
+  "new": "\\(Y=\\max (0,-X)\\)"
+ },
+ {
+  "key": "3.15",
+  "field": "latexcode",
+  "page": 9,
+  "kind": "punct",
+  "note": "missing final period after the ellipsis ('1, 2, 3, ....')",
+  "old": "x=1,2,3, \\ldots",
+  "new": "x=1,2,3, \\ldots ."
+ },
+ {
+  "key": "3.19",
+  "field": "answer",
+  "page": 85,
+  "kind": "punct",
+  "note": "book ends with 'f(7) = 0.0048.'; final period missing",
+  "old": "f(7)=0.0048",
+  "new": "f(7)=0.0048 ."
+ },
+ {
+  "key": "3.20",
+  "field": "answer",
+  "page": 85,
+  "kind": "math",
+  "note": "P(X = even) printed as one math expression; LaTeX split it into two math spans around plain-text 'even'",
+  "old": "\\(P(X=\\) even \\()=\\frac{1}{4}\\)",
+  "new": "\\(P(X=\\text{even})=\\frac{1}{4}\\)"
+ },
+ {
+  "key": "3.21",
+  "field": "latexcode",
+  "page": 10,
+  "kind": "punct",
+  "note": "missing comma after 'otherwise' (sentence continues 'then what is')",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "3.22",
+  "field": "latexcode",
+  "page": 10,
+  "kind": "punct",
+  "note": "missing comma after 'otherwise' (sentence continues 'then what')",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "4.1",
+  "field": "answer",
+  "page": 86,
+  "kind": "math",
+  "note": "book prints a math minus; LaTeX had a plain-text hyphen",
+  "old": "-0.995",
+  "new": "\\(-0.995\\)"
+ },
+ {
+  "key": "4.4",
+  "field": "answer",
+  "page": 86,
+  "kind": "math",
+  "note": "book prints a math minus in (e); LaTeX had a plain-text hyphen",
+  "old": "(e) -71.5",
+  "new": "(e) \\(-71.5\\)"
+ },
+ {
+  "key": "4.12",
+  "field": "latexcode",
+  "page": 12,
+  "kind": "punct",
+  "note": "missing comma after 'otherwise' (sentence continues 'then what are')",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "4.15",
+  "field": "answer",
+  "page": 86,
+  "kind": "math",
+  "note": "book prints a math minus; LaTeX had a plain-text hyphen",
+  "old": "-38",
+  "new": "\\(-38\\)"
+ },
+ {
+  "key": "4.29",
+  "field": "answer",
+  "page": 86,
+  "kind": "math",
+  "note": "book prints a math minus; LaTeX had a plain-text hyphen",
+  "old": "-0.25",
+  "new": "\\(-0.25\\)"
+ },
+ {
+  "key": "4.30",
+  "field": "latexcode",
+  "page": 14,
+  "kind": "punct",
+  "note": "book has a comma after 'otherwise'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise, }\\end{cases}"
+ },
+ {
+  "key": "5.16",
+  "field": "latexcode",
+  "page": 16,
+  "kind": "punct",
+  "note": "stray spaces inside the quotes around 3",
+  "old": "first \" 3 \".",
+  "new": "first \"3\"."
+ },
+ {
+  "key": "6.5",
+  "field": "latexcode",
+  "page": 19,
+  "kind": "punct",
+  "note": "book has a period after 'otherwise'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise. }\\end{cases}"
+ },
+ {
+  "key": "6.13",
+  "field": "latexcode",
+  "page": 20,
+  "kind": "punct",
+  "note": "book has a comma after 'otherwise'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise, }\\end{cases}"
+ },
+ {
+  "key": "6.21",
+  "field": "latexcode",
+  "page": 20,
+  "kind": "math",
+  "note": "minus sign typeset as a text hyphen",
+  "old": "from -5 to 5",
+  "new": "from \\(-5\\) to 5"
+ },
+ {
+  "key": "6.24",
+  "field": "latexcode",
+  "page": 21,
+  "kind": "math",
+  "note": "the book's lognormal symbol is a capital Lambda built from a wedge and a backslash stroke; OCR read it as a wedge",
+  "old": "\\bigwedge",
+  "new": "\\Lambda"
+ },
+ {
+  "key": "6.24",
+  "field": "answer",
+  "page": 88,
+  "kind": "math",
+  "note": "the book's lognormal symbol is a capital Lambda built from a wedge and a backslash stroke; OCR read it as a wedge",
+  "old": "\\wedge",
+  "new": "\\Lambda"
+ },
+ {
+  "key": "6.25",
+  "field": "latexcode",
+  "page": 21,
+  "kind": "math",
+  "note": "the book's lognormal symbol is a capital Lambda built from a wedge and a backslash stroke; OCR read it as a wedge",
+  "old": "\\wedge \\backslash",
+  "new": "\\Lambda"
+ },
+ {
+  "key": "6.26",
+  "field": "latexcode",
+  "page": 21,
+  "kind": "math",
+  "note": "the book's lognormal symbol is a capital Lambda built from a wedge and a backslash stroke; OCR read it as a wedge",
+  "old": "\\bigwedge",
+  "new": "\\Lambda"
+ },
+ {
+  "key": "6.27",
+  "field": "latexcode",
+  "page": 21,
+  "kind": "math",
+  "note": "the book's lognormal symbol is a capital Lambda built from a wedge and a backslash stroke; OCR read it as a wedge",
+  "old": "\\bigwedge",
+  "new": "\\Lambda"
+ },
+ {
+  "key": "7.5",
+  "field": "latexcode",
+  "page": 22,
+  "kind": "math",
+  "note": "minus sign typeset as a text hyphen",
+  "old": "from -1 to 1",
+  "new": "from \\(-1\\) to 1"
+ },
+ {
+  "key": "7.26",
+  "field": "latexcode",
+  "page": 26,
+  "kind": "punct",
+  "note": "book has 'otherwise,' (comma) in the last case",
+  "old": "& \\text { otherwise }\\end{cases}",
+  "new": "& \\text { otherwise, }\\end{cases}"
+ },
+ {
+  "key": "8.1",
+  "field": "latexcode",
+  "page": 27,
+  "kind": "math",
+  "note": "-0.5 is a math minus in the book; plain text renders a hyphen",
+  "old": "is -0.5, then",
+  "new": "is \\(-0.5\\), then"
+ },
+ {
+  "key": "8.19",
+  "field": "latexcode",
+  "page": 29,
+  "kind": "math",
+  "note": "value 2 of E(Y)=2 fell outside the math span",
+  "old": "E(Y)=\\) 2, and",
+  "new": "E(Y)=2\\), and"
+ },
+ {
+  "key": "8.21",
+  "field": "latexcode",
+  "page": 29,
+  "kind": "math",
+  "note": "-5 is a math minus in the book; plain text renders a hyphen",
+  "old": "is -5 and",
+  "new": "is \\(-5\\) and"
+ },
+ {
+  "key": "9.19",
+  "field": "latexcode",
+  "page": 32,
+  "kind": "punct",
+  "note": "book has 'otherwise,' (comma) in the last case",
+  "old": "& \\text { otherwise }\\end{cases}",
+  "new": "& \\text { otherwise, }\\end{cases}"
+ },
+ {
+  "key": "9.20",
+  "field": "latexcode",
+  "page": 33,
+  "kind": "punct",
+  "note": "book has 'otherwise,' (comma) in the last case",
+  "old": "& \\text { otherwise }\\end{cases}",
+  "new": "& \\text { otherwise, }\\end{cases}"
+ },
+ {
+  "key": "10.4",
+  "field": "latexcode",
+  "page": 35,
+  "kind": "math",
+  "note": "interval [-2, 2] is math in the book (minus sign); OCR had plain '[- 2, 2]'",
+  "old": "interval [- 2, 2]?",
+  "new": "interval \\([-2,2]\\)?"
+ },
+ {
+  "key": "10.24",
+  "field": "latexcode",
+  "page": 37,
+  "kind": "math",
+  "note": "book prints minus sign -1 and +1 in math; plain-text hyphen",
+  "old": "from -1 to +1 with",
+  "new": "from \\(-1\\) to \\(+1\\) with"
+ },
+ {
+  "key": "11.6",
+  "field": "answer",
+  "page": 94,
+  "kind": "punct",
+  "note": "stray space before final period",
+  "old": "0.7627 .",
+  "new": "0.7627."
+ },
+ {
+  "key": "11.8",
+  "field": "latexcode",
+  "page": 39,
+  "kind": "math",
+  "note": "book: 80 (roman) followed by italic B's; OCR put 80 inside math, losing the space",
+  "old": "\\(80 B\\) 's",
+  "new": "80 \\(B\\) 's"
+ },
+ {
+  "key": "12.6",
+  "field": "latexcode",
+  "page": 41,
+  "kind": "math",
+  "note": "book prints -5 with a math minus sign",
+  "old": "is -5 and",
+  "new": "is \\(-5\\) and"
+ },
+ {
+  "key": "12.9",
+  "field": "latexcode",
+  "page": 41,
+  "kind": "math",
+  "note": "book prints GAMK as one italic name; OCR split it as upright GAM + italic K",
+  "old": "\\operatorname{GAM} K(",
+  "new": "G A M K("
+ },
+ {
+  "key": "13.5",
+  "field": "latexcode",
+  "page": 44,
+  "kind": "punct",
+  "note": "book has comma after 'otherwise' (sentence continues 'what is...')",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise, }\\end{cases}"
+ },
+ {
+  "key": "13.24",
+  "field": "latexcode",
+  "page": 46,
+  "kind": "punct",
+  "note": "book has period after 'otherwise'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise. }\\end{cases}"
+ },
+ {
+  "key": "14.20",
+  "field": "latexcode",
+  "page": 49,
+  "kind": "math",
+  "note": "the 0 of sigma^2 > 0 was left outside math",
+  "old": "\\(\\sigma^{2}>\\) 0.",
+  "new": "\\(\\sigma^{2}>0\\)."
+ },
+ {
+  "key": "14.21",
+  "field": "latexcode",
+  "page": 49,
+  "kind": "math",
+  "note": "Z= split from its expression across two math spans",
+  "old": "\\(Z=\\) \\(\\left[4",
+  "new": "\\(Z=\\left[4"
+ },
+ {
+  "key": "15.2",
+  "field": "latexcode",
+  "page": 50,
+  "kind": "punct",
+  "note": "book prints 'otherwise,'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "15.3",
+  "field": "latexcode",
+  "page": 50,
+  "kind": "punct",
+  "note": "book prints 'otherwise,'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "15.3",
+  "field": "answer",
+  "page": 98,
+  "kind": "math",
+  "note": "book prints X-bar in the denominator (bar merges with fraction rule; text layer has the bar glyph)",
+  "old": "\\frac{2}{X}",
+  "new": "\\frac{2}{\\bar{X}}"
+ },
+ {
+  "key": "15.4",
+  "field": "latexcode",
+  "page": 51,
+  "kind": "punct",
+  "note": "book prints 'otherwise,'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "15.6",
+  "field": "latexcode",
+  "page": 51,
+  "kind": "punct",
+  "note": "book prints 'otherwise,'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "15.6",
+  "field": "answer",
+  "page": 98,
+  "kind": "math",
+  "note": "book prints X-bar in the denominator (bar merges with fraction rule; text layer has the bar glyph)",
+  "old": "\\frac{2}{X}",
+  "new": "\\frac{2}{\\bar{X}}"
+ },
+ {
+  "key": "15.7",
+  "field": "latexcode",
+  "page": 51,
+  "kind": "punct",
+  "note": "book prints 'otherwise,'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "15.8",
+  "field": "latexcode",
+  "page": 51,
+  "kind": "punct",
+  "note": "book prints 'otherwise,'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "15.10",
+  "field": "latexcode",
+  "page": 52,
+  "kind": "punct",
+  "note": "book prints 'otherwise,'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "15.11",
+  "field": "latexcode",
+  "page": 52,
+  "kind": "punct",
+  "note": "book prints 'otherwise,'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "15.14",
+  "field": "latexcode",
+  "page": 53,
+  "kind": "punct",
+  "note": "book prints 'otherwise,'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "15.15",
+  "field": "latexcode",
+  "page": 53,
+  "kind": "punct",
+  "note": "book prints 'otherwise,'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "15.25",
+  "field": "latexcode",
+  "page": 54,
+  "kind": "punct",
+  "note": "book prints 'otherwise,'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "15.28",
+  "field": "latexcode",
+  "page": 55,
+  "kind": "punct",
+  "note": "book prints 'otherwise,'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "15.32",
+  "field": "latexcode",
+  "page": 56,
+  "kind": "math",
+  "note": "book prints 'size' + italic n (run together); n was plain text glued to 'size'",
+  "old": "of sizen from",
+  "new": "of size \\(n\\) from"
+ },
+ {
+  "key": "15.33",
+  "field": "latexcode",
+  "page": 56,
+  "kind": "math",
+  "note": "book prints 'size' + italic n (run together); n was plain text glued to 'size'",
+  "old": "of sizen from",
+  "new": "of size \\(n\\) from"
+ },
+ {
+  "key": "16.10",
+  "field": "latexcode",
+  "page": 59,
+  "kind": "punct",
+  "note": "book prints 'otherwise ,'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "16.11",
+  "field": "latexcode",
+  "page": 59,
+  "kind": "punct",
+  "note": "book prints 'otherwise ,'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "16.13",
+  "field": "latexcode",
+  "page": 60,
+  "kind": "punct",
+  "note": "book prints 'otherwise,'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "16.14",
+  "field": "latexcode",
+  "page": 60,
+  "kind": "punct",
+  "note": "book prints 'otherwise,'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "16.17",
+  "field": "latexcode",
+  "page": 60,
+  "kind": "punct",
+  "note": "book prints 'otherwise,'",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "16.18",
+  "field": "latexcode",
+  "page": 61,
+  "kind": "punct",
+  "note": "book prints 'otherwise,' in the cases display",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "16.21",
+  "field": "latexcode",
+  "page": 61,
+  "kind": "punct",
+  "note": "book prints 'otherwise,' in the cases display",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "16.24",
+  "field": "latexcode",
+  "page": 62,
+  "kind": "punct",
+  "note": "book prints 'otherwise,' in the cases display",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "16.26",
+  "field": "latexcode",
+  "page": 62,
+  "kind": "punct",
+  "note": "book prints 'otherwise,' in the cases display",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "17.1",
+  "field": "latexcode",
+  "page": 63,
+  "kind": "punct",
+  "note": "book prints 'otherwise,' in the cases display",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "17.3",
+  "field": "latexcode",
+  "page": 63,
+  "kind": "punct",
+  "note": "book prints 'otherwise,' in the cases display",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "17.5",
+  "field": "latexcode",
+  "page": 64,
+  "kind": "punct",
+  "note": "book prints 'otherwise,' in the cases display",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "17.6",
+  "field": "latexcode",
+  "page": 64,
+  "kind": "punct",
+  "note": "book prints 'otherwise,' in the cases display",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "17.7",
+  "field": "answer",
+  "page": 102,
+  "kind": "punct",
+  "note": "book prints 'otherwise.' with period",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise. }\\end{cases}"
+ },
+ {
+  "key": "17.9",
+  "field": "answer",
+  "page": 102,
+  "kind": "punct",
+  "note": "book prints 'otherwise.' with period",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise. }\\end{cases}"
+ },
+ {
+  "key": "17.10",
+  "field": "latexcode",
+  "page": 65,
+  "kind": "punct",
+  "note": "book prints 'otherwise,' in the cases display",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "17.11",
+  "field": "latexcode",
+  "page": 65,
+  "kind": "punct",
+  "note": "book prints 'otherwise,' in the cases display",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "17.12",
+  "field": "latexcode",
+  "page": 66,
+  "kind": "punct",
+  "note": "book prints 'otherwise,' in the cases display",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "17.13",
+  "field": "latexcode",
+  "page": 66,
+  "kind": "punct",
+  "note": "book prints 'otherwise,' in the cases display",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "17.14",
+  "field": "latexcode",
+  "page": 66,
+  "kind": "punct",
+  "note": "book prints 'otherwise,' in the cases display",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "17.15",
+  "field": "latexcode",
+  "page": 66,
+  "kind": "punct",
+  "note": "book prints 'otherwise,' in the cases display",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "18.11",
+  "field": "latexcode",
+  "page": 70,
+  "kind": "punct",
+  "note": "book prints 'otherwise,' in the cases display",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "18.12",
+  "field": "latexcode",
+  "page": 70,
+  "kind": "punct",
+  "note": "book prints 'otherwise,' in the cases display",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "18.13",
+  "field": "latexcode",
+  "page": 70,
+  "kind": "punct",
+  "note": "book prints 'otherwise,' in the cases display",
+  "old": "\\text { otherwise }\\end{cases}",
+  "new": "\\text { otherwise },\\end{cases}"
+ },
+ {
+  "key": "18.15",
+  "field": "answer",
+  "page": 103,
+  "kind": "math",
+  "note": "set-builder bar and |x-bar - 3| rendered as adjacent '||'; make the separator a \\mid and the absolute value explicit",
+  "old": "\\right)| | \\bar{x}-3 \\mid \\geq",
+  "new": "\\right) \\mid |\\bar{x}-3| \\geq"
+ },
+ {
+  "key": "18.19",
+  "field": "latexcode",
+  "page": 72,
+  "kind": "punct",
+  "note": "book has 'otherwise,' with a comma",
+  "old": "0 & \\text { otherwise }\\end{cases}",
+  "new": "0 & \\text { otherwise, }\\end{cases}"
+ },
+ {
+  "key": "19.17",
+  "field": "latexcode",
+  "page": 76,
+  "kind": "math",
+  "note": "data set is printed in math; LaTeX had it as plain text with \\{ outside math",
+  "old": "Given a data set \\{(1, 1), (2, 1), (2, 3), (3, 2), (4, 3)\\} and",
+  "new": "Given a data set \\(\\{(1,1),(2,1),(2,3),(3,2),(4,3)\\}\\) and"
+ },
+ {
+  "key": "19.17",
+  "field": "latexcode",
+  "page": 76,
+  "kind": "math",
+  "note": "N(alpha + beta x, sigma^2) was split across two math spans with the closing parenthesis outside math",
+  "old": "N(\\alpha+\\) \\(\\beta x, \\sigma^{2}\\) ),",
+  "new": "N(\\alpha+\\beta x, \\sigma^{2})\\),"
+ },
+ {
+  "key": "21.7",
+  "field": "latexcode",
+  "page": 81,
+  "kind": "punct",
+  "note": "book has 'elsewhere,' with a comma",
+  "old": "0 & \\text { elsewhere }\\end{cases}",
+  "new": "0 & \\text { elsewhere, }\\end{cases}"
+ },
+ {
+  "key": "1.4",
+  "field": "latexcode",
+  "page": 1,
+  "kind": "book",
+  "note": "the book sets this A upright, unlike every other variable",
+  "old": "Let A be the event",
+  "new": "Let \\(A\\) be the event"
+ },
+ {
+  "key": "1.4",
+  "field": "latexcode",
+  "page": 1,
+  "kind": "book",
+  "note": "the book sets this B upright, unlike every other variable",
+  "old": "let B be the event",
+  "new": "let \\(B\\) be the event"
+ },
+ {
+  "key": "1.20",
+  "field": "latexcode",
+  "page": 3,
+  "kind": "book",
+  "note": "book: \"n red counter\"",
+  "old": "red counter numbered",
+  "new": "red counters numbered"
+ },
+ {
+  "key": "2.18",
+  "field": "latexcode",
+  "page": 6,
+  "kind": "book",
+  "note": "book: \"A urn\"",
+  "old": "A urn contains",
+  "new": "An urn contains"
+ },
+ {
+  "key": "3.14",
+  "field": "latexcode",
+  "page": 9,
+  "kind": "book",
+  "note": "book omits \"of\"",
+  "old": "distribution function \\(Y=",
+  "new": "distribution function of \\(Y="
+ },
+ {
+  "key": "3.19",
+  "field": "latexcode",
+  "page": 10,
+  "kind": "book",
+  "note": "book: \"A urn\"",
+  "old": "A urn contains",
+  "new": "An urn contains"
+ },
+ {
+  "key": "3.21",
+  "field": "latexcode",
+  "page": 10,
+  "kind": "book",
+  "note": "a question ending in a period",
+  "old": "function of \\(X\\). Graph",
+  "new": "function of \\(X\\)? Graph"
+ },
+ {
+  "key": "3.22",
+  "field": "latexcode",
+  "page": 10,
+  "kind": "book",
+  "note": "book omits \"is\"",
+  "old": "then what the probability",
+  "new": "then what is the probability"
+ },
+ {
+  "key": "4.1",
+  "field": "latexcode",
+  "page": 11,
+  "kind": "book",
+  "note": "book: \"better\" for bettor",
+  "old": "payoff to the better",
+  "new": "payoff to the bettor"
+ },
+ {
+  "key": "4.18",
+  "field": "latexcode",
+  "page": 13,
+  "kind": "book",
+  "note": "book omits \"function\"",
+  "old": "has moment generating",
+  "new": "has moment generating function"
+ },
+ {
+  "key": "4.29",
+  "field": "latexcode",
+  "page": 14,
+  "kind": "book",
+  "note": "book omits \"is\"",
+  "old": "what the expected value",
+  "new": "what is the expected value"
+ },
+ {
+  "key": "4.31",
+  "field": "latexcode",
+  "page": 14,
+  "kind": "book",
+  "note": "book: \"if\" for is",
+  "old": "random variable \\(X\\) if",
+  "new": "random variable \\(X\\) is"
+ },
+ {
+  "key": "5.12",
+  "field": "latexcode",
+  "page": 16,
+  "kind": "book",
+  "note": "book: \"Customers ... wins\"",
+  "old": "Cafe wins a",
+  "new": "Cafe win a"
+ },
+ {
+  "key": "5.25",
+  "field": "latexcode",
+  "page": 17,
+  "kind": "book",
+  "note": "book omits \"a\"",
+  "old": "hits in specified game",
+  "new": "hits in a specified game"
+ },
+ {
+  "key": "6.6",
+  "field": "latexcode",
+  "page": 19,
+  "kind": "book",
+  "note": "book: \"in term of\"",
+  "old": "in term of standard",
+  "new": "in terms of standard"
+ },
+ {
+  "key": "6.9",
+  "field": "latexcode",
+  "page": 19,
+  "kind": "book",
+  "note": "book omits \"of\"",
+  "old": "degrees freedom",
+  "new": "degrees of freedom"
+ },
+ {
+  "key": "6.16",
+  "field": "latexcode",
+  "page": 20,
+  "kind": "book",
+  "note": "book omits \"is\"",
+  "old": "random variable greater than",
+  "new": "random variable is greater than"
+ },
+ {
+  "key": "6.24",
+  "field": "answer",
+  "page": 88,
+  "kind": "book",
+  "note": "the log of a lognormal variable is normal; the book prints the lognormal symbol again",
+  "old": "\\ln (X) \\sim \\Lambda",
+  "new": "\\ln (X) \\sim N"
+ },
+ {
+  "key": "6.34",
+  "field": "latexcode",
+  "page": 21,
+  "kind": "book",
+  "note": "Gamma(1+t)Gamma(1-t) = t Gamma(t)Gamma(1-t) = pi t / sin(pi t); the book drops both pi",
+  "old": "=t \\operatorname{cosec}(t)",
+  "new": "=\\pi t \\operatorname{cosec}(\\pi t)"
+ },
+ {
+  "key": "7.5",
+  "field": "latexcode",
+  "page": 22,
+  "kind": "book",
+  "note": "book: \"the the\"",
+  "old": "that the the quadratic",
+  "new": "that the quadratic"
+ },
+ {
+  "key": "7.12",
+  "field": "latexcode",
+  "page": 23,
+  "kind": "book",
+  "note": "the book omits the radius; it is 1, as X ranges over (0, 2) about the centre (1, 1)",
+  "old": "disk of radius centered",
+  "new": "disk of radius 1 centered"
+ },
+ {
+  "key": "7.18",
+  "field": "latexcode",
+  "page": 24,
+  "kind": "book",
+  "note": "book: \"each of them arrive\"",
+  "old": "each of them arrive at",
+  "new": "each of them arrives at"
+ },
+ {
+  "key": "7.18",
+  "field": "latexcode",
+  "page": 24,
+  "kind": "book",
+  "note": "book omits \"the\"",
+  "old": "if other does not",
+  "new": "if the other does not"
+ },
+ {
+  "key": "8.12",
+  "field": "latexcode",
+  "page": 28,
+  "kind": "book",
+  "note": "the book sets this Y upright, unlike the X beside it",
+  "old": "and Y represents",
+  "new": "and \\(Y\\) represents"
+ },
+ {
+  "key": "9.4",
+  "field": "latexcode",
+  "page": 30,
+  "kind": "book",
+  "note": "book omits \"have\"",
+  "old": "\\(Y\\) joint density",
+  "new": "\\(Y\\) have joint density"
+ },
+ {
+  "key": "9.5",
+  "field": "latexcode",
+  "page": 30,
+  "kind": "book",
+  "note": "book omits \"have\"",
+  "old": "\\(Y\\) joint density",
+  "new": "\\(Y\\) have joint density"
+ },
+ {
+  "key": "10.7",
+  "field": "answer",
+  "page": 92,
+  "kind": "book",
+  "note": "sign slip: with +z^2/250 the density is continuous at 10, vanishes at 20 and integrates to 1",
+  "old": "-\\frac{2 z}{25}-\\frac{z^{2}}{250}",
+  "new": "-\\frac{2 z}{25}+\\frac{z^{2}}{250}"
+ },
+ {
+  "key": "10.9",
+  "field": "answer",
+  "page": 92,
+  "kind": "book",
+  "note": "P(Z=z) = (z^3-(z-1)^3)/216 = (3z^2-3z+1)/216 (sums to 1); the book has h(y) and -2z (sums to 237/216)",
+  "old": "h(y)=\\frac{3 z^{2}-2 z+1}{216}",
+  "new": "h(z)=\\frac{3 z^{2}-3 z+1}{216}"
+ },
+ {
+  "key": "10.10",
+  "field": "latexcode",
+  "page": 35,
+  "kind": "book",
+  "note": "h here is not Planck's constant (h^2 = m/2kT); the book also misspells it \"Plank\"",
+  "old": "where \\(h\\) is the Plank's constant.",
+  "new": "where \\(h\\) is a positive constant."
+ },
+ {
+  "key": "10.19",
+  "field": "latexcode",
+  "page": 37,
+  "kind": "book",
+  "note": "book: \"If X an uniform\"",
+  "old": "If \\(X\\) an uniform",
+  "new": "If \\(X\\) is a uniform"
+ },
+ {
+  "key": "10.19",
+  "field": "latexcode",
+  "page": 37,
+  "kind": "book",
+  "note": "book: \"an uniform\"",
+  "old": "\\(Y\\) is an uniform",
+  "new": "\\(Y\\) is a uniform"
+ },
+ {
+  "key": "10.19",
+  "field": "latexcode",
+  "page": 37,
+  "kind": "book",
+  "note": "X+Y is one variable; its density is not a joint one",
+  "old": "what is the joint probability density function of \\(X+Y\\)",
+  "new": "what is the probability density function of \\(X+Y\\)"
+ },
+ {
+  "key": "10.20",
+  "field": "latexcode",
+  "page": 37,
+  "kind": "book",
+  "note": "book: \"two ... random variable\"",
+  "old": "two independent random variable,",
+  "new": "two independent random variables,"
+ },
+ {
+  "key": "10.21",
+  "field": "latexcode",
+  "page": 37,
+  "kind": "book",
+  "note": "book: \"two ... random variable\"",
+  "old": "two independent random variable,",
+  "new": "two independent random variables,"
+ },
+ {
+  "key": "10.22",
+  "field": "latexcode",
+  "page": 37,
+  "kind": "book",
+  "note": "book: \"two ... random variable\"",
+  "old": "two independent random variable,",
+  "new": "two independent random variables,"
+ },
+ {
+  "key": "10.23",
+  "field": "latexcode",
+  "page": 37,
+  "kind": "book",
+  "note": "book: \"two ... random variable\"",
+  "old": "two independent random variable,",
+  "new": "two independent random variables,"
+ },
+ {
+  "key": "11.5",
+  "field": "latexcode",
+  "page": 39,
+  "kind": "book",
+  "note": "book: \"a four fair dice\"",
+  "old": "when a four fair dice",
+  "new": "when four fair dice"
+ },
+ {
+  "key": "11.5",
+  "field": "latexcode",
+  "page": 39,
+  "kind": "book",
+  "note": "book: \"and\" for given",
+  "old": "variance of \\(X\\) and \\(Y=1\\)",
+  "new": "variance of \\(X\\) given \\(Y=1\\)"
+ },
+ {
+  "key": "12.10",
+  "field": "latexcode",
+  "page": 42,
+  "kind": "book",
+  "note": "Kibble's correlation parameter is 0 <= theta < 1; the book prints < 0",
+  "old": "0 \\leq \\theta<0",
+  "new": "0 \\leq \\theta<1"
+ },
+ {
+  "key": "12.11",
+  "field": "latexcode",
+  "page": 42,
+  "kind": "book",
+  "note": "book: \"scedestic\"",
+  "old": "scedestic",
+  "new": "scedastic"
+ },
+ {
+  "key": "12.14",
+  "field": "latexcode",
+  "page": 42,
+  "kind": "book",
+  "note": "book: \"Gumble\"",
+  "old": "Gumble",
+  "new": "Gumbel"
+ },
+ {
+  "key": "13.16",
+  "field": "latexcode",
+  "page": 45,
+  "kind": "book",
+  "note": "book omits \"of\"",
+  "old": "limiting distribution the sample",
+  "new": "limiting distribution of the sample"
+ },
+ {
+  "key": "13.24",
+  "field": "latexcode",
+  "page": 46,
+  "kind": "book",
+  "note": "book omits \"is\"",
+  "old": "\\(\\bar{X}\\) greater than",
+  "new": "\\(\\bar{X}\\) is greater than"
+ },
+ {
+  "key": "14.2",
+  "field": "latexcode",
+  "page": 47,
+  "kind": "book",
+  "note": "book: \"it's\"",
+  "old": "it's distribution",
+  "new": "its distribution"
+ },
+ {
+  "key": "14.8",
+  "field": "latexcode",
+  "page": 47,
+  "kind": "book",
+  "note": "book: \"the measurement are\"",
+  "old": "the measurement are",
+  "new": "the measurements are"
+ },
+ {
+  "key": "14.19",
+  "field": "latexcode",
+  "page": 49,
+  "kind": "book",
+  "note": "book: \"two random sample\"",
+  "old": "two random sample from",
+  "new": "two random samples from"
+ },
+ {
+  "key": "14.21",
+  "field": "latexcode",
+  "page": 49,
+  "kind": "book",
+  "note": "the book never says what to find",
+  "old": "variance 1, and \\(Z=",
+  "new": "variance 1, and let \\(Z="
+ },
+ {
+  "key": "14.21",
+  "field": "latexcode",
+  "page": 49,
+  "kind": "book",
+  "note": "the book ends with a bare \"Z = ... ?\"; Z ~ F(6, 8) and the book's answer 6.37 is its 99th percentile",
+  "old": "\\left[3 \\sum_{j=1}^{8} Y_{j}^{2}\\right] ?\\)",
+  "new": "\\left[3 \\sum_{j=1}^{8} Y_{j}^{2}\\right]\\). What is the \\(99^{\\text {th }}\\) percentile of \\(Z\\) ?"
+ },
+ {
+  "key": "15.15",
+  "field": "latexcode",
+  "page": 53,
+  "kind": "book",
+  "note": "book: \"a absolute\"",
+  "old": "for a absolute",
+  "new": "for an absolute"
+ },
+ {
+  "key": "15.19",
+  "field": "latexcode",
+  "page": 53,
+  "kind": "book",
+  "note": "as printed, (1/2)(1+beta)^5 (x/2)^beta integrates to (1+beta)^4, so it is no density; the power 5 belongs to the likelihood of the 5 values",
+  "old": "\\frac{1}{2}(1+\\beta)^{5}\\left(\\frac{x}{2}\\right)^{\\beta}\\) ?",
+  "new": "\\frac{1}{2}(1+\\beta)\\left(\\frac{x}{2}\\right)^{\\beta}\\) for \\(0<x<2\\) ?"
+ },
+ {
+  "key": "15.19",
+  "field": "answer",
+  "page": 98,
+  "kind": "book",
+  "note": "with the density corrected: the 5 values multiply to 1, so 5/(1+beta) = 5 ln 2",
+  "old": "\\(-1+\\frac{5}{\\ln (2)}\\)",
+  "new": "\\(-1+\\frac{1}{\\ln (2)}\\)"
+ },
+ {
+  "key": "15.20",
+  "field": "latexcode",
+  "page": 54,
+  "kind": "book",
+  "note": "as printed, 2(t-1)t^x is no density; the book's answer X/(1+X) is the MLE for the geometric (1-t)t^x",
+  "old": "f(x ; t)=2(t-1) t^{x}\\)",
+  "new": "f(x ; t)=(1-t) t^{x}\\) for \\(x=0,1,2, \\ldots\\), where \\(0<t<1\\)"
+ },
+ {
+  "key": "15.24",
+  "field": "latexcode",
+  "page": 54,
+  "kind": "book",
+  "note": "book: \"number of observation\"",
+  "old": "number of observation needed",
+  "new": "number of observations needed"
+ },
+ {
+  "key": "15.24",
+  "field": "latexcode",
+  "page": 54,
+  "kind": "book",
+  "note": "book: \"in term of\"",
+  "old": "in term of \\(N\\)",
+  "new": "in terms of \\(N\\)"
+ },
+ {
+  "key": "15.31",
+  "field": "latexcode",
+  "page": 55,
+  "kind": "book",
+  "note": "the density's parameters are alpha and theta; the book asks for alpha and beta",
+  "old": "parameters \\(\\alpha\\) and \\(\\beta\\).",
+  "new": "parameters \\(\\alpha\\) and \\(\\theta\\)."
+ },
+ {
+  "key": "15.31",
+  "field": "answer",
+  "page": 99,
+  "kind": "book",
+  "note": "the parameter is theta (see the question)",
+  "old": "\\frac{\\bar{X}}{\\widehat{\\beta}}, \\quad \\widehat{\\beta}=",
+  "new": "\\frac{\\bar{X}}{\\widehat{\\theta}}, \\quad \\widehat{\\theta}="
+ },
+ {
+  "key": "15.31",
+  "field": "answer",
+  "page": 99,
+  "kind": "book",
+  "note": "the moment estimator of the scale is (m_2 - Xbar^2)/Xbar; the book drops the square",
+  "old": "X_{i}^{2}-\\bar{X}\\right]",
+  "new": "X_{i}^{2}-\\bar{X}^{2}\\right]"
+ },
+ {
+  "key": "16.1",
+  "field": "answer",
+  "page": 100,
+  "kind": "book",
+  "note": "the book leaves the parenthesis open",
+  "old": "\\left(T_{1}, T_{2}\\right.}",
+  "new": "\\left(T_{1}, T_{2}\\right)}"
+ },
+ {
+  "key": "16.6",
+  "field": "latexcode",
+  "page": 58,
+  "kind": "book",
+  "note": "book: \"the objects\"",
+  "old": "measures the objects 36",
+  "new": "measures the object 36"
+ },
+ {
+  "key": "16.7",
+  "field": "latexcode",
+  "page": 58,
+  "kind": "book",
+  "note": "book: \"a sufficient statistics\"",
+  "old": "a sufficient statistics for",
+  "new": "a sufficient statistic for"
+ },
+ {
+  "key": "16.8",
+  "field": "latexcode",
+  "page": 59,
+  "kind": "book",
+  "note": "book: \"a sufficient statistics\"",
+  "old": "Find a sufficient statistics for",
+  "new": "Find a sufficient statistic for"
+ },
+ {
+  "key": "16.8",
+  "field": "latexcode",
+  "page": 59,
+  "kind": "book",
+  "note": "book: \"a single sufficient statistics\"",
+  "old": "single sufficient statistics for",
+  "new": "single sufficient statistic for"
+ },
+ {
+  "key": "16.15",
+  "field": "latexcode",
+  "page": 60,
+  "kind": "book",
+  "note": "book: \"a sufficient statistics\"",
+  "old": "a sufficient statistics of",
+  "new": "a sufficient statistic of"
+ },
+ {
+  "key": "16.16",
+  "field": "latexcode",
+  "page": 60,
+  "kind": "book",
+  "note": "book: \"Are the estimators ... are unbiased\"",
+  "old": "\\(\\bar{X}-1\\) are unbiased",
+  "new": "\\(\\bar{X}-1\\) unbiased"
+ },
+ {
+  "key": "16.16",
+  "field": "answer",
+  "page": 100,
+  "kind": "book",
+  "note": "book: \"is efficient then\"",
+  "old": "is efficient then",
+  "new": "is more efficient than"
+ },
+ {
+  "key": "16.22",
+  "field": "latexcode",
+  "page": 61,
+  "kind": "book",
+  "note": "X_(n) is the maximum likelihood estimator",
+  "old": "Is the likelihood estimator",
+  "new": "Is the maximum likelihood estimator"
+ },
+ {
+  "key": "16.25",
+  "field": "latexcode",
+  "page": 62,
+  "kind": "book",
+  "note": "n is the sample size; the text names the fixed number of trials m",
+  "old": "\\binom{n}{x} p^{x}(1-p)^{n-x}, & \\text { if } x=0,1,2, \\ldots, n",
+  "new": "\\binom{m}{x} p^{x}(1-p)^{m-x}, & \\text { if } x=0,1,2, \\ldots, m"
+ },
+ {
+  "key": "16.25",
+  "field": "latexcode",
+  "page": 62,
+  "kind": "book",
+  "note": "book: \"Is this ... is an efficient estimator\", and a question ending in a period",
+  "old": "estimator for \\(p\\). Is this maximum likelihood estimator for \\(p\\) is an",
+  "new": "estimator for \\(p\\) ? Is this maximum likelihood estimator for \\(p\\) an"
+ },
+ {
+  "key": "16.26",
+  "field": "latexcode",
+  "page": 62,
+  "kind": "book",
+  "note": "the book drops the parentheses; 2(theta-x)/theta^2 is the density (and gives the answer 3 Xbar)",
+  "old": "\\frac{2}{\\theta^{2}} \\theta-x,",
+  "new": "\\frac{2}{\\theta^{2}}(\\theta-x),"
+ },
+ {
+  "key": "17.15",
+  "field": "latexcode",
+  "page": 66,
+  "kind": "book",
+  "note": "the only parameter is beta (and the answer is an interval for beta)",
+  "old": "interval for \\(\\theta\\)",
+  "new": "interval for \\(\\beta\\)"
+ },
+ {
+  "key": "17.17",
+  "field": "latexcode",
+  "page": 67,
+  "kind": "book",
+  "note": "the only parameter is beta (and the answer is an interval for beta)",
+  "old": "interval for \\(\\theta\\)",
+  "new": "interval for \\(\\beta\\)"
+ },
+ {
+  "key": "18.13",
+  "field": "latexcode",
+  "page": 70,
+  "kind": "book",
+  "note": "the book sets this n upright",
+  "old": "size n from",
+  "new": "size \\(n\\) from"
+ },
+ {
+  "key": "18.13",
+  "field": "latexcode",
+  "page": 70,
+  "kind": "book",
+  "note": "the only parameter is beta",
+  "old": "f(x, \\theta)=",
+  "new": "f(x, \\beta)="
+ },
+ {
+  "key": "18.20",
+  "field": "latexcode",
+  "page": 72,
+  "kind": "book",
+  "note": "the book leaves the parenthesis open",
+  "old": "uniformly most powerful critical",
+  "new": "uniformly most powerful) critical"
+ },
+ {
+  "key": "19.11",
+  "field": "latexcode",
+  "page": 75,
+  "kind": "book",
+  "note": "book: \"the find\"",
+  "old": ", the find the",
+  "new": ", then find the"
+ },
+ {
+  "key": "19.12",
+  "field": "latexcode",
+  "page": 75,
+  "kind": "book",
+  "note": "a stray 5: the other values run 0.078 to 0.131",
+  "old": "& 50.071 &",
+  "new": "& 0.071 &"
+ },
+ {
+  "key": "19.15",
+  "field": "latexcode",
+  "page": 76,
+  "kind": "book",
+  "note": "book: (x_1, y_2) for the first pair",
+  "old": "\\left(x_{1}, y_{2}\\right),\\left(x_{2}",
+  "new": "\\left(x_{1}, y_{1}\\right),\\left(x_{2}"
+ },
+ {
+  "key": "20.3",
+  "field": "latexcode",
+  "page": 78,
+  "kind": "book",
+  "note": "book: \"accompaning\"",
+  "old": "accompaning",
+  "new": "accompanying"
+ },
+ {
+  "key": "21.7",
+  "field": "latexcode",
+  "page": 81,
+  "kind": "book",
+  "note": "(1+theta)x^theta on [0,1] is not an exponential distribution",
+  "old": "from an exponential distribution",
+  "new": "from a distribution"
+ },
+ {
+  "key": "21.8",
+  "field": "latexcode",
+  "page": 81,
+  "kind": "book",
+  "note": "1/theta on [0,theta] is the uniform distribution, not an exponential one",
+  "old": "from an exponential distribution",
+  "new": "from a uniform distribution"
+ },
+ {
+  "key": "21.10",
+  "field": "latexcode",
+  "page": 82,
+  "kind": "book",
+  "note": "book: \"the a\"",
+  "old": "from the a recent",
+  "new": "from a recent"
+ },
+ {
+  "key": "21.10",
+  "field": "latexcode",
+  "page": 82,
+  "kind": "book",
+  "note": "book: \"the statistics\"",
+  "old": "value of the statistics?",
+  "new": "value of the statistic?"
+ }
+]
