@@ -46,6 +46,7 @@ from common import (  # noqa: E402
     now_iso,
     parse_solver_output,
     pipe_conn,
+    pipeline_wrote,
     q_dir,
     read_text,
     strip_code_fences,
@@ -142,8 +143,9 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
 
     write_text(d / "final.tex", final)
     sentinels = cfg["empty_answer_sentinels"]
-    ans_empty = is_blank(q["answer"], sentinels)
-    hint_empty = is_blank(q["hints"])
+    # A value an earlier pipeline run wrote counts as empty: a redo replaces it.
+    ans_empty = is_blank(q["answer"], sentinels) or pipeline_wrote(pc, qid, "answer", q["answer"])
+    hint_empty = is_blank(q["hints"]) or pipeline_wrote(pc, qid, "hints", q["hints"])
     fill_answer = answer_value if (ans_empty and parts["answer_type"] != "NONE" and row["status"] in ("passed", "passed_after_escalation")) else None
     fill_hint = hint if (hint_empty and hint) else None
     gen_col = cfg.get("generated_solution_column") or "generated_solution"

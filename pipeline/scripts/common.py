@@ -302,6 +302,19 @@ def log_event(conn: sqlite3.Connection, qid: int | None, stage: str, detail: str
     conn.commit()
 
 
+def pipeline_wrote(conn: sqlite3.Connection, qid: int, field: str, value, before_id: int | None = None) -> bool:
+    """True when `value` (the field's current content in the app database) is exactly what
+    the pipeline wrote there earlier, so a newer run may replace it."""
+    if value is None:
+        return False
+    sql = "SELECT 1 FROM provenance WHERE question_id=? AND field=? AND value=? AND applied_at IS NOT NULL AND applied_at NOT LIKE 'skipped%'"
+    args: list = [qid, field, value]
+    if before_id is not None:
+        sql += " AND id < ?"
+        args.append(before_id)
+    return conn.execute(sql, args).fetchone() is not None
+
+
 def is_done(row: sqlite3.Row | None) -> bool:
     """A question is finished when it has a final status and, for passing
     statuses, has also been assembled."""

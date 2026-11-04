@@ -53,5 +53,6 @@ pipeline/progress.json
 pipeline/*.log
 pipeline/*.err
 pipeline/*.out
+pipeline/run_sub.lock
 .env.local
 .env

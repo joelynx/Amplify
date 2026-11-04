@@ -3,7 +3,9 @@
 Fills are queued in pipeline.db (table `provenance`, applied_at NULL) by
 assemble.py. They are written to app/data/appdata/amplify.db only when
 config.app_db_writes is true (or --force is given), and only into fields that
-are still empty at write time. Filled fields are never overwritten.
+are still empty at write time. Filled fields are never overwritten, except a
+value the pipeline itself wrote earlier: a redo at a higher effort replaces it,
+while a value from the source or the owner is never touched.
 
 Usage: python apply_fields.py [--force] [--dry-run]
 """
@@ -16,7 +18,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import app_conn, is_blank, load_config, now_iso, pipe_conn  # noqa: E402
+from common import app_conn, is_blank, load_config, now_iso, pipe_conn, pipeline_wrote  # noqa: E402
 
 
 def _ensure_schema(app) -> None:
@@ -54,7 +56,8 @@ def apply_pending(cfg: dict, pc, *, force: bool = False, dry_run: bool = False) 
             # Pipeline-owned column: a newer run may replace an older one.
             empty = True
         else:
-            empty = is_blank(cur[0], sentinels if field == "answer" else ())
+            empty = (is_blank(cur[0], sentinels if field == "answer" else ())
+                     or pipeline_wrote(pc, row["question_id"], field, cur[0], before_id=row["id"]))
         if not empty:
             skipped += 1
             if not dry_run:

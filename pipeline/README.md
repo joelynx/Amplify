@@ -91,6 +91,49 @@ without spending tokens.
 | API error / expired / canceled | back to `pending` (up to `max_api_failures`) | resubmitted |
 | hint fails its checks (rules, length, answer leak) | solution still `passed`; hint dropped | Hint cell stays empty |
 
+### On the subscription instead of the API (run_sub.py, 2026-11-04)
+
+The same solver on the owner's Claude subscription: Claude Code in print mode,
+one fresh single-turn process per question, the pipeline's system prompt
+(`--system-prompt-file`; byte-identical to the one every API batch used), the
+same user message on stdin, the same model, effort and max_tokens, adaptive
+thinking, no tools, nothing saved. Replies land where an API download lands
+(`outputs/<id>/solver_<n>.tex`, `response_<n>.json`, status `received`), so
+`run.py judge` validates, assembles and writes them unchanged. Scope and order:
+`config.subscription` (math sources in priority order; questions whose own
+solution is missing or a Gemini one and that have no generated solution yet;
+retries first, continuing the API run's attempt 2 with its feedback).
+`effort_by_source` raises chosen sources above `config.solver.effort` (owner,
+2026-11-04: olympiad/research, undergraduate-competition and famous-puzzle
+sources at high) and `max_tokens_by_effort` their output cap (128k at high);
+every question of such a source is redone, also the ones the API solved at
+medium: the earlier files move to `outputs/<id>/before_<effort>_redo_*/` and the
+stored solution stays until the new one passes. Answer / Hint cells the
+pipeline itself filled are replaced by the redo (and never used as reference
+answers); cells from the source or the owner are never touched. The
+attribution line names the effort actually used. `redo_ids` lists questions
+whose text changed after the API solved them (owner, 2026-11-04: the
+missing-reference rewrites); each is redone the same way, once, at its source's
+effort. `submissions_closed` is the API lock and does not apply here.
+
+```
+python pipeline/scripts/run_sub.py verify [--qid N] [--accept]   # free: capture the request on a local stand-in server and check it
+python pipeline/scripts/run_sub.py status | queue [--n 20]
+python pipeline/scripts/run_sub.py solve [--n N] [--ids 1,2] [--workers W] [--wait-on-limit]
+python pipeline/scripts/run.py judge                             # XeLaTeX/KaTeX checks, assemble, app-db writes
+python pipeline/scripts/run_sub_supervise.py [--judge-every-hours 3] [--judge-workers 2]   # unattended: solve --wait-on-limit, judge (below-normal) every few hours and at the end, further rounds for the retries
+```
+
+Claude Code adds a wrapping a subscription login cannot switch off: a billing
+line and an identity line before the system prompt, a reminder with the
+account email before the question, and an environment block (working
+directory `~/.amplify-subscription-solver`, platform, model, date) after it.
+`verify` reports it verbatim in `outputs/_sub_verify.json`; `solve` re-checks
+the request first and refuses to start unless its wrapping fingerprint (date
+and account email excluded) was accepted with `verify --accept`, and stops if Claude Code changes
+version mid-run. A usage-limit refusal costs nothing: the question goes back to
+the front of the queue and `--wait-on-limit` sleeps until the reset.
+
 ### Old stored solutions (questions.solution): check and mechanical repair
 
 These never touch the pipeline statuses or `generated_solution`.
@@ -135,7 +178,7 @@ renderer live in `frontend/src/components/browser/__tests__/` and run with
 
 - `config.json`: everything pinned (model, effort, batch size, prices for the cost view, source order).
 - `prompts/solver.md` (system prompt template), `prompts/format_rules.md`, `prompts/hint_examples.md`.
-- `scripts/run.py` runner; `scripts/validate.py` checks; `scripts/assemble.py` storage;
+- `scripts/run.py` runner (API); `scripts/run_sub.py` runner (subscription); `scripts/validate.py` checks; `scripts/assemble.py` storage;
   `scripts/apply_fields.py` app-db writes; `scripts/check_pdf.py` + `scripts/check_web.mjs` compile checks;
   `scripts/common.py` shared code; `scripts/make_template.py` regenerates `templates/app_template.tex`.
 - `pipeline.db`: `status`, `finals`, `provenance`, `events`, `api_batches`, `usage` (tokens per reply).

@@ -59,6 +59,7 @@ from common import (  # noqa: E402
     log_event,
     now_iso,
     pipe_conn,
+    pipeline_wrote,
     q_dir,
     read_json,
     read_text,
@@ -399,7 +400,9 @@ def judge_one(qid: int, cfg: dict, app, pc) -> str:
         return _fail(qid, attempt, cfg, pc, kind="blind", reason="the reply was cut off at the output token limit")
 
     q = fetch_question(app, qid)
-    stored = None if is_blank(q["answer"], cfg["empty_answer_sentinels"]) else q["answer"]
+    # Only the source's own answer is a reference; one an earlier pipeline run filled in is not.
+    own_answer = pipeline_wrote(pc, qid, "answer", q["answer"])
+    stored = None if is_blank(q["answer"], cfg["empty_answer_sentinels"]) or own_answer else q["answer"]
     res = validate_solver_text(qid, text, cfg, stored)
     write_json(d / f"validate_{attempt}.json", res)
     if not res["ok"]:
@@ -408,7 +411,8 @@ def judge_one(qid: int, cfg: dict, app, pc) -> str:
         return _fail(qid, attempt, cfg, pc, kind="blind",
                      reason=f"its final answer did not match the stored reference answer ({res.get('stored_answer')})", mismatch=True)
 
-    hint_status = "skipped" if not is_blank(q["hints"]) else ("ok" if res["hint_ok"] else "failed")
+    keep_hint = not is_blank(q["hints"]) and not pipeline_wrote(pc, qid, "hints", q["hints"])
+    hint_status = "skipped" if keep_hint else ("ok" if res["hint_ok"] else "failed")
     note = None if res["hint_ok"] else "hint dropped: " + "; ".join(res["hint_errors"])[:300]
     upsert_status(pc, qid, status="passed", accepted_attempt=attempt, hint_status=hint_status, note=note)
     log_event(pc, qid, "collect", f"attempt {attempt} passed; hint {hint_status}")
@@ -552,9 +556,13 @@ def collect(cfg: dict, app, pc, wait: bool = False, download_only: bool = False)
 # --- loop ---------------------------------------------------------------------
 
 
+# Replies from run_sub.py (batch_id 'sub:...') come from the subscription and cost no API credit.
+API_USAGE = "batch_id NOT LIKE 'sub:%'"
+
+
 def total_cost(cfg: dict, pc) -> float:
     total = 0.0
-    for r in pc.execute("SELECT model, SUM(input_tokens), SUM(cache_write_tokens), SUM(cache_read_tokens), SUM(output_tokens) FROM usage GROUP BY model"):
+    for r in pc.execute(f"SELECT model, SUM(input_tokens), SUM(cache_write_tokens), SUM(cache_read_tokens), SUM(output_tokens) FROM usage WHERE {API_USAGE} GROUP BY model"):
         total += _cost_of(cfg, r[0], r[1] or 0, r[2] or 0, r[3] or 0, r[4] or 0)
     return total
 
@@ -642,11 +650,14 @@ def cost(cfg: dict, app, pc) -> None:
     print("prices: config.prices_usd_per_mtok x batch_discount (verify against the pricing page)")
     total = 0.0
     nq = 0
-    for r in pc.execute("SELECT model, COUNT(*), SUM(input_tokens), SUM(cache_write_tokens), SUM(cache_read_tokens), SUM(output_tokens) FROM usage GROUP BY model"):
+    for r in pc.execute(f"SELECT model, COUNT(*), SUM(input_tokens), SUM(cache_write_tokens), SUM(cache_read_tokens), SUM(output_tokens) FROM usage WHERE {API_USAGE} GROUP BY model"):
         c = _cost_of(cfg, r[0], r[2] or 0, r[3] or 0, r[4] or 0, r[5] or 0)
         total += c
         nq += r[1]
         print(json.dumps({"model": r[0], "replies": r[1], "input": r[2], "cache_write": r[3], "cache_read": r[4], "output": r[5], "usd": round(c, 2)}))
+    sub = pc.execute(f"SELECT COUNT(*), SUM(output_tokens) FROM usage WHERE NOT ({API_USAGE})").fetchone()
+    if sub[0]:
+        print(json.dumps({"subscription_replies": sub[0], "output": sub[1], "usd": 0}))
     rows = {r["question_id"]: r for r in pc.execute("SELECT * FROM status")}
     remaining = sum(1 for qid, _ in target_questions(app, cfg) if not is_done(rows.get(qid)))
     solved = sum(1 for r in rows.values() if r["status"] == "passed")
