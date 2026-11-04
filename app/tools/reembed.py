@@ -76,7 +76,11 @@ TASK_PREFIX = (
 )
 PRICE_PER_MTOK = 0.20  # USD, interactive; batch is half (aggregator figure)
 # The model refuses more image parts per input (400 INVALID_ARGUMENT, found 2026-11-04); a row
-# with more images is embedded with its first six.
+# with more images is embedded with its first six. Truncation won a 2026-11-04 test against
+# combining the images into composite sheets: 121 rows with 4-6 images squeezed into 3 parts,
+# compared with sending them all separately, came out at mean cosine 0.994 truncated, 0.993 with
+# the extra images in one composite, 0.989 with all of them in near-equal composites (and 0.878
+# with no images at all).
 MAX_IMAGES = 6
 
 IMG_PATTERN = re.compile(r"\\includegraphics\s*(?:\[[^\]]*\])?\s*\{([^}]+)\}")
