@@ -412,3 +412,25 @@
 - 21878 (de Lange): one extra "}" in the original question (pre-existing).
 - 24916 (Blitzstein): stray "$" in the original, fixed by the rewrite.
 - Mladenovic: rows after 12175/12201/12211 (Exercises 12.13-12.20, 3.12-3.30, Problems 12.37-12.46) lack their group setup; the three carrier rows were deleted with the no-PDF sources.
+
+## Working moved out of questions (2026-11-04)
+Applied with `python -m app.tools.move_working --apply` (backup `amplify.db.bak-20261104-183804-pre-move-working`, old
+values in `missing_refs/moved_working.jsonl`). 38 questions: the moved text now opens the solution.
+- Worked solutions inside the question: 11312 (proof; the unrelated d'Ocagne footnote dropped), 15056 (main idea, Fig.
+  7.3 and first proof, ahead of the stored proofs), 15648 (derivation, n = 6 check and Fig. 5.8 `mref-15648-1`).
+- White solution-sketch images (18): 18869, 18862, 18877, 19448, 19504, 19505, 19520, 19528, 19557, 19580, 19592,
+  19617, 19667, 19670, 19671, 19726, 20054, 18999. New clean book crops: `mref-18862-1` (Fig. P2.141),
+  `mref-19528-1` (Fig. P7.94). 18999's solution already had the drawing, so only the question changed and
+  `mref-18999-1` is now unused. 19520 gained one clause fixing the flag layout the stored answer assumes. 18877's
+  agent-proposed U-tube crop was not used (its dashed centre axis conflicts with rotation about DC). 19670 and 19671
+  are borderline (the sketch is only the solution's stencil/mesh).
+- Steps stated in the question (17): 20337, 20348, 21876, 21877, 21878, 10168 (whole bracketed hint; the `hints`
+  column keeps a milder one), 10288, 11005 (part c now asks for the no-loss maximum), 25085, 17300, 6642, 3044,
+  23884, 23056, 23222, 13498, 21453.
+- Kept as is (inputs, not this question's working): 18986, 18987, 18989, 18995 (mass flow 11.8 kg/s from Prob. 3.35;
+  moving it would need the nozzle data added from the book and would change 18995's thrust); 22426, 22428 (Riccati
+  equation from the Kalman-Bucy theorem; removing it re-creates the outside reference); 20062 (n = 600 r/min is in
+  Fig. 11.21's caption); 21880 (the inlined one-body results are what the question asks to generalize).
+- Found on the way: 10168's stored answer (density with a parameter built from a, b, which the question never
+  defines) is the general case; the stored solution assumes M lies between L and N, giving a uniform angle. 17300's
+  stored solution has a gravity term -Mgh cos(theta) in what the question calls free motion.
