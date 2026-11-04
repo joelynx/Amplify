@@ -595,6 +595,14 @@ def api_failure(pc, cfg: dict, qid: int, attempt: int, why: str) -> str:
     return "error"
 
 
+def save_failure(qid: int, attempt: int, out: dict, info: dict) -> str:
+    """Keep Claude Code's raw output of a run that failed or stopped the solve, for diagnosis:
+    every stream-json event, stderr and the exit code, in outputs/<id>/sub_failure_<n>_<time>.json."""
+    path = q_dir(qid) / f"sub_failure_{attempt}_{now_iso().replace(':', '').replace('-', '')}.json"
+    write_json(path, {"kind": info["kind"], "why": info.get("why"), **out})
+    return path.name
+
+
 def acquire_lock(force: bool) -> None:
     if LOCK.exists() and not force:
         raise SystemExit(f"{LOCK.as_posix()} exists: another solve may be running (pid {LOCK.read_text().strip()}); "
@@ -662,6 +670,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     out = fut.result()
                     info = interpret(out, cfg, version)
                     kind = info["kind"]
+                    raw = save_failure(qid, attempt, out, info) if kind in ("error", "stop") else None
                     if kind == "ok":
                         store(pc, cfg, qid, attempt, effort, info, out.get("seconds", 0))
                         summary["received"] += 1
@@ -681,7 +690,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         summary[api_failure(pc, cfg, qid, attempt, info["why"])] += 1
                     print(json.dumps({"question_id": qid, "attempt": attempt, "effort": effort, "outcome": kind,
                                       "seconds": out.get("seconds"),
-                                      **({"why": info["why"]} if kind != "ok" else {}),
+                                      **({"why": info["why"]} if kind != "ok" else {}), **({"raw": raw} if raw else {}),
                                       "elapsed_min": round((time.time() - t0) / 60, 1), **summary}), flush=True)
                 if stop_reason and not running:
                     if wait_on_limit and stop_reason.startswith("usage limit") and queue:
