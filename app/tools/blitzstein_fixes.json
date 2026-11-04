@@ -1,0 +1,1522 @@
+[
+ {
+  "key": "2.1",
+  "kind": "structure",
+  "page": 94,
+  "old": "\\end{itemize}\n\n\\section*{Conditioning on evidence}",
+  "new": "\\end{itemize}\n\n\\subsection*{2.11 Exercises}\n\\section*{Conditioning on evidence}",
+  "reason": "the export lost the chapter 2 Exercises header"
+ },
+ {
+  "key": "1.9",
+  "kind": "ocr",
+  "page": 45,
+  "old": "to (210, 211)",
+  "new": "to \\((210,211)\\)",
+  "reason": "point not in math mode"
+ },
+ {
+  "key": "1.9",
+  "kind": "ocr",
+  "page": 45,
+  "old": "through (110, 111)?",
+  "new": "through \\((110,111)\\)?",
+  "reason": "point not in math mode"
+ },
+ {
+  "key": "1.20",
+  "kind": "ocr",
+  "page": 46,
+  "old": "hockey stick identity. Hint:",
+  "new": "hockey stick identity.\n\nHint:",
+  "reason": "hint is a separate paragraph in the book, was run into the sentence"
+ },
+ {
+  "key": "1.21",
+  "kind": "ocr",
+  "page": 47,
+  "old": "  \\item \\{1\\}, \\{2, 3, 4\\}\n  \\item \\{1,2\\}, \\{3,4\\}\n  \\item \\{2\\}, \\{1, 3, 4\\}\n  \\item \\{1, 3\\}, \\{2, 4\\}\n  \\item \\{3\\}, \\{1, 2, 4\\}\n  \\item \\{1, 4\\}, \\{2, 3\\}",
+  "new": "  \\item \\(\\{1\\}\\), \\(\\{2,3,4\\}\\)\n  \\item \\(\\{2\\}\\), \\(\\{1,3,4\\}\\)\n  \\item \\(\\{3\\}\\), \\(\\{1,2,4\\}\\)\n  \\item \\(\\{4\\}\\), \\(\\{1,2,3\\}\\)\n  \\item \\(\\{1,2\\}\\), \\(\\{3,4\\}\\)\n  \\item \\(\\{1,3\\}\\), \\(\\{2,4\\}\\)\n  \\item \\(\\{1,4\\}\\), \\(\\{2,3\\}\\)",
+  "reason": "the book lists 7 partitions; {4}, {1,2,3} was missing. List put in the book's column order, sets in math"
+ },
+ {
+  "key": "1.29",
+  "kind": "ocr",
+  "page": 48,
+  "old": "with =, <, or >,",
+  "new": "with \\(=\\), \\(<\\), or \\(>\\),",
+  "reason": "relation symbols in math"
+ },
+ {
+  "key": "1.29",
+  "kind": "ocr",
+  "page": 48,
+  "old": "palindrome \\({ }^{3}\\) )",
+  "new": "palindrome\\footnote{A palindrome is an expression such as \"A man, a plan, a canal: Panama\" that reads the same backwards as forwards (ignoring spaces, capitalization, and punctuation). Assume for this problem that all words of the specified length are equally likely, that there are no spaces or punctuation, and that the alphabet consists of the lowercase letters a, b, \\ldots, z. A word is any string of letters from the alphabet; it does not need to be a word that has a meaning in the English language.})",
+  "reason": "footnote 3 (definition of a palindrome) belongs to (b) here; its text had landed inside Exercise 1.31. Also 'a, b, . . , z' -> 'a, b, ..., z'"
+ },
+ {
+  "key": "1.31",
+  "kind": "ocr",
+  "page": 48,
+  "old": "\n\n\\footnotetext{\\({ }^{3}\\) A palindrome is an expression such as \"A man, a plan, a canal: Panama\" that reads the same backwards as forwards (ignoring spaces, capitalization, and punctuation). Assume for this problem that all words of the specified length are equally likely, that there are no spaces or punctuation, and that the alphabet consists of the lowercase letters a, b, . . , z. A word is any string of letters from the alphabet; it does not need to be a word that has a meaning in the English language.\n}\n",
+  "new": " ",
+  "reason": "footnote 3 belongs to Exercise 1.29(b); it had split this sentence ('exactly k of the m elk in the new sample')"
+ },
+ {
+  "key": "1.36",
+  "kind": "ocr",
+  "page": 49,
+  "old": "values 1,2,3,4,5,6 appear",
+  "new": "values \\(1,2,3,4,5,6\\) appear",
+  "reason": "list of values not in math mode"
+ },
+ {
+  "key": "1.45",
+  "kind": "ocr",
+  "page": 50,
+  "old": "\\(X O R\\)",
+  "new": "XOR",
+  "reason": "the word XOR was set as math"
+ },
+ {
+  "key": "1.48",
+  "kind": "ocr",
+  "page": 51,
+  "old": "below:\\\\\nCertificate\\\\\nThe owner of this certificate can redeem it for \\$1000 if \\(A\\) occurs. No value if \\(A\\) does not occur, except as required by federal, state, or local law. No expiration date.\\\\\nLikewise",
+  "new": "below:\n\n\\begin{center}\n\\fbox{\\parbox{0.75\\linewidth}{\\textbf{Certificate}\\\\[1ex]\nThe owner of this certificate can redeem it for \\$1000 if \\(A\\) occurs. No value if \\(A\\) does not occur, except as required by federal, state, or local law. No expiration date.}}\n\\end{center}\n\nLikewise",
+  "reason": "the certificate is a framed box in the book; its text had been run into the exercise prose"
+ },
+ {
+  "key": "1.53",
+  "kind": "ocr",
+  "page": 51,
+  "old": "a, b, c, . . , z",
+  "new": "a, b, c, \\ldots, z",
+  "reason": "ellipsis misread"
+ },
+ {
+  "key": "1.53",
+  "kind": "ocr",
+  "page": 51,
+  "old": "A, B, C, . . , Z",
+  "new": "A, B, C, \\ldots, Z",
+  "reason": "ellipsis misread"
+ },
+ {
+  "key": "1.53",
+  "kind": "ocr",
+  "page": 51,
+  "old": "0, 1, . . , , 9",
+  "new": "0, 1, \\ldots, 9",
+  "reason": "ellipsis misread"
+ },
+ {
+  "key": "1.56",
+  "kind": "ocr",
+  "page": 52,
+  "old": "with =, <, or >,",
+  "new": "with \\(=\\), \\(<\\), or \\(>\\),",
+  "reason": "relation symbols in math"
+ },
+ {
+  "key": "1.56",
+  "kind": "ocr",
+  "page": 52,
+  "old": "and 3)\\\\\nMartin and Gale play an exciting game of \"toss the coin\", where they toss a fair coin until the pattern \\(H H\\) occurs (two consecutive Heads) or the pattern \\(T H\\) occurs (Tails followed immediately by Heads). Martin wins the game if and only if \\(H H\\) occurs before \\(T H\\) occurs.\n  \\item[(d)] (probability that Martin wins) \\_\\_\\_\\_ 1/2",
+  "new": "and 3)\n  \\item[(d)] Martin and Gale play an exciting game of \"toss the coin\", where they toss a fair coin until the pattern \\(H H\\) occurs (two consecutive Heads) or the pattern \\(T H\\) occurs (Tails followed immediately by Heads). Martin wins the game if and only if \\(H H\\) occurs before \\(T H\\) occurs.\n\n(probability that Martin wins) \\_\\_\\_\\_ \\(1/2\\)",
+  "reason": "the Martin and Gale paragraph sits between (c) and (d) in the book and sets up (d): moved from (c) to the start of (d); 1/2 in math"
+ },
+ {
+  "key": "1.57",
+  "kind": "ocr",
+  "page": 52,
+  "old": "writes:\\\\[0pt]\n",
+  "new": "writes:\n\\begin{quote}\n",
+  "reason": "the Paulos quotation is a block quote in the book"
+ },
+ {
+  "key": "1.57",
+  "kind": "ocr",
+  "page": 52,
+  "old": "dying breath?\\\\\n",
+  "new": "dying breath?\n\\end{quote}\n",
+  "reason": "end of the block quote"
+ },
+ {
+  "key": "1.60",
+  "kind": "ocr",
+  "page": 53,
+  "old": "are (3, 3), (3, 1), (1, 3), and (1, 1).",
+  "new": "are \\((3,3),(3,1),(1,3)\\), and \\((1,1)\\).",
+  "reason": "bootstrap samples not in math mode"
+ },
+ {
+  "key": "1.62",
+  "kind": "ocr",
+  "page": 54,
+  "old": "in terms of p and an",
+  "new": "in terms of \\(\\mathbf{p}\\) and an",
+  "reason": "bold vector p lost"
+ },
+ {
+  "key": "1.62",
+  "kind": "ocr",
+  "page": 54,
+  "old": "\\geq 0\\). Define",
+  "new": "\\geq 0\\).\n\nDefine",
+  "reason": "'Define r = ...' starts a new paragraph in the book"
+ },
+ {
+  "key": "1.62",
+  "kind": "ocr",
+  "page": 54,
+  "old": "given by r. Using",
+  "new": "given by \\(\\mathbf{r}\\). Using",
+  "reason": "bold vector r lost"
+ },
+ {
+  "key": "1.62",
+  "kind": "ocr",
+  "page": 54,
+  "old": "value of p that",
+  "new": "value of \\(\\mathbf{p}\\) that",
+  "reason": "bold vector p lost"
+ },
+ {
+  "key": "2.6",
+  "kind": "ocr",
+  "page": 95,
+  "old": "coin-but",
+  "new": "coin---but",
+  "reason": "em dash misread as a hyphen"
+ },
+ {
+  "key": "2.13",
+  "kind": "book",
+  "page": 96,
+  "old": "the probability that of someone testing negative",
+  "new": "the probability of someone testing negative",
+  "reason": "book typo: stray 'that' ('the probability that of someone'); parallels 'the probability of someone testing positive'"
+ },
+ {
+  "key": "2.14",
+  "kind": "ocr",
+  "page": 97,
+  "old": "[27]:\\\\\nLet \\(A\\)",
+  "new": "[27]:\n\\begin{quote}\nLet \\(A\\)",
+  "reason": "the scenario is an indented block quotation in the book, not a run-on line"
+ },
+ {
+  "key": "2.14",
+  "kind": "ocr",
+  "page": 97,
+  "old": "before the end of next year.\n\n\\begin{itemize}",
+  "new": "before the end of next year.\n\\end{quote}\n\n\\begin{itemize}",
+  "reason": "close the block quotation before the parts"
+ },
+ {
+  "key": "2.17",
+  "kind": "ocr",
+  "page": 97,
+  "old": "if = is replaced",
+  "new": "if \\(=\\) is replaced",
+  "reason": "the = sign is math in the book"
+ },
+ {
+  "key": "2.24",
+  "kind": "ocr",
+  "page": 98,
+  "old": "\\(P\\left(A_{2} \\mid B\\right)>\\) \\(P\\left(A_{2} \\mid C\\right)\\)",
+  "new": "\\(P\\left(A_{2} \\mid B\\right)>P\\left(A_{2} \\mid C\\right)\\)",
+  "reason": "one inequality was split into two math pieces at a line break"
+ },
+ {
+  "key": "2.26",
+  "kind": "ocr",
+  "page": 99,
+  "old": "\\(\\tilde{P}\\left(L \\mid M_{2}\\right)=P\\left(L \\mid M_{1} \\cap\\right.\\) \\(M_{2}\\) )",
+  "new": "\\(\\tilde{P}\\left(L \\mid M_{2}\\right)=P\\left(L \\mid M_{1} \\cap M_{2}\\right)\\)",
+  "reason": "equation broken across a line: M_2 and the closing parenthesis were outside the math"
+ },
+ {
+  "key": "2.28",
+  "kind": "ocr",
+  "page": 99,
+  "old": "\\(P\\) (have disease|test positive)",
+  "new": "\\(P(\\text{have disease} \\mid \\text{test positive})\\)",
+  "reason": "conditional probability was half in text mode (bar typed as text)"
+ },
+ {
+  "key": "2.28",
+  "kind": "ocr",
+  "page": 99,
+  "old": "\\(P\\) (test positive|have disease)",
+  "new": "\\(P(\\text{test positive} \\mid \\text{have disease})\\)",
+  "reason": "conditional probability was half in text mode (bar typed as text)"
+ },
+ {
+  "key": "2.32",
+  "kind": "ocr",
+  "page": 100,
+  "old": "  \\item[D:] 5, 5, 5, 1, 1, 1\\\\\nThese four dice are each rolled once. Let \\(A\\) be the result for die \\(\\mathrm{A}, B\\) be the result for die B, etc.\n  \\item[(a)]",
+  "new": "  \\item[D:] 5, 5, 5, 1, 1, 1\n\\end{itemize}\nThese four dice are each rolled once. Let \\(A\\) be the result for die A, \\(B\\) be the result for die B, etc.\n\n\\begin{itemize}\n  \\item[(a)]",
+  "reason": "dice list A:-D: belongs to the stem, not the parts list; the 'These four dice...' paragraph was trapped in item D; 'die A' was in math with B"
+ },
+ {
+  "key": "2.36",
+  "kind": "ocr",
+  "page": 101,
+  "old": "with\\\\\n\n\\[",
+  "new": "with\n\\[",
+  "reason": "stray \\\\ and paragraph break inside the sentence before the display"
+ },
+ {
+  "key": "2.38",
+  "kind": "ocr",
+  "page": 101,
+  "old": "Let\\\\\n\n\\[",
+  "new": "Let\n\\[",
+  "reason": "stray \\\\ and paragraph break inside the sentence before the display"
+ },
+ {
+  "key": "2.38",
+  "kind": "ocr",
+  "page": 101,
+  "old": "for example, that\\\\\n\n\\[",
+  "new": "for example, that\n\\[",
+  "reason": "stray \\\\ and paragraph break inside the sentence before the display"
+ },
+ {
+  "key": "2.38",
+  "kind": "ocr",
+  "page": 101,
+  "old": "So we want to compute\\\\\n\n\\[",
+  "new": "So we want to compute\n\\[",
+  "reason": "stray \\\\ and paragraph break inside the sentence before the display"
+ },
+ {
+  "key": "2.47",
+  "kind": "ocr",
+  "page": 104,
+  "old": "Monty opens a door\n\n(other than door 1)",
+  "new": "Monty opens a door (other than door 1)",
+  "reason": "sentence broken by a stray paragraph break at the page break"
+ },
+ {
+  "key": "2.49",
+  "kind": "ocr",
+  "page": 105,
+  "old": "Show by induction that\\\\\n\n\\[",
+  "new": "Show by induction that\n\\[",
+  "reason": "stray \\\\ and paragraph break before the display (one sentence in the book)"
+ },
+ {
+  "key": "2.49",
+  "kind": "ocr",
+  "page": 105,
+  "old": "for some \\(i ; p_{i}=0\\) for all \\(i ; p_{i}=1\\) for all",
+  "new": "for some \\(i\\); \\(p_{i}=0\\) for all \\(i\\); \\(p_{i}=1\\) for all",
+  "reason": "semicolons (prose punctuation) were inside math"
+ },
+ {
+  "key": "2.67",
+  "kind": "ocr",
+  "page": 109,
+  "old": "runs out of.\nHint:",
+  "new": "runs out of.\\\\\nHint:",
+  "reason": "the Hint is a separate paragraph in the book; it was run into the text of part (b)"
+ },
+ {
+  "key": "2.68",
+  "kind": "ocr",
+  "page": 109,
+  "old": "exposure, defined as\\\\\n\n\\[",
+  "new": "exposure, defined as\n\\[",
+  "reason": "stray \\\\ and paragraph break before the display (one sentence in the book)"
+ },
+ {
+  "key": "2.68",
+  "kind": "ocr",
+  "page": 109,
+  "old": "widely used measure, is\\\\\n\n\\[",
+  "new": "widely used measure, is\n\\[",
+  "reason": "stray \\\\ and paragraph break before the display (one sentence in the book)"
+ },
+ {
+  "key": "2.68",
+  "kind": "ocr",
+  "page": 110,
+  "old": "a crossproduct ratio",
+  "new": "a cross-product ratio",
+  "reason": "book prints the hyphenated compound cross-product (split at a line end)"
+ },
+ {
+  "key": "2.72",
+  "kind": "ocr",
+  "page": 111,
+  "old": "Show that\\\\\n\n\\[",
+  "new": "Show that\n\\[",
+  "reason": "stray \\\\ and paragraph break before the display (one sentence in the book)"
+ },
+ {
+  "key": "2.72",
+  "kind": "ocr",
+  "page": 112,
+  "old": "recursive equation:\\\\\n\n\\[",
+  "new": "recursive equation:\n\\[",
+  "reason": "stray \\\\ and paragraph break before the display (one sentence in the book)"
+ },
+ {
+  "key": "2.73",
+  "kind": "ocr",
+  "page": 112,
+  "old": "type Aa is called",
+  "new": "type \\(A a\\) is called",
+  "reason": "genotype Aa is math in the book; was plain text"
+ },
+ {
+  "key": "2.73",
+  "kind": "ocr",
+  "page": 112,
+  "old": "not of type aa.",
+  "new": "not of type \\(a a\\).",
+  "reason": "genotype aa is math in the book; was plain text"
+ },
+ {
+  "key": "3.4",
+  "kind": "ocr",
+  "page": 151,
+  "old": "positive integer and\\\\\n\n\\[",
+  "new": "positive integer and\n\\[",
+  "reason": "stray \\\\ and paragraph break before the display (one sentence in the book)"
+ },
+ {
+  "key": "3.6",
+  "kind": "ocr",
+  "page": 151,
+  "old": "and in general\\\\\n\n\\[",
+  "new": "and in general\n\\[",
+  "reason": "stray \\\\ and paragraph break before the display (one sentence in the book)"
+ },
+ {
+  "key": "3.8",
+  "kind": "ocr",
+  "page": 152,
+  "old": "\\$2, . . , and",
+  "new": "\\$2, \\ldots, and",
+  "reason": "ellipsis misread as two spaced dots; book has an ellipsis"
+ },
+ {
+  "key": "3.11",
+  "kind": "ocr",
+  "page": 152,
+  "old": "values are 0, 1, 2, . . . , with",
+  "new": "values are \\(0,1,2, \\ldots\\), with",
+  "reason": "math sequence 0,1,2,... was plain text with spaced dots"
+ },
+ {
+  "key": "3.13",
+  "kind": "ocr",
+  "page": 152,
+  "old": "we have\\\\\n\n\\[",
+  "new": "we have\n\\[",
+  "reason": "stray \\\\ and paragraph break before the display (one sentence in the book)"
+ },
+ {
+  "key": "3.31",
+  "kind": "ocr",
+  "page": 154,
+  "old": "3 will be milkfirst",
+  "new": "3 will be milk-first",
+  "reason": "line-end hyphen of compound 'milk-first' lost"
+ },
+ {
+  "key": "3.36",
+  "kind": "ocr",
+  "page": 156,
+  "old": "function as\\\\\n\n\\[",
+  "new": "function as\n\\[",
+  "reason": "stray line break and paragraph break before the display break the sentence"
+ },
+ {
+  "key": "3.37",
+  "kind": "ocr",
+  "page": 156,
+  "old": "Letting\\\\\n\n\\[",
+  "new": "Letting\n\\[",
+  "reason": "stray line break and paragraph break before the display break the sentence"
+ },
+ {
+  "key": "3.42",
+  "kind": "ocr",
+  "page": 157,
+  "old": "takes values 1,2,...,7,",
+  "new": "takes values \\(1,2, \\ldots, 7\\),",
+  "reason": "list of values is math in the book, was plain text with three dots"
+ },
+ {
+  "key": "3.44",
+  "kind": "ocr",
+  "page": 157,
+  "old": "i.i.d. Bern( \\(1 / 2\\) )",
+  "new": "i.i.d. \\(\\operatorname{Bern}(1 / 2)\\)",
+  "reason": "Bern(1/2) split between text and math with stray spaces"
+ },
+ {
+  "key": "3.44",
+  "kind": "ocr",
+  "page": 157,
+  "old": "let\\\\\n\n\\[",
+  "new": "let\n\\[",
+  "reason": "stray line break and paragraph break before the display break the sentence"
+ },
+ {
+  "key": "3.47",
+  "kind": "ocr",
+  "page": 158,
+  "old": "\\(\\mathrm{g}<-\\) function \\((\\mathrm{m}, \\mathrm{n})\\) [your answer from (a)]",
+  "new": "\\texttt{g <- function(m,n)} \\textit{[your answer from (a)]}",
+  "reason": "R code was turned into math; restore typewriter code as printed"
+ },
+ {
+  "key": "3.47",
+  "kind": "ocr",
+  "page": 158,
+  "old": "\\(\\mathrm{g}(1: 100,100)\\)",
+  "new": "\\texttt{g(1:100,100)}",
+  "reason": "R code was turned into math"
+ },
+ {
+  "key": "3.47",
+  "kind": "ocr",
+  "page": 158,
+  "old": "which(v>0.95) gives",
+  "new": "\\texttt{which(v>0.95)} gives",
+  "reason": "R code printed in typewriter font"
+ },
+ {
+  "key": "3.47",
+  "kind": "ocr",
+  "page": 158,
+  "old": "of vector v that",
+  "new": "of vector \\(\\mathbf{v}\\) that",
+  "reason": "vector v is a bold math symbol in the book, was plain text"
+ },
+ {
+  "key": "3.47",
+  "kind": "ocr",
+  "page": 158,
+  "old": "and min(w) gives",
+  "new": "and \\texttt{min(w)} gives",
+  "reason": "R code printed in typewriter font"
+ },
+ {
+  "key": "3.47",
+  "kind": "ocr",
+  "page": 158,
+  "old": "of a vector w.",
+  "new": "of a vector \\(\\mathbf{w}\\).",
+  "reason": "vector w is a bold math symbol in the book, was plain text"
+ },
+ {
+  "key": "4.9",
+  "kind": "book",
+  "page": 206,
+  "old": "the right answers are to the 10th",
+  "new": "the right answers to the 10th",
+  "reason": "book prints 'what the right answers are to the 10th or 11th questions are' with 'are' doubled; drop the first"
+ },
+ {
+  "key": "4.9",
+  "kind": "ocr",
+  "page": 206,
+  "old": "right).\nFind the expected value of each of these options. Which option has the highest expected value? Which option has the lowest variance?\n\\end{itemize}",
+  "new": "right).\n\\end{itemize}\nFind the expected value of each of these options. Which option has the highest expected value? Which option has the lowest variance?",
+  "reason": "the closing questions follow the list of options (a)-(c) in the book; they were wrongly placed inside option (c)"
+ },
+ {
+  "key": "4.11",
+  "kind": "ocr",
+  "page": 206,
+  "old": "The idea is that\\\\\n\n\\[",
+  "new": "The idea is that\n\\[",
+  "reason": "stray line break and paragraph break before the display break the sentence"
+ },
+ {
+  "key": "4.14",
+  "kind": "ocr",
+  "page": 207,
+  "old": "have PMF\\\\\n\n\\[",
+  "new": "have PMF\n\\[",
+  "reason": "stray line break and paragraph break before the display break the sentence"
+ },
+ {
+  "key": "4.14",
+  "kind": "ocr",
+  "page": 207,
+  "old": "Taylor series\\\\\n\n\\[",
+  "new": "Taylor series\n\\[",
+  "reason": "stray line break and paragraph break before the display break the sentence"
+ },
+ {
+  "key": "4.14",
+  "kind": "ocr",
+  "page": 207,
+  "old": "\\frac{p^{3}}{3}+\\ldots\n\\]",
+  "new": "\\frac{p^{3}}{3}+\\ldots .\n\\]",
+  "reason": "sentence-ending period after the ellipsis in the display was lost"
+ },
+ {
+  "key": "4.17",
+  "kind": "ocr",
+  "page": 208,
+  "old": "let\\\\\n\n\\[",
+  "new": "let\n\\[",
+  "reason": "stray line break and paragraph break before the display break the sentence"
+ },
+ {
+  "key": "4.22",
+  "kind": "ocr",
+  "page": 208,
+  "old": "5 inches \\({ }^{2}\\)",
+  "new": "5 inches\\(^{2}\\)",
+  "reason": "superscript 2 detached from 'inches' by a space and empty base"
+ },
+ {
+  "key": "4.30",
+  "kind": "ocr",
+  "page": 209,
+  "old": "function \\(g\\),\\\\\n\n\\[",
+  "new": "function \\(g\\),\n\\[",
+  "reason": "stray line break and paragraph break before the display break the sentence"
+ },
+ {
+  "key": "4.40",
+  "kind": "ocr",
+  "page": 211,
+  "old": "HTHTH contains",
+  "new": "\\(H T H T H\\) contains",
+  "reason": "pattern HTHTH is math italic in the book, like HTH"
+ },
+ {
+  "key": "4.45",
+  "kind": "ocr",
+  "page": 211,
+  "old": "\\(A_{1}, \\ldots, A_{n}\\),\\\\\n\n\\[",
+  "new": "\\(A_{1}, \\ldots, A_{n}\\),\n\\[",
+  "reason": "stray \\\\ and paragraph break before a mid-sentence display"
+ },
+ {
+  "key": "4.48",
+  "kind": "ocr",
+  "page": 212,
+  "old": "You should get\\\\\n\n\\[",
+  "new": "You should get\n\\[",
+  "reason": "stray \\\\ and paragraph break before a mid-sentence display"
+ },
+ {
+  "key": "4.52",
+  "kind": "ocr",
+  "page": 212,
+  "old": "e.g., HHHTTHTTTH becomes\n\n\\begin{tabular}",
+  "new": "e.g., \\(H H H T T H T T T H\\) becomes \\begin{tabular}",
+  "reason": "sequence is math in the book; the boxed runs sit inline in the sentence"
+ },
+ {
+  "key": "4.52",
+  "kind": "ocr",
+  "page": 212,
+  "old": "\\end{tabular}\n\n, which",
+  "new": "\\end{tabular}, which",
+  "reason": "stray paragraph break splits the sentence after the boxed runs"
+ },
+ {
+  "key": "4.54",
+  "kind": "ocr",
+  "page": 213,
+  "old": "for person \\(j\\), and\\\\\n\n\\[",
+  "new": "for person \\(j\\), and\n\\[",
+  "reason": "stray \\\\ and paragraph break before a mid-sentence display"
+ },
+ {
+  "key": "4.54",
+  "kind": "book",
+  "page": 213,
+  "old": "In this problem, \\(y_{1}, y_{2}, \\ldots, y_{n}\\)",
+  "new": "In this problem, \\(y_{1}, y_{2}, \\ldots, y_{N}\\)",
+  "reason": "book prints y_n, but the constants are the population values y_1..y_N (n is the sample size, introduced later)"
+ },
+ {
+  "key": "4.54",
+  "kind": "book",
+  "page": 213,
+  "old": "Even though \\(y_{1}, \\ldots, y_{n}\\)",
+  "new": "Even though \\(y_{1}, \\ldots, y_{N}\\)",
+  "reason": "same slip: the population values are y_1..y_N, not y_1..y_n"
+ },
+ {
+  "key": "4.54",
+  "kind": "ocr",
+  "page": 213,
+  "old": "is using\\\\\n\n\\[",
+  "new": "is using\n\\[",
+  "reason": "stray \\\\ and paragraph break before a mid-sentence display"
+ },
+ {
+  "key": "4.54",
+  "kind": "ocr",
+  "page": 213,
+  "old": "by writing\\\\\n\n\\[",
+  "new": "by writing\n\\[",
+  "reason": "stray \\\\ and paragraph break before a mid-sentence display"
+ },
+ {
+  "key": "4.55",
+  "kind": "ocr",
+  "page": 213,
+  "old": "10 comparisons:\\\\\n\n\\[",
+  "new": "10 comparisons:\n\\[",
+  "reason": "stray \\\\ and paragraph break before a mid-sentence display"
+ },
+ {
+  "key": "4.58",
+  "kind": "ocr",
+  "page": 214,
+  "old": "\\(C_{1}, C_{2} \\ldots\\)",
+  "new": "\\(C_{1}, C_{2}, \\ldots\\)",
+  "reason": "missing comma before the dots"
+ },
+ {
+  "key": "4.58",
+  "kind": "book",
+  "page": 214,
+  "old": "are worse than \\(C_{1}\\). For example",
+  "new": "are worse than \\(C_{1}\\)). For example",
+  "reason": "the parenthesis opened at '(so C_X is better' is never closed in the book"
+ },
+ {
+  "key": "4.59",
+  "kind": "ocr",
+  "page": 214,
+  "old": "\\(3 \\leq j \\leq 366\\),\\\\\n\n\\[",
+  "new": "\\(3 \\leq j \\leq 366\\),\n\\[",
+  "reason": "stray \\\\ and paragraph break before a mid-sentence display"
+ },
+ {
+  "key": "4.59",
+  "kind": "ocr",
+  "page": 215,
+  "old": "command cumprod(1-(0:364)/365) produces",
+  "new": "command \\texttt{cumprod(1-(0:364)/365)} produces",
+  "reason": "R code is typewriter in the book"
+ },
+ {
+  "key": "4.59",
+  "kind": "ocr",
+  "page": 215,
+  "old": "the expansion\\\\\n\n\\[",
+  "new": "the expansion\n\\[",
+  "reason": "stray \\\\ and paragraph break before a mid-sentence display"
+ },
+ {
+  "key": "4.59",
+  "kind": "ocr",
+  "page": 215,
+  "old": "is large, then\\\\\n\n\\[",
+  "new": "is large, then\n\\[",
+  "reason": "stray \\\\ and paragraph break before a mid-sentence display"
+ },
+ {
+  "key": "4.66",
+  "kind": "ocr",
+  "page": 216,
+  "old": "That is,\\\\\n\n\\[",
+  "new": "That is,\n\\[",
+  "reason": "stray \\\\ and paragraph break before a mid-sentence display"
+ },
+ {
+  "key": "4.70",
+  "kind": "ocr",
+  "page": 217,
+  "old": "\\(W \\sim\\) Pois(1)",
+  "new": "\\(W \\sim \\operatorname{Pois}(1)\\)",
+  "reason": "Pois(1) left outside math"
+ },
+ {
+  "key": "4.72",
+  "kind": "ocr",
+  "page": 217,
+  "old": "using pbirthday \\((100\\), classes \\(=365\\), coincident \\(=3)\\) to",
+  "new": "using \\texttt{pbirthday(100,classes=365,coincident=3)} to",
+  "reason": "R command mangled into math; book prints it as code"
+ },
+ {
+  "key": "4.78",
+  "kind": "ocr",
+  "page": 218,
+  "old": "We call \\(S k\\)-complete",
+  "new": "We call \\(S\\) \\(k\\)-complete",
+  "reason": "S and k-complete merged into one math group"
+ },
+ {
+  "key": "4.78",
+  "kind": "ocr",
+  "page": 218,
+  "old": "=\\) \\(b_{1} b_{2}",
+  "new": "=b_{1} b_{2}",
+  "reason": "one equation split across two math groups"
+ },
+ {
+  "key": "4.78",
+  "kind": "ocr",
+  "page": 218,
+  "old": "0 's and 1 's",
+  "new": "0's and 1's",
+  "reason": "stray spaces before apostrophes"
+ },
+ {
+  "key": "4.86",
+  "kind": "ocr",
+  "page": 220,
+  "old": "party \\(\\mathrm{A}, n_{B}\\) members",
+  "new": "party A, \\(n_{B}\\) members",
+  "reason": "prose 'A,' pulled into math"
+ },
+ {
+  "key": "5.4",
+  "kind": "book",
+  "page": 267,
+  "old": "\\(P(X \\leq x \\mid X>a)\\)",
+  "new": "\\(P(X \\leq x \\mid X>c)\\)",
+  "reason": "book typo: the conditioning event should be X>c (c is the constant named in the same sentence; 'for all c')"
+ },
+ {
+  "key": "5.6",
+  "kind": "ocr",
+  "page": 267,
+  "old": "within 1,2, and 3",
+  "new": "within \\(1,2\\), and 3",
+  "reason": "book prints the list 1, 2 in math; plain '1,2' reads as one number"
+ },
+ {
+  "key": "5.7",
+  "kind": "ocr",
+  "page": 267,
+  "old": "Beta(1/2, 1/2)",
+  "new": "\\(\\operatorname{Beta}(1 / 2,1 / 2)\\)",
+  "reason": "math left as plain text"
+ },
+ {
+  "key": "5.11",
+  "kind": "ocr",
+  "page": 268,
+  "old": "interval (-1, 1)",
+  "new": "interval \\((-1,1)\\)",
+  "reason": "interval was plain text, so its minus sign rendered as a hyphen"
+ },
+ {
+  "key": "5.18",
+  "kind": "ocr",
+  "page": 268,
+  "old": "Unif( 0,1 )",
+  "new": "\\(\\operatorname{Unif}(0,1)\\)",
+  "reason": "math left as plain text with stray spaces"
+ },
+ {
+  "key": "5.20",
+  "kind": "ocr",
+  "page": 269,
+  "old": "e^{-x^{2}} d x\n",
+  "new": "e^{-x^{2}} d x,\n",
+  "reason": "comma after dx in the display is missing"
+ },
+ {
+  "key": "5.21",
+  "kind": "ocr",
+  "page": 269,
+  "old": "\\(\\mathcal{N}(0,1) \\operatorname{PDF} \\varphi\\)",
+  "new": "\\(\\mathcal{N}(0,1)\\) PDF \\(\\varphi\\)",
+  "reason": "the word PDF was inside math"
+ },
+ {
+  "key": "5.27",
+  "kind": "ocr",
+  "page": 270,
+  "old": "interval (-1, 1). Give",
+  "new": "interval \\((-1,1)\\). Give",
+  "reason": "interval was plain text, so its minus sign rendered as a hyphen"
+ },
+ {
+  "key": "5.27",
+  "kind": "ocr",
+  "page": 270,
+  "old": "interval (-1, 1), yet",
+  "new": "interval \\((-1,1)\\), yet",
+  "reason": "interval was plain text, so its minus sign rendered as a hyphen"
+ },
+ {
+  "key": "5.27",
+  "kind": "ocr",
+  "page": 270,
+  "old": "as (-1, 1) of",
+  "new": "as \\((-1,1)\\) of",
+  "reason": "interval was plain text, so its minus sign rendered as a hyphen"
+ },
+ {
+  "key": "5.30",
+  "kind": "ocr",
+  "page": 270,
+  "old": "and -1 with",
+  "new": "and \\(-1\\) with",
+  "reason": "minus one was plain text (hyphen)"
+ },
+ {
+  "key": "5.44",
+  "kind": "ocr",
+  "page": 273,
+  "old": "(1 or -1, with",
+  "new": "(1 or \\(-1\\), with",
+  "reason": "minus one was plain text (hyphen)"
+ },
+ {
+  "key": "5.46",
+  "kind": "ocr",
+  "page": 273,
+  "old": "{1-F(t)}\n\\]",
+  "new": "{1-F(t)} .\n\\]",
+  "reason": "period ending the display is missing"
+ },
+ {
+  "key": "5.47",
+  "kind": "ocr",
+  "page": 273,
+  "old": "d s\\right)\n\\]",
+  "new": "d s\\right),\n\\]",
+  "reason": "comma after the display in (a) is missing"
+ },
+ {
+  "key": "5.52",
+  "kind": "ocr",
+  "page": 274,
+  "old": ".\nHint: A nice",
+  "new": ".\\\\\nHint: A nice",
+  "reason": "the hint is its own paragraph in the book; a single newline ran it into the (b) sentence"
+ },
+ {
+  "key": "5.55",
+  "kind": "ocr",
+  "page": 275,
+  "old": "\\(\\mathrm{CDF} F\\)",
+  "new": "CDF \\(F\\)",
+  "reason": "the word CDF was inside math"
+ },
+ {
+  "key": "5.59",
+  "kind": "ocr",
+  "page": 276,
+  "old": "the point (1, 0). What",
+  "new": "the point \\((1,0)\\). What",
+  "reason": "point (1,0) was plain text, not math"
+ },
+ {
+  "key": "5.59",
+  "kind": "ocr",
+  "page": 276,
+  "old": "replaced by (0, -1) or",
+  "new": "replaced by \\((0,-1)\\) or",
+  "reason": "point (0,-1) was plain text, so the minus sign rendered as a hyphen"
+ },
+ {
+  "key": "5.59",
+  "kind": "ocr",
+  "page": 276,
+  "old": "clockwise from (1, 0). Write",
+  "new": "clockwise from \\((1,0)\\). Write",
+  "reason": "point (1,0) was plain text, not math"
+ },
+ {
+  "key": "5.61",
+  "kind": "ocr",
+  "page": 276,
+  "old": "support [0, 1],",
+  "new": "support \\([0,1]\\),",
+  "reason": "interval [0,1] was plain text, not math"
+ },
+ {
+  "key": "6.12",
+  "kind": "ocr",
+  "page": 310,
+  "old": "\\(E=m c^{2}\\).\\\\\nThrough",
+  "new": "\\(E=m c^{2}\\).\n\nThrough",
+  "reason": "book starts a new paragraph at 'Through careful experiments'; a line break ran the two paragraphs together"
+ },
+ {
+  "key": "6.21",
+  "kind": "ocr",
+  "page": 311,
+  "old": "(so \\(\\left.p_{n}=\\lambda / n\\right)\\)",
+  "new": "(so \\(p_{n}=\\lambda / n\\))",
+  "reason": "the closing parenthesis of the prose aside was pulled into math as \\right)"
+ },
+ {
+  "key": "6.22",
+  "kind": "ocr",
+  "page": 311,
+  "old": "\\(X=\\) \\(I\\left(A_{1}\\right)",
+  "new": "\\(X=I\\left(A_{1}\\right)",
+  "reason": "one equation split across two math spans at the book's line end"
+ },
+ {
+  "key": "7.5",
+  "kind": "book",
+  "page": 360,
+  "old": "and of \\(Y\\) given \\(X=x\\)",
+  "new": "and of \\(X\\) given \\(Y=y\\)",
+  "reason": "book prints 'of Y given X=x and of Y given X=x', asking for the same conditional PMF twice; the parallel Exercise 7.4(d) asks for Y given X=x and X given Y=y"
+ },
+ {
+  "key": "7.10",
+  "kind": "ocr",
+  "page": 361,
+  "old": "constant-then",
+  "new": "constant---then",
+  "reason": "book has an em dash, not a hyphen"
+ },
+ {
+  "key": "7.11",
+  "kind": "ocr",
+  "page": 361,
+  "old": "\\(X=x, Y\\) and",
+  "new": "\\(X=x\\), \\(Y\\) and",
+  "reason": "the clause break after X=x was inside math; Y starts the next clause"
+ },
+ {
+  "key": "7.23",
+  "kind": "ocr",
+  "page": 363,
+  "old": "Section A. 7",
+  "new": "Section A.7",
+  "reason": "section number is A.7 with no space"
+ },
+ {
+  "key": "7.23",
+  "kind": "ocr",
+  "page": 363,
+  "old": "3 dimensions).\\\\\nLet",
+  "new": "3 dimensions).\n\nLet",
+  "reason": "book starts a new paragraph at 'Let U_1, U_2, ...'; a line break ran the two paragraphs together"
+ },
+ {
+  "key": "7.25",
+  "kind": "ocr",
+  "page": 363,
+  "old": "Company 2 , have",
+  "new": "Company 2, have",
+  "reason": "stray space before the comma"
+ },
+ {
+  "key": "7.30",
+  "kind": "ocr",
+  "page": 365,
+  "old": "\\(\\theta\\) is in [0, 1].",
+  "new": "\\(\\theta\\) is in \\([0,1]\\).",
+  "reason": "interval [0,1] was plain text, not math"
+ },
+ {
+  "key": "7.30",
+  "kind": "ocr",
+  "page": 365,
+  "old": "to be in [0, 1].",
+  "new": "to be in \\([0,1]\\).",
+  "reason": "interval [0,1] was plain text, not math"
+ },
+ {
+  "key": "7.53",
+  "kind": "ocr",
+  "page": 368,
+  "old": "possible values -1, 0, 1,",
+  "new": "possible values \\(-1,0,1\\),",
+  "reason": "values -1, 0, 1 are math in the book (minus sign, not hyphen)"
+ },
+ {
+  "key": "7.58",
+  "kind": "ocr",
+  "page": 369,
+  "old": "known numbers-they are",
+  "new": "known numbers---they are",
+  "reason": "book has an em dash, OCR gave a hyphen"
+ },
+ {
+  "key": "7.58",
+  "kind": "ocr",
+  "page": 369,
+  "old": "vertices (1, 3), (1, 6), (4, 6), (4, 3).",
+  "new": "vertices \\((1,3),(1,6),(4,6),(4,3)\\).",
+  "reason": "vertex coordinates are math in the book, left as plain text"
+ },
+ {
+  "key": "7.74",
+  "kind": "ocr",
+  "page": 373,
+  "old": "\\text { for } x y>0\n\\]",
+  "new": "\\text { for } x y>0,\n\\]",
+  "reason": "book display ends with a comma (\"for xy > 0,\")"
+ },
+ {
+  "key": "7.76",
+  "kind": "ocr",
+  "page": 373,
+  "old": "(1 or -1, with",
+  "new": "(1 or \\(-1\\), with",
+  "reason": "-1 is math with a minus sign in the book"
+ },
+ {
+  "key": "7.78",
+  "kind": "ocr",
+  "page": 373,
+  "old": "X_{1}, X 2, Y_{1}",
+  "new": "X_{1}, X_{2}, Y_{1}",
+  "reason": "subscript lost: X 2 should be X_2"
+ },
+ {
+  "key": "7.84",
+  "kind": "ocr",
+  "page": 375,
+  "old": "consider the following quantities.\\\\\nA: time at which The Adventures of Aaron the Aardwolf is completed;\\\\\nB: time at which The Bilinear Bonanza of Bonnie the Butterfly is completed;\\\\\n\\(M\\) : time at which Memoirs of Maude the Magnificent Mangabey is completed;\\\\\n\\(T\\) : time at which the last to be completed of these three books is completed.",
+  "new": "consider the following quantities.\n\\begin{itemize}\n  \\item[\\(A\\):] time at which The Adventures of Aaron the Aardwolf is completed;\n  \\item[\\(B\\):] time at which The Bilinear Bonanza of Bonnie the Butterfly is completed;\n  \\item[\\(M\\):] time at which Memoirs of Maude the Magnificent Mangabey is completed;\n  \\item[\\(T\\):] time at which the last to be completed of these three books is completed.\n\\end{itemize}",
+  "reason": "labels A and B were plain text instead of math; rebuilt the A:/B:/M:/T: list as a nested itemize per the import convention"
+ },
+ {
+  "key": "7.87",
+  "kind": "ocr",
+  "page": 376,
+  "old": "Section A. 8 of",
+  "new": "Section A.8 of",
+  "reason": "stray space in section number"
+ },
+ {
+  "key": "7.87",
+  "kind": "ocr",
+  "page": 376,
+  "old": "{6}\n\\]",
+  "new": "{6},\n\\]",
+  "reason": "missing comma at end of display"
+ },
+ {
+  "key": "7.88",
+  "kind": "ocr",
+  "page": 376,
+  "old": "and \\{3, 5, 7\\} is an anticlique",
+  "new": "and \\(\\{3,5,7\\}\\) is an anticlique",
+  "reason": "set written outside math mode"
+ },
+ {
+  "key": "7.88",
+  "kind": "ocr",
+  "page": 377,
+  "old": "some pairs of which are dependent.\n\n*(c) Suppose that \\(\\binom{n}{k}<2\\binom{k}{2}-1\\).",
+  "new": "some pairs of which are dependent.\n  \\item[*(c)] Suppose that \\(\\binom{n}{k}<2^{\\binom{k}{2}-1}\\).",
+  "reason": "part (c) was run into part (b) instead of being its own item; exponent of 2 was flattened (book: 2^{binom(k,2)-1})"
+ },
+ {
+  "key": "8.10",
+  "kind": "ocr",
+  "page": 418,
+  "old": "and -1 if \\(k\\) is odd",
+  "new": "and \\(-1\\) if \\(k\\) is odd",
+  "reason": "minus one written as a text hyphen outside math"
+ },
+ {
+  "key": "8.12",
+  "kind": "ocr",
+  "page": 419,
+  "old": "{\\pi\\left(1+t^{2}\\right)}\n\\]",
+  "new": "{\\pi\\left(1+t^{2}\\right)} .\n\\]",
+  "reason": "missing period at end of display"
+ },
+ {
+  "key": "8.15",
+  "kind": "ocr",
+  "page": 419,
+  "old": "\\(\\{(x, y)\\) : \\(\\left.x^{2}+y^{2} \\leq 1\\right\\}\\)",
+  "new": "\\(\\{(x, y): x^{2}+y^{2} \\leq 1\\}\\)",
+  "reason": "set split across math and text"
+ },
+ {
+  "key": "8.30",
+  "kind": "ocr",
+  "page": 421,
+  "old": "{(a+b)^{2}(a+b+1)}\n\\]",
+  "new": "{(a+b)^{2}(a+b+1)} .\n\\]",
+  "reason": "missing period at end of display"
+ },
+ {
+  "key": "8.43",
+  "kind": "ocr",
+  "page": 423,
+  "old": "x^{k}(1-x)^{n-k}\n\\]",
+  "new": "x^{k}(1-x)^{n-k},\n\\]",
+  "reason": "missing comma at end of display"
+ },
+ {
+  "key": "8.44",
+  "kind": "ocr",
+  "page": 423,
+  "old": "i.i.d. Unif( 0,1 ) r.v.s",
+  "new": "i.i.d. \\(\\operatorname{Unif}(0,1)\\) r.v.s",
+  "reason": "distribution written outside math with stray spaces"
+ },
+ {
+  "key": "8.46",
+  "kind": "ocr",
+  "page": 423,
+  "old": "i.i.d. Bern \\((1 / 2)\\) r.v.s",
+  "new": "i.i.d. \\(\\operatorname{Bern}(1 / 2)\\) r.v.s",
+  "reason": "distribution name split from its parameter"
+ },
+ {
+  "key": "8.53",
+  "kind": "ocr",
+  "page": 424,
+  "old": "r. v. before",
+  "new": "r.v. before",
+  "reason": "stray space in r.v."
+ },
+ {
+  "key": "9.2",
+  "kind": "ocr",
+  "page": 455,
+  "old": "\\(X \\sim\\) Pois(10)",
+  "new": "\\(X \\sim \\operatorname{Pois}(10)\\)",
+  "reason": "distribution outside math"
+ },
+ {
+  "key": "9.4",
+  "kind": "book",
+  "page": 455,
+  "old": "a person was arrest, given",
+  "new": "a person was arrested, given",
+  "reason": "book typo: 'how many times a person was arrest' should be 'was arrested'"
+ },
+ {
+  "key": "9.8",
+  "kind": "ocr",
+  "page": 456,
+  "old": "from the Expo(1) distribution",
+  "new": "from the \\(\\operatorname{Expo}(1)\\) distribution",
+  "reason": "distribution outside math"
+ },
+ {
+  "key": "9.9",
+  "kind": "ocr",
+  "page": 456,
+  "old": "a check for a Unif( 0,1 ) amount",
+  "new": "a check for a \\(\\operatorname{Unif}(0,1)\\) amount",
+  "reason": "distribution written outside math with stray spaces"
+ },
+ {
+  "key": "9.12",
+  "kind": "ocr",
+  "page": 457,
+  "old": "HHHTTTTHTTTHH becomes \\(\\left.\\left.\\right|_{\\text {HHH }}\\right|^{-} T T T \\mid{ }^{-} H\\) TTT \\(\\mid H H\\)",
+  "new": "\\(HHHTTTTHTTTHH\\) becomes \\begin{tabular}{|c|c|c|c|c|}\\hline \\(HHH\\) & \\(TTTT\\) & \\(H\\) & \\(TTT\\) & \\(HH\\) \\\\ \\hline\\end{tabular}",
+  "reason": "boxed run diagram garbled (second box lost a T); rebuilt as five adjacent boxes HHH|TTTT|H|TTT|HH"
+ },
+ {
+  "key": "9.22",
+  "kind": "ocr",
+  "page": 458,
+  "old": "f_{X}(x) d x\n\\]",
+  "new": "f_{X}(x) d x .\n\\]",
+  "reason": "display ends with a period in the book"
+ },
+ {
+  "key": "9.25",
+  "kind": "ocr",
+  "page": 459,
+  "old": "constant in ( 0,1 ), called",
+  "new": "constant in \\((0,1)\\), called",
+  "reason": "interval (0,1) was plain text, not math"
+ },
+ {
+  "key": "9.40",
+  "kind": "book",
+  "page": 462,
+  "old": "check that this make sense",
+  "new": "check that this makes sense",
+  "reason": "book typo: 'this make sense' should be 'this makes sense'"
+ },
+ {
+  "key": "9.41",
+  "kind": "ocr",
+  "page": 462,
+  "old": "\\(Y\\)-we can",
+  "new": "\\(Y\\)---we can",
+  "reason": "em-dash read as hyphen"
+ },
+ {
+  "key": "9.42",
+  "kind": "ocr",
+  "page": 462,
+  "old": "background variables X, which",
+  "new": "background variables \\(\\mathbf{X}\\), which",
+  "reason": "bold vector X lost math mode"
+ },
+ {
+  "key": "9.42",
+  "kind": "ocr",
+  "page": 462,
+  "old": "dependent on X, i.e., that the distribution of X given \\(Z=1\\) is different from the distribution of X given \\(Z=0\\)",
+  "new": "dependent on \\(\\mathbf{X}\\), i.e., that the distribution of \\(\\mathbf{X}\\) given \\(Z=1\\) is different from the distribution of \\(\\mathbf{X}\\) given \\(Z=0\\)",
+  "reason": "bold vector X lost math mode"
+ },
+ {
+  "key": "9.42",
+  "kind": "ocr",
+  "page": 462,
+  "old": "find a match with a similar value of X.",
+  "new": "find a match with a similar value of \\(\\mathbf{X}\\).",
+  "reason": "bold vector X lost math mode"
+ },
+ {
+  "key": "9.42",
+  "kind": "ocr",
+  "page": 462,
+  "old": "person with a similar value of X)",
+  "new": "person with a similar value of \\(\\mathbf{X}\\))",
+  "reason": "bold vector X lost math mode"
+ },
+ {
+  "key": "9.42",
+  "kind": "ocr",
+  "page": 462,
+  "old": "background characteristics X is defined",
+  "new": "background characteristics \\(\\mathbf{X}\\) is defined",
+  "reason": "bold vector X lost math mode"
+ },
+ {
+  "key": "9.42",
+  "kind": "ocr",
+  "page": 462,
+  "old": "the background variables X.",
+  "new": "the background variables \\(\\mathbf{X}\\).",
+  "reason": "bold vector X lost math mode"
+ },
+ {
+  "key": "9.51",
+  "kind": "ocr",
+  "page": 465,
+  "old": "is the smallest.\nHint:",
+  "new": "is the smallest.\\\\\nHint:",
+  "reason": "hint run into part (b) text; book prints it as its own paragraph"
+ },
+ {
+  "key": "9.55",
+  "kind": "ocr",
+  "page": 465,
+  "old": "from 1,2,...,35 each day",
+  "new": "from \\(1,2, \\ldots, 35\\) each day",
+  "reason": "number list 1,2,...,35 was plain text, not math"
+ },
+ {
+  "key": "9.57",
+  "kind": "ocr",
+  "page": 466,
+  "old": "\\(X_{1}, X 2, \\ldots",
+  "new": "\\(X_{1}, X_{2}, \\ldots",
+  "reason": "subscript lost: X 2 should be X_2"
+ },
+ {
+  "key": "9.60",
+  "kind": "ocr",
+  "page": 467,
+  "old": "i.i.d. Unif( 0,1 ).",
+  "new": "i.i.d. \\(\\operatorname{Unif}(0,1)\\).",
+  "reason": "Unif(0, 1) was plain text outside math"
+ },
+ {
+  "key": "10.6",
+  "kind": "ocr",
+  "page": 498,
+  "old": "at least -2.",
+  "new": "at least \\(-2\\).",
+  "reason": "minus sign: -2 was a text hyphen outside math"
+ },
+ {
+  "key": "10.12",
+  "kind": "ocr",
+  "page": 500,
+  "old": "\\_\\_\\_\\_ EX + EY",
+  "new": "\\_\\_\\_\\_ \\(E X+E Y\\)",
+  "reason": "right-hand side EX + EY of (f) was plain text outside math"
+ },
+ {
+  "key": "10.14",
+  "kind": "ocr",
+  "page": 500,
+  "old": "of <, >, =, or ? in each blank;",
+  "new": "of \\(<,>,=\\), or ? in each blank;",
+  "reason": "relation symbols <, >, = were plain text outside math"
+ },
+ {
+  "key": "10.17",
+  "kind": "ocr",
+  "page": 501,
+  "old": "\\right)\\) \\(P\\left(X^{2}>1\\right)\\)",
+  "new": "\\right)\\) \\_\\_\\_\\_ \\(P\\left(X^{2}>1\\right)\\)",
+  "reason": "the blank between the two sides of (c) was missing"
+ },
+ {
+  "key": "10.24",
+  "kind": "ocr",
+  "page": 502,
+  "old": "Student- \\(t\\)",
+  "new": "Student-\\(t\\)",
+  "reason": "book prints Student-t; stray space after the hyphen"
+ },
+ {
+  "key": "11.2",
+  "kind": "ocr",
+  "page": 536,
+  "old": "(In terms of s; simplify.)",
+  "new": "(In terms of \\(\\mathbf{s}\\); simplify.)",
+  "reason": "the stationary distribution is the bold vector s, which was plain text outside math"
+ },
+ {
+  "key": "11.6",
+  "kind": "ocr",
+  "page": 537,
+  "old": "state space is \\{1, 2, 3, 4\\}",
+  "new": "state space is \\(\\{1,2,3,4\\}\\)",
+  "reason": "state space set was plain text outside math"
+ },
+ {
+  "key": "11.7",
+  "kind": "ocr",
+  "page": 537,
+  "old": "stationary distribution s.",
+  "new": "stationary distribution \\(\\mathbf{s}\\).",
+  "reason": "the stationary distribution is the bold vector s, which was plain text outside math"
+ },
+ {
+  "key": "11.9",
+  "kind": "ocr",
+  "page": 538,
+  "old": "state space \\{-3, -2, -1, 0, 1, 2, 3\\}",
+  "new": "state space \\(\\{-3,-2,-1,0,1,2,3\\}\\)",
+  "reason": "state space set was plain text outside math (hyphens for minus signs)"
+ },
+ {
+  "key": "11.9",
+  "kind": "ocr",
+  "page": 538,
+  "old": "endpoint (-3 or 3)",
+  "new": "endpoint (\\(-3\\) or 3)",
+  "reason": "minus sign: -3 was a text hyphen outside math"
+ },
+ {
+  "key": "11.9",
+  "kind": "ocr",
+  "page": 538,
+  "old": "from -3 it always goes to -2.",
+  "new": "from \\(-3\\) it always goes to \\(-2\\).",
+  "reason": "minus signs: -3 and -2 were text hyphens outside math"
+ },
+ {
+  "key": "11.19",
+  "kind": "ocr",
+  "page": 541,
+  "old": "reversible.\nHint:",
+  "new": "reversible.\n\nHint:",
+  "reason": "Hint is a separate paragraph in the book; a single newline ran it into part (b)"
+ },
+ {
+  "key": "11.20",
+  "kind": "ocr",
+  "page": 542,
+  "old": "with s the stationary",
+  "new": "with \\(\\mathbf{s}\\) the stationary",
+  "reason": "bold vector s was plain text, outside math"
+ },
+ {
+  "key": "11.23",
+  "kind": "ocr",
+  "page": 542,
+  "old": "states \\{0, 1, 2\\} with",
+  "new": "states \\(\\{0,1,2\\}\\) with",
+  "reason": "set {0,1,2} was in text mode, outside math"
+ },
+ {
+  "key": "11.25",
+  "kind": "ocr",
+  "page": 543,
+  "old": "state \\(i\\).\nHint:",
+  "new": "state \\(i\\).\n\nHint:",
+  "reason": "Hint is a separate paragraph in the book; a single newline ran it into part (e)"
+ },
+ {
+  "key": "11.26",
+  "kind": "ocr",
+  "page": 545,
+  "old": "In particular, diag(n) gives",
+  "new": "In particular, \\texttt{diag(n)} gives",
+  "reason": "R code printed in typewriter font"
+ },
+ {
+  "key": "11.26",
+  "kind": "ocr",
+  "page": 545,
+  "old": "solve (A) gives",
+  "new": "\\texttt{solve(A)} gives",
+  "reason": "R code: book prints solve(A) with no space, in typewriter font"
+ },
+ {
+  "key": "11.26",
+  "kind": "ocr",
+  "page": 545,
+  "old": "and A \\%*\\% B gives",
+  "new": "and \\texttt{A \\%*\\% B} gives",
+  "reason": "R code printed in typewriter font"
+ },
+ {
+  "key": "11.26",
+  "kind": "ocr",
+  "page": 545,
+  "old": "\\(\\mathrm{A} * \\mathrm{~B}\\)",
+  "new": "\\texttt{A*B}",
+  "reason": "R code A*B was turned into math"
+ },
+ {
+  "key": "11.26",
+  "kind": "ocr",
+  "page": 545,
+  "old": "using A \\(\\%{ }^{\\wedge} \\% \\mathrm{k}\\)",
+  "new": "using \\texttt{A \\%\\^{}\\% k}",
+  "reason": "R code A %^% k was mangled into math"
+ },
+ {
+  "key": "11.26",
+  "kind": "ocr",
+  "page": 545,
+  "old": "the expm package",
+  "new": "the \\texttt{expm} package",
+  "reason": "R package name printed in typewriter font"
+ },
+ {
+  "key": "12.3",
+  "kind": "ocr",
+  "page": 568,
+  "old": "joint PMF of Y, for",
+  "new": "joint PMF of \\(\\mathbf{Y}\\), for",
+  "reason": "bold vector Y was plain text, outside math"
+ },
+ {
+  "key": "13.12",
+  "kind": "ocr",
+  "page": 590,
+  "old": "\\right) d t\n\\]",
+  "new": "\\right) d t .\n\\]",
+  "reason": "display ends with a period in the book"
+ }
+]
