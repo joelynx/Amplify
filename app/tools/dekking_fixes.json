@@ -1,0 +1,802 @@
+[
+ {
+  "key": "21.5",
+  "kind": "structure",
+  "page": 325,
+  "old": "Determine the maximum likelihood estimate for \\(\\mu\\).\n\\end{itemize}\n\n\\begin{itemize}\n  \\item[b.]",
+  "new": "Determine the maximum likelihood estimate for \\(\\mu\\).\n  \\item[b.]",
+  "reason": "parts a and b were split into two lists"
+ },
+ {
+  "key": "21.6",
+  "kind": "structure",
+  "page": 325,
+  "old": "Determine the maximum likelihood estimate for \\(\\sigma\\).\n  \\item[21.6] Let",
+  "new": "Determine the maximum likelihood estimate for \\(\\sigma\\).\n\\end{itemize}\n\n21.6 Let",
+  "reason": "21.6 was read as an item of 21.5's list"
+ },
+ {
+  "key": "21.6",
+  "kind": "structure",
+  "page": 325,
+  "old": "\\]\n  \\item[a.] Draw the likelihood \\(L(\\delta)\\).",
+  "new": "\\]\n\n\\begin{itemize}\n  \\item[a.] Draw the likelihood \\(L(\\delta)\\).",
+  "reason": "21.6's parts get their own list"
+ },
+ {
+  "key": "21.7",
+  "kind": "structure",
+  "page": 325,
+  "old": "  \\item[b.] Determine the maximum likelihood estimate for \\(\\delta\\).\n  \\item[21.7] Suppose",
+  "new": "  \\item[b.] Determine the maximum likelihood estimate for \\(\\delta\\).\n\\end{itemize}\n\n21.7 Suppose",
+  "reason": "21.7 was read as an item of 21.5's list"
+ },
+ {
+  "key": "21.8",
+  "kind": "structure",
+  "page": 326,
+  "old": "In this case what is the maximum likelihood estimate for \\(\\theta\\) ?\n  \\item[21.8] (Exercises",
+  "new": "In this case what is the maximum likelihood estimate for \\(\\theta\\) ?\n\n21.8 (Exercises",
+  "reason": "21.8 was read as an item of 21.5's list"
+ },
+ {
+  "key": "21.8",
+  "kind": "structure",
+  "page": 326,
+  "old": "\\end{tabular}\n\\end{itemize}\n\nand \\(p(a)=0\\) for all other \\(a\\).",
+  "new": "\\end{tabular}\n\nand \\(p(a)=0\\) for all other \\(a\\).",
+  "reason": "end of the list that held 21.6-21.8"
+ },
+ {
+  "key": "21.8",
+  "kind": "book",
+  "page": 93,
+  "old": "observed leave is of type starchy-green",
+  "new": "observed leaf is of type starchy-green",
+  "reason": "the book has 'the observed leave' (singular of leaves is leaf)"
+ },
+ {
+  "key": "21.8",
+  "kind": "book",
+  "page": 93,
+  "old": "observed leave is of type sugary-white",
+  "new": "observed leaf is of type sugary-white",
+  "reason": "the book has 'the observed leave' (singular of leaves is leaf)"
+ },
+ {
+  "key": "21.8",
+  "kind": "book",
+  "page": 93,
+  "old": "observed leave is of type starchy-white",
+  "new": "observed leaf is of type starchy-white",
+  "reason": "the book has 'the observed leave' (singular of leaves is leaf)"
+ },
+ {
+  "key": "21.8",
+  "kind": "book",
+  "page": 93,
+  "old": "observed leave is of type sugary-green",
+  "new": "observed leaf is of type sugary-green",
+  "reason": "the book has 'the observed leave' (singular of leaves is leaf)"
+ },
+ {
+  "key": "2.12",
+  "kind": "ocr",
+  "page": 3,
+  "old": "odd positions-in any order",
+  "new": "odd positions---in any order",
+  "reason": "em dash read as hyphen"
+ },
+ {
+  "key": "2.12",
+  "kind": "ocr",
+  "page": 3,
+  "old": "even positions-in any order",
+  "new": "even positions---in any order",
+  "reason": "em dash read as hyphen"
+ },
+ {
+  "key": "4.2",
+  "kind": "ocr",
+  "page": 9,
+  "old": "& -1 &",
+  "new": "& \\(-1\\) &",
+  "reason": "table value is a math minus sign, not a text hyphen"
+ },
+ {
+  "key": "4.6",
+  "kind": "ocr",
+  "page": 10,
+  "old": "123 .",
+  "new": "1 \\quad 2 \\quad 3 .",
+  "reason": "the three numbers 1 2 3 were merged into the single number 123"
+ },
+ {
+  "key": "4.10",
+  "kind": "ocr",
+  "page": 11,
+  "old": "and-from our point of view- completely",
+  "new": "and---from our point of view---completely",
+  "reason": "em dashes read as hyphens"
+ },
+ {
+  "key": "4.10",
+  "kind": "ocr",
+  "page": 11,
+  "old": "th floor }\\end{cases}",
+  "new": "th floor. }\\end{cases}",
+  "reason": "missing period at end of the display"
+ },
+ {
+  "key": "5.10",
+  "kind": "ocr",
+  "page": 16,
+  "old": "seconds-while",
+  "new": "seconds---while",
+  "reason": "book has an em dash ('12 seconds—while'), export has a hyphen"
+ },
+ {
+  "key": "6.10",
+  "kind": "ocr",
+  "page": 18,
+  "old": "Bernoulli random vari-\n\\end{itemize}\n\n\\begin{itemize}\n  \\item[] ables.",
+  "new": "Bernoulli random variables.",
+  "reason": "word 'variables' split at the page break (p18/p19) into 'vari-' and a second list holding 'ables.'; part a is one item"
+ },
+ {
+  "key": "6.10",
+  "kind": "ocr",
+  "page": 19,
+  "old": "\\(G e o(p)\\)",
+  "new": "\\(\\operatorname{Geo}(p)\\)",
+  "reason": "distribution name read as the math product G e o; matches the other Geo(p) in the row"
+ },
+ {
+  "key": "6.10",
+  "kind": "ocr",
+  "page": 19,
+  "old": "\\(\\lambda=-\\ln (1- p\\) )",
+  "new": "\\(\\lambda=-\\ln (1-p)\\)",
+  "reason": "closing parenthesis of ln(1-p) fell outside the math (line break in the book after '1-')"
+ },
+ {
+  "key": "6.12",
+  "kind": "ocr",
+  "page": 19,
+  "old": "\\(€ 1000\\)",
+  "new": "€1000",
+  "reason": "euro sign in math mode (no glyph in the math fonts, dropped by XeLaTeX); book prints €1000 as text like €100"
+ },
+ {
+  "key": "6.12",
+  "kind": "ocr",
+  "page": 19,
+  "old": "\\(€ 95\\)",
+  "new": "€95",
+  "reason": "euro sign in math mode (no glyph in the math fonts, dropped by XeLaTeX); book prints €95 as text like €110"
+ },
+ {
+  "key": "7.2",
+  "kind": "ocr",
+  "page": 21,
+  "old": "Determine E \\(\\left[X^{2}\\right]\\)",
+  "new": "Determine \\(\\mathrm{E}\\left[X^{2}\\right]\\)",
+  "reason": "expectation operator E left outside the math"
+ },
+ {
+  "key": "7.15",
+  "kind": "ocr",
+  "page": 22,
+  "old": "\\operatorname{Var}(r K)",
+  "new": "\\operatorname{Var}(r X)",
+  "reason": "book part a reads Var(rX) = r^2 Var(X); X misread as K"
+ },
+ {
+  "key": "8.10",
+  "kind": "ocr",
+  "page": 25,
+  "old": "Table B. 1",
+  "new": "Table B.1",
+  "reason": "table reference is 'Table B.1' with no space"
+ },
+ {
+  "key": "8.16",
+  "kind": "ocr",
+  "page": 26,
+  "old": "\\mathrm{E}[|X-Y|]\n\\]",
+  "new": "\\mathrm{E}[|X-Y|] .\n\\]",
+  "reason": "closing period of the part b display is missing"
+ },
+ {
+  "key": "9.1",
+  "kind": "ocr",
+  "page": 29,
+  "old": "\\begin{table}[h]\n\\begin{center}\n\\captionsetup{labelformat=empty}\n\\caption{Fig. 9.4. Albrecht Dürer's Melencolia I.\\\\\nAlbrecht Dürer (German, 1471-1528) Melencolia I, 1514. Engraving. Bequest of William P. Chapman, Jr., Class of 1895. Courtesy of the Herbert F. Johnson Museum of Art, Cornell University.}\n",
+  "new": "\\begin{table}[h]\n\\begin{center}\n",
+  "reason": "Fig. 9.4's caption was duplicated onto the table; the book's table has no caption"
+ },
+ {
+  "key": "9.2",
+  "kind": "ocr",
+  "page": 30,
+  "old": "-1 & ... & \\(\\cdots\\) & \\(\\cdots\\) & 1/2",
+  "new": "\\(-1\\) & \\(\\ldots\\) & \\(\\ldots\\) & \\(\\ldots\\) & 1/2",
+  "reason": "row label is minus 1 (was a text hyphen); blank cells are baseline dots in the book, not centred dots"
+ },
+ {
+  "key": "9.2",
+  "kind": "ocr",
+  "page": 30,
+  "old": "1 & ... & 1/2 & \\(\\cdots\\) & 1/2",
+  "new": "1 & \\(\\ldots\\) & 1/2 & \\(\\ldots\\) & 1/2",
+  "reason": "blank cells are baseline dots in the book, not centred dots"
+ },
+ {
+  "key": "9.5",
+  "kind": "ocr",
+  "page": 31,
+  "old": "\\(b\\) & -1 & 0 & 1",
+  "new": "\\(b\\) & \\(-1\\) & 0 & 1",
+  "reason": "column header is minus 1, was a text hyphen"
+ },
+ {
+  "key": "9.13",
+  "kind": "ocr",
+  "page": 33,
+  "old": "0 & \\text { otherwise }\\end{cases}",
+  "new": "0 & \\text { otherwise, }\\end{cases}",
+  "reason": "book has a comma after 'otherwise'"
+ },
+ {
+  "key": "9.15",
+  "kind": "ocr",
+  "page": 33,
+  "old": "larger than } 1\\end{cases}",
+  "new": "larger than } 1 .\\end{cases}",
+  "reason": "book ends the last case with a period"
+ },
+ {
+  "key": "9.15",
+  "kind": "ocr",
+  "page": 34,
+  "old": "\\(y\\) between 0 and 1.\n\\end{itemize}",
+  "new": "\\(y\\) between 0 and 1.\n\\end{itemize}\n\n\\begin{figure}[h]\n\\begin{center}\n  \\includegraphics[alt={},max width=\\textwidth]{c570910e-8abb-40ee-9023-3cd12cae0218-034_467_630_153_452}\n\\captionsetup{labelformat=empty}\n\\caption{Fig. 9.5. Drawing \\((X, Y)\\) from \\((-\\infty, a] \\times(-\\infty, b] \\cap \\Delta\\).}\n\\end{center}\n\\end{figure}",
+  "reason": "Figure 9.5 is used by 9.15a ('Use Figure 9.5'); the export had attached it to 9.16"
+ },
+ {
+  "key": "9.16",
+  "kind": "ocr",
+  "page": 34,
+  "old": "\n\n\\begin{figure}[h]\n\\begin{center}\n  \\includegraphics[alt={},max width=\\textwidth]{c570910e-8abb-40ee-9023-3cd12cae0218-034_467_630_153_452}\n\\captionsetup{labelformat=empty}\n\\caption{Fig. 9.5. Drawing \\((X, Y)\\) from \\((-\\infty, a] \\times(-\\infty, b] \\cap \\Delta\\).}\n\\end{center}\n\\end{figure}",
+  "new": "",
+  "reason": "Figure 9.5 belongs to Exercise 9.15 (moved there); 9.16 does not use it"
+ },
+ {
+  "key": "10.1",
+  "kind": "book",
+  "page": 36,
+  "old": "negative correlated",
+  "new": "negatively correlated",
+  "reason": "book prints 'negative correlated'; parallel to 'positively correlated' it should be 'negatively'"
+ },
+ {
+  "key": "10.2",
+  "kind": "ocr",
+  "page": 36,
+  "old": "-1 & 1/6 & 1/6 & 1/6 & 1/2",
+  "new": "\\(-1\\) & 1/6 & 1/6 & 1/6 & 1/2",
+  "reason": "row label is minus 1, was a text hyphen"
+ },
+ {
+  "key": "10.2",
+  "kind": "ocr",
+  "page": 36,
+  "old": "Determine E[XY].",
+  "new": "Determine \\(\\mathrm{E}[X Y]\\).",
+  "reason": "E[XY] was plain text, should be math"
+ },
+ {
+  "key": "10.5",
+  "kind": "ocr",
+  "page": 37,
+  "old": "0 & 8/72 & \\(\\cdots\\) & 10/72",
+  "new": "0 & 8/72 & \\(\\ldots\\) & 10/72",
+  "reason": "blank cells are baseline dots in the book, not centred dots"
+ },
+ {
+  "key": "10.5",
+  "kind": "ocr",
+  "page": 37,
+  "old": "12/72 & 9/72 & ... & 1/2",
+  "new": "12/72 & 9/72 & \\(\\ldots\\) & 1/2",
+  "reason": "blank-cell dots made consistent (\\ldots)"
+ },
+ {
+  "key": "10.5",
+  "kind": "ocr",
+  "page": 37,
+  "old": "2 & ... & 3/72 & \\(\\cdots\\) & ...",
+  "new": "2 & \\(\\ldots\\) & 3/72 & \\(\\ldots\\) & \\(\\ldots\\)",
+  "reason": "blank cells are baseline dots in the book, not centred dots"
+ },
+ {
+  "key": "10.5",
+  "kind": "ocr",
+  "page": 37,
+  "old": "1/3 & \\(\\cdots\\) & \\(\\cdots\\) & 1",
+  "new": "1/3 & \\(\\ldots\\) & \\(\\ldots\\) & 1",
+  "reason": "blank cells are baseline dots in the book, not centred dots"
+ },
+ {
+  "key": "10.6",
+  "kind": "ocr",
+  "page": 38,
+  "old": "Auppose \\(X\\)",
+  "new": "Suppose \\(X\\)",
+  "reason": "icon merged into 'Suppose'"
+ },
+ {
+  "key": "10.7",
+  "kind": "ocr",
+  "page": 38,
+  "old": "between -1/4 and 1/4:",
+  "new": "between \\(-1 / 4\\) and \\(1 / 4\\):",
+  "reason": "minus sign was a text hyphen"
+ },
+ {
+  "key": "10.7",
+  "kind": "ocr",
+  "page": 38,
+  "old": "0 & 1/4 - \\(\\varepsilon\\) &",
+  "new": "0 & \\(1 / 4-\\varepsilon\\) &",
+  "reason": "cell '1/4 - eps' had a text hyphen outside math; book has a minus"
+ },
+ {
+  "key": "10.7",
+  "kind": "ocr",
+  "page": 38,
+  "old": "equal to -1, 0, or 1?",
+  "new": "equal to \\(-1\\), 0, or 1?",
+  "reason": "minus sign was a text hyphen"
+ },
+ {
+  "key": "10.9",
+  "kind": "ocr",
+  "page": 39,
+  "old": "tests for the ith group?",
+  "new": "tests for the \\(i\\) th group?",
+  "reason": "the i in 'ith' is math italic in the book; was plain text"
+ },
+ {
+  "key": "10.10",
+  "kind": "ocr",
+  "page": 39,
+  "old": "0 \\leq x \\leq 3 f_{Y}(y)",
+  "new": "0 \\leq x \\leq 3 \\\\\nf_{Y}(y)",
+  "reason": "missing row break: the two marginal densities are on separate lines in the book; as exported the 2-column array has 3 cells in one row"
+ },
+ {
+  "key": "11.7",
+  "kind": "ocr",
+  "page": 45,
+  "old": "Argue-without doing any calculations- that",
+  "new": "Argue---without doing any calculations---that",
+  "reason": "the book has em dashes around 'without doing any calculations'"
+ },
+ {
+  "key": "11.9",
+  "kind": "ocr",
+  "page": 45,
+  "old": "(th \\(X\\) and \\(Y\\)",
+  "new": "Let \\(X\\) and \\(Y\\)",
+  "reason": "icon merged into 'Let'"
+ },
+ {
+  "key": "11.13",
+  "kind": "ocr",
+  "page": 46,
+  "old": "Erlang- \\(n\\)",
+  "new": "Erlang-\\(n\\)",
+  "reason": "stray space after the hyphen in 'Erlang-n'"
+ },
+ {
+  "key": "12.1",
+  "kind": "book",
+  "page": 47,
+  "old": "worngly",
+  "new": "wrongly",
+  "reason": "the book misspells 'wrongly' as 'worngly'"
+ },
+ {
+  "key": "13.1",
+  "kind": "ocr",
+  "page": 51,
+  "old": "\" \\(\\mu \\pm \\mathrm{a}\\) few \\(\\sigma\\) \"",
+  "new": "\"\\(\\mu \\pm\\) a few \\(\\sigma\\)\"",
+  "reason": "the word 'a' is prose, not math; stray spaces inside the quotes"
+ },
+ {
+  "key": "13.2",
+  "kind": "ocr",
+  "page": 51,
+  "old": "exceeds \\(€ 10\\).",
+  "new": "exceeds €10.",
+  "reason": "euro sign is prose, not math"
+ },
+ {
+  "key": "13.6",
+  "kind": "ocr",
+  "page": 52,
+  "old": "pay the player \\(€ 1\\).",
+  "new": "pay the player €1.",
+  "reason": "euro sign is prose, not math"
+ },
+ {
+  "key": "13.7",
+  "kind": "book",
+  "page": 53,
+  "old": "with distributions function",
+  "new": "with distribution function",
+  "reason": "the book has the typo 'distributions function' for 'distribution function'"
+ },
+ {
+  "key": "13.11",
+  "kind": "ocr",
+  "page": 53,
+  "old": "is 0.04.\n\\end{itemize}\n\n\\begin{itemize}\n  \\item[b.]",
+  "new": "is 0.04.\n  \\item[b.]",
+  "reason": "parts a-d are one list in the book; the export split it after part a"
+ },
+ {
+  "key": "14.8",
+  "kind": "ocr",
+  "page": 56,
+  "old": "show-using integration by parts-that",
+  "new": "show---using integration by parts---that",
+  "reason": "book has em dashes around 'using integration by parts'; Mathpix turned them into hyphens"
+ },
+ {
+  "key": "15.6",
+  "kind": "ocr",
+  "page": 60,
+  "old": "Aiven is the following",
+  "new": "Given is the following",
+  "reason": "icon merged into 'Given'"
+ },
+ {
+  "key": "16.4",
+  "kind": "ocr",
+  "page": 64,
+  "old": "\\end{array} .",
+  "new": "\\end{array}",
+  "reason": "duplicated final period after the dataset (book prints '5 5.' once)"
+ },
+ {
+  "key": "16.9",
+  "kind": "ocr",
+  "page": 65,
+  "old": "consists of -6, 1, 15.",
+  "new": "consists of \\(-6,1,15\\).",
+  "reason": "plain-text math: minus sign of -6 was a text hyphen"
+ },
+ {
+  "key": "17.3",
+  "kind": "ocr",
+  "page": 67,
+  "old": "queues with 0 women, 1 woman, 2 women, etc.\n\n\\begin{figure}[h]\n\\begin{center}\n  \\includegraphics[alt={},max width=\\textwidth]{c570910e-8abb-40ee-9023-3cd12cae0218-068_1771_1185_161_175}\n\\captionsetup{labelformat=empty}\n\\caption{Fig. 17.9. Graphical representations of different datasets from Exercise 17.1.}\n\\end{center}\n\\end{figure}\n\n\\begin{figure}[h]\n\\begin{center}\n  \\includegraphics[alt={},max width=\\textwidth]{c570910e-8abb-40ee-9023-3cd12cae0218-069_1744_1179_168_178}\n\\captionsetup{labelformat=empty}\n\\caption{Fig. 17.10. Boxplot of different datasets from Exercise 17.2.}\n\\end{center}\n\\end{figure}\n\n",
+  "new": "queues with 0 women, 1 woman, 2 women, etc.\n\n",
+  "reason": "Figures 17.9 and 17.10 belong to Exercises 17.1 and 17.2, not 17.3"
+ },
+ {
+  "key": "17.1",
+  "kind": "ocr",
+  "page": 68,
+  "old": "the dataset has been generated.",
+  "new": "the dataset has been generated.\n\n\\begin{figure}[h]\n\\begin{center}\n  \\includegraphics[alt={},max width=\\textwidth]{c570910e-8abb-40ee-9023-3cd12cae0218-068_1771_1185_161_175}\n\\captionsetup{labelformat=empty}\n\\caption{Fig. 17.9. Graphical representations of different datasets from Exercise 17.1.}\n\\end{center}\n\\end{figure}",
+  "reason": "Figure 17.9 (used by this exercise) was attached to 17.3"
+ },
+ {
+  "key": "17.2",
+  "kind": "ocr",
+  "page": 69,
+  "old": "the dataset has been generated.",
+  "new": "the dataset has been generated.\n\n\\begin{figure}[h]\n\\begin{center}\n  \\includegraphics[alt={},max width=\\textwidth]{c570910e-8abb-40ee-9023-3cd12cae0218-069_1744_1179_168_178}\n\\captionsetup{labelformat=empty}\n\\caption{Fig. 17.10. Boxplot of different datasets from Exercise 17.2.}\n\\end{center}\n\\end{figure}",
+  "reason": "Figure 17.10 (used by this exercise) was attached to 17.3"
+ },
+ {
+  "key": "17.4",
+  "kind": "book",
+  "page": 70,
+  "old": "Actuaries, 72:48, 1946",
+  "new": "Actuaries, 72:481, 1946",
+  "reason": "book prints volume:page as 72:48 but the cited one-page note (and its Table 1) is on page 481, as the same line says"
+ },
+ {
+  "key": "17.8",
+  "kind": "ocr",
+  "page": 73,
+  "old": "National Bureau of Stan-dards",
+  "new": "National Bureau of Standards",
+  "reason": "line-end hyphen kept inside \"Standards\""
+ },
+ {
+  "key": "17.9",
+  "kind": "ocr",
+  "page": 74,
+  "old": "Series B, 44:1-36, 1982. slope of the averages \\(\\bar{y} / \\bar{x}\\). In Chapter 22 we will encounter the so-called least squares estimate:\n\n\\[\n\\frac{\\sum_{i=1}^{n} x_{i} y_{i}}{\\sum_{i=1}^{n} x_{i}^{2}} .\n\\]\n\n\\begin{figure}[h]",
+  "new": "Series B, 44:1-36, 1982.\n\n\\begin{figure}[h]",
+  "reason": "rest of part b (slope of the averages, least squares display) was placed after the table source"
+ },
+ {
+  "key": "17.9",
+  "kind": "ocr",
+  "page": 75,
+  "old": "\\end{figure}\n\nCompute all three estimates for the data in Table 17.3. You need at least 5 digits accuracy, and you may use that \\(\\sum x_{i}=87.456, \\sum y_{i}=26.486\\), \\(\\sum y_{i} / x_{i}=9.369, \\sum x_{i} y_{i}=95.498\\), and \\(\\sum x_{i}^{2}=314.644\\).",
+  "new": "\\end{figure}",
+  "reason": "last paragraph of part b was placed after Figure 17.13"
+ },
+ {
+  "key": "17.9",
+  "kind": "ocr",
+  "page": 73,
+  "old": "and the\n\\end{itemize}",
+  "new": "and the slope of the averages \\(\\bar{y} / \\bar{x}\\). In Chapter 22 we will encounter the so-called least squares estimate:\n\n\\[\n\\frac{\\sum_{i=1}^{n} x_{i} y_{i}}{\\sum_{i=1}^{n} x_{i}^{2}} .\n\\]\n\nCompute all three estimates for the data in Table 17.3. You need at least 5 digits accuracy, and you may use that \\(\\sum x_{i}=87.456, \\sum y_{i}=26.486\\), \\(\\sum y_{i} / x_{i}=9.369, \\sum x_{i} y_{i}=95.498\\), and \\(\\sum x_{i}^{2}=314.644\\).\n\\end{itemize}",
+  "reason": "part b continues on page 74-75 (\"slope of the averages ...\", least squares estimate, \"Compute all three estimates ...\"); table and figure now follow the exercise"
+ },
+ {
+  "key": "18.2",
+  "kind": "ocr",
+  "page": 77,
+  "old": "\\[\n1346 \\text {. }\n\\]",
+  "new": "\\[\n\\begin{array}{llll}\n1 & 3 & 4 & 6 .\n\\end{array}\n\\]",
+  "reason": "dataset \"1 3 4 6.\" was read as the number 1346"
+ },
+ {
+  "key": "18.2",
+  "kind": "ocr",
+  "page": 77,
+  "old": "equal to 1.\n\\end{itemize}\n\n\\begin{itemize}\n  \\item[b.]",
+  "new": "equal to 1.\n  \\item[b.]",
+  "reason": "parts a and b were split into two lists at the page break"
+ },
+ {
+  "key": "18.5",
+  "kind": "ocr",
+  "page": 78,
+  "old": "Suppose we have a dataset\n\n036, which",
+  "new": "Suppose we have a dataset\n\n\\[\n\\begin{array}{lll}\n0 & 3 & 6,\n\\end{array}\n\\]\n\nwhich",
+  "reason": "displayed dataset \"0 3 6,\" was read as \"036,\" run into the text"
+ },
+ {
+  "key": "18.12",
+  "kind": "ocr",
+  "page": 80,
+  "old": "of Exercise 18.4.\n\\end{itemize}\n\n\\begin{itemize}\n  \\item[b.]",
+  "new": "of Exercise 18.4.\n  \\item[b.]",
+  "reason": "parts a and b were split into two lists at the page break"
+ },
+ {
+  "key": "19.9",
+  "kind": "ocr",
+  "page": 85,
+  "old": "a Pois \\((\\mu)\\) distribution",
+  "new": "a \\(\\operatorname{Pois}(\\mu)\\) distribution",
+  "reason": "'Pois' left outside math mode; book has Pois(mu) as one math expression, as in the hint"
+ },
+ {
+  "key": "20.11",
+  "kind": "ocr",
+  "page": 89,
+  "old": "the socalled",
+  "new": "the so-called",
+  "reason": "hyphenated compound 'so-called' joined at line-end hyphen"
+ },
+ {
+  "key": "20.11",
+  "kind": "book",
+  "page": 89,
+  "old": "Cauchy Schwartz inequality",
+  "new": "Cauchy-Schwarz inequality",
+  "reason": "book misspells the Cauchy-Schwarz inequality (H. A. Schwarz) as 'Cauchy Schwartz'"
+ },
+ {
+  "key": "21.1",
+  "kind": "ocr",
+  "page": 91,
+  "old": "\\text { First experiment: } & \\text { first red appears in } \\\\\n\\text { Second experiment: } & \\text { first red appears in } 5 \\text { th throw } \\\\\n\\text { Third experiment: } & \\text { first red appears in }\n\\end{aligned}",
+  "new": "\\text { First experiment: } & \\text { first red appears in 3rd throw } \\\\\n\\text { Second experiment: } & \\text { first red appears in 5th throw } \\\\\n\\text { Third experiment: } & \\text { first red appears in 4th throw. }\n\\end{aligned}",
+  "reason": "'3rd throw' and '4th throw.' missing from the first and third experiment lines; '5 th' spacing fixed to '5th'"
+ },
+ {
+  "key": "21.8",
+  "kind": "ocr",
+  "page": 93,
+  "old": "and sugarywhite.",
+  "new": "and sugary-white.",
+  "reason": "hyphenated compound 'sugary-white' joined at line-end hyphen"
+ },
+ {
+  "key": "21.8",
+  "kind": "ocr",
+  "page": 94,
+  "old": "type starchygreen",
+  "new": "type starchy-green",
+  "reason": "hyphenated compound 'starchy-green' joined at line-end hyphen"
+ },
+ {
+  "key": "21.11",
+  "kind": "ocr",
+  "page": 94,
+  "old": "number-say \\(N\\)-of identical",
+  "new": "number---say \\(N\\)---of identical",
+  "reason": "em-dashes around 'say N' were read as hyphens"
+ },
+ {
+  "key": "22.4",
+  "kind": "ocr",
+  "page": 96,
+  "old": "\\sum y_{i}=\\) 321",
+  "new": "\\sum y_{i}=321\\)",
+  "reason": "321 split out of the math at the line break"
+ },
+ {
+  "key": "22.11",
+  "kind": "ocr",
+  "page": 98,
+  "old": "our dataset in\n\n\\begin{figure}[h]\n\\begin{center}\n  \\includegraphics[alt={},max width=\\textwidth]{c570910e-8abb-40ee-9023-3cd12cae0218-098_509_822_835_356}\n\\captionsetup{labelformat=empty}\n\\caption{Fig. 22.7. Scatterplot of \\(y_{i}\\) versus \\(x_{i}\\).}\n\\end{center}\n\\end{figure}\n\nFigure 22.7 suggests",
+  "new": "our dataset in Figure 22.7 suggests",
+  "reason": "Fig. 22.7 split the sentence 'in Figure 22.7 suggests' into two paragraphs; figure moved below the model display (next fix)"
+ },
+ {
+  "key": "22.11",
+  "kind": "ocr",
+  "page": 98,
+  "old": "+U_{i} \\quad \\text { for } i=1,2, \\ldots, n .\n\\]\n\n\\begin{itemize}",
+  "new": "+U_{i} \\quad \\text { for } i=1,2, \\ldots, n .\n\\]\n\n\\begin{figure}[h]\n\\begin{center}\n  \\includegraphics[alt={},max width=\\textwidth]{c570910e-8abb-40ee-9023-3cd12cae0218-098_509_822_835_356}\n\\captionsetup{labelformat=empty}\n\\caption{Fig. 22.7. Scatterplot of \\(y_{i}\\) versus \\(x_{i}\\).}\n\\end{center}\n\\end{figure}\n\n\\begin{itemize}",
+  "reason": "Fig. 22.7 re-inserted after the model display, still in 22.11"
+ },
+ {
+  "key": "22.11",
+  "kind": "ocr",
+  "page": 98,
+  "old": "Infer from a-for instance, by using linear algebra-that",
+  "new": "Infer from a---for instance, by using linear algebra---that",
+  "reason": "em-dashes read as hyphens"
+ },
+ {
+  "key": "22.11",
+  "kind": "ocr",
+  "page": 99,
+  "old": "\\]\n\\end{itemize}\n\nand\n\n\\[\n\\hat{\\gamma}",
+  "new": "\\]\n\nand\n\n\\[\n\\hat{\\gamma}",
+  "reason": "'and gamma-hat = ...' is part of item b (indented in the book); list was closed too early"
+ },
+ {
+  "key": "22.11",
+  "kind": "ocr",
+  "page": 99,
+  "old": "\\right)^{2}} .\n\\]",
+  "new": "\\right)^{2}} .\n\\]\n\\end{itemize}",
+  "reason": "close the list after the gamma-hat display"
+ },
+ {
+  "key": "23.5",
+  "kind": "ocr",
+  "page": 101,
+  "old": "\\(N\\left(\\delta, \\sigma^{2}\\right)\\)\n\\end{itemize}\n\n\\begin{itemize}\n  \\item[] distribution,",
+  "new": "\\(N\\left(\\delta, \\sigma^{2}\\right)\\) distribution,",
+  "reason": "part a was split at the page break into a second list with an empty item"
+ },
+ {
+  "key": "23.7",
+  "kind": "ocr",
+  "page": 103,
+  "old": "a Pois \\((\\mu)\\) distribution",
+  "new": "a \\(\\operatorname{Pois}(\\mu)\\) distribution",
+  "reason": "distribution name left outside math with a stray space (cf. \\operatorname{Par} in 21.10)"
+ },
+ {
+  "key": "24.1",
+  "kind": "book",
+  "page": 105,
+  "old": "concluded succesfully",
+  "new": "concluded successfully",
+  "reason": "book misspells 'successfully'"
+ },
+ {
+  "key": "24.6",
+  "kind": "ocr",
+  "page": 106,
+  "old": "97.5\\% onesided",
+  "new": "97.5\\% one-sided",
+  "reason": "hyphenated compound 'one-sided' joined at line end"
+ },
+ {
+  "key": "26.1",
+  "kind": "ocr",
+  "page": 112,
+  "old": "on the basis of Table 26.2.",
+  "new": "on the basis of Table 26.2.\n\n\\begin{table}[h]\n\\begin{center}\n\\captionsetup{labelformat=empty}\n\\caption{Table 26.2. Examiners and suspects.}\n\\begin{tabular}[t]{|l|l|l|l|}\n\\hline\n\\multicolumn{2}{|l|}{} & \\multicolumn{2}{c|}{Suspect's true status} \\\\\n\\cline{3-4}\n\\multicolumn{2}{|l|}{} & Innocent & Guilty \\\\\n\\hline\nExaminer's assesment & Acquitted & 131 & 15 \\\\\n\\cline{2-4}\n & Convicted & 9 & 125 \\\\\n\\hline\n\\end{tabular}\n\\end{center}\n\\end{table}\n\nSource: F.S. Horvath and J.E. Reid. The reliability of polygraph examiner diagnosis of truth and deception. Journal of Criminal Law, Criminology, and Police Science, 62(2):276--281, 1971.",
+  "reason": "Table 26.2 and its Source line belong to 26.1, which refers to them; they were attached to 26.4 because the table is printed inside 26.4 on page 112. Header layout redone with \\cline so the blank corner and the Examiner's-assessment label span two rows as in the book (no \\multirow, and no doubled rule between the two \\multicolumn cells); the book's en dash in 276--281 restored"
+ },
+ {
+  "key": "26.1",
+  "kind": "book",
+  "page": 112,
+  "old": "Examiner's assesment",
+  "new": "Examiner's assessment",
+  "reason": "book misspells 'assessment' in the table's row header"
+ },
+ {
+  "key": "26.4",
+  "kind": "ocr",
+  "page": 111,
+  "old": "an eighthorse race",
+  "new": "an eight-horse race",
+  "reason": "hyphenated compound 'eight-horse' joined at line end"
+ },
+ {
+  "key": "26.4",
+  "kind": "ocr",
+  "page": 112,
+  "old": "lineup,\n\n\\begin{table}[h]\n\\begin{center}\n\\captionsetup{labelformat=empty}\n\\caption{Table 26.2. Examiners and suspects.}\n\\begin{tabular}[t]{|l|l|l|l|}\n\\hline\n\\multicolumn{2}{|c|}{} & \\multicolumn{2}{|l|}{Suspect's true status} \\\\\n\\hline\n &  & Innocent & Guilty \\\\\n\\hline\nExaminer's assesment & Acquitted & 131 & 15 \\\\\n\\hline\n & Convicted & 9 & 125 \\\\\n\\hline\n\\end{tabular}\n\\end{center}\n\\end{table}\n\nSource: F.S. Horvath and J.E. Reid. The reliability of polygraph examiner diagnosis of truth and deception. Journal of Criminal Law, Criminology, and Police Science, 62(2):276-281, 1971.\\\\[0pt]\nthe starting",
+  "new": "lineup, the starting",
+  "reason": "Table 26.2 and its Source line belong to Exercise 26.1 (moved there); the sentence continues directly"
+ },
+ {
+  "key": "27.6",
+  "kind": "ocr",
+  "page": 117,
+  "old": "Table II. 9 on page",
+  "new": "Table II.9 on page",
+  "reason": "spurious space in 'Table II.9'"
+ },
+ {
+  "key": "27.7",
+  "kind": "ocr",
+  "page": 117,
+  "old": "s_{b}=0.0196\\) After insulation:",
+  "new": "s_{b}=0.0196\\)\\\\\nAfter insulation:",
+  "reason": "the book prints the 'Before insulation' and 'After insulation' estimates on two separate lines; the export ran them together with no separator"
+ },
+ {
+  "key": "28.1",
+  "kind": "book",
+  "page": 119,
+  "old": "advertisements in the The Guardian",
+  "new": "advertisements in The Guardian",
+  "reason": "the book duplicates the article: 'in the The Guardian'"
+ },
+ {
+  "key": "28.2",
+  "kind": "ocr",
+  "page": 122,
+  "old": "from the \\(i\\) th group",
+  "new": "from the \\(i\\)th group",
+  "reason": "book prints 'ith'; the export split it into 'i th'"
+ },
+ {
+  "key": "28.3",
+  "kind": "ocr",
+  "page": 123,
+  "old": "\n\\end{itemize}\n\n\\begin{itemize}\n  \\item[c.]",
+  "new": "\n  \\item[c.]",
+  "reason": "parts a-b and c-d were split into two lists at the page break; the book has one list a-d"
+ },
+ {
+  "key": "28.6",
+  "kind": "book",
+  "page": 123,
+  "old": "Show that \\(S_{d}^{2}\\), as defined on page 417",
+  "new": "Show that \\(S_{p}^{2}\\), as defined on page 417",
+  "reason": "book slip in part d: page 417 is where the pooled variance S_p^2 is defined (part b), while part c places S_d^2 on page 420; with S_d^2 part d would be a trivial special case of c, so the intended estimator is S_p^2"
+ },
+ {
+  "key": "28.6",
+  "kind": "book",
+  "page": 123,
+  "old": "Is \\(S_{d}^{2}\\) also an unbiased estimator",
+  "new": "Is \\(S_{p}^{2}\\) also an unbiased estimator",
+  "reason": "same slip in part e: 'also' refers back to the estimator of part d (S_p^2), and 'What about when n=m?' only makes sense for S_p^2 (S_p^2 = S_d^2 when n=m, cf. Exercise 28.4); part c already shows S_d^2 is always unbiased"
+ }
+]
