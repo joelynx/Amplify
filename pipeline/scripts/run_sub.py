@@ -602,7 +602,16 @@ def acquire_lock(force: bool) -> None:
     LOCK.write_text(str(os.getpid()))
 
 
-def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int, wait_on_limit: bool, force_unlock: bool) -> None:
+def workers_for(cfg: dict, effort: str, override: int | None = None) -> int:
+    """How many claude processes may run while a question of this effort is next in line:
+    --workers if given, else subscription.workers_by_effort, else subscription.workers."""
+    if override:
+        return override
+    s = sub_cfg(cfg)
+    return int((s.get("workers_by_effort") or {}).get(effort) or s.get("workers", 2))
+
+
+def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int | None, wait_on_limit: bool, force_unlock: bool) -> None:
     pre = verify(cfg, app, pc, quiet=True)
     if not pre["ok"] or not pre["accepted"]:
         raise SystemExit("the request check did not pass or its wrapping is not accepted; run `run_sub.py verify` "
@@ -613,7 +622,9 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
     queue = candidates(cfg, app, pc, ids)
     if n is not None:
         queue = queue[:n]
-    print(json.dumps({"questions": len(queue), "workers": workers, "claude_code_version": version,
+    efforts = {cfg["solver"]["effort"], *(sub_cfg(cfg).get("effort_by_source") or {}).values()}
+    limits = {e: workers_for(cfg, e, workers) for e in sorted(efforts, key=effort_rank)}
+    print(json.dumps({"questions": len(queue), "workers": limits, "claude_code_version": version,
                       "model": cfg["solver"]["model"], "effort": cfg["solver"]["effort"],
                       "effort_by_source": sub_cfg(cfg).get("effort_by_source") or {},
                       "max_tokens_by_effort": sub_cfg(cfg).get("max_tokens_by_effort") or {}}), flush=True)
@@ -621,13 +632,15 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
     t0 = time.time()
     stop_reason = None
     try:
-        with ThreadPoolExecutor(max_workers=workers) as ex:
+        with ThreadPoolExecutor(max_workers=max(limits.values())) as ex:
             running: dict = {}
             while queue or running:
                 paused_until = None
-                while queue and len(running) < workers and stop_reason is None:
+                while queue and stop_reason is None:
+                    q = fetch_question(app, queue[0])
+                    if len(running) >= limits[effort_for(cfg, q["source"])]:
+                        break
                     qid = queue.pop(0)
-                    q = fetch_question(app, qid)
                     reason = image_reason(q["latexcode"])
                     if reason:  # same rule as run.py: questions with an image are not sent
                         upsert_status(pc, qid, status="skipped_image", note=reason, prompt_version=cfg["prompt_version"])
@@ -761,7 +774,7 @@ def main() -> None:
                               "will_skip": image_reason(q["latexcode"])}))
     elif a.cmd == "solve":
         ids = [int(x) for x in a.ids.split(",") if x.strip()] if a.ids else None
-        solve(cfg, app, pc, a.n, ids, a.workers or int(sub_cfg(cfg).get("workers", 2)), a.wait_on_limit, a.force_unlock)
+        solve(cfg, app, pc, a.n, ids, a.workers, a.wait_on_limit, a.force_unlock)
 
 
 if __name__ == "__main__":

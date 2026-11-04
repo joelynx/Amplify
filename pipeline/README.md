@@ -119,7 +119,7 @@ effort. `submissions_closed` is the API lock and does not apply here.
 ```
 python pipeline/scripts/run_sub.py verify [--qid N] [--accept]   # free: capture the request on a local stand-in server and check it
 python pipeline/scripts/run_sub.py status | queue [--n 20]
-python pipeline/scripts/run_sub.py solve [--n N] [--ids 1,2] [--workers W] [--wait-on-limit]
+python pipeline/scripts/run_sub.py solve [--n N] [--ids 1,2] [--workers W] [--wait-on-limit]   # parallel processes: --workers, else subscription.workers_by_effort (medium 4, high 2)
 python pipeline/scripts/run.py judge                             # XeLaTeX/KaTeX checks, assemble, app-db writes
 python pipeline/scripts/run_sub_supervise.py [--judge-every-hours 3] [--judge-workers 2]   # unattended: solve --wait-on-limit, judge (below-normal) every few hours and at the end, further rounds for the retries
 ```
