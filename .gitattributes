@@ -1,0 +1,2 @@
+# encrypted judge jobs and results (pipeline/scripts/remote_judge.py): never touch their bytes
+pipeline/jobs/**/*.enc binary
