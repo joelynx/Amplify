@@ -54,5 +54,11 @@ pipeline/*.log
 pipeline/*.err
 pipeline/*.out
 pipeline/run_sub.lock
+pipeline/.judge_key
+pipeline/jobs/*/work/
+pipeline/jobs/*/imported.json
+pipeline/jobs/*/calibration.json
+pipeline/jobs/*/*.tmp
+pipeline/jobs/_check/
 .env.local
 .env

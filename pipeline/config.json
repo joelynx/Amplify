@@ -145,6 +145,7 @@
   "batch_discount": 0.5,
   "min_batch_size": 25,
   "judge_workers": 1,
+  "judge_elsewhere": true,
   "judge_poll_seconds": 60,
   "preview_pdf": false
 }

@@ -120,7 +120,7 @@ effort. `submissions_closed` is the API lock and does not apply here.
 python pipeline/scripts/run_sub.py verify [--qid N] [--accept]   # free: capture the request on a local stand-in server and check it
 python pipeline/scripts/run_sub.py status | queue [--n 20]
 python pipeline/scripts/run_sub.py solve [--n N] [--ids 1,2] [--workers W] [--wait-on-limit]   # parallel processes: --workers, else subscription.workers_by_effort (medium 12, high 12)
-python pipeline/scripts/run.py judge                             # XeLaTeX/KaTeX checks, assemble, app-db writes
+python pipeline/scripts/run.py judge                             # XeLaTeX/KaTeX checks, assemble, app-db writes (refused while config.judge_elsewhere: see below)
 python pipeline/scripts/run_sub_supervise.py [--judge-every-hours 3] [--judge-workers 2]   # unattended: solve --wait-on-limit, judge (below-normal) every few hours and at the end, further rounds for the retries
 ```
 
@@ -140,6 +140,36 @@ human review, as in the API run; a safety-classifier stop is stored as a
 `refusal` (human review). Claude Code follows such a reply with a turn of its
 own ("Output token limit hit. Resume directly..."); the process is ended at
 that turn, since a second turn is never used.
+
+### Judging on another machine (remote_judge.py, 2026-11-05)
+
+Every XeLaTeX and KaTeX check runs on a bigger Windows machine (owner decision);
+`config.judge_elsewhere` makes `run.py judge` (and `collect`/`loop` without
+`--download-only`) refuse here. The databases never leave this machine: a job
+carries only what the judge reads for the questions waiting to be judged, the
+other machine runs the same judge code on it in a scratch folder, and the
+results come back as the rows and files the judge wrote. Jobs and results are
+committed encrypted (the repo is public) with `pipeline/.judge_key`, which git
+ignores; copy it to the other machine by hand once.
+
+```
+# once, on the other machine (Windows): clone, copy pipeline/.judge_key, then
+powershell -ExecutionPolicy Bypass -File pipeline\remote\setup.ps1   # MiKTeX with this machine's packages (remote/miktex_packages.txt), Node, uv, npm ci, a test compile
+
+# each round
+here:   python pipeline/scripts/remote_judge.py export --push          # every `received` question -> pipeline/jobs/<job>/job.enc
+there:  git pull; .venv\Scripts\python.exe -I pipeline\scripts\remote_judge.py run --push   # judges with one worker per core -> results.enc
+here:   git pull; python pipeline/scripts/remote_judge.py import [--dry-run]   # backs up both DBs, writes the verdicts, fills the app fields
+here:   python pipeline/scripts/run_sub.py solve --wait-on-limit       # sends the retries the judge asked for
+
+python pipeline/scripts/remote_judge.py export --calibrate 200 --push  # questions judged here already; `import` compares the verdicts and writes nothing
+python pipeline/scripts/remote_judge.py list | check
+```
+
+The job carries this machine's `config.json`; the other machine refuses a job
+unless its judge code and locked dependencies hash the same (`JUDGE_CODE` in the
+script), so commit and push code changes before exporting. `import` applies a
+question's verdict only if its status row is unchanged since the export.
 
 ### Old stored solutions (questions.solution): check and mechanical repair
 
@@ -185,7 +215,7 @@ renderer live in `frontend/src/components/browser/__tests__/` and run with
 
 - `config.json`: everything pinned (model, effort, batch size, prices for the cost view, source order).
 - `prompts/solver.md` (system prompt template), `prompts/format_rules.md`, `prompts/hint_examples.md`.
-- `scripts/run.py` runner (API); `scripts/run_sub.py` runner (subscription); `scripts/validate.py` checks; `scripts/assemble.py` storage;
+- `scripts/run.py` runner (API); `scripts/run_sub.py` runner (subscription); `scripts/remote_judge.py` judging on another machine; `scripts/validate.py` checks; `scripts/assemble.py` storage;
   `scripts/apply_fields.py` app-db writes; `scripts/check_pdf.py` + `scripts/check_web.mjs` compile checks;
   `scripts/common.py` shared code; `scripts/make_template.py` regenerates `templates/app_template.tex`.
 - `pipeline.db`: `status`, `finals`, `provenance`, `events`, `api_batches`, `usage` (tokens per reply).

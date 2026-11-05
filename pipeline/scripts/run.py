@@ -731,6 +731,9 @@ def main() -> None:
     a = ap.parse_args()
 
     cfg = load_config()
+    if cfg.get("judge_elsewhere") and (a.cmd == "judge" or (a.cmd in ("collect", "loop") and not a.download_only)):
+        raise SystemExit("judging runs on another machine (config judge_elsewhere): "
+                         "remote_judge.py export here, run there, import here; collect/loop need --download-only")
     pc = pipe_conn()
     if a.cmd == "check":
         check()
