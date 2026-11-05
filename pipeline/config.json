@@ -83,7 +83,7 @@
     "redo_ids_note": "Owner decision 2026-11-04: questions the API solved (at medium) before the missing-reference rewrite made their text self-contained (Burton 38, Kaczor & Nowak 30; 35 others whose only change was an encoding repair are left alone). Each is redone once at its source's effort; a question counts as done once a subscription reply exists for it.",
     "redo_ids": [2918, 2979, 2985, 3027, 3044, 3047, 3060, 3062, 3068, 3069, 3084, 3085, 3098, 3165, 3181, 3211, 3221, 3224, 3246, 3248, 3273, 3312, 3317, 3318, 3335, 3340, 3345, 3361, 3388, 6595, 6597, 6598, 6610, 6624, 6636, 6642, 6655, 6658, 13073, 13100, 13101, 13127, 13192, 13213, 13219, 13224, 13235, 13274, 13278, 13286, 13289, 13317, 13366, 13391, 13396, 13426, 13435, 13467, 13478, 13492, 13498, 13500, 13509, 13526, 13534, 13551, 13553, 13570],
     "workers": 2,
-    "workers_by_effort": {"medium": 4, "high": 2},
+    "workers_by_effort": {"medium": 12, "high": 12},
     "timeout_seconds": 3600
   },
   "max_attempts": 2,

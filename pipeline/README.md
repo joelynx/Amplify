@@ -119,7 +119,7 @@ effort. `submissions_closed` is the API lock and does not apply here.
 ```
 python pipeline/scripts/run_sub.py verify [--qid N] [--accept]   # free: capture the request on a local stand-in server and check it
 python pipeline/scripts/run_sub.py status | queue [--n 20]
-python pipeline/scripts/run_sub.py solve [--n N] [--ids 1,2] [--workers W] [--wait-on-limit]   # parallel processes: --workers, else subscription.workers_by_effort (medium 4, high 2)
+python pipeline/scripts/run_sub.py solve [--n N] [--ids 1,2] [--workers W] [--wait-on-limit]   # parallel processes: --workers, else subscription.workers_by_effort (medium 12, high 12)
 python pipeline/scripts/run.py judge                             # XeLaTeX/KaTeX checks, assemble, app-db writes
 python pipeline/scripts/run_sub_supervise.py [--judge-every-hours 3] [--judge-workers 2]   # unattended: solve --wait-on-limit, judge (below-normal) every few hours and at the end, further rounds for the retries
 ```
@@ -133,6 +133,13 @@ the request first and refuses to start unless its wrapping fingerprint (date
 and account email excluded) was accepted with `verify --accept`, and stops if Claude Code changes
 version mid-run. A usage-limit refusal costs nothing: the question goes back to
 the front of the queue and `--wait-on-limit` sleeps until the reset.
+
+A reply cut off at the output token limit is stored as the API returns one
+(stop_reason `max_tokens`), so judge gives it one blind re-solve and then
+human review, as in the API run; a safety-classifier stop is stored as a
+`refusal` (human review). Claude Code follows such a reply with a turn of its
+own ("Output token limit hit. Resume directly..."); the process is ended at
+that turn, since a second turn is never used.
 
 ### Old stored solutions (questions.solution): check and mechanical repair
 
