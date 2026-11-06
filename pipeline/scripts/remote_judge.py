@@ -391,13 +391,49 @@ def run_job(a) -> None:
     warm_up(cfg, work)
     workers = a.workers or os.cpu_count() or 4
     print(json.dumps({"job": name, "kind": job["kind"], "questions": len(job["ids"]), "workers": workers, **env}), flush=True)
+
+    # run.judge notes a crash on the question's row, but when the crash is a database write
+    # that fails (the scratch DB under the full pool) the note fails too and nothing is left.
+    crashes: list[dict] = []
+    judge_one = run.judge_one
+
+    def recorded(qid, *args):
+        try:
+            return judge_one(qid, *args)
+        except Exception as e:
+            crashes.append({"question_id": qid, "error": f"{type(e).__name__}: {e}"[:300], "at": common.now_iso()})
+            raise
+
+    run.judge_one = recorded
     t0 = time.time()
     summary = run.judge(cfg, workers)
+    passes = [dict(summary)]
+    w = workers
+    # Such a question is left `received`, or `passed` but not assembled: judge it again
+    # with a smaller pool (a crash that did leave its note is final and stays).
+    while passes[-1].get("judge_crashed") and w > 1:
+        w = max(1, w // 4)
+        pc = sqlite3.connect(common.PIPELINE_DB, timeout=60)
+        with pc:
+            pc.execute("UPDATE status SET status='received' WHERE status='passed' AND assembled=0")
+        pc.close()
+        s = run.judge(cfg, w)
+        if not s:
+            break
+        passes.append({"workers": w, **s})
+        summary["judge_crashed"] -= sum(s.values())
+        summary.update(s)
+        print(json.dumps({"judged_again": dict(s), "workers": w}), flush=True)
+    summary = +summary
     res = {"format": 1, "job": name, "finished_at": common.now_iso(), "seconds": int(time.time() - t0), "workers": workers,
-           "summary": dict(summary), "env": env, "code": job["code"]["sha256"], **collect(job, work)}
+           "summary": dict(summary), "passes": passes, "crashes": crashes, "env": env, "code": job["code"]["sha256"],
+           **collect(job, work)}
     seal(res, d / "results.enc", name, "results")
     print(json.dumps({"job": name, "seconds": res["seconds"], "judged": dict(summary), "files": len(res["files"]),
                       "events": len(res["events"])}), flush=True)
+    if crashes:
+        print(json.dumps({"crashes": len(crashes), "errors": Counter(c["error"][:120] for c in crashes).most_common(5)}),
+              flush=True)
     if not a.keep_work:
         shutil.rmtree(work, ignore_errors=True)
     if a.push:
@@ -476,10 +512,18 @@ def import_job(a) -> None:
     for q in job["ids"]:
         now = common.get_status(pc, q)
         (take if now is not None and dict(now) == job["status"][str(q)] else moved).append(q)
+    # Judging crashed there for these (still `received`, or passed but never assembled):
+    # nothing of theirs is applied, so they stay as exported and go out with the next job.
+    unfinished = [q for q in take if (r := res["status"][str(q)])["status"] == "received"
+                  or (r["status"] == "passed" and not r["assembled"])]
+    take = [q for q in take if q not in set(unfinished)]
     verdicts = Counter(res["status"][str(q)]["status"] for q in take)
-    print(json.dumps({"job": name, "judged_there": res["summary"], "seconds_there": res["seconds"],
-                      "machine": res["env"].get("machine"), "to_apply": len(take), "changed_here_since": moved[:50],
-                      "verdicts": dict(verdicts)}), flush=True)
+    print(json.dumps({"job": name, "judged_there": res["summary"], "passes": res.get("passes"), "seconds_there": res["seconds"],
+                      "machine": res["env"].get("machine"), "to_apply": len(take), "unfinished": len(unfinished),
+                      "changed_here_since": moved[:50], "verdicts": dict(verdicts)}), flush=True)
+    if res.get("crashes"):
+        print(json.dumps({"crashes_there": len(res["crashes"]),
+                          "errors": Counter(c["error"][:120] for c in res["crashes"]).most_common(5)}), flush=True)
     if a.dry_run:
         return
     stamp = time.strftime("%Y%m%d-%H%M%S")
@@ -514,7 +558,7 @@ def import_job(a) -> None:
     common.write_progress(pc)
     common.log_event(pc, None, "remote_judge", f"imported job {name}: {dict(verdicts)}; fills {fills}")
     done = {"at": common.now_iso(), "applied": len(take), "verdicts": dict(verdicts), "left_out": moved,
-            "field_fills": fills}
+            "unfinished": unfinished, "field_fills": fills}
     (d / "imported.json").write_text(json.dumps(done, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(done))
 
