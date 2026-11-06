@@ -465,18 +465,24 @@ def scope_rows(cfg: dict, app) -> list[tuple[int, str, str | None]]:
     generated is None, or the effort named in the stored generated solution ("?" if unnamed).
     Kept: questions whose `solution` kind is in config.subscription.replace, every question
     of a source in effort_by_source (those are redone when their solution came from a lower effort),
-    and the questions in redo_ids."""
+    and the questions in redo_ids. Plus api_leftover_ids, whatever their source or solution kind,
+    after everything else."""
     s = sub_cfg(cfg)
     srcs = s["sources"]
     kinds = set(s.get("replace") or ("missing", "gemini"))
     redo = set(s.get("effort_by_source") or {})
     redo_ids = set(s.get("redo_ids") or ())
+    leftover = set(s.get("api_leftover_ids") or ())
     rank = {src: i for i, src in enumerate(srcs)}
-    rows = app.execute(f"SELECT question_id, source, solution, generated_solution FROM questions "
-                       f"WHERE source IN ({','.join('?' * len(srcs))})", srcs).fetchall()
+    cols = "question_id, source, solution, generated_solution"
+    rows = app.execute(f"SELECT {cols} FROM questions WHERE source IN ({','.join('?' * len(srcs))})", srcs).fetchall()
+    have = {r[0] for r in rows}
+    if leftover:
+        rows += [r for r in app.execute(f"SELECT {cols} FROM questions WHERE question_id IN ({','.join('?' * len(leftover))})",
+                                        sorted(leftover)) if r[0] not in have]
     out = [(r[0], r[1], None if is_blank(r[3]) else (generated_effort(r[3]) or "?"))
-           for r in rows if r[1] in redo or solution_kind(r[2]) in kinds or r[0] in redo_ids]
-    out.sort(key=lambda t: (rank[t[1]], t[0]))
+           for r in rows if r[1] in redo or solution_kind(r[2]) in kinds or r[0] in redo_ids or r[0] in leftover]
+    out.sort(key=lambda t: (rank.get(t[1], len(rank)), t[0]))
     return out
 
 
@@ -850,7 +856,8 @@ def status(cfg: dict, app, pc) -> None:
     cols = ("total", "done", "human", "no_img", "judge", "retry", "redo", "todo")
     print(f"{'#':>2} {'source':56} {'effort':>6} " + " ".join(f"{c:>6}" for c in cols))
     tot: Counter = Counter()
-    for i, src in enumerate(sub_cfg(cfg)["sources"], 1):
+    srcs = sub_cfg(cfg)["sources"]
+    for i, src in enumerate(list(srcs) + sorted(set(per) - set(srcs)), 1):  # then api_leftover_ids' other sources
         c = per.get(src, Counter())
         tot.update(c)
         print(f"{i:>2} {src[:56]:56} {effort_for(cfg, src):>6} " + " ".join(f"{c[k]:>6}" for k in cols))
