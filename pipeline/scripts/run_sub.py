@@ -506,8 +506,8 @@ def candidates(cfg: dict, app, pc, ids: list[int] | None = None) -> list[int]:
     """Unfinished questions in processing order: retries first (as run.py), then by source
     priority and id. A question with a generated solution is redone only when it comes from an
     effort below what its source now gets (effort_by_source), or when it is in redo_ids and has
-    not been through the subscription yet (its text changed after the API solved it); everything
-    else is never redone."""
+    not been through the subscription yet (its text changed after the API solved it) or its
+    subscription attempt was rejected; everything else is never redone."""
     status = {r["question_id"]: r for r in pc.execute("SELECT * FROM status")}
     rows = scope_rows(cfg, app)
     if ids:
@@ -523,7 +523,8 @@ def candidates(cfg: dict, app, pc, ids: list[int] | None = None) -> list[int]:
         r = status.get(qid)
         need = effort_for(cfg, src)
         stale = src in redo and ((gen is not None and (gen == "?" or below(gen, need))) or below(last_effort(r), need))
-        stale = stale or (qid in redo_ids and not from_sub(r))
+        # a redo_ids question until its subscription redo is settled (a rejected attempt gets its retry)
+        stale = stale or (qid in redo_ids and (not from_sub(r) or r["status"] == "retry"))
         if r is not None and r["status"] in ("submitted", "received", "skipped_image", "missing_image"):
             continue
         if r is not None and r["status"] == "needs_human_review" and not below(last_effort(r), need):
