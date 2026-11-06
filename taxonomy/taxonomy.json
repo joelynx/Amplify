@@ -9402,6 +9402,62 @@
   "group": "G5",
   "subject": "Statistics",
   "topic": "Mathematical Statistics",
+  "branch": "Descriptive Statistics",
+  "subtopic": "Measures of Center",
+  "note": "sample mean, median and mode; effect of shifts, rescaling and outliers on them",
+  "est": 7,
+  "orig": [
+   "Mathematical Statistics",
+   "Descriptive Statistics",
+   "Measures of Center"
+  ]
+ },
+ {
+  "group": "G5",
+  "subject": "Statistics",
+  "topic": "Mathematical Statistics",
+  "branch": "Descriptive Statistics",
+  "subtopic": "Measures of Spread",
+  "note": "sample variance and standard deviation, range, IQR, MAD; their sensitivity to outliers",
+  "est": 4,
+  "orig": [
+   "Mathematical Statistics",
+   "Descriptive Statistics",
+   "Measures of Spread"
+  ]
+ },
+ {
+  "group": "G5",
+  "subject": "Statistics",
+  "topic": "Mathematical Statistics",
+  "branch": "Descriptive Statistics",
+  "subtopic": "Quantiles and Boxplots",
+  "note": "order statistics of a dataset, empirical quantiles and percentiles, quartiles, five-number summaries, boxplots",
+  "est": 8,
+  "orig": [
+   "Mathematical Statistics",
+   "Descriptive Statistics",
+   "Quantiles and Boxplots"
+  ]
+ },
+ {
+  "group": "G5",
+  "subject": "Statistics",
+  "topic": "Mathematical Statistics",
+  "branch": "Descriptive Statistics",
+  "subtopic": "Histograms and Empirical Distribution Functions",
+  "note": "histograms and bin widths, kernel density estimates, empirical distribution functions, scatterplots",
+  "est": 9,
+  "orig": [
+   "Mathematical Statistics",
+   "Descriptive Statistics",
+   "Histograms and Empirical Distribution Functions"
+  ]
+ },
+ {
+  "group": "G5",
+  "subject": "Statistics",
+  "topic": "Mathematical Statistics",
   "branch": "Sampling Distributions",
   "subtopic": "Sampling Distribution of the Mean",
   "note": "distribution of sample means from normal populations and two samples",
@@ -13288,6 +13344,48 @@
    "Optics",
    "Polarisation",
    "Birefringence and Optical Activity"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Electromagnetism and Special Relativity",
+  "topic": "Special Relativity",
+  "branch": "Relativistic Kinematics",
+  "subtopic": "Lorentz Transformations",
+  "note": "deriving and composing Lorentz transformations, invariance of the interval and of the wave equation, Minkowski diagrams",
+  "est": 5,
+  "orig": [
+   "Special Relativity",
+   "Relativistic Kinematics",
+   "Lorentz Transformations"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Electromagnetism and Special Relativity",
+  "topic": "Special Relativity",
+  "branch": "Relativistic Kinematics",
+  "subtopic": "Time Dilation and Length Contraction",
+  "note": "proper time, moving clocks and rods, relativity of simultaneity, twin paradox",
+  "est": 2,
+  "orig": [
+   "Special Relativity",
+   "Relativistic Kinematics",
+   "Time Dilation and Length Contraction"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Electromagnetism and Special Relativity",
+  "topic": "Special Relativity",
+  "branch": "Relativistic Kinematics",
+  "subtopic": "Relativistic Velocity Addition",
+  "note": "velocity transformation between frames, invariance of the speed of light, aberration, relativistic Doppler effect",
+  "est": 1,
+  "orig": [
+   "Special Relativity",
+   "Relativistic Kinematics",
+   "Relativistic Velocity Addition"
   ]
  },
  {

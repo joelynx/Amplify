@@ -48,7 +48,8 @@ Families are for browsing in the app only; tags are stored flat.
 | Infinite Descent | a minimal solution or counterexample yields a smaller one | Minimal Counterexample |
 | Proof by Contradiction | the contradiction carries the idea, not just the wrapper | |
 | Extremal Principle | look at the largest, smallest, first or last object and use its extremality | |
-| Explicit Construction | existence or a counterexample is shown by exhibiting the object | Counterexample Construction |
+| Explicit Construction | existence is shown by exhibiting the object | |
+| Counterexample | one explicit example refutes a general claim or shows a property fails (added 2026-11-06) | Counterexample Construction |
 | Bound and Construct | an optimum is found by proving a bound and exhibiting an example that attains it | |
 | Small Cases First | small cases are computed to find the pattern that is then proved | Pattern Spotting |
 | Working Backwards | reason from the target state or the final move | |
@@ -150,6 +151,12 @@ Families are for browsing in the app only; tags are stored flat.
 | Martingale and Optional Stopping | a martingale and a stopping theorem (or Wald) give the answer | Wald's Identity |
 | Change of Measure | switch to an equivalent measure or numeraire | Girsanov, Change of Numeraire |
 
+### Statistics moves
+| Tag | Use when | Aliases |
+|---|---|---|
+| Pivotal Quantity | a function of the data and the parameter with a known distribution is inverted into an interval or test (added 2026-11-06) | Pivot |
+| Factorization Criterion | the joint density is split as g(T; theta) h(x) to read off a sufficient statistic (added 2026-11-06) | Fisher-Neyman Factorization |
+
 ### Finance and economics moves
 | Tag | Use when | Aliases |
 |---|---|---|
@@ -178,6 +185,7 @@ Families are for browsing in the app only; tags are stored flat.
 | Method of Images | an image source replaces a boundary | |
 | Iterative Solution | guess and update until convergence (Newton, friction factor, trial and error) | |
 | Graphical Solution | the answer is read from an intersection, chart or load line | Load Line |
+| Harmonic Balance | a truncated Fourier-series ansatz for a periodic solution, coefficients fixed by the equation of motion (added 2026-11-06) | |
 
 ### Problem transformation
 | Tag | Use when | Aliases |

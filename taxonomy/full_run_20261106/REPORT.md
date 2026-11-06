@@ -28,3 +28,20 @@
 - Poissonization (1)
 - Pairing Argument (1)
 
+## Tree additions and re-file (owner, 2026-11-06)
+
+Seven subtopics added to `taxonomy.json`: Statistics > Mathematical Statistics > **Descriptive Statistics** (Measures of Center, Measures of Spread, Quantiles and Boxplots, Histograms and Empirical Distribution Functions) and Electromagnetism and Special Relativity > Special Relativity > **Relativistic Kinematics** (Lorentz Transformations, Time Dilation and Length Contraction, Relativistic Velocity Addition). The 29 questions of this run that had gone to the wastebasket for want of them, plus 9344 from the 11-02 wastebasket (mode of survey data), went through the same three stages again with the new trees and are now placed:
+
+- Descriptive Statistics > Histograms and Empirical Distribution Functions: 8
+- Descriptive Statistics > Measures of Center: 5
+- Descriptive Statistics > Measures of Spread: 4
+- Descriptive Statistics > Quantiles and Boxplots: 6
+- Relativistic Kinematics > Lorentz Transformations: 4
+- Relativistic Kinematics > Relativistic Velocity Addition: 1
+- Relativistic Kinematics > Time Dilation and Length Contraction: 2
+
+`wastebasket.csv` now holds the 25 C++ programming questions from the Quant150 book, which fit no subject. `final_labels.json` carries the new placements (`how` = `refile-...`) and the 9344 record.
+
+## Proposed tags added (owner, 2026-11-06)
+
+Pivotal Quantity, Factorization Criterion (new family Statistics moves), Counterexample (Proof methods; the alias Counterexample Construction moved here from Explicit Construction) and Harmonic Balance (Physical and engineering reasoning) are in `taxonomy/tags_draft.md` and are key tags on the questions whose tagger proposed them: Pivotal Quantity 16, Counterexample 6, Factorization Criterion 3, Harmonic Balance 3. Not added: Poissonization and Pairing Argument (one question each; Pairing already exists).

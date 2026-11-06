@@ -33,20 +33,20 @@ The machine-readable copy is `taxonomy.json`. The per-group drafts, with each on
 | Combinatorics | Enumerative Combinatorics, Graph Theory, Extremal Combinatorics, Combinatorial Geometry, Combinatorial Games and Processes, Logic and Algorithmic Puzzles | 26 | 117 | 2,005 |
 | Geometry | Plane Geometry, Solid Geometry | 11 | 51 | 596 |
 | Probability and Stochastic Processes | Probability, Stochastic Processes | 23 | 138 | 3,176 |
-| Statistics | Mathematical Statistics | 7 | 31 | 301 |
+| Statistics | Mathematical Statistics | 8 | 35 | 329 |
 | Quantitative Finance | Derivatives Pricing, Fixed Income, Portfolio Theory and Risk Management | 14 | 51 | 483 |
 | Economics | Macroeconomics | 9 | 32 | 266 |
 | Mechanics | Classical Mechanics, Oscillations and Waves, Solid Mechanics | 25 | 111 | 1,237 |
 | Fluid Mechanics | Fluid Mechanics, Compressible Flow, Hydraulics and Hydraulic Machines | 18 | 107 | 1,779 |
 | Heat Transfer | Heat and Mass Transfer | 10 | 47 | 573 |
 | Thermodynamics | Heat and Thermodynamics | 5 | 15 | 110 |
-| Electromagnetism and Special Relativity | Electromagnetism, Optics, Special Relativity | 12 | 55 | 567 |
+| Electromagnetism and Special Relativity | Electromagnetism, Optics, Special Relativity | 13 | 58 | 575 |
 | Quantum Mechanics | Quantum, Atomic and Nuclear Physics | 2 | 6 | 15 |
 | Electrical Machinery | Electric Machines | 9 | 57 | 392 |
 | Power Systems and Power Electronics | Power Electronics, Power Systems | 4 | 17 | 56 |
 | Material Science | Structure of Materials, Thermodynamics and Kinetics of Materials, Mechanical Behavior of Materials, Electrical, Magnetic, Optical and Thermal Properties, Engineering Materials | 26 | 131 | 1,044 |
 | Conventional Energy Technologies | Thermal Power Plant Engineering, Hydroelectric Power Engineering, Nuclear Power Engineering, Power Plant Economics and Operation, Non-Conventional Power and Energy Storage | 25 | 166 | 2,445 |
-| **Total** | 53 | 302 | 1,498 | 21,096 |
+| **Total** | 53 | 304 | 1,505 | 21,132 |
 
 Branch sizes: every branch has 3 to 13 subtopics, and 95% have 3 to 9, so each is a sensible unit to select.
 
@@ -989,9 +989,14 @@ _2 topic(s), 23 branches, 138 subtopics, ~3176 questions_
 
 
 # Statistics
-_1 topic(s), 7 branches, 31 subtopics, ~301 questions_
+_1 topic(s), 8 branches, 35 subtopics, ~329 questions_
 
 ## Mathematical Statistics
+### Descriptive Statistics
+- **Measures of Center** — sample mean, median and mode; effect of shifts, rescaling and outliers on them (~7)
+- **Measures of Spread** — sample variance and standard deviation, range, IQR, MAD; their sensitivity to outliers (~4)
+- **Quantiles and Boxplots** — order statistics of a dataset, empirical quantiles and percentiles, quartiles, five-number summaries, boxplots (~8)
+- **Histograms and Empirical Distribution Functions** — histograms and bin widths, kernel density estimates, empirical distribution functions, scatterplots (~9)
 ### Sampling Distributions
 - **Sampling Distribution of the Mean** — distribution of sample means from normal populations and two samples (~12)
 - **Chi-Squared, t and F Distributions** — derivation and properties of distributions arising from normal samples (~8)
@@ -1525,7 +1530,7 @@ _1 topic(s), 5 branches, 15 subtopics, ~110 questions_
 
 
 # Electromagnetism and Special Relativity
-_3 topic(s), 12 branches, 55 subtopics, ~567 questions_
+_3 topic(s), 13 branches, 58 subtopics, ~575 questions_
 
 ## Electromagnetism
 ### Electrostatics
@@ -1595,6 +1600,10 @@ _3 topic(s), 12 branches, 55 subtopics, ~567 questions_
 - **Birefringence and Optical Activity** — ordinary and extraordinary rays, wave plates, rotation of the plane of polarization (~3)
 
 ## Special Relativity
+### Relativistic Kinematics
+- **Lorentz Transformations** — deriving and composing Lorentz transformations, invariance of the interval and of the wave equation, Minkowski diagrams (~5)
+- **Time Dilation and Length Contraction** — proper time, moving clocks and rods, relativity of simultaneity, twin paradox (~2)
+- **Relativistic Velocity Addition** — velocity transformation between frames, invariance of the speed of light, aberration, relativistic Doppler effect (~1)
 ### Relativistic Dynamics
 - **Relativistic Energy and Momentum** — E-p relation, relativistic charged-particle motion (~1)
 - **Relativistic Collisions and Decays** — threshold energies, pair production, particle decays, ultra-relativistic collisions (~3)
