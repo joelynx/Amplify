@@ -1,9 +1,10 @@
 """Write the reviewed full-run labels into the app DB.
 
-Usage: python taxonomy/tools/apply_full_run.py [--apply]   (without --apply: dry run, no writes)
+Usage: python taxonomy/tools/apply_full_run.py [--labels DIR] [--apply]   (without --apply: dry run, no writes)
+  DIR holds final_labels.json; default taxonomy/full_run (the 11-02 run), e.g. taxonomy/full_run_20261106.
 
 Writes, in one transaction, only for questions still `Uncategorized`:
-  - topic/branch/subtopic from taxonomy/full_run/final_labels.json (wastebasket and subject-only rows stay Uncategorized);
+  - topic/branch/subtopic from <DIR>/final_labels.json (wastebasket and subject-only rows stay Uncategorized);
   - type, only where the column is empty (existing source types are kept);
   - question_tags rows: key and supporting technique tags, and the task tag, with their role.
 Every node must exist in taxonomy/taxonomy.json, or nothing is written. Back up the DB first.
@@ -16,10 +17,10 @@ DB = ROOT / "app" / "data" / "appdata" / "amplify.db"
 TYPES = {"objective", "numerical", "proof", "explanation/reasoning"}
 
 
-def main(apply: bool) -> None:
+def main(apply: bool, run_dir: Path) -> None:
     sys.stdout.reconfigure(encoding="utf-8")
     nodes = {(n["topic"], n["branch"], n["subtopic"]) for n in json.loads((ROOT / "taxonomy" / "taxonomy.json").read_text("utf-8"))}
-    labels = json.loads((ROOT / "taxonomy" / "full_run" / "final_labels.json").read_text("utf-8"))
+    labels = json.loads((run_dir / "final_labels.json").read_text("utf-8"))
     place, types, tags, skipped, bad = [], [], [], collections.Counter(), []
     for k, r in labels.items():
         q = int(k)
@@ -55,4 +56,6 @@ def main(apply: bool) -> None:
 
 
 if __name__ == "__main__":
-    main("--apply" in sys.argv[1:])
+    args = sys.argv[1:]
+    run_dir = ROOT / args[args.index("--labels") + 1] if "--labels" in args else ROOT / "taxonomy" / "full_run"
+    main("--apply" in args, run_dir)

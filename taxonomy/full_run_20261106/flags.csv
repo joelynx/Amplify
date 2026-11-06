@@ -1,0 +1,25 @@
+question_id,source,flags,note
+21751,de Lange and Pierrus' Solved Problems in Classical Mechanics,broken_text,Question ends at 'is'; period formula missing from question text.
+22361,Oksendal's Stochastic Differential Equations,needs_data,Statement of (2.2.15) missing from question text
+22374,Oksendal's Stochastic Differential Equations,mismatch,"Solution checks B_t+t, not B_t+4t"
+22822,Sahoo's Probability and Mathematical Statistics,mismatch,"Solution takes the circle as the full disk, not the circumference."
+22852,Sahoo's Probability and Mathematical Statistics,needs_data,lambda not given in the question; solution assumes lambda = 1.
+22977,Sahoo's Probability and Mathematical Statistics,key_conflict,Stated chi2(2n) contradicts the solution's chi2(n-1) result.
+23006,Sahoo's Probability and Mathematical Statistics,broken_text,Exponential density formula missing from question text.
+23007,Sahoo's Probability and Mathematical Statistics,broken_text,Density formula missing from question text.
+23008,Sahoo's Probability and Mathematical Statistics,broken_text,Density formula missing from question text.
+23009,Sahoo's Probability and Mathematical Statistics,key_conflict,Key 63.43 vs S >= 126.9 from chi2(5) critical 15.09.
+23347,Strang's Introduction to Linear Algebra,needs_data,"Refers to plane P from the previous exercise, not restated."
+23774,Strang's Introduction to Linear Algebra,needs_data,Refers to an unshown box; solution assumes an earlier exercise's edges
+23985,Strang's Introduction to Linear Algebra,needs_data;mismatch,matrix A missing from question; solution assumes another
+24018,Strang's Introduction to Linear Algebra,needs_data;mismatch,"matrix missing; solution uses A=[[2,2],[-1,1]]"
+24056,Strang's Introduction to Linear Algebra,needs_data,draw a chimney in a point-list matrix; no subtopic fits
+24068,Strang's Introduction to Linear Algebra,needs_data,Relies on T and A from the earlier exercise.
+24069,Strang's Introduction to Linear Algebra,needs_data,Relies on T and A from an earlier exercise.
+24071,Strang's Introduction to Linear Algebra,needs_data,No matrix given; asks which subspace rank measures.
+24227,Strang's Introduction to Linear Algebra,needs_data,Homework LP setup not restated in question
+24229,Strang's Introduction to Linear Algebra,needs_data,Depends on earlier homework setup not given here
+24230,Strang's Introduction to Linear Algebra,needs_data,First homework constraint not stated in this question
+24288,Strang's Introduction to Linear Algebra,key_conflict,Stated x omits +E term; solution gives x = 2-10000(e-E)+E.
+24580,Dekking et al.'s A Modern Introduction to Probability and Statistics,needs_data,quartile gaps of Old Faithful data; dataset not given
+24586,Dekking et al.'s A Modern Introduction to Probability and Statistics,mismatch,"solution computes mean absolute deviation, not median"
