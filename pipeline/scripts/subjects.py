@@ -217,6 +217,14 @@ def split_sections(text: str, markers: list[str]) -> tuple[dict | None, list[str
 EMPH_STAR = re.compile(r"\\(textbf|textit|emph)\{([^{}\n*]+?)\*{1,2}")
 # The same slip with the brace there as well, \emph{policy lags*}: the star would print.
 EMPH_STAR_INSIDE = re.compile(r"\\(textbf|textit|emph)\{([^{}\n*]+?)\*{1,2}\}")
+
+
+def drop_inner_star(m: re.Match) -> str:
+    """EMPH_STAR_INSIDE's replacement: the emphasis without the star, unless the star belongs to
+    a command (\\textbf{\\arabic*}, a list label)."""
+    if re.search(r"\\[A-Za-z]+$", m.group(2)):
+        return m.group(0)
+    return f"\\{m.group(1)}{{{m.group(2)}}}"
 # A line break with extra space, \\[4pt]: valid inside aligned, but the delimiter check reads its
 # \[ as an opening display bracket. The space is cosmetic, so it becomes a plain \\.
 SPACED_BREAK = re.compile(r"\\\\\[\s*-?\d*\.?\d+\s*(?:pt|em|ex|mm|cm|bp)\s*\]")
@@ -241,8 +249,9 @@ def repair_reply(text: str, markers: list[str]) -> tuple[str, list[str]]:
         if not line.lstrip().startswith("%%%") and SPACED_BREAK.search(line):
             lines[i] = SPACED_BREAK.sub(lambda m: "\\\\", line)
             notes.append(f"line {i + 1}: line break with extra space made a plain one")
-        if not lines[i].lstrip().startswith("%%%") and EMPH_STAR_INSIDE.search(lines[i]):
-            lines[i] = EMPH_STAR_INSIDE.sub(lambda m: f"\\{m.group(1)}{{{m.group(2)}}}", lines[i])
+        new = lines[i] if lines[i].lstrip().startswith("%%%") else EMPH_STAR_INSIDE.sub(drop_inner_star, lines[i])
+        if new != lines[i]:
+            lines[i] = new
             notes.append(f"line {i + 1}: stray * inside emphasis dropped")
     for i, line in enumerate(lines):
         if line.lstrip().startswith("%%%") or _brace_balance(line) <= 0 or not EMPH_STAR.search(line):
