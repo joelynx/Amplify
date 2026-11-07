@@ -78,9 +78,10 @@ def effort_for(cfg: dict, mode: str) -> str:
 
 
 def scope_rows(cfg: dict, app, ours: set[int] = frozenset()) -> list[dict]:
-    """Every question of a profiled subject with its mode, in subject order (config order)
-    and question id. A solve question that already has a generated solution is left out
-    unless it is in `ours` (it got that solution from this run)."""
+    """Every question of a profiled subject with its mode: solve questions first (they have no
+    worked solution of their own yet), then aids, each in subject order (config order) and
+    question id. A solve question that already has a generated solution is left out unless
+    it is in `ours` (it got that solution from this run)."""
     s = scfg(cfg)
     order = {name: i for i, name in enumerate(s["profiles"])}
     solve_kinds, aids_kinds = set(s.get("solve_kinds") or ()), set(s.get("aids_kinds") or ())
@@ -96,7 +97,7 @@ def scope_rows(cfg: dict, app, ours: set[int] = frozenset()) -> list[dict]:
             continue
         out.append({"id": r["question_id"], "source": r["source"], "subject": subject, "mode": mode, "kind": kind,
                     "type": r["type"], "figure": subjects.figure_reason(r["latexcode"])})
-    out.sort(key=lambda x: (order[x["subject"]], x["id"]))
+    out.sort(key=lambda x: (x["mode"] != "solve", order[x["subject"]], x["id"]))
     return out
 
 

@@ -114,7 +114,7 @@ def load_profile(cfg: dict, subject: str) -> dict[str, str]:
     out: dict[str, str] = {}
     for m in re.finditer(r"^## (\w+)\n(.*?)(?=^## |\Z)", text, flags=re.M | re.S):
         out[m.group(1)] = m.group(2).strip()
-    need = {"role", "picture", "checks", "notes_title", "notes", "takeaways", "hint_examples"}
+    need = {"role", "picture", "checks", "notes_title", "notes", "takeaways", "hint_examples", "units"}
     if need - set(out):
         raise SystemExit(f"profile {slug}.md lacks sections: {sorted(need - set(out))}")
     return out
@@ -132,7 +132,7 @@ def system_prompt(cfg: dict, mode: str, subject: str) -> str:
     fills.update({
         "NOTES_TITLE": prof["notes_title"].upper(),
         "NOTES_TITLE_LOWER": prof["notes_title"].lower(),
-        "ANSWER_KEY_RULES": read_text(SUBJECT_PROMPTS / "answer_key.md").strip(),
+        "ANSWER_KEY_RULES": read_text(SUBJECT_PROMPTS / "answer_key.md").strip().replace("{{UNITS}}", prof["units"]),
         "FORMAT_RULES": read_text(PROMPTS_DIR / "format_rules.md").strip(),
     })
     for k, v in fills.items():
@@ -215,6 +215,11 @@ def split_sections(text: str, markers: list[str]) -> tuple[dict | None, list[str
 
 
 EMPH_STAR = re.compile(r"\\(textbf|textit|emph)\{([^{}\n*]+?)\*{1,2}")
+# The same slip with the brace there as well, \emph{policy lags*}: the star would print.
+EMPH_STAR_INSIDE = re.compile(r"\\(textbf|textit|emph)\{([^{}\n*]+?)\*{1,2}\}")
+# A line break with extra space, \\[4pt]: valid inside aligned, but the delimiter check reads its
+# \[ as an opening display bracket. The space is cosmetic, so it becomes a plain \\.
+SPACED_BREAK = re.compile(r"\\\\\[\s*-?\d*\.?\d+\s*(?:pt|em|ex|mm|cm|bp)\s*\]")
 
 
 def _brace_balance(line: str) -> int:
@@ -227,9 +232,18 @@ def repair_reply(text: str, markers: list[str]) -> tuple[str, list[str]]:
     \\emph{...}, \\textit{...} or \\textbf{...} closed with a markdown * or ** instead of a
     brace (only on a line whose braces do not balance), and a marker line that is missing at
     the very start, misnamed (%%% HINT, an END of the wrong section) or doubled next to the
-    right one. Everything repaired still goes through every check; the repairs are reported."""
+    right one. A line break with extra space (\\\\[4pt]) becomes a plain one, and a star just
+    inside an emphasis's closing brace (\\emph{word*}) is dropped. Everything
+    repaired still goes through every check; the repairs are reported."""
     notes: list[str] = []
     lines = text.replace("\r\n", "\n").split("\n")
+    for i, line in enumerate(lines):
+        if not line.lstrip().startswith("%%%") and SPACED_BREAK.search(line):
+            lines[i] = SPACED_BREAK.sub(lambda m: "\\\\", line)
+            notes.append(f"line {i + 1}: line break with extra space made a plain one")
+        if not lines[i].lstrip().startswith("%%%") and EMPH_STAR_INSIDE.search(lines[i]):
+            lines[i] = EMPH_STAR_INSIDE.sub(lambda m: f"\\{m.group(1)}{{{m.group(2)}}}", lines[i])
+            notes.append(f"line {i + 1}: stray * inside emphasis dropped")
     for i, line in enumerate(lines):
         if line.lstrip().startswith("%%%") or _brace_balance(line) <= 0 or not EMPH_STAR.search(line):
             continue
@@ -317,7 +331,7 @@ UNIT_RE = re.compile(r"[A-Za-z0-9/^ .()*-]+")
 ASK_RE = re.compile(r"[A-Za-z0-9 ,.'()/+-]*")
 LABEL_RE = re.compile(r"-|[A-Za-z0-9]{1,8}(?:\.[A-Za-z0-9]{1,4}){0,2}")
 MAX_TOL_PERCENT = 50
-MICRO_BASES = ("m", "s", "F", "H", "A", "V", "W", "g", "mol", "Pa", "J")
+MICRO_BASES = ("m", "s", "F", "H", "A", "V", "W", "g", "mol", "Pa", "J", "C", "T", "Wb", "N", "L", "ohm")
 
 
 def key_unit(u: str) -> str:
@@ -331,7 +345,8 @@ def key_unit(u: str) -> str:
     u = re.sub(r"\bdegC\b", "°C", u)
     u = re.sub(r"\bdegF\b", "°F", u)
     u = re.sub(r"\bdeg\b", "°", u)
-    return re.sub(rf"\bu(?=(?:{'|'.join(MICRO_BASES)})\b)", "µ", u)
+    u = re.sub(rf"\bu(?=(?:{'|'.join(MICRO_BASES)})\b)", "µ", u)
+    return re.sub(r"ohm\b", "Ω", u)
 
 
 def unit_latex(u: str) -> str:
@@ -341,8 +356,9 @@ def unit_latex(u: str) -> str:
     if u.startswith("°"):
         rest = u[1:].strip()
         return "^{\\circ}" + (unit_latex(rest) if rest else "")
-    s = u.replace("µ", r"\mu{}")
-    s = re.sub(r"\^(-?\d+)", r"^{\1}", s)
+    s = u.replace("µ", r"\mu{}").replace("Ω", r"\Omega{}").replace("°", "{}^{\\circ}")
+    # powers: m^2, s^-1, m^0.5, m^(1/2)
+    s = re.sub(r"\^(?:\((-?\d+(?:[./]\d+)?)\)|(-?\d+(?:\.\d+)?))", lambda m: "^{" + (m[1] or m[2]) + "}", s)
     s = s.replace(" ", r"\,")
     return r"\mathrm{" + s + "}"
 
@@ -419,7 +435,11 @@ def parse_key(key_text: str, question_latex: str) -> tuple[dict | None, list[str
             if not letters or not all(re.fullmatch(r"[a-z]", x) for x in letters):
                 errors.append(f"key line {ln}: CHOICE needs option letters (a, b, ...)")
                 continue
-            if n_opts and any(ord(x) - ord("a") >= n_opts for x in letters):
+            if not n_opts:
+                errors.append(f"key line {ln}: CHOICE, but the question prints no options; when it names the "
+                              "candidates in a sentence, give the right ones as a POINTS part")
+                continue
+            if any(ord(x) - ord("a") >= n_opts for x in letters):
                 errors.append(f"key line {ln}: option {letters} but the question prints {n_opts} options")
                 continue
             current = {"label": lab, "ask": f[3] if len(f) > 3 else "", "kind": "choice",

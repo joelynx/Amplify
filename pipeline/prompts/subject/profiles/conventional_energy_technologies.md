@@ -48,3 +48,7 @@ Start from what dissolved salts and gases do to boiler water at high temperature
 
 Example 6 (nuclear):
 Work out how many fissions per second the thermal power needs from the energy released per fission; the mass of fuel used up follows from the mass of one fissioning nucleus.
+
+## units
+
+kJ/kg, kW, MW, kWh, bar, kPa, kgf/cm^2, m, m^3/s, kg/s, kg/h, K, degC, rpm, years, Rs, Rs/kWh, p/kWh

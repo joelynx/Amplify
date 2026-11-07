@@ -20,7 +20,7 @@
   },
   "subjects": {
     "note": "run_subjects.py (owner, 2026-11-07): non-math subjects on the subscription, one system prompt per subject and mode (prompts/subject/solve.md or aids.md, filled from prompts/subject/profiles/<slug>.md). solve: questions whose own solution is missing or a Gemini one get a full solution, answer key, hint and takeaways; the old solution is never sent. aids: questions with the book's own solution get an answer key, hint and takeaways built on it; the book's solution stays. The answer key (pipeline/answer_key_spec.md) goes to questions.answer_key and, for aids, the takeaways to questions.takeaways (app migration 008). Only subjects listed in profiles are in scope.",
-    "prompt_version": "s2",
+    "prompt_version": "s3",
     "model": "claude-opus-5-5",
     "effort": "medium",
     "aids_effort": "medium",
@@ -31,7 +31,17 @@
     "solution_min_chars": 400,
     "workers": 6,
     "profiles": {
-      "Conventional Energy Technologies": "conventional_energy_technologies"
+      "Conventional Energy Technologies": "conventional_energy_technologies",
+      "Material Science": "material_science",
+      "Heat Transfer": "heat_transfer",
+      "Electrical Machinery": "electrical_machinery",
+      "Economics": "economics",
+      "Mechanics": "mechanics",
+      "Fluid Mechanics": "fluid_mechanics",
+      "Power Systems and Power Electronics": "power_systems",
+      "Thermodynamics": "thermodynamics",
+      "Electromagnetism and Special Relativity": "electromagnetism",
+      "Quantum Mechanics": "quantum_mechanics"
     }
   },
   "submissions_closed": true,

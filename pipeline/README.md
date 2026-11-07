@@ -177,13 +177,15 @@ question's verdict only if its status row is unchanged since the export.
 
 ### Non-math subjects (run_subjects.py, 2026-11-07)
 
-Subjects listed in `config.subjects.profiles` (pilot: Conventional Energy
-Technologies) run on the subscription with their own system prompt: the shared
-skeleton `prompts/subject/solve.md` or `aids.md`, filled from the subject's
-profile `prompts/subject/profiles/<slug>.md` (role, physical picture, checks,
-notes section, takeaways, hint examples) and the answer-key rules
-`prompts/subject/answer_key.md`. A new subject needs only a profile file and a
-line in `profiles`.
+Subjects listed in `config.subjects.profiles` (Conventional Energy Technologies
+first, then the ten other non-math subjects on 2026-11-08) run on the
+subscription with their own system prompt: the shared skeleton
+`prompts/subject/solve.md` or `aids.md`, filled from the subject's profile
+`prompts/subject/profiles/<slug>.md` (role, physical picture, checks, notes
+section, takeaways, hint examples, the units its answer keys use) and the
+answer-key rules `prompts/subject/answer_key.md`. A new subject needs only a
+profile file and a line in `profiles`. The run sends every subject's solve
+questions before any aids question.
 
 - `solve` (solution missing or Gemini): a full solution, an
   Assumptions-and-Limits style notes section, takeaways, a Key Points checklist
