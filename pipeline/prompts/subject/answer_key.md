@@ -1,0 +1,16 @@
+- The answer key is read by a program: the quiz uses it to check the student's own answer, part by part. It is plain text lines, not LaTeX paragraphs. Write one line per thing the student answers, in the order the question asks for them, each in one of these forms:
+  PART <label> | NUMBER | <value> | <unit> | <what it is>
+  PART <label> | NUMBER | <value> | <unit> | <what it is> | TOL <percent>
+  PART <label> | CHOICE | <letter, or letters separated by commas>
+  PART <label> | TRUEFALSE | <TRUE or FALSE>
+  PART <label> | EXPRESSION | <formula in LaTeX, without delimiters>
+  PART <label> | POINTS | <what it is>
+  POINT <one thing a full-marks answer contains, in LaTeX>
+- <label>: the part's label as the question prints it, without brackets (a, b, ii); 1, 2, 3 for the items of an unlabelled list of parts; a single dash - when the question has one thing to answer. Labels must all differ: when one part asks for several things, give each its own line with the part's label followed by a dot and a number (a.1, a.2; or 1, 2, 3 when the question has no parts of its own).
+- NUMBER: for every numerical result the question asks for. <value> is a plain number with no unit, no thousands separators and no LaTeX (38.6, 0.0213, 1.25e6), rounded as in your Final answer line. <unit> is the unit that value is in, in plain ASCII: kJ/kg, kW, MW, kWh, bar, kPa, kgf/cm^2, m, m^3/s, kg/s, kg/h, K, degC, rpm, years, Rs, Rs/kWh, p/kWh; write percent for a percentage and a single dash - for a pure number. Use the unit the question asks for or states its data in. Add TOL only when the result depends on reading a chart or on property tables whose editions differ noticeably, as the relative tolerance in percent (TOL 3); otherwise leave it out.
+- <what it is>: a few plain words naming what is asked (thermal efficiency of the reheat cycle). Plain ASCII words only: no LaTeX, no symbols, and never the answer or a value from the solution. It may be left empty after the bar when the label already says enough, as for a multiple-choice question.
+- CHOICE: the correct option's letter, counting the options in the order printed and starting from a, whether the question prints them as (a), (b) or as a numbered list. When the question asks for every correct option, give all their letters separated by commas.
+- TRUEFALSE: for a statement the student marks true or false.
+- EXPRESSION: when the answer is a formula rather than a number.
+- POINTS: for every part with no single answer (explain, describe, compare, derive, draw, list): the PART line followed by 3 to 8 POINT lines, each one thing a full-marks answer must contain, one short sentence concrete enough that the student can tick it off against their own answer. For a sketch, the features the sketch must show; for a derivation, the key steps and the result.
+- Every part of the question appears in the key, and the key agrees with your Final answer line.

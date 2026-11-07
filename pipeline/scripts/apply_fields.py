@@ -1,7 +1,7 @@
 """Apply queued Answer / Hint fills to the app database.
 
 Fills are queued in pipeline.db (table `provenance`, applied_at NULL) by
-assemble.py. They are written to app/data/appdata/amplify.db only when
+assemble.py (and subjects.py, which also fills answer_key and takeaways). They are written to app/data/appdata/amplify.db only when
 config.app_db_writes is true (or --force is given), and only into fields that
 are still empty at write time. Filled fields are never overwritten, except a
 value the pipeline itself wrote earlier: a redo at a higher effort replaces it,
@@ -47,7 +47,7 @@ def apply_pending(cfg: dict, pc, *, force: bool = False, dry_run: bool = False) 
     sentinels = cfg["empty_answer_sentinels"]
     for row in pending:
         field = row["field"]
-        if field not in ("answer", "hints", gen_col):
+        if field not in ("answer", "hints", "answer_key", "takeaways", gen_col):
             continue
         cur = app.execute(f"SELECT {field} FROM questions WHERE question_id=?", (row["question_id"],)).fetchone()
         if cur is None:

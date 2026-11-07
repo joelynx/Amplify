@@ -54,6 +54,7 @@ pipeline/*.log
 pipeline/*.err
 pipeline/*.out
 pipeline/run_sub.lock
+pipeline/run_subjects.lock
 pipeline/.judge_key
 pipeline/jobs/*/work/
 pipeline/jobs/*/imported.json

@@ -58,6 +58,8 @@ JUDGE_CODE = [
     "pipeline/scripts/common.py",
     "pipeline/scripts/validate.py",
     "pipeline/scripts/assemble.py",
+    "pipeline/scripts/subjects.py",
+    "pipeline/prompts/subject/profiles/*",
     "pipeline/scripts/check_pdf.py",
     "pipeline/scripts/check_web.mjs",
     "pipeline/templates/*",

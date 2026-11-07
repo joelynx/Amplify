@@ -171,6 +171,39 @@ unless its judge code and locked dependencies hash the same (`JUDGE_CODE` in the
 script), so commit and push code changes before exporting. `import` applies a
 question's verdict only if its status row is unchanged since the export.
 
+### Non-math subjects (run_subjects.py, 2026-11-07)
+
+Subjects listed in `config.subjects.profiles` (pilot: Conventional Energy
+Technologies) run on the subscription with their own system prompt: the shared
+skeleton `prompts/subject/solve.md` or `aids.md`, filled from the subject's
+profile `prompts/subject/profiles/<slug>.md` (role, physical picture, checks,
+notes section, takeaways, hint examples) and the answer-key rules
+`prompts/subject/answer_key.md`. A new subject needs only a profile file and a
+line in `profiles`.
+
+- `solve` (solution missing or Gemini): a full solution, an
+  Assumptions-and-Limits style notes section, takeaways, a Key Points checklist
+  for descriptive parts, answer key and hint. The old solution is never sent.
+- `aids` (book solution): the book's solution is sent and kept; the reply adds
+  an answer key, hint and takeaways (`questions.takeaways`), plus a BOOK CHECK
+  line. A flagged book solution goes to human review.
+
+The answer key (`answer_key_spec.md`) is what the quiz grades: one entry per
+part (number with unit and tolerance, option letter, true/false, formula, or a
+checklist the student self-assesses against). It goes to `questions.answer_key`;
+its readable form fills an empty `answer`. A stored source answer (book option
+letter or numbers) is compared with the key, as AIME answers are for math.
+Replies are stored like run_sub.py's (status rows carry `mode` and `subject`),
+and `run.py judge` (here, or via remote_judge.py) settles them.
+
+```
+python pipeline/scripts/run_subjects.py status
+python pipeline/scripts/run_subjects.py prompt --subject "Conventional Energy Technologies" --mode solve
+python pipeline/scripts/run_subjects.py verify                      # free: the request check with these prompts
+python pipeline/scripts/run_subjects.py solve --ids 1,2,3 [--workers 6] [--wait-on-limit]
+python pipeline/scripts/run_subjects.py precheck | review [--ids ...]   # rules only, no XeLaTeX; review writes outputs/_review/<name>.html
+```
+
 ### Old stored solutions (questions.solution): check and mechanical repair
 
 These never touch the pipeline statuses or `generated_solution`.

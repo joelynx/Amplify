@@ -403,20 +403,31 @@ def judge_one(qid: int, cfg: dict, app, pc) -> str:
     # Only the source's own answer is a reference; one an earlier pipeline run filled in is not.
     own_answer = pipeline_wrote(pc, qid, "answer", q["answer"])
     stored = None if is_blank(q["answer"], cfg["empty_answer_sentinels"]) or own_answer else q["answer"]
-    res = validate_solver_text(qid, text, cfg, stored)
+    subject_mode = row["mode"] in ("solve", "aids")  # a non-math subject (subjects.py)
+    if subject_mode:
+        import subjects
+
+        res = subjects.validate_reply(qid, text, cfg, q, row["mode"], stored)
+    else:
+        res = validate_solver_text(qid, text, cfg, stored)
     write_json(d / f"validate_{attempt}.json", res)
     if not res["ok"]:
         return _fail(qid, attempt, cfg, pc, kind="feedback", errors=res["errors"], previous_text=text)
     if res.get("answer_mismatch"):
         return _fail(qid, attempt, cfg, pc, kind="blind",
                      reason=f"its final answer did not match the stored reference answer ({res.get('stored_answer')})", mismatch=True)
+    if res.get("book_problem"):  # aids: the book's own solution looks wrong; the owner decides
+        upsert_status(pc, qid, status="needs_human_review", accepted_attempt=attempt,
+                      note=f"book check: {res['book_problem'][:300]}")
+        log_event(pc, qid, "collect", f"attempt {attempt}: book check flagged: {res['book_problem'][:200]}")
+        return "book_flagged"
 
     keep_hint = not is_blank(q["hints"]) and not pipeline_wrote(pc, qid, "hints", q["hints"])
     hint_status = "skipped" if keep_hint else ("ok" if res["hint_ok"] else "failed")
     note = None if res["hint_ok"] else "hint dropped: " + "; ".join(res["hint_errors"])[:300]
     upsert_status(pc, qid, status="passed", accepted_attempt=attempt, hint_status=hint_status, note=note)
     log_event(pc, qid, "collect", f"attempt {attempt} passed; hint {hint_status}")
-    out = assemble_one(qid, cfg, app, pc)
+    out = subjects.assemble_one(qid, cfg, app, pc) if subject_mode else assemble_one(qid, cfg, app, pc)
     return "passed" if out["ok"] else "assemble_failed"
 
 

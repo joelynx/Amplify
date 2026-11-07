@@ -18,6 +18,20 @@
     "effort": "medium",
     "max_tokens": 32000
   },
+  "subjects": {
+    "note": "run_subjects.py (owner, 2026-11-07): non-math subjects on the subscription, one system prompt per subject and mode (prompts/subject/solve.md or aids.md, filled from prompts/subject/profiles/<slug>.md). solve: questions whose own solution is missing or a Gemini one get a full solution, answer key, hint and takeaways; the old solution is never sent. aids: questions with the book's own solution get an answer key, hint and takeaways built on it; the book's solution stays. The answer key (pipeline/answer_key_spec.md) goes to questions.answer_key and, for aids, the takeaways to questions.takeaways (app migration 008). Only subjects listed in profiles are in scope.",
+    "prompt_version": "s1",
+    "model": "claude-opus-5-5",
+    "effort": "medium",
+    "aids_effort": "medium",
+    "solve_kinds": ["missing", "gemini"],
+    "aids_kinds": ["book"],
+    "solution_min_chars": 400,
+    "workers": 6,
+    "profiles": {
+      "Conventional Energy Technologies": "conventional_energy_technologies"
+    }
+  },
   "submissions_closed": true,
   "submissions_closed_note": "Owner decision 2026-10-21: no more API submissions; the 585 retries and 514 unsolved questions stay as they are. run.py submit/loop refuse to send while this is true (dry runs still work).",
   "subscription": {

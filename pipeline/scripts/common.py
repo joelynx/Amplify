@@ -256,7 +256,11 @@ STATUS_EXTRA_COLUMNS = {
     "pending_attempt": "INTEGER",
     "api_failures": "INTEGER NOT NULL DEFAULT 0",
     "answer_mismatch": "INTEGER NOT NULL DEFAULT 0",
+    # non-math subjects (subjects.py): 'solve' or 'aids', and the question's subject; NULL for math
+    "mode": "TEXT",
+    "subject": "TEXT",
 }
+FINALS_EXTRA_COLUMNS = {"mode": "TEXT", "answer_key": "TEXT", "book_check": "TEXT"}
 
 
 def pipe_conn() -> sqlite3.Connection:
@@ -269,6 +273,10 @@ def pipe_conn() -> sqlite3.Connection:
     for col, decl in STATUS_EXTRA_COLUMNS.items():
         if col not in have:
             conn.execute(f"ALTER TABLE status ADD COLUMN {col} {decl}")
+    have = {r[1] for r in conn.execute("PRAGMA table_info(finals)")}
+    for col, decl in FINALS_EXTRA_COLUMNS.items():
+        if col not in have:
+            conn.execute(f"ALTER TABLE finals ADD COLUMN {col} {decl}")
     conn.commit()
     return conn
 
