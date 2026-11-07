@@ -539,12 +539,16 @@ def stored_reference(stored: str | None) -> dict | None:
     return {"kind": "numbers", "value": nums} if nums else None
 
 
+UNIT_FACTORS = (1, 1e3, 1e-3, 1e6, 1e-6, 100, 0.01, 3600, 1 / 3600, 60, 1 / 60)
+
+
 def close(a: float, b: float, tol: float) -> bool:
-    """Equal within a relative tolerance, allowing a power-of-ten unit difference (kW against
-    MW, a fraction against a percentage)."""
+    """Equal within a relative tolerance, allowing a unit difference the stored answer often
+    has: a power of ten (kW against MW), a fraction against a percentage, per hour or per
+    minute against per second (kg/h against kg/s)."""
     if b == 0:
         return abs(a) <= 1e-9
-    return any(abs(a * f - b) <= tol * abs(b) for f in (1, 1e3, 1e-3, 1e6, 1e-6, 100, 0.01))
+    return any(abs(a * f - b) <= tol * abs(b) for f in UNIT_FACTORS)
 
 
 def reference_mismatch(key: dict, ref: dict | None) -> str | None:
