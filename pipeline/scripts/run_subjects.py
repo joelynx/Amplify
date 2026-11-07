@@ -197,11 +197,11 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
     summary: Counter = Counter()
     t0 = time.time()
     stop_reason = None
+    paused_until = None  # the reset time of the limit that stopped the run (kept until the wait)
     try:
         with ThreadPoolExecutor(max_workers=limit) as ex:
             running: dict = {}
             while queue or running:
-                paused_until = None
                 while queue and stop_reason is None and len(running) < limit:
                     x = queue.pop(0)
                     qid, mode = x["id"], x["mode"]
@@ -254,7 +254,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         secs = max(60, min(int(until - time.time()) + 120, 1020))  # short polls catch a /login switch
                         print(f"{stop_reason}; waiting {secs // 60} min, then continuing", flush=True)
                         time.sleep(secs)
-                        stop_reason = None
+                        stop_reason = paused_until = None
                         continue
                     break
     finally:
