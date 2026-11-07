@@ -15,6 +15,7 @@ Usage (from the repo root):
   python pipeline/scripts/run_subjects.py prompt   --subject NAME --mode solve|aids   # print the system prompt
   python pipeline/scripts/run_subjects.py verify                                     # free request check
   python pipeline/scripts/run_subjects.py solve    [--n N] [--ids 1,2,3] [--workers W] [--wait-on-limit]
+  python pipeline/scripts/run_subjects.py tiebreak [--list] [--workers W]   # third solve, high effort, after two disagreed with the stored answer
   python pipeline/scripts/run_subjects.py precheck [--ids ...]   # structure and LaTeX rules only (no XeLaTeX)
   python pipeline/scripts/run_subjects.py review   [--ids ...]   # local HTML page of the replies
 """
@@ -176,8 +177,32 @@ def verify(cfg: dict, app, pc, quiet: bool = False) -> dict:
 # --- solve ----------------------------------------------------------------------------
 
 
+def tiebreak_rows(cfg: dict, app, pc, ids: list[int] | None = None) -> list[dict]:
+    """Solve questions whose solves disagreed with the stored answer and that have no tie-break yet:
+    those sent to human review for it, and second attempts received but not judged whose reply is
+    well formed and still disagrees (checked here without the PDF and web compiles)."""
+    status = {r["question_id"]: r for r in pc.execute("SELECT * FROM status WHERE mode='solve' AND tiebreak=0")}
+    rows = {x["id"]: x for x in scope_rows(cfg, app, set(status))}
+    out = []
+    for qid, r in sorted(status.items()):
+        if (ids and qid not in ids) or qid not in rows or int(r["attempts"] or 0) < 2:
+            continue
+        if r["status"] == "needs_human_review" and r["answer_mismatch"]:
+            out.append(rows[qid])
+        elif r["status"] == "received":
+            q = fetch_question(app, qid)
+            stored = None if is_blank(q["answer"], cfg["empty_answer_sentinels"]) else q["answer"]
+            res = subjects.validate_reply(qid, read_text(q_dir(qid) / f"solver_{r['attempts']}.tex"), cfg, q, "solve",
+                                          stored, compile_checks=False)
+            if res["ok"] and res.get("answer_mismatch"):
+                out.append(rows[qid])
+    return out
+
+
 def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int | None, wait_on_limit: bool,
-          force_unlock: bool) -> None:
+          force_unlock: bool, tiebreak: bool = False) -> None:
+    """Send the unfinished questions; with tiebreak, a third solve at config.subjects.tiebreak_effort
+    for the questions tiebreak_rows names (the stored answer is never sent)."""
     pre = verify(cfg, app, pc, quiet=True)
     if not pre["ok"]:
         raise SystemExit("the request check failed or the wrapping is not accepted; run `run_subjects.py verify`")
@@ -186,14 +211,14 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
     if LOCK.exists() and not force_unlock:
         raise SystemExit(f"{LOCK.as_posix()} exists: another solve may be running (pid {LOCK.read_text().strip()})")
     LOCK.write_text(str(os.getpid()))
-    queue = candidates(cfg, app, pc, ids)
+    queue = tiebreak_rows(cfg, app, pc, ids) if tiebreak else candidates(cfg, app, pc, ids)
     if n is not None:
         queue = queue[:n]
     limit = workers or int(scfg(cfg).get("workers", 4))
     files: dict[tuple[str, str], Path] = {}
     print(json.dumps({"questions": len(queue), "workers": limit, "claude_code_version": version,
                       "model": ccfg["solver"]["model"], "modes": dict(Counter(x["mode"] for x in queue)),
-                      "prompt_version": ccfg["prompt_version"]}), flush=True)
+                      "prompt_version": ccfg["prompt_version"], **({"tiebreak": True} if tiebreak else {})}), flush=True)
     summary: Counter = Counter()
     t0 = time.time()
     stop_reason = None
@@ -215,8 +240,8 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         files[(mode, x["subject"])] = system_file(cfg, mode, x["subject"])[0]
                     q = fetch_question(app, qid)
                     attempt, feedback = plan_attempt(pc, qid)
-                    effort = effort_for(cfg, mode)
-                    upsert_status(pc, qid, mode=mode, subject=x["subject"])
+                    effort = scfg(cfg)["tiebreak_effort"] if tiebreak else effort_for(cfg, mode)
+                    upsert_status(pc, qid, mode=mode, subject=x["subject"], **({"tiebreak": 1} if tiebreak else {}))
                     fut = ex.submit(run_sub.call_claude, ccfg, files[(mode, x["subject"])],
                                     subjects.user_text(q, mode, feedback, cfg), effort)
                     running[fut] = (qid, attempt, effort, mode)
@@ -459,12 +484,15 @@ def main() -> None:
     p.add_argument("--subject", required=True)
     p.add_argument("--solve", type=int, default=20)
     p.add_argument("--aids", type=int, default=6)
-    p = sp.add_parser("solve")
-    p.add_argument("--n", type=int)
-    p.add_argument("--ids")
-    p.add_argument("--workers", type=int)
-    p.add_argument("--wait-on-limit", action="store_true")
-    p.add_argument("--force-unlock", action="store_true")
+    for name in ("solve", "tiebreak"):
+        p = sp.add_parser(name)
+        p.add_argument("--n", type=int)
+        p.add_argument("--ids")
+        p.add_argument("--workers", type=int)
+        p.add_argument("--wait-on-limit", action="store_true")
+        p.add_argument("--force-unlock", action="store_true")
+        if name == "tiebreak":
+            p.add_argument("--list", action="store_true", help="only list the questions")
     for name in ("precheck", "review"):
         p = sp.add_parser(name)
         p.add_argument("--ids")
@@ -490,6 +518,11 @@ def main() -> None:
         print(",".join(map(str, pilot_ids(cfg, app, a.subject, a.solve, a.aids))))
     elif a.cmd == "solve":
         solve(cfg, app, pc, a.n, ids, a.workers, a.wait_on_limit, a.force_unlock)
+    elif a.cmd == "tiebreak":
+        if a.list:
+            print(",".join(str(x["id"]) for x in tiebreak_rows(cfg, app, pc, ids)))
+        else:
+            solve(cfg, app, pc, a.n, ids, a.workers, a.wait_on_limit, a.force_unlock, tiebreak=True)
     elif a.cmd == "precheck":
         precheck(cfg, app, pc, ids)
     elif a.cmd == "review":

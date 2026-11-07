@@ -410,10 +410,23 @@ def judge_one(qid: int, cfg: dict, app, pc) -> str:
         res = subjects.validate_reply(qid, text, cfg, q, row["mode"], stored)
     else:
         res = validate_solver_text(qid, text, cfg, stored)
+    tiebreak_note = None
+    if subject_mode and row["tiebreak"] and res["ok"] and res.get("answer_mismatch"):
+        # The high-effort tie-break (owner 2026-11-07): agreeing with an earlier solve against the
+        # stored answer, it is accepted and replaces that answer; agreeing with neither, a person decides.
+        agree = subjects.earlier_agreement(qid, attempt, q, row["mode"])
+        res["tiebreak_agrees_with_attempt"] = agree
+        if agree is None:
+            write_json(d / f"validate_{attempt}.json", res)
+            upsert_status(pc, qid, status="needs_human_review", accepted_attempt=attempt, answer_mismatch=1,
+                          note=f"tie-break: disagrees with the stored answer ({stored}) and with every earlier solve")
+            log_event(pc, qid, "collect", f"attempt {attempt} (tie-break) agrees with neither the stored answer nor an earlier solve")
+            return "tiebreak_split"
+        tiebreak_note = f"tie-break agrees with attempt {agree}; replaces the stored answer ({stored})"
     write_json(d / f"validate_{attempt}.json", res)
     if not res["ok"]:
         return _fail(qid, attempt, cfg, pc, kind="feedback", errors=res["errors"], previous_text=text)
-    if res.get("answer_mismatch"):
+    if res.get("answer_mismatch") and tiebreak_note is None:
         return _fail(qid, attempt, cfg, pc, kind="blind",
                      reason=f"its final answer did not match the stored reference answer ({res.get('stored_answer')})", mismatch=True)
     if res.get("book_problem"):  # aids: the book's own solution looks wrong; the owner decides
@@ -425,7 +438,12 @@ def judge_one(qid: int, cfg: dict, app, pc) -> str:
     keep_hint = not is_blank(q["hints"]) and not pipeline_wrote(pc, qid, "hints", q["hints"])
     hint_status = "skipped" if keep_hint else ("ok" if res["hint_ok"] else "failed")
     note = None if res["hint_ok"] else "hint dropped: " + "; ".join(res["hint_errors"])[:300]
-    upsert_status(pc, qid, status="passed", accepted_attempt=attempt, hint_status=hint_status, note=note)
+    if tiebreak_note:
+        note = tiebreak_note + ("; " + note if note else "")
+    # A subject question's flag says whether the accepted reply disagrees with the stored answer (an
+    # accepted tie-break replaces it); math rows keep the flag of their history.
+    extra = {"answer_mismatch": int(tiebreak_note is not None)} if subject_mode else {}
+    upsert_status(pc, qid, status="passed", accepted_attempt=attempt, hint_status=hint_status, note=note, **extra)
     log_event(pc, qid, "collect", f"attempt {attempt} passed; hint {hint_status}")
     out = subjects.assemble_one(qid, cfg, app, pc) if subject_mode else assemble_one(qid, cfg, app, pc)
     return "passed" if out["ok"] else "assemble_failed"

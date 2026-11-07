@@ -47,12 +47,15 @@ def apply_pending(cfg: dict, pc, *, force: bool = False, dry_run: bool = False) 
     sentinels = cfg["empty_answer_sentinels"]
     for row in pending:
         field = row["field"]
-        if field not in ("answer", "hints", "answer_key", "takeaways", gen_col):
+        if field not in ("answer", "hints", "answer_key", "takeaways", "answer_replace", gen_col):
             continue
-        cur = app.execute(f"SELECT {field} FROM questions WHERE question_id=?", (row["question_id"],)).fetchone()
+        # answer_replace: the source's answer, which a high-effort tie-break showed to be wrong (owner
+        # 2026-11-07), is overwritten; its old value is kept in provenance as answer_before_replace.
+        col = "answer" if field == "answer_replace" else field
+        cur = app.execute(f"SELECT {col} FROM questions WHERE question_id=?", (row["question_id"],)).fetchone()
         if cur is None:
             continue
-        if field == gen_col:
+        if field in (gen_col, "answer_replace"):
             # Pipeline-owned column: a newer run may replace an older one.
             empty = True
         else:
@@ -66,11 +69,17 @@ def apply_pending(cfg: dict, pc, *, force: bool = False, dry_run: bool = False) 
         if dry_run:
             applied += 1
             continue
-        app.execute(f"UPDATE questions SET {field}=? WHERE question_id=?", (row["value"], row["question_id"]))
+        if field == "answer_replace":
+            now = now_iso()
+            pc.executemany("INSERT INTO provenance (question_id, field, value, prompt_version, created_at, applied_at) "
+                           "VALUES (?,?,?,?,?,?)",
+                           [(row["question_id"], "answer_before_replace", cur[0], row["prompt_version"], now, "recorded"),
+                            (row["question_id"], "answer", row["value"], row["prompt_version"], now, now)])
+        app.execute(f"UPDATE questions SET {col}=? WHERE question_id=?", (row["value"], row["question_id"]))
         pc.execute("UPDATE provenance SET applied_at=? WHERE id=?", (now_iso(), row["id"]))
-        if field in ("answer", "hints"):
-            col = "answer_filled" if field == "answer" else "hint_filled"
-            pc.execute(f"UPDATE finals SET {col}=1 WHERE question_id=?", (row["question_id"],))
+        if col in ("answer", "hints"):
+            flag = "answer_filled" if col == "answer" else "hint_filled"
+            pc.execute(f"UPDATE finals SET {flag}=1 WHERE question_id=?", (row["question_id"],))
         applied += 1
     if not dry_run:
         app.commit()

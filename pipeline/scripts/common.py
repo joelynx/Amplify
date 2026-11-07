@@ -259,6 +259,8 @@ STATUS_EXTRA_COLUMNS = {
     # non-math subjects (subjects.py): 'solve' or 'aids', and the question's subject; NULL for math
     "mode": "TEXT",
     "subject": "TEXT",
+    # a third, high-effort solve after two solves disagreed with the stored answer (owner 2026-11-07)
+    "tiebreak": "INTEGER NOT NULL DEFAULT 0",
 }
 FINALS_EXTRA_COLUMNS = {"mode": "TEXT", "answer_key": "TEXT", "book_check": "TEXT"}
 

@@ -574,6 +574,43 @@ def reference_mismatch(key: dict, ref: dict | None) -> str | None:
     return None
 
 
+def keys_agree(a: list[dict], b: list[dict]) -> bool:
+    """Two answer keys give the same definite answers: as many numbers, each pair within 3
+    percent (or the larger part tolerance), and the same options and true/false values."""
+    def pick(parts: list[dict], kind: str) -> list[dict]:
+        return [p for p in parts if p["kind"] == kind]
+
+    def norm(v):
+        return sorted(v) if isinstance(v, list) else v
+
+    na, nb = pick(a, "number"), pick(b, "number")
+    if len(na) != len(nb) or any(not close(float(x["value"]), float(y["value"]),
+                                           max(x.get("tol") or 0, y.get("tol") or 0, 0.03)) for x, y in zip(na, nb)):
+        return False
+    for kind in ("choice", "truefalse"):
+        ca, cb = pick(a, kind), pick(b, kind)
+        if len(ca) != len(cb) or any(norm(x["value"]) != norm(y["value"]) for x, y in zip(ca, cb)):
+            return False
+    return bool(na or pick(a, "choice") or pick(a, "truefalse"))
+
+
+def earlier_agreement(qid: int, attempt: int, q: dict, mode: str) -> int | None:
+    """The latest earlier attempt whose answer key gives the same definite answers as this one's
+    (a tie-break agreeing with an earlier solve against the stored answer), or None."""
+    d = q_dir(qid)
+    now = parse_reply(read_text(d / f"solver_{attempt}.tex"), mode)[0]
+    key, _ = parse_key(now["key_text"], q["latexcode"]) if now else (None, [])
+    if key is None:
+        return None
+    for att in range(attempt - 1, 0, -1):
+        f = d / f"solver_{att}.tex"
+        parts = parse_reply(read_text(f), mode)[0] if f.exists() else None
+        old, _ = parse_key(parts["key_text"], q["latexcode"]) if parts else (None, [])
+        if old is not None and keys_agree(key["parts"], old["parts"]):
+            return att
+    return None
+
+
 def hint_leaks(hint: str, key: dict) -> list[str]:
     """The hint must not carry a value of the key."""
     errs = []
@@ -743,10 +780,14 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
     ans_empty = is_blank(q["answer"], sentinels) or pipeline_wrote(pc, qid, "answer", q["answer"])
     hint_empty = is_blank(q["hints"]) or pipeline_wrote(pc, qid, "hints", q["hints"])
     fill_answer = answer_value if (ans_empty and answer_value and row["status"] == "passed") else None
+    # A tie-break that agreed with an earlier solve against the stored answer replaces that answer.
+    replace_answer = answer_value if (row["tiebreak"] and row["answer_mismatch"] and answer_value) else None
+    if replace_answer:
+        fill_answer = None
     fill_hint = hint if (hint_empty and hint) else None
     gen_col = cfg.get("generated_solution_column") or "generated_solution"
-    fields = ((gen_col, final), ("takeaways", takeaways_value), ("answer", fill_answer), ("answer_key", key_json),
-              ("hints", fill_hint))
+    fields = ((gen_col, final), ("takeaways", takeaways_value), ("answer", fill_answer),
+              ("answer_replace", replace_answer), ("answer_key", key_json), ("hints", fill_hint))
     write_json(d / "final_app.json", {"question_id": qid, "mode": mode, "subject": row["subject"],
                                       **{f: v for f, v in fields}, "status": row["status"], "accepted_attempt": acc,
                                       "model": acc_model, "effort": acc_effort,
@@ -758,7 +799,7 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
             mode, answer_key, book_check)
            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
         (qid, row["status"], final, parts.get("solution"), parts.get("notes"), parts["takeaways"], "KEY",
-         answer_value, hint, fill_answer, fill_hint, 0, 0, subj_cfg(cfg)["prompt_version"], now_iso(),
+         answer_value, hint, fill_answer or replace_answer, fill_hint, 0, 0, subj_cfg(cfg)["prompt_version"], now_iso(),
          mode, key_json, parts.get("book_check")),
     )
     for field, value in fields:
@@ -770,5 +811,6 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
                        (qid, field, value, subj_cfg(cfg)["prompt_version"], now_iso()))
     pc.commit()
     upsert_status(pc, qid, assembled=1)
-    log_event(pc, qid, "assemble", f"ok ({mode}); fills answer={fill_answer is not None} hint={fill_hint is not None}")
+    log_event(pc, qid, "assemble", f"ok ({mode}); fills answer={fill_answer is not None} hint={fill_hint is not None}"
+                                   + ("; replaces the stored answer" if replace_answer else ""))
     return {"question_id": qid, "ok": True, "mode": mode, "answer_field": fill_answer, "parts": len(key["parts"])}
