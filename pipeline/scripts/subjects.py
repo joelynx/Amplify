@@ -60,6 +60,8 @@ AIDS_MARKERS = [
     "%%% BEGIN HINT", "%%% END HINT",
 ]
 KINDS = ("NUMBER", "CHOICE", "TRUEFALSE", "EXPRESSION", "POINTS")
+# How run.judge_one words a blind re-solve after a disagreement with the stored answer.
+MISMATCH_REASON = "its final answer did not match the stored reference answer"
 
 # Prose that points at a figure the question does not carry. Unlike the math run's rule, a
 # question that asks the student to draw ("explain with a neat sketch") is not skipped: the
@@ -158,6 +160,14 @@ def user_text(q: dict, mode: str, feedback: dict | None, cfg: dict) -> str:
             "for these reasons:\n" + bullets + "\n\n"
             "Write the complete reply again in the required structure with these problems fixed. "
             "Do not mention the previous reply.\n\nPREVIOUS REPLY:\n" + feedback["previous_text"].strip() + "\n"
+        )
+    elif feedback["reason"].startswith(MISMATCH_REASON):
+        # Never the stored answer itself: these books' answers are often wrong, and a solver
+        # told the expected value bends its working to reach it.
+        text += (
+            "\nNote: an earlier attempt at this question gave a final result that disagrees with a reference "
+            "answer, which may itself be wrong. Work it carefully from scratch and double-check every final value; "
+            "if the question lacks data needed for a result, say so rather than assuming a value.\n"
         )
     else:  # blind re-solve
         text += (

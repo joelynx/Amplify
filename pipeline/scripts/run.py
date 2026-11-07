@@ -709,6 +709,21 @@ def reset(pc, force: bool) -> None:
     print(f"archived {moved} to {dest.as_posix()}")
 
 
+def backup_app_db(cfg: dict, label: str) -> None:
+    """A copy of the app database next to it before the judge writes to it, as import does."""
+    import sqlite3
+
+    from common import app_db_path
+
+    path = app_db_path(cfg)
+    dest = path.with_name(f"{path.name}.bak-{time.strftime('%Y%m%d-%H%M%S')}-{label}")
+    src, out = sqlite3.connect(path), sqlite3.connect(dest)
+    src.backup(out)
+    out.close()
+    src.close()
+    print(json.dumps({"app_db_backup": dest.name}), flush=True)
+
+
 # --- main ---------------------------------------------------------------------
 
 
@@ -742,10 +757,15 @@ def main() -> None:
     a = ap.parse_args()
 
     cfg = load_config()
-    if cfg.get("judge_elsewhere") and (a.cmd == "judge" or (a.cmd in ("collect", "loop") and not a.download_only)):
-        raise SystemExit("judging runs on another machine (config judge_elsewhere): "
-                         "remote_judge.py export here, run there, import here; collect/loop need --download-only")
     pc = pipe_conn()
+    if cfg.get("judge_elsewhere") and (a.cmd == "judge" or (a.cmd in ("collect", "loop") and not a.download_only)):
+        # Owner (2026-11-07): a small round (at most judge_here_max replies) is judged here.
+        waiting = pc.execute("SELECT COUNT(*) FROM status WHERE status='received'").fetchone()[0]
+        if a.cmd != "judge" or a.watch or waiting > int(cfg.get("judge_here_max") or 0):
+            raise SystemExit(f"judging runs on another machine (config judge_elsewhere; {waiting} waiting, "
+                             f"judge_here_max {cfg.get('judge_here_max') or 0}): remote_judge.py export here, run there, "
+                             "import here; collect/loop need --download-only")
+        backup_app_db(cfg, "pre-judge")
     if a.cmd == "check":
         check()
         return

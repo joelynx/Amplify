@@ -166,6 +166,10 @@ python pipeline/scripts/remote_judge.py export --calibrate 200 --push  # questio
 python pipeline/scripts/remote_judge.py list | check
 ```
 
+Small rounds (at most `config.judge_here_max` replies waiting, owner 2026-11-07) are
+judged here instead: `python pipeline/scripts/run.py judge --workers 2` backs up the app
+database and judges as before; it refuses when more are waiting.
+
 The job carries this machine's `config.json`; the other machine refuses a job
 unless its judge code and locked dependencies hash the same (`JUDGE_CODE` in the
 script), so commit and push code changes before exporting. `import` applies a

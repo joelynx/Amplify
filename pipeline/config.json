@@ -162,6 +162,8 @@
   "min_batch_size": 25,
   "judge_workers": 1,
   "judge_elsewhere": true,
+  "judge_here_max": 20,
+  "judge_here_note": "Owner 2026-11-07: a small judge round (at most judge_here_max replies waiting) runs here with run.py judge, which backs up the app DB first; bigger rounds go to the other machine through remote_judge.py.",
   "judge_poll_seconds": 60,
   "preview_pdf": false
 }

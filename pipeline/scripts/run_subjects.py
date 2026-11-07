@@ -76,9 +76,10 @@ def effort_for(cfg: dict, mode: str) -> str:
 # --- scope ----------------------------------------------------------------------------
 
 
-def scope_rows(cfg: dict, app) -> list[dict]:
+def scope_rows(cfg: dict, app, ours: set[int] = frozenset()) -> list[dict]:
     """Every question of a profiled subject with its mode, in subject order (config order)
-    and question id."""
+    and question id. A solve question that already has a generated solution is left out
+    unless it is in `ours` (it got that solution from this run)."""
     s = scfg(cfg)
     order = {name: i for i, name in enumerate(s["profiles"])}
     solve_kinds, aids_kinds = set(s.get("solve_kinds") or ()), set(s.get("aids_kinds") or ())
@@ -90,7 +91,7 @@ def scope_rows(cfg: dict, app) -> list[dict]:
             continue
         kind = run_sub.solution_kind(r["solution"])
         mode = "solve" if kind in solve_kinds else "aids" if kind in aids_kinds else None
-        if mode is None or (mode == "solve" and not is_blank(r["generated_solution"])):
+        if mode is None or (mode == "solve" and not is_blank(r["generated_solution"]) and r["question_id"] not in ours):
             continue
         out.append({"id": r["question_id"], "source": r["source"], "subject": subject, "mode": mode, "kind": kind,
                     "type": r["type"], "figure": subjects.figure_reason(r["latexcode"])})
@@ -102,7 +103,7 @@ def candidates(cfg: dict, app, pc, ids: list[int] | None = None) -> list[dict]:
     """Unfinished questions in order: retries first, then the rest. A status row written by the
     math run (mode NULL) is never touched."""
     status = {r["question_id"]: r for r in pc.execute("SELECT * FROM status")}
-    rows = scope_rows(cfg, app)
+    rows = scope_rows(cfg, app, {q for q, r in status.items() if r["mode"] is not None})
     if ids:
         want = set(ids)
         rows = [x for x in rows if x["id"] in want]
@@ -269,7 +270,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
 def status(cfg: dict, app, pc) -> None:
     st = {r["question_id"]: r for r in pc.execute("SELECT * FROM status WHERE mode IS NOT NULL")}
     per: dict[tuple[str, str], Counter] = {}
-    for x in scope_rows(cfg, app):
+    for x in scope_rows(cfg, app, set(st)):
         c = per.setdefault((x["subject"], x["mode"]), Counter())
         c["total"] += 1
         r = st.get(x["id"])
