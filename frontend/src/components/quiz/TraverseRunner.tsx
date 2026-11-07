@@ -4,6 +4,7 @@ import { ipc } from "../../lib/ipc";
 import { useQuizStore } from "../../state/quiz";
 import { useGenerateStore, draftToFilters } from "../../state/generate";
 import { ElapsedTime } from "./ElapsedTime";
+import { PracticeAnswer } from "./PracticeAnswer";
 import { QuestionViewer } from "./QuestionViewer";
 
 export function TraverseRunner() {
@@ -22,13 +23,14 @@ export function TraverseRunner() {
     useSeed,
     seedId,
     seedDiversity,
+    quizId,
+    setQuizId,
   } = useQuizStore();
 
   const draft = useGenerateStore();
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [quizId, setQuizId] = useState<string | null>(null);
   const [remaining, setRemaining] = useState<number | null>(null);
 
   // Initialize Traverse
@@ -72,7 +74,7 @@ export function TraverseRunner() {
     start();
     
     return () => { active = false; };
-  }, [draft, questions.length, quizId, setCurrentIndex, setQuestionStartTime, setQuestions, setQuizStartTime]);
+  }, [draft, questions.length, quizId, setCurrentIndex, setQuestionStartTime, setQuestions, setQuizId, setQuizStartTime]);
 
   const handleNext = async () => {
     if (!quizId) return;
@@ -152,7 +154,9 @@ export function TraverseRunner() {
       </div>
 
       <div className="bg-surface p-6 rounded-lg border border-border shadow-sm min-h-[400px]">
-        <QuestionViewer question={currentQuestion} />
+        <QuestionViewer question={currentQuestion}>
+          <PracticeAnswer key={currentQuestion.question_id} quizId={quizId} question={currentQuestion} />
+        </QuestionViewer>
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur border-t border-border z-10 flex justify-center">

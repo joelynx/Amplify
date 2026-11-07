@@ -134,6 +134,63 @@ def insert_partial_attempt(
     return attempt_id
 
 
+def _answer_dict(a: AnswerRecord) -> dict[str, Any]:
+    """One entry of `summary.answers`. `credit` / `parts` (per-part detail from
+    the answer key) are absent on attempts stored before them; readers treat a
+    missing key as None."""
+    return {
+        "question_id": a.question_id,
+        "slot_index": a.slot_index,
+        "user_answer": a.user_answer,
+        "correct": a.correct,
+        "score": a.score,
+        "wrong_attempts": a.wrong_attempts,
+        "self_assessment": a.self_assessment,
+        "hints_used": a.hints_used,
+        "time_taken_ms": a.time_taken_ms,
+        "submitted_at": a.submitted_at,
+        "credit": a.credit,
+        "parts": a.parts,
+    }
+
+
+def attempt_id_for(conn: sqlite3.Connection, quiz_id: str) -> str | None:
+    row = conn.execute("SELECT attempt_id FROM quiz_attempts WHERE quiz_id = ?", (quiz_id,)).fetchone()
+    return row[0] if row else None
+
+
+def append_attempt_answer(conn: sqlite3.Connection, *, quiz_id: str, answer: AnswerRecord) -> float | None:
+    """Traverse / Discover log each answer as it is finished (they have no
+    finish step): append it to the attempt's summary and refresh its total.
+    Returns the new total, or None when the quiz has no attempt row."""
+    row = conn.execute(
+        "SELECT attempt_id, summary FROM quiz_attempts WHERE quiz_id = ?", (quiz_id,)
+    ).fetchone()
+    if row is None:
+        return None
+    try:
+        summary = json.loads(row["summary"] or "{}")
+    except ValueError:
+        summary = {}
+    if not isinstance(summary, dict):
+        summary = {}
+    answers = list(summary.get("answers") or [])
+    answers.append(_answer_dict(answer))
+    summary["answers"] = answers
+    summary["n_answers"] = len(answers)
+    total = float(sum(a.get("score") or 0.0 for a in answers))
+    try:
+        conn.execute(
+            "UPDATE quiz_attempts SET summary = ?, total_score = ? WHERE attempt_id = ?",
+            (json.dumps(summary), total, row["attempt_id"]),
+        )
+        conn.commit()
+    except Exception:
+        conn.rollback()
+        raise
+    return total
+
+
 def update_attempt_finish(
     conn: sqlite3.Connection,
     *,
@@ -142,21 +199,7 @@ def update_attempt_finish(
     total_score: float,
 ) -> str:
     summary = {
-        "answers": [
-            {
-                "question_id": a.question_id,
-                "slot_index": a.slot_index,
-                "user_answer": a.user_answer,
-                "correct": a.correct,
-                "score": a.score,
-                "wrong_attempts": a.wrong_attempts,
-                "self_assessment": a.self_assessment,
-                "hints_used": a.hints_used,
-                "time_taken_ms": a.time_taken_ms,
-                "submitted_at": a.submitted_at,
-            }
-            for a in answers
-        ],
+        "answers": [_answer_dict(a) for a in answers],
         "n_answers": len(answers),
     }
     try:

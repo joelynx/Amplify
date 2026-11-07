@@ -14,6 +14,9 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
+# Put between the source's own solution and the pipeline's takeaways (best_solution).
+TAKEAWAYS_HEADING = "\n\n\\medskip\\noindent\\textbf{Takeaways}\n\n"
+
 
 @dataclass(slots=True)
 class Question:
@@ -40,11 +43,18 @@ class Question:
     instructions: str | None = None
     date_last_accessed: str | None = None
     difficulty_rating: float | None = None
+    # What the quiz grades with (JSON, pipeline/answer_key_spec.md); NULL = derive from `answer`.
+    answer_key: str | None = None
+    # Pipeline-written takeaways for book-solved questions (LaTeX, ends with its own attribution).
+    takeaways: str | None = None
 
     def best_solution(self) -> str | None:
-        """The solution to show: the generated one when there is one, else `solution`."""
+        """The solution to show: the generated one when there is one, else `solution`
+        followed by the takeaways block when there are takeaways."""
         if self.generated_solution and self.generated_solution.strip():
             return self.generated_solution
+        if self.takeaways and self.takeaways.strip():
+            return (self.solution or "") + TAKEAWAYS_HEADING + self.takeaways
         return self.solution
 
 

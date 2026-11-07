@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import type { QuizQuestionFull } from "../../lib/ipc";
 import { LatexContent } from "../browser/LatexContent";
@@ -5,9 +6,11 @@ import { useQuizStore } from "../../state/quiz";
 
 interface QuestionViewerProps {
   question: QuizQuestionFull;
+  /** Shown right under the question (the answer panel). */
+  children?: ReactNode;
 }
 
-export function QuestionViewer({ question }: QuestionViewerProps) {
+export function QuestionViewer({ question, children }: QuestionViewerProps) {
   const {
     showHint,
     showAnswer,
@@ -110,6 +113,8 @@ export function QuestionViewer({ question }: QuestionViewerProps) {
       <div className="prose dark:prose-invert max-w-none">
         <LatexContent source={question.latexcode} />
       </div>
+
+      {children}
 
       {showHint && question.hints && (
         <div className="mt-8 border border-border rounded-lg overflow-hidden">

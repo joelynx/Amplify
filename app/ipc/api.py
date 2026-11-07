@@ -25,6 +25,7 @@ from typing import Any
 
 import webview
 
+from app.core.answer_key import parts_for, public_fields
 from app.core.difficulty import (
     DEFAULT_WEIGHTS,
     combined_rating,
@@ -57,6 +58,7 @@ from app.core.stats import (
 )
 from app.core.trends import detect_trends
 from app.interactive import pbs as pbs_runner
+from app.interactive import practice
 from app.interactive import runner as nonpbs_runner
 from app.interactive import session_manager
 from app.interactive.models import QuizConfig, QuizSession, TraverseSession
@@ -442,24 +444,81 @@ class Api:
         slot_index: int,
         payload: dict[str, Any],
     ) -> dict[str, Any]:
+        """Grade an answer. `payload.answers` holds one input per answer-key part
+        (the question's `answer_fields`); the old `payload.user_answer` string is
+        the first part's input. A result with `pending: true` carries the reveal
+        for the parts the student self-assesses; `quiz_self_assess` finishes it.
+
+        Traverse / Discover have no slots: they name `payload.question_id`."""
         session = session_manager.get(quiz_id)
-        if session is None:
-            return {"error": "quiz session not found"}
-        if session.mode == "pbs":
-            return pbs_runner.submit_answer(
+        answers = payload.get("answers")
+        answers = list(answers) if isinstance(answers, list) else None
+        user_answer = str(payload.get("user_answer") or "")
+        time_taken_ms = int(payload.get("time_taken_ms") or 0)
+        if isinstance(session, QuizSession):
+            if session.mode == "pbs":
+                return pbs_runner.submit_answer(
+                    session,
+                    slot_index=int(slot_index),
+                    user_answer=user_answer,
+                    answers=answers,
+                    time_taken_ms=time_taken_ms,
+                )
+            return nonpbs_runner.submit_answer(
                 session,
                 slot_index=int(slot_index),
-                user_answer=str(payload.get("user_answer", "")),
-                time_taken_ms=int(payload.get("time_taken_ms", 0)),
+                user_answer=user_answer,
+                answers=answers,
+                self_assessment=payload.get("self_assessment"),
+                time_taken_ms=time_taken_ms,
+                hints_used=int(payload.get("hints_used") or 0),
             )
-        return nonpbs_runner.submit_answer(
-            session,
-            slot_index=int(slot_index),
-            user_answer=str(payload.get("user_answer", "")),
-            self_assessment=payload.get("self_assessment"),
-            time_taken_ms=int(payload.get("time_taken_ms", 0)),
-            hints_used=int(payload.get("hints_used", 0)),
+        return self._practice_answer(
+            quiz_id,
+            payload,
+            lambda q: practice.submit(
+                quiz_id, q, answers=answers, user_answer=user_answer, time_taken_ms=time_taken_ms
+            ),
         )
+
+    def quiz_self_assess(
+        self,
+        quiz_id: str,
+        slot_index: int,
+        payload: dict[str, Any],
+    ) -> dict[str, Any]:
+        """Finish a pending submission: `payload.marks` holds `got_it` / `partial`
+        / `missed` per part (null for the auto-graded ones), after the student
+        has seen the expected answers. Same result shape as quiz_submit_answer."""
+        session = session_manager.get(quiz_id)
+        marks = payload.get("marks")
+        marks = [m if isinstance(m, str) else None for m in marks] if isinstance(marks, list) else []
+        if isinstance(session, QuizSession):
+            if session.mode == "pbs":
+                return pbs_runner.self_assess(session, slot_index=int(slot_index), marks=marks)
+            return nonpbs_runner.self_assess(session, slot_index=int(slot_index), marks=marks)
+        return self._practice_answer(quiz_id, payload, lambda q: practice.self_assess(quiz_id, q, marks))
+
+    def _practice_answer(
+        self,
+        quiz_id: str,
+        payload: dict[str, Any],
+        step: Callable[[Question], tuple[dict[str, Any], Any]],
+    ) -> dict[str, Any]:
+        """Traverse / Discover: grade `payload.question_id` and append each
+        finished answer to the quiz's attempt row."""
+        qid = payload.get("question_id")
+        if qid is None or quizzes_repo.attempt_id_for(self._conn, quiz_id) is None:
+            return {"error": "quiz session not found"}
+        q = questions_repo.get_by_id(self._conn, int(qid))
+        if q is None:
+            return {"error": "question not found"}
+        result, record = step(q)
+        if record is not None:
+            result["current_total"] = quizzes_repo.append_attempt_answer(
+                self._conn, quiz_id=quiz_id, answer=record
+            )
+        return result
 
     def quiz_skip(self, quiz_id: str, slot_index: int = 0) -> dict[str, Any]:
         session = session_manager.get(quiz_id)
@@ -480,8 +539,13 @@ class Api:
 
     def quiz_finish(self, quiz_id: str) -> dict[str, Any]:
         session = session_manager.get(quiz_id)
-        if session is None:
+        if not isinstance(session, QuizSession):
             return {"error": "quiz session not found"}
+        # A submission still awaiting self-assessment keeps its auto-graded credit.
+        if session.mode == "pbs":
+            pbs_runner.flush_pending(session)
+        else:
+            nonpbs_runner.flush_pending(session)
         total = sum(a.score for a in session.answers)
         attempt_id = quizzes_repo.update_attempt_finish(
             self._conn,
@@ -661,7 +725,8 @@ class Api:
     def quiz_discover(self, filters: dict[str, Any], n: int) -> dict[str, Any]:
         s = _resolve_subject(self._conn, filters.get("subject"))
         sel = pick(self._conn, filters, n, subject=s, strategy="diverse")
-        
+        quiz_id: str | None = None  # answers are graded and logged against it
+
         if sel.questions:
             import uuid
             from datetime import UTC, datetime
@@ -685,6 +750,7 @@ class Api:
 
         return {
             "success": True,
+            "quiz_id": quiz_id,
             "questions": [_question_full_dict(q) for q in sel.questions],
             "diversity_score": sel.diversity_score,
         }
@@ -1496,6 +1562,9 @@ class Api:
 
 
 def _question_full_dict(q: Question) -> dict[str, Any]:
+    """A question for Traverse / Discover, which show the answer and solution on
+    request. The answer key itself stays out: `answer_fields` is its public
+    projection (answer_key_spec.md, "What the quiz may show")."""
     from dataclasses import asdict
     d = asdict(q)
     return {
@@ -1512,4 +1581,5 @@ def _question_full_dict(q: Question) -> dict[str, Any]:
         "source": d["source"],
         "difficulty_rating": d["difficulty_rating"],
         "tags": d["tags"],
+        "answer_fields": public_fields(parts_for(q)),
     }

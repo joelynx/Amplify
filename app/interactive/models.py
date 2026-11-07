@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Literal
+from typing import Any, Literal
 
 from app.core.models import Question
 
@@ -61,6 +61,22 @@ class AnswerRecord:
     hints_used: int = 0
     time_taken_ms: int = 0
     submitted_at: str = ""            # ISO8601 Z
+    credit: float | None = None       # mean part credit in [0, 1]; None on records from before answer keys
+    parts: list[dict[str, Any]] | None = None  # per part: answer_key.part_result (input, expected, credit, mark)
+
+
+@dataclass(slots=True)
+class PendingAnswer:
+    """A submission whose auto-graded parts are locked in while the student
+    self-assesses the rest after seeing them (answer_key_spec.md). Nothing is
+    recorded until `self_assess` (or the quiz ends)."""
+
+    question_id: int
+    inputs: list[str]
+    credits: list[float | None]       # None = awaiting self-assessment
+    user_answer: str = ""
+    time_taken_ms: int = 0
+    hints_used: int = 0
 
 
 @dataclass(slots=True)
@@ -86,6 +102,7 @@ class QuizSession:
     available_scores: dict[int, float] = field(default_factory=dict)  # question_id → current
     wrong_counts: dict[int, int] = field(default_factory=dict)        # question_id → attempts so far
     base_scores: dict[int, float] = field(default_factory=dict)       # question_id → starting points
+    pending: dict[int, PendingAnswer] = field(default_factory=dict)  # slot_index → awaiting self-assessment
     finished: bool = False
 
 @dataclass(slots=True)

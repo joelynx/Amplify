@@ -22,7 +22,8 @@ from app.persistence.ingest.seed import latex_hash
 ROOT = Path(__file__).resolve().parents[2]
 APPDATA = ROOT / "app" / "data" / "appdata"
 DB = APPDATA / "amplify.db"
-FIELDS = ("latexcode", "solution", "generated_solution", "answer", "hints", "solution_outline", "instructions")
+FIELDS = ("latexcode", "solution", "generated_solution", "answer", "hints", "solution_outline", "instructions",
+          "answer_key", "takeaways")
 
 # Windows-1252 bytes 0x80-0x9F as Unicode; the undefined ones fall back to the Latin-1 control characters
 CP1252_HIGH = {c: b for b in range(0x80, 0xA0) for c in [bytes([b]).decode("cp1252", errors="ignore")] if c}
@@ -89,10 +90,13 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--apply", action="store_true")
     args = ap.parse_args(argv)
     conn = sqlite3.connect(DB)
+    # answer_key / takeaways arrive with migration 008; skip them on a DB the app has not migrated yet
+    have = {r[1] for r in conn.execute("PRAGMA table_info(questions)")}
+    fields = [f for f in FIELDS if f in have]
     changes, leftovers = [], []
-    for row in conn.execute(f"SELECT question_id, {', '.join(FIELDS)} FROM questions"):
+    for row in conn.execute(f"SELECT question_id, {', '.join(fields)} FROM questions"):
         qid, vals = row[0], row[1:]
-        for field, val in zip(FIELDS, vals):
+        for field, val in zip(fields, vals):
             if not val or not SUSPECT.search(val):
                 continue
             new = repair(val)

@@ -18,7 +18,8 @@ from app.core.models import Question, Subject
 _QUESTION_COLS = (
     "question_id, semester, topic, branch, subtopic, latexcode, type, in_syllabus, "
     "source, subsource, answer, solution, generated_solution, solution_outline, hints, instructions, "
-    "date_last_accessed, times_used, interactive_times_used, difficulty_rating, latex_hash"
+    "date_last_accessed, times_used, interactive_times_used, difficulty_rating, latex_hash, "
+    "answer_key, takeaways"
 )
 
 # Migration 007: technique tags are 'key' or 'supporting'; task tags are 'task'.
@@ -48,6 +49,8 @@ def _row_to_question(row: sqlite3.Row, tags: list[str] | None = None) -> Questio
         interactive_times_used=row["interactive_times_used"],
         difficulty_rating=row["difficulty_rating"],
         latex_hash=row["latex_hash"],
+        answer_key=row["answer_key"],
+        takeaways=row["takeaways"],
         tags=list(tags or []),
     )
 

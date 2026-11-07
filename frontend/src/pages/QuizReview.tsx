@@ -3,6 +3,10 @@
  * score, user answer vs correct, hints used, solutions. Solutions are revealed
  * unconditionally on review (spec: "review page always shows solutions
  * regardless").
+ *
+ * Answers graded from an answer key carry per-part detail (`parts`): the
+ * student's input, the expected value with its unit or the checklist, and the
+ * credit. Attempts stored before that show the single answer as before.
  */
 
 /**
@@ -15,8 +19,10 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
 import { LatexContent } from "../components/browser/LatexContent";
+import { PartResults } from "../components/quiz/PartResults";
+import { creditLabel } from "../lib/answerKey";
 import { cn } from "../lib/cn";
-import { bestSolution, ipc, type QuizAttemptDetail, type Question } from "../lib/ipc";
+import { bestSolution, ipc, type QuizAttemptAnswer, type QuizAttemptDetail, type Question } from "../lib/ipc";
 
 export default function QuizReviewPage() {
   const { attemptId } = useParams<{ attemptId: string }>();
@@ -90,6 +96,7 @@ export default function QuizReviewPage() {
 
         {attempt.answers.map((a, i) => {
           const q = questions[a.question_id];
+          const verdict = verdictOf(a);
           return (
             <Card
               key={`${a.question_id}-${i}`}
@@ -98,22 +105,32 @@ export default function QuizReviewPage() {
                 <span
                   className={cn(
                     "rounded-full px-2 py-0.5 text-xs font-semibold",
-                    a.correct === true && "bg-success/15 text-success",
-                    a.correct === false && "bg-error/15 text-error",
-                    a.correct === null && "bg-muted/15 text-muted",
+                    verdict === "Correct" && "bg-success/15 text-success",
+                    verdict === "Partial" && "bg-warning/15 text-warning",
+                    verdict === "Wrong" && "bg-error/15 text-error",
+                    verdict === "—" && "bg-muted/15 text-muted",
                   )}
                 >
-                  {a.correct === true ? "Correct" : a.correct === false ? "Wrong" : "—"} · {a.score.toFixed(1)}
+                  {verdict} · {a.score.toFixed(1)}
                 </span>
               }
             >
               {q && (
                 <>
                   <LatexContent source={q.latexcode} />
+                  {a.parts?.length ? (
+                    <div className="mt-3">
+                      <PartResults parts={a.parts} />
+                    </div>
+                  ) : null}
                   <dl className="mt-3 grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
-                    <Detail label="Your answer" value={a.user_answer || <em className="text-muted">no answer</em>} />
-                    <Detail label="Canonical answer" value={q.answer ?? <em className="text-muted">—</em>} />
-                    {a.self_assessment && <Detail label="Self-assessed" value={a.self_assessment} />}
+                    {!a.parts?.length && (
+                      <>
+                        <Detail label="Your answer" value={a.user_answer || <em className="text-muted">no answer</em>} />
+                        <Detail label="Canonical answer" value={q.answer ?? <em className="text-muted">—</em>} />
+                      </>
+                    )}
+                    {a.self_assessment && !a.parts?.length && <Detail label="Self-assessed" value={a.self_assessment} />}
                     {a.wrong_attempts > 0 && (
                       <Detail label="Prior wrong attempts" value={a.wrong_attempts.toString()} />
                     )}
@@ -138,6 +155,12 @@ export default function QuizReviewPage() {
       </div>
     </main>
   );
+}
+
+/** Correct / Partial / Wrong from the credit when the answer has one, else from `correct`. */
+function verdictOf(a: QuizAttemptAnswer): string {
+  if (a.credit != null) return creditLabel(a.credit);
+  return a.correct === true ? "Correct" : a.correct === false ? "Wrong" : "—";
 }
 
 function Detail({ label, value }: { label: string; value: React.ReactNode }) {

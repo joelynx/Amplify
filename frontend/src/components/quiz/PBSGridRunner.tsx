@@ -5,21 +5,25 @@
  * on a correct numerical submission; wrong submissions decay the available
  * score (geometric ×0.5, floor 1). The user can switch focus between widgets
  * at any time — implicit skip, no advance penalty.
+ *
+ * Each widget answers its question's answer-key parts. A submission with a
+ * wrong auto-graded part is wrong (the card marks which parts, reveals
+ * nothing); parts that need self-assessment are revealed and marked in the
+ * card once the auto-graded ones are right.
  */
 
 /**
  * @deprecated Replaced by TraverseRunner and DiscoverRunner.
  */
 import { useEffect, useState } from "react";
-import { Send } from "lucide-react";
 
 import { Button } from "../ui/Button";
 import { Card } from "../ui/Card";
-import { Input } from "../ui/Input";
 import { LatexContent } from "../browser/LatexContent";
+import { AnswerPanel } from "./AnswerPanel";
 import { QuizCountdown } from "./QuizCountdown";
 import { cn } from "../../lib/cn";
-import { ipc, type QuizSettings, type QuizSlot } from "../../lib/ipc";
+import { ipc, type QuizAnswerResult, type QuizSettings, type QuizSlot } from "../../lib/ipc";
 
 interface Props {
   quizId: string;
@@ -31,9 +35,8 @@ interface Props {
 
 export function PBSGridRunner({ quizId, settings, initial, totalTimeS, onFinished }: Props) {
   const [slots, setSlots] = useState<QuizSlot[]>(initial);
-  const [inputs, setInputs] = useState<Record<number, string>>(() =>
-    Object.fromEntries(initial.map((s) => [s.slot_index, ""])),
-  );
+  // The last result per slot while its question stays up (a retry or a pending reveal).
+  const [results, setResults] = useState<Record<number, QuizAnswerResult | null>>({});
   const [totalScore, setTotalScore] = useState(0);
   const [busy, setBusy] = useState(false);
   const [deadlineMs] = useState<number | null>(() => (totalTimeS ? Date.now() + totalTimeS * 1000 : null));
@@ -58,33 +61,24 @@ export function PBSGridRunner({ quizId, settings, initial, totalTimeS, onFinishe
     }
   };
 
-  const submit = async (slotIndex: number) => {
-    const slot = slots[slotIndex];
-    if (!slot?.question) return;
-    const userAnswer = inputs[slotIndex] ?? "";
-    if (!userAnswer.trim()) return;
-    setBusy(true);
-    try {
-      const r = await ipc.quiz_submit_answer(quizId, slotIndex, { user_answer: userAnswer });
-      if (r.partial_score !== undefined && r.correct) setTotalScore((t) => t + r.partial_score!);
+  const applyResult = async (slotIndex: number, r: QuizAnswerResult) => {
+    if (r.current_total != null) setTotalScore(r.current_total);
+    // A pending reveal or a retry keeps the question (and its panel) up.
+    setResults((prev) => ({ ...prev, [slotIndex]: r.pending || r.retry ? r : null }));
+    if (!r.pending) {
       setFlash((f) => ({ ...f, [slotIndex]: r.correct ? "ok" : "wrong" }));
       window.setTimeout(() => setFlash((f) => ({ ...f, [slotIndex]: null })), 600);
-      const repl = r.replacement as QuizSlot | null | undefined;
-      if (repl && "slot_index" in repl) {
-        setSlots((prev) => {
-          const next = [...prev];
-          next[slotIndex] = repl;
-          return next;
-        });
-        if (r.correct) {
-          setInputs((prev) => ({ ...prev, [slotIndex]: "" }));
-        }
-      }
-      if (r.finished) {
-        await finish();
-      }
-    } finally {
-      setBusy(false);
+    }
+    const repl = r.replacement as QuizSlot | null | undefined;
+    if (repl && "slot_index" in repl) {
+      setSlots((prev) => {
+        const next = [...prev];
+        next[slotIndex] = repl;
+        return next;
+      });
+    }
+    if (r.finished) {
+      await finish();
     }
   };
 
@@ -145,28 +139,16 @@ export function PBSGridRunner({ quizId, settings, initial, totalTimeS, onFinishe
                   <div className="mb-3">
                     <LatexContent source={q.latexcode} />
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Input
-                      value={inputs[i] ?? ""}
-                      onChange={(e) =>
-                        setInputs((prev) => ({ ...prev, [i]: e.target.value }))
-                      }
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" && !busy) submit(i);
-                      }}
-                      placeholder="numerical"
-                      disabled={busy}
-                    />
-                    <Button
-                      variant="primary"
-                      size="sm"
-                      onClick={() => submit(i)}
-                      disabled={busy || !(inputs[i] ?? "").trim()}
-                      aria-label="Submit"
-                    >
-                      <Send className="h-4 w-4" />
-                    </Button>
-                  </div>
+                  <AnswerPanel
+                    compact
+                    autoFocus={false}
+                    fields={q.answer_fields}
+                    result={results[i] ?? null}
+                    disabled={busy}
+                    submit={(answers) => ipc.quiz_submit_answer(quizId, i, { answers })}
+                    assess={(marks) => ipc.quiz_self_assess(quizId, i, { marks })}
+                    onResult={(r) => void applyResult(i, r)}
+                  />
                 </>
               )}
             </Card>

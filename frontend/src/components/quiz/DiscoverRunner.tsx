@@ -4,6 +4,7 @@ import { ipc } from "../../lib/ipc";
 import { useQuizStore } from "../../state/quiz";
 import { useGenerateStore, draftToFilters } from "../../state/generate";
 import { ElapsedTime } from "./ElapsedTime";
+import { PracticeAnswer } from "./PracticeAnswer";
 import { QuestionViewer } from "./QuestionViewer";
 
 export function DiscoverRunner() {
@@ -18,6 +19,8 @@ export function DiscoverRunner() {
     questionStartTime,
     setQuestionStartTime,
     resetToggles,
+    quizId,
+    setQuizId,
   } = useQuizStore();
 
   const draft = useGenerateStore();
@@ -46,6 +49,7 @@ export function DiscoverRunner() {
         }
         
         setQuestions(res.questions);
+        setQuizId(res.quiz_id ?? null);
         setDiversityScore(res.diversity_score ?? null);
         setCurrentIndex(0);
         
@@ -62,7 +66,7 @@ export function DiscoverRunner() {
     start();
     
     return () => { active = false; };
-  }, [draft, nQuestions, questions.length, setCurrentIndex, setQuestionStartTime, setQuestions, setQuizStartTime]);
+  }, [draft, nQuestions, questions.length, setCurrentIndex, setQuestionStartTime, setQuestions, setQuizId, setQuizStartTime]);
 
   const handleNext = () => {
     if (currentIndex < questions.length - 1) {
@@ -130,7 +134,9 @@ export function DiscoverRunner() {
       </div>
 
       <div className="bg-surface p-6 rounded-lg border border-border shadow-sm min-h-[400px]">
-        <QuestionViewer question={currentQuestion} />
+        <QuestionViewer question={currentQuestion}>
+          <PracticeAnswer key={currentQuestion.question_id} quizId={quizId} question={currentQuestion} />
+        </QuestionViewer>
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur border-t border-border z-10 flex justify-center">

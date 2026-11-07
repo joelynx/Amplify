@@ -94,7 +94,7 @@ export function QuestionSidePanel({ question, filters, textQuery, onClose, onPic
         )}
 
         {/* The source's own solution, when the generated one is shown above. */}
-        {solution !== question.solution && question.solution?.trim() && (
+        {question.generated_solution?.trim() && question.solution?.trim() && (
           <Disclosure title="Original solution" defaultOpen={false}>
             <LatexContent source={question.solution} />
           </Disclosure>

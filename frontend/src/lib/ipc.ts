@@ -55,13 +55,25 @@ export interface Question {
   interactive_times_used: number;
   difficulty_rating: number | null;
   latex_hash: string;
+  /** What the quiz grades with (JSON, pipeline/answer_key_spec.md); null = derived from `answer`. */
+  answer_key: string | null;
+  /** Pipeline-written takeaways for book-solved questions (LaTeX). */
+  takeaways: string | null;
   tags: string[];
 }
 
+/** Put between the source's solution and its takeaways (`TAKEAWAYS_HEADING` in Python). */
+export const TAKEAWAYS_HEADING = "\n\n\\medskip\\noindent\\textbf{Takeaways}\n\n";
+
 /** The solution to show: the generated one when there is one, else the source's
- * (mirrors `Question.best_solution()` in Python). */
-export function bestSolution(q: Pick<Question, "solution" | "generated_solution">): string | null {
-  return q.generated_solution?.trim() ? q.generated_solution : q.solution;
+ * followed by the takeaways when there are any (mirrors `Question.best_solution()`
+ * in Python). */
+export function bestSolution(
+  q: Pick<Question, "solution" | "generated_solution"> & { takeaways?: string | null },
+): string | null {
+  if (q.generated_solution?.trim()) return q.generated_solution;
+  if (q.takeaways?.trim()) return (q.solution ?? "") + TAKEAWAYS_HEADING + q.takeaways;
+  return q.solution;
 }
 
 /** A `Question` plus the cosine similarity from `get_similar_questions`. */
@@ -133,6 +145,48 @@ export interface QuizSettings {
   pbs_pool_size?: number;
 }
 
+export type AnswerKind = "number" | "choice" | "truefalse" | "expression" | "points";
+
+/** One part the student answers: the public projection of the question's answer
+ * key (answer_key_spec.md, "What the quiz may show"). Never the value, the
+ * checklist or the tolerance. */
+export interface AnswerField {
+  /** As the question prints it (`a`, `ii`, `2`), or "" for a one-part question. */
+  label: string;
+  /** A few words naming what the part asks for; may be "". */
+  ask: string;
+  kind: AnswerKind;
+  /** The unit the student answers in (`number` only; "" otherwise or for a pure number). */
+  unit: string;
+  /** Number of options (`choice` only, when known). */
+  options: number | null;
+  /** A `choice` part that asks for every correct option. */
+  multi: boolean;
+}
+
+export type SelfMark = "got_it" | "partial" | "missed";
+
+/** One graded part, as returned after a submission and stored on the attempt
+ * (`answer_key.part_result`). */
+export interface PartResult {
+  label: string;
+  ask: string;
+  kind: AnswerKind;
+  unit: string;
+  /** What the student typed or picked. */
+  input: string;
+  /** How it was read: the number in `unit`, option letters, `true` / `false`. */
+  read: string | null;
+  /** In [0, 1]; null while awaiting self-assessment (or not judged on a retry). */
+  credit: number | null;
+  mark: SelfMark | null;
+  /** Number (unit separate), option letters (`b`, `a, c`), `true` / `false`, or
+   * LaTeX. Null for `points` and when withheld because a retry is allowed. */
+  expected: string | null;
+  /** The checklist of a `points` part (empty when withheld). */
+  points: string[];
+}
+
 export interface QuizQuestion {
   question_id: number;
   topic: string;
@@ -142,6 +196,7 @@ export interface QuizQuestion {
   type: string | null;
   hints?: string | null;
   instructions?: string | null;
+  answer_fields: AnswerField[];
 }
 
 export interface QuizSlot {
@@ -164,6 +219,7 @@ export interface QuizQuestionFull {
   source: string | null;
   difficulty_rating: number | null;
   tags: string[];
+  answer_fields: AnswerField[];
 }
 
 export interface TraverseStartResult {
@@ -184,6 +240,8 @@ export interface TraverseNextResult {
 export interface DiscoverResult {
   success: boolean;
   error?: string;
+  /** Answers are graded and logged against it. */
+  quiz_id?: string | null;
   questions?: QuizQuestionFull[];
   diversity_score?: number | null;
 }
@@ -199,20 +257,43 @@ export interface StartQuizResult {
 }
 
 export interface QuizAnswerPayload {
-  user_answer: string;
-  self_assessment?: "got_it" | "partial" | "missed" | null;
+  /** One input per `answer_fields` entry (a multi-select choice as "a, c"). */
+  answers?: string[];
+  /** The old single-string path: the first part's input. */
+  user_answer?: string;
+  /** The old one-call path: marks every part that needs self-assessment. */
+  self_assessment?: SelfMark | null;
   time_taken_ms?: number;
   hints_used?: number;
+  /** Traverse / Discover (no slots): the question answered. */
+  question_id?: number;
+}
+
+export interface QuizSelfAssessPayload {
+  /** Per part; null for the auto-graded ones (ignored there). */
+  marks: (SelfMark | null)[];
+  /** Traverse / Discover (no slots): the question answered. */
+  question_id?: number;
 }
 
 export interface QuizAnswerResult {
+  /** Every part full credit; null while pending. */
   correct: boolean | null;
+  /** Some parts await self-assessment: `parts` carries the reveal; finish with
+   * `quiz_self_assess`. */
+  pending?: boolean;
+  /** Wrong, and the same question stays up for another try (PBS,
+   * wait_for_correct): expected answers are withheld. */
+  retry?: boolean;
+  /** Mean part credit in [0, 1]. */
+  credit?: number | null;
+  parts?: PartResult[];
   partial_score?: number;
   canonical_answer?: string | null;
   solution?: string | null;
   replacement?: QuizSlot | { question_id?: number; topic?: string; branch?: string; subtopic?: string; latexcode?: string; type?: string | null } | null;
   finished?: boolean;
-  current_total?: number;
+  current_total?: number | null;
   error?: string;
 }
 
@@ -244,6 +325,9 @@ export interface QuizAttemptAnswer {
   hints_used: number;
   time_taken_ms: number;
   submitted_at: string;
+  /** Absent on attempts stored before answer keys. */
+  credit?: number | null;
+  parts?: PartResult[] | null;
 }
 
 export interface QuizAttemptDetail {
@@ -344,6 +428,11 @@ interface PyWebViewApi {
     quiz_id: string,
     slot_index: number,
     payload: QuizAnswerPayload,
+  ) => Promise<QuizAnswerResult>;
+  quiz_self_assess: (
+    quiz_id: string,
+    slot_index: number,
+    payload: QuizSelfAssessPayload,
   ) => Promise<QuizAnswerResult>;
   quiz_skip: (quiz_id: string, slot_index?: number) => Promise<QuizAnswerResult>;
   quiz_request_hint: (quiz_id: string, slot_index: number) => Promise<{ hint: string | null; hint_index: number }>;
@@ -695,6 +784,15 @@ export const ipc = {
   ): Promise<QuizAnswerResult> {
     const api = await bridge();
     return api.quiz_submit_answer(quiz_id, slot_index, payload);
+  },
+  /** Finish a `pending` submission once the student has seen the reveal. */
+  async quiz_self_assess(
+    quiz_id: string,
+    slot_index: number,
+    payload: QuizSelfAssessPayload,
+  ): Promise<QuizAnswerResult> {
+    const api = await bridge();
+    return api.quiz_self_assess(quiz_id, slot_index, payload);
   },
   async quiz_skip(quiz_id: string, slot_index = 0): Promise<QuizAnswerResult> {
     const api = await bridge();
