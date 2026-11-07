@@ -214,11 +214,74 @@ def split_sections(text: str, markers: list[str]) -> tuple[dict | None, list[str
     return {"lines": lines, "pos": dict(zip(markers, order))}, errors
 
 
+EMPH_STAR = re.compile(r"\\(textbf|textit|emph)\{([^{}\n*]+?)\*{1,2}")
+
+
+def _brace_balance(line: str) -> int:
+    s = re.sub(r"\\[{}]", "", line)
+    return s.count("{") - s.count("}")
+
+
+def repair_reply(text: str, markers: list[str]) -> tuple[str, list[str]]:
+    """Mechanical repairs of the two slips the solver makes most, done before any check:
+    \\emph{...}, \\textit{...} or \\textbf{...} closed with a markdown * or ** instead of a
+    brace (only on a line whose braces do not balance), and a marker line that is missing at
+    the very start, misnamed (%%% HINT, an END of the wrong section) or doubled next to the
+    right one. Everything repaired still goes through every check; the repairs are reported."""
+    notes: list[str] = []
+    lines = text.replace("\r\n", "\n").split("\n")
+    for i, line in enumerate(lines):
+        if line.lstrip().startswith("%%%") or _brace_balance(line) <= 0 or not EMPH_STAR.search(line):
+            continue
+        new = EMPH_STAR.sub(lambda m: f"\\{m.group(1)}{{{m.group(2)}}}", line)
+        if _brace_balance(new) < _brace_balance(line):
+            lines[i] = new
+            notes.append(f"line {i + 1}: emphasis closed with * instead of a brace")
+
+    def same(s: str, m: str) -> bool:
+        s = s.strip()
+        return s == m or (m.endswith(":") and s.startswith(m))
+
+    first = next((i for i, line in enumerate(lines) if line.strip()), None)
+    if (first is not None and not lines[first].strip().startswith("%%%") and not markers[0].endswith(":")
+            and not any(same(line, markers[0]) for line in lines) and sum(same(line, markers[1]) for line in lines) == 1):
+        lines.insert(first, markers[0])
+        notes.append(f"missing first marker '{markers[0]}' added")
+    at = [i for i, line in enumerate(lines) if line.strip().startswith("%%%")]
+    drop: set[int] = set()
+    k = 0  # the marker expected next
+    for j, i in enumerate(at):
+        if k >= len(markers):
+            break
+        s, want = lines[i].strip(), markers[k]
+        if same(s, want):
+            k += 1
+            continue
+        nxt = lines[at[j + 1]].strip() if j + 1 < len(at) else None
+        if nxt is not None and same(nxt, want):
+            drop.add(i)
+            notes.append(f"stray marker '{s[:40]}' dropped")
+        elif want.startswith("%%% BEGIN ") and s == "%%% " + want[len("%%% BEGIN "):]:
+            lines[i] = want
+            notes.append(f"'{s}' read as '{want}'")
+            k += 1
+        elif want.startswith("%%% END ") and s.startswith("%%% END "):
+            lines[i] = want
+            notes.append(f"'{s}' read as '{want}'")
+            k += 1
+        else:
+            break
+    return "\n".join(line for i, line in enumerate(lines) if i not in drop), notes
+
+
 def parse_reply(text: str, mode: str) -> tuple[dict | None, list[str]]:
-    """Split a reply into its sections. parts: solution, notes (None for NONE), takeaways,
-    key_text, hint (solve); book_check, takeaways, key_text, hint (aids)."""
+    """Split a reply into its sections (after repair_reply). parts: solution, notes (None for
+    NONE), takeaways, key_text, hint (solve); book_check, takeaways, key_text, hint (aids);
+    repairs: what repair_reply changed."""
+    markers = SOLVE_MARKERS if mode == "solve" else AIDS_MARKERS
     text, _ = strip_code_fences(text)
-    sec, errors = split_sections(text, SOLVE_MARKERS if mode == "solve" else AIDS_MARKERS)
+    text, repairs = repair_reply(text, markers)
+    sec, errors = split_sections(text, markers)
     if sec is None:
         return None, errors
     lines, pos = sec["lines"], sec["pos"]
@@ -226,7 +289,8 @@ def parse_reply(text: str, mode: str) -> tuple[dict | None, list[str]]:
     def body(name: str) -> str:
         return "\n".join(lines[pos[f"%%% BEGIN {name}"] + 1: pos[f"%%% END {name}"]]).strip()
 
-    parts: dict = {"mode": mode, "takeaways": body("TAKEAWAYS"), "key_text": body("ANSWER KEY"), "hint": body("HINT")}
+    parts: dict = {"mode": mode, "takeaways": body("TAKEAWAYS"), "key_text": body("ANSWER KEY"), "hint": body("HINT"),
+                   "repairs": repairs}
     if mode == "solve":
         parts["solution"] = body("SOLUTION")
         notes = body("NOTES")
@@ -251,7 +315,8 @@ def parse_reply(text: str, mode: str) -> tuple[dict | None, list[str]]:
 NUM_RE = re.compile(r"[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?")
 UNIT_RE = re.compile(r"[A-Za-z0-9/^ .()*-]+")
 ASK_RE = re.compile(r"[A-Za-z0-9 ,.'()/+-]*")
-LABEL_RE = re.compile(r"-|[A-Za-z0-9]{1,6}(?:\.[A-Za-z0-9]{1,4})?")
+LABEL_RE = re.compile(r"-|[A-Za-z0-9]{1,8}(?:\.[A-Za-z0-9]{1,4}){0,2}")
+MAX_TOL_PERCENT = 50
 MICRO_BASES = ("m", "s", "F", "H", "A", "V", "W", "g", "mol", "Pa", "J")
 
 
@@ -321,7 +386,7 @@ def parse_key(key_text: str, question_latex: str) -> tuple[dict | None, list[str
         if len(f) < 2 or f[1] not in KINDS:
             errors.append(f"key line {ln}: expected PART <label> | <{'|'.join(KINDS)}> | ...")
             continue
-        label, kind = f[0], f[1]
+        label, kind = re.sub(r"^-\s*\.\s*", "", f[0]), f[1]  # "-.1" for the first of several things: "1"
         if not LABEL_RE.fullmatch(label):
             errors.append(f"key line {ln}: bad label '{label[:20]}'")
             continue
@@ -340,8 +405,9 @@ def parse_key(key_text: str, question_latex: str) -> tuple[dict | None, list[str
             tol = None
             if len(f) == 6:
                 m = re.fullmatch(r"TOL\s+(\d+(?:\.\d+)?)\s*(?:percent|%)?", f[5])
-                if not m or not 0 < float(m.group(1)) <= 25:
-                    errors.append(f"key line {ln}: bad tolerance '{f[5][:20]}' (TOL <percent>, at most 25)")
+                if not m or not 0 < float(m.group(1)) <= MAX_TOL_PERCENT:
+                    errors.append(f"key line {ln}: bad tolerance '{f[5][:20]}' (TOL <percent>, at most {MAX_TOL_PERCENT}; "
+                                  "a result known only to its order of magnitude is a POINTS part)")
                     continue
                 tol = round(float(m.group(1)) / 100, 6)
             num = float(value)
@@ -533,6 +599,8 @@ def validate_reply(qid: int, text: str, cfg: dict, q: dict, mode: str, stored_an
     if parts is None:
         res.update(ok=False, hint_ok=False)
         return res
+    if parts["repairs"]:
+        res["repairs"] = parts["repairs"]
     key, kerrs = parse_key(parts["key_text"], q["latexcode"])
     res["errors"] += [f"answer key: {e}" for e in kerrs]
     main: dict[str, str] = {}

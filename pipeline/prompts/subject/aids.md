@@ -28,6 +28,8 @@ OUTPUT FORMAT:
 Write the takeaways, the POINT lines of the answer key, and the hint in LaTeX. They are compiled into a PDF and also shown in a web view, so:
 - Do NOT use any markdown: no # headings, no **bold**, no - or * bullet lists, no backticks, no code fences.
 - Write only content. Do NOT write \documentclass, \usepackage, \begin{document}, or section titles; those are added separately.
+- Close every \textbf{...}, \textit{...} and \emph{...} with its closing brace. Never use * or ** for emphasis.
+- The very first line of your reply is the marker line %%% BOOK CHECK:, and every marker line is copied exactly as shown below.
 
 Your entire reply is the structure below: nothing before the first marker line, nothing after the last one. The lines starting with %%% are markers; copy them exactly:
 
