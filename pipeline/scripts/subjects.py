@@ -60,6 +60,12 @@ AIDS_MARKERS = [
     "%%% BEGIN HINT", "%%% END HINT",
 ]
 KINDS = ("NUMBER", "CHOICE", "TRUEFALSE", "EXPRESSION", "POINTS")
+# A reply that writes out a tool call (the solver has no tools; seen when a question asks for a
+# computer solution): the feedback says so plainly, since a missing marker alone does not explain it.
+TOOL_CALL = re.compile(r"<(?:\w+:)?invoke\s+name=|<parameter\s+name=")
+TOOL_CALL_ERROR = ("the reply tries to run a tool, but no tools are available here: do every computation inside "
+                   "the solution itself (by hand, or a clearly described numerical scheme with the values it gives), "
+                   "and write the whole reply in the required format from its first line")
 # How run.judge_one words a blind re-solve after a disagreement with the stored answer.
 MISMATCH_REASON = "its final answer did not match the stored reference answer"
 
@@ -168,6 +174,12 @@ def user_text(q: dict, mode: str, feedback: dict | None, cfg: dict) -> str:
             "\nNote: an earlier attempt at this question gave a final result that disagrees with a reference "
             "answer, which may itself be wrong. Work it carefully from scratch and double-check every final value; "
             "if the question lacks data needed for a result, say so rather than assuming a value.\n"
+        )
+    elif "output token limit" in feedback["reason"]:  # cut off: the next reply must be shorter
+        text += (
+            "\nNote: an earlier attempt at this question ran past the output limit and was cut off before it "
+            "finished. Keep this reply well within it: give the working the question needs, do not explore "
+            "alternatives or repeat checks at length, and complete every section through the hint.\n"
         )
     else:  # blind re-solve
         text += (
@@ -684,6 +696,8 @@ def validate_reply(qid: int, text: str, cfg: dict, q: dict, mode: str, stored_an
     compile_checks) the PDF and web-view checks. No model is consulted."""
     res: dict = {"question_id": qid, "mode": mode, "checked_at": now_iso(), "errors": [], "hint_errors": [],
                  "answer_mismatch": False}
+    if TOOL_CALL.search(text):
+        res["errors"].append(TOOL_CALL_ERROR)
     parts, errs = parse_reply(text, mode)
     res["errors"] += [f"structure: {e}" for e in errs]
     if parts is None:

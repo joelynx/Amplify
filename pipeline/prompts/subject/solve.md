@@ -43,6 +43,7 @@ Write everything except the answer key in LaTeX. The output is compiled into a P
 - Write only content. Do NOT write \documentclass, \usepackage, \begin{document}, or section titles; those are added separately.
 - Close every \textbf{...}, \textit{...} and \emph{...} with its closing brace. Never use * or ** for emphasis.
 - The very first line of your reply is the marker line %%% BEGIN SOLUTION, and every marker line is copied exactly as shown below.
+- You have no tools here: do every calculation in the reply itself. When the question asks for a computer or numerical solution, carry out the method in your own working (enough steps or iterations for the accuracy the question needs), show the scheme, and say how a program would refine it.
 
 Your entire reply is the structure below: nothing before the first marker line, nothing after the last one. The lines starting with %%% are markers; copy them exactly:
 
