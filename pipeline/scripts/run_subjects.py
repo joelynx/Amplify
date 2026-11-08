@@ -16,6 +16,8 @@ Usage (from the repo root):
   python pipeline/scripts/run_subjects.py verify                                     # free request check
   python pipeline/scripts/run_subjects.py solve    [--n N] [--ids 1,2,3] [--workers W] [--wait-on-limit]
   python pipeline/scripts/run_subjects.py tiebreak [--list] [--workers W]   # third solve, high effort, after two disagreed with the stored answer
+  python pipeline/scripts/run_subjects.py adjudicate [--list] [--workers W] # the review solve (review model) that replaces human review
+  python pipeline/scripts/run_subjects.py verify --review                  # the request check for it
   python pipeline/scripts/run_subjects.py precheck [--ids ...]   # structure and LaTeX rules only (no XeLaTeX)
   python pipeline/scripts/run_subjects.py review   [--ids ...]   # local HTML page of the replies
 """
@@ -63,10 +65,12 @@ def scfg(cfg: dict) -> dict:
     return subjects.subj_cfg(cfg)
 
 
-def call_cfg(cfg: dict) -> dict:
-    """The config run_sub's transport and storage read: the subjects' model and prompt version."""
+def call_cfg(cfg: dict, review: bool = False) -> dict:
+    """The config run_sub's transport and storage read: the subjects' model (the review model for
+    the review solve) and prompt version."""
     s = scfg(cfg)
-    return dict(cfg, prompt_version=s["prompt_version"], solver=dict(cfg["solver"], model=s["model"]))
+    model = s["review_model"] if review else s["model"]
+    return dict(cfg, prompt_version=s["prompt_version"], solver=dict(cfg["solver"], model=model))
 
 
 def effort_for(cfg: dict, mode: str) -> str:
@@ -103,7 +107,7 @@ def scope_rows(cfg: dict, app, ours: set[int] = frozenset()) -> list[dict]:
 
 def candidates(cfg: dict, app, pc, ids: list[int] | None = None) -> list[dict]:
     """Unfinished questions in order: retries first, then the rest. A status row written by the
-    math run (mode NULL) is never touched."""
+    math run (mode NULL) is never touched, nor one that went to the review solve (adjudicate)."""
     status = {r["question_id"]: r for r in pc.execute("SELECT * FROM status")}
     rows = scope_rows(cfg, app, {q for q, r in status.items() if r["mode"] is not None})
     if ids:
@@ -115,8 +119,8 @@ def candidates(cfg: dict, app, pc, ids: list[int] | None = None) -> list[dict]:
     retry, fresh = [], []
     for x in rows:
         r = status.get(x["id"])
-        if r is not None and (r["mode"] is None or r["status"] in ("submitted", "received", "skipped_image")
-                              or is_done(r)):
+        if r is not None and (r["mode"] is None or r["review_from"] is not None
+                              or r["status"] in ("submitted", "received", "skipped_image") or is_done(r)):
             continue
         (retry if r is not None and r["status"] == "retry" else fresh).append(x)
     return retry + fresh
@@ -140,12 +144,14 @@ def system_file(cfg: dict, mode: str, subject: str) -> tuple[Path, str]:
 # --- verify ---------------------------------------------------------------------------
 
 
-def verify(cfg: dict, app, pc, quiet: bool = False) -> dict:
-    """run_sub's request check on one question of each mode with the subjects' prompts: the
-    request must pass every check and Claude Code's wrapping must be one the owner accepted."""
-    ccfg = call_cfg(cfg)
+def verify(cfg: dict, app, pc, quiet: bool = False, review: bool = False, accept: bool = False) -> dict:
+    """run_sub's request check on one question of each mode with the subjects' prompts (with
+    review, one review solve with the review model and effort): the request must pass every check
+    and Claude Code's wrapping must be one the owner accepted."""
+    ccfg = call_cfg(cfg, review)
     picks: dict[str, dict] = {}
-    for x in candidates(cfg, app, pc) or scope_rows(cfg, app):
+    pool = [dict(x, mode="solve") for x in review_rows(cfg, app, pc)] if review else []
+    for x in pool or candidates(cfg, app, pc) or scope_rows(cfg, app):
         if not x["figure"]:
             picks.setdefault(x["mode"], x)
     if not picks:
@@ -156,13 +162,25 @@ def verify(cfg: dict, app, pc, quiet: bool = False) -> dict:
         q = fetch_question(app, x["id"])
         path, system = system_file(cfg, mode, x["subject"])
         text = subjects.user_text(q, mode, None, cfg)
-        effort = effort_for(cfg, mode)
+        effort = scfg(cfg)["review_effort"] if review else effort_for(cfg, mode)
         captured, out = run_sub.capture_request(ccfg, path, text, effort)
         rep = run_sub.check_request(ccfg, system, text, effort, captured, out, set())
         rep.update(question_id=x["id"], mode=mode, effort=effort,
                    claude_code_version=rep["init"].get("claude_code_version"),
                    accepted=rep["fingerprint"] in accepted)
         reports.append(rep)
+    if accept:  # the owner's acceptance of this wrapping, stored as run_sub.py verify --accept stores it
+        if not all(r["ok"] for r in reports):
+            raise SystemExit("refusing --accept: the request failed a check")
+        summary = {"at": now_iso(), "ok": True, "fingerprint": reports[0]["fingerprint"], "accepted": True,
+                   "source": "run_subjects.py verify" + (" --review" if review else ""),
+                   "reports": [{k: v for k, v in r.items() if k != "init"} for r in reports]}
+        pc.execute("INSERT INTO sub_verifications (created_at, claude_code_version, fingerprint, ok, accepted, report_json) "
+                   "VALUES (?,?,?,?,?,?)", (now_iso(), reports[0]["claude_code_version"], reports[0]["fingerprint"], 1, 1,
+                                            json.dumps(summary)))
+        pc.commit()
+        for r in reports:
+            r["accepted"] = True
     ok = all(r["ok"] and r["accepted"] for r in reports)
     if not quiet:
         for r in reports:
@@ -182,7 +200,8 @@ def tiebreak_rows(cfg: dict, app, pc, ids: list[int] | None = None) -> list[dict
     """Solve questions whose solves disagreed with the stored answer and that have no tie-break yet:
     those sent to human review for it, and second attempts received but not judged whose reply is
     well formed and still disagrees (checked here without the PDF and web compiles)."""
-    status = {r["question_id"]: r for r in pc.execute("SELECT * FROM status WHERE mode='solve' AND tiebreak=0")}
+    status = {r["question_id"]: r for r in pc.execute("SELECT * FROM status WHERE mode='solve' AND tiebreak=0 "
+                                                      "AND review_from IS NULL")}
     rows = {x["id"]: x for x in scope_rows(cfg, app, set(status))}
     out = []
     for qid, r in sorted(status.items()):
@@ -200,26 +219,54 @@ def tiebreak_rows(cfg: dict, app, pc, ids: list[int] | None = None) -> list[dict
     return out
 
 
+def review_rows(cfg: dict, app, pc, ids: list[int] | None = None) -> list[dict]:
+    """Questions for the review solve that replaces human review (config.subjects.review_*), as
+    solve-mode questions: every subject question in human review that has not had it (or whose
+    review request never came back), except one still waiting for its tie-break, and review solves
+    the checks sent back (retry) or whose request failed (pending)."""
+    status = {r["question_id"]: r for r in pc.execute(
+        "SELECT * FROM status WHERE mode IS NOT NULL AND status IN ('needs_human_review', 'retry', 'pending')")}
+    rows = {x["id"]: x for x in scope_rows(cfg, app, set(status))}
+    waiting = {x["id"] for x in tiebreak_rows(cfg, app, pc, ids)}
+    out = []
+    for qid, r in sorted(status.items()):
+        if (ids and qid not in ids) or qid not in rows or qid in waiting:
+            continue
+        rf = r["review_from"]
+        if r["status"] == "needs_human_review":
+            take = rf is None or int(r["attempts"] or 0) < rf
+        else:
+            take = rf is not None
+        if take:
+            out.append(dict(rows[qid], mode="solve"))
+    return out
+
+
 def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int | None, wait_on_limit: bool,
-          force_unlock: bool, tiebreak: bool = False) -> None:
+          force_unlock: bool, tiebreak: bool = False, review: bool = False) -> None:
     """Send the unfinished questions; with tiebreak, a third solve at config.subjects.tiebreak_effort
-    for the questions tiebreak_rows names (the stored answer is never sent)."""
-    pre = verify(cfg, app, pc, quiet=True)
+    for the questions tiebreak_rows names; with review, the review solve (config.subjects.review_model
+    at review_effort, solve mode) for the questions review_rows names. Neither sends the stored answer."""
+    pre = verify(cfg, app, pc, quiet=True, review=review)
     if not pre["ok"]:
         raise SystemExit("the request check failed or the wrapping is not accepted; run `run_subjects.py verify`")
     version = pre["claude_code_version"]
-    ccfg = call_cfg(cfg)
+    ccfg = call_cfg(cfg, review)
     if LOCK.exists() and not force_unlock:
         raise SystemExit(f"{LOCK.as_posix()} exists: another solve may be running (pid {LOCK.read_text().strip()})")
     LOCK.write_text(str(os.getpid()))
-    queue = tiebreak_rows(cfg, app, pc, ids) if tiebreak else candidates(cfg, app, pc, ids)
+    if review:
+        queue = review_rows(cfg, app, pc, ids)
+    else:
+        queue = tiebreak_rows(cfg, app, pc, ids) if tiebreak else candidates(cfg, app, pc, ids)
     if n is not None:
         queue = queue[:n]
     limit = workers or int(scfg(cfg).get("workers", 4))
     files: dict[tuple[str, str], Path] = {}
     print(json.dumps({"questions": len(queue), "workers": limit, "claude_code_version": version,
                       "model": ccfg["solver"]["model"], "modes": dict(Counter(x["mode"] for x in queue)),
-                      "prompt_version": ccfg["prompt_version"], **({"tiebreak": True} if tiebreak else {})}), flush=True)
+                      "prompt_version": ccfg["prompt_version"], **({"tiebreak": True} if tiebreak else {}),
+                      **({"review": True} if review else {})}), flush=True)
     summary: Counter = Counter()
     t0 = time.time()
     stop_reason = None
@@ -241,16 +288,23 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         files[(mode, x["subject"])] = system_file(cfg, mode, x["subject"])[0]
                     q = fetch_question(app, qid)
                     attempt, feedback = plan_attempt(pc, qid)
-                    effort = scfg(cfg)["tiebreak_effort"] if tiebreak else effort_for(cfg, mode)
-                    upsert_status(pc, qid, mode=mode, subject=x["subject"], **({"tiebreak": 1} if tiebreak else {}))
+                    extra = {"tiebreak": 1} if tiebreak else {}
+                    if review:
+                        effort = scfg(cfg)["review_effort"]
+                        if get_status(pc, qid)["review_from"] is None:
+                            extra["review_from"] = attempt
+                    else:
+                        effort = scfg(cfg)["tiebreak_effort"] if tiebreak else effort_for(cfg, mode)
+                    upsert_status(pc, qid, mode=mode, subject=x["subject"], **extra)
                     fut = ex.submit(run_sub.call_claude, ccfg, files[(mode, x["subject"])],
                                     subjects.user_text(q, mode, feedback, cfg), effort)
-                    running[fut] = (qid, attempt, effort, mode)
+                    running[fut] = (x, attempt, effort)
                 if not running:
                     break
                 done, _ = wait(running, return_when=FIRST_COMPLETED)
                 for fut in done:
-                    qid, attempt, effort, mode = running.pop(fut)
+                    x, attempt, effort = running.pop(fut)
+                    qid, mode = x["id"], x["mode"]
                     out = fut.result()
                     info = run_sub.interpret(out, ccfg, version)
                     kind = info["kind"]
@@ -259,13 +313,13 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         run_sub.store(pc, ccfg, qid, attempt, effort, info, out.get("seconds", 0))
                         summary["received" if kind == "ok" else info["result"]["stop_reason"]] += 1
                     elif kind == "limited":
-                        queue.insert(0, next(x for x in scope_rows(cfg, app) if x["id"] == qid))
+                        queue.insert(0, x)  # the same row, mode included, goes again after the wait
                         summary["limited"] += 1
                         if stop_reason is None:
                             stop_reason = "usage limit: " + info["why"]
                             paused_until = info.get("resets_at")
                     elif kind == "stop":
-                        queue.insert(0, next(x for x in scope_rows(cfg, app) if x["id"] == qid))
+                        queue.insert(0, x)
                         stop_reason = info["why"]
                         wait_on_limit = False
                     else:
@@ -480,19 +534,21 @@ def main() -> None:
     p = sp.add_parser("prompt")
     p.add_argument("--subject", required=True)
     p.add_argument("--mode", choices=subjects.MODES, required=True)
-    sp.add_parser("verify")
+    p = sp.add_parser("verify")
+    p.add_argument("--review", action="store_true", help="check a review solve (review model and effort)")
+    p.add_argument("--accept", action="store_true", help="record the owner's acceptance of the wrapping")
     p = sp.add_parser("pilot")
     p.add_argument("--subject", required=True)
     p.add_argument("--solve", type=int, default=20)
     p.add_argument("--aids", type=int, default=6)
-    for name in ("solve", "tiebreak"):
+    for name in ("solve", "tiebreak", "adjudicate"):
         p = sp.add_parser(name)
         p.add_argument("--n", type=int)
         p.add_argument("--ids")
         p.add_argument("--workers", type=int)
         p.add_argument("--wait-on-limit", action="store_true")
         p.add_argument("--force-unlock", action="store_true")
-        if name == "tiebreak":
+        if name in ("tiebreak", "adjudicate"):
             p.add_argument("--list", action="store_true", help="only list the questions")
     for name in ("precheck", "review"):
         p = sp.add_parser(name)
@@ -513,7 +569,7 @@ def main() -> None:
     elif a.cmd == "prompt":
         print(subjects.system_prompt(cfg, a.mode, a.subject))
     elif a.cmd == "verify":
-        if not verify(cfg, app, pc)["ok"]:
+        if not verify(cfg, app, pc, review=a.review, accept=a.accept)["ok"]:
             raise SystemExit(1)
     elif a.cmd == "pilot":
         print(",".join(map(str, pilot_ids(cfg, app, a.subject, a.solve, a.aids))))
@@ -524,6 +580,11 @@ def main() -> None:
             print(",".join(str(x["id"]) for x in tiebreak_rows(cfg, app, pc, ids)))
         else:
             solve(cfg, app, pc, a.n, ids, a.workers, a.wait_on_limit, a.force_unlock, tiebreak=True)
+    elif a.cmd == "adjudicate":
+        if a.list:
+            print(",".join(str(x["id"]) for x in review_rows(cfg, app, pc, ids)))
+        else:
+            solve(cfg, app, pc, a.n, ids, a.workers, a.wait_on_limit, a.force_unlock, review=True)
     elif a.cmd == "precheck":
         precheck(cfg, app, pc, ids)
     elif a.cmd == "review":

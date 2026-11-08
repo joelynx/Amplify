@@ -261,6 +261,9 @@ STATUS_EXTRA_COLUMNS = {
     "subject": "TEXT",
     # a third, high-effort solve after two solves disagreed with the stored answer (owner 2026-11-07)
     "tiebreak": "INTEGER NOT NULL DEFAULT 0",
+    # the first attempt of the review solve that replaces human review (config.subjects.review_*,
+    # owner 2026-11-08); NULL when the question never went to it
+    "review_from": "INTEGER",
 }
 FINALS_EXTRA_COLUMNS = {"mode": "TEXT", "answer_key": "TEXT", "book_check": "TEXT"}
 

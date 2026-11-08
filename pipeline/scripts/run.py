@@ -319,10 +319,10 @@ def submit(cfg: dict, app, pc, n: int, ids: list[int] | None = None, dry_run: bo
 
 
 def _fail(qid: int, attempt: int, cfg: dict, pc, *, kind: str, errors: list[str] | None = None,
-          reason: str = "", previous_text: str = "", mismatch: bool = False) -> str:
+          reason: str = "", previous_text: str = "", mismatch: bool = False, max_attempts: int | None = None) -> str:
     d = q_dir(qid)
     note = (reason or "; ".join(errors or []))[:400]
-    if attempt < int(cfg.get("max_attempts", 2)):
+    if attempt < (max_attempts or int(cfg.get("max_attempts", 2))):
         fb = {"kind": kind, "errors": [e[:240] for e in (errors or [])[:12]], "reason": reason,
               "previous_text": previous_text if kind == "feedback" else "", "from_attempt": attempt}
         write_json(d / f"feedback_{attempt + 1}.json", fb)
@@ -390,6 +390,9 @@ def judge_one(qid: int, cfg: dict, app, pc) -> str:
     d = q_dir(qid)
     resp = read_json(d / f"response_{attempt}.json")
     text = read_text(d / f"solver_{attempt}.tex")
+    # The review solve that replaces human review (owner 2026-11-08): its own attempt budget.
+    review_from = row["review_from"] if "review_from" in row.keys() else None
+    cap = review_from + int((cfg.get("subjects") or {}).get("review_max_attempts", 3)) - 1 if review_from else None
 
     if resp.get("stop_reason") == "refusal":
         cat = (resp.get("stop_details") or {}).get("category")
@@ -397,7 +400,8 @@ def judge_one(qid: int, cfg: dict, app, pc) -> str:
         log_event(pc, qid, "collect", f"attempt {attempt} refused ({cat})")
         return "refused"
     if resp.get("stop_reason") == "max_tokens":
-        return _fail(qid, attempt, cfg, pc, kind="blind", reason="the reply was cut off at the output token limit")
+        return _fail(qid, attempt, cfg, pc, kind="blind", reason="the reply was cut off at the output token limit",
+                     max_attempts=cap)
 
     q = fetch_question(app, qid)
     # Only the source's own answer is a reference; one an earlier pipeline run filled in is not.
@@ -411,7 +415,11 @@ def judge_one(qid: int, cfg: dict, app, pc) -> str:
     else:
         res = validate_solver_text(qid, text, cfg, stored)
     tiebreak_note = None
-    if subject_mode and row["tiebreak"] and res["ok"] and res.get("answer_mismatch"):
+    if subject_mode and review_from and res["ok"] and res.get("answer_mismatch"):
+        # The review solve is final: it replaces a disagreeing stored answer (old value kept as
+        # answer_before_replace), as an accepted tie-break does.
+        tiebreak_note = f"review solve is final; replaces the stored answer ({stored})"
+    elif subject_mode and row["tiebreak"] and res["ok"] and res.get("answer_mismatch"):
         # The high-effort tie-break (owner 2026-11-07): agreeing with an earlier solve against the
         # stored answer, it is accepted and replaces that answer; agreeing with neither, a person decides.
         agree = subjects.earlier_agreement(qid, attempt, q, row["mode"])
@@ -425,7 +433,7 @@ def judge_one(qid: int, cfg: dict, app, pc) -> str:
         tiebreak_note = f"tie-break agrees with attempt {agree}; replaces the stored answer ({stored})"
     write_json(d / f"validate_{attempt}.json", res)
     if not res["ok"]:
-        return _fail(qid, attempt, cfg, pc, kind="feedback", errors=res["errors"], previous_text=text)
+        return _fail(qid, attempt, cfg, pc, kind="feedback", errors=res["errors"], previous_text=text, max_attempts=cap)
     if res.get("answer_mismatch") and tiebreak_note is None:
         return _fail(qid, attempt, cfg, pc, kind="blind",
                      reason=f"its final answer did not match the stored reference answer ({res.get('stored_answer')})", mismatch=True)

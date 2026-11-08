@@ -830,7 +830,9 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
     hint_empty = is_blank(q["hints"]) or pipeline_wrote(pc, qid, "hints", q["hints"])
     fill_answer = answer_value if (ans_empty and answer_value and row["status"] == "passed") else None
     # A tie-break that agreed with an earlier solve against the stored answer replaces that answer.
-    replace_answer = answer_value if (row["tiebreak"] and row["answer_mismatch"] and answer_value) else None
+    # an accepted tie-break or review solve that disagrees with the stored answer replaces it
+    reviewed = "review_from" in row.keys() and row["review_from"]
+    replace_answer = answer_value if ((row["tiebreak"] or reviewed) and row["answer_mismatch"] and answer_value) else None
     if replace_answer:
         fill_answer = None
     fill_hint = hint if (hint_empty and hint) else None
