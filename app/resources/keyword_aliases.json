@@ -1,0 +1,407 @@
+{
+  "_comment": "Lecture-keyword aliases (app/core/concepts.py). Key = what a student might type (case and hyphens ignored); value = one or more phrases to match against topic, branch, subtopic and tag names. Spelling variants (-ise/-ize, -our/-or, plurals) are handled in code, not here.",
+  "ode": [
+    "ordinary differential equations"
+  ],
+  "odes": [
+    "ordinary differential equations"
+  ],
+  "pde": [
+    "partial differential equations"
+  ],
+  "pdes": [
+    "partial differential equations"
+  ],
+  "ivp": [
+    "initial value problems"
+  ],
+  "bvp": [
+    "boundary value problems"
+  ],
+  "laplace": [
+    "laplace transform"
+  ],
+  "fourier": [
+    "fourier series",
+    "fourier transform"
+  ],
+  "fft": [
+    "fourier transform"
+  ],
+  "ibp": [
+    "techniques of integration",
+    "integration by parts"
+  ],
+  "u sub": [
+    "substitution",
+    "techniques of integration"
+  ],
+  "u substitution": [
+    "substitution",
+    "techniques of integration"
+  ],
+  "ftc": [
+    "fundamental theorem of calculus"
+  ],
+  "mvt": [
+    "mean value theorem"
+  ],
+  "ivt": [
+    "intermediate value theorem"
+  ],
+  "l hopital": [
+    "l'hopital's rule"
+  ],
+  "lhopital": [
+    "l'hopital's rule"
+  ],
+  "multivariable": [
+    "multivariable calculus",
+    "partial derivatives"
+  ],
+  "lagrange multipliers": [
+    "constrained optimization",
+    "lagrange multipliers"
+  ],
+  "epsilon delta": [
+    "limits",
+    "continuity"
+  ],
+  "svd": [
+    "singular value decomposition"
+  ],
+  "lu": [
+    "lu decomposition"
+  ],
+  "qr": [
+    "qr decomposition"
+  ],
+  "rref": [
+    "row echelon form",
+    "gaussian elimination"
+  ],
+  "gaussian elimination": [
+    "gaussian elimination",
+    "row reduction"
+  ],
+  "gram schmidt": [
+    "gram-schmidt process"
+  ],
+  "jnf": [
+    "jordan normal form"
+  ],
+  "jordan form": [
+    "jordan normal form"
+  ],
+  "cayley hamilton": [
+    "cayley-hamilton theorem"
+  ],
+  "eigen": [
+    "eigenvalues and eigenvectors"
+  ],
+  "eigenstuff": [
+    "eigenvalues and eigenvectors"
+  ],
+  "rank nullity": [
+    "rank-nullity theorem"
+  ],
+  "least squares": [
+    "least squares approximation"
+  ],
+  "pd matrices": [
+    "positive definite matrices"
+  ],
+  "spd": [
+    "positive definite matrices"
+  ],
+  "clt": [
+    "central limit theorem"
+  ],
+  "lln": [
+    "law of large numbers"
+  ],
+  "wlln": [
+    "weak law of large numbers"
+  ],
+  "slln": [
+    "strong law of large numbers"
+  ],
+  "mgf": [
+    "moment generating functions"
+  ],
+  "mgfs": [
+    "moment generating functions"
+  ],
+  "pgf": [
+    "probability generating functions"
+  ],
+  "pdf": [
+    "probability density functions",
+    "continuous random variables"
+  ],
+  "pmf": [
+    "probability mass functions",
+    "discrete random variables"
+  ],
+  "cdf": [
+    "cumulative distribution functions"
+  ],
+  "iid": [
+    "independent random variables"
+  ],
+  "rv": [
+    "random variables"
+  ],
+  "rvs": [
+    "random variables"
+  ],
+  "mle": [
+    "maximum likelihood estimation"
+  ],
+  "mom": [
+    "method of moments"
+  ],
+  "ci": [
+    "confidence intervals"
+  ],
+  "hypothesis testing": [
+    "hypothesis testing",
+    "tests of hypotheses"
+  ],
+  "bayes": [
+    "bayes theorem",
+    "conditional probability"
+  ],
+  "markov": [
+    "markov chains"
+  ],
+  "dtmc": [
+    "discrete-time markov chains"
+  ],
+  "ctmc": [
+    "continuous-time markov chains"
+  ],
+  "bm": [
+    "brownian motion"
+  ],
+  "gbm": [
+    "geometric brownian motion"
+  ],
+  "poisson process": [
+    "poisson processes"
+  ],
+  "ost": [
+    "martingale and optional stopping"
+  ],
+  "optional stopping": [
+    "martingale and optional stopping"
+  ],
+  "linearity of expectation": [
+    "linearity of expectation"
+  ],
+  "loe": [
+    "linearity of expectation"
+  ],
+  "gcd": [
+    "greatest common divisor"
+  ],
+  "hcf": [
+    "greatest common divisor"
+  ],
+  "lcm": [
+    "least common multiple"
+  ],
+  "crt": [
+    "chinese remainder theorem"
+  ],
+  "flt": [
+    "fermat's little theorem",
+    "fermat-euler and orders"
+  ],
+  "fermat little": [
+    "fermat-euler and orders"
+  ],
+  "euler totient": [
+    "euler's totient function",
+    "fermat-euler and orders"
+  ],
+  "phi function": [
+    "euler's totient function"
+  ],
+  "mod": [
+    "modular arithmetic"
+  ],
+  "modular": [
+    "modular arithmetic"
+  ],
+  "congruences": [
+    "modular arithmetic",
+    "congruences"
+  ],
+  "lte": [
+    "lifting the exponent",
+    "p-adic valuation"
+  ],
+  "vieta": [
+    "vieta's formulas"
+  ],
+  "am gm": [
+    "am-gm inequality"
+  ],
+  "amgm": [
+    "am-gm inequality"
+  ],
+  "cs": [
+    "cauchy-schwarz inequality"
+  ],
+  "cauchy schwarz": [
+    "cauchy-schwarz inequality"
+  ],
+  "jensen": [
+    "jensen and convexity"
+  ],
+  "pie": [
+    "inclusion-exclusion"
+  ],
+  "inclusion exclusion": [
+    "inclusion-exclusion"
+  ],
+  "php": [
+    "pigeonhole principle"
+  ],
+  "pigeonhole": [
+    "pigeonhole principle"
+  ],
+  "gf": [
+    "generating functions"
+  ],
+  "gfs": [
+    "generating functions"
+  ],
+  "stars bars": [
+    "stars and bars"
+  ],
+  "wlog": [
+    "symmetry argument"
+  ],
+  "fbd": [
+    "equilibrium of forces and moments",
+    "free body diagrams"
+  ],
+  "shm": [
+    "simple harmonic motion"
+  ],
+  "com": [
+    "centre of mass"
+  ],
+  "moi": [
+    "moment of inertia"
+  ],
+  "emf": [
+    "electromotive force",
+    "electromagnetic induction"
+  ],
+  "faraday": [
+    "faraday's law",
+    "electromagnetic induction"
+  ],
+  "kvl": [
+    "kirchhoff's laws",
+    "dc circuits"
+  ],
+  "kcl": [
+    "kirchhoff's laws",
+    "dc circuits"
+  ],
+  "rlc": [
+    "rlc circuits",
+    "ac circuits"
+  ],
+  "ac": [
+    "ac circuits"
+  ],
+  "dc": [
+    "dc circuits"
+  ],
+  "dc machines": [
+    "dc machines"
+  ],
+  "induction motor": [
+    "induction machines"
+  ],
+  "transformers": [
+    "transformers"
+  ],
+  "navier stokes": [
+    "navier-stokes equations"
+  ],
+  "reynolds": [
+    "reynolds number"
+  ],
+  "nusselt": [
+    "convection"
+  ],
+  "lmtd": [
+    "heat exchangers"
+  ],
+  "ntu": [
+    "heat exchangers"
+  ],
+  "rankine": [
+    "rankine cycle"
+  ],
+  "brayton": [
+    "brayton cycle",
+    "gas turbines"
+  ],
+  "carnot": [
+    "carnot cycle",
+    "second law of thermodynamics"
+  ],
+  "first law": [
+    "first law of thermodynamics"
+  ],
+  "second law": [
+    "second law of thermodynamics"
+  ],
+  "entropy": [
+    "entropy"
+  ],
+  "bsm": [
+    "black-scholes"
+  ],
+  "black scholes": [
+    "black-scholes"
+  ],
+  "capm": [
+    "capital asset pricing model"
+  ],
+  "npv": [
+    "net present value"
+  ],
+  "irr": [
+    "internal rate of return"
+  ],
+  "ytm": [
+    "yield to maturity"
+  ],
+  "put call parity": [
+    "put-call parity"
+  ],
+  "gdp": [
+    "national income accounting"
+  ],
+  "is lm": [
+    "is-lm model"
+  ],
+  "integration by parts": [
+    "techniques of integration"
+  ],
+  "partial fractions": [
+    "techniques of integration",
+    "partial fractions"
+  ],
+  "repeated roots": [
+    "multiple roots"
+  ]
+}

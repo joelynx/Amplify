@@ -44,6 +44,8 @@ class Filters(TypedDict, total=False):
     min_difficulty: float
     reuse_questions: bool
     in_syllabus_only: bool
+    exclude_question_ids: list[int]
+    bookmarked_only: bool
 
 
 def _in_clause(col: str, values: list[str]) -> tuple[str, list[Any]]:
@@ -69,6 +71,20 @@ def assemble_where(
         placeholders = ",".join(["?"] * len(question_ids))
         parts.append(f"question_id IN ({placeholders})")
         params.extend(int(i) for i in question_ids)
+
+    # Questions already taken by an earlier pick in the same session (the
+    # per-concept allocation in app/core/concepts.py).
+    exclude_ids = filters.get("exclude_question_ids") or []
+    if exclude_ids:
+        placeholders = ",".join(["?"] * len(exclude_ids))
+        parts.append(f"questions.question_id NOT IN ({placeholders})")
+        params.extend(int(i) for i in exclude_ids)
+
+    # Bookmarked questions only (migration 009, question_notes).
+    if filters.get("bookmarked_only"):
+        parts.append(
+            "questions.question_id IN (SELECT question_id FROM question_notes WHERE bookmarked = 1)"
+        )
 
     # Subject curricular gate (spec §3.6 / §7.2). Independent of in_syllabus_only.
     if subject_payload:

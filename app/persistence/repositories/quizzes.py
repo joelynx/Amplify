@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import sqlite3
 import uuid
+from collections.abc import Iterable
 from datetime import UTC, datetime
 from typing import Any
 
@@ -42,9 +43,14 @@ def insert_quiz(
     config: QuizConfig,
     template_name: str | None,
     question_ids: list[int],
+    presented_ids: Iterable[int] | None = None,
 ) -> None:
-    """Atomic write: quizzes row + N quiz_questions rows."""
+    """Atomic write: quizzes row + N quiz_questions rows. `presented_ids` are
+    the questions on screen from the start (their `presented_at` is stamped);
+    the rest are stamped by `practice.mark_presented` when shown. None = all."""
     tags = filters.get("tags") or {}
+    created = _iso_now()
+    shown = set(question_ids) if presented_ids is None else set(presented_ids)
     try:
         conn.execute(
             """
@@ -61,7 +67,7 @@ def insert_quiz(
             """,
             (
                 quiz_id,
-                _iso_now(),
+                created,
                 subject,
                 json.dumps(filters.get("topics") or []),
                 json.dumps(filters.get("branches") or []),
@@ -88,8 +94,9 @@ def insert_quiz(
         )
         for order, qid in enumerate(question_ids, start=1):
             conn.execute(
-                "INSERT INTO quiz_questions (quiz_id, question_id, question_order) VALUES (?, ?, ?)",
-                (quiz_id, qid, order),
+                "INSERT INTO quiz_questions (quiz_id, question_id, question_order, presented_at) "
+                "VALUES (?, ?, ?, ?)",
+                (quiz_id, qid, order, created if qid in shown else None),
             )
         conn.commit()
     except Exception:
@@ -99,8 +106,8 @@ def insert_quiz(
 def append_traverse_question(conn: sqlite3.Connection, quiz_id: str, question_id: int, order: int) -> None:
     try:
         conn.execute(
-            "INSERT INTO quiz_questions (quiz_id, question_id, question_order) VALUES (?, ?, ?)",
-            (quiz_id, question_id, order)
+            "INSERT INTO quiz_questions (quiz_id, question_id, question_order, presented_at) VALUES (?, ?, ?, ?)",
+            (quiz_id, question_id, order, _iso_now())
         )
         conn.execute(
             "UPDATE quizzes SET n_questions = n_questions + 1 WHERE quiz_id = ?",
@@ -152,6 +159,11 @@ def _answer_dict(a: AnswerRecord) -> dict[str, Any]:
         "credit": a.credit,
         "parts": a.parts,
     }
+
+
+def template_for(conn: sqlite3.Connection, quiz_id: str) -> str | None:
+    row = conn.execute("SELECT template_name FROM quizzes WHERE quiz_id = ?", (quiz_id,)).fetchone()
+    return row[0] if row else None
 
 
 def attempt_id_for(conn: sqlite3.Connection, quiz_id: str) -> str | None:

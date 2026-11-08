@@ -27,6 +27,10 @@ export interface Filters {
   in_syllabus_only?: boolean;
   /** One-off "Generate PSet from selection" mode (spec §8.6). */
   question_ids?: number[];
+  /** Questions already taken earlier in the same session. */
+  exclude_question_ids?: number[];
+  /** Bookmarked questions only. */
+  bookmarked_only?: boolean;
 }
 
 /** A `Question` as projected by the questions repo for the Generate / Browser pages.
@@ -244,6 +248,134 @@ export interface DiscoverResult {
   quiz_id?: string | null;
   questions?: QuizQuestionFull[];
   diversity_score?: number | null;
+  /** Lecture / mixed sessions: the concept each question was picked for (by id). */
+  concept_labels?: Record<string, string>;
+  /** Lecture / mixed sessions: how many fewer questions than asked matched. */
+  shortfall?: number;
+}
+
+// ---- Practice history (review queue, keywords, notes, learning stats) ----
+
+export type ReviewList = "due" | "mistakes" | "assisted" | "bookmarked";
+export type Outcome = "independent" | "assisted" | "partial" | "missed";
+
+export interface ReviewRow {
+  question_id: number;
+  topic?: string;
+  branch?: string;
+  subtopic?: string;
+  preview?: string;
+  difficulty_rating?: number | null;
+  last_outcome?: Outcome;
+  last_at?: string | null;
+  due_at?: string | null;
+  attempts?: number;
+}
+
+export interface ReviewSummary {
+  counts: Record<ReviewList, number>;
+  next_due: string | null;
+  tracked: number;
+  retired: number;
+  lists: Record<ReviewList, ReviewRow[]>;
+}
+
+export type ConceptKind = "subtopic" | "branch" | "tag" | "topic";
+
+export interface ConceptMatch {
+  kind: ConceptKind;
+  label: string;
+  path: string;
+  count: number;
+  score: number;
+  via_alias: string | null;
+  selected: boolean;
+}
+
+export interface KeywordTerm {
+  term: string;
+  matches: ConceptMatch[];
+}
+
+export interface ConceptRef {
+  kind: ConceptKind;
+  label: string;
+  path?: string;
+}
+
+export interface LectureSet {
+  name: string;
+  text: string;
+  concepts: ConceptRef[];
+  saved_at: string;
+}
+
+export interface StudiedTechnique {
+  tag: string;
+  role: string;
+  available: number;
+  practised: number;
+  last_at: string | null;
+}
+
+export interface QuestionNote {
+  note: string;
+  bookmarked: boolean;
+  updated_at: string;
+}
+
+export type PaperOutcome = "solved" | "partial" | "missed";
+
+export interface PaperQuestion {
+  question_id: number;
+  topic?: string;
+  branch?: string;
+  subtopic?: string;
+  preview?: string;
+  outcome: PaperOutcome | null;
+  assisted: boolean;
+}
+
+export interface TopicLearning {
+  topic: string;
+  in_scope: number;
+  attempted: number;
+  independent: number;
+  independent_self: number;
+  first_attempts: number;
+  first_independent: number;
+  revisit: number;
+  delayed: number;
+  delayed_success: number;
+  avg_difficulty: number | null;
+}
+
+export interface LearningStats {
+  funnel: {
+    generated: number;
+    presented: number;
+    attempted: number;
+    assisted: number;
+    independent: number;
+    independent_self: number;
+    independent_unknown: number;
+  };
+  first_attempts: { n: number; independent: number };
+  delayed: { n: number; independent: number };
+  revisit: number;
+  reviews: { due: number; mistakes: number; assisted: number; next_due: string | null };
+  topics: TopicLearning[];
+  bands: { band: string; first_attempts: number; first_independent: number }[];
+}
+
+export interface Milestone {
+  id: string;
+  title: string;
+  description: string;
+  target: number;
+  progress: number;
+  unlocked: boolean;
+  theme_id: string;
 }
 
 export interface StartQuizResult {
@@ -443,6 +575,32 @@ interface PyWebViewApi {
   quiz_traverse_start: (filters: Filters, seed_id?: number | null, seed_diversity?: number) => Promise<TraverseStartResult>;
   quiz_traverse_next: (quiz_id: string, current_question_id: number, diversity: number) => Promise<TraverseNextResult>;
   quiz_discover: (filters: Filters, n: number) => Promise<DiscoverResult>;
+  quiz_mark_presented: (quiz_id: string, question_id: number) => Promise<boolean>;
+  quiz_log_reveal: (quiz_id: string, question_id: number) => Promise<boolean>;
+  get_review_summary: (subject?: string | null) => Promise<ReviewSummary>;
+  quiz_review_start: (subject: string | null, kind: ReviewList, n: number) => Promise<DiscoverResult>;
+  dismiss_review: (question_id: number) => Promise<void>;
+  match_keywords: (text: string, filters?: Filters | null) => Promise<KeywordTerm[]>;
+  quiz_concepts_start: (
+    filters: Filters,
+    concept_list: ConceptRef[],
+    n: number,
+    template: "LECTURE" | "MIXED",
+  ) => Promise<DiscoverResult>;
+  list_lecture_sets: () => Promise<LectureSet[]>;
+  save_lecture_set: (name: string, text: string, concept_list: ConceptRef[]) => Promise<LectureSet[]>;
+  delete_lecture_set: (name: string) => Promise<LectureSet[]>;
+  get_studied_techniques: (subject?: string | null) => Promise<StudiedTechnique[]>;
+  get_question_notes: (question_ids: number[]) => Promise<Record<string, QuestionNote>>;
+  save_question_note: (question_id: number, note: string) => Promise<void>;
+  set_question_bookmark: (question_id: number, on: boolean) => Promise<void>;
+  get_paper_results: (pset_id: string) => Promise<{ pset_id: string; questions: PaperQuestion[] }>;
+  record_paper_results: (
+    pset_id: string,
+    results: { question_id: number; outcome: PaperOutcome | null; assisted: boolean }[],
+  ) => Promise<{ recorded: number }>;
+  get_milestones: () => Promise<Milestone[]>;
+  get_learning_stats: (subject?: string | null, date_range?: DateRange | null) => Promise<LearningStats>;
   get_topics: (subject?: string | null, in_syllabus_only?: boolean) => Promise<string[]>;
   get_branches: (subject: string | null, topic: string, in_syllabus_only?: boolean) => Promise<string[]>;
   get_subtopics: (
@@ -502,7 +660,11 @@ interface PyWebViewApi {
     mode?: "generate" | "quiz",
   ) => Promise<DistributionDatum[]>;
   get_trends: (subject?: string | null, mode?: "generate" | "quiz") => Promise<TrendInsight[]>;
-  get_question_multiplicity_dist: (subject?: string | null, mode?: "generate" | "quiz") => Promise<Record<number, number>>;
+  get_question_multiplicity_dist: (
+    subject?: string | null,
+    mode?: "generate" | "quiz",
+    date_range?: DateRange | null,
+  ) => Promise<Record<number, number>>;
   get_calendar_heatmap: (year?: number | null, mode?: "generate" | "quiz") => Promise<Record<string, number>>;
   get_activity_line: (date_range?: DateRange | null, mode?: "generate" | "quiz") => Promise<ActivityDatum[]>;
   list_psets: (subject?: string | null, date_range?: DateRange | null) => Promise<PSetSummary[]>;
@@ -576,7 +738,9 @@ export interface TrendInsight {
   title: string;
   body: string;
   cta_label: string;
-  cta_filters: Partial<TemplatePayload>;
+  cta_filters: Partial<TemplatePayload> & { kind?: ReviewList };
+  /** Where the CTA goes: Generate or Quiz pre-filled, or a review session. */
+  cta_target?: "generate" | "quiz" | "review";
 }
 
 export interface ActivityDatum {
@@ -590,6 +754,10 @@ export interface ThemeMeta {
   name: string;
   description: string;
   preview: string | null;
+  /** Earned through a practice milestone. */
+  reward?: boolean;
+  locked?: boolean;
+  milestone?: Milestone | null;
 }
 
 export interface SeedDiagnostics {
@@ -833,6 +1001,89 @@ export const ipc = {
     const api = await bridge();
     return api.quiz_discover(filters, n);
   },
+  async quiz_mark_presented(quiz_id: string, question_id: number): Promise<boolean> {
+    const api = await bridge();
+    return api.quiz_mark_presented(quiz_id, question_id);
+  },
+  async quiz_log_reveal(quiz_id: string, question_id: number): Promise<boolean> {
+    const api = await bridge();
+    return api.quiz_log_reveal(quiz_id, question_id);
+  },
+  async get_review_summary(subject: string | null = null): Promise<ReviewSummary> {
+    const api = await bridge();
+    return api.get_review_summary(subject);
+  },
+  async quiz_review_start(subject: string | null, kind: ReviewList, n: number): Promise<DiscoverResult> {
+    const api = await bridge();
+    return api.quiz_review_start(subject, kind, n);
+  },
+  async dismiss_review(question_id: number): Promise<void> {
+    const api = await bridge();
+    return api.dismiss_review(question_id);
+  },
+  async match_keywords(text: string, filters: Filters | null = null): Promise<KeywordTerm[]> {
+    const api = await bridge();
+    return api.match_keywords(text, filters);
+  },
+  async quiz_concepts_start(
+    filters: Filters,
+    concept_list: ConceptRef[],
+    n: number,
+    template: "LECTURE" | "MIXED",
+  ): Promise<DiscoverResult> {
+    const api = await bridge();
+    return api.quiz_concepts_start(filters, concept_list, n, template);
+  },
+  async list_lecture_sets(): Promise<LectureSet[]> {
+    const api = await bridge();
+    return (await api.list_lecture_sets()) ?? [];
+  },
+  async save_lecture_set(name: string, text: string, concept_list: ConceptRef[]): Promise<LectureSet[]> {
+    const api = await bridge();
+    return api.save_lecture_set(name, text, concept_list);
+  },
+  async delete_lecture_set(name: string): Promise<LectureSet[]> {
+    const api = await bridge();
+    return api.delete_lecture_set(name);
+  },
+  async get_studied_techniques(subject: string | null = null): Promise<StudiedTechnique[]> {
+    const api = await bridge();
+    return api.get_studied_techniques(subject);
+  },
+  async get_question_notes(question_ids: number[]): Promise<Record<string, QuestionNote>> {
+    const api = await bridge();
+    return (await api.get_question_notes(question_ids)) ?? {};
+  },
+  async save_question_note(question_id: number, note: string): Promise<void> {
+    const api = await bridge();
+    return api.save_question_note(question_id, note);
+  },
+  async set_question_bookmark(question_id: number, on: boolean): Promise<void> {
+    const api = await bridge();
+    return api.set_question_bookmark(question_id, on);
+  },
+  async get_paper_results(pset_id: string): Promise<{ pset_id: string; questions: PaperQuestion[] }> {
+    const api = await bridge();
+    return api.get_paper_results(pset_id);
+  },
+  async record_paper_results(
+    pset_id: string,
+    results: { question_id: number; outcome: PaperOutcome | null; assisted: boolean }[],
+  ): Promise<{ recorded: number }> {
+    const api = await bridge();
+    return api.record_paper_results(pset_id, results);
+  },
+  async get_milestones(): Promise<Milestone[]> {
+    const api = await bridge();
+    return api.get_milestones();
+  },
+  async get_learning_stats(
+    subject: string | null = null,
+    date_range: DateRange | null = null,
+  ): Promise<LearningStats> {
+    const api = await bridge();
+    return api.get_learning_stats(subject, date_range);
+  },
   async get_topics(subject: string | null = null, in_syllabus_only = true): Promise<string[]> {
     const api = await bridge();
     return api.get_topics(subject, in_syllabus_only);
@@ -1047,9 +1298,10 @@ export const ipc = {
   async get_question_multiplicity_dist(
     subject: string | null = null,
     mode?: "generate" | "quiz",
+    date_range: DateRange | null = null,
   ): Promise<Record<number, number>> {
     const api = await bridge();
-    return api.get_question_multiplicity_dist(subject, mode);
+    return api.get_question_multiplicity_dist(subject, mode, date_range);
   },
   async get_calendar_heatmap(
     year: number | null = null,

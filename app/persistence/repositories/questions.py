@@ -354,15 +354,54 @@ def browser_where(
     *,
     subject: Subject | None = None,
     text_query: str | None = None,
+    concepts: list[dict[str, Any]] | None = None,
 ) -> tuple[str, list[Any]]:
-    """The Browser's WHERE clause: the filters plus the free-text substring on
-    `latexcode`. Shared by `search` and the filtered similar-questions list."""
+    """The Browser's WHERE clause: the filters plus the free text. The text
+    matches as a substring of the LaTeX or of the topic, branch, subtopic or a
+    tag name, or through `concepts` (taxonomy / tag matches for the text, from
+    app/core/concepts.search_concepts: aliases and spelling variants). Shared
+    by `search` and the filtered similar-questions list."""
     payload = subject.to_payload() if subject else None
     where, params = assemble_where(filters, payload)
     if text_query:
-        where = f"({where}) AND latexcode LIKE ?"
-        params = [*params, f"%{text_query}%"]
+        like = f"%{text_query}%"
+        alts = [
+            "latexcode LIKE ?",
+            "topic LIKE ?",
+            "branch LIKE ?",
+            "subtopic LIKE ?",
+            "EXISTS (SELECT 1 FROM question_tags qt WHERE qt.question_id = questions.question_id AND qt.tag LIKE ?)",
+        ]
+        alt_params: list[Any] = [like] * 5
+        by_kind: dict[str, list[str]] = {}
+        for c in concepts or []:
+            by_kind.setdefault(c["kind"], []).append(c["label"])
+        for kind, col in (("topic", "topic"), ("branch", "branch"), ("subtopic", "subtopic")):
+            labels = by_kind.get(kind)
+            if labels:
+                alts.append(f"{col} IN ({','.join('?' * len(labels))})")
+                alt_params.extend(labels)
+        if by_kind.get("tag"):
+            tags = by_kind["tag"]
+            alts.append(
+                "EXISTS (SELECT 1 FROM question_tags qt WHERE qt.question_id = questions.question_id "
+                f"AND qt.tag IN ({','.join('?' * len(tags))}))"
+            )
+            alt_params.extend(tags)
+        where = f"({where}) AND ({' OR '.join(alts)})"
+        params = [*params, *alt_params]
     return where, list(params)
+
+
+def text_concepts(
+    conn: sqlite3.Connection, text_query: str | None, subject: Subject | None
+) -> list[dict[str, Any]]:
+    """Concepts the Browser's free text names well (aliases, spelling variants)."""
+    if not text_query or len(text_query.strip()) < 2:
+        return []
+    from app.core.concepts import search_concepts
+
+    return search_concepts(conn, text_query, subject)
 
 
 def search(
@@ -377,11 +416,13 @@ def search(
 ) -> tuple[list[Question], int]:
     """Paginated, sortable search for the Browser table.
 
-    `text_query` is a free-text substring on `latexcode` (case-insensitive).
+    `text_query` is free text (see `browser_where`; case-insensitive).
     `sort_by` is `<column>_<asc|desc>`; unknown columns fall back to
     `question_id_asc`.
     """
-    where, params = browser_where(filters, subject=subject, text_query=text_query)
+    where, params = browser_where(
+        filters, subject=subject, text_query=text_query, concepts=text_concepts(conn, text_query, subject)
+    )
 
     total = int(conn.execute(f"SELECT COUNT(*) FROM questions WHERE {where}", params).fetchone()[0])
 

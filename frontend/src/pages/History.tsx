@@ -8,17 +8,20 @@
  *   - Generate  → fetches `get_pset_filters` and navigates to /generate with the
  *     similar    payload in location.state. User reviews/edits before clicking
  *                 Generate; the new PSet stores the *edited* filters (no back-link).
+ *   - Record    → per-question solved / partial / missed for work done on paper
+ *     results    (PaperResultsDialog); feeds the review queue.
  *   - Delete    → drops the psets row + pset_questions cascade. The on-disk PDF stays.
  */
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Download, ExternalLink, RefreshCw, Settings as Gear, Trash2, Wand2 } from "lucide-react";
+import { ClipboardCheck, Download, ExternalLink, RefreshCw, Settings as Gear, Trash2, Wand2 } from "lucide-react";
 
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
 import { Modal } from "../components/ui/Modal";
 import { StatsFiltersDialog } from "../components/stats/StatsFiltersDialog";
+import { PaperResultsDialog } from "../components/history/PaperResultsDialog";
 import {
   ipc,
   type DateRange,
@@ -55,6 +58,7 @@ export default function HistoryPage() {
   const [reExportResult, setReExportResult] = useState<GenerateResult | null>(null);
   const [openError, setOpenError] = useState<string | null>(null);
   const [confirmingDelete, setConfirmingDelete] = useState<PSetSummary | null>(null);
+  const [recording, setRecording] = useState<string | null>(null); // pset_id whose paper results are open
 
   useEffect(() => {
     ipc.list_subjects().then(setSubjects);
@@ -196,6 +200,17 @@ export default function HistoryPage() {
                     <Button
                       variant="ghost"
                       size="sm"
+                      onClick={() => setRecording(p.pset_id)}
+                      disabled={busy !== null}
+                      aria-label={`Record paper results for ${p.pset_id}`}
+                      title="Mark each question solved, partial or missed; misses come back for review"
+                    >
+                      <ClipboardCheck className="h-4 w-4" />
+                      Record results
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
                       onClick={() => setConfirmingDelete(p)}
                       disabled={busy !== null}
                       aria-label={`Delete ${p.pset_id}`}
@@ -245,6 +260,8 @@ export default function HistoryPage() {
           )}
         </div>
       </main>
+
+      <PaperResultsDialog psetId={recording} onClose={() => setRecording(null)} />
 
       <StatsFiltersDialog
         open={filtersOpen}

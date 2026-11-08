@@ -34,19 +34,21 @@ def submit(
     answers: list[Any] | None = None,
     user_answer: str = "",
     time_taken_ms: int = 0,
+    hints_used: int = 0,
 ) -> tuple[dict[str, Any], AnswerRecord | None]:
     """Grade an answer to `q`. Returns the result (same shape as the slot
     runners' minus slots and replacements) and the record to log, which is
-    None while the submission awaits self-assessment."""
+    None while the submission awaits self-assessment. `hints_used` counts the
+    hints opened before submitting."""
     key = (quiz_id, q.question_id)
     with _lock:
         if key in _pending:
             return {"correct": None, "pending": True, "error": "self-assess the revealed parts first"}, None
         g = grade_submission(q, answers=answers, user_answer=user_answer)
         if g.awaiting:
-            _pending[key] = g.pending(q.question_id, user_answer, time_taken_ms)
+            _pending[key] = g.pending(q.question_id, user_answer, time_taken_ms, hints_used)
             return {**pending_result(g), "solution": q.best_solution() if g.needs_solution else None}, None
-    return _finish(q, g, time_taken_ms)
+    return _finish(q, g, time_taken_ms, hints_used)
 
 
 def self_assess(
@@ -62,10 +64,12 @@ def self_assess(
         if g.awaiting:
             return {"correct": None, "pending": True, "error": "mark every revealed part"}, None
         del _pending[key]
-    return _finish(q, g, p.time_taken_ms)
+    return _finish(q, g, p.time_taken_ms, p.hints_used)
 
 
-def _finish(q: Question, g: Graded, time_taken_ms: int) -> tuple[dict[str, Any], AnswerRecord]:
+def _finish(
+    q: Question, g: Graded, time_taken_ms: int, hints_used: int = 0
+) -> tuple[dict[str, Any], AnswerRecord]:
     credit = g.credit
     record = AnswerRecord(
         question_id=q.question_id,
@@ -74,6 +78,7 @@ def _finish(q: Question, g: Graded, time_taken_ms: int) -> tuple[dict[str, Any],
         correct=credit >= 1.0,
         score=credit,
         self_assessment=g.single_mark,
+        hints_used=hints_used,
         time_taken_ms=time_taken_ms,
         submitted_at=_now(),
         credit=credit,

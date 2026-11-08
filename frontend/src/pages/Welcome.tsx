@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "../components/ui/Button";
+import { TodayCard } from "../components/quiz/TodayCard";
 import { cn } from "../lib/cn";
 
 interface NavCard {
@@ -33,7 +34,7 @@ const CARDS: readonly NavCard[] = [
   {
     to: "/themes",
     title: "Themes",
-    blurb: "Pick a look — two defaults plus seven flavor themes. Switching applies live.",
+    blurb: "Pick a look — two defaults, seven flavor themes, and three earned by practising. Switching applies live.",
     Icon: Palette,
   },
   {
@@ -66,6 +67,8 @@ export default function WelcomePage() {
             Enter
           </Button>
         </Link>
+
+        <TodayCard />
 
         <nav className="grid w-full gap-3 sm:grid-cols-2">
           {CARDS.map(({ to, title, blurb, Icon }) => (

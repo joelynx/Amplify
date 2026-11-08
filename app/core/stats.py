@@ -4,11 +4,15 @@ Two scopes apply, and they're *different*:
 
 - **PSet-side stats** (PSets Generated, Max Questions in a single PSet) filter by
   both subject name (literal match on `psets.subject`) AND the date range.
-- **Question-side stats** (Total / Unique / Max-multiplicity / Avg-difficulty)
-  are *lifetime* numbers — they ignore the date range and apply the subject
-  curricular gate via topic/branch/subtopic membership.
+- **Question-side stats** (Total / Unique / Max-multiplicity / Avg-difficulty,
+  the topic distribution and the multiplicity histogram) count *uses* inside the
+  date range: rows of `pset_questions` (by PSet date) in Generate mode, shown
+  `quiz_questions` (by `presented_at`) in Quiz mode. The subject applies as its
+  curricular gate (topic/branch/subtopic membership), not `psets.subject`.
 
-This mirrors spec §9.1's specified SQL exactly.
+Spec §9.1 had the question-side numbers as lifetime counters (`times_used`);
+they now follow the selected range (Low_Hanging_Fruit.md §2). With no range
+they still cover everything except uses whose PSet was deleted.
 """
 
 from __future__ import annotations
@@ -69,6 +73,29 @@ def _question_scope(subject: Subject | None) -> tuple[str, list[Any]]:
     return assemble_where({"in_syllabus_only": False, "reuse_questions": True}, payload)
 
 
+def _usage(
+    subject: Subject | None, date_range: DateRange, mode: str
+) -> tuple[str, str, list[Any]]:
+    """(FROM, WHERE, params) over one row per use of a question in the range,
+    aliased `u` with `u.question_id`."""
+    q_where, q_params = _question_scope(subject)
+    if mode == "quiz":
+        src, date_col, parts = "quiz_questions u", "u.presented_at", ["u.presented_at IS NOT NULL"]
+    else:
+        src, date_col, parts = "pset_questions u JOIN psets s ON s.pset_id = u.pset_id", "s.date_created", []
+    params: list[Any] = []
+    date_from, date_to = date_range
+    if date_from:
+        parts.append(f"date({date_col}) >= date(?)")
+        params.append(date_from)
+    if date_to:
+        parts.append(f"date({date_col}) <= date(?)")
+        params.append(date_to)
+    parts.append(f"u.question_id IN (SELECT question_id FROM questions WHERE {q_where})")
+    params.extend(q_params)
+    return src, " AND ".join(parts), params
+
+
 def compute_stats(
     conn: sqlite3.Connection,
     subject: Subject | None = None,
@@ -76,10 +103,6 @@ def compute_stats(
     mode: str = "generate",
 ) -> StatsBundle:
     if mode == "quiz":
-        # Quiz mode: count attempts in `quiz_attempts` table
-        pset_where, pset_params = _pset_scope(subject, date_range)
-        # Modify the scope slightly because we're joining `quiz_attempts a` and `quizzes q`
-        # Subject and date filtering apply to quizzes/attempts respectively
         parts: list[str] = ["a.quiz_id = q.quiz_id"]
         params: list[Any] = []
         if subject is not None:
@@ -92,105 +115,52 @@ def compute_stats(
         if date_to:
             parts.append("date(a.date_started) <= date(?)")
             params.append(date_to)
-        quiz_where = " AND ".join(parts) if parts else "1=1"
-
+        quiz_where = " AND ".join(parts)
         completed = int(conn.execute(
             f"SELECT COUNT(*) FROM quiz_attempts a, quizzes q WHERE {quiz_where} AND a.date_finished IS NOT NULL", params
         ).fetchone()[0])
         partial = int(conn.execute(
             f"SELECT COUNT(*) FROM quiz_attempts a, quizzes q WHERE {quiz_where} AND a.date_finished IS NULL", params
         ).fetchone()[0])
-        max_q_row = conn.execute(
+        max_questions_in_pset = int(conn.execute(
             f"SELECT COALESCE(MAX(q.n_questions), 0) FROM quiz_attempts a, quizzes q WHERE {quiz_where}", params
-        ).fetchone()
-        max_questions_in_pset = int(max_q_row[0])
-
-        q_where, q_params = _question_scope(subject)
-        
-        total_seen = int(
-            conn.execute(
-                f"SELECT COALESCE(SUM(interactive_times_used), 0) FROM questions WHERE {q_where}", q_params
-            ).fetchone()[0]
+        ).fetchone()[0])
+    else:
+        pset_where, pset_params = _pset_scope(subject, date_range)
+        completed = int(
+            conn.execute(f"SELECT COUNT(*) FROM psets WHERE {pset_where}", pset_params).fetchone()[0]
         )
-        unique_seen = int(
-            conn.execute(
-                f"SELECT COUNT(*) FROM questions WHERE interactive_times_used > 0 AND {q_where}", q_params
-            ).fetchone()[0]
-        )
-        total_in_subject = int(
-            conn.execute(f"SELECT COUNT(*) FROM questions WHERE {q_where}", q_params).fetchone()[0]
-        )
-        max_multiplicity = int(
-            conn.execute(
-                f"SELECT COALESCE(MAX(interactive_times_used), 0) FROM questions WHERE {q_where}", q_params
-            ).fetchone()[0]
-        )
-        avg_diff_row = conn.execute(
-            f"SELECT AVG(difficulty_rating) FROM questions "
-            f"WHERE interactive_times_used > 0 AND difficulty_rating IS NOT NULL AND {q_where}",
-            q_params,
-        ).fetchone()
-        avg_difficulty = float(avg_diff_row[0]) if avg_diff_row and avg_diff_row[0] is not None else None
+        partial = 0
+        max_questions_in_pset = int(conn.execute(
+            f"SELECT COALESCE(MAX(n_questions), 0) FROM psets WHERE {pset_where}", pset_params
+        ).fetchone()[0])
 
-        fraction = (unique_seen / total_in_subject * 100.0) if total_in_subject > 0 else 0.0
-        avg_mult = (total_seen / unique_seen) if unique_seen > 0 else 0.0
-
-        return StatsBundle(
-            sessions_completed=completed,
-            sessions_partial=partial,
-            total_questions_seen=total_seen,
-            unique_questions_seen=unique_seen,
-            fraction_questions_seen=fraction,
-            max_questions_in_single_pset=max_questions_in_pset,
-            max_question_multiplicity=max_multiplicity,
-            avg_question_multiplicity=avg_mult,
-            avg_difficulty_rating=avg_difficulty,
-            total_questions_in_subject=total_in_subject,
-        )
-
-    # Generate Mode (Default)
-    pset_where, pset_params = _pset_scope(subject, date_range)
-    q_where, q_params = _question_scope(subject)
-
-    psets_generated = int(
-        conn.execute(f"SELECT COUNT(*) FROM psets WHERE {pset_where}", pset_params).fetchone()[0]
-    )
-    max_q_row = conn.execute(
-        f"SELECT COALESCE(MAX(n_questions), 0) FROM psets WHERE {pset_where}", pset_params
-    ).fetchone()
-    max_questions_in_pset = int(max_q_row[0])
-
-    total_seen = int(
-        conn.execute(
-            f"SELECT COALESCE(SUM(times_used), 0) FROM questions WHERE {q_where}", q_params
-        ).fetchone()[0]
-    )
+    src, where, uparams = _usage(subject, date_range, mode)
+    total_seen = int(conn.execute(f"SELECT COUNT(*) FROM {src} WHERE {where}", uparams).fetchone()[0])
     unique_seen = int(
-        conn.execute(
-            f"SELECT COUNT(*) FROM questions WHERE times_used > 0 AND {q_where}", q_params
-        ).fetchone()[0]
+        conn.execute(f"SELECT COUNT(DISTINCT u.question_id) FROM {src} WHERE {where}", uparams).fetchone()[0]
     )
-    total_in_subject = int(
-        conn.execute(f"SELECT COUNT(*) FROM questions WHERE {q_where}", q_params).fetchone()[0]
-    )
-    max_multiplicity = int(
-        conn.execute(
-            f"SELECT COALESCE(MAX(times_used), 0) FROM questions WHERE {q_where}", q_params
-        ).fetchone()[0]
-    )
+    max_multiplicity = int(conn.execute(
+        f"SELECT COALESCE(MAX(c), 0) FROM (SELECT COUNT(*) AS c FROM {src} WHERE {where} GROUP BY u.question_id)",
+        uparams,
+    ).fetchone()[0])
     avg_diff_row = conn.execute(
-        f"SELECT AVG(difficulty_rating) FROM questions "
-        f"WHERE times_used > 0 AND difficulty_rating IS NOT NULL AND {q_where}",
-        q_params,
+        f"SELECT AVG(difficulty_rating) FROM questions WHERE difficulty_rating IS NOT NULL "
+        f"AND question_id IN (SELECT u.question_id FROM {src} WHERE {where})",
+        uparams,
     ).fetchone()
     avg_difficulty = float(avg_diff_row[0]) if avg_diff_row and avg_diff_row[0] is not None else None
 
+    q_where, q_params = _question_scope(subject)
+    total_in_subject = int(
+        conn.execute(f"SELECT COUNT(*) FROM questions WHERE {q_where}", q_params).fetchone()[0]
+    )
     fraction = (unique_seen / total_in_subject * 100.0) if total_in_subject > 0 else 0.0
     avg_mult = (total_seen / unique_seen) if unique_seen > 0 else 0.0
 
     return StatsBundle(
-        sessions_completed=psets_generated,
-        sessions_partial=0,
+        sessions_completed=completed,
+        sessions_partial=partial,
         total_questions_seen=total_seen,
         unique_questions_seen=unique_seen,
         fraction_questions_seen=fraction,
@@ -240,14 +210,14 @@ def question_multiplicity_dist(
     conn: sqlite3.Connection,
     subject: Subject | None = None,
     mode: str = "generate",
+    date_range: DateRange = (None, None),
 ) -> dict[int, int]:
-    q_where, q_params = _question_scope(subject)
-    col = "interactive_times_used" if mode == "quiz" else "times_used"
+    """Uses per question inside the range → how many questions had that many."""
+    src, where, params = _usage(subject, date_range, mode)
     rows = conn.execute(
-        f"SELECT {col}, COUNT(*) FROM questions "
-        f"WHERE {q_where} AND {col} > 0 "
-        f"GROUP BY {col} ORDER BY {col}",
-        q_params,
+        f"SELECT c, COUNT(*) FROM (SELECT COUNT(*) AS c FROM {src} WHERE {where} GROUP BY u.question_id) "
+        f"GROUP BY c ORDER BY c",
+        params,
     )
     return {int(r[0]): int(r[1]) for r in rows}
 
@@ -378,13 +348,10 @@ def topic_distribution(
     date_range: DateRange = (None, None),
     mode: str = "generate",
 ) -> list[dict[str, Any]]:
-    _ = date_range
-    q_where, q_params = _question_scope(subject)
-    col = "interactive_times_used" if mode == "quiz" else "times_used"
+    src, where, params = _usage(subject, date_range, mode)
     rows = conn.execute(
-        f"SELECT topic, SUM({col}) FROM questions "
-        f"WHERE {q_where} AND {col} > 0 "
-        f"GROUP BY topic ORDER BY SUM({col}) DESC, topic",
-        q_params,
+        f"SELECT qs.topic, COUNT(*) AS c FROM {src} JOIN questions qs ON qs.question_id = u.question_id "
+        f"WHERE {where} GROUP BY qs.topic ORDER BY c DESC, qs.topic",
+        params,
     )
     return [{"label": r[0], "count": int(r[1])} for r in rows]

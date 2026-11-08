@@ -2,15 +2,19 @@ import type { ReactNode } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import type { QuizQuestionFull } from "../../lib/ipc";
 import { LatexContent } from "../browser/LatexContent";
+import { BookmarkButton, SelfExplain } from "../notes/QuestionNotes";
 import { useQuizStore } from "../../state/quiz";
 
 interface QuestionViewerProps {
   question: QuizQuestionFull;
   /** Shown right under the question (the answer panel). */
   children?: ReactNode;
+  /** Mixed review: keep the metadata (topic, tags) out of sight so the
+   * student has to choose the method; the runner lifts it once answered. */
+  hideLabels?: boolean;
 }
 
-export function QuestionViewer({ question, children }: QuestionViewerProps) {
+export function QuestionViewer({ question, children, hideLabels = false }: QuestionViewerProps) {
   const {
     showHint,
     showAnswer,
@@ -20,7 +24,11 @@ export function QuestionViewer({ question, children }: QuestionViewerProps) {
     setShowAnswer,
     setShowSolution,
     setShowMetadata,
+    markHinted,
+    results,
   } = useQuizStore();
+  const result = results[question.question_id];
+  const answered = Boolean(result && !result.pending);
 
   return (
     <div className="flex flex-col space-y-6">
@@ -30,7 +38,11 @@ export function QuestionViewer({ question, children }: QuestionViewerProps) {
             className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
               showHint ? "bg-primary/10 text-primary" : "bg-surface text-text/80 hover:bg-surface-hover"
             }`}
-            onClick={() => setShowHint(!showHint)}
+            onClick={() => {
+              // A hint opened before answering makes the answer "assisted".
+              if (!showHint && !answered) markHinted(question.question_id);
+              setShowHint(!showHint);
+            }}
           >
             {showHint ? <EyeOff size={16} /> : <Eye size={16} />}
             {showHint ? "Hide Hint" : "Show Hint"}
@@ -63,18 +75,22 @@ export function QuestionViewer({ question, children }: QuestionViewerProps) {
 
         <div className="flex-1" />
 
-        <button
-          className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-            showMetadata ? "bg-primary/10 text-primary" : "bg-surface text-text/80 hover:bg-surface-hover"
-          }`}
-          onClick={() => setShowMetadata(!showMetadata)}
-        >
-          {showMetadata ? <EyeOff size={16} /> : <Eye size={16} />}
-          See Metadata
-        </button>
+        <BookmarkButton questionId={question.question_id} />
+
+        {!hideLabels && (
+          <button
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+              showMetadata ? "bg-primary/10 text-primary" : "bg-surface text-text/80 hover:bg-surface-hover"
+            }`}
+            onClick={() => setShowMetadata(!showMetadata)}
+          >
+            {showMetadata ? <EyeOff size={16} /> : <Eye size={16} />}
+            See Metadata
+          </button>
+        )}
       </div>
 
-      {showMetadata && (
+      {showMetadata && !hideLabels && (
         <div className="bg-surface rounded-lg p-4 border border-border space-y-3 text-sm">
           <h3 className="font-semibold text-text mb-2">Question Metadata</h3>
           <div className="grid grid-cols-2 gap-4">
@@ -142,6 +158,8 @@ export function QuestionViewer({ question, children }: QuestionViewerProps) {
           </div>
         </div>
       )}
+
+      {(showSolution || answered) && <SelfExplain questionId={question.question_id} />}
     </div>
   );
 }

@@ -22,7 +22,10 @@ export type ThemeId =
   | "windows-xp"
   | "comic"
   | "ascii"
-  | "android-kitkat";
+  | "android-kitkat"
+  | "sage"
+  | "ember"
+  | "midnight";
 
 export type SoundEvent = "click" | "generate" | "error" | "success" | "theme_switch";
 

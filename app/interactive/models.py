@@ -15,7 +15,9 @@ from app.core.models import Question
 
 QuizMode = Literal["pbs", "non_pbs"]
 GradientMode = Literal["random", "constant", "custom"]
-TemplateId = Literal["PBS", "MIT_INTEGRATION_BEE", "FREE_ANSWERING", "TRAVERSE", "DISCOVER"]
+TemplateId = Literal[
+    "PBS", "MIT_INTEGRATION_BEE", "FREE_ANSWERING", "TRAVERSE", "DISCOVER", "REVIEW", "LECTURE", "MIXED"
+]
 
 
 @dataclass(slots=True)

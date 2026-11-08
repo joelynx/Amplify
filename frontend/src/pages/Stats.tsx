@@ -17,6 +17,7 @@ import { MultiplicityHistogram } from "../components/stats/MultiplicityHistogram
 import { CalendarHeatmap } from "../components/stats/CalendarHeatmap";
 import { ActivityLine } from "../components/stats/ActivityLine";
 import { TrendsPanel } from "../components/stats/TrendsPanel";
+import { LearningPanel } from "../components/stats/LearningPanel";
 import {
   ipc,
   type ActivityDatum,
@@ -58,6 +59,7 @@ export default function StatsPage() {
   const [heatmapMonth, setHeatmapMonth] = useState<number>(() => new Date().getMonth());
   const [heatmapMode, setHeatmapMode] = useState<"year" | "month">("year");
   const [loading, setLoading] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
     ipc.list_subjects().then(setSubjects);
@@ -72,7 +74,7 @@ export default function StatsPage() {
           ? ipc.get_topic_distribution(subject, dateRange, mode)
           : ipc.get_subject_distribution(dateRange, mode),
         ipc.get_source_attribution(subject, dateRange, mode),
-        ipc.get_question_multiplicity_dist(subject, mode),
+        ipc.get_question_multiplicity_dist(subject, mode, dateRange),
         ipc.get_calendar_heatmap(heatmapYear, mode),
         ipc.get_activity_line(dateRange, mode),
       ]);
@@ -82,6 +84,7 @@ export default function StatsPage() {
       setMultiplicity(mult);
       setHeatmap(heat);
       setActivity(act);
+      setRefreshKey((k) => k + 1);
     } finally {
       setLoading(false);
     }
@@ -178,7 +181,9 @@ export default function StatsPage() {
         <div className="mx-auto max-w-5xl space-y-6 px-6 py-6">
           <StatsCards stats={stats} mode={mode} />
 
-          <TrendsPanel subject={subject} mode={mode} />
+          <TrendsPanel subject={subject} mode={mode} refreshKey={refreshKey} />
+
+          <LearningPanel subject={subject} dateRange={dateRange} refreshKey={refreshKey} />
 
           <Card title={chartTitle}>
             {loading && distribution.length === 0 ? (
@@ -202,9 +207,9 @@ export default function StatsPage() {
             )}
           </Card>
 
-          <Card title="Question multiplicity">
+          <Card title="Question multiplicity (uses in range)">
             {Object.keys(multiplicity).length === 0 ? (
-              <p className="text-muted">No questions used yet under the current subject filter.</p>
+              <p className="text-muted">No questions used in the selected range under the current subject filter.</p>
             ) : (
               <MultiplicityHistogram data={multiplicity} />
             )}

@@ -88,18 +88,75 @@ def test_trends_topic_concentration_fires(seeded_conn: sqlite3.Connection) -> No
     assert "Calculus" not in hit.cta_filters["topic_list"]
 
 
-def test_trends_reuse_pressure(seeded_conn: sqlite3.Connection) -> None:
-    # Mark 8 out of 10 questions as heavily used (times_used >= 3). Need >= 20
-    # seen total to trip the gate, so add fillers.
-    seeded_conn.executemany(
+def _heavy_fillers(conn: sqlite3.Connection, n: int = 20) -> list[int]:
+    """`n` extra questions with times_used = 5 (>= 20 seen, all heavy)."""
+    conn.executemany(
         "INSERT INTO questions (topic, branch, subtopic, latexcode, in_syllabus, times_used, latex_hash) "
         "VALUES ('Calculus', 'X', 'Y', ?, 1, ?, ?)",
-        [(f"q{i}", 5, f"h{i}-extra") for i in range(20)],
+        [(f"q{i}", 5, f"h{i}-extra") for i in range(n)],
     )
-    seeded_conn.commit()
+    conn.commit()
+    return [r[0] for r in conn.execute("SELECT question_id FROM questions WHERE latex_hash LIKE '%-extra'")]
 
+
+def test_trends_reuse_pressure_massed(seeded_conn: sqlite3.Connection) -> None:
+    # The heavy questions came back three times within a week: unproductive.
+    ids = _heavy_fillers(seeded_conn)
+    for i, days in enumerate((6, 4, 1)):
+        _add_pset(seeded_conn, f"massed-{i}", ids, days_ago=days)
     insights = detect_trends(seeded_conn, None)
     assert any(i.id == "reuse_pressure" for i in insights)
+
+
+def test_trends_reuse_pressure_spaced_is_fine(seeded_conn: sqlite3.Connection) -> None:
+    # Same counters, but the uses were weeks apart: that is spacing, not waste.
+    ids = _heavy_fillers(seeded_conn)
+    for i, days in enumerate((60, 30, 1)):
+        _add_pset(seeded_conn, f"spaced-{i}", ids, days_ago=days)
+    insights = detect_trends(seeded_conn, None)
+    assert not any(i.id == "reuse_pressure" for i in insights)
+
+
+def test_trends_reuse_pressure_ignores_open_mistakes(seeded_conn: sqlite3.Connection) -> None:
+    # Massed, but every repeated question was last missed: that is review.
+    ids = _heavy_fillers(seeded_conn)
+    for i, days in enumerate((6, 4, 1)):
+        _add_pset(seeded_conn, f"massed-{i}", ids, days_ago=days)
+    seeded_conn.executemany(
+        "INSERT INTO answer_events (question_id, mode, occurred_at, kind, credit, hints_used) "
+        "VALUES (?, 'PAPER', ?, 'answered', 0.0, 0)",
+        [(q, datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")) for q in ids],
+    )
+    seeded_conn.commit()
+    insights = detect_trends(seeded_conn, None)
+    assert not any(i.id == "reuse_pressure" for i in insights)
+    # ...and those questions are due tomorrow, not now, so no review insight yet.
+    assert not any(i.id == "reviews_due" for i in insights)
+
+
+def test_trends_quiz_mode_reads_quiz_usage(seeded_conn: sqlite3.Connection) -> None:
+    # Ten shown quiz questions, all from one topic: the quiz-mode panel sees it,
+    # the generate-mode panel (no PSets) does not.
+    ts = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+    seeded_conn.execute(
+        "INSERT INTO quizzes (quiz_id, date_created, n_questions, reuse_questions) VALUES ('z1', ?, 10, 1)", (ts,)
+    )
+    for i in range(10):
+        seeded_conn.execute(
+            "INSERT INTO questions (topic, branch, subtopic, latexcode, in_syllabus, latex_hash) "
+            "VALUES ('Calculus', 'X', 'Y', ?, 1, ?)",
+            (f"z{i}", f"hz{i}"),
+        )
+        qid = seeded_conn.execute("SELECT last_insert_rowid()").fetchone()[0]
+        seeded_conn.execute(
+            "INSERT INTO quiz_questions (quiz_id, question_id, question_order, presented_at) VALUES ('z1', ?, ?, ?)",
+            (qid, i, ts),
+        )
+    seeded_conn.commit()
+    quiz = detect_trends(seeded_conn, None, "quiz")
+    hit = next(i for i in quiz if i.id == "topic_concentration")
+    assert hit.cta_target == "quiz"
+    assert not any(i.id == "topic_concentration" for i in detect_trends(seeded_conn, None, "generate"))
 
 
 def test_trends_caps_at_max(seeded_conn: sqlite3.Connection) -> None:

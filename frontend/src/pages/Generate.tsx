@@ -40,7 +40,7 @@ import {
   draftToFilters,
   draftToOutputSettings,
   draftToTemplate,
-  templateSubtopicsToLeaves,
+  templateToLeaves,
   useGenerateStore,
 } from "../state/generate";
 
@@ -170,7 +170,7 @@ export default function GeneratePage() {
     // Order matters: setSubject() clears leaves+tags, so call it before
     // populating them.
     draft.setSubject(payload.subject);
-    const leaves = templateSubtopicsToLeaves(payload.subtopic_list, tree);
+    const leaves = templateToLeaves(payload, tree);
     draft.clearLeaves();
     draft.setLeavesBulk(Array.from(leaves), true);
     draft.clearTags();

@@ -1,9 +1,13 @@
 import { create } from "zustand";
 
-import type { QuizAnswerResult, QuizQuestionFull } from "../lib/ipc";
+import type { ConceptRef, QuizAnswerResult, QuizQuestionFull, ReviewList } from "../lib/ipc";
+
+/** Traverse and Discover browse the bank; review, lecture and mixed run a fixed
+ * list the same way Discover does (DiscoverRunner). */
+export type QuizMode = "traverse" | "discover" | "review" | "lecture" | "mixed";
 
 export interface QuizState {
-  mode: "traverse" | "discover";
+  mode: QuizMode;
   diversity: number;
   nQuestions: number;
   
@@ -13,6 +17,11 @@ export interface QuizState {
   seedDiversity: number;
   
   // Filter state is managed by useGenerateStore now
+
+  // What the list modes start from
+  reviewKind: ReviewList;
+  /** Lecture: the confirmed concepts. Mixed: the chosen technique tags. */
+  concepts: ConceptRef[];
   
   // Active quiz state
   isStarted: boolean;
@@ -26,6 +35,10 @@ export interface QuizState {
   results: Record<number, QuizAnswerResult>;
   // Questions whose answer or solution was opened before answering: not graded
   revealedIds: Record<number, true>;
+  // Questions whose hint was opened before answering (sent as hints_used)
+  hintedIds: Record<number, true>;
+  // Lecture / mixed: the concept each question was picked for, by id
+  conceptLabels: Record<string, string>;
 
   // Toggle states
   showHint: boolean;
@@ -34,7 +47,10 @@ export interface QuizState {
   showMetadata: boolean;
 
   // Actions
-  setMode: (mode: "traverse" | "discover") => void;
+  setMode: (mode: QuizMode) => void;
+  setReviewKind: (kind: ReviewList) => void;
+  setConcepts: (concepts: ConceptRef[]) => void;
+  setConceptLabels: (labels: Record<string, string>) => void;
   setDiversity: (diversity: number) => void;
   setNQuestions: (n: number) => void;
   
@@ -50,6 +66,7 @@ export interface QuizState {
   setQuestionStartTime: (time: number | null) => void;
   setResult: (questionId: number, result: QuizAnswerResult) => void;
   markRevealed: (questionId: number) => void;
+  markHinted: (questionId: number) => void;
 
   setShowHint: (show: boolean) => void;
   setShowAnswer: (show: boolean) => void;
@@ -67,6 +84,9 @@ export const useQuizStore = create<QuizState>((set) => ({
   useSeed: false,
   seedId: null,
   seedDiversity: 0.5,
+
+  reviewKind: "due",
+  concepts: [],
   
   isStarted: false,
   quizId: null,
@@ -77,6 +97,8 @@ export const useQuizStore = create<QuizState>((set) => ({
 
   results: {},
   revealedIds: {},
+  hintedIds: {},
+  conceptLabels: {},
 
   showHint: false,
   showAnswer: false,
@@ -84,6 +106,9 @@ export const useQuizStore = create<QuizState>((set) => ({
   showMetadata: false,
 
   setMode: (mode) => set({ mode }),
+  setReviewKind: (reviewKind) => set({ reviewKind }),
+  setConcepts: (concepts) => set({ concepts }),
+  setConceptLabels: (conceptLabels) => set({ conceptLabels }),
   setDiversity: (diversity) => set({ diversity }),
   setNQuestions: (nQuestions) => set({ nQuestions }),
   
@@ -99,6 +124,7 @@ export const useQuizStore = create<QuizState>((set) => ({
   setQuestionStartTime: (questionStartTime) => set({ questionStartTime }),
   setResult: (questionId, result) => set((s) => ({ results: { ...s.results, [questionId]: result } })),
   markRevealed: (questionId) => set((s) => ({ revealedIds: { ...s.revealedIds, [questionId]: true } })),
+  markHinted: (questionId) => set((s) => ({ hintedIds: { ...s.hintedIds, [questionId]: true } })),
 
   setShowHint: (showHint) => set({ showHint }),
   setShowAnswer: (showAnswer) => set({ showAnswer }),
@@ -114,6 +140,8 @@ export const useQuizStore = create<QuizState>((set) => ({
     questionStartTime: null,
     results: {},
     revealedIds: {},
+    hintedIds: {},
+    conceptLabels: {},
     showHint: false,
     showAnswer: false,
     showSolution: false,

@@ -1,0 +1,17 @@
+/* Midnight — deep navy dark theme, soft violet accent; reward for honest attempts (WCAG AA text). */
+:root[data-theme="midnight"],
+[data-theme="midnight"] {
+  --text: #e6e8f2;
+  --background: #0b1020;
+  --surface: #151b30;
+  --primary: #a78bfa;
+  --secondary: #7dd3fc;
+  --accent: #f0abfc;
+  --border: #283150;
+  --muted: #9aa3bf;
+  --success: #6ee7a8;
+  --warning: #fcd34d;
+  --error: #fb8a8a;
+  --font-family: "Inter", system-ui, sans-serif;
+  --rem: 16px;
+}

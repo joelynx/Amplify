@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
-import { useQuizStore } from "../state/quiz";
-import { useGenerateStore, draftToFilters, draftToTemplate, templateSubtopicsToLeaves } from "../state/generate";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useQuizStore, type QuizMode } from "../state/quiz";
+import { useGenerateStore, draftToFilters, draftToTemplate, templateToLeaves } from "../state/generate";
 import { useDebounced } from "../lib/debounce";
 
 import { CheckableTree } from "../components/generate/CheckableTree";
@@ -14,9 +15,28 @@ import { Button } from "../components/ui/Button";
 
 import { TraverseRunner } from "../components/quiz/TraverseRunner";
 import { DiscoverRunner } from "../components/quiz/DiscoverRunner";
+import { ReviewPanel } from "../components/quiz/ReviewPanel";
+import { LecturePanel } from "../components/quiz/LecturePanel";
+import { TechniquePanel } from "../components/quiz/TechniquePanel";
 
-import { ipc, type ConceptTree, type TemplatePayload } from "../lib/ipc";
-import { Map, Zap, Loader2 } from "lucide-react";
+import { ipc, type ConceptTree, type ReviewList, type TemplatePayload } from "../lib/ipc";
+import { Map, Zap, Loader2, RotateCcw, NotebookPen, Shuffle } from "lucide-react";
+
+const MODES: { id: QuizMode; title: string; blurb: string; Icon: typeof Map }[] = [
+  { id: "review", title: "Review", blurb: "Questions due again, past mistakes, and ones you solved with help.", Icon: RotateCcw },
+  { id: "lecture", title: "From a lecture", blurb: "Paste the lecture's keywords, confirm the matches, practise.", Icon: NotebookPen },
+  { id: "mixed", title: "Mixed review", blurb: "Interleave techniques you have studied; spot which one each needs.", Icon: Shuffle },
+  { id: "traverse", title: "Traverse", blurb: "One question at a time; a slider sets how similar the next one is.", Icon: Map },
+  { id: "discover", title: "Discover", blurb: "A batch of N maximally diverse questions (DPP selection).", Icon: Zap },
+];
+
+const TITLES: Record<QuizMode, string> = {
+  traverse: "Traverse Mode",
+  discover: "Discover Mode",
+  review: "Review",
+  lecture: "Lecture practice",
+  mixed: "Mixed review",
+};
 
 export default function QuizPage() {
   const {
@@ -31,8 +51,23 @@ export default function QuizPage() {
     setSeedDiversity,
     isStarted,
     setIsStarted,
-    resetQuizState
+    resetQuizState,
+    concepts,
+    setConcepts,
+    setReviewKind,
   } = useQuizStore();
+
+  const chooseMode = (m: QuizMode) => {
+    if (m !== mode) setConcepts([]);
+    setMode(m);
+  };
+
+  const startReview = (kind: ReviewList) => {
+    resetQuizState();
+    setMode("review");
+    setReviewKind(kind);
+    setIsStarted(true);
+  };
 
   const draft = useGenerateStore();
 
@@ -84,7 +119,7 @@ export default function QuizPage() {
 
   const applyPayload = (payload: TemplatePayload) => {
     draft.setSubject(payload.subject);
-    const leaves = templateSubtopicsToLeaves(payload.subtopic_list, tree);
+    const leaves = templateToLeaves(payload, tree);
     draft.clearLeaves();
     draft.setLeavesBulk(Array.from(leaves), true);
     draft.clearTags();
@@ -97,6 +132,39 @@ export default function QuizPage() {
     draft.setReuseQuestions(payload.reuse_questions);
     draft.setInSyllabusOnly(payload.in_syllabus_only);
   };
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const navState = location.state as
+    | { template?: TemplatePayload; startReview?: ReviewList; subject?: string | null; mode?: QuizMode }
+    | null;
+
+  useEffect(() => {
+    if (!navState) return;
+    if (navState.startReview) {
+      if (navState.subject !== undefined) draft.setSubject(navState.subject);
+      startReview(navState.startReview);
+      navigate("/quiz", { replace: true, state: null });
+    } else if (navState.mode && !navState.template) {
+      resetQuizState();
+      chooseMode(navState.mode);
+      navigate("/quiz", { replace: true, state: null });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navState]);
+
+  const pendingTemplate = navState?.template;
+  useEffect(() => {
+    if (!pendingTemplate) return;
+    if (Object.keys(tree).length === 0) return;
+    resetQuizState();
+    if (mode !== "traverse" && mode !== "discover") chooseMode("discover");
+    applyPayload(pendingTemplate);
+    draft.setTemplate(null);
+    setLoadedTemplate(null);
+    navigate("/quiz", { replace: true, state: null });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pendingTemplate, tree]);
 
   const handleSelectTemplate = async (name: string | null) => {
     draft.setTemplate(name);
@@ -169,9 +237,7 @@ export default function QuizPage() {
     return (
       <main className="h-full overflow-y-auto bg-background px-6 pt-6 pb-20">
         <div className="max-w-4xl mx-auto mb-6 flex items-center justify-between">
-          <h1 className="text-2xl font-semibold text-text">
-            {mode === "traverse" ? "Traverse Mode" : "Discover Mode"}
-          </h1>
+          <h1 className="text-2xl font-semibold text-text">{TITLES[mode]}</h1>
           <button
             onClick={() => resetQuizState()}
             className="text-sm font-medium text-muted hover:text-text transition-colors"
@@ -190,41 +256,44 @@ export default function QuizPage() {
       <div className="mx-auto max-w-3xl space-y-6">
         <div className="space-y-1">
           <h1 className="text-3xl font-semibold text-text">Quiz</h1>
-          <p className="text-muted">Explore questions interactively.</p>
+          <p className="text-muted">Practise interactively: review what is due, work from a lecture, or explore the bank.</p>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <button
-            onClick={() => setMode("traverse")}
-            className={`p-6 rounded-xl border text-left transition-all ${
-              mode === "traverse"
-                ? "border-primary bg-primary/5 ring-1 ring-primary"
-                : "border-border bg-surface hover:border-primary/50"
-            }`}
-          >
-            <Map className={`w-8 h-8 mb-4 ${mode === "traverse" ? "text-primary" : "text-muted"}`} />
-            <h3 className="font-semibold text-lg mb-1 text-text">Traverse</h3>
-            <p className="text-sm text-muted">
-              Sequential browsing. Control the similarity of the next question using a diversity slider.
-            </p>
-          </button>
-
-          <button
-            onClick={() => setMode("discover")}
-            className={`p-6 rounded-xl border text-left transition-all ${
-              mode === "discover"
-                ? "border-primary bg-primary/5 ring-1 ring-primary"
-                : "border-border bg-surface hover:border-primary/50"
-            }`}
-          >
-            <Zap className={`w-8 h-8 mb-4 ${mode === "discover" ? "text-primary" : "text-muted"}`} />
-            <h3 className="font-semibold text-lg mb-1 text-text">Discover</h3>
-            <p className="text-sm text-muted">
-              Batch generation. Uses a Determinantal Point Process to select N maximally diverse questions.
-            </p>
-          </button>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {MODES.map(({ id, title, blurb, Icon }) => (
+            <button
+              key={id}
+              onClick={() => chooseMode(id)}
+              className={`p-4 rounded-xl border text-left transition-all ${
+                mode === id
+                  ? "border-primary bg-primary/5 ring-1 ring-primary"
+                  : "border-border bg-surface hover:border-primary/50"
+              }`}
+            >
+              <Icon className={`w-6 h-6 mb-2 ${mode === id ? "text-primary" : "text-muted"}`} />
+              <h3 className="font-semibold mb-1 text-text">{title}</h3>
+              <p className="text-xs text-muted">{blurb}</p>
+            </button>
+          ))}
         </div>
 
+        {(mode === "review" || mode === "lecture" || mode === "mixed") && (
+          <div className="bg-surface rounded-lg border border-border p-5 space-y-4">
+            <div className="flex items-center justify-between gap-4">
+              <h3 className="font-medium text-text">
+                {mode === "review" ? "Your review queue" : mode === "lecture" ? "What did the lecture cover?" : "Techniques to mix"}
+              </h3>
+              <div className="w-64">
+                <SubjectPicker subjects={subjects} value={draft.subject} onChange={draft.setSubject} />
+              </div>
+            </div>
+            {mode === "review" && <ReviewPanel subject={draft.subject} onStart={startReview} />}
+            {mode === "lecture" && <LecturePanel filters={filters} onChange={setConcepts} />}
+            {mode === "mixed" && <TechniquePanel subject={draft.subject} selected={concepts} onChange={setConcepts} />}
+          </div>
+        )}
+
+        {(mode === "traverse" || mode === "discover") && (<>
         <div className="bg-surface rounded-lg border border-border p-5 space-y-5">
           <div className="flex items-center justify-between">
             <h3 className="font-medium text-text">Subject Filters</h3>
@@ -278,33 +347,39 @@ export default function QuizPage() {
           </div>
         </div>
 
+        </>)}
+
         <div className="bg-surface rounded-lg border border-border p-5 space-y-4">
           <h3 className="font-medium text-text">Options</h3>
-          
-          <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              id="inSyllabusOnly"
-              checked={draft.inSyllabusOnly}
-              onChange={(e) => draft.setInSyllabusOnly(e.target.checked)}
-              className="rounded border-border text-primary focus:ring-primary h-4 w-4"
-            />
-            <label htmlFor="inSyllabusOnly" className="text-sm text-text">In syllabus only</label>
-          </div>
 
-          <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              id="reuseQuestions"
-              checked={draft.reuseQuestions}
-              onChange={(e) => draft.setReuseQuestions(e.target.checked)}
-              className="rounded border-border text-primary focus:ring-primary h-4 w-4"
-            />
-            <label htmlFor="reuseQuestions" className="text-sm text-text">Allow reused questions</label>
-          </div>
-          
-          {mode === "discover" && (
-            <div className="pt-4 border-t border-border">
+          {mode !== "review" && (
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="inSyllabusOnly"
+                checked={draft.inSyllabusOnly}
+                onChange={(e) => draft.setInSyllabusOnly(e.target.checked)}
+                className="rounded border-border text-primary focus:ring-primary h-4 w-4"
+              />
+              <label htmlFor="inSyllabusOnly" className="text-sm text-text">In syllabus only</label>
+            </div>
+          )}
+
+          {mode !== "review" && mode !== "mixed" && (
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="reuseQuestions"
+                checked={draft.reuseQuestions}
+                onChange={(e) => draft.setReuseQuestions(e.target.checked)}
+                className="rounded border-border text-primary focus:ring-primary h-4 w-4"
+              />
+              <label htmlFor="reuseQuestions" className="text-sm text-text">Allow reused questions</label>
+            </div>
+          )}
+
+          {mode !== "traverse" && (
+            <div className={mode === "review" ? "" : "pt-4 border-t border-border"}>
               <label htmlFor="nQuestions" className="block text-sm font-medium text-text mb-2">
                 Number of Questions
               </label>
@@ -386,15 +461,21 @@ export default function QuizPage() {
           )}
         </div>
 
-        <div className="flex justify-end pt-4">
-          <button
-            onClick={() => setIsStarted(true)}
-            disabled={useSeed && (!seedValidation?.valid || seedValidating)}
-            className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Start {mode === "traverse" ? "Traverse" : "Discover"} Session
-          </button>
-        </div>
+        {mode !== "review" && (
+          <div className="flex justify-end pt-4">
+            <button
+              onClick={() => setIsStarted(true)}
+              disabled={
+                (mode === "traverse" && useSeed && (!seedValidation?.valid || seedValidating)) ||
+                (mode === "lecture" && concepts.length === 0) ||
+                (mode === "mixed" && concepts.length < 2)
+              }
+              className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Start {TITLES[mode].replace(" Mode", "")} Session
+            </button>
+          </div>
+        )}
       </div>
 
       <NameDialog

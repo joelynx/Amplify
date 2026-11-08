@@ -5,7 +5,9 @@
  *
  * The question viewer can still show the answer and solution on request.
  * Opening either before answering ends the attempt at grading: the panel then
- * says the question is not graded instead of offering inputs.
+ * says the question is not graded instead of offering inputs, and the reveal
+ * is logged so the question lands on the "try it independently" review list.
+ * A hint opened before answering is sent as `hints_used` (an assisted answer).
  */
 
 import { useEffect } from "react";
@@ -20,15 +22,19 @@ interface Props {
 }
 
 export function PracticeAnswer({ quizId, question }: Props) {
-  const { showAnswer, showSolution, questionStartTime, results, revealedIds, setResult, markRevealed } =
+  const { showAnswer, showSolution, questionStartTime, results, revealedIds, hintedIds, setResult, markRevealed } =
     useQuizStore();
   const qid = question.question_id;
   const result = results[qid] ?? null;
   const revealed = Boolean(revealedIds[qid]);
+  const gradable = question.answer_fields.length > 0;
 
   useEffect(() => {
-    if ((showAnswer || showSolution) && !result) markRevealed(qid);
-  }, [showAnswer, showSolution, result, qid, markRevealed]);
+    if ((showAnswer || showSolution) && !result && !revealed) {
+      markRevealed(qid);
+      if (quizId && gradable) void ipc.quiz_log_reveal(quizId, qid).catch(() => undefined);
+    }
+  }, [showAnswer, showSolution, result, revealed, qid, quizId, gradable, markRevealed]);
 
   if (!quizId || question.answer_fields.length === 0) return null;
 
@@ -46,6 +52,7 @@ export function PracticeAnswer({ quizId, question }: Props) {
             answers,
             question_id: qid,
             time_taken_ms: questionStartTime ? Date.now() - questionStartTime : 0,
+            hints_used: hintedIds[qid] ? 1 : 0,
           })
         }
         assess={(marks) => ipc.quiz_self_assess(quizId, 0, { marks, question_id: qid })}

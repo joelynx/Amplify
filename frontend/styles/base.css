@@ -11,6 +11,9 @@
 @import "./themes/comic/theme.css";
 @import "./themes/ascii/theme.css";
 @import "./themes/android-kitkat/theme.css";
+@import "./themes/sage/theme.css";
+@import "./themes/ember/theme.css";
+@import "./themes/midnight/theme.css";
 
 @tailwind base;
 @tailwind components;

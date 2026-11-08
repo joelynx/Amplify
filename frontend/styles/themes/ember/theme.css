@@ -1,0 +1,17 @@
+/* Ember — warm paper tones, deep orange accent; reward for fixing old mistakes (WCAG AA text). */
+:root[data-theme="ember"],
+[data-theme="ember"] {
+  --text: #2b1d14;
+  --background: #fdf8f3;
+  --surface: #f7ece1;
+  --primary: #b4501d;
+  --secondary: #8a5a44;
+  --accent: #d99a2b;
+  --border: #ead6c4;
+  --muted: #6f5a4c;
+  --success: #3d7d45;
+  --warning: #b7791f;
+  --error: #b53a2e;
+  --font-family: "Inter", system-ui, sans-serif;
+  --rem: 16px;
+}

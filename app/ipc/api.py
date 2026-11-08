@@ -25,6 +25,7 @@ from typing import Any
 
 import webview
 
+from app.core import concepts, learning
 from app.core.answer_key import parts_for, public_fields
 from app.core.difficulty import (
     DEFAULT_WEIGHTS,
@@ -65,6 +66,7 @@ from app.interactive.models import QuizConfig, QuizSession, TraverseSession
 from app.interactive.scoring import build_gradient
 from app.persistence.ingest.seed import ingest as run_ingest
 from app.persistence.repositories import configs as configs_repo
+from app.persistence.repositories import practice as practice_repo
 from app.persistence.repositories import psets as psets_repo
 from app.persistence.repositories import questions as questions_repo
 from app.persistence.repositories import quizzes as quizzes_repo
@@ -387,6 +389,7 @@ class Api:
             config=config,
             template_name=template,
             question_ids=[q.question_id for q in selection.questions],
+            presented_ids=[q.question_id for q in visible_slots if q is not None],
         )
         
         quizzes_repo.insert_partial_attempt(
@@ -426,12 +429,12 @@ class Api:
         if session.mode == "pbs":
             result = pbs_runner.take_widget(session, slot_index)
             if result and "question" in result and result["question"]:
-                questions_repo.increment_interactive_times_used(self._conn, [result["question"]["question_id"]])
+                practice_repo.mark_presented(self._conn, quiz_id, result["question"]["question_id"])
             return result
         q = nonpbs_runner.take_widget(session, slot_index)
         if q is None:
             return None
-        questions_repo.increment_interactive_times_used(self._conn, [q.question_id])
+        practice_repo.mark_presented(self._conn, quiz_id, q.question_id)
         return {
             "slot_index": 0,
             "question": nonpbs_runner._question_to_dict(q),
@@ -473,11 +476,17 @@ class Api:
                 time_taken_ms=time_taken_ms,
                 hints_used=int(payload.get("hints_used") or 0),
             )
+        hints_used = int(payload.get("hints_used") or 0)
         return self._practice_answer(
             quiz_id,
             payload,
             lambda q: practice.submit(
-                quiz_id, q, answers=answers, user_answer=user_answer, time_taken_ms=time_taken_ms
+                quiz_id,
+                q,
+                answers=answers,
+                user_answer=user_answer,
+                time_taken_ms=time_taken_ms,
+                hints_used=hints_used,
             ),
         )
 
@@ -505,8 +514,9 @@ class Api:
         payload: dict[str, Any],
         step: Callable[[Question], tuple[dict[str, Any], Any]],
     ) -> dict[str, Any]:
-        """Traverse / Discover: grade `payload.question_id` and append each
-        finished answer to the quiz's attempt row."""
+        """Traverse / Discover (and the review, lecture and mixed sessions built
+        on them): grade `payload.question_id`, append each finished answer to
+        the quiz's attempt row and log it in the practice history."""
         qid = payload.get("question_id")
         if qid is None or quizzes_repo.attempt_id_for(self._conn, quiz_id) is None:
             return {"error": "quiz session not found"}
@@ -517,6 +527,12 @@ class Api:
         if record is not None:
             result["current_total"] = quizzes_repo.append_attempt_answer(
                 self._conn, quiz_id=quiz_id, answer=record
+            )
+            practice_repo.record_answer(
+                self._conn,
+                quiz_id=quiz_id,
+                mode=quizzes_repo.template_for(self._conn, quiz_id) or "QUIZ",
+                record=record,
             )
         return result
 
@@ -553,6 +569,10 @@ class Api:
             answers=session.answers,
             total_score=total,
         )
+        for a in session.answers:
+            practice_repo.record_answer(
+                self._conn, quiz_id=quiz_id, mode=session.config.template, record=a
+            )
         session_manager.drop(quiz_id)
         return {
             "attempt_id": attempt_id,
@@ -725,35 +745,220 @@ class Api:
     def quiz_discover(self, filters: dict[str, Any], n: int) -> dict[str, Any]:
         s = _resolve_subject(self._conn, filters.get("subject"))
         sel = pick(self._conn, filters, n, subject=s, strategy="diverse")
-        quiz_id: str | None = None  # answers are graded and logged against it
+        out = self._start_list_quiz("DISCOVER", s, filters, sel.questions)
+        out["diversity_score"] = sel.diversity_score
+        return out
 
-        if sel.questions:
+    def _start_list_quiz(
+        self,
+        template: str,
+        s: Subject | None,
+        filters: dict[str, Any],
+        questions: list[Question],
+    ) -> dict[str, Any]:
+        """A browse-style session over a fixed list (Discover, review, lecture,
+        mixed). Answers are graded and logged against the returned quiz_id. Only
+        the first question counts as shown now; the runner reports the others
+        through `quiz_mark_presented` as they come up."""
+        quiz_id: str | None = None
+        if questions:
             import uuid
             from datetime import UTC, datetime
+
             quiz_id = str(uuid.uuid4())
-            config = QuizConfig(template="DISCOVER", n_questions=len(sel.questions))
+            config = QuizConfig(template=template, n_questions=len(questions))  # type: ignore[arg-type]
             quizzes_repo.insert_quiz(
                 self._conn,
                 quiz_id=quiz_id,
                 subject=(s.name if s else None),
                 filters=filters,
                 config=config,
-                template_name="DISCOVER",
-                question_ids=[q.question_id for q in sel.questions],
+                template_name=template,
+                question_ids=[q.question_id for q in questions],
+                presented_ids=[questions[0].question_id],
             )
             quizzes_repo.insert_partial_attempt(
                 self._conn,
                 quiz_id=quiz_id,
-                date_started=datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
+                date_started=datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z"),
             )
-            questions_repo.increment_interactive_times_used(self._conn, [q.question_id for q in sel.questions])
-
+            questions_repo.increment_interactive_times_used(self._conn, [questions[0].question_id])
         return {
             "success": True,
             "quiz_id": quiz_id,
-            "questions": [_question_full_dict(q) for q in sel.questions],
-            "diversity_score": sel.diversity_score,
+            "questions": [_question_full_dict(q) for q in questions],
         }
+
+    def quiz_mark_presented(self, quiz_id: str, question_id: int) -> bool:
+        """A list-session question came on screen: count it as used now (once)."""
+        return practice_repo.mark_presented(self._conn, quiz_id, int(question_id))
+
+    def quiz_log_reveal(self, quiz_id: str, question_id: int) -> bool:
+        """The answer or solution was opened before answering. Logged once per
+        quiz and question; the question goes on the "try it independently" list."""
+        mode = quizzes_repo.template_for(self._conn, quiz_id)
+        if mode is None:
+            return False
+        return practice_repo.record_reveal(
+            self._conn, quiz_id=quiz_id, mode=mode, question_id=int(question_id)
+        )
+
+    # ---- Review queue, lecture keywords, mixed review (Low_Hanging_Fruit.md) --
+
+    def get_review_summary(self, subject: str | None = None) -> dict[str, Any]:
+        """Counts and the head of each review list (due / mistakes / assisted /
+        bookmarked) inside the subject's scope."""
+        return learning.review_summary(self._conn, _resolve_subject(self._conn, subject))
+
+    def quiz_review_start(
+        self, subject: str | None = None, kind: str = "due", n: int = 8
+    ) -> dict[str, Any]:
+        """A short session over the next `n` questions of one review list,
+        ordered so neighbouring questions come from different subtopics."""
+        s = _resolve_subject(self._conn, subject)
+        try:
+            ids = learning.review_question_ids(self._conn, s, kind, int(n))
+        except ValueError as e:
+            return {"success": False, "error": str(e)}
+        if not ids:
+            return {"success": False, "error": "Nothing to review in this list right now."}
+        qs = questions_repo.fetch_by_ids(self._conn, ids, preserve_order=True)
+        qs = concepts.interleave(qs, key=lambda q: q.subtopic)
+        return self._start_list_quiz("REVIEW", s, {"subject": s.name if s else None}, qs)
+
+    def dismiss_review(self, question_id: int) -> None:
+        """Take a question off the review lists until it is answered again."""
+        practice_repo.dismiss(self._conn, int(question_id))
+
+    def match_keywords(self, text: str, filters: dict[str, Any] | None = None) -> list[dict[str, Any]]:
+        """Lecture keywords -> candidate topics / branches / subtopics / tags, per
+        term, for the student to confirm (app/core/concepts.py)."""
+        filters = filters or {}
+        s = _resolve_subject(self._conn, filters.get("subject"))
+        return concepts.match_text(self._conn, text or "", s, bool(filters.get("in_syllabus_only", False)))
+
+    def quiz_concepts_start(
+        self,
+        filters: dict[str, Any],
+        concept_list: list[dict[str, Any]],
+        n: int,
+        template: str = "LECTURE",
+    ) -> dict[str, Any]:
+        """A session split evenly across confirmed concepts, retrieved one
+        concept at a time and interleaved. LECTURE keeps the form's reuse flag;
+        MIXED (techniques already studied) always allows reused questions.
+        `concept_labels` maps each question to the concept it was picked for;
+        the mixed runner keeps it hidden until the question is answered."""
+        template = "MIXED" if str(template).upper() == "MIXED" else "LECTURE"
+        chosen = [
+            {"kind": c["kind"], "label": c["label"]}
+            for c in (concept_list or [])
+            if isinstance(c, dict) and c.get("kind") in concepts.KINDS and c.get("label")
+        ]
+        if not chosen:
+            return {"success": False, "error": "Pick at least one concept."}
+        if template == "MIXED" and len(chosen) < 2:
+            return {"success": False, "error": "Pick at least two techniques to mix."}
+        s = _resolve_subject(self._conn, (filters or {}).get("subject"))
+        base = dict(filters or {})
+        if template == "MIXED":
+            base["reuse_questions"] = True
+
+        def fetch(need: int, concept: dict[str, Any], taken: set[int]) -> list[int]:
+            f = concepts.concept_filters(base, concept)
+            if taken:
+                f["exclude_question_ids"] = sorted(taken)
+            try:
+                sel = pick(self._conn, f, need, subject=s, strategy="diverse")
+            except FilterError:
+                return []
+            return [q.question_id for q in sel.questions]
+
+        pairs = concepts.allocate(chosen, int(n), fetch)
+        if not pairs:
+            return {"success": False, "error": "No questions match these concepts with the current filters."}
+        ordered = concepts.interleave(pairs, key=lambda p: p[1])
+        qs = questions_repo.fetch_by_ids(self._conn, [q for q, _ in ordered], preserve_order=True)
+        out = self._start_list_quiz(template, s, base, qs)
+        out["concept_labels"] = {str(q): chosen[i]["label"] for q, i in ordered}
+        out["shortfall"] = max(0, int(n) - len(qs))
+        return out
+
+    def list_lecture_sets(self) -> list[dict[str, Any]]:
+        """Saved keyword sets ("Monday's lecture"), newest first."""
+        return list(configs_repo.get(self._conn, "LECTURE_SETS", []) or [])
+
+    def save_lecture_set(
+        self, name: str, text: str, concept_list: list[dict[str, Any]]
+    ) -> list[dict[str, Any]]:
+        from datetime import UTC, datetime
+
+        name = (name or "").strip()
+        if not name:
+            raise ValueError("a saved lecture needs a name")
+        sets = [x for x in self.list_lecture_sets() if x.get("name") != name]
+        sets.insert(
+            0,
+            {
+                "name": name,
+                "text": text or "",
+                "concepts": [
+                    {"kind": c.get("kind"), "label": c.get("label"), "path": c.get("path")}
+                    for c in (concept_list or [])
+                    if isinstance(c, dict)
+                ],
+                "saved_at": datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z"),
+            },
+        )
+        configs_repo.set_(self._conn, "LECTURE_SETS", sets)
+        return sets
+
+    def delete_lecture_set(self, name: str) -> list[dict[str, Any]]:
+        sets = [x for x in self.list_lecture_sets() if x.get("name") != name]
+        configs_repo.set_(self._conn, "LECTURE_SETS", sets)
+        return sets
+
+    def get_studied_techniques(self, subject: str | None = None) -> list[dict[str, Any]]:
+        return learning.studied_techniques(self._conn, _resolve_subject(self._conn, subject))
+
+    # ---- Notes, bookmarks, paper results -----------------------------------
+
+    def get_question_notes(self, question_ids: list[int]) -> dict[str, dict[str, Any]]:
+        notes = practice_repo.notes_for(self._conn, [int(q) for q in question_ids or []])
+        return {str(q): v for q, v in notes.items()}
+
+    def save_question_note(self, question_id: int, note: str) -> None:
+        practice_repo.save_note(self._conn, int(question_id), str(note or ""))
+
+    def set_question_bookmark(self, question_id: int, on: bool) -> None:
+        practice_repo.set_bookmark(self._conn, int(question_id), bool(on))
+
+    def get_paper_results(self, pset_id: str) -> dict[str, Any]:
+        """A PSet's questions, in order, with any results recorded for them."""
+        ids = [
+            int(r[0])
+            for r in self._conn.execute(
+                "SELECT question_id FROM pset_questions WHERE pset_id = ? ORDER BY question_order", (pset_id,)
+            )
+        ]
+        meta = learning.question_meta(self._conn, ids)
+        recorded = practice_repo.paper_results(self._conn, pset_id)
+        return {
+            "pset_id": pset_id,
+            "questions": [
+                {"question_id": q, **meta.get(q, {}), **recorded.get(q, {"outcome": None, "assisted": False})}
+                for q in ids
+            ],
+        }
+
+    def record_paper_results(self, pset_id: str, results: list[dict[str, Any]]) -> dict[str, Any]:
+        """Solved / partial / missed (and whether a hint or the solution was
+        used) for questions worked on paper; they feed the review queue."""
+        n = practice_repo.record_paper_results(self._conn, pset_id, results or [])
+        return {"recorded": n}
+
+    def get_milestones(self) -> list[dict[str, Any]]:
+        return learning.milestones(self._conn)
 
     # ---- Step 16: Browser (§5.7 / §8.6) ---------------------------------
 
@@ -811,7 +1016,10 @@ class Api:
         if filters is not None:
             s = _resolve_subject(self._conn, filters.get("subject"))
             try:
-                where, params = questions_repo.browser_where(filters, subject=s, text_query=text_query)
+                where, params = questions_repo.browser_where(
+                    filters, subject=s, text_query=text_query,
+                    concepts=questions_repo.text_concepts(self._conn, text_query, s),
+                )
             except FilterError as e:
                 _log.info("get_similar_questions filter error: %s", e)
                 return []
@@ -1214,14 +1422,28 @@ class Api:
     # ---- Step 12: themes (§5.8 / §11) ------------------------------------
 
     def list_themes(self) -> list[dict[str, Any]]:
+        """Every theme; reward themes not yet earned carry `locked` and their
+        milestone (app/core/learning.py MILESTONES)."""
+        locked = learning.locked_themes(self._conn)
         return [
-            {"id": t.id, "name": t.name, "description": t.description, "preview": None}
+            {
+                "id": t.id,
+                "name": t.name,
+                "description": t.description,
+                "preview": None,
+                "reward": t.reward,
+                "locked": t.id in locked,
+                "milestone": locked.get(t.id),
+            }
             for t in theme_registry.THEMES
         ]
 
     def set_theme(self, theme_id: str) -> None:
         if theme_registry.get(theme_id) is None:
             raise ValueError(f"unknown theme: {theme_id!r}")
+        milestone = learning.locked_themes(self._conn).get(theme_id)
+        if milestone is not None:
+            raise ValueError(f"theme {theme_id!r} unlocks with the {milestone['title']!r} milestone")
         configs_repo.set_(self._conn, "THEME_SELECTED", theme_id)
 
     def play_sound(self, event: str) -> None:
@@ -1519,21 +1741,33 @@ class Api:
         dr = ((date_range or {}).get("from") or None, (date_range or {}).get("to") or None)
         return source_attribution(self._conn, s, dr, mode=mode)
 
-    def get_trends(self, subject: str | None = None, mode: str = "generate") -> list[dict[str, Any]]:
-        """Step 21: pattern detectors that surface actionable insights."""
-        # Trends could theoretically be mode-dependent but detect_trends is hardcoded for PSets currently.
-        # We can just run it without mode, or we would need to update `detect_trends` as well.
-        # For now, `detect_trends` doesn't take a mode parameter, so we just ignore mode.
+    def get_learning_stats(
+        self,
+        subject: str | None = None,
+        date_range: dict[str, str | None] | None = None,
+    ) -> dict[str, Any]:
+        """The learning measures (answers from quizzes and paper results)."""
         s = _resolve_subject(self._conn, subject)
-        return [asdict(i) for i in detect_trends(self._conn, s)]
+        dr = ((date_range or {}).get("from") or None, (date_range or {}).get("to") or None)
+        return learning.learning_stats(self._conn, s, dr)
+
+    def get_trends(self, subject: str | None = None, mode: str = "generate") -> list[dict[str, Any]]:
+        """Step 21: pattern detectors that surface actionable insights, over PSet
+        usage ("generate") or quiz usage ("quiz")."""
+        s = _resolve_subject(self._conn, subject)
+        return [asdict(i) for i in detect_trends(self._conn, s, mode)]
 
     # ---- Step 14: stats v2 (§5.6 / §9) -----------------------------------
 
     def get_question_multiplicity_dist(
-        self, subject: str | None = None, mode: str = "generate"
+        self,
+        subject: str | None = None,
+        mode: str = "generate",
+        date_range: dict[str, str | None] | None = None,
     ) -> dict[int, int]:
         s = _resolve_subject(self._conn, subject)
-        return question_multiplicity_dist(self._conn, s, mode=mode)
+        dr = ((date_range or {}).get("from") or None, (date_range or {}).get("to") or None)
+        return question_multiplicity_dist(self._conn, s, mode=mode, date_range=dr)
 
     def get_calendar_heatmap(self, year: int | None = None, mode: str = "generate") -> dict[str, int]:
         return calendar_heatmap(self._conn, year, mode=mode)

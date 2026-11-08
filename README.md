@@ -105,6 +105,38 @@ Keep the prompt in `app/tools/reembed.py` byte-identical between runs, or the
 new vectors will not be comparable with the stored ones (the 2026-10-21 A/B test
 in `app/tools/embed_ab_test.py` found no better prompt).
 
+## Practice loop (review queue, lecture keywords, learning stats)
+
+Migration 009 adds `answer_events`: one row per finished answer in any quiz
+mode (and per paper result recorded from History), plus a `revealed` row when
+the answer or solution was opened before answering. Hint use is recorded from
+009 on; older answers keep `hints_used = NULL` ("unknown"), never "no hint".
+
+- **Review queue** (`app/core/review.py`, Quiz → Review, the Welcome page's
+  Today card): a miss, a partial answer or an assisted one comes back the next
+  day; independent successes come back after 3, 7 and 21 days (a first-try
+  success starts at 7), then retire. The intervals are a product heuristic kept
+  in one tuple. Lists: due, mistakes, try independently, bookmarks; a row can be
+  taken off the queue until it is answered again.
+- **From a lecture** (`app/core/concepts.py`): pasted keywords are matched
+  offline against topic / branch / subtopic / tag names (spelling variants,
+  light stemming, abbreviations in `app/resources/keyword_aliases.json`). The
+  student ticks the matches; questions are picked per concept and interleaved.
+  Keyword sets can be saved (`configs.LECTURE_SETS`). The Browser's search box
+  uses the same matching on top of the LaTeX substring.
+- **Mixed review**: two or more studied technique tags, interleaved so
+  neighbours need different techniques; the label stays hidden until answered.
+- **Learning stats** (`app/core/learning.py`, Stats → Learning): first-try
+  unaided success, questions to revisit, delayed-review success, coverage by
+  topic and reviews due, each with its denominator and a "Practise this" action.
+  The Stats page's question numbers now follow the selected date range.
+- **Notes and bookmarks** (`question_notes`): the optional self-explanation
+  prompt after a solution saves to the question's note; the Browser shows the
+  note and can filter to bookmarks.
+- **Reward themes**: Sage, Ember and Midnight unlock with practice milestones
+  (spaced reviews, fixing old mistakes, honest attempts). Built-in themes and
+  the accessibility toggle stay free.
+
 ## Image support
 
 Questions with `\includegraphics{filename}` commands in their LaTeX source are fully supported.
@@ -119,7 +151,7 @@ Questions with `\includegraphics{filename}` commands in their LaTeX source are f
 
 - `app/` — Python backend
   - `app/ipc/` — PyWebView IPC API surface
-  - `app/core/` — Domain models, filters, selection, stats, difficulty
+  - `app/core/` — Domain models, filters, selection, stats, difficulty, review queue, concepts, learning stats
   - `app/persistence/` — SQLite repositories, migrations, ingest pipeline
   - `app/tex/` — LaTeX preamble, sanitizers, PDF generation
   - `app/data/appdata/` — Runtime data (database, logs, teximages)

@@ -24,6 +24,9 @@ class ThemeMeta:
     id: str
     name: str
     description: str
+    # Earned through a practice milestone (app/core/learning.py MILESTONES);
+    # the built-in themes are always available.
+    reward: bool = False
 
     def sounds_dir(self) -> Path:
         return _RESOURCES / "sounds" / self.id
@@ -77,6 +80,24 @@ THEMES: Final[tuple[ThemeMeta, ...]] = (
         id="android-kitkat",
         name="Android KitKat",
         description="Material 1 flat surfaces, teal primary, dark Material toast tooltip.",
+    ),
+    ThemeMeta(
+        id="sage",
+        name="Sage",
+        description="Calm green-grey light theme. Earned with spaced reviews.",
+        reward=True,
+    ),
+    ThemeMeta(
+        id="ember",
+        name="Ember",
+        description="Warm paper tones with a deep orange accent. Earned by fixing old mistakes.",
+        reward=True,
+    ),
+    ThemeMeta(
+        id="midnight",
+        name="Midnight",
+        description="Deep navy dark theme with a soft violet accent. Earned with honest attempts.",
+        reward=True,
     ),
 )
 

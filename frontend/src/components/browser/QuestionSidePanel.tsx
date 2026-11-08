@@ -19,6 +19,7 @@ import { Button } from "../ui/Button";
 import { Checkbox } from "../ui/Checkbox";
 import { bestSolution, ipc, type Filters, type Question, type SimilarQuestion } from "../../lib/ipc";
 import { LatexContent } from "./LatexContent";
+import { BookmarkButton, NoteEditor } from "../notes/QuestionNotes";
 
 interface Props {
   question: Question | null;
@@ -83,6 +84,10 @@ export function QuestionSidePanel({ question, filters, textQuery, onClose, onPic
       <div className="space-y-4 p-4">
         <Metadata question={question} />
 
+        <div className="flex justify-end">
+          <BookmarkButton questionId={question.question_id} />
+        </div>
+
         <Section title="Question">
           <LatexContent source={question.latexcode} />
         </Section>
@@ -111,6 +116,10 @@ export function QuestionSidePanel({ question, filters, textQuery, onClose, onPic
             <LatexContent source={question.hints} />
           </Disclosure>
         )}
+
+        <Section title="Your note">
+          <NoteEditor questionId={question.question_id} placeholder="Why the method works, where you got stuck, what to remember." />
+        </Section>
 
         <Section
           title="Similar questions"

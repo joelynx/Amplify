@@ -64,6 +64,7 @@ export default function BrowserPage() {
   const [type, setType] = useState<string | null>(null);
   const [source, setSource] = useState<string | null>(null);
   const [inSyllabusOnly, setInSyllabusOnly] = useState(false);
+  const [bookmarkedOnly, setBookmarkedOnly] = useState(false);
   const [textQuery, setTextQuery] = useState("");
   const [sortBy, setSortBy] = useState<SortColumn>("question_id");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
@@ -88,7 +89,7 @@ export default function BrowserPage() {
   // Reset page when filters change.
   useEffect(() => {
     setPage(0);
-  }, [topic, type, source, inSyllabusOnly, textQuery, sortBy, sortDir]);
+  }, [topic, type, source, inSyllabusOnly, bookmarkedOnly, textQuery, sortBy, sortDir]);
 
   const filters = useMemo<Filters>(
     () => ({
@@ -97,8 +98,9 @@ export default function BrowserPage() {
       sources: source ? [source] : [],
       in_syllabus_only: inSyllabusOnly,
       reuse_questions: true,
+      bookmarked_only: bookmarkedOnly,
     }),
-    [topic, type, source, inSyllabusOnly],
+    [topic, type, source, inSyllabusOnly, bookmarkedOnly],
   );
 
   const refresh = useCallback(async () => {
@@ -257,7 +259,7 @@ export default function BrowserPage() {
                   value={textQuery}
                   onChange={(e) => setTextQuery(e.target.value)}
                   className="w-56 bg-transparent text-sm outline-none"
-                  placeholder="Substring in latexcode"
+                  placeholder="Text, topic, tag or abbreviation"
                 />
               </div>
             </FilterCol>
@@ -268,6 +270,15 @@ export default function BrowserPage() {
                   onChange={() => setInSyllabusOnly((v) => !v)}
                 />
                 <span>In-syllabus only</span>
+              </label>
+            </FilterCol>
+            <FilterCol label="">
+              <label className="inline-flex items-center gap-2 text-sm">
+                <Checkbox
+                  state={bookmarkedOnly ? "checked" : "unchecked"}
+                  onChange={() => setBookmarkedOnly((v) => !v)}
+                />
+                <span>Bookmarked only</span>
               </label>
             </FilterCol>
             <div className="ml-auto text-sm text-muted">

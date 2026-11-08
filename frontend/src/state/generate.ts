@@ -279,6 +279,27 @@ export function templateSubtopicsToLeaves(
   return out;
 }
 
+/** A template's tree selection as leaf keys: its subtopics, else every leaf
+ * under its branches, else under its topics (one level applies at a time, as
+ * in the filter SQL). Trends and "Practise this" send topic lists. */
+export function templateToLeaves(
+  payload: Pick<TemplatePayload, "subtopic_list"> & Partial<Pick<TemplatePayload, "topic_list" | "branch_list">>,
+  tree: ConceptTree,
+): Set<string> {
+  if (payload.subtopic_list?.length) return templateSubtopicsToLeaves(payload.subtopic_list, tree);
+  const branches = new Set(payload.branch_list ?? []);
+  const topics = new Set(payload.topic_list ?? []);
+  const out = new Set<string>();
+  if (branches.size === 0 && topics.size === 0) return out;
+  for (const [topic, byBranch] of Object.entries(tree)) {
+    for (const [branch, subs] of Object.entries(byBranch)) {
+      const hit = branches.size > 0 ? branches.has(branch) : topics.has(topic);
+      if (hit) for (const sub of subs) out.add(leafKey(topic, branch, sub));
+    }
+  }
+  return out;
+}
+
 /** Compare a draft against a saved template's payload for the spec's
  * "Save Template greys when payload exactly matches" rule (§8.1). */
 export function draftEqualsTemplate(draft: GenerateDraft, t: TemplatePayload): boolean {

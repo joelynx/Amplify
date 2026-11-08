@@ -1,0 +1,17 @@
+/* Sage — calm green-grey light theme; reward for spaced reviews (WCAG AA text). */
+:root[data-theme="sage"],
+[data-theme="sage"] {
+  --text: #1f2a24;
+  --background: #f6f8f5;
+  --surface: #eaf0e8;
+  --primary: #3f7a5a;
+  --secondary: #5b7f8f;
+  --accent: #c08a3e;
+  --border: #d3ddd0;
+  --muted: #5e6d64;
+  --success: #2f8550;
+  --warning: #b7791f;
+  --error: #b84a3c;
+  --font-family: "Inter", system-ui, sans-serif;
+  --rem: 16px;
+}
