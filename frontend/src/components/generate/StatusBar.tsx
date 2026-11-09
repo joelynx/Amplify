@@ -1,5 +1,5 @@
-import { Loader2 } from "lucide-react";
 import { cn } from "../../lib/cn";
+import { Spinner } from "../../appearance/brand/Loader";
 
 interface Props {
   count: number | null;
@@ -16,7 +16,7 @@ export function StatusBar({ count, loading, error }: Props) {
         error && "text-error",
       )}
     >
-      {loading && <Loader2 className="h-3 w-3 animate-spin text-muted" />}
+      {loading && <Spinner className="h-3 w-3 text-muted" />}
       {error ? (
         <span>{error}</span>
       ) : count === null ? (

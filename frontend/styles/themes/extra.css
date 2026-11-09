@@ -1,0 +1,569 @@
+/* Palettes added with the makeover (Makeover.md §5.1, §8).
+ *
+ * A palette is colour tokens + --font-family + --rem only; component skins
+ * live in the chrome slot (styles/appearance/chrome.css). Every block keeps
+ * the same shape as the original overlays, plus a high-contrast override for
+ * <html data-a11y="on">. --background is always a plain colour so the
+ * contrast test (src/appearance/palettes/__tests__/contrast.test.ts) can
+ * check it. That test enforces, for every palette here:
+ *   --text on --background and --surface >= 4.5:1
+ *   --muted on --background and --surface >= 4.5:1
+ *   white on --primary >= 3:1 (buttons are `bg-primary text-white`)
+ *   --primary, --success, --warning, --error on --background >= 3:1
+ *   and >= 7:1 for text and muted in high-contrast mode.
+ *
+ * Editor palettes use the official colours (all MIT-licensed; credits are
+ * on the palette items in src/appearance/core/items.ts). Where an official
+ * accent is too light to carry white button text, the primary is a deeper
+ * shade of it or another official colour; each case is noted inline. */
+
+
+/* ================================================================ Blackboard */
+:root[data-theme="blackboard"],
+[data-theme="blackboard"] {
+  --text: #eef2ea;          /* chalk */
+  --background: #1e2b25;    /* slate */
+  --surface: #26362f;
+  --primary: #4d7fb8;       /* blue chalk */
+  --secondary: #a3506f;     /* pink chalk */
+  --accent: #f2d16b;        /* yellow chalk */
+  --border: #3f5549;
+  --muted: #a8bbaf;
+  --success: #8fd19e;
+  --warning: #f2d16b;
+  --error: #ff9a8f;
+  --font-family: "Patrick Hand", "Segoe Print", system-ui, sans-serif;
+  --rem: 16px;
+}
+:root[data-a11y="on"][data-theme="blackboard"] {
+  --text: #ffffff;
+  --background: #121c17;
+  --surface: #1a2620;
+  --muted: #e2ebe5;
+}
+
+/* ================================================================ Blueprint */
+:root[data-theme="blueprint"],
+[data-theme="blueprint"] {
+  --text: #f3f8ff;          /* white line work */
+  --background: #123f74;    /* drafting blue */
+  --surface: #1a4a82;
+  --primary: #d6741f;       /* orange correction pencil */
+  --secondary: #2c6cb8;
+  --accent: #ffd45c;
+  --border: #4f7db3;
+  --muted: #c3d5ec;
+  --success: #8ee0a8;
+  --warning: #ffd45c;
+  --error: #ffa494;
+  --font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --rem: 16px;
+}
+:root[data-a11y="on"][data-theme="blueprint"] {
+  --text: #ffffff;
+  --background: #0b2a50;
+  --surface: #10335f;
+  --muted: #e6eef9;
+}
+
+/* ================================================================ Engineer's notebook */
+:root[data-theme="engineer"],
+[data-theme="engineer"] {
+  --text: #1d2a21;          /* pencil graphite */
+  --background: #e9f2df;    /* engineering paper */
+  --surface: #f6faf1;
+  --primary: #2f6b4f;       /* technical-pen green */
+  --secondary: #355a85;     /* blue pen */
+  --accent: #d9822b;        /* highlighter */
+  --border: #b7cda3;
+  --muted: #4b5c4f;
+  --success: #2a7a3b;
+  --warning: #96580c;
+  --error: #b3362b;
+  --font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --rem: 16px;
+}
+:root[data-a11y="on"][data-theme="engineer"] {
+  --text: #000000;
+  --background: #f6faf1;
+  --surface: #ffffff;
+  --muted: #1d2a21;
+}
+
+/* ================================================================ Illuminated manuscript */
+:root[data-theme="manuscript"],
+[data-theme="manuscript"] {
+  --text: #2b1f14;          /* iron-gall ink */
+  --background: #f3e7c9;    /* parchment */
+  --surface: #faf3e0;
+  --primary: #1f4e96;       /* lapis */
+  --secondary: #8b1e1e;     /* rubric red */
+  --accent: #b8860b;        /* gilt */
+  --border: #d8c193;
+  --muted: #5e4a33;
+  --success: #3f6b2e;
+  --warning: #8a5a0a;
+  --error: #9e2a1e;
+  --font-family: "Crimson Pro", "EB Garamond", Georgia, serif;
+  --rem: 17px;
+}
+:root[data-a11y="on"][data-theme="manuscript"] {
+  --text: #000000;
+  --background: #faf3e0;
+  --surface: #fffaf0;
+  --muted: #2b1f14;
+}
+
+/* ================================================================ Dark academia */
+:root[data-theme="dark-academia"],
+[data-theme="dark-academia"] {
+  --text: #ede3d1;          /* cream pages */
+  --background: #1c1611;    /* leather */
+  --surface: #282019;
+  --primary: #a0652d;       /* aged brass */
+  --secondary: #5b6c4a;     /* library green */
+  --accent: #c9a24a;        /* polished brass */
+  --border: #45372b;
+  --muted: #b5a48c;
+  --success: #9cc087;
+  --warning: #dcb055;
+  --error: #e58373;
+  --font-family: "EB Garamond", "Crimson Pro", Georgia, serif;
+  --rem: 17px;
+}
+:root[data-a11y="on"][data-theme="dark-academia"] {
+  --text: #ffffff;
+  --background: #120e0a;
+  --surface: #1c1611;
+  --muted: #efe6d8;
+}
+
+/* ================================================================ Synthwave */
+:root[data-theme="synthwave"],
+[data-theme="synthwave"] {
+  --text: #f6eaff;
+  --background: #1a1033;    /* purple night */
+  --surface: #251946;
+  --primary: #e0218a;       /* hot magenta */
+  --secondary: #6a3fd1;
+  --accent: #36e2f0;        /* neon cyan */
+  --border: #3f2c6e;
+  --muted: #bca9dc;
+  --success: #4ef0a5;
+  --warning: #ffc857;
+  --error: #ff6b8b;
+  --font-family: "Space Grotesk", "Inter", "Segoe UI", sans-serif;
+  --rem: 16px;
+}
+:root[data-a11y="on"][data-theme="synthwave"] {
+  --text: #ffffff;
+  --background: #100a22;
+  --surface: #1a1033;
+  --muted: #ece2ff;
+}
+
+/* ================================================================ Vaporwave (secret) */
+:root[data-theme="vaporwave"],
+[data-theme="vaporwave"] {
+  --text: #2d1b45;          /* deep purple */
+  --background: #fbeef8;    /* pink haze */
+  --surface: #ffffff;       /* marble */
+  --primary: #b8338f;       /* deeper vaporwave pink, carries white text */
+  --secondary: #11807f;     /* teal */
+  --accent: #ff71ce;
+  --border: #e6c8ea;
+  --muted: #674c7d;
+  --success: #17795d;
+  --warning: #a35f00;
+  --error: #be2d4f;
+  --font-family: "Space Grotesk", "Inter", "Segoe UI", sans-serif;
+  --rem: 16px;
+}
+:root[data-a11y="on"][data-theme="vaporwave"] {
+  --text: #000000;
+  --background: #ffffff;
+  --surface: #fdf6fb;
+  --muted: #2d1b45;
+}
+
+/* ================================================================ Handheld (four-shade LCD) */
+/* Four greens: a lit-screen shade, the classic light green for cards and
+ * two dark shades for ink (the lighter dark one deepened a step so muted
+ * text passes AA on the cards). Error steps out of the greens on purpose: a
+ * red-brown, so it still reads. */
+:root[data-theme="handheld"],
+[data-theme="handheld"] {
+  --text: #0f380f;          /* darkest */
+  --background: #cadc9f;    /* lit screen */
+  --surface: #9bbc0f;       /* classic light green */
+  --primary: #306230;       /* dark green */
+  --secondary: #0f380f;
+  --accent: #8bac0f;
+  --border: #306230;
+  --muted: #1f4a1f;         /* dark green, one step deeper */
+  --success: #306230;
+  --warning: #5a5a00;
+  --error: #7a2414;
+  --font-family: "Pixelify Sans", "VT323", ui-monospace, monospace;
+  --rem: 15px;
+}
+:root[data-a11y="on"][data-theme="handheld"] {
+  --text: #000000;
+  --background: #d8e6b4;
+  --surface: #b3cf5a;
+  --muted: #0f380f;
+}
+
+/* ================================================================ Amber CRT */
+/* The phosphor amber is too bright for white button text, so buttons use a
+ * burnt amber. */
+:root[data-theme="amber-crt"],
+[data-theme="amber-crt"] {
+  --text: #ffb000;          /* phosphor */
+  --background: #0d0800;
+  --surface: #181002;
+  --primary: #b36a00;       /* burnt amber */
+  --secondary: #8a5200;
+  --accent: #ffd27a;
+  --border: #4a3000;
+  --muted: #cc8f24;
+  --success: #e3c25a;
+  --warning: #ffd27a;
+  --error: #ff7048;
+  --font-family: "IBM Plex Mono", "Cascadia Mono", Consolas, monospace;
+  --rem: 15px;
+}
+:root[data-a11y="on"][data-theme="amber-crt"] {
+  --text: #ffc640;
+  --background: #000000;
+  --surface: #0d0800;
+  --muted: #ffbb33;
+}
+
+/* ================================================================ Dracula */
+/* Official: background #282a36, surfaces #343746 / #44475a, foreground
+ * #f8f8f2, pink, cyan, green, yellow, orange, red. Purple #bd93f9 is too
+ * light for white text, so the primary is a deeper shade of it (#9168f0),
+ * and the comment colour #6272a4 is lightened to #9aa3d4 for AA. */
+:root[data-theme="dracula"],
+[data-theme="dracula"] {
+  --text: #f8f8f2;
+  --background: #282a36;
+  --surface: #343746;
+  --primary: #9168f0;
+  --secondary: #c74f97;
+  --accent: #ffb86c;
+  --border: #44475a;
+  --muted: #9aa3d4;
+  --success: #50fa7b;
+  --warning: #f1fa8c;
+  --error: #ff5555;
+  --font-family: "JetBrains Mono", "Cascadia Mono", Consolas, monospace;
+  --rem: 15px;
+}
+:root[data-a11y="on"][data-theme="dracula"] {
+  --text: #ffffff;
+  --background: #1e1f29;
+  --surface: #282a36;
+  --muted: #e6e8f7;
+}
+
+/* ================================================================ Nord */
+/* Polar Night backgrounds, Snow Storm text, Frost nord10 for buttons
+ * (nord8/nord9 are too light for white text), Aurora for states. The muted
+ * tone sits between nord3 and nord4 for AA. */
+:root[data-theme="nord"],
+[data-theme="nord"] {
+  --text: #eceff4;          /* nord6 */
+  --background: #2e3440;    /* nord0 */
+  --surface: #3b4252;       /* nord1 */
+  --primary: #5e81ac;       /* nord10 */
+  --secondary: #b48ead;     /* nord15 */
+  --accent: #88c0d0;        /* nord8 */
+  --border: #4c566a;        /* nord3 */
+  --muted: #b2bccc;
+  --success: #a3be8c;       /* nord14 */
+  --warning: #ebcb8b;       /* nord13 */
+  --error: #bf616a;         /* nord11 */
+  --font-family: "Inter", system-ui, "Segoe UI", sans-serif;
+  --rem: 16px;
+}
+:root[data-a11y="on"][data-theme="nord"] {
+  --text: #ffffff;
+  --background: #242933;
+  --surface: #2e3440;
+  --muted: #e5e9f0;         /* nord5 */
+}
+
+/* ================================================================ Catppuccin Mocha */
+/* Mocha's accents are all pastels that cannot carry white text, so buttons
+ * use Latte's Mauve (#8839ef), the same hue one flavour over. */
+:root[data-theme="catppuccin"],
+[data-theme="catppuccin"] {
+  --text: #cdd6f4;          /* Text */
+  --background: #1e1e2e;    /* Base */
+  --surface: #313244;       /* Surface0 */
+  --primary: #8839ef;       /* Latte Mauve */
+  --secondary: #1e66f5;     /* Latte Blue */
+  --accent: #f5c2e7;        /* Pink */
+  --border: #45475a;        /* Surface1 */
+  --muted: #a6adc8;         /* Subtext0 */
+  --success: #a6e3a1;       /* Green */
+  --warning: #f9e2af;       /* Yellow */
+  --error: #f38ba8;         /* Red */
+  --font-family: "Inter", system-ui, "Segoe UI", sans-serif;
+  --rem: 16px;
+}
+:root[data-a11y="on"][data-theme="catppuccin"] {
+  --text: #ffffff;
+  --background: #11111b;    /* Crust */
+  --surface: #181825;       /* Mantle */
+  --muted: #bac2de;         /* Subtext1 */
+}
+
+/* ================================================================ Catppuccin Latte */
+:root[data-theme="catppuccin-latte"],
+[data-theme="catppuccin-latte"] {
+  --text: #4c4f69;          /* Text */
+  --background: #eff1f5;    /* Base */
+  --surface: #e6e9ef;       /* Mantle */
+  --primary: #8839ef;       /* Mauve */
+  --secondary: #1e66f5;     /* Blue */
+  --accent: #fe640b;        /* Peach */
+  --border: #bcc0cc;        /* Surface1 */
+  --muted: #5c5f77;         /* Subtext1 (Subtext0 misses AA on Base) */
+  --success: #3b9229;       /* Green, deepened from #40a02b for 3:1 */
+  --warning: #c47a12;       /* Yellow, deepened from #df8e1d for 3:1 */
+  --error: #d20f39;         /* Red */
+  --font-family: "Inter", system-ui, "Segoe UI", sans-serif;
+  --rem: 16px;
+}
+:root[data-a11y="on"][data-theme="catppuccin-latte"] {
+  --text: #11111b;
+  --background: #ffffff;
+  --surface: #eff1f5;
+  --muted: #303446;
+}
+
+/* ================================================================ Gruvbox (dark) */
+:root[data-theme="gruvbox"],
+[data-theme="gruvbox"] {
+  --text: #ebdbb2;          /* fg */
+  --background: #282828;    /* bg0 */
+  --surface: #3c3836;       /* bg1 */
+  --primary: #d65d0e;       /* neutral orange */
+  --secondary: #458588;     /* neutral blue */
+  --accent: #fabd2f;        /* bright yellow */
+  --border: #504945;        /* bg2 */
+  --muted: #bdae93;         /* fg3 */
+  --success: #b8bb26;       /* bright green */
+  --warning: #fabd2f;       /* bright yellow */
+  --error: #fb4934;         /* bright red */
+  --font-family: "JetBrains Mono", "Cascadia Mono", Consolas, monospace;
+  --rem: 15px;
+}
+:root[data-a11y="on"][data-theme="gruvbox"] {
+  --text: #fbf1c7;          /* fg0 */
+  --background: #1d2021;    /* bg0_h */
+  --surface: #282828;
+  --muted: #ebdbb2;
+}
+
+/* ================================================================ Solarized Light */
+/* base3/base2 backgrounds. Body text uses base02 because base00 and base01
+ * miss AA on base2; base01 is the muted tone. */
+:root[data-theme="solarized"],
+[data-theme="solarized"] {
+  --text: #073642;          /* base02 */
+  --background: #fdf6e3;    /* base3 */
+  --surface: #eee8d5;       /* base2 */
+  --primary: #268bd2;       /* blue */
+  --secondary: #6c71c4;     /* violet */
+  --accent: #cb4b16;        /* orange */
+  --border: #d6cfb9;
+  --muted: #4f646b;         /* base01, a shade darker for AA on base2 */
+  --success: #6f8000;       /* green, deepened from #859900 for 3:1 */
+  --warning: #9a7500;       /* yellow, deepened from #b58900 for 3:1 */
+  --error: #dc322f;         /* red */
+  --font-family: "Inter", system-ui, "Segoe UI", sans-serif;
+  --rem: 16px;
+}
+:root[data-a11y="on"][data-theme="solarized"] {
+  --text: #002b36;          /* base03 */
+  --background: #fdf6e3;
+  --surface: #fffbf0;
+  --muted: #073642;
+}
+
+/* ================================================================ Tokyo Night */
+/* Blue #7aa2f7 is too light for white text; purple #9d7cd8 (official) is the
+ * primary and blue0 #3d59a1 the secondary. */
+:root[data-theme="tokyo-night"],
+[data-theme="tokyo-night"] {
+  --text: #c0caf5;          /* fg */
+  --background: #1a1b26;    /* bg */
+  --surface: #24283b;       /* storm bg */
+  --primary: #9d7cd8;       /* purple */
+  --secondary: #3d59a1;     /* blue0 */
+  --accent: #7dcfff;        /* cyan */
+  --border: #3b4261;        /* fg_gutter */
+  --muted: #a9b1d6;         /* fg_dark */
+  --success: #9ece6a;       /* green */
+  --warning: #e0af68;       /* yellow */
+  --error: #f7768e;         /* red */
+  --font-family: "JetBrains Mono", "Cascadia Mono", Consolas, monospace;
+  --rem: 15px;
+}
+:root[data-a11y="on"][data-theme="tokyo-night"] {
+  --text: #ffffff;
+  --background: #16161e;    /* bg_dark */
+  --surface: #1a1b26;
+  --muted: #dfe4fb;
+}
+
+/* ================================================================ Lo-fi café */
+:root[data-theme="lofi-cafe"],
+[data-theme="lofi-cafe"] {
+  --text: #f3e6d8;          /* milk foam */
+  --background: #231b19;    /* espresso */
+  --surface: #30262a;
+  --primary: #bd6446;       /* terracotta mug */
+  --secondary: #6b5b95;     /* dusk */
+  --accent: #e8b86d;        /* desk lamp */
+  --border: #4a3b38;
+  --muted: #c4ae9b;
+  --success: #a3c98f;
+  --warning: #e8b86d;
+  --error: #ec8a7b;
+  --font-family: "Nunito", "Segoe UI", system-ui, sans-serif;
+  --rem: 16px;
+}
+:root[data-a11y="on"][data-theme="lofi-cafe"] {
+  --text: #ffffff;
+  --background: #17110f;
+  --surface: #231b19;
+  --muted: #f3e9de;
+}
+
+/* ================================================================ Desert night */
+:root[data-theme="desert-night"],
+[data-theme="desert-night"] {
+  --text: #f2e6d0;          /* moonlit sand */
+  --background: #141a33;    /* indigo sky */
+  --surface: #1e2647;
+  --primary: #bb6a2c;       /* lantern copper */
+  --secondary: #4a63b0;
+  --accent: #e9b96e;        /* lantern glow */
+  --border: #2f3a63;
+  --muted: #c2b8a6;
+  --success: #8fd1a6;
+  --warning: #f0c36a;
+  --error: #f08a7a;
+  --font-family: "Space Grotesk", "Inter", "Segoe UI", sans-serif;
+  --rem: 16px;
+}
+:root[data-a11y="on"][data-theme="desert-night"] {
+  --text: #ffffff;
+  --background: #0c1024;
+  --surface: #141a33;
+  --muted: #f2eadb;
+}
+
+/* ================================================================ Sakura */
+:root[data-theme="sakura"],
+[data-theme="sakura"] {
+  --text: #3a2a33;
+  --background: #fdf8f4;    /* rice paper */
+  --surface: #fbeef1;
+  --primary: #c2456f;       /* deep blossom */
+  --secondary: #5f7f5a;     /* leaf */
+  --accent: #f2a7bb;        /* petal */
+  --border: #f0d2da;
+  --muted: #6e5560;
+  --success: #4a8445;
+  --warning: #a56912;
+  --error: #b83a4b;
+  --font-family: "Nunito", "Quicksand", "Segoe UI", sans-serif;
+  --rem: 16px;
+}
+:root[data-a11y="on"][data-theme="sakura"] {
+  --text: #000000;
+  --background: #ffffff;
+  --surface: #fdf6f8;
+  --muted: #3a2a33;
+}
+
+/* ================================================================ Bauhaus */
+:root[data-theme="bauhaus"],
+[data-theme="bauhaus"] {
+  --text: #111111;
+  --background: #f4efe3;    /* off-white paper */
+  --surface: #ffffff;
+  --primary: #d02c22;       /* red */
+  --secondary: #1d4fa0;     /* blue */
+  --accent: #f2c12e;        /* yellow */
+  --border: #111111;
+  --muted: #4a4a4a;
+  --success: #2b7a3d;
+  --warning: #96690a;
+  --error: #b3221b;
+  --font-family: "Jost", "Century Gothic", "Segoe UI", sans-serif;
+  --rem: 16px;
+}
+:root[data-a11y="on"][data-theme="bauhaus"] {
+  --text: #000000;
+  --background: #ffffff;
+  --surface: #faf7f0;
+  --muted: #222222;
+}
+
+/* ================================================================ Brutalist */
+:root[data-theme="brutalist"],
+[data-theme="brutalist"] {
+  --text: #000000;
+  --background: #ffffff;
+  --surface: #f2f2f2;
+  --primary: #e62e00;       /* the one loud accent */
+  --secondary: #000000;
+  --accent: #ffe600;
+  --border: #000000;
+  --muted: #4d4d4d;
+  --success: #007a33;
+  --warning: #a86200;
+  --error: #c40000;
+  --font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --rem: 16px;
+}
+:root[data-a11y="on"][data-theme="brutalist"] {
+  --text: #000000;
+  --background: #ffffff;
+  --surface: #ffffff;
+  --muted: #1a1a1a;
+}
+
+/* ================================================================ Club edition */
+/* Mathematics Club red (the logo's #ff0000 / #d90000 / #8c0000) with Coding
+ * Club yellow (#ffd60a) as the accent, on a clean light background. Yellow
+ * can't carry white text, so it is only ever an accent. */
+:root[data-theme="club"],
+[data-theme="club"] {
+  --text: #1a1416;
+  --background: #ffffff;
+  --surface: #fbf7f5;
+  --primary: #d90000;       /* logo red */
+  --secondary: #8c0000;     /* logo dark red */
+  --accent: #ffd60a;        /* Coding Club yellow */
+  --border: #ecdcd8;
+  --muted: #5f5458;
+  --success: #1f7a3a;
+  --warning: #9a6200;
+  --error: #a3122e;
+  --font-family: "Inter", system-ui, "Segoe UI", sans-serif;
+  --rem: 16px;
+}
+:root[data-a11y="on"][data-theme="club"] {
+  --text: #000000;
+  --background: #ffffff;
+  --surface: #ffffff;
+  --muted: #2a2224;
+}

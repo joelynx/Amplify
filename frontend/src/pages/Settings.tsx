@@ -4,14 +4,17 @@
  *   2. General (font size, default # questions, default save dir, active theme,
  *      Restart App, Global mute)
  *   3. PDF Output (Left/Right header, Title, Instructions — each validated
- *      through the appropriate sanitizer; image-mode for headers; Save/Cancel/
- *      Reset to Defaults)
+ *      through the appropriate sanitizer; an optional image beside each side
+ *      header; Save/Cancel/Reset to Defaults)
  *   4. Data (Re-run Seed Ingest, Augment from CSV, diagnostics)
  */
 
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Brain, FolderOpen, ImagePlus, RotateCw, Trash2, Upload } from "lucide-react";
+import { Brain, FileText, FolderOpen, ImagePlus, Palette, RotateCw, Trash2, Upload } from "lucide-react";
+
+import { getPreset } from "../appearance/presets";
+import { useAppearance } from "../appearance/store";
 
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
@@ -34,6 +37,9 @@ interface PdfHeaders {
   right: string;
   title: string;
   instructions: string;
+  /** Stored image names (pdfgen.import_header_image), "" for none. */
+  leftImage: string;
+  rightImage: string;
 }
 
 interface HeaderErrors {
@@ -48,20 +54,24 @@ const DEFAULT_PDF: PdfHeaders = {
   right: "<d>",
   title: "<T>",
   instructions: "",
+  leftImage: "",
+  rightImage: "",
 };
 
-const IMAGE_PREFIX = "\\includegraphics[width=1cm]{";
-
-function isImageHeader(value: string): boolean {
-  return value.startsWith(IMAGE_PREFIX);
-}
+/** Before header images had their own configs, picking one wrote this into the text (which the sanitizer rejects). */
+const LEGACY_IMAGE_PREFIX = "\\includegraphics";
 
 export default function SettingsPage() {
   // General
   const [defaultN, setDefaultN] = useState<number>(10);
   const [saveDir, setSaveDir] = useState<string>("");
-  const [activeTheme, setActiveTheme] = useState<string>("");
-  const [globalMute, setGlobalMute] = useState<boolean>(false);
+  const presetId = useAppearance((st) => st.preset);
+  const [letterhead, setLetterhead] = useState(false);
+  useEffect(() => {
+    ipc.get_config("PDF_CLUB_LETTERHEAD").then((v) => setLetterhead(v === true)).catch(() => undefined);
+  }, []);
+  const muted = useAppearance((st) => st.settings.muted);
+  const setAppearance = useAppearance((st) => st.setSettings);
 
   // PDF Output
   const [pdf, setPdf] = useState<PdfHeaders>(DEFAULT_PDF);
@@ -86,26 +96,27 @@ export default function SettingsPage() {
   const [busy, setBusy] = useState<string | null>(null);
 
   const refresh = useCallback(async () => {
-    const [n, sd, theme, mute, l, r, t, ins, d] = await Promise.all([
+    const [n, sd, l, r, t, ins, li, ri, d] = await Promise.all([
       ipc.get_config("DEFAULT_NO_QUESTIONS"),
       ipc.get_config("FILE_SAVE_LOCATION"),
-      ipc.get_config("THEME_SELECTED"),
-      ipc.get_config("GLOBAL_MUTE"),
       ipc.get_config("PDF_LEFT_HEADER"),
       ipc.get_config("PDF_RIGHT_HEADER"),
       ipc.get_config("PDF_TITLE_LINE"),
       ipc.get_config("PDF_INSTRUCTIONS"),
+      ipc.get_config("PDF_LEFT_HEADER_IMAGE"),
+      ipc.get_config("PDF_RIGHT_HEADER_IMAGE"),
       ipc.get_seed_diagnostics(),
     ]);
     if (typeof n === "number") setDefaultN(n);
     if (typeof sd === "string") setSaveDir(sd);
-    if (typeof theme === "string") setActiveTheme(theme);
-    if (typeof mute === "boolean") setGlobalMute(mute);
+    const text = (v: unknown) => (typeof v === "string" && !v.startsWith(LEGACY_IMAGE_PREFIX) ? v : "");
     const headers = {
-      left: typeof l === "string" ? l : "",
-      right: typeof r === "string" ? r : "",
+      left: text(l),
+      right: text(r),
       title: typeof t === "string" ? t : "",
       instructions: typeof ins === "string" ? ins : "",
+      leftImage: typeof li === "string" ? li : "",
+      rightImage: typeof ri === "string" ? ri : "",
     };
     setPdf(headers);
     setPdfSaved(headers);
@@ -154,11 +165,6 @@ export default function SettingsPage() {
     }
   };
 
-  const onMuteChange = async (v: boolean) => {
-    setGlobalMute(v);
-    await ipc.set_config("GLOBAL_MUTE", v);
-  };
-
   const onRestart = async () => {
     try {
       await ipc.restart_app();
@@ -169,13 +175,18 @@ export default function SettingsPage() {
 
   // --- PDF headers -------------------------------------------------
 
-  const onPickImage = async (field: keyof PdfHeaders) => {
+  const onPickImage = async (field: "leftImage" | "rightImage") => {
     const path = await ipc.pick_image_file();
     if (!path) return;
-    setPdf((p) => ({ ...p, [field]: `${IMAGE_PREFIX}${path}}` }));
+    try {
+      const name = await ipc.import_header_image(path);
+      setPdf((p) => ({ ...p, [field]: name }));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    }
   };
 
-  const clearImage = (field: keyof PdfHeaders) => setPdf((p) => ({ ...p, [field]: "" }));
+  const clearImage = (field: "leftImage" | "rightImage") => setPdf((p) => ({ ...p, [field]: "" }));
 
   const onSavePdf = async () => {
     if (anyHeaderError) {
@@ -187,6 +198,8 @@ export default function SettingsPage() {
       ipc.set_config("PDF_RIGHT_HEADER", pdf.right),
       ipc.set_config("PDF_TITLE_LINE", pdf.title),
       ipc.set_config("PDF_INSTRUCTIONS", pdf.instructions),
+      ipc.set_config("PDF_LEFT_HEADER_IMAGE", pdf.leftImage),
+      ipc.set_config("PDF_RIGHT_HEADER_IMAGE", pdf.rightImage),
     ]);
     setPdfSaved(pdf);
   };
@@ -195,7 +208,9 @@ export default function SettingsPage() {
     pdf.left !== pdfSaved.left ||
     pdf.right !== pdfSaved.right ||
     pdf.title !== pdfSaved.title ||
-    pdf.instructions !== pdfSaved.instructions;
+    pdf.instructions !== pdfSaved.instructions ||
+    pdf.leftImage !== pdfSaved.leftImage ||
+    pdf.rightImage !== pdfSaved.rightImage;
 
   // --- Reset DB Data -----------------------------------------------
 
@@ -316,11 +331,18 @@ export default function SettingsPage() {
                 </Button>
               </div>
             </Row>
-            <Row label="Active theme">
-              <span className="text-sm">{activeTheme || "default-light"}</span>
+            <Row label="Theme">
+              <span className="text-sm">{getPreset(presetId)?.name ?? "Custom loadout"}</span>
+              <Button variant="outline" size="sm" onClick={() => navigate("/themes")}>
+                <Palette className="h-4 w-4" />
+                Themes
+              </Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate("/theme-lab")}>
+                Theme Lab
+              </Button>
             </Row>
-            <Row label="Global mute (sound effects)">
-              <Switch checked={globalMute} onCheckedChange={onMuteChange} />
+            <Row label="Mute all sounds">
+              <Switch checked={muted} onCheckedChange={(v) => setAppearance({ muted: v })} />
             </Row>
             <Row label="">
               <Button variant="outline" onClick={onRestart}>
@@ -334,14 +356,25 @@ export default function SettingsPage() {
         {/* PDF Output */}
         <Card title="PDF Output">
           <div className="space-y-3">
+            <Row label="Club letterhead">
+              <Switch
+                checked={letterhead}
+                onCheckedChange={(v) => {
+                  setLetterhead(v);
+                  void ipc.set_config("PDF_CLUB_LETTERHEAD", v);
+                }}
+              />
+              <span className="text-xs text-muted">The ampliφ logo on the left of the page header, the Coding Club logo on the right.</span>
+            </Row>
             <HeaderField
               label="Left header"
               value={pdf.left}
               error={pdfErrors.left}
               level="basic"
               onChange={(v) => setPdf((p) => ({ ...p, left: v }))}
-              onPickImage={() => onPickImage("left")}
-              onClearImage={() => clearImage("left")}
+              image={pdf.leftImage}
+              onPickImage={() => onPickImage("leftImage")}
+              onClearImage={() => clearImage("leftImage")}
             />
             <HeaderField
               label="Right header"
@@ -349,8 +382,9 @@ export default function SettingsPage() {
               error={pdfErrors.right}
               level="basic"
               onChange={(v) => setPdf((p) => ({ ...p, right: v }))}
-              onPickImage={() => onPickImage("right")}
-              onClearImage={() => clearImage("right")}
+              image={pdf.rightImage}
+              onPickImage={() => onPickImage("rightImage")}
+              onClearImage={() => clearImage("rightImage")}
             />
             <HeaderField
               label="Title line"
@@ -618,6 +652,7 @@ function HeaderField({
   level: _level,
   multiline,
   onChange,
+  image,
   onPickImage,
   onClearImage,
 }: {
@@ -627,39 +662,65 @@ function HeaderField({
   level: "basic" | "extended";
   multiline?: boolean;
   onChange: (v: string) => void;
+  /** Header image name; it sits beside the text, on the outer side of the page. */
+  image?: string;
   onPickImage?: () => void;
   onClearImage?: () => void;
 }) {
-  const isImage = isImageHeader(value);
   return (
     <div>
       <div className="flex items-center justify-between gap-2">
         <span className="text-sm text-muted">{label}</span>
-        {onPickImage && (
-          <div className="flex gap-1">
-            {isImage ? (
-              <Button variant="ghost" size="sm" onClick={onClearImage} aria-label="Clear image">
-                <Trash2 className="h-4 w-4" />
-              </Button>
-            ) : (
-              <Button variant="ghost" size="sm" onClick={onPickImage} aria-label="Pick image">
-                <ImagePlus className="h-4 w-4" />
-              </Button>
-            )}
-          </div>
+        {onPickImage && !image && (
+          <Button variant="ghost" size="sm" onClick={onPickImage} aria-label={`Add an image to the ${label.toLowerCase()}`}>
+            <ImagePlus className="h-4 w-4" />
+          </Button>
         )}
       </div>
+      {image && onClearImage && <HeaderImageChip name={image} onClear={onClearImage} />}
       {multiline ? (
         <textarea
           value={value}
           onChange={(e) => onChange(e.target.value)}
           className="min-h-[3rem] w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"
-          disabled={isImage}
         />
       ) : (
-        <Input value={value} onChange={(e) => onChange(e.target.value)} disabled={isImage} />
+        <Input value={value} onChange={(e) => onChange(e.target.value)} />
       )}
       {error && <p className="mt-1 text-xs text-error">{error}</p>}
+    </div>
+  );
+}
+
+/** The picked header image: a thumbnail (a page icon for a PDF) and a remove button. */
+function HeaderImageChip({ name, onClear }: { name: string; onClear: () => void }) {
+  const [src, setSrc] = useState<string | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    setSrc(null);
+    if (!name.endsWith(".pdf")) {
+      ipc
+        .resolve_images([name])
+        .then((m) => {
+          if (!cancelled) setSrc(m[name] ?? null);
+        })
+        .catch(() => undefined);
+    }
+    return () => {
+      cancelled = true;
+    };
+  }, [name]);
+  return (
+    <div className="mb-1 flex items-center gap-2 text-xs text-muted">
+      {src ? (
+        <img src={src} alt="" className="h-6 max-w-[6rem] rounded border border-border object-contain" />
+      ) : (
+        <FileText className="h-4 w-4" />
+      )}
+      <span>{name.endsWith(".pdf") ? "PDF image" : "Image"}, beside the text</span>
+      <Button variant="ghost" size="sm" onClick={onClear} aria-label="Remove image">
+        <Trash2 className="h-4 w-4" />
+      </Button>
     </div>
   );
 }

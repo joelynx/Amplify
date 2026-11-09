@@ -16,6 +16,8 @@ export default {
         background: "var(--background)",
         surface: "var(--surface)",
         primary: "var(--primary)",
+        // Text on primary-filled controls; white unless a palette has a light primary.
+        "on-primary": "var(--on-primary, #ffffff)",
         secondary: "var(--secondary)",
         accent: "var(--accent)",
         border: "var(--border)",
@@ -26,6 +28,7 @@ export default {
       },
       fontFamily: {
         sans: ["var(--font-family)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "Consolas", "monospace"],
       },
     },
   },

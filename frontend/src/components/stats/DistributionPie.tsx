@@ -99,7 +99,7 @@ export function DistributionPie({
   }, [data, palette, size]);
 
   return (
-    <div className="flex flex-col items-center gap-4 md:flex-row md:items-start">
+    <div data-ui="chart" className="flex flex-col items-center gap-4 md:flex-row md:items-start">
       <svg ref={svgRef} className="w-full max-w-[360px]" />
       <Legend data={data} palette={palette} />
       <div

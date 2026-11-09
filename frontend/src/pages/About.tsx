@@ -5,6 +5,8 @@
 
 import { useEffect, useState } from "react";
 
+import { Logo } from "../appearance/brand/Logo";
+import { allItems } from "../appearance/registry";
 import { Card } from "../components/ui/Card";
 import { ipc } from "../lib/ipc";
 
@@ -27,6 +29,17 @@ export default function AboutPage() {
             {version && <> Version {version}.</>}
           </p>
         </header>
+
+        <Card title="The clubs">
+          <div className="flex flex-wrap items-center gap-6">
+            <Logo name="matrix" style={{ width: 150 }} />
+            <Logo name="coding" style={{ width: 180 }} />
+          </div>
+          <p className="mt-3 text-sm leading-relaxed">
+            Amplify is an offering of ampliφ, the Mathematics Club, and the Coding Club at IIT Delhi – Abu Dhabi. The
+            ampliφ logo is a diagonal matrix whose entries, amp(z), li(x) and φ(n), spell the club's name.
+          </p>
+        </Card>
 
         <Card title="What this is">
           <p className="text-sm leading-relaxed">
@@ -59,7 +72,27 @@ export default function AboutPage() {
             <li>LanceDB (embeddings, ingest-time only)</li>
           </ul>
         </Card>
+
+        <AssetCredits />
       </div>
     </main>
+  );
+}
+
+/** Credits for palettes, fonts and packs, from each item's `credits`. */
+function AssetCredits() {
+  const credits = allItems().flatMap((i) => (i.credits ?? []).map((c) => ({ ...c, item: i.name })));
+  if (credits.length === 0) return null;
+  return (
+    <Card title="Theme credits">
+      <ul className="space-y-1 text-sm">
+        {credits.map((c, k) => (
+          <li key={k}>
+            <span className="font-medium">{c.item}</span> ({c.what}): {c.who}, {c.license}
+            {c.url && <span className="text-muted"> · {c.url}</span>}
+          </li>
+        ))}
+      </ul>
+    </Card>
   );
 }

@@ -89,7 +89,9 @@ export function QuestionSidePanel({ question, filters, textQuery, onClose, onPic
         </div>
 
         <Section title="Question">
-          <LatexContent source={question.latexcode} />
+          <div data-ui="question">
+            <LatexContent source={question.latexcode} />
+          </div>
         </Section>
 
         {solution && (

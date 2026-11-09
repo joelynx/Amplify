@@ -14,6 +14,11 @@
 @import "./themes/sage/theme.css";
 @import "./themes/ember/theme.css";
 @import "./themes/midnight/theme.css";
+@import "./themes/extra.css";
+@import "./appearance/chrome.css";
+@import "./appearance/surfaces.css";
+@import "./appearance/logo.css";
+@import "./appearance/places.css";
 
 @tailwind base;
 @tailwind components;
@@ -24,7 +29,9 @@ html, body, #root {
 }
 
 body {
-  background: var(--background);
+  /* Surface pattern (styles/appearance/surfaces.css) over the palette background. */
+  background: var(--surface-pattern, none), var(--background);
+  background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-family);
   font-size: var(--rem);

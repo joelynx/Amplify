@@ -1,0 +1,177 @@
+/* Chrome slot (Makeover.md §5.3): component skins keyed on <html data-chrome>.
+ * Components carry data-ui hooks (card, card-header, card-title, button,
+ * dialog, dialog-header, input, switch, checkbox, nav, nav-link, progress,
+ * progress-bar). `section.rounded-lg` also matches the ad-hoc panels that
+ * pages build without the Card component. "default" adds nothing. */
+
+
+/* ------------------------------------------------------------------ flat */
+:root[data-chrome="flat"] :is([data-ui="card"], section.rounded-lg) { box-shadow: none; border-radius: 4px; }
+:root[data-chrome="flat"] [data-ui="button"] { border-radius: 4px; box-shadow: none; }
+:root[data-chrome="flat"] [data-ui="dialog"] { border-radius: 4px; box-shadow: 0 0 0 1px var(--border); }
+
+/* ------------------------------------------------------------------ soft (pillowy, washi tape) */
+:root[data-chrome="soft"] :is([data-ui="card"], section.rounded-lg) {
+  border-radius: 22px; border-color: color-mix(in srgb, var(--primary) 25%, var(--border));
+  box-shadow: 0 10px 24px -14px color-mix(in srgb, var(--primary) 55%, transparent); position: relative;
+}
+:root[data-chrome="soft"] [data-ui="card"]::before {
+  content: ""; position: absolute; top: -9px; left: 22px; width: 70px; height: 18px; transform: rotate(-4deg);
+  background: repeating-linear-gradient(45deg, color-mix(in srgb, var(--accent) 55%, transparent) 0 6px, color-mix(in srgb, var(--secondary) 45%, transparent) 6px 12px);
+  opacity: 0.75; border-radius: 2px; pointer-events: none;
+}
+:root[data-chrome="soft"] [data-ui="button"] { border-radius: 999px; transition: transform 0.15s cubic-bezier(.34, 1.56, .64, 1); }
+:root[data-chrome="soft"] [data-ui="button"]:active { transform: scale(0.94); }
+:root[data-chrome="soft"] [data-ui="input"] { border-radius: 14px; }
+:root[data-chrome="soft"] [data-ui="dialog"] { border-radius: 26px; }
+:root[data-chrome="soft"] [data-ui="progress"] { border-radius: 999px; height: 0.6rem; }
+
+/* ------------------------------------------------------------------ glass */
+:root[data-chrome="glass"] :is([data-ui="card"], section.rounded-lg) {
+  backdrop-filter: blur(10px); background-color: color-mix(in srgb, var(--surface) 70%, transparent);
+  border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 14px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65), 0 10px 28px rgba(13, 43, 64, 0.1);
+}
+:root[data-chrome="glass"] [data-ui="button"] {
+  border-radius: 999px; position: relative; overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 2px 6px rgba(13, 43, 64, 0.15);
+}
+:root[data-chrome="glass"] [data-ui="button"]::after {
+  content: ""; position: absolute; inset: 1px 6px 52% 6px; border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.05)); pointer-events: none;
+}
+:root[data-chrome="glass"] [data-ui="dialog"] { backdrop-filter: blur(14px); border-radius: 16px; background-color: color-mix(in srgb, var(--surface) 85%, transparent); }
+:root[data-chrome="glass"] [data-ui="nav"] { backdrop-filter: blur(10px); background: color-mix(in srgb, var(--surface) 60%, transparent); }
+:root[data-chrome="glass"] [data-ui="progress"] { border-radius: 999px; box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15); }
+:root[data-chrome="glass"] [data-ui="progress-bar"] {
+  border-radius: 999px; background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0 45%, transparent 55%);
+}
+
+/* ------------------------------------------------------------------ pixel */
+:root[data-chrome="pixel"] :is([data-ui="card"], section.rounded-lg) {
+  border: none; border-radius: 0 !important; margin: 4px;
+  box-shadow: 0 -4px 0 0 var(--border), 0 4px 0 0 var(--border), -4px 0 0 0 var(--border), 4px 0 0 0 var(--border),
+    8px 8px 0 0 rgba(0, 0, 0, 0.35);
+}
+:root[data-chrome="pixel"] [data-ui="button"] {
+  border-radius: 0 !important; border: none;
+  box-shadow: 0 -3px 0 0 currentColor, 0 3px 0 0 currentColor, -3px 0 0 0 currentColor, 3px 0 0 0 currentColor, 5px 5px 0 0 rgba(0, 0, 0, 0.35);
+  margin: 3px; text-transform: uppercase; letter-spacing: 0.04em;
+}
+:root[data-chrome="pixel"] [data-ui="button"]:active { transform: translate(2px, 2px); box-shadow: 0 -3px 0 0 currentColor, 0 3px 0 0 currentColor, -3px 0 0 0 currentColor, 3px 0 0 0 currentColor; }
+:root[data-chrome="pixel"] :is([data-ui="input"], input, textarea, select) { border-radius: 0 !important; border-width: 2px; }
+:root[data-chrome="pixel"] [data-ui="dialog"] { border-radius: 0 !important; border: 4px solid var(--border); box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.45); }
+:root[data-chrome="pixel"] [class*="rounded"]:not(svg *):not(.amp-logo) { border-radius: 0 !important; }
+:root[data-chrome="pixel"] [data-ui="progress"] { border-radius: 0; height: 12px; border: 2px solid var(--border); background: var(--background); padding: 1px; }
+:root[data-chrome="pixel"] [data-ui="progress-bar"] {
+  border-radius: 0; background: repeating-linear-gradient(90deg, var(--success) 0 6px, transparent 6px 8px);
+}
+
+/* ------------------------------------------------------------------ bevel (early-2000s desktop) */
+:root[data-chrome="bevel"] :is([data-ui="card"], section.rounded-lg) {
+  border-radius: 6px 6px 3px 3px; border: 1px solid #7b7b7b; padding-top: 0;
+  box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #a0a0a0, 2px 2px 6px rgba(0, 0, 0, 0.12);
+}
+:root[data-chrome="bevel"] [data-ui="card"]:not(:has([data-ui="card-header"])) { padding-top: 1rem; }
+:root[data-chrome="bevel"] [data-ui="card-header"] {
+  margin: 0 -1rem 0.75rem; padding: 0.3rem 0.5rem 0.3rem 0.75rem; border-radius: 5px 5px 0 0;
+  background: linear-gradient(180deg, #3a8cf0 0%, #0a5fd8 12%, #0753c4 85%, #0a46a8 100%); color: #fff;
+}
+:root[data-chrome="bevel"] [data-ui="card-title"] { color: #fff; text-transform: none; letter-spacing: 0; font-weight: 700; text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.35); }
+:root[data-chrome="bevel"] [data-ui="button"]:not([data-variant="ghost"]) {
+  border-radius: 3px; background: linear-gradient(180deg, #ffffff 0%, #ecebe5 60%, #d6d3c8 100%); color: #1a1a1a;
+  border: 1px solid #003c74; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+:root[data-chrome="bevel"] [data-ui="button"]:not([data-variant="ghost"]):hover { box-shadow: inset 0 0 0 2px #f9b33a; }
+:root[data-chrome="bevel"] [data-ui="dialog"] { border-radius: 8px 8px 3px 3px; border: 3px solid #0753c4; padding-top: 0; }
+:root[data-chrome="bevel"] [data-ui="dialog-header"] {
+  margin: 0 -1.5rem 1rem; padding: 0.4rem 0.75rem; color: #fff;
+  background: linear-gradient(180deg, #3a8cf0 0%, #0a5fd8 12%, #0753c4 85%, #0a46a8 100%);
+}
+:root[data-chrome="bevel"] [data-ui="nav"] { background: linear-gradient(180deg, #3168d5 0%, #2457c5 50%, #1d4cb8 100%); color: #fff; border-bottom-color: #0a2a7a; }
+:root[data-chrome="bevel"] [data-ui="nav-link"] { color: #fff !important; }
+:root[data-chrome="bevel"] [data-ui="nav-link"][aria-current="page"] { background: rgba(255, 255, 255, 0.18) !important; box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.35); }
+:root[data-chrome="bevel"] [data-ui="progress"] { border-radius: 3px; border: 1px solid #686868; background: #fff; padding: 1px; height: 12px; }
+:root[data-chrome="bevel"] [data-ui="progress-bar"] {
+  border-radius: 0; background: repeating-linear-gradient(90deg, #37b03b 0 8px, transparent 8px 10px);
+}
+
+/* ------------------------------------------------------------------ ink (comic) */
+:root[data-chrome="ink"] :is([data-ui="card"], section.rounded-lg) { border: 3px solid var(--text); border-radius: 16px; box-shadow: 6px 6px 0 0 var(--text); }
+:root[data-chrome="ink"] [data-ui="button"] { border: 2px solid var(--text); border-radius: 999px; box-shadow: 3px 3px 0 0 var(--text); font-weight: 700; }
+:root[data-chrome="ink"] [data-ui="button"]:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 0 var(--text); }
+:root[data-chrome="ink"] [data-ui="input"] { border: 2px solid var(--text); border-radius: 10px; }
+:root[data-chrome="ink"] [data-ui="dialog"] { border: 3px solid var(--text); border-radius: 20px; box-shadow: 8px 8px 0 0 var(--text); }
+:root[data-chrome="ink"] [data-ui="card-title"] { color: var(--text); font-size: 1rem; letter-spacing: 0.06em; }
+:root[data-chrome="ink"] [data-ui="progress"] { border: 2px solid var(--text); border-radius: 999px; height: 0.7rem; }
+
+/* ------------------------------------------------------------------ terminal (box drawing) */
+:root[data-chrome="terminal"] :is([data-ui="card"], section.rounded-lg, [data-ui="button"], [data-ui="input"], [data-ui="dialog"], input, textarea) {
+  border-radius: 0 !important; box-shadow: none !important;
+}
+:root[data-chrome="terminal"] :is([data-ui="card"], section.rounded-lg) { border: 1px solid var(--border); }
+:root[data-chrome="terminal"] [data-ui="card-title"]::before { content: "[ "; }
+:root[data-chrome="terminal"] [data-ui="card-title"]::after { content: " ]"; }
+:root[data-chrome="terminal"] [data-ui="button"]:not([data-variant="ghost"])::before { content: "<"; opacity: 0.6; }
+:root[data-chrome="terminal"] [data-ui="button"]:not([data-variant="ghost"])::after { content: ">"; opacity: 0.6; }
+:root[data-chrome="terminal"] [data-ui="nav-link"][aria-current="page"]::before { content: "> "; }
+:root[data-chrome="terminal"] [data-ui="progress"] { border-radius: 0; height: 0.9rem; border: 1px solid var(--border); background: transparent; }
+:root[data-chrome="terminal"] [data-ui="progress-bar"] { border-radius: 0; background: repeating-linear-gradient(90deg, var(--primary) 0 0.5ch, transparent 0.5ch 0.7ch); }
+
+/* ------------------------------------------------------------------ material */
+:root[data-chrome="material"] :is([data-ui="card"], section.rounded-lg) { border: none; border-radius: 2px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.14), 0 1px 4px rgba(0, 0, 0, 0.1); }
+:root[data-chrome="material"] [data-ui="button"] { border-radius: 2px; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 500; }
+:root[data-chrome="material"] [data-ui="button"][data-variant="primary"] { box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+:root[data-chrome="material"] [data-ui="dialog"] { border: none; border-radius: 2px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3); }
+:root[data-chrome="material"] [data-ui="input"] { border-radius: 0; border-width: 0 0 2px; background: transparent; }
+:root[data-chrome="material"] [data-ui="nav"] { background: var(--primary); color: #fff; border: none; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+:root[data-chrome="material"] [data-ui="nav-link"] { color: rgba(255, 255, 255, 0.85) !important; background: transparent !important; border-radius: 0 !important; }
+:root[data-chrome="material"] [data-ui="nav-link"][aria-current="page"] { color: #fff !important; box-shadow: inset 0 -3px 0 #fff; }
+
+/* ------------------------------------------------------------------ paper */
+:root[data-chrome="paper"] :is([data-ui="card"], section.rounded-lg) {
+  border: none; border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(60, 40, 20, 0.1), 0 10px 22px -12px rgba(60, 40, 20, 0.45);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent 40%);
+}
+:root[data-chrome="paper"] [data-ui="button"] { border-radius: 3px; }
+:root[data-chrome="paper"] [data-ui="dialog"] { border: none; border-radius: 3px; box-shadow: 0 24px 48px -16px rgba(60, 40, 20, 0.5); }
+:root[data-chrome="paper"] [data-ui="card-title"] { font-family: var(--font-heading); text-transform: none; letter-spacing: 0.01em; font-size: 1rem; color: var(--text); font-weight: 600; }
+
+/* ------------------------------------------------------------------ brutal */
+:root[data-chrome="brutal"] :is([data-ui="card"], section.rounded-lg) { border: 3px solid var(--text); border-radius: 0 !important; box-shadow: 7px 7px 0 var(--text); }
+:root[data-chrome="brutal"] [data-ui="button"] { border: 3px solid var(--text); border-radius: 0 !important; box-shadow: 4px 4px 0 var(--text); font-weight: 800; }
+:root[data-chrome="brutal"] [data-ui="button"]:active { transform: translate(4px, 4px); box-shadow: none; }
+:root[data-chrome="brutal"] :is([data-ui="input"], [data-ui="dialog"]) { border: 3px solid var(--text); border-radius: 0 !important; }
+:root[data-chrome="brutal"] [data-ui="nav"] { border-bottom: 3px solid var(--text); }
+
+/* ------------------------------------------------------------------ neon */
+:root[data-chrome="neon"] :is([data-ui="card"], section.rounded-lg) {
+  border: 1px solid color-mix(in srgb, var(--primary) 55%, transparent); border-radius: 12px;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary) 15%, transparent), 0 0 22px -6px color-mix(in srgb, var(--primary) 70%, transparent);
+  background-color: color-mix(in srgb, var(--surface) 82%, transparent);
+}
+:root[data-chrome="neon"] [data-ui="button"][data-variant="primary"] { box-shadow: 0 0 14px -2px var(--primary); }
+:root[data-chrome="neon"] [data-ui="dialog"] { box-shadow: 0 0 40px -8px var(--primary); }
+:root[data-chrome="neon"] [data-ui="card-title"] { color: var(--primary); text-shadow: 0 0 8px color-mix(in srgb, var(--primary) 60%, transparent); }
+:root[data-chrome="neon"] [data-ui="progress-bar"] { box-shadow: 0 0 10px var(--primary); }
+
+/* ------------------------------------------------------------------ chalk */
+:root[data-chrome="chalk"] :is([data-ui="card"], section.rounded-lg) { border-color: transparent; box-shadow: none; position: relative; background-color: color-mix(in srgb, var(--surface) 60%, transparent); }
+:root[data-chrome="chalk"] :is([data-ui="card"], section.rounded-lg)::after,
+:root[data-chrome="chalk"] [data-ui="dialog"]::after {
+  content: ""; position: absolute; inset: 0; border: 2px solid color-mix(in srgb, var(--text) 75%, transparent);
+  border-radius: 6px; filter: url(#amp-rough); pointer-events: none;
+}
+:root[data-chrome="chalk"] [data-ui="button"] { border: 2px solid color-mix(in srgb, var(--text) 70%, transparent); border-radius: 8px 12px 9px 11px; }
+
+/* ------------------------------------------------------------------ scrollbars per chrome */
+:root[data-chrome="pixel"] ::-webkit-scrollbar, :root[data-chrome="terminal"] ::-webkit-scrollbar { width: 12px; height: 12px; }
+:root[data-chrome="pixel"] ::-webkit-scrollbar-thumb { background: var(--primary); border: 2px solid var(--background); }
+:root[data-chrome="terminal"] ::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--primary) 60%, transparent); }
+:root[data-chrome="pixel"] ::-webkit-scrollbar-track, :root[data-chrome="terminal"] ::-webkit-scrollbar-track { background: var(--background); }
+:root[data-chrome="bevel"] ::-webkit-scrollbar { width: 16px; }
+:root[data-chrome="bevel"] ::-webkit-scrollbar-thumb { background: linear-gradient(90deg, #c8d6fb, #a9c0f6); border: 1px solid #7a95dc; border-radius: 3px; }
+:root[data-chrome="bevel"] ::-webkit-scrollbar-track { background: #f4f3ee; }
+:root[data-chrome="soft"] ::-webkit-scrollbar-thumb, :root[data-chrome="glass"] ::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--primary) 40%, transparent); border-radius: 999px; }
+:root[data-chrome="neon"] ::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--primary) 50%, transparent); border-radius: 999px; box-shadow: 0 0 6px var(--primary); }

@@ -10,7 +10,7 @@
   --secondary: #8e75c9;
   --accent: #f4a261;
   --border: #f5c8d8;
-  --muted: #8a7ca0;
+  --muted: #6e5f86;
   --success: #6fae8a;
   --warning: #e0a96d;
   --error: #c75b6f;
@@ -27,9 +27,4 @@
   border-radius: 12px;
   padding: 0.5rem 0.75rem;
   box-shadow: 0 8px 22px rgba(217, 110, 156, 0.25);
-}
-
-/* Slightly softer card corners + warmer button rounding when pastel is on. */
-:root[data-theme="pastel"] section[class*="rounded-lg"] {
-  border-radius: 18px;
 }

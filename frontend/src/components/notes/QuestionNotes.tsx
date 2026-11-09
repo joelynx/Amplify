@@ -9,11 +9,16 @@
  */
 
 import { useCallback, useEffect, useState } from "react";
-import { Bookmark, BookmarkCheck, MessageSquareText } from "lucide-react";
+import { MessageSquareText } from "lucide-react";
 
 import { Button } from "../ui/Button";
 import { cn } from "../../lib/cn";
+import { emit } from "../../appearance/events";
+import { ThemedIcon } from "../../appearance/icons/ThemedIcon";
 import { ipc } from "../../lib/ipc";
+
+/** A note's maximum length (the margin is only so wide). */
+const NOTE_LIMIT = 2000;
 
 /** Self-explanation prompts. Reusable on any worked solution; no live tutor. */
 export const SELF_EXPLAIN_PROMPTS: readonly string[] = [
@@ -60,6 +65,7 @@ export function useQuestionNote(questionId: number) {
     async (note: string) => {
       await ipc.save_question_note(questionId, note);
       setState((s) => ({ ...s, note }));
+      emit({ type: "note_saved", text: note, limit: NOTE_LIMIT });
     },
     [questionId],
   );
@@ -69,6 +75,7 @@ export function useQuestionNote(questionId: number) {
     setState((s) => ({ ...s, bookmarked: next }));
     try {
       await ipc.set_question_bookmark(questionId, next);
+      emit({ type: "bookmark", on: next });
     } catch {
       setState((s) => ({ ...s, bookmarked: !next }));
     }
@@ -92,7 +99,7 @@ export function BookmarkButton({ questionId, className }: { questionId: number; 
         className,
       )}
     >
-      {bookmarked ? <BookmarkCheck size={16} /> : <Bookmark size={16} />}
+      <ThemedIcon name={bookmarked ? "bookmarked" : "bookmark"} className="h-4 w-4" />
       {bookmarked ? "Bookmarked" : "Bookmark"}
     </button>
   );
@@ -162,6 +169,7 @@ export function NoteEditor({ questionId, prompt, placeholder, collapsible = fals
           setStatus("idle");
         }}
         rows={3}
+        maxLength={NOTE_LIMIT}
         placeholder={placeholder ?? "A sentence or two in your own words."}
         className="w-full resize-y rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
       />

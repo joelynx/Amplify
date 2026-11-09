@@ -7,26 +7,16 @@
   --background: linear-gradient(180deg, #b3e0ff 0%, #d6f0ff 60%, #eaf6ff 100%);
   --surface: rgba(255, 255, 255, 0.72);
   --primary: #0aa6e0;
+  --on-primary: #062033;
   --secondary: #45c9b8;
   --accent: #ff9a3c;
   --border: rgba(13, 43, 64, 0.15);
-  --muted: #4a6577;
+  --muted: #405a6b;
   --success: #2bb673;
   --warning: #ffb547;
   --error: #e94f4f;
   --font-family: "Segoe UI", "Helvetica Neue", system-ui, sans-serif;
   --rem: 16px;
-}
-
-/* Glassy surfaces with subtle inner highlight */
-:root[data-theme="frutiger-aero"] body {
-  background-attachment: fixed;
-}
-:root[data-theme="frutiger-aero"] section[class*="rounded-lg"] {
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    0 8px 24px rgba(13, 43, 64, 0.08);
 }
 
 :root[data-theme="frutiger-aero"] .amplify-tooltip {

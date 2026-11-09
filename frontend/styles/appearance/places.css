@@ -1,0 +1,80 @@
+/* Chart skins (<html data-charts>) and quiz arena skins (<html data-arena>).
+ * Hooks: [data-ui="chart"] wraps each Stats chart; [data-ui="arena"] is the
+ * running quiz, [data-ui="question"] its question and [data-ui="answer"] the
+ * answer panel. Heatmap cell shapes are drawn by CalendarHeatmap itself. */
+
+/* ================================================================== charts */
+:root[data-charts="pixel"] :is([data-ui="chart"] svg, svg[data-ui="chart"]) { shape-rendering: crispEdges; }
+:root[data-charts="pixel"] :is([data-ui="chart"] svg, svg[data-ui="chart"]) text { font-family: var(--font-mono); }
+:root[data-charts="hand-drawn"] :is([data-ui="chart"] svg, svg[data-ui="chart"]) :is(path, rect, line, circle) { filter: url(#amp-rough); }
+:root[data-charts="hand-drawn"] :is([data-ui="chart"] svg, svg[data-ui="chart"]) text { font-family: var(--font-heading); }
+:root[data-charts="phosphor"] :is([data-ui="chart"] svg, svg[data-ui="chart"]) :is(path, rect, circle) { filter: drop-shadow(0 0 3px color-mix(in srgb, var(--primary) 70%, transparent)); }
+:root[data-charts="phosphor"] :is([data-ui="chart"] svg, svg[data-ui="chart"]) text { font-family: var(--font-mono); fill: var(--primary); }
+:root[data-charts="glossy"] :is([data-ui="chart"] svg, svg[data-ui="chart"]) :is(rect, path[fill]:not([fill="none"])) { filter: url(#amp-emboss); }
+:root[data-charts="night-sky"] [data-ui="chart"] { background: radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--primary) 12%, transparent), transparent 70%); border-radius: 8px; }
+
+/* ================================================================== arena */
+/* chalkboard */
+:root[data-arena="chalkboard"] [data-ui="arena"] [data-ui="question"] {
+  background: radial-gradient(ellipse at 30% 10%, rgba(255, 255, 255, .07), transparent 60%), #2c3a33 !important;
+  color: #f2efe6 !important; --math-ink: #fff3a8; padding: 1.25rem 1.5rem !important;
+  border: 10px solid #7a5532 !important; border-radius: 6px !important;
+  box-shadow: inset 0 0 0 2px #5c3f24, 0 6px 16px rgba(0, 0, 0, .25);
+}
+:root[data-arena="chalkboard"] [data-ui="answer"] :is(input, textarea) {
+  background: #2c3a33; color: #f2efe6; border-style: dashed; font-family: var(--font-heading);
+}
+
+/* arcade */
+:root[data-arena="arcade"] [data-ui="arena"] [data-ui="question"] {
+  background: #0b0f1e !important; color: #e8f1ff !important; --math-ink: #7df9ff;
+  border: 4px solid #ff2d6f !important; border-radius: 18px !important; padding: 1.25rem 1.5rem !important;
+  box-shadow: 0 0 0 4px #0b0f1e, 0 0 0 8px #7df9ff, 0 0 24px rgba(125, 249, 255, .35);
+}
+:root[data-arena="arcade"] [data-ui="answer"] :is(input, textarea) {
+  background: #0b0f1e; color: #ffe600; border: 3px solid #ffe600; border-radius: 0; font-family: var(--font-mono);
+  text-transform: uppercase; letter-spacing: .05em;
+}
+
+/* game show */
+:root[data-arena="gameshow"] [data-ui="arena"] {
+  background: radial-gradient(ellipse at 50% -10%, color-mix(in srgb, #ffd60a 22%, transparent), transparent 55%), var(--background) !important;
+}
+:root[data-arena="gameshow"] [data-ui="arena"] [data-ui="question"] {
+  background: linear-gradient(180deg, #1d3fae, #0c1f63) !important; color: #fff !important; --math-ink: #ffe27a;
+  border: 3px solid #d9a520 !important; border-radius: 10px !important; padding: 1.25rem 1.5rem !important;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, .25), 0 10px 24px rgba(12, 31, 99, .35); text-align: center;
+}
+:root[data-arena="gameshow"] [data-ui="answer"] { border: 3px solid #d9a520 !important; border-radius: 999px !important; }
+
+/* quest board */
+:root[data-arena="questboard"] [data-ui="arena"] {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='turbulence' baseFrequency='.55' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .35 0 0 0 0 .15 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    #b98a57 !important;
+}
+:root[data-arena="questboard"] [data-ui="arena"] [data-ui="question"] {
+  position: relative; background: radial-gradient(ellipse at center, #f6ead0 50%, #e8d3a6 100%) !important; color: #3b2a14 !important;
+  --math-ink: #5a2e0e; padding: 1.5rem 1.5rem 1.25rem !important; border: none !important; border-radius: 2px !important;
+  transform: rotate(-0.6deg); box-shadow: 0 8px 18px rgba(40, 20, 0, .35);
+}
+:root[data-arena="questboard"] [data-ui="arena"] [data-ui="question"]::before {
+  content: ""; position: absolute; top: 8px; left: 50%; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff8a8a, #b3121f); box-shadow: 0 2px 3px rgba(0, 0, 0, .4);
+}
+:root[data-arena="questboard"] [data-ui="arena"] h1 { color: #2b1b0a; }
+
+/* terminal */
+:root[data-arena="terminal"] [data-ui="arena"] [data-ui="question"] {
+  background: #050b06 !important; color: #39ff6a !important; --math-ink: #8dffad; font-family: var(--font-mono);
+  border: 1px solid #1f8f3d !important; border-radius: 0 !important; padding: 1rem 1.25rem !important;
+}
+:root[data-arena="terminal"] [data-ui="answer"] { background: #050b06 !important; border-radius: 0 !important; border-color: #1f8f3d !important; color: #39ff6a; }
+:root[data-arena="terminal"] [data-ui="answer"] :is(input, textarea) {
+  background: transparent; color: #39ff6a; border: none; border-bottom: 1px solid #1f8f3d; border-radius: 0; font-family: var(--font-mono);
+  caret-color: #39ff6a;
+}
+:root[data-arena="terminal"] [data-ui="answer"] > div:first-child::before { content: "$ "; }
+
+/* ================================================================== icon sets */
+:root[data-icons="pixel"] svg.lucide { stroke-linecap: square; stroke-linejoin: miter; shape-rendering: crispEdges; stroke-width: 2.5; }

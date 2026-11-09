@@ -94,7 +94,7 @@ export function OutputSettings() {
                 className={cn(
                   "px-3 py-1.5 text-xs font-medium transition",
                   draft.strategy === s.id
-                    ? "bg-primary text-white"
+                    ? "bg-primary text-on-primary"
                     : "bg-surface text-text hover:bg-primary/10",
                 )}
                 aria-pressed={draft.strategy === s.id}

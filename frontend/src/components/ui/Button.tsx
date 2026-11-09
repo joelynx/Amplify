@@ -6,7 +6,7 @@ type Size = "sm" | "md";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-primary text-white hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed",
+    "bg-primary text-on-primary hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed",
   secondary:
     "bg-secondary text-white hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed",
   ghost:
@@ -29,6 +29,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "outline", size = "md", ...props }, ref) => (
     <button
       ref={ref}
+      data-ui="button"
+      data-variant={variant}
       className={cn(
         "inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
         variants[variant],

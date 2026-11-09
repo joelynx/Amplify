@@ -25,6 +25,7 @@ import { Input } from "../components/ui/Input";
 import { Modal } from "../components/ui/Modal";
 import { InclusionTree } from "../components/subjects/InclusionTree";
 import { ipc, type ConceptTree, type SubjectPayload } from "../lib/ipc";
+import { useSubjectStore } from "../state/subject";
 
 interface EditorState {
   /** Name in the DB this editor row came from. Null when this is a new (unsaved) subject. */
@@ -86,6 +87,8 @@ export default function SubjectsPage() {
     ]);
     setNames(list);
     setActiveName(active);
+    // Keep the app-wide copy in step (study room, review reminder, quiz scope).
+    useSubjectStore.getState().setActive(active);
     setTree(fullTree);
   }, []);
 

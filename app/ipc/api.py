@@ -72,7 +72,7 @@ from app.persistence.repositories import questions as questions_repo
 from app.persistence.repositories import quizzes as quizzes_repo
 from app.persistence.repositories import subjects as subjects_repo
 from app.persistence.repositories import templates as templates_repo
-from app.tex.pdfgen import assemble, compile_to_pdf
+from app.tex.pdfgen import assemble, compile_to_pdf, import_header_image
 from app.tex.sanitize import SanitizeError, sanitize_latex_basic, sanitize_latex_extended
 from app.theming import theme_registry
 
@@ -1332,16 +1332,19 @@ class Api:
             return None
         result = windows[0].create_file_dialog(
             webview.OPEN_DIALOG,
-            file_types=(
-                "Image Files (*.png;*.jpg;*.jpeg;*.gif;*.bmp;*.svg)",
-                "All files (*.*)",
-            ),
+            # What XeLaTeX can embed (see import_header_image).
+            file_types=("Images (*.png;*.jpg;*.jpeg;*.pdf)",),
             allow_multiple=False,
         )
         if not result:
             return None
         path = result[0] if isinstance(result, list | tuple) else result
         return str(path) if path else None
+
+    def import_header_image(self, path: str) -> str:
+        """Copy a picked PDF header image into the TeX image folder and return
+        the name to store in PDF_LEFT_HEADER_IMAGE / PDF_RIGHT_HEADER_IMAGE."""
+        return import_header_image(Path(path))
 
     def resolve_images(self, filenames: list[str]) -> dict[str, str]:
         """Resolve image filenames to base64 data-URLs for frontend display.

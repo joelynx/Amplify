@@ -13,6 +13,7 @@
 import { useEffect } from "react";
 
 import { AnswerPanel } from "./AnswerPanel";
+import { emit } from "../../appearance/events";
 import { ipc, type QuizQuestionFull } from "../../lib/ipc";
 import { useQuizStore } from "../../state/quiz";
 
@@ -32,6 +33,7 @@ export function PracticeAnswer({ quizId, question }: Props) {
   useEffect(() => {
     if ((showAnswer || showSolution) && !result && !revealed) {
       markRevealed(qid);
+      emit({ type: "reveal" });
       if (quizId && gradable) void ipc.quiz_log_reveal(quizId, qid).catch(() => undefined);
     }
   }, [showAnswer, showSolution, result, revealed, qid, quizId, gradable, markRevealed]);
@@ -39,7 +41,7 @@ export function PracticeAnswer({ quizId, question }: Props) {
   if (!quizId || question.answer_fields.length === 0) return null;
 
   return (
-    <div className="rounded-lg border border-border bg-surface/50 p-4">
+    <div data-ui="answer" className="rounded-lg border border-border bg-surface/50 p-4">
       <div className="mb-3 text-xs font-medium uppercase tracking-wide text-muted">Your answer</div>
       <AnswerPanel
         fields={question.answer_fields}
@@ -57,6 +59,7 @@ export function PracticeAnswer({ quizId, question }: Props) {
         }
         assess={(marks) => ipc.quiz_self_assess(quizId, 0, { marks, question_id: qid })}
         onResult={(r) => setResult(qid, r)}
+        assisted={Boolean(hintedIds[qid]) || revealed}
       />
     </div>
   );

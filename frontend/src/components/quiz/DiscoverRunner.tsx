@@ -9,13 +9,14 @@
  */
 
 import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ipc, type DiscoverResult } from "../../lib/ipc";
 import { useQuizStore } from "../../state/quiz";
 import { useGenerateStore, draftToFilters } from "../../state/generate";
 import { ElapsedTime } from "./ElapsedTime";
 import { PracticeAnswer } from "./PracticeAnswer";
 import { QuestionViewer } from "./QuestionViewer";
+import { MatrixLoader } from "../../appearance/brand/Loader";
 
 const LOADING: Record<string, string> = {
   discover: "Running Determinantal Point Process selection...",
@@ -135,7 +136,7 @@ export function DiscoverRunner() {
   if (loading && questions.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-64 space-y-4">
-        <Loader2 className="animate-spin text-primary" size={32} />
+        <MatrixLoader className="w-28" />
         <div className="text-muted">{LOADING[mode] ?? LOADING.discover}</div>
       </div>
     );

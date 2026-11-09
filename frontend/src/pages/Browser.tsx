@@ -32,6 +32,9 @@ import { Input } from "../components/ui/Input";
 import { Modal } from "../components/ui/Modal";
 import { QuestionSidePanel } from "../components/browser/QuestionSidePanel";
 import { cn } from "../lib/cn";
+import { useDebounced } from "../lib/debounce";
+import { emit } from "../appearance/events";
+import { searchEgg } from "../appearance/eggs/search";
 import {
   ipc,
   type Filters,
@@ -118,6 +121,13 @@ export default function BrowserPage() {
   useEffect(() => {
     refresh();
   }, [refresh]);
+
+  // Easter-egg cards for a few famous queries; the real search still runs.
+  const debouncedQuery = useDebounced(textQuery, 500);
+  const searchCard = useMemo(() => searchEgg(debouncedQuery), [debouncedQuery]);
+  useEffect(() => {
+    if (debouncedQuery.trim()) emit({ type: "search", query: debouncedQuery.trim() });
+  }, [debouncedQuery]);
 
   useEffect(() => {
     ipc.get_topics(null, false).then(setTopics);
@@ -286,6 +296,12 @@ export default function BrowserPage() {
             </div>
           </div>
         </Card>
+
+        {searchCard && (
+          <div className="m-3 mb-0 rounded-lg border border-dashed border-primary/60 bg-primary/5 px-4 py-3 text-sm">
+            <span className="font-semibold">{searchCard.title}</span> <span className="text-muted">{searchCard.body}</span>
+          </div>
+        )}
 
         {/* Mass actions */}
         {selected.size > 0 && (

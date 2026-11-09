@@ -1,0 +1,99 @@
+/* Club logo variants and loaders (src/appearance/brand). Colour slots:
+ * --lg-ink brackets / "CODING", --lg-r1..3 the diagonal reds, --lg-sub the
+ * arguments (z)(x)(n), --lg-zero the zeros and "@iitd-ad", --lg-club "CLUB". */
+
+.amp-logo { display: block; max-width: 100%; height: auto; overflow: visible;
+  --lg-ink: #000; --lg-r1: #ff0000; --lg-r2: #d90000; --lg-r3: #8c0000; --lg-sub: #dfdfdf; --lg-zero: #bfbfbf;
+  --lg-cw: #0a0a0a; --lg-club: #ffd60a; --lg-var: #9a9a9a; --lg-bar: rgba(255, 0, 0, 0.08); }
+.amp-logo .br { fill: var(--lg-ink); }
+.amp-logo .d1 { fill: var(--lg-r1); }
+.amp-logo .d2 { fill: var(--lg-r2); }
+.amp-logo .d3 { fill: var(--lg-r3); }
+.amp-logo .s { fill: var(--lg-sub); }
+.amp-logo .z, .amp-logo .tag { fill: var(--lg-zero); }
+.amp-logo .cw { fill: var(--lg-cw); }
+.amp-logo .cc { fill: var(--lg-club); }
+.amp-logo .rowbar { fill: var(--lg-bar); opacity: 0; }
+.amp-logo .v { fill: var(--lg-var); opacity: 0; }
+
+/* On dark palettes the black ink would vanish. */
+:root[data-dark="true"] .amp-logo.v-original,
+.amp-logo.v-original.on-dark {
+  --lg-ink: #f2f2f2; --lg-r1: #ff4545; --lg-r2: #e83434; --lg-r3: #c22b2b; --lg-sub: #555; --lg-zero: #8a8a8a;
+  --lg-cw: #f2f2f2; --lg-var: #777; --lg-bar: rgba(255, 69, 69, 0.14);
+}
+
+.amp-logo.v-tinted {
+  --lg-r1: var(--primary); --lg-r2: color-mix(in srgb, var(--primary) 78%, #000); --lg-r3: color-mix(in srgb, var(--primary) 52%, #000);
+  --lg-ink: var(--text); --lg-cw: var(--text); --lg-zero: color-mix(in srgb, var(--muted) 75%, var(--surface));
+  --lg-sub: color-mix(in srgb, var(--muted) 35%, var(--surface)); --lg-var: var(--muted);
+  --lg-bar: color-mix(in srgb, var(--primary) 12%, transparent);
+}
+:root[data-dark="true"] .amp-logo.v-tinted {
+  --lg-r2: color-mix(in srgb, var(--primary) 80%, #fff); --lg-r3: color-mix(in srgb, var(--primary) 60%, #fff);
+}
+
+.amp-logo.v-mono { --lg-ink: currentColor; --lg-r1: currentColor; --lg-r2: currentColor; --lg-r3: currentColor;
+  --lg-zero: currentColor; --lg-sub: currentColor; --lg-cw: currentColor; --lg-club: currentColor; --lg-var: currentColor; }
+.amp-logo.v-mono .z, .amp-logo.v-mono .tag { opacity: 0.42; }
+.amp-logo.v-mono .s { opacity: 0.26; }
+.amp-logo.v-mono .cc { opacity: 0.55; }
+
+.amp-logo.v-comic { transform: rotate(-2.5deg); --lg-ink: #1a1a1a; --lg-r1: #ff3b3b; --lg-r2: #e63946; --lg-r3: #c1121f;
+  --lg-zero: #1a1a1a; --lg-sub: #6b6b6b; --lg-cw: #1a1a1a; --lg-club: #ffd23f; --lg-shadow: #1a1a1a; }
+.amp-logo.v-comic .d, .amp-logo.v-comic .cc { stroke: #1a1a1a; stroke-width: 1.5px; paint-order: stroke; stroke-linejoin: round; }
+.amp-logo-inline.v-comic .d { stroke-width: 0.7px; }
+.amp-logo-coding.v-comic .cc { stroke-width: 3px; }
+/* The hard offset shadow: copies of the inked parts drawn underneath. */
+.amp-logo.v-comic .comic-shadow * { fill: var(--lg-shadow); stroke: var(--lg-shadow); }
+.amp-logo.v-comic .comic-shadow .br, .amp-logo.v-comic .comic-shadow .cw { stroke: none; }
+:root[data-dark="true"] .amp-logo.v-comic { --lg-ink: #f2f2f2; --lg-zero: #f2f2f2; --lg-cw: #f2f2f2;
+  --lg-shadow: color-mix(in srgb, var(--primary, #ff3b3b) 55%, #000); }
+
+.amp-logo.v-glossy { --lg-ink: #0d2b40; --lg-zero: #7ea6bd; --lg-sub: #a9c6d6; filter: drop-shadow(0 3px 5px rgba(10, 100, 160, 0.35)); }
+.amp-logo.v-glossy .d1 { fill: url(#amp-gloss1); }
+.amp-logo.v-glossy .d2 { fill: url(#amp-gloss2); }
+.amp-logo.v-glossy .d3 { fill: url(#amp-gloss3); }
+
+.amp-logo.v-chalk { filter: url(#amp-chalk); --lg-ink: #f2efe6; --lg-r1: #ff9a9a; --lg-r2: #ff7676; --lg-r3: #ef5f5f;
+  --lg-zero: #d6d3c9; --lg-sub: #7f8a84; --lg-cw: #f2efe6; --lg-club: #ffe27a; }
+
+.amp-logo.v-neon { filter: url(#amp-neon); --lg-ink: #7df9ff; --lg-r1: #ff2d6f; --lg-r2: #ff3d5a; --lg-r3: #ff6a3d;
+  --lg-zero: #9f8cff; --lg-sub: #4b3d86; --lg-cw: #7df9ff; --lg-club: #ffe600; }
+
+.amp-logo.v-blueprint * { fill: none !important; stroke: var(--text, #eaf2ff); stroke-width: 0.7px; }
+.amp-logo.v-blueprint .z, .amp-logo.v-blueprint .tag { stroke-opacity: 0.7; }
+.amp-logo.v-blueprint .s { stroke-opacity: 0.45; }
+.amp-logo.v-blueprint .rowbar { fill: color-mix(in srgb, var(--text, #fff) 12%, transparent) !important; stroke: none; }
+
+.amp-ascii { margin: 0; font: 0.9rem/1.15 var(--font-mono, ui-monospace, monospace); white-space: pre; color: var(--primary);
+  text-shadow: 0 0 6px color-mix(in srgb, var(--primary) 55%, transparent); }
+.amp-ascii .dim { color: color-mix(in srgb, var(--primary) 55%, var(--background)); text-shadow: none; }
+.amp-ascii .fnt { color: color-mix(in srgb, var(--primary) 35%, var(--background)); text-shadow: none; }
+.amp-ascii .club { color: #ffd60a; text-shadow: 0 0 6px rgba(255, 214, 10, 0.5); }
+
+/* ---------- loaders ---------- */
+.amp-loader { display: inline-block; }
+.amp-loader .amp-logo { width: 100%; }
+.ld-sweep .d, .ld-sweep .s { animation: amp-sweep 1.5s ease-in-out infinite; }
+.ld-sweep .d2, .ld-sweep .s2 { animation-delay: 0.5s; }
+.ld-sweep .d3, .ld-sweep .s3 { animation-delay: 1s; }
+.ld-sweep .z { opacity: 0.55; }
+@keyframes amp-sweep { 0%, 100% { opacity: 0.2; } 18% { opacity: 1; } 46% { opacity: 0.2; } }
+
+/* The φ coin takes the colour of the φ in the theme's logo variant. The theme
+ * rules use :where() so the button rule below always wins. */
+.amp-phi { overflow: visible; flex: none; fill: var(--phi, #8c0000); }
+:where(:root[data-dark="true"]) .amp-phi { --phi: #e83434; }
+.amp-phi:where(.v-tinted, .v-pixel) { --phi: var(--primary); }
+.amp-phi:where(.v-mono, .v-blueprint) { --phi: currentColor; }
+.amp-phi:where(.v-terminal) { --phi: var(--primary); filter: drop-shadow(0 0 3px color-mix(in srgb, var(--primary) 60%, transparent)); }
+.amp-phi:where(.v-neon) { --phi: #ff6a3d; filter: drop-shadow(0 0 2px #ff6a3d) drop-shadow(0 0 5px rgba(255, 45, 111, 0.6)); }
+.amp-phi:where(.v-chalk) { --phi: #ef5f5f; }
+.amp-phi:where(.v-glossy) { --phi: url(#amp-gloss3); }
+.amp-phi:where(.v-comic) { --phi: #c1121f; stroke: #1a1a1a; stroke-width: 1.2px; paint-order: stroke; }
+.amp-phi:where(.v-pixel) path { shape-rendering: crispEdges; }
+/* Inside a button it follows the button's text, so it never clashes with a filled primary. */
+button .amp-phi { --phi: currentColor; stroke: none; filter: none; }
+.amp-phi.spin path { transform-box: fill-box; transform-origin: center; animation: amp-coin 1.3s ease-in-out infinite; }
+@keyframes amp-coin { 0% { transform: scaleX(1); } 25% { transform: scaleX(0); } 50% { transform: scaleX(-1); } 75% { transform: scaleX(0); } 100% { transform: scaleX(1); } }

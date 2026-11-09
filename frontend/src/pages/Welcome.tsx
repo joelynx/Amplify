@@ -13,6 +13,9 @@ import {
   Palette,
 } from "lucide-react";
 
+import { Logo } from "../appearance/brand/Logo";
+import { StudyRoom } from "../appearance/room/StudyRoom";
+import { useAppearance } from "../appearance/store";
 import { Button } from "../components/ui/Button";
 import { TodayCard } from "../components/quiz/TodayCard";
 import { cn } from "../lib/cn";
@@ -34,7 +37,7 @@ const CARDS: readonly NavCard[] = [
   {
     to: "/themes",
     title: "Themes",
-    blurb: "Pick a look — two defaults, seven flavor themes, and three earned by practising. Switching applies live.",
+    blurb: "Presets, a wardrobe of swappable parts, sounds, a study room. Three presets are earned by practising.",
     Icon: Palette,
   },
   {
@@ -52,11 +55,21 @@ const CARDS: readonly NavCard[] = [
 ];
 
 export default function WelcomePage() {
+  const room = useAppearance((s) => s.settings.room);
   return (
     <main className="h-full overflow-y-auto">
+      {room ? (
+        <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 py-6">
+          <StudyRoom />
+          <ClubCredit />
+          <TodayCard />
+        </div>
+      ) : (
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-10 px-6 py-12">
-        <header className="space-y-2 text-center">
-          <h1 className="text-5xl font-semibold tracking-tight">Amplify</h1>
+        <header className="flex flex-col items-center gap-3 text-center">
+          <h1 className="sr-only">Amplify</h1>
+          <Logo name="matrix" style={{ width: 220 }} />
+          <ClubCredit />
           <p className="text-sm text-muted">
             Practice problem sets, generated from a curated bank.
           </p>
@@ -89,6 +102,18 @@ export default function WelcomePage() {
           ))}
         </nav>
       </div>
+      )}
     </main>
+  );
+}
+
+/** Both club marks side by side; links to About. */
+function ClubCredit() {
+  return (
+    <Link to="/about" className="flex items-center gap-2 text-xs text-muted hover:text-text" aria-label="ampliφ × Coding Club: about">
+      <Logo name="inline" style={{ width: 64 }} />
+      <span aria-hidden="true">×</span>
+      <Logo name="coding" style={{ width: 70 }} />
+    </Link>
   );
 }

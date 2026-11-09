@@ -7,6 +7,7 @@
   --background: #050a05;
   --surface: #0a140a;
   --primary: #66ff66;
+  --on-primary: #050a05;
   --secondary: #cfffd1;
   --accent: #ffff00;
   --border: #2a4a2a;
@@ -16,22 +17,6 @@
   --error: #ff6666;
   --font-family: ui-monospace, "Cascadia Mono", "Consolas", "Courier New", monospace;
   --rem: 15px;
-}
-
-/* All borders thin solid, no shadows, no rounding */
-:root[data-theme="ascii"] section[class*="rounded-lg"],
-:root[data-theme="ascii"] button[class*="rounded-md"],
-:root[data-theme="ascii"] input,
-:root[data-theme="ascii"] textarea {
-  border-radius: 0 !important;
-  box-shadow: none !important;
-}
-:root[data-theme="ascii"] section[class*="rounded-lg"] {
-  border: 1px solid var(--border);
-}
-:root[data-theme="ascii"] section[class*="rounded-lg"]::before {
-  content: "[ " attr(data-title) " ]";
-  display: none;
 }
 
 :root[data-theme="ascii"] .amplify-tooltip {

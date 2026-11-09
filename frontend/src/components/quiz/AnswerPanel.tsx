@@ -35,6 +35,7 @@ import {
   splitLetters,
   toggleChoice,
 } from "../../lib/answerKey";
+import { recordAnswer } from "../../appearance/session";
 
 interface Props {
   fields: AnswerField[];
@@ -50,6 +51,8 @@ interface Props {
   /** Narrow layout (PBS cards): labels above the inputs. */
   compact?: boolean;
   autoFocus?: boolean;
+  /** A hint or the answer was opened first (for the session summary and sounds). */
+  assisted?: boolean;
 }
 
 const MARKS: SelfMark[] = ["got_it", "partial", "missed"];
@@ -64,6 +67,7 @@ export function AnswerPanel({
   disabled = false,
   compact = false,
   autoFocus = true,
+  assisted = false,
 }: Props) {
   const [inputs, setInputs] = useState<string[]>(() => fields.map(() => ""));
   const [marks, setMarks] = useState<Partial<Record<number, SelfMark>>>({});
@@ -75,7 +79,7 @@ export function AnswerPanel({
   const phase = result?.pending ? "assess" : result && !result.retry ? "done" : "edit";
   const locked = busy || disabled;
 
-  const run = async (call: () => Promise<QuizAnswerResult>) => {
+  const run = async (call: () => Promise<QuizAnswerResult>, selfAssessed = false) => {
     setBusy(true);
     setError(null);
     try {
@@ -85,6 +89,9 @@ export function AnswerPanel({
       } else {
         setMarks({});
         onResult(r);
+        if (!r.pending && !r.retry) {
+          recordAnswer({ credit: r.credit ?? (r.correct ? 1 : 0), assisted, selfAssessed });
+        }
       }
     } catch (e) {
       setError(e instanceof Error ? e.message : "IPC error");
@@ -100,7 +107,7 @@ export function AnswerPanel({
 
   const record = (picked: Partial<Record<number, SelfMark>>) => {
     const payload = marksPayload(parts, picked);
-    if (payload && !busy) void run(() => assess(payload));
+    if (payload && !busy) void run(() => assess(payload), true);
   };
 
   const setInput = (i: number, value: string) =>

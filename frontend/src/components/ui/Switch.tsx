@@ -14,6 +14,7 @@ export function Switch({ checked, onCheckedChange, disabled, className, ariaLabe
     <button
       type="button"
       role="switch"
+      data-ui="switch"
       aria-checked={checked}
       aria-label={ariaLabel}
       disabled={disabled}

@@ -8,8 +8,10 @@ returns a tail of the XeLaTeX log for the modal to display.
 
 from __future__ import annotations
 
+import hashlib
 import logging
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -114,6 +116,72 @@ def _build_pset_id(subject: str | None, now: datetime) -> str:
     return f"{base}_{now.strftime('%Y%m%d_%H%M%S')}"
 
 
+# Club letterhead (Settings -> PDF Output): the ampliφ and Coding Club logos,
+# vector PDFs printed from the clubs' SVGs, copied next to the question images
+# so \graphicspath finds them.
+_BRAND_DIR = Path(__file__).resolve().parent.parent / "resources" / "brand"
+LETTERHEAD_LOGOS = {"left": ("ampliphi_inline.pdf", "11pt"), "right": ("coding_club.pdf", "8pt")}
+
+
+def letterhead(conn, dest: Path | None = None) -> dict[str, str] | None:
+    """`{"left": tex, "right": tex}` when PDF_CLUB_LETTERHEAD is on, else None."""
+    if not configs_repo.get(conn, "PDF_CLUB_LETTERHEAD", False):
+        return None
+    dest = dest or image_dir()
+    out: dict[str, str] = {}
+    for side, (name, height) in LETTERHEAD_LOGOS.items():
+        src = _BRAND_DIR / name
+        if not src.exists():
+            log.warning("letterhead logo missing: %s", src)
+            continue
+        target = dest / f"amp-club-{name}"
+        if not target.exists() or target.stat().st_size != src.stat().st_size:
+            shutil.copyfile(src, target)
+        out[side] = rf"\includegraphics[height={height}]{{{target.name}}}"
+    return out or None
+
+
+# A picked header image is copied into the TeX image folder under a name made
+# from its content hash; only that name is stored (configs PDF_LEFT_HEADER_IMAGE /
+# PDF_RIGHT_HEADER_IMAGE) and put in the .tex, so no user text reaches LaTeX
+# outside the header sanitizer.
+HEADER_IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".pdf")
+HEADER_IMAGE_HEIGHT = "11pt"
+_HEADER_IMAGE_MAX_BYTES = 5 * 1024 * 1024
+_HEADER_IMAGE_NAME = re.compile(r"amp-header-[0-9a-f]{12}\.(?:png|jpg|pdf)")
+
+
+def import_header_image(src: Path, dest: Path | None = None) -> str:
+    """Copy `src` into the TeX image folder; return the stored name.
+
+    Raises ValueError for an unsupported type or a file over 5 MB."""
+    ext = src.suffix.lower()
+    if ext not in HEADER_IMAGE_EXTS:
+        raise ValueError(f"header images must be PNG, JPEG or PDF, not {ext or 'no extension'}")
+    if src.stat().st_size > _HEADER_IMAGE_MAX_BYTES:
+        raise ValueError("header images must be under 5 MB")
+    data = src.read_bytes()
+    name = f"amp-header-{hashlib.sha256(data).hexdigest()[:12]}{'.jpg' if ext == '.jpeg' else ext}"
+    target = (dest or image_dir()) / name
+    if not target.exists():
+        target.write_bytes(data)
+    return name
+
+
+def header_image(conn, side: str, dest: Path | None = None) -> str | None:
+    """`\\includegraphics` for the header image on `side` ("left"/"right"), if one is set."""
+    name = configs_repo.get(conn, f"PDF_{side.upper()}_HEADER_IMAGE")
+    if not name:
+        return None
+    if not isinstance(name, str) or not _HEADER_IMAGE_NAME.fullmatch(name):
+        log.warning("ignoring malformed %s header image %r", side, name)
+        return None
+    if not ((dest or image_dir()) / name).exists():
+        log.warning("%s header image missing: %s", side, name)
+        return None
+    return rf"\includegraphics[height={HEADER_IMAGE_HEIGHT}]{{{name}}}"
+
+
 def assemble(
     conn,
     questions: list[Question],
@@ -151,10 +219,17 @@ def assemble(
     topic_line = ", ".join(ctx.topic_list)
 
     pre = preamble(image_dir())
+    logos = letterhead(conn) or {}
+    images = {side: header_image(conn, side) for side in ("left", "right")}
+    # Outside in: club logo, the user's image, then the header text.
+    left = r"\quad ".join(x for x in (logos.get("left"), images["left"], left) if x)
+    right = r"\quad ".join(x for x in (right, images["right"], logos.get("right")) if x)
+    tall = bool(logos) or any(images.values())
     fancy = "\n".join(
         [
             r"\pagestyle{fancy}",
             r"\fancyhf{}",
+            *([r"\setlength{\headheight}{15pt}"] if tall else []),
             rf"\fancyhead[L]{{{left}}}",
             rf"\fancyhead[R]{{{right}}}",
             r"\fancyfoot[C]{\thepage}",

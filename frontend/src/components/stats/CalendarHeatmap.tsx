@@ -13,6 +13,9 @@
 import { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
+import { resolve } from "../../appearance/registry";
+import { useAppearance } from "../../appearance/store";
+
 interface Props {
   /** {YYYY-MM-DD: count}. Days not in the map default to 0. */
   data: Record<string, number>;
@@ -54,6 +57,8 @@ const DAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 export function CalendarHeatmap({ data, year, month = 0, mode = "year" }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
+  // Redraw when the chart skin changes (cell shapes are drawn here, not in CSS).
+  const skin = useAppearance((st) => st.loadout.charts);
 
   useEffect(() => {
     const svgEl = svgRef.current;
@@ -70,11 +75,11 @@ export function CalendarHeatmap({ data, year, month = 0, mode = "year" }: Props)
     } else {
       renderMonth(svg, tooltip, data, year, month, max);
     }
-  }, [data, year, month, mode]);
+  }, [data, year, month, mode, skin]);
 
   return (
     <>
-      <svg ref={svgRef} className="w-full" />
+      <svg ref={svgRef} data-ui="chart" className="w-full" />
       <div
         ref={tooltipRef}
         className="amplify-tooltip fixed"
@@ -101,6 +106,69 @@ function opacityFor(v: number, max: number): number {
   // Scale 25% → 100% so even 1× cells are visibly distinct from empty,
   // and the max cell is fully saturated.
   return 0.25 + 0.75 * (v / max);
+}
+
+/* ---- chart skin (appearance "charts" slot): cell shape and colour ---- */
+
+function cellSkin(): { cell: string; green: boolean } {
+  const d = resolve(useAppearance.getState().loadout, "charts")?.data;
+  return { cell: String(d?.cell ?? "square"), green: Boolean(d?.green) };
+}
+
+function starPath(size: number): string {
+  const c = size / 2;
+  const pts: string[] = [];
+  for (let i = 0; i < 10; i++) {
+    const r = i % 2 === 0 ? size * 0.5 : size * 0.21;
+    const a = -Math.PI / 2 + (i * Math.PI) / 5;
+    pts.push(`${(c + r * Math.cos(a)).toFixed(2)},${(c + r * Math.sin(a)).toFixed(2)}`);
+  }
+  return `M${pts.join("L")}Z`;
+}
+
+function flowerPath(size: number): string {
+  const c = size / 2;
+  const r = size * 0.2;
+  let d = "";
+  for (let i = 0; i < 5; i++) {
+    const a = -Math.PI / 2 + (i * 2 * Math.PI) / 5;
+    const x = c + size * 0.24 * Math.cos(a);
+    const y = c + size * 0.24 * Math.sin(a);
+    d += `M${x - r},${y}a${r},${r} 0 1,0 ${2 * r},0a${r},${r} 0 1,0 ${-2 * r},0`;
+  }
+  return d + `M${c - r * 0.8},${c}a${r * 0.8},${r * 0.8} 0 1,0 ${r * 1.6},0a${r * 0.8},${r * 0.8} 0 1,0 ${-r * 1.6},0`;
+}
+
+/**
+ * Restyle day cells for the active chart skin. Stars and flowers are drawn
+ * in a layer under the (now transparent) rects, which stay as hover targets.
+ */
+function applyCellSkin(
+  rect: d3.Selection<SVGRectElement, Date, SVGGElement, unknown>,
+  size: number,
+  value: (d: Date) => number,
+  max: number,
+) {
+  const { cell, green } = cellSkin();
+  if (green) rect.attr("fill", (d) => (value(d) > 0 ? "#2ea043" : "var(--surface)"));
+  if (cell === "round") rect.attr("rx", size / 2);
+  if (cell === "pixel") rect.attr("rx", 0);
+  if (cell !== "star" && cell !== "flower") return;
+  const shape = cell === "star" ? starPath(size) : flowerPath(size);
+  const fill = cell === "star" ? "var(--accent)" : "var(--primary)";
+  rect.each(function (d) {
+    const r = d3.select(this);
+    const parent = d3.select(this.parentNode as SVGGElement);
+    const v = value(d);
+    parent
+      .insert("path", () => this)
+      .attr("d", v > 0 ? shape : `M${size / 2 - 1},${size / 2}a1,1 0 1,0 2,0a1,1 0 1,0 -2,0`)
+      .attr("transform", `translate(${r.attr("x") ?? 0}, ${r.attr("y") ?? 0})`)
+      .attr("fill", v > 0 ? fill : "var(--muted)")
+      .attr("opacity", v > 0 ? opacityFor(v, max) : 0.5)
+      .attr("pointer-events", "none");
+  });
+  rect.attr("fill", "transparent").attr("opacity", 1).attr("stroke-opacity", 0);
 }
 
 function attachHover(
@@ -170,6 +238,7 @@ function renderYear(svg: Sel, tooltip: TipSel, data: Record<string, number>, yea
     .attr("opacity", (d) => opacityFor(data[isoDate(d)] ?? 0, max))
     .attr("stroke", "var(--border)")
     .attr("stroke-width", 0.5);
+  applyCellSkin(rect, cell, (d) => data[isoDate(d)] ?? 0, max);
   attachHover(rect, tooltip, data);
 
   const monthStarts = d3.timeMonths(new Date(year, 0, 1), new Date(year + 1, 0, 1));
@@ -245,6 +314,7 @@ function renderMonth(
     .attr("opacity", (d) => opacityFor(data[isoDate(d)] ?? 0, max))
     .attr("stroke", "var(--border)")
     .attr("stroke-width", 0.5);
+  applyCellSkin(rect, cell, (d) => data[isoDate(d)] ?? 0, max);
   attachHover(rect, tooltip, data);
 
   // Day-of-month number. Filled cells get a high-contrast label; empty cells

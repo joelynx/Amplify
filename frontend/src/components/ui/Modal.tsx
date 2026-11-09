@@ -40,13 +40,14 @@ export function Modal({ open, onClose, title, children, footer, className, tone 
     <div className="fixed inset-0 z-50 flex items-center justify-center" role="dialog" aria-modal="true">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
       <div
+        data-ui="dialog"
         className={cn(
           "relative z-10 mx-4 w-full max-w-lg rounded-lg border border-border border-l-4 bg-background p-6 shadow-xl",
           accent,
           className,
         )}
       >
-        <header className="mb-3 flex items-center justify-between gap-2">
+        <header data-ui="dialog-header" className="mb-3 flex items-center justify-between gap-2">
           <h2 className="text-lg font-semibold">{title}</h2>
           <button
             type="button"

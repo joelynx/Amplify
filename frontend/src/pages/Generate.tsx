@@ -43,6 +43,7 @@ import {
   templateToLeaves,
   useGenerateStore,
 } from "../state/generate";
+import { emit } from "../appearance/events";
 
 export default function GeneratePage() {
   const draft = useGenerateStore();
@@ -269,8 +270,10 @@ export default function GeneratePage() {
     try {
       const result = await ipc.generate_pdf(draftToFilters(draft), draftToOutputSettings(draft));
       setGenerateResult(result);
+      emit({ type: result.success ? "generate_done" : "generate_error" });
     } catch (e) {
       setGenerateResult({ success: false, errors: e instanceof Error ? e.message : String(e) });
+      emit({ type: "generate_error" });
     } finally {
       setBusy("idle");
     }

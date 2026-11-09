@@ -20,7 +20,12 @@ import { LecturePanel } from "../components/quiz/LecturePanel";
 import { TechniquePanel } from "../components/quiz/TechniquePanel";
 
 import { ipc, type ConceptTree, type ReviewList, type TemplatePayload } from "../lib/ipc";
-import { Map, Zap, Loader2, RotateCcw, NotebookPen, Shuffle } from "lucide-react";
+import { Map, Zap, RotateCcw, NotebookPen, Shuffle } from "lucide-react";
+import { createPortal } from "react-dom";
+import { Spinner } from "../appearance/brand/Loader";
+import type { SessionSummary } from "../appearance/events";
+import { ResultsScreen } from "../appearance/results/ResultsScreen";
+import { endSession, startSession } from "../appearance/session";
 
 const MODES: { id: QuizMode; title: string; blurb: string; Icon: typeof Map }[] = [
   { id: "review", title: "Review", blurb: "Questions due again, past mistakes, and ones you solved with help.", Icon: RotateCcw },
@@ -56,6 +61,18 @@ export default function QuizPage() {
     setConcepts,
     setReviewKind,
   } = useQuizStore();
+
+  // Session events for sounds and the session-end screen.
+  const [sessionSummary, setSessionSummary] = useState<SessionSummary | null>(null);
+  useEffect(() => {
+    if (isStarted) startSession(mode);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isStarted]);
+  const endQuizSession = () => {
+    const summary = endSession();
+    if (summary) setSessionSummary(summary);
+    else resetQuizState();
+  };
 
   const chooseMode = (m: QuizMode) => {
     if (m !== mode) setConcepts([]);
@@ -235,17 +252,33 @@ export default function QuizPage() {
 
   if (isStarted) {
     return (
-      <main className="h-full overflow-y-auto bg-background px-6 pt-6 pb-20">
+      <main data-ui="arena" className="h-full overflow-y-auto bg-background px-6 pt-6 pb-20">
         <div className="max-w-4xl mx-auto mb-6 flex items-center justify-between">
           <h1 className="text-2xl font-semibold text-text">{TITLES[mode]}</h1>
           <button
-            onClick={() => resetQuizState()}
+            onClick={endQuizSession}
             className="text-sm font-medium text-muted hover:text-text transition-colors"
           >
             End Session
           </button>
         </div>
         {mode === "traverse" ? <TraverseRunner /> : <DiscoverRunner />}
+        {sessionSummary &&
+          createPortal(
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
+              <div className="absolute inset-0 bg-black/40" />
+              <div className="relative z-10 w-full max-w-lg">
+                <ResultsScreen
+                  summary={sessionSummary}
+                  onClose={() => {
+                    setSessionSummary(null);
+                    resetQuizState();
+                  }}
+                />
+              </div>
+            </div>,
+            document.body,
+          )}
       </main>
     );
   }
@@ -421,7 +454,7 @@ export default function QuizPage() {
                         placeholder="e.g. 1234"
                         className="w-32 rounded-md border border-border bg-background px-3 py-1.5 text-sm outline-none focus:border-primary"
                       />
-                      {seedValidating && <Loader2 className="w-4 h-4 animate-spin text-muted" />}
+                      {seedValidating && <Spinner className="w-4 h-4 text-muted" />}
                       {!seedValidating && seedValidation && (
                         <span className={`text-sm ${seedValidation.valid ? "text-success" : "text-error"}`}>
                           {seedValidation.valid ? "Valid" : seedValidation.reason}

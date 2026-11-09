@@ -6,6 +6,7 @@
   --background: #0d1b2a;
   --surface: #1b3a57;
   --primary: #ffd166;
+  --on-primary: #0d1b2a;
   --secondary: #06d6a0;
   --accent: #ef476f;
   --border: #ffd166;
@@ -15,18 +16,6 @@
   --error: #ef476f;
   --font-family: ui-monospace, "Cascadia Mono", "Courier New", monospace;
   --rem: 14px;
-}
-
-/* Chunky pixel borders via dual box-shadow (no anti-aliasing).
- * Buttons / cards lose rounded corners. */
-:root[data-theme="pixel-art"] section[class*="rounded-lg"],
-:root[data-theme="pixel-art"] button[class*="rounded-md"],
-:root[data-theme="pixel-art"] [class*="rounded-md"]:not(input):not(textarea) {
-  border-radius: 0 !important;
-}
-:root[data-theme="pixel-art"] section[class*="rounded-lg"] {
-  border: 2px solid var(--border);
-  box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.4);
 }
 
 :root[data-theme="pixel-art"] .amplify-tooltip {

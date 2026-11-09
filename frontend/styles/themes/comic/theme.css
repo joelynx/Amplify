@@ -17,19 +17,6 @@
   --rem: 16px;
 }
 
-/* Heavy ink-pen borders on cards and buttons */
-:root[data-theme="comic"] section[class*="rounded-lg"] {
-  border: 3px solid var(--border);
-  border-radius: 16px;
-  box-shadow: 6px 6px 0 0 var(--border);
-}
-:root[data-theme="comic"] button[class*="rounded-md"] {
-  border: 2px solid var(--border);
-  border-radius: 999px;
-  box-shadow: 3px 3px 0 0 var(--border);
-  font-weight: 700;
-}
-
 /* Speech-bubble tooltip with a tail at the bottom-left. */
 :root[data-theme="comic"] .amplify-tooltip {
   background: var(--surface);
@@ -41,6 +28,7 @@
   font-family: var(--font-family);
   font-weight: 600;
 }
+
 :root[data-theme="comic"] .amplify-tooltip::after {
   content: "";
   position: absolute;

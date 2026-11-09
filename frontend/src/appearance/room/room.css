@@ -1,0 +1,47 @@
+/* Study room (src/appearance/room). Hotspot affordances, the hover/focus
+ * callout, and decorative motion, which only runs under .rm-motion (set when
+ * effectsLevel() > 0) and pauses under .rm-paused (document hidden). */
+
+.amp-room-svg { display: block; width: 100%; height: auto; overflow: hidden; user-select: none; -webkit-user-select: none;
+  font-family: var(--font-family, system-ui, sans-serif); }
+.amp-room-svg text { font-family: inherit; }
+.amp-room-svg .rm-deco,
+.amp-room-svg .rm-ambient,
+.amp-room-svg .rm-callout { pointer-events: none; }
+
+.amp-room-svg .rm-hs { cursor: pointer; outline: none; }
+.amp-room-svg .rm-hit { fill: transparent; pointer-events: all; }
+.amp-room-svg .rm-art { transition: filter 160ms ease; }
+.amp-room-svg .rm-hs:hover > .rm-art,
+.amp-room-svg .rm-hs:focus-visible > .rm-art { filter: brightness(1.08) saturate(1.06); }
+
+.amp-room-svg .rm-ring { fill: none; stroke: var(--primary); stroke-width: 2; stroke-dasharray: 6 4; opacity: 0.8; }
+.amp-room-svg .rm-ring-focus { stroke-width: 3.5; stroke-dasharray: none; opacity: 1; }
+.amp-room-svg .rm-ring-halo { fill: none; stroke: var(--background); stroke-width: 8; opacity: 0.9; }
+.amp-room-svg .rm-tip-bg { fill: var(--text); opacity: 0.92; }
+.amp-room-svg .rm-tip-text { fill: var(--background); font-size: 12px; font-weight: 600; }
+
+.amp-room-svg .rm-steam { opacity: 0.3; }
+
+.rm-motion .rm-glow { animation: rm-breathe 5s ease-in-out infinite; }
+.rm-motion .rm-sway { transform-box: fill-box; transform-origin: 50% 100%; animation: rm-sway 7s ease-in-out infinite; }
+.rm-motion .rm-twinkle { animation: rm-twinkle 3.2s ease-in-out infinite; }
+.rm-motion .rm-steam { animation: rm-steam 4s ease-in-out infinite; }
+.rm-motion .rm-drift { animation: rm-drift 45s ease-in-out infinite alternate; }
+.rm-motion .rm-fall { animation-name: rm-fall; animation-timing-function: linear; animation-iteration-count: infinite; }
+.rm-paused * { animation-play-state: paused !important; }
+
+@keyframes rm-breathe { 0%, 100% { opacity: 0.78; } 50% { opacity: 1; } }
+@keyframes rm-sway { 0%, 100% { transform: rotate(-1.6deg); } 50% { transform: rotate(1.6deg); } }
+@keyframes rm-twinkle { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@keyframes rm-steam {
+  0% { opacity: 0; transform: translateY(4px); }
+  35% { opacity: 0.55; }
+  100% { opacity: 0; transform: translateY(-14px); }
+}
+@keyframes rm-drift { from { transform: translateX(-18px); } to { transform: translateX(18px); } }
+@keyframes rm-fall { from { transform: translate(0, 0); } to { transform: translate(var(--dx, 8px), var(--fall, 200px)); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .amp-room-svg .rm-art { transition: none; }
+}

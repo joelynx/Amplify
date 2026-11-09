@@ -7,6 +7,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, ...props }, ref) => (
     <input
       ref={ref}
+      data-ui="input"
       className={cn(
         "h-9 w-full rounded-md border border-border bg-background px-3 text-sm outline-none",
         "focus-visible:ring-2 focus-visible:ring-primary",

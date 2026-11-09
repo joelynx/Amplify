@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { ChevronRight, Loader2 } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { ipc } from "../../lib/ipc";
 import { useQuizStore } from "../../state/quiz";
 import { useGenerateStore, draftToFilters } from "../../state/generate";
 import { ElapsedTime } from "./ElapsedTime";
 import { PracticeAnswer } from "./PracticeAnswer";
 import { QuestionViewer } from "./QuestionViewer";
+import { MatrixLoader, Spinner } from "../../appearance/brand/Loader";
 
 export function TraverseRunner() {
   const {
@@ -123,7 +124,7 @@ export function TraverseRunner() {
   if (loading && questions.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-64 space-y-4">
-        <Loader2 className="animate-spin text-primary" size={32} />
+        <MatrixLoader className="w-28" />
         <div className="text-muted">Initializing Traverse mode...</div>
       </div>
     );
@@ -187,7 +188,7 @@ export function TraverseRunner() {
             disabled={loading || remaining === 0}
             className="flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? <Loader2 size={20} className="animate-spin" /> : <ChevronRight size={20} />}
+            {loading ? <Spinner className="h-5 w-5" /> : <ChevronRight size={20} />}
             {remaining === 0 ? "Pool Exhausted" : "Next Question"}
           </button>
         </div>

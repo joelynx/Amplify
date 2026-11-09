@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import { emit } from "../../appearance/events";
+import { ThemedIcon } from "../../appearance/icons/ThemedIcon";
 import { Eye, EyeOff } from "lucide-react";
 import type { QuizQuestionFull } from "../../lib/ipc";
 import { LatexContent } from "../browser/LatexContent";
@@ -40,11 +42,14 @@ export function QuestionViewer({ question, children, hideLabels = false }: Quest
             }`}
             onClick={() => {
               // A hint opened before answering makes the answer "assisted".
-              if (!showHint && !answered) markHinted(question.question_id);
+              if (!showHint && !answered) {
+                markHinted(question.question_id);
+                emit({ type: "hint" });
+              }
               setShowHint(!showHint);
             }}
           >
-            {showHint ? <EyeOff size={16} /> : <Eye size={16} />}
+            {showHint ? <EyeOff size={16} /> : <ThemedIcon name="hint" className="h-4 w-4" />}
             {showHint ? "Hide Hint" : "Show Hint"}
           </button>
         )}
@@ -56,7 +61,7 @@ export function QuestionViewer({ question, children, hideLabels = false }: Quest
             }`}
             onClick={() => setShowAnswer(!showAnswer)}
           >
-            {showAnswer ? <EyeOff size={16} /> : <Eye size={16} />}
+            {showAnswer ? <EyeOff size={16} /> : <ThemedIcon name="reveal" className="h-4 w-4" />}
             {showAnswer ? "Hide Answer" : "Show Answer"}
           </button>
         )}
@@ -126,7 +131,7 @@ export function QuestionViewer({ question, children, hideLabels = false }: Quest
         </div>
       )}
 
-      <div className="prose dark:prose-invert max-w-none">
+      <div data-ui="question" className="prose dark:prose-invert max-w-none">
         <LatexContent source={question.latexcode} />
       </div>
 

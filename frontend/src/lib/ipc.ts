@@ -643,6 +643,7 @@ interface PyWebViewApi {
   restart_app: () => Promise<void>;
   pick_csv_file: () => Promise<string | null>;
   pick_image_file: () => Promise<string | null>;
+  import_header_image: (path: string) => Promise<string>;
   validate_header_text: (text: string, level: "basic" | "extended") => Promise<string | null>;
   generate_pdf: (filters: Filters, output_settings: OutputSettings) => Promise<GenerateResult>;
   export_tex: (filters: Filters, output_settings: OutputSettings) => Promise<ExportResult>;
@@ -1240,6 +1241,10 @@ export const ipc = {
   async pick_image_file(): Promise<string | null> {
     const api = await bridge();
     return api.pick_image_file();
+  },
+  async import_header_image(path: string): Promise<string> {
+    const api = await bridge();
+    return api.import_header_image(path);
   },
   async validate_header_text(text: string, level: "basic" | "extended"): Promise<string | null> {
     const api = await bridge();

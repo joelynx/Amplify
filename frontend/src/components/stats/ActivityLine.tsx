@@ -149,7 +149,7 @@ export function ActivityLine({ data, height = 220 }: Props) {
 
   return (
     <>
-      <svg ref={svgRef} className="w-full" style={{ height }} />
+      <svg ref={svgRef} data-ui="chart" className="w-full" style={{ height }} />
       <div
         ref={tooltipRef}
         className="amplify-tooltip fixed"
