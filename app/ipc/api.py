@@ -25,7 +25,7 @@ from typing import Any
 
 import webview
 
-from app.core import concepts, learning
+from app.core import concepts, learning, retrieval
 from app.core.answer_key import parts_for, public_fields
 from app.core.difficulty import (
     DEFAULT_WEIGHTS,
@@ -848,10 +848,12 @@ class Api:
         concept at a time and interleaved. LECTURE keeps the form's reuse flag;
         MIXED (techniques already studied) always allows reused questions.
         `concept_labels` maps each question to the concept it was picked for;
-        the mixed runner keeps it hidden until the question is answered."""
+        the mixed runner keeps it hidden until the question is answered.
+        LECTURE orders each concept's questions by meaning when the concept has
+        a query vector (retrieval.lecture_fetch); MIXED keeps the diverse pick."""
         template = "MIXED" if str(template).upper() == "MIXED" else "LECTURE"
         chosen = [
-            {"kind": c["kind"], "label": c["label"]}
+            {"kind": c["kind"], "label": c["label"], "path": c.get("path") or ""}
             for c in (concept_list or [])
             if isinstance(c, dict) and c.get("kind") in concepts.KINDS and c.get("label")
         ]
@@ -874,6 +876,8 @@ class Api:
                 return []
             return [q.question_id for q in sel.questions]
 
+        if template == "LECTURE":
+            fetch = retrieval.lecture_fetch(self._conn, base, s, fetch)
         pairs = concepts.allocate(chosen, int(n), fetch)
         if not pairs:
             return {"success": False, "error": "No questions match these concepts with the current filters."}

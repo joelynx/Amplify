@@ -121,6 +121,31 @@ def get_candidate_pool_ids(
     return [int(r[0]) for r in conn.execute(sql, [*params, int(limit)])]
 
 
+def matching_ids(
+    conn: sqlite3.Connection,
+    filters: dict[str, Any] | None,
+    subject: Subject | None = None,
+) -> list[int]:
+    """Every filter-matching question ID, by ID."""
+    payload = subject.to_payload() if subject else None
+    where, params = assemble_where(filters, payload)
+    sql = f"SELECT question_id FROM questions WHERE {where} ORDER BY question_id"
+    return [int(r[0]) for r in conn.execute(sql, params)]
+
+
+def fresh_ids(conn: sqlite3.Connection, question_ids: list[int]) -> set[int]:
+    """The IDs never used in a problem set or an interactive session."""
+    if not question_ids:
+        return set()
+    placeholders = ",".join(["?"] * len(question_ids))
+    rows = conn.execute(
+        f"SELECT question_id FROM questions WHERE question_id IN ({placeholders}) "
+        f"AND times_used = 0 AND interactive_times_used = 0",
+        question_ids,
+    )
+    return {int(r[0]) for r in rows}
+
+
 def fetch_by_ids(
     conn: sqlite3.Connection,
     question_ids: list[int],

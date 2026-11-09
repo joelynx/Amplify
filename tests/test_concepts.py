@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import sqlite3
 
 import pytest
@@ -24,11 +25,36 @@ def test_token_matching() -> None:
     assert c.phrase_score(c.tokens("eigenvalues"), c.tokens("Eigenvectors")) == 0.0
     # Filler words drop out on both sides.
     assert c.phrase_score(c.tokens("number theory"), c.tokens("Elementary Number Theory")) == 1.0
+    # Short words meet their plurals, and nothing else.
+    assert c.phrase_score(c.tokens("Lenz's law"), c.tokens("Faraday's and Lenz's Laws")) == pytest.approx(0.8)
+    assert c.phrase_score(c.tokens("gas"), c.tokens("Gases")) == 0.0
+    assert c.phrase_score(c.tokens("map"), c.tokens("Mass")) == 0.0
+    # Accents fold, so plain typing reaches accented names.
+    assert c.phrase_score(c.tokens("Mobius transformations"), c.tokens("Möbius Transformations")) == 1.0
+    assert c.tokens("Itô's Formula") == c.tokens("Ito's formula")
 
 
 def test_split_terms() -> None:
     assert c.split_terms("eigenvalues, diagonalisation;\nrepeated roots, Eigenvalues") == [
         "eigenvalues", "diagonalisation", "repeated roots"]
+    # Slashes split words, not notation.
+    assert c.split_terms("pdf/cdf, M/M/1 queues, mean / variance") == ["pdf", "cdf", "M/M/1 queues", "mean", "variance"]
+
+
+def test_whole_term_aliases(conn: sqlite3.Connection, tmp_path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """A "=" key applies to the whole term only, never to one word of a longer term."""
+    path = tmp_path / "aliases.json"
+    path.write_text(json.dumps({"=power": ["Basic Counting"], "svd": "singular value decomposition"}), encoding="utf-8")
+    monkeypatch.setattr(c, "_ALIASES_PATH", path)
+    c._alias_table.cache_clear()
+    try:
+        _vocab_db(conn)
+        vocab = c.vocabulary(conn, None)
+        assert c.match_term("power", vocab)[0]["label"] == "Basic Counting"
+        assert all(m["via_alias"] != "Basic Counting" for m in c.match_term("power counting", vocab))
+        assert c.match_term("truncated svd", vocab)[0]["label"] == "Singular Value Decomposition"
+    finally:
+        c._alias_table.cache_clear()
 
 
 def _vocab_db(conn: sqlite3.Connection) -> None:
@@ -63,6 +89,19 @@ def test_match_text_aliases_and_preselection(conn: sqlite3.Connection) -> None:
     markov = out["markov chains"]
     assert len([m for m in markov if m["score"] == markov[0]["score"]]) >= 3
     assert not any(m["selected"] for m in markov)
+
+
+def test_every_matching_tag_is_listed(conn: sqlite3.Connection) -> None:
+    """Tags have keys of their own: a term naming several tags lists each one."""
+    _vocab_db(conn)
+    qid = conn.execute("SELECT MIN(question_id) FROM questions").fetchone()[0]
+    for tag in ("Conservation of Energy", "Conservation of Mass"):
+        conn.execute("INSERT INTO question_tags (question_id, tag, role) VALUES (?, ?, 'key')", (qid, tag))
+    conn.commit()
+    vocab = c.vocabulary(conn, None)
+    assert len({x.key() for x in vocab}) == len(vocab)
+    labels = {m["label"] for m in c.match_term("conservation", vocab) if m["kind"] == "tag"}
+    assert labels == {"Conservation of Energy", "Conservation of Mass"}
 
 
 def test_concept_filters() -> None:

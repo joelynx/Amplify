@@ -53,7 +53,8 @@
     "l'hopital's rule"
   ],
   "lhopital": [
-    "l'hopital's rule"
+    "l'hopital's rule",
+    "Limits (Single Variable)"
   ],
   "multivariable": [
     "multivariable calculus",
@@ -65,7 +66,9 @@
   ],
   "epsilon delta": [
     "limits",
-    "continuity"
+    "continuity",
+    "Limits (Single Variable)",
+    "Continuity (Single Variable)"
   ],
   "svd": [
     "singular value decomposition"
@@ -106,7 +109,9 @@
     "rank-nullity theorem"
   ],
   "least squares": [
-    "least squares approximation"
+    "least squares approximation",
+    "Simple Linear Regression",
+    "General Linear Model"
   ],
   "pd matrices": [
     "positive definite matrices"
@@ -286,7 +291,9 @@
   ],
   "fbd": [
     "equilibrium of forces and moments",
-    "free body diagrams"
+    "free body diagrams",
+    "Newton's Laws and Connected Bodies",
+    "Equilibrium of Rigid Bodies"
   ],
   "shm": [
     "simple harmonic motion"
@@ -402,6 +409,2292 @@
     "partial fractions"
   ],
   "repeated roots": [
-    "multiple roots"
+    "multiple roots",
+    "Diagonalizability",
+    "Homogeneous Constant-Coefficient Equations"
+  ],
+  "_added_2026_11_09": "Added from the terms of the retrieval evaluation that matched nothing (app/tools/retrieval_eval_inputs.json); expansions are exact concept names. A key starting with '=' applies only to a whole term.",
+  "interarrival times": [
+    "Homogeneous Poisson Process"
+  ],
+  "inter-arrival times": [
+    "Homogeneous Poisson Process"
+  ],
+  "interarrival": [
+    "Homogeneous Poisson Process"
+  ],
+  "inter-arrival": [
+    "Homogeneous Poisson Process"
+  ],
+  "interarrival time distribution": [
+    "Homogeneous Poisson Process"
+  ],
+  "ito's lemma": [
+    "Itô's Formula"
+  ],
+  "itô's lemma": [
+    "Itô's Formula"
+  ],
+  "itos lemma": [
+    "Itô's Formula"
+  ],
+  "ito lemma": [
+    "Itô's Formula"
+  ],
+  "ito's formula": [
+    "Itô's Formula"
+  ],
+  "itô's formula": [
+    "Itô's Formula"
+  ],
+  "ito formula": [
+    "Itô's Formula"
+  ],
+  "ito's rule": [
+    "Itô's Formula"
+  ],
+  "ito-doeblin formula": [
+    "Itô's Formula"
+  ],
+  "quadratic variation": [
+    "Brownian Motion",
+    "Itô Integral"
+  ],
+  "quadratic covariation": [
+    "Brownian Motion",
+    "Itô Integral"
+  ],
+  "quadratic variation of brownian motion": [
+    "Brownian Motion",
+    "Itô Integral"
+  ],
+  "bracket process": [
+    "Brownian Motion",
+    "Itô Integral"
+  ],
+  "ornstein-uhlenbeck process": [
+    "Stochastic Differential Equations",
+    "Diffusion Processes"
+  ],
+  "ornstein-uhlenbeck": [
+    "Stochastic Differential Equations",
+    "Diffusion Processes"
+  ],
+  "ornstein uhlenbeck": [
+    "Stochastic Differential Equations",
+    "Diffusion Processes"
+  ],
+  "ou process": [
+    "Stochastic Differential Equations",
+    "Diffusion Processes"
+  ],
+  "o-u process": [
+    "Stochastic Differential Equations",
+    "Diffusion Processes"
+  ],
+  "m/m/1 queues": [
+    "Single-Server Markovian Queues"
+  ],
+  "m/m/1": [
+    "Single-Server Markovian Queues"
+  ],
+  "mm1": [
+    "Single-Server Markovian Queues"
+  ],
+  "mm1 queue": [
+    "Single-Server Markovian Queues"
+  ],
+  "m m 1 queue": [
+    "Single-Server Markovian Queues"
+  ],
+  "single-server queue": [
+    "Single-Server Markovian Queues"
+  ],
+  "single server markovian queue": [
+    "Single-Server Markovian Queues"
+  ],
+  "little's law": [
+    "Queueing Theory"
+  ],
+  "littles law": [
+    "Queueing Theory"
+  ],
+  "little law": [
+    "Queueing Theory"
+  ],
+  "little's formula": [
+    "Queueing Theory"
+  ],
+  "little's theorem": [
+    "Queueing Theory"
+  ],
+  "repeated eigenvalues": [
+    "Diagonalizability",
+    "Homogeneous Constant-Coefficient Equations"
+  ],
+  "multiple roots": [
+    "Diagonalizability",
+    "Homogeneous Constant-Coefficient Equations"
+  ],
+  "double roots": [
+    "Diagonalizability",
+    "Homogeneous Constant-Coefficient Equations"
+  ],
+  "repeated characteristic roots": [
+    "Diagonalizability",
+    "Homogeneous Constant-Coefficient Equations"
+  ],
+  "repeated root case": [
+    "Diagonalizability",
+    "Homogeneous Constant-Coefficient Equations"
+  ],
+  "stability of equilibrium points": [
+    "Stability and Qualitative Theory"
+  ],
+  "stability of equilibria": [
+    "Stability and Qualitative Theory"
+  ],
+  "equilibrium points": [
+    "Stability and Qualitative Theory"
+  ],
+  "stability of critical points": [
+    "Stability and Qualitative Theory"
+  ],
+  "stability of fixed points": [
+    "Stability and Qualitative Theory"
+  ],
+  "classification of equilibrium points": [
+    "Stability and Qualitative Theory"
+  ],
+  "linear stability analysis": [
+    "Stability and Qualitative Theory"
+  ],
+  "stable and unstable equilibria": [
+    "Stability and Qualitative Theory"
+  ],
+  "eigen values and eigen vectors of 3x3 matrices": [
+    "Eigenvalues and Eigenvectors"
+  ],
+  "eigen values and eigen vectors": [
+    "Eigenvalues and Eigenvectors"
+  ],
+  "eigen values": [
+    "Eigenvalues and Eigenvectors"
+  ],
+  "eigen vectors": [
+    "Eigenvalues and Eigenvectors"
+  ],
+  "eigenvalues of 3x3 matrices": [
+    "Eigenvalues and Eigenvectors"
+  ],
+  "eigenvalues and eigenvectors of 3x3 matrices": [
+    "Eigenvalues and Eigenvectors"
+  ],
+  "3x3 eigenvalues": [
+    "Eigenvalues and Eigenvectors"
+  ],
+  "mobius inversion": [
+    "Multiplicative Functions and Möbius Inversion"
+  ],
+  "möbius inversion": [
+    "Multiplicative Functions and Möbius Inversion"
+  ],
+  "moebius inversion": [
+    "Multiplicative Functions and Möbius Inversion"
+  ],
+  "mobius inversion formula": [
+    "Multiplicative Functions and Möbius Inversion"
+  ],
+  "mobius function": [
+    "Multiplicative Functions and Möbius Inversion"
+  ],
+  "möbius function": [
+    "Multiplicative Functions and Möbius Inversion"
+  ],
+  "moebius function": [
+    "Multiplicative Functions and Möbius Inversion"
+  ],
+  "l'hopital's rule": [
+    "Limits (Single Variable)"
+  ],
+  "l'hôpital's rule": [
+    "Limits (Single Variable)"
+  ],
+  "l'hospital's rule": [
+    "Limits (Single Variable)"
+  ],
+  "lhospital": [
+    "Limits (Single Variable)"
+  ],
+  "l hopital rule": [
+    "Limits (Single Variable)"
+  ],
+  "l hospital rule": [
+    "Limits (Single Variable)"
+  ],
+  "lhopitals rule": [
+    "Limits (Single Variable)"
+  ],
+  "l'hopital": [
+    "Limits (Single Variable)"
+  ],
+  "l'hospital": [
+    "Limits (Single Variable)"
+  ],
+  "ratio test": [
+    "Convergence (Series)"
+  ],
+  "d'alembert's ratio test": [
+    "Convergence (Series)"
+  ],
+  "d'alembert ratio test": [
+    "Convergence (Series)"
+  ],
+  "dalembert ratio test": [
+    "Convergence (Series)"
+  ],
+  "d'alembert's test": [
+    "Convergence (Series)"
+  ],
+  "comparison test": [
+    "Convergence (Series)",
+    "Convergence of Improper Integrals"
+  ],
+  "limit comparison test": [
+    "Convergence (Series)",
+    "Convergence of Improper Integrals"
+  ],
+  "direct comparison test": [
+    "Convergence (Series)",
+    "Convergence of Improper Integrals"
+  ],
+  "weierstrass m-test": [
+    "Uniform Convergence"
+  ],
+  "weierstrass m test": [
+    "Uniform Convergence"
+  ],
+  "m-test": [
+    "Uniform Convergence"
+  ],
+  "weierstrass test": [
+    "Uniform Convergence"
+  ],
+  "mtest": [
+    "Uniform Convergence"
+  ],
+  "epsilon-delta proofs": [
+    "Limits (Single Variable)",
+    "Continuity (Single Variable)"
+  ],
+  "epsilon-delta definition": [
+    "Limits (Single Variable)",
+    "Continuity (Single Variable)"
+  ],
+  "ε-δ proofs": [
+    "Limits (Single Variable)",
+    "Continuity (Single Variable)"
+  ],
+  "delta-epsilon": [
+    "Limits (Single Variable)",
+    "Continuity (Single Variable)"
+  ],
+  "epsilon-delta limits": [
+    "Limits (Single Variable)",
+    "Continuity (Single Variable)"
+  ],
+  "epsilon-delta continuity": [
+    "Limits (Single Variable)",
+    "Continuity (Single Variable)"
+  ],
+  "rolle": [
+    "Mean Value Theorems"
+  ],
+  "rolle's theorem": [
+    "Mean Value Theorems"
+  ],
+  "rolles theorem": [
+    "Mean Value Theorems"
+  ],
+  "rolle theorem": [
+    "Mean Value Theorems"
+  ],
+  "dirichlet conditions": [
+    "Convergence of Fourier Series"
+  ],
+  "dirichlet's conditions": [
+    "Convergence of Fourier Series"
+  ],
+  "dirichlet conditions for fourier series": [
+    "Convergence of Fourier Series"
+  ],
+  "dirichlet's theorem for fourier series": [
+    "Convergence of Fourier Series"
+  ],
+  "half-range expansions": [
+    "Fourier Series Expansions"
+  ],
+  "half range expansion": [
+    "Fourier Series Expansions"
+  ],
+  "halfrange expansion": [
+    "Fourier Series Expansions"
+  ],
+  "half-range series": [
+    "Fourier Series Expansions"
+  ],
+  "half-range sine series": [
+    "Fourier Series Expansions"
+  ],
+  "half-range cosine series": [
+    "Fourier Series Expansions"
+  ],
+  "half-range fourier series": [
+    "Fourier Series Expansions"
+  ],
+  "gibbs phenomenon": [
+    "Convergence of Fourier Series"
+  ],
+  "gibbs' phenomenon": [
+    "Convergence of Fourier Series"
+  ],
+  "gibb's phenomenon": [
+    "Convergence of Fourier Series"
+  ],
+  "gibbs effect": [
+    "Convergence of Fourier Series"
+  ],
+  "gibbs overshoot": [
+    "Convergence of Fourier Series"
+  ],
+  "winning strategies": [
+    "Two-Player Games",
+    "Who Wins"
+  ],
+  "winning positions": [
+    "Two-Player Games",
+    "Who Wins"
+  ],
+  "winning and losing positions": [
+    "Two-Player Games",
+    "Who Wins"
+  ],
+  "p-positions": [
+    "Two-Player Games",
+    "Who Wins"
+  ],
+  "n-positions": [
+    "Two-Player Games",
+    "Who Wins"
+  ],
+  "putting identical balls in boxes": [
+    "Combinations with Repetition (Stars and Bars)",
+    "Stars and Bars"
+  ],
+  "identical balls in boxes": [
+    "Combinations with Repetition (Stars and Bars)",
+    "Stars and Bars"
+  ],
+  "identical balls into distinct boxes": [
+    "Combinations with Repetition (Stars and Bars)",
+    "Stars and Bars"
+  ],
+  "indistinguishable balls in boxes": [
+    "Combinations with Repetition (Stars and Bars)",
+    "Stars and Bars"
+  ],
+  "balls in boxes": [
+    "Combinations with Repetition (Stars and Bars)",
+    "Stars and Bars"
+  ],
+  "balls into boxes": [
+    "Combinations with Repetition (Stars and Bars)",
+    "Stars and Bars"
+  ],
+  "identical objects into distinct boxes": [
+    "Combinations with Repetition (Stars and Bars)",
+    "Stars and Bars"
+  ],
+  "distributing identical objects": [
+    "Combinations with Repetition (Stars and Bars)",
+    "Stars and Bars"
+  ],
+  "tilings and colourings of chessboards": [
+    "Domino Tilings",
+    "Polyomino Tilings",
+    "Colorings of Grids"
+  ],
+  "tilings and colorings of chessboards": [
+    "Domino Tilings",
+    "Polyomino Tilings",
+    "Colorings of Grids"
+  ],
+  "chessboard tilings": [
+    "Domino Tilings",
+    "Polyomino Tilings",
+    "Colorings of Grids"
+  ],
+  "tiling a chessboard": [
+    "Domino Tilings",
+    "Polyomino Tilings",
+    "Colorings of Grids"
+  ],
+  "chessboard colourings": [
+    "Domino Tilings",
+    "Polyomino Tilings",
+    "Colorings of Grids"
+  ],
+  "chessboard colorings": [
+    "Domino Tilings",
+    "Polyomino Tilings",
+    "Colorings of Grids"
+  ],
+  "colouring a chessboard": [
+    "Domino Tilings",
+    "Polyomino Tilings",
+    "Colorings of Grids"
+  ],
+  "coloring a chessboard": [
+    "Domino Tilings",
+    "Polyomino Tilings",
+    "Colorings of Grids"
+  ],
+  "mutilated chessboard": [
+    "Domino Tilings",
+    "Polyomino Tilings",
+    "Colorings of Grids"
+  ],
+  "convex polygons": [
+    "Convex Position and Helly's Theorem",
+    "Diagonals and Triangulations of Polygons"
+  ],
+  "convex n-gons": [
+    "Convex Position and Helly's Theorem",
+    "Diagonals and Triangulations of Polygons"
+  ],
+  "convex position": [
+    "Convex Position and Helly's Theorem",
+    "Diagonals and Triangulations of Polygons"
+  ],
+  "points in convex position": [
+    "Convex Position and Helly's Theorem",
+    "Diagonals and Triangulations of Polygons"
+  ],
+  "convex hull": [
+    "Convex Position and Helly's Theorem",
+    "Diagonals and Triangulations of Polygons"
+  ],
+  "convex quadrilaterals": [
+    "Convex Position and Helly's Theorem",
+    "Diagonals and Triangulations of Polygons"
+  ],
+  "=power": [
+    "Work-Energy Theorem and Power"
+  ],
+  "mechanical power": [
+    "Work-Energy Theorem and Power"
+  ],
+  "instantaneous power": [
+    "Work-Energy Theorem and Power"
+  ],
+  "average power": [
+    "Work-Energy Theorem and Power"
+  ],
+  "rate of doing work": [
+    "Work-Energy Theorem and Power"
+  ],
+  "power of a force": [
+    "Work-Energy Theorem and Power"
+  ],
+  "coefficient of restitution": [
+    "Inelastic Collisions and Restitution"
+  ],
+  "restitution coefficient": [
+    "Inelastic Collisions and Restitution"
+  ],
+  "restitution": [
+    "Inelastic Collisions and Restitution"
+  ],
+  "newton's law of restitution": [
+    "Inelastic Collisions and Restitution"
+  ],
+  "newton's experimental law": [
+    "Inelastic Collisions and Restitution"
+  ],
+  "newtons experimental law": [
+    "Inelastic Collisions and Restitution"
+  ],
+  "thin cylinders": [
+    "Thin-Walled Pressure Vessels"
+  ],
+  "thin-walled cylinders": [
+    "Thin-Walled Pressure Vessels"
+  ],
+  "thin cylindrical shells": [
+    "Thin-Walled Pressure Vessels"
+  ],
+  "thin shells": [
+    "Thin-Walled Pressure Vessels"
+  ],
+  "thin spherical shells": [
+    "Thin-Walled Pressure Vessels"
+  ],
+  "thin-walled pressure vessels": [
+    "Thin-Walled Pressure Vessels"
+  ],
+  "hoop stress in thin cylinders": [
+    "Thin-Walled Pressure Vessels"
+  ],
+  "boiler shells": [
+    "Thin-Walled Pressure Vessels"
+  ],
+  "pulleys and blocks": [
+    "Newton's Laws and Connected Bodies"
+  ],
+  "blocks and pulleys": [
+    "Newton's Laws and Connected Bodies"
+  ],
+  "pulleys": [
+    "Newton's Laws and Connected Bodies"
+  ],
+  "pulley systems": [
+    "Newton's Laws and Connected Bodies"
+  ],
+  "atwood machine": [
+    "Newton's Laws and Connected Bodies"
+  ],
+  "atwood's machine": [
+    "Newton's Laws and Connected Bodies"
+  ],
+  "connected particles": [
+    "Newton's Laws and Connected Bodies"
+  ],
+  "tension in strings": [
+    "Newton's Laws and Connected Bodies"
+  ],
+  "tension in a string": [
+    "Newton's Laws and Connected Bodies"
+  ],
+  "string tension": [
+    "Newton's Laws and Connected Bodies"
+  ],
+  "tension in ropes": [
+    "Newton's Laws and Connected Bodies"
+  ],
+  "=tension": [
+    "Newton's Laws and Connected Bodies"
+  ],
+  "light inextensible strings": [
+    "Newton's Laws and Connected Bodies"
+  ],
+  "trusses": [
+    "Equilibrium of Rigid Bodies",
+    "Equilibrium of Forces and Moments"
+  ],
+  "plane trusses": [
+    "Equilibrium of Rigid Bodies",
+    "Equilibrium of Forces and Moments"
+  ],
+  "method of joints": [
+    "Equilibrium of Rigid Bodies",
+    "Equilibrium of Forces and Moments"
+  ],
+  "method of sections": [
+    "Equilibrium of Rigid Bodies",
+    "Equilibrium of Forces and Moments"
+  ],
+  "pin-jointed frameworks": [
+    "Equilibrium of Rigid Bodies",
+    "Equilibrium of Forces and Moments"
+  ],
+  "pin-jointed frames": [
+    "Equilibrium of Rigid Bodies",
+    "Equilibrium of Forces and Moments"
+  ],
+  "light frameworks": [
+    "Equilibrium of Rigid Bodies",
+    "Equilibrium of Forces and Moments"
+  ],
+  "discriminant": [
+    "Quadratic Equations and Functions"
+  ],
+  "nature of roots": [
+    "Quadratic Equations and Functions"
+  ],
+  "discriminant of a quadratic": [
+    "Quadratic Equations and Functions"
+  ],
+  "b^2-4ac": [
+    "Quadratic Equations and Functions"
+  ],
+  "remainder theorem": [
+    "Polynomial Division and Remainders"
+  ],
+  "polynomial remainder theorem": [
+    "Polynomial Division and Remainders"
+  ],
+  "remainder theorem for polynomials": [
+    "Polynomial Division and Remainders"
+  ],
+  "little bezout theorem": [
+    "Polynomial Division and Remainders"
+  ],
+  "little bézout theorem": [
+    "Polynomial Division and Remainders"
+  ],
+  "p-values": [
+    "Hypothesis Testing"
+  ],
+  "pvalue": [
+    "Hypothesis Testing"
+  ],
+  "observed significance level": [
+    "Hypothesis Testing"
+  ],
+  "significance probability": [
+    "Hypothesis Testing"
+  ],
+  "least squares estimators": [
+    "Simple Linear Regression",
+    "General Linear Model"
+  ],
+  "least squares estimates": [
+    "Simple Linear Regression",
+    "General Linear Model"
+  ],
+  "method of least squares": [
+    "Simple Linear Regression",
+    "General Linear Model"
+  ],
+  "ordinary least squares": [
+    "Simple Linear Regression",
+    "General Linear Model"
+  ],
+  "ols": [
+    "Simple Linear Regression",
+    "General Linear Model"
+  ],
+  "lse": [
+    "Simple Linear Regression",
+    "General Linear Model"
+  ],
+  "conjugate priors": [
+    "Prior and Posterior Distributions"
+  ],
+  "conjugate prior distribution": [
+    "Prior and Posterior Distributions"
+  ],
+  "conjugate family": [
+    "Prior and Posterior Distributions"
+  ],
+  "conjugacy": [
+    "Prior and Posterior Distributions"
+  ],
+  "cramer-rao lower bound": [
+    "Cramér-Rao Bound and Fisher Information"
+  ],
+  "cramér-rao lower bound": [
+    "Cramér-Rao Bound and Fisher Information"
+  ],
+  "cramer-rao bound": [
+    "Cramér-Rao Bound and Fisher Information"
+  ],
+  "cramér-rao bound": [
+    "Cramér-Rao Bound and Fisher Information"
+  ],
+  "cramer-rao inequality": [
+    "Cramér-Rao Bound and Fisher Information"
+  ],
+  "cramer rao": [
+    "Cramér-Rao Bound and Fisher Information"
+  ],
+  "cramér-rao": [
+    "Cramér-Rao Bound and Fisher Information"
+  ],
+  "crlb": [
+    "Cramér-Rao Bound and Fisher Information"
+  ],
+  "information inequality": [
+    "Cramér-Rao Bound and Fisher Information"
+  ],
+  "anova": [
+    "Inference in Linear Models",
+    "General Linear Model"
+  ],
+  "analysis of variance": [
+    "Inference in Linear Models",
+    "General Linear Model"
+  ],
+  "one-way anova": [
+    "Inference in Linear Models",
+    "General Linear Model"
+  ],
+  "two-way anova": [
+    "Inference in Linear Models",
+    "General Linear Model"
+  ],
+  "anova table": [
+    "Inference in Linear Models",
+    "General Linear Model"
+  ],
+  "anova f test": [
+    "Inference in Linear Models",
+    "General Linear Model"
+  ],
+  "fins": [
+    "Fin Efficiency and Effectiveness",
+    "Fin Temperature Distribution and Heat Rate"
+  ],
+  "extended surfaces": [
+    "Fin Efficiency and Effectiveness",
+    "Fin Temperature Distribution and Heat Rate"
+  ],
+  "pin fins": [
+    "Fin Efficiency and Effectiveness",
+    "Fin Temperature Distribution and Heat Rate"
+  ],
+  "annular fins": [
+    "Fin Efficiency and Effectiveness",
+    "Fin Temperature Distribution and Heat Rate"
+  ],
+  "fin analysis": [
+    "Fin Efficiency and Effectiveness",
+    "Fin Temperature Distribution and Heat Rate"
+  ],
+  "fin heat transfer": [
+    "Fin Efficiency and Effectiveness",
+    "Fin Temperature Distribution and Heat Rate"
+  ],
+  "prandtl number": [
+    "Dimensionless Groups in Convection"
+  ],
+  "prandtl": [
+    "Dimensionless Groups in Convection"
+  ],
+  "pr number": [
+    "Dimensionless Groups in Convection"
+  ],
+  "=pr": [
+    "Dimensionless Groups in Convection"
+  ],
+  "stefan-boltzmann law": [
+    "Blackbody Radiation Laws"
+  ],
+  "stefan-boltzmann": [
+    "Blackbody Radiation Laws"
+  ],
+  "stefan boltzmann law": [
+    "Blackbody Radiation Laws"
+  ],
+  "stefan-boltzmann constant": [
+    "Blackbody Radiation Laws"
+  ],
+  "stefan's law": [
+    "Blackbody Radiation Laws"
+  ],
+  "stefans law": [
+    "Blackbody Radiation Laws"
+  ],
+  "blackbody emissive power": [
+    "Blackbody Radiation Laws"
+  ],
+  "biot number": [
+    "Lumped Capacitance Method",
+    "Transient Conduction in Plates, Cylinders and Spheres"
+  ],
+  "biot modulus": [
+    "Lumped Capacitance Method",
+    "Transient Conduction in Plates, Cylinders and Spheres"
+  ],
+  "biot": [
+    "Lumped Capacitance Method",
+    "Transient Conduction in Plates, Cylinders and Spheres"
+  ],
+  "=bi": [
+    "Lumped Capacitance Method",
+    "Transient Conduction in Plates, Cylinders and Spheres"
+  ],
+  "ellipse and parabola": [
+    "Conic Sections"
+  ],
+  "ellipse": [
+    "Conic Sections"
+  ],
+  "parabola": [
+    "Conic Sections"
+  ],
+  "hyperbola": [
+    "Conic Sections"
+  ],
+  "conics": [
+    "Conic Sections"
+  ],
+  "focus and directrix": [
+    "Conic Sections"
+  ],
+  "eccentricity": [
+    "Conic Sections"
+  ],
+  "sine rule": [
+    "Law of Sines and Cosines"
+  ],
+  "law of sines": [
+    "Law of Sines and Cosines"
+  ],
+  "sine law": [
+    "Law of Sines and Cosines"
+  ],
+  "sin rule": [
+    "Law of Sines and Cosines"
+  ],
+  "extended sine rule": [
+    "Law of Sines and Cosines"
+  ],
+  "extended law of sines": [
+    "Law of Sines and Cosines"
+  ],
+  "cosine rule": [
+    "Law of Sines and Cosines"
+  ],
+  "law of cosines": [
+    "Law of Sines and Cosines"
+  ],
+  "cosine law": [
+    "Law of Sines and Cosines"
+  ],
+  "cos rule": [
+    "Law of Sines and Cosines"
+  ],
+  "isoperimetric problems": [
+    "Maximal Area and Perimeter",
+    "Area and Perimeter Inequalities"
+  ],
+  "isoperimetric": [
+    "Maximal Area and Perimeter",
+    "Area and Perimeter Inequalities"
+  ],
+  "isoperimetric inequality": [
+    "Maximal Area and Perimeter",
+    "Area and Perimeter Inequalities"
+  ],
+  "isoperimetric theorem": [
+    "Maximal Area and Perimeter",
+    "Area and Perimeter Inequalities"
+  ],
+  "maximum area for a given perimeter": [
+    "Maximal Area and Perimeter",
+    "Area and Perimeter Inequalities"
+  ],
+  "dc circuits": [
+    "Direct-Current Circuits"
+  ],
+  "direct current circuits": [
+    "Direct-Current Circuits"
+  ],
+  "d.c. circuits": [
+    "Direct-Current Circuits"
+  ],
+  "dc networks": [
+    "Direct-Current Circuits"
+  ],
+  "dc circuit analysis": [
+    "Direct-Current Circuits"
+  ],
+  "rc circuits": [
+    "RC and RL Transients"
+  ],
+  "r-c circuits": [
+    "RC and RL Transients"
+  ],
+  "rc circuit transients": [
+    "RC and RL Transients"
+  ],
+  "rc time constant": [
+    "RC and RL Transients"
+  ],
+  "charging a capacitor": [
+    "RC and RL Transients"
+  ],
+  "discharging a capacitor": [
+    "RC and RL Transients"
+  ],
+  "capacitor charging and discharging": [
+    "RC and RL Transients"
+  ],
+  "lenses and mirrors": [
+    "Lenses and Spherical Refracting Surfaces",
+    "Geometrical Optics"
+  ],
+  "mirrors and lenses": [
+    "Lenses and Spherical Refracting Surfaces",
+    "Geometrical Optics"
+  ],
+  "thin lenses": [
+    "Lenses and Spherical Refracting Surfaces",
+    "Geometrical Optics"
+  ],
+  "lens formula": [
+    "Lenses and Spherical Refracting Surfaces",
+    "Geometrical Optics"
+  ],
+  "mirror formula": [
+    "Lenses and Spherical Refracting Surfaces",
+    "Geometrical Optics"
+  ],
+  "lensmaker's equation": [
+    "Lenses and Spherical Refracting Surfaces",
+    "Geometrical Optics"
+  ],
+  "lens maker's formula": [
+    "Lenses and Spherical Refracting Surfaces",
+    "Geometrical Optics"
+  ],
+  "spherical mirrors": [
+    "Lenses and Spherical Refracting Surfaces",
+    "Geometrical Optics"
+  ],
+  "concave mirrors": [
+    "Lenses and Spherical Refracting Surfaces",
+    "Geometrical Optics"
+  ],
+  "convex lenses": [
+    "Lenses and Spherical Refracting Surfaces",
+    "Geometrical Optics"
+  ],
+  "venturimeter": [
+    "Obstruction Flow Meters"
+  ],
+  "venturi meter": [
+    "Obstruction Flow Meters"
+  ],
+  "venturi": [
+    "Obstruction Flow Meters"
+  ],
+  "venturi tube": [
+    "Obstruction Flow Meters"
+  ],
+  "venturi flowmeter": [
+    "Obstruction Flow Meters"
+  ],
+  "darcy-weisbach": [
+    "Friction Factor and the Moody Chart"
+  ],
+  "darcy-weisbach equation": [
+    "Friction Factor and the Moody Chart"
+  ],
+  "darcy-weisbach formula": [
+    "Friction Factor and the Moody Chart"
+  ],
+  "darcy friction factor": [
+    "Friction Factor and the Moody Chart"
+  ],
+  "fanning friction factor": [
+    "Friction Factor and the Moody Chart"
+  ],
+  "head loss due to friction": [
+    "Friction Factor and the Moody Chart"
+  ],
+  "frictional head loss": [
+    "Friction Factor and the Moody Chart"
+  ],
+  "major losses": [
+    "Friction Factor and the Moody Chart"
+  ],
+  "drag and lift": [
+    "Drag on Immersed Bodies",
+    "Lift, Airfoils and Aircraft Performance"
+  ],
+  "lift and drag": [
+    "Drag on Immersed Bodies",
+    "Lift, Airfoils and Aircraft Performance"
+  ],
+  "drag force": [
+    "Drag on Immersed Bodies",
+    "Lift, Airfoils and Aircraft Performance"
+  ],
+  "lift force": [
+    "Drag on Immersed Bodies",
+    "Lift, Airfoils and Aircraft Performance"
+  ],
+  "drag coefficient": [
+    "Drag on Immersed Bodies",
+    "Lift, Airfoils and Aircraft Performance"
+  ],
+  "lift coefficient": [
+    "Drag on Immersed Bodies",
+    "Lift, Airfoils and Aircraft Performance"
+  ],
+  "aerodynamic forces": [
+    "Drag on Immersed Bodies",
+    "Lift, Airfoils and Aircraft Performance"
+  ],
+  "work done by a gas": [
+    "First Law for Closed Systems",
+    "Ideal-Gas Processes"
+  ],
+  "work done by gas": [
+    "First Law for Closed Systems",
+    "Ideal-Gas Processes"
+  ],
+  "work done on a gas": [
+    "First Law for Closed Systems",
+    "Ideal-Gas Processes"
+  ],
+  "pdv work": [
+    "First Law for Closed Systems",
+    "Ideal-Gas Processes"
+  ],
+  "p dv work": [
+    "First Law for Closed Systems",
+    "Ideal-Gas Processes"
+  ],
+  "boundary work": [
+    "First Law for Closed Systems",
+    "Ideal-Gas Processes"
+  ],
+  "expansion work": [
+    "First Law for Closed Systems",
+    "Ideal-Gas Processes"
+  ],
+  "fcc": [
+    "Metallic Crystal Structures",
+    "Atomic Packing Factor and Density"
+  ],
+  "face-centred cubic": [
+    "Metallic Crystal Structures",
+    "Atomic Packing Factor and Density"
+  ],
+  "face-centered cubic": [
+    "Metallic Crystal Structures",
+    "Atomic Packing Factor and Density"
+  ],
+  "f.c.c.": [
+    "Metallic Crystal Structures",
+    "Atomic Packing Factor and Density"
+  ],
+  "cubic close-packed": [
+    "Metallic Crystal Structures",
+    "Atomic Packing Factor and Density"
+  ],
+  "ccp": [
+    "Metallic Crystal Structures",
+    "Atomic Packing Factor and Density"
+  ],
+  "fcc structure": [
+    "Metallic Crystal Structures",
+    "Atomic Packing Factor and Density"
+  ],
+  "fcc lattice": [
+    "Metallic Crystal Structures",
+    "Atomic Packing Factor and Density"
+  ],
+  "bcc": [
+    "Metallic Crystal Structures",
+    "Atomic Packing Factor and Density"
+  ],
+  "body-centred cubic": [
+    "Metallic Crystal Structures",
+    "Atomic Packing Factor and Density"
+  ],
+  "body-centered cubic": [
+    "Metallic Crystal Structures",
+    "Atomic Packing Factor and Density"
+  ],
+  "b.c.c.": [
+    "Metallic Crystal Structures",
+    "Atomic Packing Factor and Density"
+  ],
+  "bcc structure": [
+    "Metallic Crystal Structures",
+    "Atomic Packing Factor and Density"
+  ],
+  "bcc lattice": [
+    "Metallic Crystal Structures",
+    "Atomic Packing Factor and Density"
+  ],
+  "fick's laws": [
+    "Fick's First Law",
+    "Fick's Second Law"
+  ],
+  "ficks laws": [
+    "Fick's First Law",
+    "Fick's Second Law"
+  ],
+  "fick laws": [
+    "Fick's First Law",
+    "Fick's Second Law"
+  ],
+  "fick's law of diffusion": [
+    "Fick's First Law",
+    "Fick's Second Law"
+  ],
+  "fick's laws of diffusion": [
+    "Fick's First Law",
+    "Fick's Second Law"
+  ],
+  "ficks law": [
+    "Fick's First Law",
+    "Fick's Second Law"
+  ],
+  "oc and sc tests": [
+    "Open-Circuit and Short-Circuit Tests",
+    "Determining Synchronous Reactance"
+  ],
+  "o.c. and s.c. tests": [
+    "Open-Circuit and Short-Circuit Tests",
+    "Determining Synchronous Reactance"
+  ],
+  "oc sc tests": [
+    "Open-Circuit and Short-Circuit Tests",
+    "Determining Synchronous Reactance"
+  ],
+  "open circuit and short circuit tests": [
+    "Open-Circuit and Short-Circuit Tests",
+    "Determining Synchronous Reactance"
+  ],
+  "open-circuit test": [
+    "Open-Circuit and Short-Circuit Tests",
+    "Determining Synchronous Reactance"
+  ],
+  "short-circuit test": [
+    "Open-Circuit and Short-Circuit Tests",
+    "Determining Synchronous Reactance"
+  ],
+  "oc test": [
+    "Open-Circuit and Short-Circuit Tests",
+    "Determining Synchronous Reactance"
+  ],
+  "sc test": [
+    "Open-Circuit and Short-Circuit Tests",
+    "Determining Synchronous Reactance"
+  ],
+  "occ and scc": [
+    "Open-Circuit and Short-Circuit Tests",
+    "Determining Synchronous Reactance"
+  ],
+  "velocity diagrams": [
+    "Impulse Steam Turbine Stages",
+    "Reaction Steam Turbine Stages"
+  ],
+  "velocity triangles": [
+    "Impulse Steam Turbine Stages",
+    "Reaction Steam Turbine Stages"
+  ],
+  "blade velocity diagrams": [
+    "Impulse Steam Turbine Stages",
+    "Reaction Steam Turbine Stages"
+  ],
+  "combined velocity diagram": [
+    "Impulse Steam Turbine Stages",
+    "Reaction Steam Turbine Stages"
+  ],
+  "inlet and outlet velocity triangles": [
+    "Impulse Steam Turbine Stages",
+    "Reaction Steam Turbine Stages"
+  ],
+  "hydroelectric plants": [
+    "Hydro Plant Elements and Types"
+  ],
+  "hydroelectric power plants": [
+    "Hydro Plant Elements and Types"
+  ],
+  "hydro plants": [
+    "Hydro Plant Elements and Types"
+  ],
+  "hydro power plants": [
+    "Hydro Plant Elements and Types"
+  ],
+  "hydroelectric power stations": [
+    "Hydro Plant Elements and Types"
+  ],
+  "hydropower": [
+    "Hydro Plant Elements and Types"
+  ],
+  "hydel plants": [
+    "Hydro Plant Elements and Types"
+  ],
+  "hydel": [
+    "Hydro Plant Elements and Types"
+  ],
+  "hydroelectricity": [
+    "Hydro Plant Elements and Types"
+  ],
+  "hydrographs": [
+    "Hydrographs and Flow Duration Curves"
+  ],
+  "unit hydrographs": [
+    "Hydrographs and Flow Duration Curves"
+  ],
+  "discharge hydrograph": [
+    "Hydrographs and Flow Duration Curves"
+  ],
+  "hydrograph analysis": [
+    "Hydrographs and Flow Duration Curves"
+  ],
+  "binomial trees": [
+    "Binomial Option Pricing",
+    "Tree Calibration and Convergence"
+  ],
+  "binomial lattice": [
+    "Binomial Option Pricing",
+    "Tree Calibration and Convergence"
+  ],
+  "binomial model": [
+    "Binomial Option Pricing",
+    "Tree Calibration and Convergence"
+  ],
+  "binomial option pricing model": [
+    "Binomial Option Pricing",
+    "Tree Calibration and Convergence"
+  ],
+  "multi-period binomial model": [
+    "Binomial Option Pricing",
+    "Tree Calibration and Convergence"
+  ],
+  "cox-ross-rubinstein": [
+    "Binomial Option Pricing",
+    "Tree Calibration and Convergence"
+  ],
+  "crr model": [
+    "Binomial Option Pricing",
+    "Tree Calibration and Convergence"
+  ],
+  "crr tree": [
+    "Binomial Option Pricing",
+    "Tree Calibration and Convergence"
+  ],
+  "=var": [
+    "Value at Risk"
+  ],
+  "value at risk": [
+    "Value at Risk"
+  ],
+  "value-at-risk": [
+    "Value at Risk"
+  ],
+  "cvar": [
+    "Value at Risk"
+  ],
+  "conditional value at risk": [
+    "Value at Risk"
+  ],
+  "expected shortfall": [
+    "Value at Risk"
+  ],
+  "cosets": [
+    "Subgroups, Cosets and Lagrange's Theorem"
+  ],
+  "left cosets": [
+    "Subgroups, Cosets and Lagrange's Theorem"
+  ],
+  "right cosets": [
+    "Subgroups, Cosets and Lagrange's Theorem"
+  ],
+  "coset decomposition": [
+    "Subgroups, Cosets and Lagrange's Theorem"
+  ],
+  "coset representatives": [
+    "Subgroups, Cosets and Lagrange's Theorem"
+  ],
+  "index of a subgroup": [
+    "Subgroups, Cosets and Lagrange's Theorem"
+  ],
+  "orbit-stabiliser theorem": [
+    "Group Actions and Conjugacy Classes"
+  ],
+  "orbit-stabilizer theorem": [
+    "Group Actions and Conjugacy Classes"
+  ],
+  "orbit stabiliser": [
+    "Group Actions and Conjugacy Classes"
+  ],
+  "orbit stabilizer": [
+    "Group Actions and Conjugacy Classes"
+  ],
+  "orbits and stabilisers": [
+    "Group Actions and Conjugacy Classes"
+  ],
+  "orbits and stabilizers": [
+    "Group Actions and Conjugacy Classes"
+  ],
+  "stabiliser": [
+    "Group Actions and Conjugacy Classes"
+  ],
+  "stabilizer": [
+    "Group Actions and Conjugacy Classes"
+  ],
+  "poles": [
+    "Isolated Singularities"
+  ],
+  "simple poles": [
+    "Isolated Singularities"
+  ],
+  "order of a pole": [
+    "Isolated Singularities"
+  ],
+  "poles and zeros": [
+    "Isolated Singularities"
+  ],
+  "removable singularities": [
+    "Isolated Singularities"
+  ],
+  "essential singularities": [
+    "Isolated Singularities"
+  ],
+  "mobius transformations": [
+    "Möbius Transformations"
+  ],
+  "möbius transformations": [
+    "Möbius Transformations"
+  ],
+  "moebius transformations": [
+    "Möbius Transformations"
+  ],
+  "mobius maps": [
+    "Möbius Transformations"
+  ],
+  "möbius maps": [
+    "Möbius Transformations"
+  ],
+  "linear fractional transformations": [
+    "Möbius Transformations"
+  ],
+  "fractional linear transformations": [
+    "Möbius Transformations"
+  ],
+  "bilinear transformations": [
+    "Möbius Transformations"
+  ],
+  "photoelectric effect": [
+    "Wave-Particle Duality"
+  ],
+  "photo-electric effect": [
+    "Wave-Particle Duality"
+  ],
+  "photoelectric equation": [
+    "Wave-Particle Duality"
+  ],
+  "einstein's photoelectric equation": [
+    "Wave-Particle Duality"
+  ],
+  "work function": [
+    "Wave-Particle Duality"
+  ],
+  "stopping potential": [
+    "Wave-Particle Duality"
+  ],
+  "threshold frequency": [
+    "Wave-Particle Duality"
+  ],
+  "_added_2026_11_09_proposed2": "Added from terms of the retrieval evaluation (proposed2.json: matched nothing, or only wrongly) (app/tools/retrieval_eval_inputs.json); expansions are exact concept names. A key starting with '=' applies only to a whole term.",
+  "indicator random variables": [
+    "Linearity of Expectation",
+    "Expected Count"
+  ],
+  "indicator variables": [
+    "Linearity of Expectation",
+    "Expected Count"
+  ],
+  "indicator rv": [
+    "Linearity of Expectation",
+    "Expected Count"
+  ],
+  "indicator rvs": [
+    "Linearity of Expectation",
+    "Expected Count"
+  ],
+  "indicator functions": [
+    "Linearity of Expectation",
+    "Expected Count"
+  ],
+  "method of indicators": [
+    "Linearity of Expectation",
+    "Expected Count"
+  ],
+  "=indicator": [
+    "Linearity of Expectation",
+    "Expected Count"
+  ],
+  "absorption probabilities": [
+    "Hitting Probabilities and Mean Hitting Times"
+  ],
+  "absorption probability": [
+    "Hitting Probabilities and Mean Hitting Times"
+  ],
+  "probability of absorption": [
+    "Hitting Probabilities and Mean Hitting Times"
+  ],
+  "absorbing probabilities": [
+    "Hitting Probabilities and Mean Hitting Times"
+  ],
+  "absorbing markov chain": [
+    "Hitting Probabilities and Mean Hitting Times"
+  ],
+  "absorbing chain": [
+    "Hitting Probabilities and Mean Hitting Times"
+  ],
+  "time to absorption": [
+    "Hitting Probabilities and Mean Hitting Times"
+  ],
+  "expected time to absorption": [
+    "Hitting Probabilities and Mean Hitting Times"
+  ],
+  "absorption time": [
+    "Hitting Probabilities and Mean Hitting Times"
+  ],
+  "stopping times": [
+    "Optional Stopping Theorem",
+    "Martingale and Optional Stopping"
+  ],
+  "stopping time": [
+    "Optional Stopping Theorem",
+    "Martingale and Optional Stopping"
+  ],
+  "stopped process": [
+    "Optional Stopping Theorem",
+    "Martingale and Optional Stopping"
+  ],
+  "stopped martingale": [
+    "Optional Stopping Theorem",
+    "Martingale and Optional Stopping"
+  ],
+  "optional time": [
+    "Optional Stopping Theorem",
+    "Martingale and Optional Stopping"
+  ],
+  "markov time": [
+    "Optional Stopping Theorem",
+    "Martingale and Optional Stopping"
+  ],
+  "kernel and image of a linear map": [
+    "Kernel and Range of a Transformation"
+  ],
+  "kernel and image": [
+    "Kernel and Range of a Transformation"
+  ],
+  "image and kernel": [
+    "Kernel and Range of a Transformation"
+  ],
+  "kernel and range": [
+    "Kernel and Range of a Transformation"
+  ],
+  "range and kernel": [
+    "Kernel and Range of a Transformation"
+  ],
+  "kernel of a linear map": [
+    "Kernel and Range of a Transformation"
+  ],
+  "image of a linear map": [
+    "Kernel and Range of a Transformation"
+  ],
+  "range of a linear map": [
+    "Kernel and Range of a Transformation"
+  ],
+  "null space": [
+    "Kernel and Range of a Transformation"
+  ],
+  "nullspace": [
+    "Kernel and Range of a Transformation"
+  ],
+  "null space and range": [
+    "Kernel and Range of a Transformation"
+  ],
+  "range space": [
+    "Kernel and Range of a Transformation"
+  ],
+  "=kernel": [
+    "Kernel and Range of a Transformation"
+  ],
+  "=image": [
+    "Kernel and Range of a Transformation"
+  ],
+  "cofactor expansion": [
+    "Determinant Evaluation"
+  ],
+  "laplace expansion": [
+    "Determinant Evaluation"
+  ],
+  "expansion by cofactors": [
+    "Determinant Evaluation"
+  ],
+  "expansion by minors": [
+    "Determinant Evaluation"
+  ],
+  "minors and cofactors": [
+    "Determinant Evaluation"
+  ],
+  "=cofactor": [
+    "Determinant Evaluation"
+  ],
+  "wave equation": [
+    "Partial Differential Equations"
+  ],
+  "1d wave equation": [
+    "Partial Differential Equations"
+  ],
+  "one dimensional wave equation": [
+    "Partial Differential Equations"
+  ],
+  "vibrating string": [
+    "Partial Differential Equations"
+  ],
+  "d'alembert's solution": [
+    "Partial Differential Equations"
+  ],
+  "d'alembert solution": [
+    "Partial Differential Equations"
+  ],
+  "dalembert solution": [
+    "Partial Differential Equations"
+  ],
+  "d'alembert's formula": [
+    "Partial Differential Equations"
+  ],
+  "dalemberts formula": [
+    "Partial Differential Equations"
+  ],
+  "fourier series solutions": [
+    "Separation of Variables"
+  ],
+  "fourier series solution": [
+    "Separation of Variables"
+  ],
+  "fourier series method": [
+    "Separation of Variables"
+  ],
+  "fourier sine series solution": [
+    "Separation of Variables"
+  ],
+  "fourier cosine series solution": [
+    "Separation of Variables"
+  ],
+  "fourier series solution of pde": [
+    "Separation of Variables"
+  ],
+  "inclined planes": [
+    "Newton's Laws and Connected Bodies",
+    "Friction"
+  ],
+  "inclined plane": [
+    "Newton's Laws and Connected Bodies",
+    "Friction"
+  ],
+  "block on an incline": [
+    "Newton's Laws and Connected Bodies",
+    "Friction"
+  ],
+  "block on incline": [
+    "Newton's Laws and Connected Bodies",
+    "Friction"
+  ],
+  "rough incline": [
+    "Newton's Laws and Connected Bodies",
+    "Friction"
+  ],
+  "smooth incline": [
+    "Newton's Laws and Connected Bodies",
+    "Friction"
+  ],
+  "=incline": [
+    "Newton's Laws and Connected Bodies",
+    "Friction"
+  ],
+  "=ramp": [
+    "Newton's Laws and Connected Bodies",
+    "Friction"
+  ],
+  "free body diagram": [
+    "Newton's Laws and Connected Bodies",
+    "Equilibrium of Rigid Bodies"
+  ],
+  "free body diagrams": [
+    "Newton's Laws and Connected Bodies",
+    "Equilibrium of Rigid Bodies"
+  ],
+  "force diagram": [
+    "Newton's Laws and Connected Bodies",
+    "Equilibrium of Rigid Bodies"
+  ],
+  "generalised coordinates": [
+    "Lagrange's Equations"
+  ],
+  "generalized coordinates": [
+    "Lagrange's Equations"
+  ],
+  "generalised velocities": [
+    "Lagrange's Equations"
+  ],
+  "generalized velocities": [
+    "Lagrange's Equations"
+  ],
+  "generalised forces": [
+    "Lagrange's Equations"
+  ],
+  "generalized forces": [
+    "Lagrange's Equations"
+  ],
+  "holonomic constraints": [
+    "Lagrange's Equations"
+  ],
+  "poisson's ratio": [
+    "Generalized Hooke's Law and Elastic Constants",
+    "Axial Loading and Young's Modulus"
+  ],
+  "poissons ratio": [
+    "Generalized Hooke's Law and Elastic Constants",
+    "Axial Loading and Young's Modulus"
+  ],
+  "poisson ratio": [
+    "Generalized Hooke's Law and Elastic Constants",
+    "Axial Loading and Young's Modulus"
+  ],
+  "lateral strain": [
+    "Generalized Hooke's Law and Elastic Constants",
+    "Axial Loading and Young's Modulus"
+  ],
+  "lateral contraction": [
+    "Generalized Hooke's Law and Elastic Constants",
+    "Axial Loading and Young's Modulus"
+  ],
+  "poisson effect": [
+    "Generalized Hooke's Law and Elastic Constants",
+    "Axial Loading and Young's Modulus"
+  ],
+  "shear force and bending moment diagrams": [
+    "Bending of Beams"
+  ],
+  "shear force and bending moment": [
+    "Bending of Beams"
+  ],
+  "shear force diagram": [
+    "Bending of Beams"
+  ],
+  "bending moment diagram": [
+    "Bending of Beams"
+  ],
+  "shear and moment diagrams": [
+    "Bending of Beams"
+  ],
+  "sfd and bmd": [
+    "Bending of Beams"
+  ],
+  "sfd bmd": [
+    "Bending of Beams"
+  ],
+  "sfd": [
+    "Bending of Beams"
+  ],
+  "bmd": [
+    "Bending of Beams"
+  ],
+  "bending moment": [
+    "Bending of Beams"
+  ],
+  "factor theorem": [
+    "Polynomial Division and Remainders",
+    "Polynomial Root Argument"
+  ],
+  "remainder and factor theorems": [
+    "Polynomial Division and Remainders",
+    "Polynomial Root Argument"
+  ],
+  "factor and remainder theorems": [
+    "Polynomial Division and Remainders",
+    "Polynomial Root Argument"
+  ],
+  "recurrence relations": [
+    "Recursive Sequences",
+    "Recursion"
+  ],
+  "recurrence relation": [
+    "Recursive Sequences",
+    "Recursion"
+  ],
+  "recurrence equations": [
+    "Recursive Sequences",
+    "Recursion"
+  ],
+  "difference equations": [
+    "Recursive Sequences",
+    "Recursion"
+  ],
+  "recursively defined sequences": [
+    "Recursive Sequences",
+    "Recursion"
+  ],
+  "recursive formula": [
+    "Recursive Sequences",
+    "Recursion"
+  ],
+  "=recurrence": [
+    "Recursive Sequences",
+    "Recursion"
+  ],
+  "chi-squared test": [
+    "Goodness-of-Fit Tests",
+    "Contingency Table Tests"
+  ],
+  "chi-square test": [
+    "Goodness-of-Fit Tests",
+    "Contingency Table Tests"
+  ],
+  "chi squared test": [
+    "Goodness-of-Fit Tests",
+    "Contingency Table Tests"
+  ],
+  "chi^2 test": [
+    "Goodness-of-Fit Tests",
+    "Contingency Table Tests"
+  ],
+  "χ2 test": [
+    "Goodness-of-Fit Tests",
+    "Contingency Table Tests"
+  ],
+  "χ² test": [
+    "Goodness-of-Fit Tests",
+    "Contingency Table Tests"
+  ],
+  "pearson's chi-squared test": [
+    "Goodness-of-Fit Tests",
+    "Contingency Table Tests"
+  ],
+  "pearsons chi squared test": [
+    "Goodness-of-Fit Tests",
+    "Contingency Table Tests"
+  ],
+  "chi-squared test of independence": [
+    "Goodness-of-Fit Tests",
+    "Contingency Table Tests"
+  ],
+  "chi-square goodness of fit": [
+    "Goodness-of-Fit Tests",
+    "Contingency Table Tests"
+  ],
+  "chi-squared goodness of fit test": [
+    "Goodness-of-Fit Tests",
+    "Contingency Table Tests"
+  ],
+  "thermal resistance": [
+    "Plane and Composite Walls",
+    "Cylindrical and Spherical Shells",
+    "Equivalent Network"
+  ],
+  "thermal resistance network": [
+    "Plane and Composite Walls",
+    "Cylindrical and Spherical Shells",
+    "Equivalent Network"
+  ],
+  "thermal circuit": [
+    "Plane and Composite Walls",
+    "Cylindrical and Spherical Shells",
+    "Equivalent Network"
+  ],
+  "conduction resistance": [
+    "Plane and Composite Walls",
+    "Cylindrical and Spherical Shells",
+    "Equivalent Network"
+  ],
+  "convection resistance": [
+    "Plane and Composite Walls",
+    "Cylindrical and Spherical Shells",
+    "Equivalent Network"
+  ],
+  "thermal contact resistance": [
+    "Plane and Composite Walls",
+    "Cylindrical and Spherical Shells",
+    "Equivalent Network"
+  ],
+  "contact resistance": [
+    "Plane and Composite Walls",
+    "Cylindrical and Spherical Shells",
+    "Equivalent Network"
+  ],
+  "r-value": [
+    "Plane and Composite Walls",
+    "Cylindrical and Spherical Shells",
+    "Equivalent Network"
+  ],
+  "surface area": [
+    "Polyhedra",
+    "Spheres, Cones and Cylinders"
+  ],
+  "total surface area": [
+    "Polyhedra",
+    "Spheres, Cones and Cylinders"
+  ],
+  "lateral surface area": [
+    "Polyhedra",
+    "Spheres, Cones and Cylinders"
+  ],
+  "curved surface area": [
+    "Polyhedra",
+    "Spheres, Cones and Cylinders"
+  ],
+  "tsa": [
+    "Polyhedra",
+    "Spheres, Cones and Cylinders"
+  ],
+  "csa": [
+    "Polyhedra",
+    "Spheres, Cones and Cylinders"
+  ],
+  "magnetic fields of currents": [
+    "Biot-Savart Law",
+    "Ampère's Law"
+  ],
+  "magnetic field of a current": [
+    "Biot-Savart Law",
+    "Ampère's Law"
+  ],
+  "magnetic field due to a current": [
+    "Biot-Savart Law",
+    "Ampère's Law"
+  ],
+  "magnetic field due to current": [
+    "Biot-Savart Law",
+    "Ampère's Law"
+  ],
+  "magnetic field of a wire": [
+    "Biot-Savart Law",
+    "Ampère's Law"
+  ],
+  "magnetic field of a current carrying wire": [
+    "Biot-Savart Law",
+    "Ampère's Law"
+  ],
+  "magnetic field of a current loop": [
+    "Biot-Savart Law",
+    "Ampère's Law"
+  ],
+  "magnetic field of a solenoid": [
+    "Biot-Savart Law",
+    "Ampère's Law"
+  ],
+  "magnetic effect of current": [
+    "Biot-Savart Law",
+    "Ampère's Law"
+  ],
+  "magnetic effects of current": [
+    "Biot-Savart Law",
+    "Ampère's Law"
+  ],
+  "lenz's law": [
+    "Faraday's and Lenz's Laws"
+  ],
+  "lenzs law": [
+    "Faraday's and Lenz's Laws"
+  ],
+  "lenz law": [
+    "Faraday's and Lenz's Laws"
+  ],
+  "lenz's rule": [
+    "Faraday's and Lenz's Laws"
+  ],
+  "=lenz": [
+    "Faraday's and Lenz's Laws"
+  ],
+  "manning's equation": [
+    "Uniform Flow and Manning's Formula"
+  ],
+  "mannings equation": [
+    "Uniform Flow and Manning's Formula"
+  ],
+  "manning equation": [
+    "Uniform Flow and Manning's Formula"
+  ],
+  "manning's formula": [
+    "Uniform Flow and Manning's Formula"
+  ],
+  "manning formula": [
+    "Uniform Flow and Manning's Formula"
+  ],
+  "manning's n": [
+    "Uniform Flow and Manning's Formula"
+  ],
+  "manning roughness coefficient": [
+    "Uniform Flow and Manning's Formula"
+  ],
+  "chezy formula": [
+    "Uniform Flow and Manning's Formula"
+  ],
+  "chézy formula": [
+    "Uniform Flow and Manning's Formula"
+  ],
+  "chezy equation": [
+    "Uniform Flow and Manning's Formula"
+  ],
+  "=manning": [
+    "Uniform Flow and Manning's Formula"
+  ],
+  "internal energy": [
+    "First Law for Closed Systems"
+  ],
+  "change in internal energy": [
+    "First Law for Closed Systems"
+  ],
+  "internal energy of an ideal gas": [
+    "First Law for Closed Systems"
+  ],
+  "ideal gas law": [
+    "Gas Laws and Equations of State"
+  ],
+  "ideal gas equation": [
+    "Gas Laws and Equations of State"
+  ],
+  "ideal gas equation of state": [
+    "Gas Laws and Equations of State"
+  ],
+  "perfect gas law": [
+    "Gas Laws and Equations of State"
+  ],
+  "perfect gas equation": [
+    "Gas Laws and Equations of State"
+  ],
+  "pv=nrt": [
+    "Gas Laws and Equations of State"
+  ],
+  "pv = nrt": [
+    "Gas Laws and Equations of State"
+  ],
+  "combined gas law": [
+    "Gas Laws and Equations of State"
+  ],
+  "boyle's law": [
+    "Gas Laws and Equations of State"
+  ],
+  "boyles law": [
+    "Gas Laws and Equations of State"
+  ],
+  "charles's law": [
+    "Gas Laws and Equations of State"
+  ],
+  "charles' law": [
+    "Gas Laws and Equations of State"
+  ],
+  "charles law": [
+    "Gas Laws and Equations of State"
+  ],
+  "gay-lussac's law": [
+    "Gas Laws and Equations of State"
+  ],
+  "gay lussac law": [
+    "Gas Laws and Equations of State"
+  ],
+  "yield strength": [
+    "Engineering Stress-Strain Curve"
+  ],
+  "yield stress": [
+    "Engineering Stress-Strain Curve"
+  ],
+  "yield point": [
+    "Engineering Stress-Strain Curve"
+  ],
+  "offset yield strength": [
+    "Engineering Stress-Strain Curve"
+  ],
+  "0.2% offset": [
+    "Engineering Stress-Strain Curve"
+  ],
+  "proof stress": [
+    "Engineering Stress-Strain Curve"
+  ],
+  "ttt diagrams": [
+    "Isothermal Transformation Diagrams"
+  ],
+  "ttt diagram": [
+    "Isothermal Transformation Diagrams"
+  ],
+  "ttt curves": [
+    "Isothermal Transformation Diagrams"
+  ],
+  "time-temperature-transformation diagram": [
+    "Isothermal Transformation Diagrams"
+  ],
+  "time temperature transformation": [
+    "Isothermal Transformation Diagrams"
+  ],
+  "isothermal transformation diagram": [
+    "Isothermal Transformation Diagrams"
+  ],
+  "it diagram": [
+    "Isothermal Transformation Diagrams"
+  ],
+  "c curve": [
+    "Isothermal Transformation Diagrams"
+  ],
+  "=ttt": [
+    "Isothermal Transformation Diagrams"
+  ],
+  "back emf": [
+    "Generated Voltage and Torque Equations",
+    "Shunt and Separately Excited Motors"
+  ],
+  "back e.m.f.": [
+    "Generated Voltage and Torque Equations",
+    "Shunt and Separately Excited Motors"
+  ],
+  "counter emf": [
+    "Generated Voltage and Torque Equations",
+    "Shunt and Separately Excited Motors"
+  ],
+  "back electromotive force": [
+    "Generated Voltage and Torque Equations",
+    "Shunt and Separately Excited Motors"
+  ],
+  "counter electromotive force": [
+    "Generated Voltage and Torque Equations",
+    "Shunt and Separately Excited Motors"
+  ],
+  "cemf": [
+    "Generated Voltage and Torque Equations",
+    "Shunt and Separately Excited Motors"
+  ],
+  "alternators": [
+    "Synchronous Generator Equivalent Circuit",
+    "Parallel Operation and Load Sharing"
+  ],
+  "alternator": [
+    "Synchronous Generator Equivalent Circuit",
+    "Parallel Operation and Load Sharing"
+  ],
+  "synchronous generator": [
+    "Synchronous Generator Equivalent Circuit",
+    "Parallel Operation and Load Sharing"
+  ],
+  "ac generator": [
+    "Synchronous Generator Equivalent Circuit",
+    "Parallel Operation and Load Sharing"
+  ],
+  "three phase alternator": [
+    "Synchronous Generator Equivalent Circuit",
+    "Parallel Operation and Load Sharing"
+  ],
+  "three phase generator": [
+    "Synchronous Generator Equivalent Circuit",
+    "Parallel Operation and Load Sharing"
+  ],
+  "voltage regulation": [
+    "Synchronous Generator Equivalent Circuit",
+    "Determining Synchronous Reactance"
+  ],
+  "voltage regulation of alternator": [
+    "Synchronous Generator Equivalent Circuit",
+    "Determining Synchronous Reactance"
+  ],
+  "alternator voltage regulation": [
+    "Synchronous Generator Equivalent Circuit",
+    "Determining Synchronous Reactance"
+  ],
+  "regulation of an alternator": [
+    "Synchronous Generator Equivalent Circuit",
+    "Determining Synchronous Reactance"
+  ],
+  "regulation of alternator": [
+    "Synchronous Generator Equivalent Circuit",
+    "Determining Synchronous Reactance"
+  ],
+  "voltage regulation of synchronous generator": [
+    "Synchronous Generator Equivalent Circuit",
+    "Determining Synchronous Reactance"
+  ],
+  "synchronous impedance method": [
+    "Synchronous Generator Equivalent Circuit",
+    "Determining Synchronous Reactance"
+  ],
+  "emf method": [
+    "Synchronous Generator Equivalent Circuit",
+    "Determining Synchronous Reactance"
+  ],
+  "mmf method": [
+    "Synchronous Generator Equivalent Circuit",
+    "Determining Synchronous Reactance"
+  ],
+  "zero power factor method": [
+    "Synchronous Generator Equivalent Circuit",
+    "Determining Synchronous Reactance"
+  ],
+  "zpf method": [
+    "Synchronous Generator Equivalent Circuit",
+    "Determining Synchronous Reactance"
+  ],
+  "potier triangle": [
+    "Synchronous Generator Equivalent Circuit",
+    "Determining Synchronous Reactance"
+  ],
+  "potier method": [
+    "Synchronous Generator Equivalent Circuit",
+    "Determining Synchronous Reactance"
+  ],
+  "=reluctance": [
+    "Magnetic Equivalent Circuits"
+  ],
+  "magnetic reluctance": [
+    "Magnetic Equivalent Circuits"
+  ],
+  "reluctance of a magnetic circuit": [
+    "Magnetic Equivalent Circuits"
+  ],
+  "air gap reluctance": [
+    "Magnetic Equivalent Circuits"
+  ],
+  "core reluctance": [
+    "Magnetic Equivalent Circuits"
+  ],
+  "permeance": [
+    "Magnetic Equivalent Circuits"
+  ],
+  "reheat and regeneration": [
+    "Steam Reheating and Optimum Reheat Pressure",
+    "Regenerative Feedwater Heating"
+  ],
+  "regeneration and reheat": [
+    "Steam Reheating and Optimum Reheat Pressure",
+    "Regenerative Feedwater Heating"
+  ],
+  "reheat regenerative cycle": [
+    "Steam Reheating and Optimum Reheat Pressure",
+    "Regenerative Feedwater Heating"
+  ],
+  "reheat and regenerative rankine cycle": [
+    "Steam Reheating and Optimum Reheat Pressure",
+    "Regenerative Feedwater Heating"
+  ],
+  "reheat rankine cycle": [
+    "Steam Reheating and Optimum Reheat Pressure",
+    "Regenerative Feedwater Heating"
+  ],
+  "regenerative rankine cycle": [
+    "Steam Reheating and Optimum Reheat Pressure",
+    "Regenerative Feedwater Heating"
+  ],
+  "steam reheating": [
+    "Steam Reheating and Optimum Reheat Pressure",
+    "Regenerative Feedwater Heating"
+  ],
+  "regenerative feed heating": [
+    "Steam Reheating and Optimum Reheat Pressure",
+    "Regenerative Feedwater Heating"
+  ],
+  "feedwater heating": [
+    "Steam Reheating and Optimum Reheat Pressure",
+    "Regenerative Feedwater Heating"
+  ],
+  "feed water heating": [
+    "Steam Reheating and Optimum Reheat Pressure",
+    "Regenerative Feedwater Heating"
+  ],
+  "bled steam": [
+    "Steam Reheating and Optimum Reheat Pressure",
+    "Regenerative Feedwater Heating"
+  ],
+  "steam bleeding": [
+    "Steam Reheating and Optimum Reheat Pressure",
+    "Regenerative Feedwater Heating"
+  ],
+  "solar energy": [
+    "Solar Collectors and Insolation",
+    "Photovoltaic Power Systems",
+    "Solar Thermal Power Plants"
+  ],
+  "solar power": [
+    "Solar Collectors and Insolation",
+    "Photovoltaic Power Systems",
+    "Solar Thermal Power Plants"
+  ],
+  "solar power plants": [
+    "Solar Collectors and Insolation",
+    "Photovoltaic Power Systems",
+    "Solar Thermal Power Plants"
+  ],
+  "solar radiation": [
+    "Solar Collectors and Insolation",
+    "Photovoltaic Power Systems",
+    "Solar Thermal Power Plants"
+  ],
+  "=solar": [
+    "Solar Collectors and Insolation",
+    "Photovoltaic Power Systems",
+    "Solar Thermal Power Plants"
+  ],
+  "bond pricing": [
+    "Bonds and the Yield Curve"
+  ],
+  "bond price": [
+    "Bonds and the Yield Curve"
+  ],
+  "bond valuation": [
+    "Bonds and the Yield Curve"
+  ],
+  "pricing bonds": [
+    "Bonds and the Yield Curve"
+  ],
+  "price of a bond": [
+    "Bonds and the Yield Curve"
+  ],
+  "coupon bond pricing": [
+    "Bonds and the Yield Curve"
+  ],
+  "dirty price": [
+    "Bonds and the Yield Curve"
+  ],
+  "clean price": [
+    "Bonds and the Yield Curve"
+  ],
+  "clean and dirty price": [
+    "Bonds and the Yield Curve"
+  ],
+  "money multiplier": [
+    "Money Supply and the Central Bank"
+  ],
+  "money multiplier model": [
+    "Money Supply and the Central Bank"
+  ],
+  "deposit multiplier": [
+    "Money Supply and the Central Bank"
+  ],
+  "credit multiplier": [
+    "Money Supply and the Central Bank"
+  ],
+  "bank multiplier": [
+    "Money Supply and the Central Bank"
+  ],
+  "reserve-deposit ratio": [
+    "Money Supply and the Central Bank"
+  ],
+  "currency-deposit ratio": [
+    "Money Supply and the Central Bank"
+  ],
+  "fractional reserve banking": [
+    "Money Supply and the Central Bank"
+  ],
+  "monetary base": [
+    "Money Supply and the Central Bank"
+  ],
+  "high-powered money": [
+    "Money Supply and the Central Bank"
+  ],
+  "galois theory": [
+    "Fields and Extensions"
+  ],
+  "galois group": [
+    "Fields and Extensions"
+  ],
+  "galois extension": [
+    "Fields and Extensions"
+  ],
+  "fundamental theorem of galois theory": [
+    "Fields and Extensions"
+  ],
+  "splitting field": [
+    "Fields and Extensions"
+  ],
+  "normal extension": [
+    "Fields and Extensions"
+  ],
+  "separable extension": [
+    "Fields and Extensions"
+  ],
+  "=galois": [
+    "Fields and Extensions"
   ]
 }

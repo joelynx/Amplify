@@ -245,12 +245,14 @@ def cosine(a: list[float], b: list[float]) -> float:
     return dot / (na * nb) if na and nb else 0.0
 
 
-def run_sync(conn: sqlite3.Connection, client, pending: list[dict]) -> int:
+def run_sync(conn: sqlite3.Connection, client, pending: list[dict], store_fn=None) -> int:
+    """`store_fn(conn, item, vec)` writes a vector (default: the questions table)."""
+    store_fn = store_fn or store
     t0 = time.time()
     done = 0
     for i, item in enumerate(pending, 1):
         try:
-            store(conn, item, embed_one(client, item))
+            store_fn(conn, item, embed_one(client, item))
             done += 1
         except Exception as e:
             print(f"[{i}/{len(pending)}] FAILED q{item['qid']}: {e}", flush=True)
@@ -308,21 +310,38 @@ def order_ok(client, chunk: list[dict], vecs: list[list[float] | None]) -> bool:
     return True
 
 
-def save_jobs(jobs: dict[str, list[dict]]) -> None:
-    JOBS_FILE.write_text(json.dumps({name: [it["qid"] for it in chunk] for name, chunk in jobs.items()}), encoding="utf-8")
+def save_jobs(jobs: dict[str, list[dict]], path: Path = JOBS_FILE) -> None:
+    path.write_text(json.dumps({name: [it["qid"] for it in chunk] for name, chunk in jobs.items()}), encoding="utf-8")
 
 
-def run_batch(conn: sqlite3.Connection, client, pending: list[dict], batch_size: int, resume: bool, poll: int = 30) -> int:
+def run_batch(
+    conn: sqlite3.Connection,
+    client,
+    pending: list[dict],
+    batch_size: int,
+    resume: bool,
+    poll: int = 30,
+    *,
+    store_fn=None,
+    jobs_file: Path = JOBS_FILE,
+    resolve=None,
+    label: str = "amplify-reembed",
+) -> int:
     """Submit chunks as the service accepts them (a refused submission is retried
     every poll interval for up to 20 min, then goes through sync), poll the
-    running jobs and store their vectors as each one finishes."""
+    running jobs and store their vectors as each one finishes.
+
+    Other vector stores pass `store_fn(conn, item, vec)`, their own `jobs_file`
+    and `resolve(ids) -> items` (rebuilds a saved job's items on --resume-jobs)."""
+    store_fn = store_fn or store
+    resolve = resolve or (lambda ids: items_for(conn, ids))
     fallback: list[dict] = []
     remaining: dict[str, list[dict]] = {}
     queue: list[tuple[int, list[dict]]] = []
     if resume:
-        saved = json.loads(JOBS_FILE.read_text(encoding="utf-8"))
+        saved = json.loads(jobs_file.read_text(encoding="utf-8"))
         for name, qids in saved.items():
-            remaining[name] = items_for(conn, qids)
+            remaining[name] = resolve(qids)
         covered = {it["qid"] for chunk in remaining.values() for it in chunk}
         pending = [it for it in pending if it["qid"] not in covered]
         print(f"resuming {len(remaining)} saved jobs ({len(covered)} rows); {len(pending)} pending rows are in no job yet", flush=True)
@@ -344,7 +363,7 @@ def run_batch(conn: sqlite3.Connection, client, pending: list[dict], batch_size:
         while queue:
             n, chunk = queue[0]
             try:
-                job = submit_batch(client, chunk, f"amplify-reembed-{n}")
+                job = submit_batch(client, chunk, f"{label}-{n}")
             except Exception as e:
                 msg = str(e).replace("\n", " ")[:300]
                 if remaining:
@@ -368,7 +387,7 @@ def run_batch(conn: sqlite3.Connection, client, pending: list[dict], batch_size:
             waits = 0
             queue.pop(0)
             remaining[job.name] = chunk
-            save_jobs(remaining)
+            save_jobs(remaining, jobs_file)
             size_mb = sum(len(it["text"]) for it in chunk) / 1e6
             print(f"submitted job {n} of ~{n_chunks}: {job.name} ({len(chunk)} rows, {size_mb:.1f} MB); {len(queue)} chunks queued", flush=True)
         if not remaining and not queue:
@@ -390,13 +409,13 @@ def run_batch(conn: sqlite3.Connection, client, pending: list[dict], batch_size:
             if job.state.name != "JOB_STATE_SUCCEEDED":
                 print(f"job {name} ended {job.state.name}; its {len(chunk)} rows go through sync", flush=True)
                 fallback.extend(chunk)
-                save_jobs(remaining)
+                save_jobs(remaining, jobs_file)
                 continue
             vecs = batch_vectors(job)
             if len(vecs) != len(chunk) or not order_ok(client, chunk, vecs):
                 print(f"job {name}: {len(vecs)} vectors for {len(chunk)} rows, or order mismatch; sync for this job", flush=True)
                 fallback.extend(chunk)
-                save_jobs(remaining)
+                save_jobs(remaining, jobs_file)
                 continue
             n_fail = 0
             for it, v in zip(chunk, vecs):
@@ -404,17 +423,17 @@ def run_batch(conn: sqlite3.Connection, client, pending: list[dict], batch_size:
                     fallback.append(it)
                     n_fail += 1
                     continue
-                store(conn, it, v)
+                store_fn(conn, it, v)
                 done += 1
             conn.commit()
-            save_jobs(remaining)
+            save_jobs(remaining, jobs_file)
             print(
                 f"job {name} stored ({n_fail} items failed): {done} rows so far, {len(remaining)} jobs left ({int(time.time() - t0)}s)",
                 flush=True,
             )
     if fallback:
         print(f"{len(fallback)} rows through the synchronous API (images, failed jobs or failed items)", flush=True)
-        done += run_sync(conn, client, fallback)
+        done += run_sync(conn, client, fallback, store_fn)
     return done
 
 

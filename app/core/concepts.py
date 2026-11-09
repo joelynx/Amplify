@@ -23,6 +23,7 @@ import json
 import re
 import sqlite3
 import time
+import unicodedata
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass, field
 from functools import lru_cache
@@ -81,7 +82,9 @@ _ENDINGS = sorted(
 # ("differentiation" / "differential").
 _SHARED_PREFIX = 8
 _TOKEN = re.compile(r"[a-z0-9]+")
-_SPLIT_TERMS = re.compile(r"[,;\n\r]+|\s+-\s+|\s*/\s*")
+# A slash separates terms when spaced ("pdf / cdf") or between two words
+# ("pdf/cdf"), not in notation such as "M/M/1".
+_SPLIT_TERMS = re.compile(r"[,;\n\r]+|\s+-\s+|\s+/\s*|\s*/\s+|(?<=\w\w)/(?=\w\w)")
 
 
 def _spell(tok: str) -> str:
@@ -115,17 +118,27 @@ def _shared_prefix(a: str, b: str) -> int:
     return n
 
 
+def _fold(text: str) -> str:
+    """Lower case without accents, so "Itô" meets "Ito" and "Möbius" "Mobius"."""
+    return unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii").lower()
+
+
 def tokens(text: str) -> tuple[str, ...]:
     """Content tokens of `text`, spelling-normalised (not yet stripped)."""
-    raw = _TOKEN.findall(text.lower().replace("'s", "").replace("-", " "))
+    raw = _TOKEN.findall(_fold(text).replace("'s", "").replace("-", " "))
     return tuple(_spell(t) for t in raw if t not in _STOP)
+
+
+def _singular(tok: str) -> str:
+    return tok[:-1] if len(tok) > 3 and tok.endswith("s") and not tok.endswith(("ss", "us", "is")) else tok
 
 
 def _tok_match(a: str, b: str) -> bool:
     if a == b:
         return True
     if len(a) < 4 or len(b) < 4:
-        return False
+        # Short words only meet their plural ("law" / "laws", "map" / "maps").
+        return _singular(a) == _singular(b)
     return _root(a) == _root(b) or _shared_prefix(a, b) >= _SHARED_PREFIX
 
 
@@ -143,27 +156,44 @@ def phrase_score(term: Sequence[str], label: Sequence[str]) -> float:
     return 2 * p * r / (p + r)
 
 
+def _alias_key(text: str) -> str:
+    return " ".join(_TOKEN.findall(_fold(text).replace("-", " ")))
+
+
 @lru_cache(maxsize=1)
-def aliases() -> dict[str, list[str]]:
-    """Abbreviation → expansions, keys normalised to their token string."""
+def _alias_table() -> tuple[dict[str, list[str]], frozenset[str]]:
     try:
         raw = json.loads(_ALIASES_PATH.read_text(encoding="utf-8"))
     except (OSError, ValueError):
-        return {}
+        return {}, frozenset()
     out: dict[str, list[str]] = {}
+    whole: set[str] = set()
     for key, val in raw.items():
         if key.startswith("_"):
             continue
-        vals = [val] if isinstance(val, str) else list(val)
-        out[" ".join(_TOKEN.findall(key.lower().replace("-", " ")))] = vals
-    return out
+        norm = _alias_key(key.lstrip("="))
+        out[norm] = [val] if isinstance(val, str) else list(val)
+        if key.startswith("="):
+            whole.add(norm)
+    return out, frozenset(whole)
+
+
+def aliases() -> dict[str, list[str]]:
+    """Abbreviation → expansions, keys normalised to their token string. A key
+    written with a leading "=" ("=power") applies only to a whole term, never
+    to one word of a longer term ("power series")."""
+    return _alias_table()[0]
+
+
+def whole_term_aliases() -> frozenset[str]:
+    return _alias_table()[1]
 
 
 @dataclass(slots=True)
 class Concept:
     kind: str  # subtopic | branch | tag | topic
     label: str
-    path: str  # "Topic › Branch › Subtopic" for taxonomy nodes, the role for tags
+    path: str  # "Topic › Branch › Subtopic" for taxonomy nodes, "Tag (role)" for tags
     count: int  # questions in scope
     toks: tuple[str, ...] = field(default=(), repr=False)
 
@@ -208,7 +238,8 @@ def vocabulary(
         f"WHERE qt.question_id IN (SELECT question_id FROM questions WHERE {where}) GROUP BY qt.tag",
         params,
     ):
-        out.append(Concept("tag", tag, f"tag ({role})", int(n), tokens(tag)))
+        # The path is the concept's key (here and in the Lecture panel), so it names the tag.
+        out.append(Concept("tag", tag, f"{tag} ({role})", int(n), tokens(tag)))
     _vocab_cache[key] = (time.monotonic(), out)
     return out
 
@@ -235,13 +266,16 @@ def _expansions(term: str) -> list[tuple[tuple[str, ...], str | None]]:
     """The token sequences to try for a term: the term itself, the term with any
     abbreviation token expanded, and the whole-term alias expansions."""
     al = aliases()
-    norm = " ".join(_TOKEN.findall(term.lower().replace("-", " ")))
+    whole = whole_term_aliases()
+    norm = _alias_key(term)
     out: list[tuple[tuple[str, ...], str | None]] = [(tokens(term), None)]
     for exp in al.get(norm, []):
         out.append((tokens(exp), exp))
     words = norm.split()
     if len(words) > 1:
         for i, w in enumerate(words):
+            if w in whole:
+                continue
             for exp in al.get(w, []):
                 swapped = " ".join([*words[:i], exp, *words[i + 1 :]])
                 out.append((tokens(swapped), exp))
