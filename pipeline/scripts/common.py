@@ -12,6 +12,7 @@ a stored Answer or Hint exists.
 
 from __future__ import annotations
 
+import base64
 import datetime as _dt
 import json
 import os
@@ -39,7 +40,9 @@ PIPELINE_DB = Path(os.environ.get("AMPLIFY_PIPELINE_DB") or (PIPELINE_DIR / "pip
 #   submitted     -> inside an in-flight Message Batch (status.batch_id, pending_attempt)
 #   retry         -> output rejected by the checks; resubmitted with feedback in the next batch
 #   passed        -> accepted (assembled=1 once stored)
-#   skipped_image -> the question references an image; never sent (owner decision)
+#   skipped_image -> the question needs a figure that cannot go with it; never sent (owner
+#                    decision; since config.attach_images, only a missing image file or a
+#                    figure the text points at without an \includegraphics)
 #   needs_human_review -> final, not stored
 # Legacy values from the subagent-era run (passed_after_escalation, low_confidence,
 # missing_image, triaged, solved_n, reviewed_n, escalated) are still recognised.
@@ -146,7 +149,7 @@ def is_blank(value, sentinels=()) -> bool:
     return s.upper() in {x.upper() for x in sentinels}
 
 
-# --- image detection (questions with images are skipped, owner decision) ------
+# --- image detection (questions with images were skipped until config.attach_images) ---
 
 IMG_RE = re.compile(r"\\includegraphics\s*(?:\[[^\]]*\])?\s*\{([^}]+)\}")
 FIGURE_KW = re.compile(
@@ -169,6 +172,36 @@ def image_reason(latex: str) -> str | None:
     if m:
         return f"text refers to a figure ('{m.group(0)}')"
     return None
+
+
+# --- images sent with the question (config.attach_images, owner 2026-11-10) ----------
+
+IMAGE_MEDIA = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".gif": "image/gif"}
+
+
+def question_images(texts: list[str], tex_dir: Path) -> tuple[list[tuple[str, Path]], str | None]:
+    """The images that \\includegraphics names in texts, in order and each once, and why they
+    cannot all be sent (a missing file, or a type the model cannot read), else None."""
+    out: list[tuple[str, Path]] = []
+    for name in dict.fromkeys(n.strip() for t in texts for n in IMG_RE.findall(t or "")):
+        p = resolve_image(name, tex_dir)
+        if p is None:
+            return [], f"image file not found: {name}"
+        if p.suffix.lower() not in IMAGE_MEDIA:
+            return [], f"image the model cannot read: {p.name}"
+        out.append((name, p))
+    return out, None
+
+
+def image_blocks(images: list[tuple[str, Path]]) -> list[dict]:
+    """The content blocks after the question's text: each image follows a line naming the
+    \\includegraphics command it belongs to, so the model can tell which picture the text means."""
+    blocks: list[dict] = []
+    for name, path in images:
+        blocks.append({"type": "text", "text": f"IMAGE \\includegraphics{{{name}}}:"})
+        blocks.append({"type": "image", "source": {"type": "base64", "media_type": IMAGE_MEDIA[path.suffix.lower()],
+                                                   "data": base64.b64encode(path.read_bytes()).decode("ascii")}})
+    return blocks
 
 
 # --- pipeline database --------------------------------------------------------

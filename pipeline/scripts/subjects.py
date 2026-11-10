@@ -35,8 +35,10 @@ from common import (
     now_iso,
     pipeline_wrote,
     q_dir,
+    question_images,
     read_text,
     strip_code_fences,
+    teximages_dir,
     upsert_status,
     write_json,
     write_text,
@@ -97,6 +99,26 @@ def figure_reason(latex: str) -> str | None:
         return "references image(s): " + ", ".join(n.strip() for n in names[:3])
     m = FIGURE_REF.search(latex)
     return f"text refers to a figure ('{m.group(0)}')" if m else None
+
+
+def attachments(cfg: dict, q: dict, mode: str) -> tuple[list[tuple[str, Path]], str | None]:
+    """The images to send with a question (in aids mode the book solution's too), and why it is
+    skipped instead (None: send it). Without config.attach_images figure_reason decides, as before.
+    With it, every image named must exist, and a question that points at a figure without an
+    \\includegraphics of its own is still skipped. config.subjects.figure_ok_ids lists questions
+    the rule flags that were read and need no figure: they are sent."""
+    reason = figure_reason(q["latexcode"])
+    if reason and not IMG_RE.search(q["latexcode"]) and q["question_id"] in set(subj_cfg(cfg).get("figure_ok_ids") or ()):
+        reason = None  # read and found not to need a figure (the rule's hit is a false alarm)
+    if not cfg.get("attach_images"):
+        return [], reason
+    texts = [q["latexcode"]] + ([q["solution"] or ""] if mode == "aids" else [])
+    images, missing = question_images(texts, teximages_dir(cfg))
+    if missing:
+        return [], missing
+    if reason and not IMG_RE.search(q["latexcode"]):
+        return [], reason
+    return images, None
 
 
 # --- subjects and prompts -------------------------------------------------------------

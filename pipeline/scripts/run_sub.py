@@ -12,6 +12,11 @@ token limit (or by a safety classifier) is stored the same way with stop_reason 
 (refusal), and judge treats it as in the API run; Claude Code's automatic follow-up turn is
 never let run.
 
+With config.attach_images a question that names images with \\includegraphics is sent with them
+(owner 2026-11-10; the API run skipped them): the same text, then each image after a line naming
+its command, as one stream-json user message. A question whose image file is missing, or whose
+text points at a figure it does not carry, is still skipped (skipped_image).
+
 Claude Code wraps every request in boilerplate that a subscription login cannot switch off:
 a billing line and an identity line before the system prompt, a reminder with the account
 email before the question, and an environment block (working directory, platform, model,
@@ -49,11 +54,13 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import (  # noqa: E402
+    IMG_RE,
     OUTPUTS_DIR,
     PIPELINE_DIR,
     app_conn,
     fetch_question,
     get_status,
+    image_blocks,
     image_reason,
     is_blank,
     is_done,
@@ -62,7 +69,9 @@ from common import (  # noqa: E402
     now_iso,
     pipe_conn,
     q_dir,
+    question_images,
     read_json,
+    teximages_dir,
     upsert_status,
     write_json,
     write_progress,
@@ -149,14 +158,31 @@ def effort_for(cfg: dict, source: str | None) -> str:
     return (sub_cfg(cfg).get("effort_by_source") or {}).get(source) or cfg["solver"]["effort"]
 
 
-def claude_cmd(cfg: dict, system_file: Path, effort: str) -> list[str]:
+def claude_cmd(cfg: dict, system_file: Path, effort: str, stream_input: bool = False) -> list[str]:
     return [claude_exe(cfg), "-p",
             "--system-prompt-file", str(system_file),  # replaces Claude Code's own system prompt
             "--model", cfg["solver"]["model"], "--effort", effort,
             "--tools", "",                             # no tools: a single reply, as over the API
             "--output-format", "stream-json", "--verbose",
             "--no-session-persistence", "--strict-mcp-config", "--safe-mode",
-            "--permission-mode", "dontAsk"]
+            "--permission-mode", "dontAsk",
+            *(["--input-format", "stream-json"] if stream_input else [])]  # a message with image blocks
+
+
+def attachments(cfg: dict, q: dict) -> tuple[list[tuple[str, Path]], str | None]:
+    """The images to send with a question, and why it is skipped instead (None: send it). Without
+    config.attach_images every question image_reason flags is skipped, as in the API run. With it,
+    a question goes with the images its \\includegraphics commands name when every file exists;
+    one whose text points at a figure it does not carry is still skipped, unless it is in
+    config.subscription.figure_ok_ids (read and found not to need a figure)."""
+    reason = image_reason(q["latexcode"])
+    if not reason:
+        return [], None
+    if not IMG_RE.search(q["latexcode"]):
+        return [], None if q["question_id"] in set(sub_cfg(cfg).get("figure_ok_ids") or ()) else reason
+    if not cfg.get("attach_images"):
+        return [], reason
+    return question_images([q["latexcode"]], teximages_dir(cfg))
 
 
 def max_tokens_for(cfg: dict, effort: str) -> int:
@@ -187,14 +213,22 @@ def write_system_file(cfg: dict) -> tuple[Path, str]:
     return path, system
 
 
-def call_claude(cfg: dict, system_file: Path, text: str, effort: str, base_url: str | None = None) -> dict:
+def call_claude(cfg: dict, system_file: Path, text: str, effort: str, base_url: str | None = None,
+                images: list[tuple[str, Path]] | None = None) -> dict:
     """Run one question; return the parsed stream-json events (no interpretation). When Claude
     Code follows the reply with a turn of its own (a `user` event: "Output token limit hit.
     Resume directly...", a stalled stream, a safety-classifier stop), the process is ended
-    there: a second turn is never used, so letting it run would only cost time and usage."""
+    there: a second turn is never used, so letting it run would only cost time and usage.
+    With images, the same text goes as the first block of a stream-json user message and each
+    image follows it (image_blocks); Claude Code's wrapping is the same either way."""
     t0 = time.time()
-    p = subprocess.Popen(claude_cmd(cfg, system_file, effort), stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                         stderr=subprocess.PIPE, cwd=SUB_CWD, env=child_env(cfg, effort, base_url))
+    if images:
+        msg = {"role": "user", "content": [{"type": "text", "text": text}, *image_blocks(images)]}
+        payload = json.dumps({"type": "user", "message": msg}) + "\n"
+    else:
+        payload = text
+    p = subprocess.Popen(claude_cmd(cfg, system_file, effort, stream_input=bool(images)), stdin=subprocess.PIPE,
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=SUB_CWD, env=child_env(cfg, effort, base_url))
     timed_out = threading.Event()
 
     def on_timeout() -> None:
@@ -203,7 +237,7 @@ def call_claude(cfg: dict, system_file: Path, text: str, effort: str, base_url: 
 
     def feed() -> None:
         try:
-            p.stdin.write(text.encode("utf-8"))
+            p.stdin.write(payload.encode("utf-8"))
             p.stdin.close()
         except OSError:
             pass
@@ -288,13 +322,15 @@ class _StandIn(BaseHTTPRequestHandler):
         self.wfile.flush()
 
 
-def capture_request(cfg: dict, system_file: Path, text: str, effort: str) -> tuple[list, dict]:
+def capture_request(cfg: dict, system_file: Path, text: str, effort: str,
+                    images: list[tuple[str, Path]] | None = None) -> tuple[list, dict]:
     _StandIn.captured = []
     srv = ThreadingHTTPServer(("127.0.0.1", 0), _StandIn)
     th = threading.Thread(target=srv.serve_forever, daemon=True)
     th.start()
     try:
-        out = call_claude(cfg, system_file, text, effort, base_url=f"http://127.0.0.1:{srv.server_address[1]}")
+        out = call_claude(cfg, system_file, text, effort, base_url=f"http://127.0.0.1:{srv.server_address[1]}",
+                          images=images)
     finally:
         srv.shutdown()
     return list(_StandIn.captured), out
@@ -306,8 +342,18 @@ def _texts(content) -> list[str]:
     return [c.get("text", "") if c.get("type") == "text" else json.dumps(c) for c in content]
 
 
-def check_request(cfg: dict, system: str, text: str, effort: str, captured: list, out: dict, api_shas: set[str]) -> dict:
-    """Field-by-field comparison with the request run.py sends for the same question."""
+def _block_core(b) -> dict:
+    """What a content block carries, without delivery fields such as cache_control."""
+    if not isinstance(b, dict):
+        return {"text": b}
+    return {"type": b.get("type"), **({"text": b.get("text")} if b.get("type") == "text" else {"source": b.get("source")})}
+
+
+def check_request(cfg: dict, system: str, text: str, effort: str, captured: list, out: dict, api_shas: set[str],
+                  images: list[tuple[str, Path]] | None = None) -> dict:
+    """Field-by-field comparison with the request run.py sends for the same question (with images:
+    the same request plus the image blocks right after the question; they are not part of the
+    wrapping, so its fingerprint is the one a text question gives)."""
     st = dict(cfg["solver"], effort=effort, max_tokens=max_tokens_for(cfg, effort))
     checks: list[tuple[str, bool, str]] = []
 
@@ -337,8 +383,20 @@ def check_request(cfg: dict, system: str, text: str, effort: str, captured: list
         f"{len(sys_blocks)} system blocks")
     msgs = b.get("messages") or []
     first = msgs[0] if msgs else {}
-    user_blocks = _texts(first.get("content", [])) if first.get("role") == "user" else []
+    content = first.get("content", []) if first.get("role") == "user" else []
+    content = [{"type": "text", "text": content}] if isinstance(content, str) else list(content)
+    user_blocks = _texts(content)
     chk("question sent byte for byte, once", user_blocks.count(text) == 1, f"{len(user_blocks)} user blocks")
+    span = 0
+    if images:
+        want = [_block_core(x) for x in image_blocks(images)]
+        at = user_blocks.index(text) + 1 if text in user_blocks else len(content)
+        got = [_block_core(x) for x in content[at:at + len(want)]]
+        chk("images sent byte for byte right after the question, each after its \\includegraphics line",
+            got == want, f"{len(images)} images, {len(got) // 2} found in place")
+        span = len(want) if got == want else 0
+        content = content[:at] + content[at + span:]
+        user_blocks = user_blocks[:at] + user_blocks[at + span:]
     extra_user = [t for t in user_blocks if t != text]
     chk("other user blocks are Claude Code context reminders",
         all(t.startswith("<system-reminder>") for t in extra_user), str([t[:60] for t in extra_user]))
@@ -381,16 +439,21 @@ def api_system_shas(pc) -> set[str]:
 
 def verify_samples(cfg: dict, app, pc) -> list[int]:
     """One question of each kind the run sends: a fresh one, a retry (its message carries the
-    previous reply), one with non-ASCII text, and one from each effort level in use."""
-    cands = [q for q in candidates(cfg, app, pc) if not image_reason(fetch_question(app, q)["latexcode"])]
+    previous reply), one with non-ASCII text, one from each effort level in use, and one with
+    one image and one with several when images are sent."""
     picks: dict[str, int] = {}
-    for qid in cands:
+    for qid in candidates(cfg, app, pc):
         q = fetch_question(app, qid)
+        images, skip = attachments(cfg, q)
+        if skip:
+            continue
         row = get_status(pc, qid)
         kinds = ["retry" if row is not None and row["status"] == "retry" else "fresh",
                  "effort:" + effort_for(cfg, q["source"])]
         if any(ord(ch) > 127 for ch in q["latexcode"]):
             kinds.append("non-ascii")
+        if images:
+            kinds.append("images" if len(images) == 1 else "several images")
         for k in kinds:
             picks.setdefault(k, qid)
     return list(dict.fromkeys(picks.values()))
@@ -409,10 +472,12 @@ def verify(cfg: dict, app, pc, qids: list[int] | None = None, accept: bool = Fal
         attempt, feedback, _redo = plan_attempt(cfg, pc, qid, q["source"])  # no reset here: verify writes nothing
         text = user_text(q, feedback)
         effort = effort_for(cfg, q["source"])
-        captured, out = capture_request(cfg, system_file, text, effort)
-        rep = check_request(cfg, system, text, effort, captured, out, shas)
+        images, _skip = attachments(cfg, q)
+        captured, out = capture_request(cfg, system_file, text, effort, images)
+        rep = check_request(cfg, system, text, effort, captured, out, shas, images)
         rep.update({"question_id": qid, "source": q["source"], "effort": effort, "attempt": attempt,
-                    "with_feedback": bool(feedback), "claude_code_version": rep["init"].get("claude_code_version")})
+                    "with_feedback": bool(feedback), "images": len(images),
+                    "claude_code_version": rep["init"].get("claude_code_version")})
         reports.append(rep)
     fps = {r["fingerprint"] for r in reports}
     versions = {r["claude_code_version"] for r in reports}
@@ -431,7 +496,8 @@ def verify(cfg: dict, app, pc, qids: list[int] | None = None, accept: bool = Fal
     if not quiet:
         for r in reports:
             print(f"question {r['question_id']} ({r['source'][:40]}, {r['effort']} effort, attempt {r['attempt']}"
-                  f"{', with feedback' if r['with_feedback'] else ''}):")
+                  f"{', with feedback' if r['with_feedback'] else ''}"
+                  f"{', ' + str(r['images']) + ' image(s)' if r['images'] else ''}):")
             for name, good, detail in r["checks"]:
                 print(f"  {'ok  ' if good else 'FAIL'} {name}" + (f"  [{detail}]" if detail and not good else ""))
         print(f"Claude Code {version}; wrapping fingerprint {fp[:16] if fp else None}; "
@@ -465,14 +531,15 @@ def scope_rows(cfg: dict, app) -> list[tuple[int, str, str | None]]:
     generated is None, or the effort named in the stored generated solution ("?" if unnamed).
     Kept: questions whose `solution` kind is in config.subscription.replace, every question
     of a source in effort_by_source (those are redone when their solution came from a lower effort),
-    and the questions in redo_ids. Plus api_leftover_ids, whatever their source or solution kind,
+    and the questions in redo_ids. Plus api_leftover_ids and figure_ok_ids (questions the API run
+    skipped for a figure they turned out not to need), whatever their source or solution kind,
     after everything else."""
     s = sub_cfg(cfg)
     srcs = s["sources"]
     kinds = set(s.get("replace") or ("missing", "gemini"))
     redo = set(s.get("effort_by_source") or {})
     redo_ids = set(s.get("redo_ids") or ())
-    leftover = set(s.get("api_leftover_ids") or ())
+    leftover = set(s.get("api_leftover_ids") or ()) | set(s.get("figure_ok_ids") or ())
     rank = {src: i for i, src in enumerate(srcs)}
     cols = "question_id, source, solution, generated_solution"
     rows = app.execute(f"SELECT {cols} FROM questions WHERE source IN ({','.join('?' * len(srcs))})", srcs).fetchall()
@@ -525,8 +592,12 @@ def candidates(cfg: dict, app, pc, ids: list[int] | None = None) -> list[int]:
         stale = src in redo and ((gen is not None and (gen == "?" or below(gen, need))) or below(last_effort(r), need))
         # a redo_ids question until its subscription redo is settled (a rejected attempt gets its retry)
         stale = stale or (qid in redo_ids and (not from_sub(r) or r["status"] == "retry"))
-        if r is not None and r["status"] in ("submitted", "received", "skipped_image", "missing_image"):
+        if r is not None and r["status"] in ("submitted", "received", "missing_image"):
             continue
+        if r is not None and r["status"] == "skipped_image":
+            if attachments(cfg, fetch_question(app, qid))[1]:
+                continue  # still cannot go with its figure
+            r = None  # skipped before config.attach_images: now it goes with its images, as a new question
         if r is not None and r["status"] == "needs_human_review" and not below(last_effort(r), need):
             continue  # settled at the effort its source gets now (a redo keeps its old solution meanwhile)
         if not stale and (gen is not None or (r is not None and is_done(r))):
@@ -670,9 +741,11 @@ def interpret(out: dict, cfg: dict, version: str) -> dict:
             "warning": any(li.get("status") == "allowed_warning" for li in limits)}
 
 
-def store(pc, cfg: dict, qid: int, attempt: int, effort: str, info: dict, seconds: int) -> None:
+def store(pc, cfg: dict, qid: int, attempt: int, effort: str, info: dict, seconds: int,
+          images: list[str] | None = None) -> None:
     """Persist a reply exactly where run.py's download phase puts one. The effort recorded in
-    status.solverN_effort is what assemble.py writes into the attribution line."""
+    status.solverN_effort is what assemble.py writes into the attribution line; the names of the
+    images sent with the question go into the response file."""
     st = dict(cfg["solver"], effort=effort)
     res = info["result"]
     u = res.get("usage") or {}
@@ -684,6 +757,7 @@ def store(pc, cfg: dict, qid: int, attempt: int, effort: str, info: dict, second
         "usage": u, "collected_at": now_iso(), "transport": "subscription",
         "claude_code_version": info["init"].get("claude_code_version"), "session_id": res.get("session_id"),
         "duration_ms": res.get("duration_ms"), "model_usage": res.get("modelUsage"),
+        **({"images": images} if images else {}),
         **({"cut_off": info["why"]} if info["kind"] == "cut" else {}),
     })
     pc.execute(
@@ -695,7 +769,8 @@ def store(pc, cfg: dict, qid: int, attempt: int, effort: str, info: dict, second
     upsert_status(pc, qid, status="received", attempts=attempt, pending_attempt=None, batch_id=batch_id, batch=None,
                   prompt_version=cfg["prompt_version"],
                   **{f"solver{min(attempt, 2)}_model": st["model"], f"solver{min(attempt, 2)}_effort": st["effort"]})
-    log_event(pc, qid, "sub", f"attempt {attempt} received in {seconds}s, {u.get('output_tokens')} output tokens, stop {res.get('stop_reason')}")
+    log_event(pc, qid, "sub", f"attempt {attempt} received in {seconds}s, {u.get('output_tokens')} output tokens, stop {res.get('stop_reason')}"
+              + (f", sent with {len(images)} image(s)" if images else ""))
 
 
 def api_failure(pc, cfg: dict, qid: int, attempt: int, why: str) -> str:
@@ -764,8 +839,8 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     if len(running) >= limits[effort_for(cfg, q["source"])]:
                         break
                     qid = queue.pop(0)
-                    reason = image_reason(q["latexcode"])
-                    if reason:  # same rule as run.py: questions with an image are not sent
+                    images, reason = attachments(cfg, q)
+                    if reason:  # a figure that cannot go with the question: not sent
                         upsert_status(pc, qid, status="skipped_image", note=reason, prompt_version=cfg["prompt_version"])
                         log_event(pc, qid, "skip", reason)
                         summary["skipped_image"] += 1
@@ -775,19 +850,19 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     if redo:
                         reset_for_redo(pc, qid, effort)
                         summary["redo"] += 1
-                    fut = ex.submit(call_claude, cfg, system_file, user_text(q, feedback), effort)
-                    running[fut] = (qid, attempt, effort)
+                    fut = ex.submit(call_claude, cfg, system_file, user_text(q, feedback), effort, None, images)
+                    running[fut] = (qid, attempt, effort, [n for n, _ in images])
                 if not running:
                     break
                 done, _ = wait(running, return_when=FIRST_COMPLETED)
                 for fut in done:
-                    qid, attempt, effort = running.pop(fut)
+                    qid, attempt, effort, names = running.pop(fut)
                     out = fut.result()
                     info = interpret(out, cfg, version)
                     kind = info["kind"]
                     raw = save_failure(qid, attempt, out, info) if kind in ("error", "stop", "cut") else None
                     if kind in ("ok", "cut"):
-                        store(pc, cfg, qid, attempt, effort, info, out.get("seconds", 0))
+                        store(pc, cfg, qid, attempt, effort, info, out.get("seconds", 0), names)
                         summary["received" if kind == "ok" else info["result"]["stop_reason"]] += 1
                         if info["warning"]:
                             summary["limit_warnings"] += 1
@@ -837,8 +912,10 @@ def status(cfg: dict, app, pc) -> None:
         st = r["status"] if r is not None else None
         if st == "received":
             c["judge"] += 1
-        elif st in ("skipped_image", "missing_image"):
+        elif st in ("skipped_image", "missing_image") and qid not in cand:
             c["no_img"] += 1
+        elif qid in cand and st == "skipped_image":
+            c["img"] += 1  # skipped before config.attach_images; goes with its images now
         elif qid in cand:
             if gen is not None or (r is not None and is_done(r)) or below(last_effort(r), effort_for(cfg, src)):
                 c["redo"] += 1
@@ -854,7 +931,7 @@ def status(cfg: dict, app, pc) -> None:
     print(f"subscription | {cfg['prompt_version']} | {cfg['solver']['model']} / {cfg['solver']['effort']} | "
           f"replies so far {sub[0]} ({sub[1]} output tokens) | replacing solutions that are: "
           f"{', '.join(sub_cfg(cfg).get('replace') or ('missing', 'gemini'))}")
-    cols = ("total", "done", "human", "no_img", "judge", "retry", "redo", "todo")
+    cols = ("total", "done", "human", "no_img", "judge", "retry", "redo", "todo", "img")
     print(f"{'#':>2} {'source':56} {'effort':>6} " + " ".join(f"{c:>6}" for c in cols))
     tot: Counter = Counter()
     srcs = sub_cfg(cfg)["sources"]
@@ -895,8 +972,9 @@ def main() -> None:
         for qid in candidates(cfg, app, pc)[: a.n]:
             q = fetch_question(app, qid)
             r = get_status(pc, qid)
+            images, skip = attachments(cfg, q)
             print(json.dumps({"question_id": qid, "source": q["source"], "status": r["status"] if r else "new",
-                              "will_skip": image_reason(q["latexcode"])}))
+                              "will_skip": skip, "images": len(images)}))
     elif a.cmd == "solve":
         ids = [int(x) for x in a.ids.split(",") if x.strip()] if a.ids else None
         solve(cfg, app, pc, a.n, ids, a.workers, a.wait_on_limit, a.force_unlock)

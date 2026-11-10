@@ -39,6 +39,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import run_sub  # noqa: E402
 import subjects  # noqa: E402
 from common import (  # noqa: E402
+    IMG_RE,
     OUTPUTS_DIR,
     PIPELINE_DIR,
     app_conn,
@@ -52,6 +53,8 @@ from common import (  # noqa: E402
     q_dir,
     read_json,
     read_text,
+    resolve_image,
+    teximages_dir,
     upsert_status,
     write_progress,
     write_text,
@@ -99,8 +102,9 @@ def scope_rows(cfg: dict, app, ours: set[int] = frozenset()) -> list[dict]:
         mode = "solve" if kind in solve_kinds else "aids" if kind in aids_kinds else None
         if mode is None or (mode == "solve" and not is_blank(r["generated_solution"]) and r["question_id"] not in ours):
             continue
+        images, figure = subjects.attachments(cfg, dict(r), mode)
         out.append({"id": r["question_id"], "source": r["source"], "subject": subject, "mode": mode, "kind": kind,
-                    "type": r["type"], "figure": subjects.figure_reason(r["latexcode"])})
+                    "type": r["type"], "figure": figure, "images": len(images)})
     out.sort(key=lambda x: (x["mode"] != "solve", order[x["subject"]], x["id"]))
     return out
 
@@ -119,6 +123,9 @@ def candidates(cfg: dict, app, pc, ids: list[int] | None = None) -> list[dict]:
     retry, fresh = [], []
     for x in rows:
         r = status.get(x["id"])
+        if r is not None and r["mode"] is not None and r["status"] == "skipped_image" and not x["figure"]:
+            fresh.append(x)  # skipped before config.attach_images: now it goes with its images
+            continue
         if r is not None and (r["mode"] is None or r["review_from"] is not None
                               or r["status"] in ("submitted", "received", "skipped_image") or is_done(r)):
             continue
@@ -152,20 +159,22 @@ def verify(cfg: dict, app, pc, quiet: bool = False, review: bool = False, accept
     picks: dict[str, dict] = {}
     pool = [dict(x, mode="solve") for x in review_rows(cfg, app, pc)] if review else []
     for x in pool or candidates(cfg, app, pc) or scope_rows(cfg, app):
-        if not x["figure"]:
-            picks.setdefault(x["mode"], x)
+        if not x["figure"]:  # one question of each mode, and one with images of each mode when sent
+            picks.setdefault(x["mode"] + (" with images" if x["images"] else ""), x)
     if not picks:
         raise SystemExit("no question to verify with")
     accepted = run_sub.accepted_fingerprints(pc)
     reports = []
-    for mode, x in picks.items():
+    for x in picks.values():
+        mode = x["mode"]
         q = fetch_question(app, x["id"])
         path, system = system_file(cfg, mode, x["subject"])
         text = subjects.user_text(q, mode, None, cfg)
+        images, _skip = subjects.attachments(cfg, q, mode)
         effort = scfg(cfg)["review_effort"] if review else effort_for(cfg, mode)
-        captured, out = run_sub.capture_request(ccfg, path, text, effort)
-        rep = run_sub.check_request(ccfg, system, text, effort, captured, out, set())
-        rep.update(question_id=x["id"], mode=mode, effort=effort,
+        captured, out = run_sub.capture_request(ccfg, path, text, effort, images)
+        rep = run_sub.check_request(ccfg, system, text, effort, captured, out, set(), images)
+        rep.update(question_id=x["id"], mode=mode, effort=effort, images=len(images),
                    claude_code_version=rep["init"].get("claude_code_version"),
                    accepted=rep["fingerprint"] in accepted)
         reports.append(rep)
@@ -184,7 +193,8 @@ def verify(cfg: dict, app, pc, quiet: bool = False, review: bool = False, accept
     ok = all(r["ok"] and r["accepted"] for r in reports)
     if not quiet:
         for r in reports:
-            print(f"question {r['question_id']} ({r['mode']}, {r['effort']} effort): "
+            print(f"question {r['question_id']} ({r['mode']}, {r['effort']} effort"
+                  f"{', ' + str(r['images']) + ' image(s)' if r['images'] else ''}): "
                   f"{'ok' if r['ok'] else 'FAILED'}; wrapping {(r['fingerprint'] or '')[:16]} "
                   f"{'accepted' if r['accepted'] else 'NOT accepted (run_sub.py verify --accept after review)'}")
             for name, good, detail in r["checks"]:
@@ -278,15 +288,16 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                 while queue and stop_reason is None and len(running) < limit:
                     x = queue.pop(0)
                     qid, mode = x["id"], x["mode"]
-                    if x["figure"]:  # a figure the question does not carry: not sent
-                        upsert_status(pc, qid, status="skipped_image", note=x["figure"], mode=mode, subject=x["subject"],
+                    q = fetch_question(app, qid)
+                    images, figure = subjects.attachments(cfg, q, mode)
+                    if figure:  # a figure that cannot go with the question: not sent
+                        upsert_status(pc, qid, status="skipped_image", note=figure, mode=mode, subject=x["subject"],
                                       prompt_version=ccfg["prompt_version"])
-                        log_event(pc, qid, "skip", x["figure"])
+                        log_event(pc, qid, "skip", figure)
                         summary["skipped_image"] += 1
                         continue
                     if (mode, x["subject"]) not in files:
                         files[(mode, x["subject"])] = system_file(cfg, mode, x["subject"])[0]
-                    q = fetch_question(app, qid)
                     attempt, feedback = plan_attempt(pc, qid)
                     extra = {"tiebreak": 1} if tiebreak else {}
                     if review:
@@ -297,20 +308,20 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         effort = scfg(cfg)["tiebreak_effort"] if tiebreak else effort_for(cfg, mode)
                     upsert_status(pc, qid, mode=mode, subject=x["subject"], **extra)
                     fut = ex.submit(run_sub.call_claude, ccfg, files[(mode, x["subject"])],
-                                    subjects.user_text(q, mode, feedback, cfg), effort)
-                    running[fut] = (x, attempt, effort)
+                                    subjects.user_text(q, mode, feedback, cfg), effort, None, images)
+                    running[fut] = (x, attempt, effort, [name for name, _ in images])
                 if not running:
                     break
                 done, _ = wait(running, return_when=FIRST_COMPLETED)
                 for fut in done:
-                    x, attempt, effort = running.pop(fut)
+                    x, attempt, effort, names = running.pop(fut)
                     qid, mode = x["id"], x["mode"]
                     out = fut.result()
                     info = run_sub.interpret(out, ccfg, version)
                     kind = info["kind"]
                     raw = run_sub.save_failure(qid, attempt, out, info) if kind in ("error", "stop", "cut") else None
                     if kind in ("ok", "cut"):
-                        run_sub.store(pc, ccfg, qid, attempt, effort, info, out.get("seconds", 0))
+                        run_sub.store(pc, ccfg, qid, attempt, effort, info, out.get("seconds", 0), names)
                         summary["received" if kind == "ok" else info["result"]["stop_reason"]] += 1
                     elif kind == "limited":
                         queue.insert(0, x)  # the same row, mode included, goes again after the wait
@@ -358,9 +369,11 @@ def status(cfg: dict, app, pc) -> None:
             c["figure"] += 1
         elif r is None:
             c["todo"] += 1
+        elif r["status"] == "skipped_image" and not x["figure"]:
+            c["images"] += 1  # skipped before config.attach_images; goes with its images now
         else:
             c[r["status"]] += 1
-    cols = ("total", "todo", "figure", "received", "retry", "passed", "needs_human_review", "skipped_image")
+    cols = ("total", "todo", "images", "figure", "received", "retry", "passed", "needs_human_review", "skipped_image")
     print(f"{'subject':42} {'mode':5} " + " ".join(f"{c[:8]:>8}" for c in cols))
     for (s, m), c in per.items():
         print(f"{s[:42]:42} {m:5} " + " ".join(f"{c[k]:>8}" for k in cols))
@@ -456,13 +469,19 @@ document.addEventListener("DOMContentLoaded",()=>renderMathInElement(document.bo
 </script></body></html>"""
 
 
-def tex_html(s: str | None) -> str:
-    """Rough LaTeX-to-HTML for reading: text commands and lists converted, math left to KaTeX."""
+def tex_html(s: str | None, tex_dir: Path | None = None) -> str:
+    """Rough LaTeX-to-HTML for reading: text commands and lists converted, math left to KaTeX, and
+    with tex_dir each \\includegraphics shown as the image file it names."""
     import re
 
     if not s:
         return "<i>(none)</i>"
     t = html.escape(s, quote=False)
+    if tex_dir is not None:
+        def img(m: re.Match) -> str:
+            p = resolve_image(m.group(1), tex_dir)
+            return f'<img src="{p.as_uri()}" style="max-width:100%;display:block">' if p else m.group(0)
+        t = IMG_RE.sub(img, t)
     t = re.sub(r"\\textbf\{([^{}]*)\}", r"<b>\1</b>", t)
     t = re.sub(r"\\(?:textit|emph)\{([^{}]*)\}", r"<i>\1</i>", t)
     t = re.sub(r"\\begin\{itemize\}", "<ul>", t)
@@ -497,12 +516,12 @@ def review(cfg: dict, app, pc, ids: list[int] | None, name: str) -> Path:
              f"<div class=meta>{html.escape(q['source'] or '')} &middot; {html.escape(q['topic'])} / {html.escape(q['branch'])} / "
              f"{html.escape(q['subtopic'])} &middot; attempt {res['attempt']} &middot; {out_tok} output tokens</div>",
              f"<div>{verdict}</div>", *[f"<div>{e}</div>" for e in extra],
-             "<h3>Question</h3>", tex_html(q["latexcode"])]
+             "<h3>Question</h3>", tex_html(q["latexcode"], teximages_dir(cfg))]
         if not is_blank(q["answer"], cfg["empty_answer_sentinels"]):
             b += ["<h3>Stored answer (source)</h3>", tex_html(q["answer"])]
         if parts:
             if row["mode"] == "aids":
-                b += ["<h3>Book solution (kept as is)</h3>", f"<div class=book>{tex_html(q['solution'])}</div>",
+                b += ["<h3>Book solution (kept as is)</h3>", f"<div class=book>{tex_html(q['solution'], teximages_dir(cfg))}</div>",
                       "<h3>Book check</h3>", html.escape(parts["book_check"])]
             else:
                 b += ["<h3>Solution</h3>", tex_html(parts["solution"]),

@@ -33,6 +33,8 @@ and fills empty Answer / Hint cells.
   `{{OLD_SOLUTION}}` / `{{STORED_ANSWER}}` placeholder.
 - Every question that involves an image is skipped (`skipped_image`): any
   `\includegraphics`, or prose that points at a figure. 301 of 12,118.
+  (Since 2026-11-10 the subscription runners send the images instead; see
+  below.)
 - Cost levers: Batch API (half price on every token), the static instructions
   as a cached system prompt (1-hour TTL), one request per question (rigor
   notes and hint come from the same reply), retries only for the questions
@@ -133,6 +135,25 @@ the request first and refuses to start unless its wrapping fingerprint (date
 and account email excluded) was accepted with `verify --accept`, and stops if Claude Code changes
 version mid-run. A usage-limit refusal costs nothing: the question goes back to
 the front of the queue and `--wait-on-limit` sleeps until the reset.
+
+Questions with images (`config.attach_images`, owner 2026-11-10): the API run
+skipped every question with an image. run_sub.py and run_subjects.py now send
+a question whose `\includegraphics` files all exist together with them: the
+same text block first, then each image after a line `IMAGE
+\includegraphics{<name>}:`, as one stream-json user message (`--input-format
+stream-json`). In aids mode the book solution's images go too. The system
+prompts are unchanged: format rule 11 already asks for whatever a figure
+contributes to be said in words, and replies still may not use
+`\includegraphics`. `verify` checks the image blocks arrive byte for byte
+right after the question and leaves them out of the wrapping fingerprint, which
+is therefore the accepted one. A question skipped before goes again; one whose
+image file is missing, or whose text points at a figure without an
+`\includegraphics` of its own, stays `skipped_image`, unless it is listed in
+`subscription.figure_ok_ids` / `subjects.figure_ok_ids`: questions the broad
+figure rules flag that were read and need no figure (owner 2026-11-10; the 7
+that did point at a missing figure were deleted from the app). Judging needs no images
+(the preview PDF is off), so jobs stay as they were. `response_<n>.json` lists
+the images sent.
 
 A reply cut off at the output token limit is stored as the API returns one
 (stop_reason `max_tokens`), so judge gives it one blind re-solve and then
