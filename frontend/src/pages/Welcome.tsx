@@ -63,6 +63,7 @@ export default function WelcomePage() {
           <StudyRoom />
           <ClubCredit />
           <TodayCard />
+          <NavCards />
         </div>
       ) : (
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-10 px-6 py-12">
@@ -83,27 +84,34 @@ export default function WelcomePage() {
 
         <TodayCard />
 
-        <nav className="grid w-full gap-3 sm:grid-cols-2">
-          {CARDS.map(({ to, title, blurb, Icon }) => (
-            <Link
-              key={to}
-              to={to}
-              className={cn(
-                "flex flex-col gap-2 rounded-lg border border-border bg-surface p-4 text-left transition",
-                "hover:border-primary hover:shadow-md",
-              )}
-            >
-              <span className="flex items-center gap-2 font-semibold">
-                <Icon className="h-4 w-4 text-primary" />
-                {title}
-              </span>
-              <span className="text-sm text-muted">{blurb}</span>
-            </Link>
-          ))}
-        </nav>
+        <NavCards />
       </div>
       )}
     </main>
+  );
+}
+
+/** Subjects, Themes, Tutorial and About: the room has no object for most of them. */
+function NavCards() {
+  return (
+    <nav className="grid w-full gap-3 sm:grid-cols-2">
+      {CARDS.map(({ to, title, blurb, Icon }) => (
+        <Link
+          key={to}
+          to={to}
+          className={cn(
+            "flex flex-col gap-2 rounded-lg border border-border bg-surface p-4 text-left transition",
+            "hover:border-primary hover:shadow-md",
+          )}
+        >
+          <span className="flex items-center gap-2 font-semibold">
+            <Icon className="h-4 w-4 text-primary" />
+            {title}
+          </span>
+          <span className="text-sm text-muted">{blurb}</span>
+        </Link>
+      ))}
+    </nav>
   );
 }
 
