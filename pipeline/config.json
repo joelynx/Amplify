@@ -26,7 +26,8 @@
     "aids_effort": "medium",
     "tiebreak_effort": "high",
     "tiebreak_note": "Owner 2026-11-07: when two solves disagree with the stored answer, a third solve at tiebreak_effort (stored answer never sent) decides. Agreeing with the stored answer, it is accepted as usual; agreeing with an earlier solve, it is accepted and its answer replaces the stored one (old value kept in pipeline.db provenance as answer_before_replace); agreeing with neither, human review.",
-    "review_model": "claude-fable-5-1",
+    "review_model": "claude-fable-5-2",
+    "review_model_note": "Owner 2026-11-10: the book flags of the image run (217) and later review questions go to Claude Fable 5.2 at medium effort; earlier review solves were Fable 5.1 and keep that attribution.",
     "review_effort": "medium",
     "review_effort_note": "Owner 2026-11-08 15:31: 'Continue with fable medium instead' after the high-effort review solves used up several accounts' session limits; replies already received keep their high-effort attribution.",
     "review_max_attempts": 3,
@@ -150,6 +151,7 @@
     "claude-opus-5-5": "Claude Opus 5.5",
     "claude-sonnet-5-5": "Claude Sonnet 5.5",
     "claude-fable-5-1": "Claude Fable 5.1",
+    "claude-fable-5-2": "Claude Fable 5.2",
     "claude-haiku-5-5": "Claude Haiku 5.5"
   },
   "prices_note": "USD per million tokens, standard tier, from the Claude API reference cached 2026-10-06; verify against the pricing page. Batch requests are billed at batch_discount times these. cache_write is the 1-hour TTL rate (2x input).",
