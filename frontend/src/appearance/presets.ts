@@ -301,7 +301,7 @@ export const PRESETS: Preset[] = [
     name: "Club Edition",
     description: "Mathematics Club red and Coding Club yellow.",
     slots: {
-      palette: "palette.club", typography: "typography.typewriter", chrome: "chrome.default", motion: "motion.default",
+      palette: "palette.club", typography: "typography.code", chrome: "chrome.default", motion: "motion.default",
       logo: "logo.original", loader: "loader.elimination", sfx: "sfx.soft",
       room: "room.study",
     },
