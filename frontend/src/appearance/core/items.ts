@@ -58,29 +58,44 @@ export const PALETTES: Item[] = make("palette", [
   ["club", "Club", "Mathematics Club red, Coding Club yellow.", pal("club")],
 ]);
 
-const type = (body: string, heading?: string, mono?: string, extra: Partial<Item> = {}): Partial<Item> => ({
-  data: { body, heading: heading ?? body, mono: mono ?? '"JetBrains Mono", "Cascadia Mono", Consolas, monospace' },
+const JETBRAINS = '"JetBrains Mono", "Cascadia Mono", Consolas, monospace';
+const DM_MONO = '"DM Mono", "JetBrains Mono", Consolas, monospace';
+
+/** `variation` sets font-variation-settings on the page (e.g. Recursive's Casual axis). */
+const type = (body: string, heading?: string, mono?: string, extra: Partial<Item> = {}, variation?: string): Partial<Item> => ({
+  data: { body, heading: heading ?? body, mono: mono ?? JETBRAINS, ...(variation ? { variation } : {}) },
   ...extra,
 });
 
+const ofl = (font: string, who: string, url: string) => ({ what: `${font} font`, who, license: "SIL OFL 1.1", url });
+
+// Only fonts bundled in frontend/fonts (the owner's picks) and fonts Windows
+// ships are named, so each description says what actually shows.
 export const TYPOGRAPHY: Item[] = make("typography", [
-  ["system", "System", "Whatever Windows provides.", type('system-ui, "Segoe UI", sans-serif')],
-  ["inter", "Inter", "The house sans.", type('"Inter", system-ui, "Segoe UI", sans-serif')],
-  ["rounded", "Rounded", "Nunito with Quicksand headings.", type('"Nunito", "Segoe UI", sans-serif', '"Quicksand", "Nunito", sans-serif')],
-  ["aero", "Aero", "Nunito Sans; Segoe UI as a fallback.", type('"Nunito Sans", "Segoe UI", sans-serif')],
-  ["pixel", "Pixel", "Pixelify Sans, Press Start 2P headings.", type('"Pixelify Sans", "VT323", ui-monospace, monospace', '"Press Start 2P", "Pixelify Sans", monospace', '"VT323", ui-monospace, monospace')],
+  ["system", "System", "Whatever Windows provides (Segoe UI).", type('system-ui, "Segoe UI", sans-serif')],
+  ["inter", "Inter", "The house sans.", type('"Inter", system-ui, "Segoe UI", sans-serif', undefined, undefined, { credits: [ofl("Inter", "Rasmus Andersson", "https://github.com/rsms/inter")] })],
+  ["geometric", "Geometric", "Figtree, a friendly geometric sans.", type('"Figtree", "Segoe UI", sans-serif', undefined, DM_MONO, { credits: [ofl("Figtree", "Erik Kennedy", "https://github.com/erikdkennedy/figtree")] })],
+  ["rubik", "Rubik", "Slightly rounded corners on every letter.", type('"Rubik", "Segoe UI", sans-serif', undefined, DM_MONO, { credits: [ofl("Rubik", "Hubert and Fischer", "https://github.com/googlefonts/rubik")] })],
+  ["rounded", "Rounded", "Nunito: rounded ends on every stroke.", type('"Nunito", "Segoe UI", sans-serif', undefined, DM_MONO, {
+    credits: [ofl("Nunito", "Vernon Adams", "https://github.com/googlefonts/nunito"), ofl("DM Mono", "Colophon Foundry", "https://github.com/googlefonts/dm-mono")],
+  })],
+  ["grotesk", "Grotesk", "Bricolage Grotesque: calm in text, quirkier in headings.", type('"Bricolage Grotesque", "Inter", "Segoe UI", sans-serif', undefined, undefined, { credits: [ofl("Bricolage Grotesque", "Mathieu Triay", "https://github.com/ateliertriay/bricolage")] })],
+  ["recursive", "Recursive", "Recursive set half casual, for a light brush-drawn feel.", type('"Recursive", "Segoe UI", sans-serif', undefined, undefined, { credits: [ofl("Recursive", "Arrow Type", "https://github.com/arrowtype/recursive")] }, '"CASL" 0.5')],
+  ["technical", "Technical", "Fira Sans, Mozilla's humanist sans.", type('"Fira Sans", "Segoe UI", sans-serif', undefined, undefined, { credits: [ofl("Fira Sans", "Carrois and Edenspiekermann for Mozilla", "https://fonts.google.com/specimen/Fira+Sans")] })],
+  ["literata", "Literata", "A warm book face made for reading on screens.", type('"Literata", Georgia, serif', undefined, undefined, { credits: [ofl("Literata", "Veronika Burian and José Scaglione (TypeTogether)", "https://github.com/googlefonts/literata")] })],
+  ["botanical", "Botanical", "Source Serif 4, a sturdy screen serif.", type('"Source Serif 4", Georgia, serif', undefined, undefined, { credits: [ofl("Source Serif 4", "Frank Grießhammer, Adobe", "https://github.com/adobe-fonts/source-serif")] })],
+  ["oldstyle", "Old Style", "Alegreya with EB Garamond headings.", type('"Alegreya", Georgia, serif', '"EB Garamond", "Alegreya", Georgia, serif', undefined, {
+    credits: [ofl("Alegreya", "Juan Pablo del Peral (Huerta Tipográfica)", "https://github.com/huertatipografica/Alegreya"), ofl("EB Garamond", "Georg Duffner and Octavio Pardo", "https://github.com/octaviopardo/EBGaramond12")],
+  })],
+  ["pixel", "Pixel", "Pixelify Sans, with VT323 for code.", type('"Pixelify Sans", "VT323", ui-monospace, monospace', undefined, '"VT323", ui-monospace, monospace', {
+    credits: [ofl("Pixelify Sans", "Stefie Justprince", "https://github.com/eifetx/Pixelify-Sans"), ofl("VT323", "Peter Hull", "https://fonts.google.com/specimen/VT323")],
+  })],
   ["xp", "Desktop 2001", "Tahoma, as installed on Windows.", type('Tahoma, Verdana, "Segoe UI", sans-serif')],
-  ["comic", "Comic", "Comic Neue with Bangers headings.", type('"Comic Neue", "Comic Sans MS", "Patrick Hand", cursive', '"Bangers", "Comic Neue", cursive')],
-  ["terminal", "Terminal", "IBM Plex Mono with VT323 headings.", type('"IBM Plex Mono", "Cascadia Mono", Consolas, monospace', '"VT323", "IBM Plex Mono", monospace', '"IBM Plex Mono", Consolas, monospace')],
-  ["kitkat", "Roboto", "Early-mobile Roboto.", type('"Roboto", "Segoe UI", sans-serif')],
-  ["botanical", "Botanical", "Source Serif 4 with Fraunces headings.", type('"Source Serif 4", Georgia, serif', '"Fraunces", "Source Serif 4", Georgia, serif')],
-  ["oldstyle", "Old Style", "Crimson Pro with EB Garamond headings.", type('"Crimson Pro", Georgia, serif', '"EB Garamond", "Crimson Pro", Georgia, serif')],
-  ["grotesk", "Grotesk", "Space Grotesk.", type('"Space Grotesk", "Inter", "Segoe UI", sans-serif')],
-  ["chalk", "Chalk", "Patrick Hand with Cabin Sketch headings.", type('"Patrick Hand", "Segoe Print", cursive', '"Cabin Sketch", "Patrick Hand", cursive')],
-  ["technical", "Technical", "IBM Plex Sans with Architects Daughter headings.", type('"IBM Plex Sans", "Segoe UI", sans-serif', '"Architects Daughter", "IBM Plex Sans", sans-serif')],
-  ["code", "Code", "JetBrains Mono everywhere.", type('"JetBrains Mono", "Cascadia Mono", Consolas, monospace')],
-  ["geometric", "Geometric", "Jost, a Futura-like sans.", type('"Jost", "Century Gothic", "Segoe UI", sans-serif')],
-  ["typewriter", "Typewriter", "Courier Prime, close to the logo's LaTeX typewriter face.", type('"Courier Prime", "CMU Typewriter Text", "Courier New", monospace', '"CMU Typewriter Text", "Courier Prime", "Courier New", monospace')],
+  ["comic", "Comic", "Comic Neue, a tidier Comic Sans.", type('"Comic Neue", "Comic Sans MS", cursive', undefined, undefined, { credits: [ofl("Comic Neue", "Craig Rozynski", "https://github.com/crozynski/comicneue")] })],
+  ["terminal", "Terminal", "JetBrains Mono with VT323 headings.", type(JETBRAINS, '"VT323", "JetBrains Mono", monospace')],
+  ["chalk", "Chalk", "Segoe Print, Windows' handwriting font.", type('"Segoe Print", "Comic Neue", cursive')],
+  ["code", "Code", "JetBrains Mono everywhere.", type(JETBRAINS, undefined, undefined, { credits: [ofl("JetBrains Mono", "Philipp Nurullin and Konstantin Bulenkov (JetBrains)", "https://github.com/JetBrains/JetBrainsMono")] })],
+  ["typewriter", "Typewriter", "Courier New, as installed on Windows.", type('"Courier New", "JetBrains Mono", monospace')],
 ]);
 
 export const CHROME: Item[] = make("chrome", [

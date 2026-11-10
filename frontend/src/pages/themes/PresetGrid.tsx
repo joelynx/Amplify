@@ -5,7 +5,7 @@
  * secret presets appear once found.
  */
 
-import { useEffect, useState } from "react";
+import { type CSSProperties, useEffect, useState } from "react";
 import { Check, Lock, Trophy } from "lucide-react";
 
 import { Logo, autoLogoVariant, type LogoVariant } from "../../appearance/brand/Logo";
@@ -69,6 +69,14 @@ export function PresetGrid() {
         {visiblePresets(st).map((p) => {
           const loadout = normalizeLoadout({ ...p.slots });
           const theme = (getItem(loadout.palette)?.data?.theme as string) ?? "default-light";
+          // The preset's own fonts, not the palette CSS fallback stack.
+          const type = getItem(loadout.typography)?.data as { body?: string; heading?: string; mono?: string; variation?: string } | undefined;
+          const fonts = {
+            "--font-family": type?.body,
+            "--font-heading": type?.heading,
+            "--font-mono": type?.mono,
+            fontVariationSettings: type?.variation ?? "normal",
+          } as CSSProperties;
           const m = meta.get(p.id);
           const locked = st.locked.has(p.id);
           const active = st.preset === p.id;
@@ -81,7 +89,7 @@ export function PresetGrid() {
                 "flex flex-col overflow-hidden rounded-lg border shadow-sm",
                 active ? "border-primary ring-2 ring-primary/40" : "border-border",
               )}
-              style={{ background: "var(--background)", color: "var(--text)", fontFamily: "var(--font-family)" }}
+              style={{ ...fonts, background: "var(--background)", color: "var(--text)", fontFamily: "var(--font-family)" }}
             >
               <div className="flex items-center justify-center px-4 pt-4" style={{ minHeight: 92 }}>
                 <Logo name="matrix" variant={presetLogoVariant(p.id, theme)} style={{ width: 150 }} />

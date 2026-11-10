@@ -68,7 +68,7 @@ function Preview({ item }: { item: Item }) {
       );
     case "typography":
       return (
-        <div className="space-y-0.5">
+        <div className="space-y-0.5" style={{ fontVariationSettings: d.variation ? String(d.variation) : "normal" }}>
           <div className="truncate text-base" style={{ fontFamily: String(d.heading ?? d.body) }}>Eigenvalues</div>
           <div className="truncate text-xs" style={{ fontFamily: String(d.body) }}>The quick brown fox · 0123</div>
           <div className="truncate text-xs" style={{ fontFamily: String(d.mono) }}>x = 3.14159</div>

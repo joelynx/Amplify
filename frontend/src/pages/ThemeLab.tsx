@@ -13,7 +13,7 @@ import { Logo, type LogoVariant } from "../appearance/brand/Logo";
 import { BootScreen, MatrixLoader, Spinner } from "../appearance/brand/Loader";
 import { contrast } from "../appearance/contrast";
 import { emit } from "../appearance/events";
-import { bundledFamilies } from "../appearance/fonts";
+import { WINDOWS_FONTS, bundledFamilies } from "../appearance/fonts";
 import { allItems, itemsFor, resolve } from "../appearance/registry";
 import { ResultsPreview } from "../appearance/results/ResultsScreen";
 import { previewSfx } from "../appearance/sound/engine";
@@ -208,12 +208,12 @@ export default function ThemeLabPage() {
             </table>
           </Card>
           <Card title="Fonts">
-            <p className="mb-2 text-xs text-muted">Families the typography items ask for. Missing ones fall back to the next font in the stack.</p>
+            <p className="mb-2 text-xs text-muted">Families the typography items ask for: bundled in frontend/fonts, or installed with Windows. Missing ones fall back to the next font in the stack.</p>
             <ul className="grid grid-cols-2 gap-x-4 text-xs">
               {wanted.map((f) => (
                 <li key={f} className="flex justify-between gap-2 py-0.5">
                   <span style={{ fontFamily: `"${f}"` }}>{f}</span>
-                  <span className={bundled.has(f) ? "text-success" : "text-muted"}>{bundled.has(f) ? "bundled" : "missing"}</span>
+                  <span className={bundled.has(f) ? "text-success" : "text-muted"}>{bundled.has(f) ? "bundled" : WINDOWS_FONTS.has(f) ? "Windows" : "missing"}</span>
                 </li>
               ))}
             </ul>

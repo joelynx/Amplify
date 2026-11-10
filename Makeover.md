@@ -31,7 +31,7 @@ The owner chose to build all of the theming first and decide later which parts g
 Built (frontend/src/appearance/, styles/appearance/):
 - Slots, items, presets and loadouts; the Wardrobe (Themes page: Presets, Wardrobe, Settings, Colours, Saved, Collection); saved loadouts with share codes; day/night switching; token overrides with live contrast checks; Theme Lab (#/theme-lab).
 - Club logos drawn from the owner's SVGs in 11 variants, four matrix loaders and two small spinners, the boot animation, the nav logo, the Welcome and About placements, a club letterhead option for PDFs, and the app icon.
-- Chrome, motion, surface, paper, cursor, icon, chart and arena skins; 34 palettes; 19 typography stacks (fonts load from frontend/fonts/ when bundled).
+- Chrome, motion, surface, paper, cursor, icon, chart and arena skins; 34 palettes; 18 typography stacks. 16 fonts the owner picked (2026-11-10) are bundled in frontend/fonts/ as WOFF2 with their OFL licences: Inter, Figtree, Rubik, Bricolage Grotesque, Recursive, Fira Sans, Nunito, Literata, Source Serif 4, Alegreya, EB Garamond, JetBrains Mono, DM Mono, Pixelify Sans, VT323 and Comic Neue.
 - Procedural sound effects, still wallpapers, the study room, easter eggs, seasonal events and results screens (built by parallel modules; see each folder).
 - Drop-in packs (frontend/packs/) and fonts (frontend/fonts/), each with a README.
 
@@ -212,7 +212,8 @@ Amplify is an offering of two clubs: ampliφ, the Mathematics Club (its logo is 
 
 ### 5.2 Typography
 - Four sub-slots: UI font, heading font, mono font (answers, IDs, code), and tabular numerals for stats.
-- Bundle each font locally as WOFF2, subset to the scripts needed, all under the SIL Open Font License. Suggestions per theme are in §7.
+- Bundle each font locally as WOFF2, all under the SIL Open Font License. Suggestions per theme are in §7.
+- Bundled (2026-11-10): the owner's 16 picks, full character sets (not subset, so Greek and accented letters in questions keep the font), 6.3 MB. Stacks name only bundled fonts and fonts Windows ships, so each item's description is what shows. Fonts in §7 that weren't picked were swapped: Grotesk is Bricolage Grotesque, Technical is Fira Sans, Geometric is Figtree, Terminal is JetBrains Mono, Old Style is Alegreya with EB Garamond headings, Chalk is Segoe Print and Typewriter is Courier New. The Aero and Roboto items went (Frutiger Aero now uses System, which is Segoe UI, and KitKat uses Inter). New items: Rubik, Recursive (Casual axis at 0.5) and Literata; DM Mono is the code font in Geometric, Rubik and Rounded.
 - Math keeps the KaTeX fonts. Only the math ink colour and size change, so formulas stay correct.
 - Always free (accessibility, not cosmetics): a larger-text scale. The Hyperlegible and OpenDyslexic fonts were dropped (see the evidence check at the top).
 

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { contrast, parseColor } from "../contrast";
 import { on } from "../events";
-import { parseFontPath } from "../fonts";
+import { WINDOWS_FONTS, bundledFamilies, parseFontPath } from "../fonts";
 import { PRESETS } from "../presets";
 import { DEFAULT_LOADOUT, getItem, itemsFor, normalizeLoadout, resolve } from "../registry";
 import { endSession, outcomeOf, recordAnswer, startSession } from "../session";
@@ -79,6 +79,19 @@ describe("fonts", () => {
     expect(parseFontPath("../../fonts/Comic Neue/ComicNeue-BoldItalic.ttf", "u")).toMatchObject({ family: "Comic Neue", weight: "700", style: "italic" });
     expect(parseFontPath("../../fonts/Crimson Pro/CrimsonPro-SemiBold.ttf", "u").weight).toBe("600");
     expect(parseFontPath("../../fonts/Press Start 2P/PressStart2P-Regular.ttf", "u").weight).toBe("400");
+    expect(parseFontPath("../../fonts/Inter/Inter-Italic-Variable.woff2", "u")).toMatchObject({ weight: "100 900", style: "italic" });
+  });
+
+  it("names only bundled fonts or fonts Windows ships in typography stacks", () => {
+    const generic = /^(system-ui|ui-monospace|sans-serif|serif|monospace|cursive)$/;
+    const bundled = bundledFamilies();
+    for (const t of itemsFor("typography")) {
+      for (const k of ["body", "heading", "mono"]) {
+        for (const f of String(t.data?.[k]).split(",").map((s) => s.trim().replace(/^"|"$/g, ""))) {
+          if (!generic.test(f)) expect(bundled.has(f) || WINDOWS_FONTS.has(f), `${t.id} ${k}: ${f}`).toBe(true);
+        }
+      }
+    }
   });
 });
 

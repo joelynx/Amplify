@@ -44,10 +44,12 @@ export function applyToDocument(state: Pick<AppearanceState, "loadout" | "settin
 
   for (const slot of ATTR_SLOTS) root.setAttribute(`data-${slot}`, suffix(resolve(loadout, slot)?.id));
 
-  const t = resolve(loadout, "typography")?.data as { body?: string; heading?: string; mono?: string } | undefined;
+  const t = resolve(loadout, "typography")?.data as { body?: string; heading?: string; mono?: string; variation?: string } | undefined;
   if (t?.body) root.style.setProperty("--font-family", t.body);
   if (t?.heading) root.style.setProperty("--font-heading", t.heading);
   if (t?.mono) root.style.setProperty("--font-mono", t.mono);
+  if (t?.variation) root.style.setProperty("font-variation-settings", t.variation);
+  else root.style.removeProperty("font-variation-settings");
 
   for (const k of appliedTokens) root.style.removeProperty(k);
   appliedTokens = [];

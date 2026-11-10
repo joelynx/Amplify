@@ -68,6 +68,9 @@ export function registerFonts(): void {
   }
 }
 
+/** Fonts Windows ships, which typography stacks may name without bundling. */
+export const WINDOWS_FONTS = new Set(["Segoe UI", "Segoe Print", "Tahoma", "Verdana", "Comic Sans MS", "Courier New", "Cascadia Mono", "Consolas", "Georgia"]);
+
 /** Families present in frontend/fonts (for the Theme Lab's missing-font report). */
 export function bundledFamilies(): Set<string> {
   return new Set(bundledFonts().map((f) => f.family));

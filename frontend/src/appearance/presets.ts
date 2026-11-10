@@ -46,7 +46,7 @@ export const PRESETS: Preset[] = [
     name: "Frutiger Aero",
     description: "Glossy optimism: sky, water, bubbles, glass chimes.",
     slots: {
-      palette: "palette.frutiger-aero", typography: "typography.aero", chrome: "chrome.glass", motion: "motion.glassy",
+      palette: "palette.frutiger-aero", typography: "typography.system", chrome: "chrome.glass", motion: "motion.glassy",
       wallpaper: "wallpaper.aquarium", logo: "logo.glossy", sfx: "sfx.glass",
       results: "results.report",
       room: "room.greenhouse", charts: "charts.glossy",
@@ -103,7 +103,7 @@ export const PRESETS: Preset[] = [
     name: "Android KitKat",
     description: "Early mobile: flat cards, toasts, a notification shade for reviews.",
     slots: {
-      palette: "palette.android-kitkat", typography: "typography.kitkat", chrome: "chrome.material", motion: "motion.default",
+      palette: "palette.android-kitkat", typography: "typography.inter", chrome: "chrome.material", motion: "motion.default",
       sfx: "sfx.material", results: "results.report",
       room: "room.study", charts: "charts.default",
     },
