@@ -279,6 +279,45 @@ def set_bookmark(conn: sqlite3.Connection, question_id: int, on: bool) -> None:
     )
 
 
+# ---- flagged hints and solutions ---------------------------------------------
+
+FLAG_PARTS = ("hint", "solution")
+
+
+def content_flags_for(conn: sqlite3.Connection, question_ids: list[int]) -> dict[int, list[str]]:
+    if not question_ids:
+        return {}
+    marks = ",".join("?" * len(question_ids))
+    flags: dict[int, list[str]] = {}
+    for qid, part in conn.execute(
+        f"SELECT question_id, part FROM content_flags WHERE question_id IN ({marks}) ORDER BY part",
+        question_ids,
+    ):
+        flags.setdefault(int(qid), []).append(part)
+    return flags
+
+
+def set_content_flag(conn: sqlite3.Connection, question_id: int, part: str, on: bool) -> None:
+    if part not in FLAG_PARTS:
+        raise ValueError(f"unknown part: {part}")
+    if on:
+        sql = "INSERT OR IGNORE INTO content_flags (question_id, part, flagged_at) VALUES (?, ?, ?)"
+        params: tuple[Any, ...] = (question_id, part, _now())
+    else:
+        sql = "DELETE FROM content_flags WHERE question_id = ? AND part = ?"
+        params = (question_id, part)
+    _commit(conn, lambda: conn.execute(sql, params))
+
+
+def flagged_content(conn: sqlite3.Connection) -> list[dict[str, Any]]:
+    return [
+        {"question_id": int(r[0]), "part": r[1], "flagged_at": r[2]}
+        for r in conn.execute(
+            "SELECT question_id, part, flagged_at FROM content_flags ORDER BY flagged_at DESC, question_id"
+        )
+    ]
+
+
 def bookmarked_ids(conn: sqlite3.Connection, subject: Subject | None = None) -> list[int]:
     clause, params = subject_question_clause(subject)
     return [

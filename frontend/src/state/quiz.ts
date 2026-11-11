@@ -39,6 +39,13 @@ export interface QuizState {
   hintedIds: Record<number, true>;
   // Lecture / mixed: the concept each question was picked for, by id
   conceptLabels: Record<string, string>;
+  // Typed but unsubmitted answers, by question id (kept across page changes)
+  drafts: Record<number, string[]>;
+  // Traverse: unseen questions left in the pool; null until the session starts
+  remaining: number | null;
+  // Discover: the batch's diversity score; list modes: how many fewer than asked
+  diversityScore: number | null;
+  shortfall: number;
 
   // Toggle states
   showHint: boolean;
@@ -67,6 +74,10 @@ export interface QuizState {
   setResult: (questionId: number, result: QuizAnswerResult) => void;
   markRevealed: (questionId: number) => void;
   markHinted: (questionId: number) => void;
+  setDraft: (questionId: number, inputs: string[]) => void;
+  setRemaining: (remaining: number | null) => void;
+  setDiversityScore: (score: number | null) => void;
+  setShortfall: (shortfall: number) => void;
 
   setShowHint: (show: boolean) => void;
   setShowAnswer: (show: boolean) => void;
@@ -99,6 +110,10 @@ export const useQuizStore = create<QuizState>((set) => ({
   revealedIds: {},
   hintedIds: {},
   conceptLabels: {},
+  drafts: {},
+  remaining: null,
+  diversityScore: null,
+  shortfall: 0,
 
   showHint: false,
   showAnswer: false,
@@ -125,6 +140,10 @@ export const useQuizStore = create<QuizState>((set) => ({
   setResult: (questionId, result) => set((s) => ({ results: { ...s.results, [questionId]: result } })),
   markRevealed: (questionId) => set((s) => ({ revealedIds: { ...s.revealedIds, [questionId]: true } })),
   markHinted: (questionId) => set((s) => ({ hintedIds: { ...s.hintedIds, [questionId]: true } })),
+  setDraft: (questionId, inputs) => set((s) => ({ drafts: { ...s.drafts, [questionId]: inputs } })),
+  setRemaining: (remaining) => set({ remaining }),
+  setDiversityScore: (diversityScore) => set({ diversityScore }),
+  setShortfall: (shortfall) => set({ shortfall }),
 
   setShowHint: (showHint) => set({ showHint }),
   setShowAnswer: (showAnswer) => set({ showAnswer }),
@@ -142,6 +161,10 @@ export const useQuizStore = create<QuizState>((set) => ({
     revealedIds: {},
     hintedIds: {},
     conceptLabels: {},
+    drafts: {},
+    remaining: null,
+    diversityScore: null,
+    shortfall: 0,
     showHint: false,
     showAnswer: false,
     showSolution: false,

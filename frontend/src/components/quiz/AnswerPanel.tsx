@@ -53,6 +53,9 @@ interface Props {
   autoFocus?: boolean;
   /** A hint or the answer was opened first (for the session summary and sounds). */
   assisted?: boolean;
+  /** Inputs typed earlier and not submitted; the parent keeps them across navigation. */
+  draft?: string[];
+  onDraft?: (inputs: string[]) => void;
 }
 
 const MARKS: SelfMark[] = ["got_it", "partial", "missed"];
@@ -68,8 +71,10 @@ export function AnswerPanel({
   compact = false,
   autoFocus = true,
   assisted = false,
+  draft,
+  onDraft,
 }: Props) {
-  const [inputs, setInputs] = useState<string[]>(() => fields.map(() => ""));
+  const [inputs, setInputs] = useState<string[]>(() => fields.map((_, i) => draft?.[i] ?? ""));
   const [marks, setMarks] = useState<Partial<Record<number, SelfMark>>>({});
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -110,8 +115,11 @@ export function AnswerPanel({
     if (payload && !busy) void run(() => assess(payload), true);
   };
 
-  const setInput = (i: number, value: string) =>
-    setInputs((prev) => prev.map((v, j) => (j === i ? value : v)));
+  const setInput = (i: number, value: string) => {
+    const next = inputs.map((v, j) => (j === i ? value : v));
+    setInputs(next);
+    onDraft?.(next);
+  };
 
   const onKey = (e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>, i: number) => {
     if (e.key !== "Enter") return;

@@ -186,6 +186,19 @@ def test_notes_bookmarks_and_bookmark_filter(seeded_conn: sqlite3.Connection) ->
     assert api.get_review_summary(None)["counts"]["bookmarked"] == 1
 
 
+def test_content_flags(seeded_conn: sqlite3.Connection) -> None:
+    api = Api(lambda: seeded_conn)
+    api.set_content_flag(2, "hint", True)
+    api.set_content_flag(2, "hint", True)  # flagging twice is one flag
+    api.set_content_flag(3, "solution", True)
+    assert api.get_content_flags([2, 3, 4]) == {"2": ["hint"], "3": ["solution"]}
+    assert {(f["question_id"], f["part"]) for f in api.list_content_flags()} == {(2, "hint"), (3, "solution")}
+    api.set_content_flag(2, "hint", False)
+    assert api.get_content_flags([2]) == {}
+    with pytest.raises(ValueError):
+        api.set_content_flag(2, "question", True)
+
+
 # ---- learning stats, milestones -----------------------------------------------
 
 def test_learning_stats(seeded_conn: sqlite3.Connection) -> None:

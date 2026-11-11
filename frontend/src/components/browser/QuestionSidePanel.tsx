@@ -8,11 +8,15 @@
  * filters" checked, that list only draws from questions matching the
  * Browser's filters and search text. Read-only — no edit / new / delete
  * affordances anywhere.
+ *
+ * Beside the list on a wide window, where its left edge drags to resize it;
+ * over the whole list below the `lg` width, where the two do not fit.
  */
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronRight, X } from "lucide-react";
 
+import { setPref, usePref } from "../../appearance/prefs";
 import { cn } from "../../lib/cn";
 
 import { Button } from "../ui/Button";
@@ -20,6 +24,7 @@ import { Checkbox } from "../ui/Checkbox";
 import { bestSolution, ipc, type Filters, type Question, type SimilarQuestion } from "../../lib/ipc";
 import { LatexContent } from "./LatexContent";
 import { BookmarkButton, NoteEditor } from "../notes/QuestionNotes";
+import { Flaggable } from "../notes/ContentFlag";
 
 interface Props {
   question: Question | null;
@@ -30,10 +35,51 @@ interface Props {
   onPickSimilar: (qid: number) => void;
 }
 
+const WIDTH_PREF = "browser.panelWidth";
+const DEFAULT_WIDTH = 420;
+const MIN_WIDTH = 340;
+const MAX_WIDTH = 760;
+const clampWidth = (w: number) => Math.min(MAX_WIDTH, Math.max(MIN_WIDTH, Math.round(w)));
+
 export function QuestionSidePanel({ question, filters, textQuery, onClose, onPickSimilar }: Props) {
   const [similar, setSimilar] = useState<SimilarQuestion[]>([]);
   const [loadingSimilar, setLoadingSimilar] = useState(false);
   const [applyFilters, setApplyFilters] = useState(false);
+
+  const storedWidth = usePref<number>(WIDTH_PREF, DEFAULT_WIDTH);
+  // Width while the edge is being dragged; saved on release.
+  const [dragWidth, setDragWidth] = useState<number | null>(null);
+  const width = clampWidth(dragWidth ?? storedWidth);
+  const panelRef = useRef<HTMLElement>(null);
+
+  const onDragStart = (e: React.PointerEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.currentTarget.setPointerCapture(e.pointerId);
+    setDragWidth(width);
+  };
+  const onDragMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (dragWidth === null || !panelRef.current) return;
+    setDragWidth(clampWidth(panelRef.current.getBoundingClientRect().right - e.clientX));
+  };
+  const onDragEnd = () => {
+    if (dragWidth !== null) setPref(WIDTH_PREF, dragWidth);
+    setDragWidth(null);
+  };
+  const onHandleKey = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft") setPref(WIDTH_PREF, clampWidth(width + 24));
+    else if (e.key === "ArrowRight") setPref(WIDTH_PREF, clampWidth(width - 24));
+  };
+
+  // Escape closes the question, unless a dialog on top of it wants the key.
+  const isOpen = question !== null;
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && !e.defaultPrevented && !document.querySelector('[role="dialog"]')) onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen, onClose]);
 
   // Null while "Apply filters" is off, so Browser filter edits don't refetch then.
   const scopeFilters = applyFilters ? filters : null;
@@ -59,11 +105,16 @@ export function QuestionSidePanel({ question, filters, textQuery, onClose, onPic
     };
   }, [question, scopeFilters, scopeText]);
 
+  const widthVar = { "--panel-w": `${width}px` } as React.CSSProperties;
+
   if (!question) {
     return (
-      <aside className="hidden w-[420px] flex-none border-l border-border bg-surface lg:block">
+      <aside
+        style={widthVar}
+        className="hidden w-[var(--panel-w)] flex-none border-l border-border bg-surface lg:block"
+      >
         <div className="p-6 text-sm text-muted">
-          Click a row to view it.
+          Click a question to read it here.
         </div>
       </aside>
     );
@@ -72,16 +123,39 @@ export function QuestionSidePanel({ question, filters, textQuery, onClose, onPic
   const solution = bestSolution(question);
 
   return (
-    <aside className="w-[420px] flex-none overflow-y-auto border-l border-border bg-surface">
-      <header className="sticky top-0 z-10 flex items-center justify-between border-b border-border bg-surface px-4 py-2">
+    <aside
+      ref={panelRef}
+      style={widthVar}
+      data-ui="question-panel"
+      aria-label={`Question ${question.question_id}`}
+      className="absolute inset-0 z-20 bg-surface lg:relative lg:inset-auto lg:z-auto lg:w-[var(--panel-w)] lg:flex-none lg:border-l lg:border-border"
+    >
+      <div
+        role="separator"
+        aria-orientation="vertical"
+        aria-label="Resize the question panel"
+        aria-valuemin={MIN_WIDTH}
+        aria-valuemax={MAX_WIDTH}
+        aria-valuenow={width}
+        tabIndex={0}
+        onPointerDown={onDragStart}
+        onPointerMove={onDragMove}
+        onPointerUp={onDragEnd}
+        onPointerCancel={onDragEnd}
+        onKeyDown={onHandleKey}
+        className="absolute left-0 top-0 z-20 -ml-px hidden h-full w-1.5 cursor-col-resize touch-none hover:bg-primary/40 focus:outline-none focus-visible:bg-primary lg:block"
+      />
+      <div className="h-full overflow-y-auto">
+      <header className="sticky top-0 z-10 flex items-center justify-between gap-2 border-b border-border bg-surface px-4 py-2">
         <div className="text-xs uppercase tracking-wide text-muted">
           Q{question.question_id} · {question.topic} / {question.branch} / {question.subtopic}
         </div>
-        <Button variant="ghost" size="sm" onClick={onClose} aria-label="Close">
+        <Button variant="ghost" size="sm" onClick={onClose} aria-label="Close question">
           <X className="h-4 w-4" />
+          <span className="lg:hidden">Back to list</span>
         </Button>
       </header>
-      <div className="space-y-4 p-4">
+      <div className="mx-auto max-w-3xl space-y-4 p-4">
         <Metadata question={question} />
 
         <div className="flex justify-end">
@@ -96,7 +170,9 @@ export function QuestionSidePanel({ question, filters, textQuery, onClose, onPic
 
         {solution && (
           <Disclosure title="Solution" defaultOpen={false}>
-            <LatexContent source={solution} />
+            <Flaggable questionId={question.question_id} part="solution">
+              <LatexContent source={solution} />
+            </Flaggable>
           </Disclosure>
         )}
 
@@ -108,14 +184,16 @@ export function QuestionSidePanel({ question, filters, textQuery, onClose, onPic
         )}
 
         {question.solution_outline && (
-          <Disclosure title="Outline" defaultOpen={true}>
+          <Disclosure title="Outline" defaultOpen={false}>
             <LatexContent source={question.solution_outline} />
           </Disclosure>
         )}
 
         {question.hints && (
-          <Disclosure title="Hints" defaultOpen={true}>
-            <LatexContent source={question.hints} />
+          <Disclosure title="Hints" defaultOpen={false}>
+            <Flaggable questionId={question.question_id} part="hint">
+              <LatexContent source={question.hints} />
+            </Flaggable>
           </Disclosure>
         )}
 
@@ -143,7 +221,7 @@ export function QuestionSidePanel({ question, filters, textQuery, onClose, onPic
             <p className="text-xs text-muted">
               {applyFilters
                 ? "No similar questions match the Browser's filters."
-                : "No similar questions — this row may have no embedding (augmented seed)."}
+                : "No similar questions found for this one."}
             </p>
           )}
           {similar.length > 0 && (
@@ -168,6 +246,7 @@ export function QuestionSidePanel({ question, filters, textQuery, onClose, onPic
             </ul>
           )}
         </Section>
+      </div>
       </div>
     </aside>
   );
@@ -194,9 +273,8 @@ function Section({
   );
 }
 
-/** Collapsible section — solutions hide behind a click so the panel works
- * as a practice surface (read question, attempt, then reveal). Outline /
- * hints default open since they're short. */
+/** Collapsible section — solutions, outline and hints hide behind a click so
+ * the panel works as a practice surface (read question, attempt, then reveal). */
 function Disclosure({
   title,
   defaultOpen,
@@ -212,6 +290,7 @@ function Disclosure({
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
         className="flex w-full items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted hover:text-text"
       >
         <ChevronRight className={cn("h-3 w-3 transition-transform", open && "rotate-90")} />

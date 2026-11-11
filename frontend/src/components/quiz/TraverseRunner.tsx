@@ -26,13 +26,15 @@ export function TraverseRunner() {
     seedDiversity,
     quizId,
     setQuizId,
+    remaining,
+    setRemaining,
   } = useQuizStore();
 
   const draft = useGenerateStore();
 
-  const [loading, setLoading] = useState(true);
+  // A session that is already running (back from another page) is not loading.
+  const [loading, setLoading] = useState(questions.length === 0);
   const [error, setError] = useState<string | null>(null);
-  const [remaining, setRemaining] = useState<number | null>(null);
 
   // Initialize Traverse
   useEffect(() => {
@@ -75,7 +77,7 @@ export function TraverseRunner() {
     start();
     
     return () => { active = false; };
-  }, [draft, questions.length, quizId, setCurrentIndex, setQuestionStartTime, setQuestions, setQuizId, setQuizStartTime]);
+  }, [draft, questions.length, quizId, setCurrentIndex, setQuestionStartTime, setQuestions, setQuizId, setQuizStartTime, setRemaining]);
 
   const handleNext = async () => {
     if (!quizId) return;
@@ -164,7 +166,7 @@ export function TraverseRunner() {
         <div className="flex items-center gap-6 max-w-4xl w-full">
           <div className="flex-1 flex flex-col space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-muted">Diversity</span>
+              <span className="text-muted">Similarity of the next question to this one</span>
               <span className="font-medium text-primary">{(diversity * 100).toFixed(0)}%</span>
             </div>
             <div className="flex items-center gap-3">
@@ -179,14 +181,14 @@ export function TraverseRunner() {
                 className="flex-1 accent-primary"
                 disabled={loading || remaining === 0}
               />
-              <span className="text-xs text-muted">Similar</span>
+              <span className="text-xs text-muted">Very similar</span>
             </div>
           </div>
           
           <button
             onClick={handleNext}
             disabled={loading || remaining === 0}
-            className="flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? <Spinner className="h-5 w-5" /> : <ChevronRight size={20} />}
             {remaining === 0 ? "Pool Exhausted" : "Next Question"}

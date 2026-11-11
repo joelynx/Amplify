@@ -52,7 +52,7 @@ export default function AboutPage() {
 
         <Card title="Question sources">
           {sources.length === 0 ? (
-            <p className="text-muted">No sources yet — ingest the seed bundle first.</p>
+            <p className="text-muted">No sources yet. Import the question bank in Settings first.</p>
           ) : (
             <ul className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-2">
               {sources.map((s) => (

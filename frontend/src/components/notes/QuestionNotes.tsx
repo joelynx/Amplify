@@ -95,7 +95,7 @@ export function BookmarkButton({ questionId, className }: { questionId: number; 
       aria-pressed={bookmarked}
       className={cn(
         "flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors disabled:opacity-50",
-        bookmarked ? "bg-primary/10 text-primary" : "bg-surface text-text/80 hover:bg-surface-hover",
+        bookmarked ? "bg-primary/10 text-primary" : "bg-surface text-text/80 hover:bg-background",
         className,
       )}
     >
@@ -104,6 +104,10 @@ export function BookmarkButton({ questionId, className }: { questionId: number; 
     </button>
   );
 }
+
+/** Text typed but not saved yet, per question: it survives moving to another
+ * question or page and back (until the app closes). */
+const unsavedNotes = new Map<number, string>();
 
 interface EditorProps {
   questionId: number;
@@ -121,12 +125,13 @@ export function NoteEditor({ questionId, prompt, placeholder, collapsible = fals
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
 
   useEffect(() => {
-    setDraft(note);
-    if (note) setOpen(true);
-  }, [note]);
+    const kept = unsavedNotes.get(questionId);
+    setDraft(kept ?? note);
+    if (note || kept) setOpen(true);
+  }, [note, questionId]);
 
   useEffect(() => {
-    setOpen(!collapsible);
+    setOpen(!collapsible || unsavedNotes.has(questionId));
     setStatus("idle");
   }, [questionId, collapsible]);
 
@@ -148,11 +153,14 @@ export function NoteEditor({ questionId, prompt, placeholder, collapsible = fals
     setStatus("saving");
     try {
       await saveNote(draft.trim());
+      unsavedNotes.delete(questionId);
       setStatus("saved");
     } catch {
       setStatus("error");
     }
   };
+
+  const unsaved = draft.trim() !== note.trim();
 
   return (
     <div className="space-y-2 rounded-lg border border-border p-3">
@@ -166,6 +174,8 @@ export function NoteEditor({ questionId, prompt, placeholder, collapsible = fals
         value={draft}
         onChange={(e) => {
           setDraft(e.target.value);
+          if (e.target.value.trim() === note.trim()) unsavedNotes.delete(questionId);
+          else unsavedNotes.set(questionId, e.target.value);
           setStatus("idle");
         }}
         rows={3}
@@ -175,8 +185,9 @@ export function NoteEditor({ questionId, prompt, placeholder, collapsible = fals
       />
       <div className="flex items-center justify-end gap-3 text-xs text-muted">
         {status === "saved" && <span>Saved to your notes.</span>}
-        {status === "error" && <span className="text-error">Could not save.</span>}
-        <Button size="sm" variant="primary" onClick={() => void save()} disabled={status === "saving" || draft.trim() === note.trim()}>
+        {status === "error" && <span className="text-error">Could not save. Your text is still here; try again.</span>}
+        {unsaved && status !== "error" && <span>Not saved yet</span>}
+        <Button size="sm" variant="primary" onClick={() => void save()} disabled={status === "saving" || !unsaved}>
           Save note
         </Button>
       </div>

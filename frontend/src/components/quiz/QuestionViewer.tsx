@@ -5,6 +5,7 @@ import { Eye, EyeOff } from "lucide-react";
 import type { QuizQuestionFull } from "../../lib/ipc";
 import { LatexContent } from "../browser/LatexContent";
 import { BookmarkButton, SelfExplain } from "../notes/QuestionNotes";
+import { Flaggable } from "../notes/ContentFlag";
 import { useQuizStore } from "../../state/quiz";
 
 interface QuestionViewerProps {
@@ -31,53 +32,29 @@ export function QuestionViewer({ question, children, hideLabels = false }: Quest
   } = useQuizStore();
   const result = results[question.question_id];
   const answered = Boolean(result && !result.pending);
+  const helpButton = (on: boolean) =>
+    `flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+      on ? "bg-primary/10 text-primary" : "bg-surface text-text/80 hover:bg-background"
+    }`;
+  const hasHint = Boolean(question.hints?.trim());
+  const hasAnswer = Boolean(question.answer?.trim());
+  const hasSolution = Boolean(question.solution?.trim());
+  // What opening help does to this answer, said before the click.
+  const consequence =
+    answered || question.answer_fields.length === 0
+      ? null
+      : [
+          hasHint ? "A hint counts this answer as solved with help." : null,
+          hasAnswer || hasSolution
+            ? "Revealing the answer or solution before you answer leaves this question ungraded; it comes back later for a try on your own."
+            : null,
+        ]
+          .filter(Boolean)
+          .join(" ");
 
   return (
     <div className="flex flex-col space-y-6">
       <div className="flex flex-wrap gap-2 pb-4 border-b border-border">
-        {question.hints && question.hints.trim() !== "" && (
-          <button
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-              showHint ? "bg-primary/10 text-primary" : "bg-surface text-text/80 hover:bg-surface-hover"
-            }`}
-            onClick={() => {
-              // A hint opened before answering makes the answer "assisted".
-              if (!showHint && !answered) {
-                markHinted(question.question_id);
-                emit({ type: "hint" });
-              }
-              setShowHint(!showHint);
-            }}
-          >
-            {showHint ? <EyeOff size={16} /> : <ThemedIcon name="hint" className="h-4 w-4" />}
-            {showHint ? "Hide Hint" : "Show Hint"}
-          </button>
-        )}
-        
-        {question.answer && question.answer.trim() !== "" && (
-          <button
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-              showAnswer ? "bg-primary/10 text-primary" : "bg-surface text-text/80 hover:bg-surface-hover"
-            }`}
-            onClick={() => setShowAnswer(!showAnswer)}
-          >
-            {showAnswer ? <EyeOff size={16} /> : <ThemedIcon name="reveal" className="h-4 w-4" />}
-            {showAnswer ? "Hide Answer" : "Show Answer"}
-          </button>
-        )}
-        
-        {question.solution && question.solution.trim() !== "" && (
-          <button
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-              showSolution ? "bg-primary/10 text-primary" : "bg-surface text-text/80 hover:bg-surface-hover"
-            }`}
-            onClick={() => setShowSolution(!showSolution)}
-          >
-            {showSolution ? <EyeOff size={16} /> : <Eye size={16} />}
-            {showSolution ? "Hide Solution" : "Show Solution"}
-          </button>
-        )}
-
         <div className="flex-1" />
 
         <BookmarkButton questionId={question.question_id} />
@@ -85,19 +62,19 @@ export function QuestionViewer({ question, children, hideLabels = false }: Quest
         {!hideLabels && (
           <button
             className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-              showMetadata ? "bg-primary/10 text-primary" : "bg-surface text-text/80 hover:bg-surface-hover"
+              showMetadata ? "bg-primary/10 text-primary" : "bg-surface text-text/80 hover:bg-background"
             }`}
             onClick={() => setShowMetadata(!showMetadata)}
           >
             {showMetadata ? <EyeOff size={16} /> : <Eye size={16} />}
-            See Metadata
+            {showMetadata ? "Hide details" : "Question details"}
           </button>
         )}
       </div>
 
       {showMetadata && !hideLabels && (
         <div className="bg-surface rounded-lg p-4 border border-border space-y-3 text-sm">
-          <h3 className="font-semibold text-text mb-2">Question Metadata</h3>
+          <h3 className="font-semibold text-text mb-2">Question details</h3>
           <div className="grid grid-cols-2 gap-4">
             <div><span className="text-muted">Topic:</span> {question.topic}</div>
             <div><span className="text-muted">Branch:</span> {question.branch}</div>
@@ -137,11 +114,54 @@ export function QuestionViewer({ question, children, hideLabels = false }: Quest
 
       {children}
 
+      {/* Help comes after the answer area: the attempt first, then hint / reveal. */}
+      {(hasHint || hasAnswer || hasSolution) && (
+        <div data-ui="help-row" className="flex flex-wrap items-center gap-2 border-t border-border pt-4">
+          <span className="mr-1 text-xs font-medium uppercase tracking-wide text-muted">Help</span>
+          {hasHint && (
+            <button
+              className={helpButton(showHint)}
+              aria-pressed={showHint}
+              onClick={() => {
+                // A hint opened before answering makes the answer "assisted".
+                if (!showHint && !answered) {
+                  markHinted(question.question_id);
+                  emit({ type: "hint" });
+                }
+                setShowHint(!showHint);
+              }}
+            >
+              {showHint ? <EyeOff size={16} /> : <ThemedIcon name="hint" className="h-4 w-4" />}
+              {showHint ? "Hide hint" : "Show hint"}
+            </button>
+          )}
+          {hasAnswer && (
+            <button className={helpButton(showAnswer)} aria-pressed={showAnswer} onClick={() => setShowAnswer(!showAnswer)}>
+              {showAnswer ? <EyeOff size={16} /> : <ThemedIcon name="reveal" className="h-4 w-4" />}
+              {showAnswer ? "Hide answer" : "Reveal answer"}
+            </button>
+          )}
+          {hasSolution && (
+            <button className={helpButton(showSolution)} aria-pressed={showSolution} onClick={() => setShowSolution(!showSolution)}>
+              {showSolution ? <EyeOff size={16} /> : <Eye size={16} />}
+              {showSolution ? "Hide solution" : "Reveal solution"}
+            </button>
+          )}
+          {consequence && (
+            <p data-ui="help-consequence" className="basis-full text-xs text-muted">
+              {consequence}
+            </p>
+          )}
+        </div>
+      )}
+
       {showHint && question.hints && (
-        <div className="mt-8 border border-border rounded-lg overflow-hidden">
+        <div className="border border-border rounded-lg overflow-hidden">
           <div className="bg-surface px-4 py-2 font-medium border-b border-border">Hint</div>
           <div className="p-4 bg-background">
-            <LatexContent source={question.hints} />
+            <Flaggable questionId={question.question_id} part="hint">
+              <LatexContent source={question.hints} />
+            </Flaggable>
           </div>
         </div>
       )}
@@ -159,7 +179,9 @@ export function QuestionViewer({ question, children, hideLabels = false }: Quest
         <div className="mt-8 border border-border rounded-lg overflow-hidden">
           <div className="bg-surface px-4 py-2 font-medium border-b border-border">Solution</div>
           <div className="p-4 bg-background">
-            <LatexContent source={question.solution} />
+            <Flaggable questionId={question.question_id} part="solution">
+              <LatexContent source={question.solution} />
+            </Flaggable>
           </div>
         </div>
       )}

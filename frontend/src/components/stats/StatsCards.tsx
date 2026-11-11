@@ -13,19 +13,19 @@ interface CardSpec {
 
 const CARDS: readonly CardSpec[] = [
   {
-    label: (mode) => mode === "generate" ? "PSets Generated" : "Completed Quizzes",
+    label: (mode) => mode === "generate" ? "Papers created" : "Quizzes completed",
     value: (s) => (s.sessions_completed ?? (s as any).psets_generated ?? 0).toLocaleString(),
   },
   {
-    label: (mode) => mode === "generate" ? "Partial PSets" : "Partial Quizzes",
+    label: (mode) => mode === "generate" ? "Partial papers" : "Partial quizzes",
     value: (s) => (s.sessions_partial ?? 0).toLocaleString(),
   },
   {
-    label: () => "Total Questions Seen",
+    label: () => "Questions seen, with repeats",
     value: (s) => (s.total_questions_seen ?? 0).toLocaleString(),
   },
   {
-    label: () => "Unique Questions Seen",
+    label: () => "Different questions seen",
     value: (s) => (s.unique_questions_seen ?? 0).toLocaleString(),
     hint: (s) =>
       (s.total_questions_in_subject ?? 0) > 0
@@ -33,23 +33,23 @@ const CARDS: readonly CardSpec[] = [
         : null,
   },
   {
-    label: () => "Fraction Seen",
+    label: () => "Share of the bank seen",
     value: (s) => `${(s.fraction_questions_seen ?? 0).toFixed(1)}%`,
   },
   {
-    label: (mode) => mode === "generate" ? "Max in single PSet" : "Max in single Quiz",
+    label: (mode) => mode === "generate" ? "Largest paper" : "Longest quiz",
     value: (s) => (s.max_questions_in_single_pset ?? 0).toLocaleString(),
   },
   {
-    label: () => "Max Multiplicity",
+    label: () => "Most uses of one question",
     value: (s) => (s.max_question_multiplicity ?? 0).toLocaleString(),
   },
   {
-    label: () => "Avg Multiplicity",
+    label: () => "Average uses per question",
     value: (s) => (s.avg_question_multiplicity ?? 0).toFixed(2),
   },
   {
-    label: () => "Avg Difficulty",
+    label: () => "Average difficulty",
     value: (s) =>
       s.avg_difficulty_rating == null ? "—" : s.avg_difficulty_rating.toFixed(2),
   },

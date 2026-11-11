@@ -75,7 +75,7 @@ export function PaperResultsDialog({ psetId, onClose }: Props) {
           {!rows ? (
             <p className="text-sm text-muted">Loading…</p>
           ) : rows.length === 0 ? (
-            <p className="text-sm text-muted">This PSet has no questions on record.</p>
+            <p className="text-sm text-muted">This paper has no questions on record.</p>
           ) : (
             <ol className="space-y-2">
               {rows.map((r, i) => (

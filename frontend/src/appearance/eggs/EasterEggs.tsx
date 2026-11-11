@@ -36,6 +36,13 @@ const FERMAT =
 let lateNightShown = false;
 let crtSession = false;
 
+/** The screensaver may only cover Home: anywhere else a student may be reading
+ * a question while working on paper. */
+function onHome(): boolean {
+  const route = window.location.hash.replace(/^#/, "");
+  return route === "" || route === "/";
+}
+
 function isEditable(t: EventTarget | null): boolean {
   if (!(t instanceof HTMLElement)) return false;
   return t.isContentEditable || t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT";
@@ -73,7 +80,7 @@ export function EasterEggs() {
       }
       idle = true;
       emit({ type: "idle", idle: true });
-      if (effectsLevel() > 0) setSaver(true);
+      if (effectsLevel() > 0 && onHome()) setSaver(true);
     };
     const active = () => {
       lastActive = Date.now();
@@ -199,7 +206,7 @@ export function EasterEggs() {
     <>
       <style>{EGG_CSS}</style>
       {eggs && crt && !focus && <CrtOverlay />}
-      {eggs && saver && <Screensaver onCorner={onCorner} />}
+      {eggs && saver && !focus && <Screensaver onCorner={onCorner} />}
       {eggs && stamp > 0 && <QedStamp key={stamp} onDone={endStamp} />}
       <ToastStack paused={focus} />
     </>

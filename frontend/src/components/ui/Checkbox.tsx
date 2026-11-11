@@ -13,13 +13,19 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       data-ui="checkbox"
       className={cn(
         "relative inline-flex h-4 w-4 flex-none items-center justify-center rounded border border-border bg-background",
+        "focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-1",
         state !== "unchecked" && "bg-primary border-primary",
         disabled && "opacity-50",
         className,
       )}
     >
       <input
-        ref={ref}
+        ref={(el) => {
+          // Partial is exposed as the native indeterminate state ("mixed").
+          if (el) el.indeterminate = state === "partial";
+          if (typeof ref === "function") ref(el);
+          else if (ref) ref.current = el;
+        }}
         type="checkbox"
         checked={state === "checked"}
         disabled={disabled}

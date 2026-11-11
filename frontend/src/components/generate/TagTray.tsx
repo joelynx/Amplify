@@ -1,11 +1,8 @@
 /**
  * Tag tray (spec §8.1, §7.2):
  *   - Searchable combobox adds chips into a flow-layout tray.
- *   - Two header toggles **Compulsory?** and **Exclude** drive the category at add time.
- *   - Cascade rules (spec §8.1):
- *       * Adding while Exclude is on forces Compulsory on.
- *       * Turning Compulsory off while Exclude is on also turns Exclude off.
- *   - Chip colors: compulsory blue, optional grey, excluded red.
+ *   - A rule selector (Must include / Match any / Exclude) sets the category at add time.
+ *   - Each chip names its rule; colors: compulsory blue, optional grey, excluded red.
  *
  * Each chip stays in its category until removed. Clicking the × removes it.
  */
@@ -16,13 +13,13 @@ import { X } from "lucide-react";
 import { cn } from "../../lib/cn";
 import { useGenerateStore, type TagCategory } from "../../state/generate";
 import { Combobox } from "../ui/Combobox";
-import { Switch } from "../ui/Switch";
-import {
-  cascadeOnCompulsoryChange,
-  cascadeOnExcludeChange,
-  categoryFromToggles,
-  type ToggleState,
-} from "./tagToggle";
+
+const RULES: readonly { id: TagCategory; label: string; hint: string }[] = [
+  { id: "compulsory", label: "Must include", hint: "Every question has this tag." },
+  { id: "optional", label: "Match any", hint: "Every question has at least one of these tags." },
+  { id: "excluded", label: "Exclude", hint: "No question has this tag." },
+];
+const RULE_LABEL = Object.fromEntries(RULES.map((r) => [r.id, r.label])) as Record<TagCategory, string>;
 
 interface Props {
   available: readonly string[];
@@ -39,12 +36,8 @@ export function TagTray({ available }: Props) {
   const addTag = useGenerateStore((s) => s.addTag);
   const removeTag = useGenerateStore((s) => s.removeTag);
 
-  const [toggles, setToggles] = useState<ToggleState>({ compulsory: false, exclude: false });
-
-  const handleCompulsoryChange = (v: boolean) =>
-    setToggles((prev) => cascadeOnCompulsoryChange(prev, v));
-  const handleExcludeChange = (v: boolean) =>
-    setToggles((prev) => cascadeOnExcludeChange(prev, v));
+  // The rule the next added tag gets.
+  const [rule, setRule] = useState<TagCategory>("optional");
 
   // The combobox lists tags that aren't already in any category.
   const allInUse = useMemo(
@@ -58,7 +51,7 @@ export function TagTray({ available }: Props) {
 
   const handlePick = (tag: string | null) => {
     if (!tag) return;
-    addTag(tag, categoryFromToggles(toggles));
+    addTag(tag, rule);
   };
 
   const allChips: Array<{ tag: string; category: TagCategory }> = [
@@ -78,12 +71,24 @@ export function TagTray({ available }: Props) {
           onSelect={handlePick}
           className="min-w-[14rem]"
         />
-        <ToggleRow
-          label="Compulsory?"
-          checked={toggles.compulsory}
-          onChange={handleCompulsoryChange}
-        />
-        <ToggleRow label="Exclude" checked={toggles.exclude} onChange={handleExcludeChange} />
+        <div role="group" aria-label="Rule for the next tag" className="inline-flex overflow-hidden rounded-md border border-border">
+          {RULES.map((r) => (
+            <button
+              key={r.id}
+              type="button"
+              aria-pressed={rule === r.id}
+              title={r.hint}
+              onClick={() => setRule(r.id)}
+              className={cn(
+                "px-3 py-1.5 text-xs font-medium transition",
+                rule === r.id ? "bg-primary text-on-primary" : "bg-surface text-text hover:bg-primary/10",
+              )}
+            >
+              {r.label}
+            </button>
+          ))}
+        </div>
+        <span className="text-xs text-muted">{RULES.find((r) => r.id === rule)?.hint}</span>
       </div>
 
       {allChips.length > 0 && (
@@ -96,6 +101,7 @@ export function TagTray({ available }: Props) {
                 chipStyle[category],
               )}
             >
+              <span className="font-normal opacity-80">{RULE_LABEL[category]}:</span>
               {tag}
               <button
                 type="button"
@@ -110,22 +116,5 @@ export function TagTray({ available }: Props) {
         </div>
       )}
     </div>
-  );
-}
-
-function ToggleRow({
-  label,
-  checked,
-  onChange,
-}: {
-  label: string;
-  checked: boolean;
-  onChange: (v: boolean) => void;
-}) {
-  return (
-    <label className="inline-flex cursor-pointer items-center gap-2 text-sm">
-      <Switch checked={checked} onCheckedChange={onChange} ariaLabel={label} />
-      <span>{label}</span>
-    </label>
   );
 }

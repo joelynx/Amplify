@@ -123,7 +123,8 @@ export function CheckableTree({ tree }: Props) {
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Filter visible leaves…"
+            placeholder="Search topics…"
+            aria-label="Search topics"
             className="flex-1 bg-transparent text-sm outline-none"
           />
           {query && (
@@ -138,14 +139,14 @@ export function CheckableTree({ tree }: Props) {
           )}
         </div>
         <Button variant="ghost" size="sm" onClick={collapseAll}>
-          Collapse leaves
+          Collapse all
         </Button>
       </div>
 
       <div className="max-h-[24rem] overflow-y-auto rounded-md border border-border bg-background py-1">
         {topicEntries.length === 0 && (
           <p className="px-4 py-6 text-sm text-muted">
-            {queryLower ? "No leaves match." : "No taxonomy data — ingest the seed first."}
+            {queryLower ? "No topics match this search." : "No topics yet. Import the question bank in Settings first."}
           </p>
         )}
         {topicEntries.map(([topic, branches]) => {

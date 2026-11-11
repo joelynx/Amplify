@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "../components/ui/Button";
+import { useSubjectStore } from "../state/subject";
 import { Card } from "../components/ui/Card";
 import { StatsCards } from "../components/stats/StatsCards";
 import { DistributionPie } from "../components/stats/DistributionPie";
@@ -43,7 +44,10 @@ function formatRange(range: DateRange): string {
 }
 
 export default function StatsPage() {
-  const [subject, setSubject] = useState<string | null>(null);
+  // Scope: the active subject, unless another is picked in Filters.
+  const activeSubject = useSubjectStore((s) => s.active);
+  const [subject, setSubject] = useState<string | null>(activeSubject);
+  useEffect(() => setSubject(activeSubject), [activeSubject]);
   const [dateRange, setDateRange] = useState<DateRange>(defaultRange);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
@@ -146,15 +150,17 @@ export default function StatsPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <div className="flex bg-muted rounded-md p-1 mr-2 text-sm font-medium">
+          <div role="group" aria-label="Activity shown" className="flex bg-background border border-border rounded-md p-1 mr-2 text-sm font-medium">
             <button
-              className={`px-3 py-1 rounded-sm transition-colors ${mode === "generate" ? "bg-surface shadow-sm text-foreground" : "text-muted hover:text-foreground"}`}
+              aria-pressed={mode === "generate"}
+              className={`px-3 py-1 rounded-sm transition-colors ${mode === "generate" ? "bg-primary text-on-primary shadow-sm" : "text-text/80 hover:bg-surface hover:text-text"}`}
               onClick={() => setMode("generate")}
             >
-              Generate
+              Papers
             </button>
             <button
-              className={`px-3 py-1 rounded-sm transition-colors ${mode === "quiz" ? "bg-surface shadow-sm text-foreground" : "text-muted hover:text-foreground"}`}
+              aria-pressed={mode === "quiz"}
+              className={`px-3 py-1 rounded-sm transition-colors ${mode === "quiz" ? "bg-primary text-on-primary shadow-sm" : "text-text/80 hover:bg-surface hover:text-text"}`}
               onClick={() => setMode("quiz")}
             >
               Quizzes
@@ -179,11 +185,20 @@ export default function StatsPage() {
 
       <main className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-5xl space-y-6 px-6 py-6">
+          {/* Learning first; how much the app was used comes after. */}
+          <LearningPanel subject={subject} dateRange={dateRange} refreshKey={refreshKey} />
+
+          <div className="border-t border-border pt-5">
+            <h2 className="text-lg font-semibold">Usage</h2>
+            <p className="text-xs text-muted">
+              {mode === "generate" ? "Papers created" : "Quizzes taken"} · {subject ?? "All subjects"} ·{" "}
+              {formatRange(dateRange)}
+            </p>
+          </div>
+
           <StatsCards stats={stats} mode={mode} />
 
           <TrendsPanel subject={subject} mode={mode} refreshKey={refreshKey} />
-
-          <LearningPanel subject={subject} dateRange={dateRange} refreshKey={refreshKey} />
 
           <Card title={chartTitle}>
             {loading && distribution.length === 0 ? (
@@ -200,14 +215,14 @@ export default function StatsPage() {
               <p className="text-muted">Loading…</p>
             ) : sourceAttribution.length === 0 ? (
               <p className="text-muted">
-                No questions practiced in the selected range yet — {mode === "generate" ? "generate a PSet" : "take a quiz"} to populate this.
+                No questions practiced in the selected range yet — {mode === "generate" ? "create a paper" : "take a quiz"} to fill this in.
               </p>
             ) : (
               <DistributionPie data={sourceAttribution} />
             )}
           </Card>
 
-          <Card title="Question multiplicity (uses in range)">
+          <Card title="How often each question was used (in range)">
             {Object.keys(multiplicity).length === 0 ? (
               <p className="text-muted">No questions used in the selected range under the current subject filter.</p>
             ) : (
@@ -259,7 +274,7 @@ export default function StatsPage() {
             />
             {Object.keys(heatmap).length === 0 && (
               <p className="mt-2 text-xs text-muted">
-                No {mode === "generate" ? "PSets generated" : "quizzes taken"} in {heatmapMode === "year" ? heatmapYear : monthLabel}.
+                No {mode === "generate" ? "papers created" : "quizzes taken"} in {heatmapMode === "year" ? heatmapYear : monthLabel}.
               </p>
             )}
           </Card>

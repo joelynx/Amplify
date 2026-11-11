@@ -937,6 +937,17 @@ class Api:
     def set_question_bookmark(self, question_id: int, on: bool) -> None:
         practice_repo.set_bookmark(self._conn, int(question_id), bool(on))
 
+    def get_content_flags(self, question_ids: list[int]) -> dict[str, list[str]]:
+        """The parts ("hint", "solution") of each question the student flagged as unusable."""
+        flags = practice_repo.content_flags_for(self._conn, [int(q) for q in question_ids or []])
+        return {str(q): v for q, v in flags.items()}
+
+    def set_content_flag(self, question_id: int, part: str, on: bool) -> None:
+        practice_repo.set_content_flag(self._conn, int(question_id), str(part), bool(on))
+
+    def list_content_flags(self) -> list[dict[str, Any]]:
+        return practice_repo.flagged_content(self._conn)
+
     def get_paper_results(self, pset_id: str) -> dict[str, Any]:
         """A PSet's questions, in order, with any results recorded for them."""
         ids = [
@@ -1653,7 +1664,7 @@ class Api:
         """
         pset = psets_repo.get(self._conn, pset_id)
         if pset is None:
-            return {"success": False, "errors": f"unknown pset {pset_id!r}"}
+            return {"success": False, "errors": f"unknown paper {pset_id!r}"}
 
         save_dir_raw = psets_repo.get_save_directory(self._conn, pset_id)
         if not save_dir_raw or not Path(save_dir_raw).exists():
@@ -1671,7 +1682,7 @@ class Api:
                 continue
             questions.append(q)
         if not questions:
-            return {"success": False, "errors": "pset has no extant questions"}
+            return {"success": False, "errors": "none of this paper's questions are in the bank any more"}
 
         output_settings = {
             "solutions": pset.solutions or "none",

@@ -9,6 +9,7 @@ import { emit } from "./appearance/events";
 import { loadPrefs } from "./appearance/prefs";
 import { useAppearance } from "./appearance/store";
 import { BridgeUnavailableError, ipc } from "./lib/ipc";
+import { Combobox } from "./components/ui/Combobox";
 import { cn } from "./lib/cn";
 import AboutPage from "./pages/About";
 import BrowserPage from "./pages/Browser";
@@ -130,6 +131,50 @@ function Page({ children }: { children: ReactNode }) {
   );
 }
 
+const ALL_SUBJECTS = "All subjects";
+
+/** The active subject: the scope every page starts from. Changing it here
+ * activates that subject (the same as Activate on the Subjects page). */
+function SubjectScope() {
+  const { pathname } = useLocation();
+  const active = useSubjectStore((s) => s.active);
+  const [subjects, setSubjects] = useState<string[]>([]);
+
+  // Re-read on navigation: subjects are created and renamed on the Subjects page.
+  useEffect(() => {
+    let cancelled = false;
+    ipc
+      .list_subjects()
+      .then((s) => {
+        if (!cancelled) setSubjects(s);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [pathname]);
+
+  const choose = async (name: string | null) => {
+    if (name === active) return;
+    await ipc.activate_subject(name);
+    useSubjectStore.getState().setActive(name);
+  };
+
+  return (
+    <Combobox
+      options={subjects}
+      value={active}
+      onSelect={choose}
+      placeholder={ALL_SUBJECTS}
+      sentinel={ALL_SUBJECTS}
+      searchPlaceholder="Search subjects"
+      emptyMessage="No subjects yet: create one on the Subjects page"
+      ariaLabel="Active subject"
+      className="nav-subject mr-2 w-48"
+    />
+  );
+}
+
 function NavBar() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -167,6 +212,7 @@ function NavBar() {
         );
       })}
       <div className="ml-auto flex items-center gap-1">
+        <SubjectScope />
         <button
           type="button"
           onClick={() => setSettings({ focus: !focus })}

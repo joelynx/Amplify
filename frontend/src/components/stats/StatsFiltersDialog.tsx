@@ -65,7 +65,7 @@ export function StatsFiltersDialog({ open, onClose, initial, subjects, onApply }
           </label>
         </div>
         <p className="text-xs text-muted">
-          Date range filters PSet counts. Per-question multiplicity and difficulty stay lifetime.
+          The date range applies to paper and quiz counts. Use counts per question and difficulty cover all time.
         </p>
       </div>
     </Modal>

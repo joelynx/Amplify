@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { ClipboardCheck, Download, ExternalLink, RefreshCw, Settings as Gear, Trash2, Wand2 } from "lucide-react";
 
 import { Button } from "../components/ui/Button";
+import { useSubjectStore } from "../state/subject";
 import { Card } from "../components/ui/Card";
 import { Modal } from "../components/ui/Modal";
 import { StatsFiltersDialog } from "../components/stats/StatsFiltersDialog";
@@ -46,7 +47,10 @@ function formatDate(iso: string): string {
 
 export default function HistoryPage() {
   const navigate = useNavigate();
-  const [subject, setSubject] = useState<string | null>(null);
+  // Scope: the active subject, unless another is picked in Filters.
+  const activeSubject = useSubjectStore((s) => s.active);
+  const [subject, setSubject] = useState<string | null>(activeSubject);
+  useEffect(() => setSubject(activeSubject), [activeSubject]);
   const [dateRange, setDateRange] = useState<DateRange>(defaultRange);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
@@ -127,7 +131,7 @@ export default function HistoryPage() {
         <div>
           <h1 className="text-2xl font-semibold">History</h1>
           <p className="text-xs text-muted">
-            {subject ?? "All subjects"} · {formatRange(dateRange)} · {psets.length} PSet
+            {subject ?? "All subjects"} · {formatRange(dateRange)} · {psets.length} paper
             {psets.length === 1 ? "" : "s"}
           </p>
         </div>
@@ -141,7 +145,7 @@ export default function HistoryPage() {
         <div className="mx-auto max-w-5xl px-6 py-6">
           {empty ? (
             <Card>
-              <p className="text-muted">No PSets match these filters yet.</p>
+              <p className="text-muted">No papers match these filters yet.</p>
             </Card>
           ) : (
             <ul className="divide-y divide-border overflow-hidden rounded-lg border border-border bg-surface">
@@ -277,7 +281,7 @@ export default function HistoryPage() {
       <Modal
         open={confirmingDelete !== null}
         onClose={() => setConfirmingDelete(null)}
-        title="Delete PSet?"
+        title="Delete paper?"
         tone="error"
         footer={
           <>
@@ -292,7 +296,7 @@ export default function HistoryPage() {
       >
         <p>
           Remove <code className="font-mono">{confirmingDelete?.pset_id}</code> from history? The
-          saved PDF stays on disk — only the database row is dropped.
+          saved PDF stays on disk; only the history entry is removed.
         </p>
       </Modal>
 

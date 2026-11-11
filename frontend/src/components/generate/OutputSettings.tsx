@@ -1,33 +1,32 @@
 import { FolderOpen } from "lucide-react";
 
 import { Button } from "../ui/Button";
-import { Checkbox } from "../ui/Checkbox";
 import { Combobox } from "../ui/Combobox";
 import { NumberInput } from "../ui/NumberInput";
 import { Switch } from "../ui/Switch";
 import { cn } from "../../lib/cn";
 import { ipc, type GenerationStrategy } from "../../lib/ipc";
-import { useGenerateStore, type SolutionsValue } from "../../state/generate";
+import { useGenerateStore, type GenerateDraft, type SolutionsValue } from "../../state/generate";
 
 const STRATEGIES: readonly { id: GenerationStrategy; label: string; hint: string }[] = [
-  { id: "random", label: "Random", hint: "Uniform random over your filters." },
+  { id: "random", label: "Random", hint: "Any questions that match your filters." },
   {
     id: "diverse",
-    label: "Diverse",
+    label: "Varied",
     hint:
-      "Maximum spread across the concept space via greedy MAP-DPP on question embeddings.",
+      "Varied practice: questions chosen to be as different from each other as possible.",
   },
   {
     id: "focused",
-    label: "Focused",
+    label: "Similar",
     hint:
-      "Tight cluster around a seed question — nearest neighbours by cosine similarity.",
+      "Similar questions: the ones closest to a starting question.",
   },
   {
     id: "frontier",
-    label: "Frontier",
+    label: "Challenging",
     hint:
-      "Hardest, least-attempted questions first (difficulty ÷ (1+times_used)).",
+      "Hard questions you have seen least come first.",
   },
 ];
 
@@ -51,7 +50,69 @@ function isOutline(value: SolutionsValue): boolean {
   return value === "outline_appendix" || value === "outline_interleaved";
 }
 
-export function OutputSettings() {
+/** How questions are picked from the ones that match: strategy, difficulty
+ * floor, reuse, syllabus. Sits under "More filters" on Generate. */
+export function SelectionOptions() {
+  const draft = useGenerateStore();
+  const activeStrategy = STRATEGIES.find((s) => s.id === draft.strategy) ?? STRATEGIES[0];
+
+  return (
+    <div className="grid gap-4 sm:grid-cols-2">
+      <FieldRow label="How to pick" className="sm:col-span-2 items-start sm:items-center">
+        <div className="flex w-full flex-col items-end gap-1">
+          <div className="inline-flex overflow-hidden rounded-md border border-border">
+            {STRATEGIES.map((s) => (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => draft.setStrategy(s.id)}
+                className={cn(
+                  "px-3 py-1.5 text-xs font-medium transition",
+                  draft.strategy === s.id
+                    ? "bg-primary text-on-primary"
+                    : "bg-surface text-text hover:bg-primary/10",
+                )}
+                aria-pressed={draft.strategy === s.id}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+          <p className="max-w-prose text-right text-xs text-muted">{activeStrategy.hint}</p>
+        </div>
+      </FieldRow>
+
+      <FieldRow label="Minimum difficulty (0–20)">
+        <NumberInput
+          value={draft.minDifficulty}
+          onChange={draft.setMinDifficulty}
+          min={0}
+          max={20}
+          ariaLabel="min difficulty"
+        />
+      </FieldRow>
+
+      <FieldRow label="Allow questions used before">
+        <Switch
+          checked={draft.reuseQuestions}
+          onCheckedChange={draft.setReuseQuestions}
+          ariaLabel="reuse questions"
+        />
+      </FieldRow>
+
+      <FieldRow label="Only questions in the syllabus">
+        <Switch
+          checked={draft.inSyllabusOnly}
+          onCheckedChange={draft.setInSyllabusOnly}
+          ariaLabel="in syllabus only"
+        />
+      </FieldRow>
+    </div>
+  );
+}
+
+/** How the PDF is laid out and where it is saved. */
+export function PaperOptions() {
   const draft = useGenerateStore();
 
   const solutionsPrimary = isOutline(draft.solutions) ? "outline_only" : draft.solutions;
@@ -79,70 +140,8 @@ export function OutputSettings() {
     }
   };
 
-  const activeStrategy = STRATEGIES.find((s) => s.id === draft.strategy) ?? STRATEGIES[0];
-
   return (
     <div className="grid gap-4 sm:grid-cols-2">
-      <FieldRow label="Strategy" className="sm:col-span-2 items-start sm:items-center">
-        <div className="flex w-full flex-col items-end gap-1">
-          <div className="inline-flex overflow-hidden rounded-md border border-border">
-            {STRATEGIES.map((s) => (
-              <button
-                key={s.id}
-                type="button"
-                onClick={() => draft.setStrategy(s.id)}
-                className={cn(
-                  "px-3 py-1.5 text-xs font-medium transition",
-                  draft.strategy === s.id
-                    ? "bg-primary text-on-primary"
-                    : "bg-surface text-text hover:bg-primary/10",
-                )}
-                aria-pressed={draft.strategy === s.id}
-              >
-                {s.label}
-              </button>
-            ))}
-          </div>
-          <p className="max-w-prose text-right text-xs text-muted">{activeStrategy.hint}</p>
-        </div>
-      </FieldRow>
-
-      <FieldRow label="Number of questions">
-        <NumberInput
-          value={draft.nQuestions}
-          onChange={draft.setNQuestions}
-          min={1}
-          max={200}
-          ariaLabel="number of questions"
-        />
-      </FieldRow>
-
-      <FieldRow label="Min difficulty">
-        <NumberInput
-          value={draft.minDifficulty}
-          onChange={draft.setMinDifficulty}
-          min={0}
-          max={20}
-          ariaLabel="min difficulty"
-        />
-      </FieldRow>
-
-      <FieldRow label="Reuse questions">
-        <Switch
-          checked={draft.reuseQuestions}
-          onCheckedChange={draft.setReuseQuestions}
-          ariaLabel="reuse questions"
-        />
-      </FieldRow>
-
-      <FieldRow label="In-syllabus only">
-        <Switch
-          checked={draft.inSyllabusOnly}
-          onCheckedChange={draft.setInSyllabusOnly}
-          ariaLabel="in syllabus only"
-        />
-      </FieldRow>
-
       <FieldRow label="Include sources in PDF">
         <Switch
           checked={draft.includeSources}
@@ -195,6 +194,31 @@ export function OutputSettings() {
   );
 }
 
+const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? "" : "s"}`;
+
+/** What is set under "More filters", for the collapsed header. */
+export function filterSummary(draft: GenerateDraft): string {
+  const parts: string[] = [];
+  const tags = draft.tags.compulsory.length + draft.tags.optional.length + draft.tags.excluded.length;
+  if (tags > 0) parts.push(plural(tags, "tag"));
+  if (draft.sources.length > 0) parts.push(plural(draft.sources.length, "source"));
+  if (draft.types.length > 0) parts.push(plural(draft.types.length, "type"));
+  if (draft.minDifficulty > 0) parts.push(`difficulty ${draft.minDifficulty}+`);
+  if (draft.strategy !== "random") parts.push(STRATEGIES.find((s) => s.id === draft.strategy)?.label.toLowerCase() ?? draft.strategy);
+  if (draft.reuseQuestions) parts.push("reuse allowed");
+  if (!draft.inSyllabusOnly) parts.push("outside syllabus too");
+  return parts.length > 0 ? parts.join(" · ") : "None set";
+}
+
+/** What is set under "Paper options", for the collapsed header. */
+export function paperSummary(draft: GenerateDraft): string {
+  const solutions = draft.solutions === "none" ? "No solutions" : `Solutions: ${OPTION_LABELS[draft.solutions].toLowerCase()}`;
+  const folder = draft.saveDirectory
+    ? `saved to ${draft.saveDirectory.split(/[\\/]/).filter(Boolean).pop() ?? draft.saveDirectory}`
+    : "no save folder chosen";
+  return `${solutions} · ${folder}`;
+}
+
 function FieldRow({
   label,
   children,
@@ -211,6 +235,3 @@ function FieldRow({
     </label>
   );
 }
-
-// Re-exports kept so the file compiles cleanly even if Checkbox isn't used yet.
-export const _kept = { Checkbox };

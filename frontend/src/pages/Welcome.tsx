@@ -1,8 +1,9 @@
 /**
- * Welcome screen — spec §8: Enter button + 4 navlinks (About / Theme /
- * Subjects / Tutorial). Those four pages live here so the top nav stays
- * focused on the daily workflow (Generate / Browser / History / Stats /
- * Settings).
+ * Welcome screen: today's status and the main actions first (practise,
+ * review, create a paper), then the optional study room, then 4 navlinks
+ * (About / Theme / Subjects / Tutorial). Those four pages live here so the
+ * top nav stays focused on the daily workflow (Generate / Browser / History /
+ * Stats / Settings).
  */
 
 import { Link } from "react-router-dom";
@@ -16,7 +17,6 @@ import {
 import { Logo } from "../appearance/brand/Logo";
 import { StudyRoom } from "../appearance/room/StudyRoom";
 import { useAppearance } from "../appearance/store";
-import { Button } from "../components/ui/Button";
 import { TodayCard } from "../components/quiz/TodayCard";
 import { cn } from "../lib/cn";
 
@@ -60,9 +60,12 @@ export default function WelcomePage() {
     <main className="h-full overflow-y-auto">
       {room ? (
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 py-6">
-          <StudyRoom />
-          <ClubCredit />
           <TodayCard />
+          {/* Kept below the actions and narrower, so they stay in view with it. */}
+          <div className="w-full max-w-[760px]">
+            <StudyRoom />
+          </div>
+          <ClubCredit />
           <NavCards />
         </div>
       ) : (
@@ -75,12 +78,6 @@ export default function WelcomePage() {
             Practice problem sets, generated from a curated bank.
           </p>
         </header>
-
-        <Link to="/generate">
-          <Button variant="primary" size="md">
-            Enter
-          </Button>
-        </Link>
 
         <TodayCard />
 

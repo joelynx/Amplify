@@ -318,6 +318,15 @@ export interface StudiedTechnique {
   last_at: string | null;
 }
 
+/** A part of a question the student can flag as unusable. */
+export type FlagPart = "hint" | "solution";
+
+export interface ContentFlag {
+  question_id: number;
+  part: FlagPart;
+  flagged_at: string;
+}
+
 export interface QuestionNote {
   note: string;
   bookmarked: boolean;
@@ -594,6 +603,9 @@ interface PyWebViewApi {
   get_question_notes: (question_ids: number[]) => Promise<Record<string, QuestionNote>>;
   save_question_note: (question_id: number, note: string) => Promise<void>;
   set_question_bookmark: (question_id: number, on: boolean) => Promise<void>;
+  get_content_flags: (question_ids: number[]) => Promise<Record<string, FlagPart[]>>;
+  set_content_flag: (question_id: number, part: FlagPart, on: boolean) => Promise<void>;
+  list_content_flags: () => Promise<ContentFlag[]>;
   get_paper_results: (pset_id: string) => Promise<{ pset_id: string; questions: PaperQuestion[] }>;
   record_paper_results: (
     pset_id: string,
@@ -1062,6 +1074,18 @@ export const ipc = {
   async set_question_bookmark(question_id: number, on: boolean): Promise<void> {
     const api = await bridge();
     return api.set_question_bookmark(question_id, on);
+  },
+  async get_content_flags(question_ids: number[]): Promise<Record<string, FlagPart[]>> {
+    const api = await bridge();
+    return (await api.get_content_flags(question_ids)) ?? {};
+  },
+  async set_content_flag(question_id: number, part: FlagPart, on: boolean): Promise<void> {
+    const api = await bridge();
+    return api.set_content_flag(question_id, part, on);
+  },
+  async list_content_flags(): Promise<ContentFlag[]> {
+    const api = await bridge();
+    return (await api.list_content_flags()) ?? [];
   },
   async get_paper_results(pset_id: string): Promise<{ pset_id: string; questions: PaperQuestion[] }> {
     const api = await bridge();

@@ -43,7 +43,7 @@ export default function TutorialPage() {
 
         <Card title="History">
           <p className="text-sm">
-            Every successful generate creates a PSet row with the questions, filters, and save
+            Every successful generate saves a paper in History with its questions, filters, and save
             directory. From the History page you can <em>Open</em> the saved PDF,{" "}
             <em>Re-export</em> the same questions, <em>Generate similar</em> (pre-fills the form
             with the recorded filters), <em>Record results</em> for work done on paper (solved,
@@ -63,8 +63,9 @@ export default function TutorialPage() {
         <Card title="Settings">
           <p className="text-sm">
             Configure default question count, save location, PDF header text, and theme. The
-            Data card has buttons to <em>Re-run seed ingest</em> and <em>Augment seed from CSV</em>,
-            plus diagnostics about embeddings / outlines coverage.
+            Data card has buttons to <em>Re-import question bank</em> and <em>Add questions from CSV</em>,
+            plus how many questions support similar-question search and have a solution outline. Resets
+            sit apart under <em>Maintenance</em> at the bottom.
           </p>
         </Card>
       </div>

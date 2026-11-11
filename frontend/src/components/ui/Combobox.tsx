@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { ChevronDown, Search, X } from "lucide-react";
 import { cn } from "../../lib/cn";
 
@@ -16,6 +16,8 @@ interface ComboboxProps {
   clearable?: boolean;
   disabled?: boolean;
   className?: string;
+  /** Accessible name when no visible label is attached. */
+  ariaLabel?: string;
 }
 
 /**
@@ -37,12 +39,15 @@ export function Combobox({
   clearable,
   disabled,
   className,
+  ariaLabel,
 }: ComboboxProps) {
+  const listId = useId();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [highlight, setHighlight] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   const filtered = useMemo(() => {
     if (!query) return options;
@@ -80,13 +85,18 @@ export function Combobox({
       onSelect(label);
     }
     setOpen(false);
+    triggerRef.current?.focus();
   };
 
   return (
     <div ref={rootRef} className={cn("relative inline-block", className)}>
       <button
+        ref={triggerRef}
         type="button"
         disabled={disabled}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-label={ariaLabel ? `${ariaLabel}: ${value || placeholder}` : undefined}
         onClick={() => !disabled && setOpen((o) => !o)}
         className={cn(
           "flex h-9 w-full items-center justify-between gap-2 rounded-md border border-border bg-background px-3 text-left text-sm",
@@ -94,7 +104,7 @@ export function Combobox({
           "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
         )}
       >
-        <span className={cn(!value && "text-muted")}>{value || placeholder}</span>
+        <span className={cn("min-w-0 truncate", !value && "text-muted")}>{value || placeholder}</span>
         <span className="flex items-center gap-1">
           {clearable && value && (
             <X
@@ -119,6 +129,12 @@ export function Combobox({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={searchPlaceholder}
+              role="combobox"
+              aria-expanded
+              aria-controls={listId}
+              aria-autocomplete="list"
+              aria-label={searchPlaceholder}
+              aria-activedescendant={rows[highlight] !== undefined ? `${listId}-${highlight}` : undefined}
               className="h-8 flex-1 bg-transparent text-sm outline-none"
               onKeyDown={(e) => {
                 if (e.key === "ArrowDown") {
@@ -131,12 +147,18 @@ export function Combobox({
                   e.preventDefault();
                   if (rows[highlight] !== undefined) choose(rows[highlight]);
                 } else if (e.key === "Escape") {
+                  // Close only the list, not a dialog it sits in.
+                  e.stopPropagation();
+                  e.nativeEvent.stopImmediatePropagation();
+                  setOpen(false);
+                  triggerRef.current?.focus();
+                } else if (e.key === "Tab") {
                   setOpen(false);
                 }
               }}
             />
           </div>
-          <ul className="max-h-64 overflow-y-auto py-1">
+          <ul id={listId} role="listbox" className="max-h-64 overflow-y-auto py-1">
             {rows.length === 0 && (
               <li className="px-3 py-2 text-sm text-muted">{emptyMessage}</li>
             )}
@@ -146,6 +168,9 @@ export function Combobox({
               return (
                 <li
                   key={label}
+                  id={`${listId}-${i}`}
+                  role="option"
+                  aria-selected={isSentinel ? !value : value === label}
                   className={cn(
                     "cursor-pointer px-3 py-1.5 text-sm",
                     isHi && "bg-surface",

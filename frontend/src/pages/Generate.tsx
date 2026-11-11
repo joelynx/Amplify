@@ -6,13 +6,14 @@
  *   - live count (`count_matching_questions`, debounced 150ms)
  *   - dynamic tag / source / type dropdowns (spec §7.3 — re-query on every change)
  *
- * Generate / Export / Save Template are no-ops in this step; the action row
- * shows a validation tooltip when the form isn't ready to generate.
+ * Subject, topics and the question count are the main flow; other filters and
+ * the print options are collapsed. The action bar under the form stays in
+ * view with the selection summary, the live count and what is still missing.
  */
 
 import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { Download, FileText, Save } from "lucide-react";
 
 import { Card } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
@@ -22,9 +23,15 @@ import { TagTray } from "../components/generate/TagTray";
 import { ChipTray } from "../components/generate/ChipTray";
 import { SubjectPicker } from "../components/generate/SubjectPicker";
 import { TemplatePicker } from "../components/generate/TemplatePicker";
-import { OutputSettings } from "../components/generate/OutputSettings";
-import { ActionRow } from "../components/generate/ActionRow";
-import { StatusBar } from "../components/generate/StatusBar";
+import {
+  PaperOptions,
+  SelectionOptions,
+  filterSummary,
+  paperSummary,
+} from "../components/generate/OutputSettings";
+import { ActionBar } from "../components/ui/ActionBar";
+import { Disclosure } from "../components/ui/Disclosure";
+import { NumberInput } from "../components/ui/NumberInput";
 import { NameDialog } from "../components/generate/NameDialog";
 import { TemplateManager } from "../components/generate/TemplateManager";
 import { useDebounced } from "../lib/debounce";
@@ -259,11 +266,23 @@ export default function GeneratePage() {
       if (!draft.saveDirectory) return "Choose a save directory";
       return null;
     }
-    if (draft.selectedLeaves.size === 0) return "Pick at least one subtopic from the tree";
+    if (draft.selectedLeaves.size === 0) return "Tick at least one topic";
     if (draft.nQuestions < 1) return "Set the question count to at least 1";
     if (!draft.saveDirectory) return "Choose a save directory";
     return null;
   }, [busy, inSelectionMode, draft.selectedLeaves, draft.nQuestions, draft.saveDirectory]);
+
+  // Nothing blocks the action, but the paper will come out shorter than asked.
+  const shortNote =
+    !inSelectionMode && count !== null && !countLoading && count < draft.nQuestions
+      ? count === 0
+        ? "No questions match these filters"
+        : `Only ${count.toLocaleString()} match: the paper will have fewer than ${draft.nQuestions} questions`
+      : null;
+  const actionNote =
+    busy !== "idle" ? null : generateDisabledReason === "Choose a save directory"
+      ? "Choose a save directory under Paper options"
+      : (generateDisabledReason ?? countError ?? shortNote);
 
   const handleGenerate = async () => {
     setBusy("generating");
@@ -298,7 +317,7 @@ export default function GeneratePage() {
           <header>
             <h1 className="text-2xl font-semibold">Generate</h1>
             <p className="text-sm text-muted">
-              Compose filters, watch the live count, then generate a PDF.
+              Choose a subject, topics and a question count, then generate the PDF.
             </p>
           </header>
 
@@ -319,17 +338,8 @@ export default function GeneratePage() {
             </div>
           )}
 
-          <Card title="Required">
-            <div className="grid gap-3 sm:grid-cols-2">
-              <label className="flex flex-col gap-1 text-sm">
-                <span className="text-muted">Template</span>
-                <TemplatePicker
-                  templates={templates}
-                  value={draft.templateName}
-                  onChange={handleSelectTemplate}
-                  onOpenManager={() => setManagerOpen(true)}
-                />
-              </label>
+          <Card title="Paper">
+            <div className="grid gap-3 sm:grid-cols-3">
               <label className="flex flex-col gap-1 text-sm">
                 <span className="text-muted">Subject</span>
                 <SubjectPicker
@@ -338,56 +348,107 @@ export default function GeneratePage() {
                   onChange={draft.setSubject}
                 />
               </label>
+              <label className="flex flex-col gap-1 text-sm">
+                <span className="text-muted">Saved template (optional)</span>
+                <TemplatePicker
+                  templates={templates}
+                  value={draft.templateName}
+                  onChange={handleSelectTemplate}
+                  onOpenManager={() => setManagerOpen(true)}
+                />
+              </label>
+              <label className="flex flex-col items-start gap-1 text-sm">
+                <span className="text-muted">Number of questions</span>
+                <NumberInput
+                  value={draft.nQuestions}
+                  onChange={draft.setNQuestions}
+                  min={1}
+                  max={200}
+                  ariaLabel="number of questions"
+                />
+              </label>
             </div>
           </Card>
 
-          <Card title="Topics / Branches / Subtopics">
+          <Card title="Topics">
             <CheckableTree tree={tree} />
           </Card>
 
-          <Card title="Tags">
-            <TagTray available={tags} />
-          </Card>
+          <Disclosure title="More filters" summary={filterSummary(draft)} prefKey="generate.filtersOpen">
+            <div className="flex flex-col gap-5">
+              <FilterGroup label="Tags">
+                <TagTray available={tags} />
+              </FilterGroup>
+              <div className="grid gap-5 lg:grid-cols-2">
+                <FilterGroup label="Sources">
+                  <ChipTray
+                    available={sources}
+                    selected={draft.sources}
+                    onChange={draft.setSources}
+                    placeholder="Add a source…"
+                    searchPlaceholder="Search sources"
+                    emptyMessage={sources.length === 0 ? "No sources available" : "All sources added"}
+                  />
+                </FilterGroup>
+                <FilterGroup label="Question types">
+                  <ChipTray
+                    available={types}
+                    selected={draft.types}
+                    onChange={draft.setTypes}
+                    placeholder="Add a question type…"
+                    searchPlaceholder="Search types"
+                    emptyMessage={types.length === 0 ? "No types available" : "All types added"}
+                  />
+                </FilterGroup>
+              </div>
+              <div className="border-t border-border pt-4">
+                <SelectionOptions />
+              </div>
+            </div>
+          </Disclosure>
 
-          <div className="grid gap-4 lg:grid-cols-2">
-            <Card title="Sources">
-              <ChipTray
-                available={sources}
-                selected={draft.sources}
-                onChange={draft.setSources}
-                placeholder="Add a source…"
-                searchPlaceholder="Search sources"
-                emptyMessage={sources.length === 0 ? "No sources available" : "All sources added"}
-              />
-            </Card>
-            <Card title="Types">
-              <ChipTray
-                available={types}
-                selected={draft.types}
-                onChange={draft.setTypes}
-                placeholder="Add a question type…"
-                searchPlaceholder="Search types"
-                emptyMessage={types.length === 0 ? "No types available" : "All types added"}
-              />
-            </Card>
-          </div>
-
-          <Card title="Output settings">
-            <OutputSettings />
-          </Card>
-
-          <Card title="Actions">
-            <ActionRow
-              saveTemplateDisabled={saveTemplateDisabled}
-              generateDisabledReason={generateDisabledReason}
-              onSaveTemplate={handleSaveTemplate}
-              onExportLatex={handleExport}
-              onGenerate={handleGenerate}
-            />
-          </Card>
+          <Disclosure title="Paper options" summary={paperSummary(draft)} prefKey="generate.paperOpen">
+            <PaperOptions />
+          </Disclosure>
         </div>
       </main>
-      <StatusBar count={count} loading={countLoading} error={countError} />
+      <ActionBar
+        loading={countLoading || busy !== "idle"}
+        note={actionNote}
+        summary={
+          inSelectionMode ? (
+            <>
+              <span className="font-semibold">{draft.specificQuestionIds.length}</span> chosen question
+              {draft.specificQuestionIds.length === 1 ? "" : "s"}
+            </>
+          ) : (
+            <>
+              {draft.subject ?? "Any subject"} · {draft.selectedLeaves.size} subtopic
+              {draft.selectedLeaves.size === 1 ? "" : "s"} ticked · {draft.nQuestions} question
+              {draft.nQuestions === 1 ? "" : "s"} asked for
+              {count !== null && (
+                <>
+                  {" · "}
+                  <span className="font-semibold">{count.toLocaleString()}</span> match
+                </>
+              )}
+            </>
+          )
+        }
+      >
+        <Button variant="outline" onClick={handleSaveTemplate} disabled={saveTemplateDisabled}>
+          <Save className="h-4 w-4" />
+          Save Template
+        </Button>
+        <Button variant="outline" onClick={handleExport} disabled={busy !== "idle"}>
+          <FileText className="h-4 w-4" />
+          {busy === "exporting" ? "Exporting…" : "Export LaTeX"}
+        </Button>
+        <Button variant="primary" onClick={handleGenerate} disabled={generateDisabledReason !== null}>
+          <Download className="h-4 w-4" />
+          {busy === "generating" ? "Creating PDF…" : "Generate PDF"}
+        </Button>
+      </ActionBar>
       <GenerateResultModal result={generateResult} onClose={() => setGenerateResult(null)} />
       <ExportResultModal result={exportResult} onClose={() => setExportResult(null)} />
       <NameDialog
@@ -414,6 +475,15 @@ export default function GeneratePage() {
           draft.setTemplate(null);
         }}
       />
+    </div>
+  );
+}
+
+function FilterGroup({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col gap-2">
+      <h3 className="text-sm font-medium">{label}</h3>
+      {children}
     </div>
   );
 }

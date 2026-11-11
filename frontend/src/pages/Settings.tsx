@@ -22,6 +22,7 @@ import { Input } from "../components/ui/Input";
 import { Modal } from "../components/ui/Modal";
 import { NumberInput } from "../components/ui/NumberInput";
 import { Switch } from "../components/ui/Switch";
+import { useSubjectStore } from "../state/subject";
 import {
   ipc,
   type AugmentResult,
@@ -30,6 +31,7 @@ import {
   type RecomputeDifficultyResult,
   type ResetSubjectResult,
   type SeedDiagnostics,
+  type ContentFlag,
 } from "../lib/ipc";
 
 interface PdfHeaders {
@@ -85,6 +87,14 @@ export default function SettingsPage() {
 
   // Data card
   const [diag, setDiag] = useState<SeedDiagnostics | null>(null);
+  // Hints and solutions the student reported as unusable.
+  const [flags, setFlags] = useState<ContentFlag[]>([]);
+  useEffect(() => {
+    ipc
+      .list_content_flags()
+      .then(setFlags)
+      .catch(() => {});
+  }, []);
   const [ingestResult, setIngestResult] = useState<IngestResult | null>(null);
   const [augmentResult, setAugmentResult] = useState<AugmentResult | null>(null);
   const [diff, setDiff] = useState<DifficultyState | null>(null);
@@ -92,6 +102,8 @@ export default function SettingsPage() {
   const navigate = useNavigate();
   const [subjectReset, setSubjectReset] = useState<ResetSubjectResult | null>(null);
   const [factoryConfirm, setFactoryConfirm] = useState(false);
+  const [subjectConfirm, setSubjectConfirm] = useState(false);
+  const activeSubject = useSubjectStore((st) => st.active);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
 
@@ -215,6 +227,7 @@ export default function SettingsPage() {
   // --- Reset DB Data -----------------------------------------------
 
   const onResetSubject = async () => {
+    setSubjectConfirm(false);
     setError(null);
     setBusy("reset-subject");
     try {
@@ -245,11 +258,14 @@ export default function SettingsPage() {
   // --- Data card ---------------------------------------------------
 
   const onReingest = async () => {
+    setError(null);
     setBusy("ingest");
     try {
       const r = await ipc.run_seed_ingest();
       setIngestResult(r);
       await refresh();
+    } catch (e) {
+      setError(`The question bank could not be imported: ${e instanceof Error ? e.message : String(e)}`);
     } finally {
       setBusy(null);
     }
@@ -258,11 +274,14 @@ export default function SettingsPage() {
   const onAugment = async () => {
     const path = await ipc.pick_csv_file();
     if (!path) return;
+    setError(null);
     setBusy("augment");
     try {
       const r = await ipc.augment_seed_from_csv(path);
       setAugmentResult(r);
       await refresh();
+    } catch (e) {
+      setError(`The questions could not be added: ${e instanceof Error ? e.message : String(e)}`);
     } finally {
       setBusy(null);
     }
@@ -288,31 +307,12 @@ export default function SettingsPage() {
       <div className="mx-auto max-w-3xl space-y-4 px-6 py-6">
         <header>
           <h1 className="text-2xl font-semibold">Settings</h1>
-          {error && <p className="text-sm text-error">{error}</p>}
+          {error && (
+            <p role="alert" className="text-sm text-error">
+              {error}
+            </p>
+          )}
         </header>
-
-        {/* Reset DB Data */}
-        <Card title="Reset DB Data">
-          <div className="flex flex-wrap gap-2">
-            <Button variant="outline" onClick={onResetSubject} disabled={busy !== null}>
-              <RotateCw className="h-4 w-4" />
-              Reset active subject usage
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => setFactoryConfirm(true)}
-              disabled={busy !== null}
-            >
-              <Trash2 className="h-4 w-4 text-error" />
-              Factory reset…
-            </Button>
-          </div>
-          <p className="mt-2 text-xs text-muted">
-            Reset subject zeroes <code>times_used</code> for questions in the active subject's
-            scope. Factory reset wipes psets, templates, quizzes, subjects, and configs — question
-            content (bodies, solutions, embeddings, outlines) is preserved.
-          </p>
-        </Card>
 
         {/* General */}
         <Card title="General">
@@ -416,7 +416,7 @@ export default function SettingsPage() {
             <p className="text-xs text-muted">
               Tokens: <code>&lt;S&gt;</code> subject · <code>&lt;T&gt;</code> topics ·{" "}
               <code>&lt;N&gt;</code> count · <code>&lt;K&gt;</code> sources · <code>&lt;Q&gt;</code>{" "}
-              types · <code>&lt;P&gt;</code> pset id · <code>&lt;d&gt;</code> /{" "}
+              types · <code>&lt;P&gt;</code> paper id · <code>&lt;d&gt;</code> /{" "}
               <code>&lt;D&gt;</code> dates
             </p>
           </div>
@@ -466,33 +466,106 @@ export default function SettingsPage() {
             <div className="flex flex-wrap gap-2">
               <Button variant="outline" onClick={onReingest} disabled={busy !== null}>
                 <RotateCw className="h-4 w-4" />
-                Re-run seed ingest
+                {busy === "ingest" ? "Importing…" : "Re-import question bank"}
               </Button>
               <Button variant="outline" onClick={onAugment} disabled={busy !== null}>
                 <Upload className="h-4 w-4" />
-                Augment seed from CSV…
+                {busy === "augment" ? "Adding…" : "Add questions from CSV…"}
               </Button>
             </div>
+            {(busy === "ingest" || busy === "augment") && (
+              <p role="status" className="text-xs text-muted">
+                {busy === "ingest" ? "Importing the question bank" : "Adding the questions"}. This can take a minute; keep
+                the app open.
+              </p>
+            )}
             {diag && (
               <div className="rounded-md border border-border bg-background p-3 text-sm">
                 <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
-                  <span className="text-muted">Embedding model</span>
+                  <span className="text-muted">Similarity model</span>
                   <span className="font-mono">{diag.embed_model_version}</span>
-                  <span className="text-muted">Questions total</span>
+                  <span className="text-muted">Questions</span>
                   <span>{diag.questions_total}</span>
-                  <span className="text-muted">With embeddings</span>
+                  <span className="text-muted">Usable for similar-question search</span>
                   <span>
                     {diag.questions_with_embeddings} / {diag.questions_total}
                   </span>
-                  <span className="text-muted">With outlines</span>
+                  <span className="text-muted">With a solution outline</span>
                   <span>
                     {diag.questions_with_outlines} / {diag.questions_total}
                   </span>
                 </div>
               </div>
             )}
+            <div data-ui="content-flags" className="rounded-md border border-border bg-background p-3 text-sm">
+              <div className="font-medium">Hints and solutions you reported</div>
+              {flags.length === 0 ? (
+                <p className="mt-1 text-xs text-muted">
+                  None. Use “Report a problem” under a hint or solution to hide it and list it here.
+                </p>
+              ) : (
+                <>
+                  <p className="mt-1 text-xs text-muted">
+                    Hidden in Quiz and the Browser until the flag is removed there. Pass this list on when the bank is
+                    repaired.
+                  </p>
+                  <ul className="mt-2 max-h-32 space-y-0.5 overflow-y-auto font-mono text-xs">
+                    {flags.map((f) => (
+                      <li key={`${f.question_id}-${f.part}`}>
+                        Q{f.question_id} · {f.part}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </div>
           </div>
         </Card>
+        {/* Maintenance: the controls that erase things, kept apart from everyday settings. */}
+        <section
+          data-ui="maintenance"
+          aria-labelledby="maintenance-title"
+          className="rounded-lg border border-error/40 p-4"
+        >
+          <h2 id="maintenance-title" className="text-sm font-semibold uppercase tracking-wide text-muted">
+            Maintenance
+          </h2>
+          <p className="mt-1 text-xs text-muted">
+            These erase records and cannot be undone. The questions themselves are never deleted.
+          </p>
+          <div className="mt-3 space-y-3">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="min-w-[14rem] flex-1 text-sm">
+                <div className="font-medium">Clear usage for {activeSubject ? `“${activeSubject}”` : "the active subject"}</div>
+                <div className="text-xs text-muted">
+                  {activeSubject
+                    ? "Forgets which of this subject's questions have appeared in papers and quizzes, so they can be picked again."
+                    : "No subject is active. Choose one in the bar at the top first."}
+                </div>
+              </div>
+              <Button
+                variant="outline"
+                onClick={() => setSubjectConfirm(true)}
+                disabled={busy !== null || !activeSubject}
+              >
+                <RotateCw className="h-4 w-4" />
+                Clear subject usage…
+              </Button>
+            </div>
+            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border pt-3">
+              <div className="min-w-[14rem] flex-1 text-sm">
+                <div className="font-medium">Factory reset</div>
+                <div className="text-xs text-muted">
+                  Erases every paper, template, quiz, subject and setting, then restarts the app.
+                </div>
+              </div>
+              <Button variant="outline" onClick={() => setFactoryConfirm(true)} disabled={busy !== null}>
+                <Trash2 className="h-4 w-4 text-error" />
+                Factory reset…
+              </Button>
+            </div>
+          </div>
+        </section>
       </div>
 
       {/* --- Modals --- */}
@@ -513,16 +586,37 @@ export default function SettingsPage() {
         }
       >
         <p>
-          Wipes psets, templates, quizzes, subjects, and configs. The question bank
-          (bodies, solutions, tags, embeddings, outlines) stays intact. The app restarts
-          when the reset finishes.
+          Erases every paper, template, quiz, subject and setting. The question bank
+          (questions, solutions, tags) stays intact. The app restarts when the reset finishes.
+        </p>
+      </Modal>
+
+      <Modal
+        open={subjectConfirm}
+        onClose={() => setSubjectConfirm(false)}
+        title={`Clear usage for “${activeSubject ?? ""}”?`}
+        tone="error"
+        footer={
+          <>
+            <Button variant="ghost" onClick={() => setSubjectConfirm(false)}>
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={onResetSubject}>
+              Clear usage for {activeSubject}
+            </Button>
+          </>
+        }
+      >
+        <p>
+          Every question in <strong>{activeSubject}</strong> is marked as never used, so papers and quizzes can pick
+          it again. Other subjects, your notes and the questions themselves are not touched. This cannot be undone.
         </p>
       </Modal>
 
       <Modal
         open={subjectReset !== null}
         onClose={() => setSubjectReset(null)}
-        title="Subject usage reset"
+        title="Subject usage cleared"
         tone="success"
         footer={
           <Button variant="primary" onClick={() => setSubjectReset(null)}>
@@ -532,7 +626,7 @@ export default function SettingsPage() {
       >
         {subjectReset && (
           <p>
-            Reset usage counters on <strong>{subjectReset.rows_reset.toLocaleString()}</strong>{" "}
+            Cleared usage on <strong>{subjectReset.rows_reset.toLocaleString()}</strong>{" "}
             question{subjectReset.rows_reset === 1 ? "" : "s"} in{" "}
             <code className="font-mono">{subjectReset.subject}</code>.
           </p>
@@ -542,7 +636,7 @@ export default function SettingsPage() {
       <Modal
         open={ingestResult !== null}
         onClose={() => setIngestResult(null)}
-        title="Seed ingest complete"
+        title="Question bank imported"
         tone={ingestResult?.warnings?.length ? "default" : "success"}
         footer={
           <Button variant="primary" onClick={() => setIngestResult(null)}>
@@ -554,7 +648,7 @@ export default function SettingsPage() {
           <div className="space-y-2 text-sm">
             <p>
               Imported: <strong>{ingestResult.imported.toLocaleString()}</strong> · Skipped:{" "}
-              <strong>{ingestResult.skipped.toLocaleString()}</strong> · Embeddings:{" "}
+              <strong>{ingestResult.skipped.toLocaleString()}</strong> · Similarity data:{" "}
               <strong>{ingestResult.embeddings_loaded.toLocaleString()}</strong> · Outlines:{" "}
               <strong>{ingestResult.outlines_loaded.toLocaleString()}</strong>
             </p>
@@ -575,7 +669,7 @@ export default function SettingsPage() {
       <Modal
         open={augmentResult !== null}
         onClose={() => setAugmentResult(null)}
-        title="Augment from CSV"
+        title="Questions added from CSV"
         tone={augmentResult?.errors.length ? "error" : "success"}
         footer={
           <Button variant="primary" onClick={() => setAugmentResult(null)}>

@@ -185,7 +185,7 @@ function attachHover(
         .style("display", "block")
         .html(
           `<div class="amp-label">${iso}</div>` +
-            `<div class="amp-meta">${count.toLocaleString()} PSet${count === 1 ? "" : "s"}</div>`,
+            `<div class="amp-meta">${count.toLocaleString()} paper${count === 1 ? "" : "s"}</div>`,
         );
     })
     .on("mousemove", function (event: MouseEvent) {

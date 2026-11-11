@@ -23,8 +23,18 @@ interface Props {
 }
 
 export function PracticeAnswer({ quizId, question }: Props) {
-  const { showAnswer, showSolution, questionStartTime, results, revealedIds, hintedIds, setResult, markRevealed } =
-    useQuizStore();
+  const {
+    showAnswer,
+    showSolution,
+    questionStartTime,
+    results,
+    revealedIds,
+    hintedIds,
+    drafts,
+    setResult,
+    markRevealed,
+    setDraft,
+  } = useQuizStore();
   const qid = question.question_id;
   const result = results[qid] ?? null;
   const revealed = Boolean(revealedIds[qid]);
@@ -59,6 +69,8 @@ export function PracticeAnswer({ quizId, question }: Props) {
         }
         assess={(marks) => ipc.quiz_self_assess(quizId, 0, { marks, question_id: qid })}
         onResult={(r) => setResult(qid, r)}
+        draft={drafts[qid]}
+        onDraft={(inputs) => setDraft(qid, inputs)}
         assisted={Boolean(hintedIds[qid]) || revealed}
       />
     </div>

@@ -88,7 +88,7 @@ export function ReviewPanel({ subject, onStart }: Props) {
       {empty ? (
         <p className="text-sm text-muted">
           Nothing to review yet. Answer questions in Traverse, Discover or a lecture session (or record results
-          for a printed PSet in History) and they will come back here when they are due.
+          for a printed paper in History) and they will come back here when they are due.
         </p>
       ) : (
         <p className="text-xs text-muted">

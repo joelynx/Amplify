@@ -68,14 +68,38 @@ function editorToPayload(e: EditorState): SubjectPayload {
   };
 }
 
+/** Unsaved edits, kept while the student is on another page (pages remount on navigation). */
+let unsavedDraft: { editor: EditorState; saved: EditorState } | null = null;
+
 export default function SubjectsPage() {
   const [names, setNames] = useState<string[]>([]);
   const [activeName, setActiveName] = useState<string | null>(null);
-  const [editor, setEditor] = useState<EditorState>(EMPTY_EDITOR);
+  const [editor, setEditor] = useState<EditorState>(() => unsavedDraft?.editor ?? EMPTY_EDITOR);
+  // The editor as last loaded or saved; a difference from it is an unsaved edit.
+  const [saved, setSaved] = useState<EditorState>(() => unsavedDraft?.saved ?? EMPTY_EDITOR);
+  const [restored] = useState(() => unsavedDraft !== null);
+  // An action that would replace the editor, waiting for the student to confirm the discard.
+  const [pendingSwitch, setPendingSwitch] = useState<(() => void) | null>(null);
+  const dirty = useMemo(() => JSON.stringify(editor) !== JSON.stringify(saved), [editor, saved]);
+  useEffect(() => {
+    unsavedDraft = dirty ? { editor, saved } : null;
+  }, [dirty, editor, saved]);
+  const load = (e: EditorState) => {
+    setEditor(e);
+    setSaved(e);
+  };
+  const guarded = (action: () => void) => {
+    if (dirty) setPendingSwitch(() => action);
+    else action();
+  };
   const [tree, setTree] = useState<ConceptTree>({});
   const [importConflict, setImportConflict] = useState<SubjectPayload | null>(null);
   const [confirmingDelete, setConfirmingDelete] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  // The nav bar's subject selector can change the active subject while this page is open.
+  const storeActive = useSubjectStore((s) => s.active);
+  useEffect(() => setActiveName(storeActive), [storeActive]);
 
   const refresh = useCallback(async () => {
     const [list, active, fullTree] = await Promise.all([
@@ -98,11 +122,11 @@ export default function SubjectsPage() {
 
   const selectExisting = async (name: string) => {
     const p = await ipc.load_subject(name);
-    if (p) setEditor(payloadToEditor(p));
+    if (p) load(payloadToEditor(p));
   };
 
   const startNew = () => {
-    setEditor(EMPTY_EDITOR);
+    load(EMPTY_EDITOR);
   };
 
   const duplicate = async () => {
@@ -172,7 +196,7 @@ export default function SubjectsPage() {
         }
       }
       await ipc.save_subject(target, editorToPayload(editor));
-      setEditor((e) => ({ ...e, originalName: target, name: target }));
+      load({ ...editor, originalName: target, name: target });
       await refresh();
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
@@ -183,7 +207,7 @@ export default function SubjectsPage() {
     if (!confirmingDelete) return;
     try {
       await ipc.delete_subject(confirmingDelete);
-      if (editor.originalName === confirmingDelete) setEditor(EMPTY_EDITOR);
+      if (editor.originalName === confirmingDelete) load(EMPTY_EDITOR);
     } finally {
       setConfirmingDelete(null);
       await refresh();
@@ -215,7 +239,7 @@ export default function SubjectsPage() {
     } else {
       await ipc.save_subject(payload.name, payload);
       await refresh();
-      setEditor(payloadToEditor(payload));
+      load(payloadToEditor(payload));
     }
   };
 
@@ -224,7 +248,7 @@ export default function SubjectsPage() {
     await ipc.save_subject(importConflict.name, importConflict);
     setImportConflict(null);
     await refresh();
-    setEditor(payloadToEditor(importConflict));
+    load(payloadToEditor(importConflict));
   };
 
   const handleImportRename = async (newName: string) => {
@@ -244,7 +268,7 @@ export default function SubjectsPage() {
       <aside className="flex w-72 flex-col border-r border-border bg-surface">
         <div className="border-b border-border p-3">
           <div className="mb-2 flex items-center gap-1">
-            <Button variant="primary" size="sm" onClick={startNew} className="flex-1">
+            <Button variant="primary" size="sm" onClick={() => guarded(startNew)} className="flex-1">
               <Plus className="h-4 w-4" />
               New
             </Button>
@@ -270,7 +294,7 @@ export default function SubjectsPage() {
             </Button>
           </div>
           <div className="flex items-center gap-1">
-            <Button variant="ghost" size="sm" onClick={handleImport} className="flex-1">
+            <Button variant="ghost" size="sm" onClick={() => guarded(() => void handleImport())} className="flex-1">
               <Upload className="h-4 w-4" />
               Import
             </Button>
@@ -291,21 +315,22 @@ export default function SubjectsPage() {
             <li className="px-4 py-3 text-sm text-muted">No subjects yet. Click New to create one.</li>
           )}
           {names.map((n) => (
-            <li
-              key={n}
-              className={
-                "mx-1 my-0.5 flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-background " +
-                (editor.originalName === n ? "bg-background font-medium" : "")
-              }
-              onClick={() => selectExisting(n)}
-            >
-              {activeName === n && (
-                <span
-                  className="h-2 w-2 flex-none rounded-full bg-success"
-                  aria-label="active"
-                />
-              )}
-              <span className="flex-1 truncate">{n}</span>
+            <li key={n} className="mx-1 my-0.5">
+              <button
+                type="button"
+                aria-current={editor.originalName === n ? "true" : undefined}
+                className={
+                  "flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm hover:bg-background focus:outline-none focus-visible:ring-2 focus-visible:ring-primary " +
+                  (editor.originalName === n ? "bg-background font-medium" : "")
+                }
+                onClick={() => guarded(() => void selectExisting(n))}
+              >
+                {activeName === n && (
+                  <span className="h-2 w-2 flex-none rounded-full bg-success" aria-hidden="true" />
+                )}
+                <span className="flex-1 truncate">{n}</span>
+                {activeName === n && <span className="sr-only">(active)</span>}
+              </button>
             </li>
           ))}
         </ul>
@@ -334,10 +359,15 @@ export default function SubjectsPage() {
                 />
               </label>
               {error && <p className="text-sm text-error">{error}</p>}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <Button variant="primary" onClick={handleSave}>
                   Save changes
                 </Button>
+                {dirty && (
+                  <span role="status" className="text-xs font-medium text-text">
+                    Unsaved changes{restored ? ", kept from before you left this page" : ""}
+                  </span>
+                )}
                 {editor.originalName && activeName !== editor.originalName && (
                   <Button variant="outline" onClick={handleActivate}>
                     Activate this subject
@@ -361,7 +391,7 @@ export default function SubjectsPage() {
                 searchPlaceholder="Search topics"
                 emptyMessage={
                   allTopics.length === 0
-                    ? "No taxonomy data — ingest the seed first"
+                    ? "No topics yet. Import the question bank in Settings first."
                     : "All topics added"
                 }
                 className="min-w-[14rem]"
@@ -406,6 +436,33 @@ export default function SubjectsPage() {
       >
         <p>
           Delete <code className="font-mono">{confirmingDelete}</code>?
+        </p>
+      </Modal>
+
+      <Modal
+        open={pendingSwitch !== null}
+        onClose={() => setPendingSwitch(null)}
+        title="Discard unsaved changes?"
+        footer={
+          <>
+            <Button variant="ghost" onClick={() => setPendingSwitch(null)}>
+              Keep editing
+            </Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                const action = pendingSwitch;
+                setPendingSwitch(null);
+                action?.();
+              }}
+            >
+              Discard changes
+            </Button>
+          </>
+        }
+      >
+        <p>
+          The changes to <strong>{editor.name.trim() || "the new subject"}</strong> have not been saved.
         </p>
       </Modal>
 

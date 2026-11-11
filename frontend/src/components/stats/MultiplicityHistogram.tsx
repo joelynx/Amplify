@@ -80,7 +80,7 @@ export function MultiplicityHistogram({ data, height = 220 }: Props) {
         tooltip
           .style("display", "block")
           .html(
-            `<div class="amp-label">${d.k}× multiplicity</div>` +
+            `<div class="amp-label">Used ${d.k}×</div>` +
               `<div class="amp-meta">${d.v.toLocaleString()} question${d.v === 1 ? "" : "s"}</div>`,
           );
       })

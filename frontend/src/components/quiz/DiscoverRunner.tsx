@@ -45,14 +45,16 @@ export function DiscoverRunner() {
     conceptLabels,
     setConceptLabels,
     results,
+    diversityScore,
+    setDiversityScore,
+    shortfall,
+    setShortfall,
   } = useQuizStore();
 
   const draft = useGenerateStore();
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(questions.length === 0);
   const [error, setError] = useState<string | null>(null);
-  const [diversityScore, setDiversityScore] = useState<number | null>(null);
-  const [shortfall, setShortfall] = useState(0);
 
   useEffect(() => {
     if (questions.length > 0) return; // Already started
@@ -211,7 +213,7 @@ export function DiscoverRunner() {
           <button
             onClick={handlePrev}
             disabled={currentIndex === 0}
-            className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors hover:bg-surface-hover disabled:opacity-50 disabled:cursor-not-allowed border border-border"
+            className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors hover:bg-surface disabled:opacity-50 disabled:cursor-not-allowed border border-border"
           >
             <ChevronLeft size={20} />
             Previous
@@ -220,7 +222,7 @@ export function DiscoverRunner() {
           <button
             onClick={handleNext}
             disabled={currentIndex === questions.length - 1}
-            className="flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Next Question
             <ChevronRight size={20} />
