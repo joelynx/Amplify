@@ -121,9 +121,10 @@ def sub_cfg(cfg: dict) -> dict:
     stray = set(s.get("effort_by_source") or {}) - set(s["sources"])
     if stray:
         raise SystemExit(f"subscription.effort_by_source names sources missing from subscription.sources: {sorted(stray)}")
-    bad = {e for e in (s.get("effort_by_source") or {}).values() if e not in EFFORTS}
+    bad = {e for e in (*(s.get("effort_by_source") or {}).values(), *(s.get("effort_by_id") or {}).values())
+           if e not in EFFORTS}
     if bad:
-        raise SystemExit(f"unknown effort level(s) in subscription.effort_by_source: {sorted(bad)}")
+        raise SystemExit(f"unknown effort level(s) in subscription.effort_by_source / effort_by_id: {sorted(bad)}")
     return s
 
 
@@ -153,9 +154,12 @@ def claude_exe(cfg: dict) -> str:
     raise SystemExit("Claude Code not found; set AMPLIFY_CLAUDE_EXE to the claude binary")
 
 
-def effort_for(cfg: dict, source: str | None) -> str:
-    """config.solver.effort, unless config.subscription.effort_by_source names the source."""
-    return (sub_cfg(cfg).get("effort_by_source") or {}).get(source) or cfg["solver"]["effort"]
+def effort_for(cfg: dict, source: str | None, qid: int | None = None) -> str:
+    """config.solver.effort, unless config.subscription.effort_by_id names the question or
+    effort_by_source names its source."""
+    s = sub_cfg(cfg)
+    return ((s.get("effort_by_id") or {}).get(str(qid)) or (s.get("effort_by_source") or {}).get(source)
+            or cfg["solver"]["effort"])
 
 
 def claude_cmd(cfg: dict, system_file: Path, effort: str, stream_input: bool = False) -> list[str]:
@@ -449,7 +453,7 @@ def verify_samples(cfg: dict, app, pc) -> list[int]:
             continue
         row = get_status(pc, qid)
         kinds = ["retry" if row is not None and row["status"] == "retry" else "fresh",
-                 "effort:" + effort_for(cfg, q["source"])]
+                 "effort:" + effort_for(cfg, q["source"], qid)]
         if any(ord(ch) > 127 for ch in q["latexcode"]):
             kinds.append("non-ascii")
         if images:
@@ -471,7 +475,7 @@ def verify(cfg: dict, app, pc, qids: list[int] | None = None, accept: bool = Fal
         q = fetch_question(app, qid)
         attempt, feedback, _redo = plan_attempt(cfg, pc, qid, q["source"])  # no reset here: verify writes nothing
         text = user_text(q, feedback)
-        effort = effort_for(cfg, q["source"])
+        effort = effort_for(cfg, q["source"], qid)
         images, _skip = attachments(cfg, q)
         captured, out = capture_request(cfg, system_file, text, effort, images)
         rep = check_request(cfg, system, text, effort, captured, out, shas, images)
@@ -584,12 +588,13 @@ def candidates(cfg: dict, app, pc, ids: list[int] | None = None) -> list[int]:
         if missing:
             raise SystemExit(f"not in the subscription scope: {sorted(missing)}")
     redo = set(sub_cfg(cfg).get("effort_by_source") or {})
+    redo_qids = {int(k) for k in sub_cfg(cfg).get("effort_by_id") or {}}
     redo_ids = set(sub_cfg(cfg).get("redo_ids") or ())
     retry, fresh = [], []
     for qid, src, gen in rows:
         r = status.get(qid)
-        need = effort_for(cfg, src)
-        stale = src in redo and ((gen is not None and (gen == "?" or below(gen, need))) or below(last_effort(r), need))
+        need = effort_for(cfg, src, qid)
+        stale = (src in redo or qid in redo_qids) and ((gen is not None and (gen == "?" or below(gen, need))) or below(last_effort(r), need))
         # a redo_ids question until its subscription redo is settled (a rejected attempt gets its retry)
         stale = stale or (qid in redo_ids and (not from_sub(r) or r["status"] == "retry"))
         if r is not None and r["status"] in ("submitted", "received", "missing_image"):
@@ -611,7 +616,7 @@ def plan_attempt(cfg: dict, pc, qid: int, source: str) -> tuple[int, dict | None
     its source now gets, or came from the API for a question in redo_ids, so it starts again from
     attempt 1 (solve archives the old files first)."""
     row = get_status(pc, qid)
-    if below(last_effort(row), effort_for(cfg, source)):
+    if below(last_effort(row), effort_for(cfg, source, qid)):
         return 1, None, True
     if (qid in set(sub_cfg(cfg).get("redo_ids") or ()) and row is not None and int(row["attempts"] or 0) > 0
             and not from_sub(row)):
@@ -820,11 +825,13 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
     queue = candidates(cfg, app, pc, ids)
     if n is not None:
         queue = queue[:n]
-    efforts = {cfg["solver"]["effort"], *(sub_cfg(cfg).get("effort_by_source") or {}).values()}
+    efforts = {cfg["solver"]["effort"], *(sub_cfg(cfg).get("effort_by_source") or {}).values(),
+               *(sub_cfg(cfg).get("effort_by_id") or {}).values()}
     limits = {e: workers_for(cfg, e, workers) for e in sorted(efforts, key=effort_rank)}
     print(json.dumps({"questions": len(queue), "workers": limits, "claude_code_version": version,
                       "model": cfg["solver"]["model"], "effort": cfg["solver"]["effort"],
                       "effort_by_source": sub_cfg(cfg).get("effort_by_source") or {},
+                      "effort_by_id": sub_cfg(cfg).get("effort_by_id") or {},
                       "max_tokens_by_effort": sub_cfg(cfg).get("max_tokens_by_effort") or {}}), flush=True)
     summary: Counter = Counter()
     t0 = time.time()
@@ -836,7 +843,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                 paused_until = None
                 while queue and stop_reason is None:
                     q = fetch_question(app, queue[0])
-                    if len(running) >= limits[effort_for(cfg, q["source"])]:
+                    if len(running) >= limits[effort_for(cfg, q["source"], queue[0])]:
                         break
                     qid = queue.pop(0)
                     images, reason = attachments(cfg, q)
@@ -846,7 +853,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         summary["skipped_image"] += 1
                         continue
                     attempt, feedback, redo = plan_attempt(cfg, pc, qid, q["source"])
-                    effort = effort_for(cfg, q["source"])
+                    effort = effort_for(cfg, q["source"], qid)
                     if redo:
                         reset_for_redo(pc, qid, effort)
                         summary["redo"] += 1
@@ -917,7 +924,7 @@ def status(cfg: dict, app, pc) -> None:
         elif qid in cand and st == "skipped_image":
             c["img"] += 1  # skipped before config.attach_images; goes with its images now
         elif qid in cand:
-            if gen is not None or (r is not None and is_done(r)) or below(last_effort(r), effort_for(cfg, src)):
+            if gen is not None or (r is not None and is_done(r)) or below(last_effort(r), effort_for(cfg, src, qid)):
                 c["redo"] += 1
             elif st == "retry":
                 c["retry"] += 1
