@@ -531,15 +531,15 @@ def scope_rows(cfg: dict, app) -> list[tuple[int, str, str | None]]:
     generated is None, or the effort named in the stored generated solution ("?" if unnamed).
     Kept: questions whose `solution` kind is in config.subscription.replace, every question
     of a source in effort_by_source (those are redone when their solution came from a lower effort),
-    and the questions in redo_ids. Plus api_leftover_ids and figure_ok_ids (questions the API run
-    skipped for a figure they turned out not to need), whatever their source or solution kind,
-    after everything else."""
+    and the questions in redo_ids. Plus api_leftover_ids, figure_ok_ids (questions the API run
+    skipped for a figure they turned out not to need) and image_ids (book-solved image questions
+    of sources outside the scope), whatever their source or solution kind, after everything else."""
     s = sub_cfg(cfg)
     srcs = s["sources"]
     kinds = set(s.get("replace") or ("missing", "gemini"))
     redo = set(s.get("effort_by_source") or {})
     redo_ids = set(s.get("redo_ids") or ())
-    leftover = set(s.get("api_leftover_ids") or ()) | set(s.get("figure_ok_ids") or ())
+    leftover = set(s.get("api_leftover_ids") or ()) | set(s.get("figure_ok_ids") or ()) | set(s.get("image_ids") or ())
     rank = {src: i for i, src in enumerate(srcs)}
     cols = "question_id, source, solution, generated_solution"
     rows = app.execute(f"SELECT {cols} FROM questions WHERE source IN ({','.join('?' * len(srcs))})", srcs).fetchall()
