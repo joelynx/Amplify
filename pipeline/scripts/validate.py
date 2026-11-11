@@ -39,6 +39,7 @@ from common import (  # noqa: E402
     parse_solver_output,
     q_dir,
     read_text,
+    repair_slips,
     strip_code_fences,
     write_json,
 )
@@ -88,6 +89,9 @@ def validate_solver_text(qid: int, text: str, cfg: dict, stored_answer: str | No
     text, fenced = strip_code_fences(text)
     if fenced:
         res["code_fences_stripped"] = True
+    text, repairs = repair_slips(text)
+    if repairs:
+        res["repairs"] = repairs
     parts, errs = parse_solver_output(text, fmt="v5")
     res["errors"] += [f"structure: {e}" for e in errs]
     if parts is None:

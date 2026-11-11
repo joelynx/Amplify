@@ -419,6 +419,66 @@ V4_MARKERS = [
 ANSWER_TYPES = ("NUMERICAL", "EXPRESSION", "NONE")
 
 
+EMPH_STAR = re.compile(r"\\(textbf|textit|emph)\{([^{}\n*]+?)\*{1,2}")
+# \lt and \gt: KaTeX knows them, XeLaTeX does not (the format rules ask for < and > in math).
+LT_GT = re.compile(r"\\(lt|gt)(?![A-Za-z])")
+# The same slip with the brace there as well, \emph{policy lags*}: the star would print.
+EMPH_STAR_INSIDE = re.compile(r"\\(textbf|textit|emph)\{([^{}\n*]+?)\*{1,2}\}")
+
+
+def drop_inner_star(m: re.Match) -> str:
+    """EMPH_STAR_INSIDE's replacement: the emphasis without the star, unless the star belongs to
+    a command (\\textbf{\\arabic*}, a list label)."""
+    if re.search(r"\\[A-Za-z]+$", m.group(2)):
+        return m.group(0)
+    return f"\\{m.group(1)}{{{m.group(2)}}}"
+# A line break with extra space, \\[4pt]: valid inside aligned, but the delimiter check reads its
+# \[ as an opening display bracket. The space is cosmetic, so it becomes a plain \\.
+SPACED_BREAK = re.compile(r"\\\\\[\s*-?\d*\.?\d+\s*(?:pt|em|ex|mm|cm|bp)\s*\]")
+
+
+def _brace_balance(line: str) -> int:
+    s = re.sub(r"\\[{}]", "", line)
+    return s.count("{") - s.count("}")
+
+
+def repair_line_slips(lines: list[str]) -> list[str]:
+    """Mechanical repairs of the LaTeX slips solvers make, on the reply's lines in place (marker
+    lines are left alone); returns what was repaired. \\emph{...}, \\textit{...} or \\textbf{...}
+    closed with a markdown * or ** instead of a brace (only on a line whose braces do not
+    balance); a star just inside an emphasis's closing brace (\\emph{word*}) dropped; \\lt and
+    \\gt (web view only) written as < and >; a line break with extra space (\\\\[4pt]) made a
+    plain one. Used for subject replies (subjects.repair_reply) and math replies (repair_slips)."""
+    notes: list[str] = []
+    for i, line in enumerate(lines):
+        if not line.lstrip().startswith("%%%") and SPACED_BREAK.search(line):
+            lines[i] = SPACED_BREAK.sub(lambda m: "\\\\", line)
+            notes.append(f"line {i + 1}: line break with extra space made a plain one")
+        if not lines[i].lstrip().startswith("%%%") and LT_GT.search(lines[i]):
+            lines[i] = LT_GT.sub(lambda m: "<" if m.group(1) == "lt" else ">", lines[i])
+            notes.append(f"line {i + 1}: \\lt or \\gt written as < or >")
+        new = lines[i] if lines[i].lstrip().startswith("%%%") else EMPH_STAR_INSIDE.sub(drop_inner_star, lines[i])
+        if new != lines[i]:
+            lines[i] = new
+            notes.append(f"line {i + 1}: stray * inside emphasis dropped")
+    for i, line in enumerate(lines):
+        if line.lstrip().startswith("%%%") or _brace_balance(line) <= 0 or not EMPH_STAR.search(line):
+            continue
+        new = EMPH_STAR.sub(lambda m: f"\\{m.group(1)}{{{m.group(2)}}}", line)
+        if _brace_balance(new) < _brace_balance(line):
+            lines[i] = new
+            notes.append(f"line {i + 1}: emphasis closed with * instead of a brace")
+    return notes
+
+
+def repair_slips(text: str) -> tuple[str, list[str]]:
+    """repair_line_slips on a whole math reply, before any check and again when assemble.py
+    stores the accepted reply (owner 2026-11-11), so the stored solution is the checked one."""
+    lines = text.replace("\r\n", "\n").split("\n")
+    notes = repair_line_slips(lines)
+    return "\n".join(lines), notes
+
+
 def strip_code_fences(text: str) -> tuple[str, bool]:
     """Remove one pair of markdown code fences wrapping the whole reply
     (```latex ... ```), which chat-style replies sometimes add. Returns

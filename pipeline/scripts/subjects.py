@@ -37,6 +37,7 @@ from common import (
     q_dir,
     question_images,
     read_text,
+    repair_line_slips,
     strip_code_fences,
     teximages_dir,
     upsert_status,
@@ -248,29 +249,6 @@ def split_sections(text: str, markers: list[str]) -> tuple[dict | None, list[str
     return {"lines": lines, "pos": dict(zip(markers, order))}, errors
 
 
-EMPH_STAR = re.compile(r"\\(textbf|textit|emph)\{([^{}\n*]+?)\*{1,2}")
-# \lt and \gt: KaTeX knows them, XeLaTeX does not (the format rules ask for < and > in math).
-LT_GT = re.compile(r"\\(lt|gt)(?![A-Za-z])")
-# The same slip with the brace there as well, \emph{policy lags*}: the star would print.
-EMPH_STAR_INSIDE = re.compile(r"\\(textbf|textit|emph)\{([^{}\n*]+?)\*{1,2}\}")
-
-
-def drop_inner_star(m: re.Match) -> str:
-    """EMPH_STAR_INSIDE's replacement: the emphasis without the star, unless the star belongs to
-    a command (\\textbf{\\arabic*}, a list label)."""
-    if re.search(r"\\[A-Za-z]+$", m.group(2)):
-        return m.group(0)
-    return f"\\{m.group(1)}{{{m.group(2)}}}"
-# A line break with extra space, \\[4pt]: valid inside aligned, but the delimiter check reads its
-# \[ as an opening display bracket. The space is cosmetic, so it becomes a plain \\.
-SPACED_BREAK = re.compile(r"\\\\\[\s*-?\d*\.?\d+\s*(?:pt|em|ex|mm|cm|bp)\s*\]")
-
-
-def _brace_balance(line: str) -> int:
-    s = re.sub(r"\\[{}]", "", line)
-    return s.count("{") - s.count("}")
-
-
 def repair_reply(text: str, markers: list[str]) -> tuple[str, list[str]]:
     """Mechanical repairs of the two slips the solver makes most, done before any check:
     \\emph{...}, \\textit{...} or \\textbf{...} closed with a markdown * or ** instead of a
@@ -280,27 +258,9 @@ def repair_reply(text: str, markers: list[str]) -> tuple[str, list[str]]:
     inside an emphasis's closing brace (\\emph{word*}) is dropped, \\lt and \\gt (web view only)
     become < and >, and POINT lines the answer key puts under a part that is not a POINTS part
     (a checklist of steps after a NUMBER) are dropped. Everything repaired still goes through
-    every check; the repairs are reported."""
-    notes: list[str] = []
+    every check; the repairs are reported. The line repairs are common.repair_line_slips."""
     lines = text.replace("\r\n", "\n").split("\n")
-    for i, line in enumerate(lines):
-        if not line.lstrip().startswith("%%%") and SPACED_BREAK.search(line):
-            lines[i] = SPACED_BREAK.sub(lambda m: "\\\\", line)
-            notes.append(f"line {i + 1}: line break with extra space made a plain one")
-        if not lines[i].lstrip().startswith("%%%") and LT_GT.search(lines[i]):
-            lines[i] = LT_GT.sub(lambda m: "<" if m.group(1) == "lt" else ">", lines[i])
-            notes.append(f"line {i + 1}: \\lt or \\gt written as < or >")
-        new = lines[i] if lines[i].lstrip().startswith("%%%") else EMPH_STAR_INSIDE.sub(drop_inner_star, lines[i])
-        if new != lines[i]:
-            lines[i] = new
-            notes.append(f"line {i + 1}: stray * inside emphasis dropped")
-    for i, line in enumerate(lines):
-        if line.lstrip().startswith("%%%") or _brace_balance(line) <= 0 or not EMPH_STAR.search(line):
-            continue
-        new = EMPH_STAR.sub(lambda m: f"\\{m.group(1)}{{{m.group(2)}}}", line)
-        if _brace_balance(new) < _brace_balance(line):
-            lines[i] = new
-            notes.append(f"line {i + 1}: emphasis closed with * instead of a brace")
+    notes = repair_line_slips(lines)
 
     def same(s: str, m: str) -> bool:
         s = s.strip()

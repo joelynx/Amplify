@@ -49,6 +49,7 @@ from common import (  # noqa: E402
     pipeline_wrote,
     q_dir,
     read_text,
+    repair_slips,
     strip_code_fences,
     strip_marker_lines,
     upsert_status,
@@ -73,7 +74,7 @@ def build_final(solution: str, rigor: str | None, takeaways: str) -> str:
 def accepted_parts(row, d: Path) -> tuple[dict | None, list[str], str | None, str | None]:
     """(parts, errors, rigor, hint) from the accepted attempt."""
     acc = int(row["accepted_attempt"])
-    text, _ = strip_code_fences(read_text(d / f"solver_{acc}.tex"))
+    text, _ = repair_slips(strip_code_fences(read_text(d / f"solver_{acc}.tex"))[0])
     parts, errs = parse_solver_output(text)
     if parts is None:
         return None, errs, None, None
