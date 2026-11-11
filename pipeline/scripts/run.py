@@ -415,9 +415,9 @@ def judge_one(qid: int, cfg: dict, app, pc) -> str:
     else:
         res = validate_solver_text(qid, text, cfg, stored)
     tiebreak_note = None
-    if subject_mode and review_from and res["ok"] and res.get("answer_mismatch"):
-        # The review solve is final: it replaces a disagreeing stored answer (old value kept as
-        # answer_before_replace), as an accepted tie-break does.
+    if review_from and res["ok"] and res.get("answer_mismatch"):
+        # The review solve is final (subjects 2026-11-08, math 2026-11-11): it replaces a disagreeing
+        # stored answer (old value kept as answer_before_replace), as an accepted tie-break does.
         tiebreak_note = f"review solve is final; replaces the stored answer ({stored})"
     elif subject_mode and row["tiebreak"] and res["ok"] and res.get("answer_mismatch"):
         # The high-effort tie-break (owner 2026-11-07): agreeing with an earlier solve against the
@@ -448,9 +448,10 @@ def judge_one(qid: int, cfg: dict, app, pc) -> str:
     note = None if res["hint_ok"] else "hint dropped: " + "; ".join(res["hint_errors"])[:300]
     if tiebreak_note:
         note = tiebreak_note + ("; " + note if note else "")
-    # A subject question's flag says whether the accepted reply disagrees with the stored answer (an
-    # accepted tie-break replaces it); math rows keep the flag of their history.
-    extra = {"answer_mismatch": int(tiebreak_note is not None)} if subject_mode else {}
+    # A subject question's flag, and a math review solve's, says whether the accepted reply disagrees
+    # with the stored answer (an accepted tie-break or review solve replaces it); other math rows keep
+    # the flag of their history.
+    extra = {"answer_mismatch": int(tiebreak_note is not None)} if subject_mode or review_from else {}
     upsert_status(pc, qid, status="passed", accepted_attempt=attempt, hint_status=hint_status, note=note, **extra)
     log_event(pc, qid, "collect", f"attempt {attempt} passed; hint {hint_status}")
     out = subjects.assemble_one(qid, cfg, app, pc) if subject_mode else assemble_one(qid, cfg, app, pc)

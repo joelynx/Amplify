@@ -148,12 +148,20 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
     ans_empty = is_blank(q["answer"], sentinels) or pipeline_wrote(pc, qid, "answer", q["answer"])
     hint_empty = is_blank(q["hints"]) or pipeline_wrote(pc, qid, "hints", q["hints"])
     fill_answer = answer_value if (ans_empty and parts["answer_type"] != "NONE" and row["status"] in ("passed", "passed_after_escalation")) else None
+    # An accepted review solve that disagrees with the stored answer replaces it (owner 2026-11-11,
+    # as for the subjects); apply_fields keeps the old value as answer_before_replace.
+    reviewed = "review_from" in row.keys() and row["review_from"]
+    replace_answer = (answer_value if (reviewed and row["answer_mismatch"] and parts["answer_type"] != "NONE"
+                                       and row["status"] == "passed") else None)
+    if replace_answer:
+        fill_answer = None
     fill_hint = hint if (hint_empty and hint) else None
     gen_col = cfg.get("generated_solution_column") or "generated_solution"
     app_record = {
         "question_id": qid,
         gen_col: final,
         "answer": fill_answer,
+        **({"answer_replace": replace_answer} if replace_answer else {}),
         "hints": fill_hint,
         "answer_type": parts["answer_type"],
         "answer_value": answer_value,
@@ -172,9 +180,9 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
             hint_tex, answer_field_value, hint_field_value, answer_filled, hint_filled, prompt_version, created_at)
            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
         (qid, row["status"], final, solution, rigor, takeaways, parts["answer_type"], parts["answer"],
-         hint, fill_answer, fill_hint, 0, 0, cfg["prompt_version"], now_iso()),
+         hint, fill_answer or replace_answer, fill_hint, 0, 0, cfg["prompt_version"], now_iso()),
     )
-    for field, value in ((gen_col, final), ("answer", fill_answer), ("hints", fill_hint)):
+    for field, value in ((gen_col, final), ("answer", fill_answer), ("answer_replace", replace_answer), ("hints", fill_hint)):
         if value is None:
             continue
         exists = pc.execute(
@@ -187,7 +195,8 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
             )
     pc.commit()
     upsert_status(pc, qid, assembled=1)
-    log_event(pc, qid, "assemble", f"ok; preview {preview_note}; fills answer={fill_answer is not None} hint={fill_hint is not None}")
+    log_event(pc, qid, "assemble", f"ok; preview {preview_note}; fills answer={fill_answer is not None} hint={fill_hint is not None}"
+              + ("; replaces the stored answer" if replace_answer else ""))
     return {
         "question_id": qid,
         "ok": True,

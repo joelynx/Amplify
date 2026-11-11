@@ -122,6 +122,7 @@ effort. `submissions_closed` is the API lock and does not apply here.
 python pipeline/scripts/run_sub.py verify [--qid N] [--accept]   # free: capture the request on a local stand-in server and check it
 python pipeline/scripts/run_sub.py status | queue [--n 20]
 python pipeline/scripts/run_sub.py solve [--n N] [--ids 1,2] [--workers W] [--wait-on-limit]   # parallel processes: --workers, else subscription.workers_by_effort (medium 12, high 12)
+python pipeline/scripts/run_sub.py review [--list] [--ids 1,2] [--workers W] [--wait-on-limit]  # the review solve that replaces human review (below)
 python pipeline/scripts/run.py judge                             # XeLaTeX/KaTeX checks, assemble, app-db writes (refused while config.judge_elsewhere: see below)
 python pipeline/scripts/run_sub_supervise.py [--judge-every-hours 3] [--judge-workers 2]   # unattended: solve --wait-on-limit, judge (below-normal) every few hours and at the end, further rounds for the retries
 ```
@@ -135,6 +136,16 @@ the request first and refuses to start unless its wrapping fingerprint (date
 and account email excluded) was accepted with `verify --accept`, and stops if Claude Code changes
 version mid-run. A usage-limit refusal costs nothing: the question goes back to
 the front of the queue and `--wait-on-limit` sleeps until the reset.
+
+The review solve (owner 2026-11-11, as the subjects' `run_subjects.py
+adjudicate`): `review` sends every math question in human review once more as a
+blind solve with `subscription.review_model` at `review_effort` (Claude Fable
+5.2, high); `verify --review` checks that request. The review solve is final:
+agreeing with the stored answer it is accepted as usual; disagreeing, it is
+accepted and its answer replaces the stored one (the old value is kept in
+provenance as `answer_before_replace`). A reply that fails the checks is
+retried with feedback, up to `subjects.review_max_attempts` review solves,
+then a person decides. `solve` leaves review rows alone.
 
 Questions with images (`config.attach_images`, owner 2026-11-10): the API run
 skipped every question with an image. run_sub.py and run_subjects.py now send

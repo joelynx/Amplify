@@ -31,6 +31,8 @@ Usage (from the repo root):
   python pipeline/scripts/run_sub.py status                        # progress over config.subscription
   python pipeline/scripts/run_sub.py queue  [--n 20]               # the next questions, in order
   python pipeline/scripts/run_sub.py solve  [--n N] [--ids 1,2,3] [--workers W] [--wait-on-limit]
+  python pipeline/scripts/run_sub.py review [--list] [--ids 1,2,3] [--workers W] [--wait-on-limit]  # the review solve (review model) that replaces human review
+  python pipeline/scripts/run_sub.py verify --review [--accept]    # the request check for it
   python pipeline/scripts/run.py judge [--workers N]               # then validate, assemble, write (XeLaTeX)
 """
 
@@ -463,22 +465,29 @@ def verify_samples(cfg: dict, app, pc) -> list[int]:
     return list(dict.fromkeys(picks.values()))
 
 
-def verify(cfg: dict, app, pc, qids: list[int] | None = None, accept: bool = False, quiet: bool = False) -> dict:
-    """Capture the request Claude Code sends for a few real questions and check it."""
+def verify(cfg: dict, app, pc, qids: list[int] | None = None, accept: bool = False, quiet: bool = False,
+           review: bool = False) -> dict:
+    """Capture the request Claude Code sends for a few real questions and check it. With review,
+    the review solve's request (review model and effort) for up to two of its questions."""
     system_file, system = write_system_file(cfg)
-    qids = qids or verify_samples(cfg, app, pc)
+    qids = qids or (review_rows(cfg, app, pc)[:2] if review else verify_samples(cfg, app, pc))
     if not qids:
         raise SystemExit("no candidate question to verify with; pass --qid")
+    ccfg = review_cfg(cfg) if review else cfg
     shas = api_system_shas(pc)
     reports = []
     for qid in qids:
         q = fetch_question(app, qid)
-        attempt, feedback, _redo = plan_attempt(cfg, pc, qid, q["source"])  # no reset here: verify writes nothing
+        if review:
+            attempt, feedback = plan_review_attempt(pc, qid)
+            effort = sub_cfg(cfg)["review_effort"]
+        else:
+            attempt, feedback, _redo = plan_attempt(cfg, pc, qid, q["source"])  # no reset here: verify writes nothing
+            effort = effort_for(cfg, q["source"], qid)
         text = user_text(q, feedback)
-        effort = effort_for(cfg, q["source"], qid)
         images, _skip = attachments(cfg, q)
-        captured, out = capture_request(cfg, system_file, text, effort, images)
-        rep = check_request(cfg, system, text, effort, captured, out, shas, images)
+        captured, out = capture_request(ccfg, system_file, text, effort, images)
+        rep = check_request(ccfg, system, text, effort, captured, out, shas, images)
         rep.update({"question_id": qid, "source": q["source"], "effort": effort, "attempt": attempt,
                     "with_feedback": bool(feedback), "images": len(images),
                     "claude_code_version": rep["init"].get("claude_code_version")})
@@ -593,6 +602,8 @@ def candidates(cfg: dict, app, pc, ids: list[int] | None = None) -> list[int]:
     retry, fresh = [], []
     for qid, src, gen in rows:
         r = status.get(qid)
+        if r is not None and r["review_from"] is not None:
+            continue  # the review solve's (review_rows), with its own model and attempts
         need = effort_for(cfg, src, qid)
         stale = (src in redo or qid in redo_qids) and ((gen is not None and (gen == "?" or below(gen, need))) or below(last_effort(r), need))
         # a redo_ids question until its subscription redo is settled (a rejected attempt gets its retry)
@@ -625,6 +636,37 @@ def plan_attempt(cfg: dict, pc, qid: int, source: str) -> tuple[int, dict | None
     fb = q_dir(qid) / f"feedback_{attempt}.json"
     feedback = read_json(fb) if (row is not None and row["status"] == "retry" and fb.exists()) else None
     return attempt, feedback, False
+
+
+def review_cfg(cfg: dict) -> dict:
+    """The config the review solve's transport and storage read: config.subscription.review_model."""
+    return dict(cfg, solver=dict(cfg["solver"], model=sub_cfg(cfg)["review_model"]))
+
+
+def review_rows(cfg: dict, app, pc, ids: list[int] | None = None) -> list[int]:
+    """Math questions for the review solve that replaces human review (owner 2026-11-11, as the
+    subjects' adjudicate): every math question in human review that has not had it (or whose
+    review request never came back), and review solves the checks sent back (retry) or whose
+    request failed (pending). A question no longer in the app, or whose figure cannot go, is left out."""
+    out = []
+    for r in pc.execute("SELECT * FROM status WHERE mode IS NULL AND status IN ('needs_human_review', 'retry', 'pending') "
+                        "ORDER BY question_id"):
+        qid, rf = r["question_id"], r["review_from"]
+        if ids and qid not in ids:
+            continue
+        take = (rf is None or int(r["attempts"] or 0) < rf) if r["status"] == "needs_human_review" else rf is not None
+        q = fetch_question(app, qid) if take else None
+        if q is not None and not attachments(cfg, q)[1]:
+            out.append(qid)
+    return out
+
+
+def plan_review_attempt(pc, qid: int) -> tuple[int, dict | None]:
+    """The next attempt; the checks' feedback only when the checks sent a review solve back."""
+    row = get_status(pc, qid)
+    attempt = int(row["attempts"] or 0) + 1
+    fb = q_dir(qid) / f"feedback_{attempt}.json"
+    return attempt, (read_json(fb) if row["status"] == "retry" and row["review_from"] is not None and fb.exists() else None)
 
 
 def reset_for_redo(pc, qid: int, effort: str) -> None:
@@ -814,25 +856,35 @@ def workers_for(cfg: dict, effort: str, override: int | None = None) -> int:
     return int((s.get("workers_by_effort") or {}).get(effort) or s.get("workers", 2))
 
 
-def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int | None, wait_on_limit: bool, force_unlock: bool) -> None:
-    pre = verify(cfg, app, pc, quiet=True)
+def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int | None, wait_on_limit: bool,
+          force_unlock: bool, review: bool = False) -> None:
+    """Send the unfinished questions; with review, the review solve (config.subscription.review_model
+    at review_effort) for the questions review_rows names. Neither sends the stored answer."""
+    pre = verify(cfg, app, pc, quiet=True, review=review)
     if not pre["ok"] or not pre["accepted"]:
-        raise SystemExit("the request check did not pass or its wrapping is not accepted; run `run_sub.py verify` "
-                         f"and read {VERIFY_REPORT.as_posix()}")
+        raise SystemExit(f"the request check did not pass or its wrapping is not accepted; run `run_sub.py verify"
+                         f"{' --review' if review else ''}` and read {VERIFY_REPORT.as_posix()}")
     version = pre["claude_code_version"]
     system_file, _ = write_system_file(cfg)
     acquire_lock(force_unlock)
-    queue = candidates(cfg, app, pc, ids)
+    ccfg = review_cfg(cfg) if review else cfg  # the model the requests go to and the replies are stored under
+    queue = review_rows(cfg, app, pc, ids) if review else candidates(cfg, app, pc, ids)
     if n is not None:
         queue = queue[:n]
-    efforts = {cfg["solver"]["effort"], *(sub_cfg(cfg).get("effort_by_source") or {}).values(),
-               *(sub_cfg(cfg).get("effort_by_id") or {}).values()}
+
+    def effort_of(qid: int, source: str) -> str:
+        return sub_cfg(cfg)["review_effort"] if review else effort_for(cfg, source, qid)
+
+    efforts = ({sub_cfg(cfg)["review_effort"]} if review else
+               {cfg["solver"]["effort"], *(sub_cfg(cfg).get("effort_by_source") or {}).values(),
+                *(sub_cfg(cfg).get("effort_by_id") or {}).values()})
     limits = {e: workers_for(cfg, e, workers) for e in sorted(efforts, key=effort_rank)}
     print(json.dumps({"questions": len(queue), "workers": limits, "claude_code_version": version,
-                      "model": cfg["solver"]["model"], "effort": cfg["solver"]["effort"],
+                      "model": ccfg["solver"]["model"], "effort": cfg["solver"]["effort"],
                       "effort_by_source": sub_cfg(cfg).get("effort_by_source") or {},
                       "effort_by_id": sub_cfg(cfg).get("effort_by_id") or {},
-                      "max_tokens_by_effort": sub_cfg(cfg).get("max_tokens_by_effort") or {}}), flush=True)
+                      "max_tokens_by_effort": sub_cfg(cfg).get("max_tokens_by_effort") or {},
+                      **({"review": True, "review_effort": sub_cfg(cfg)["review_effort"]} if review else {})}), flush=True)
     summary: Counter = Counter()
     t0 = time.time()
     stop_reason = None
@@ -843,7 +895,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                 paused_until = None
                 while queue and stop_reason is None:
                     q = fetch_question(app, queue[0])
-                    if len(running) >= limits[effort_for(cfg, q["source"], queue[0])]:
+                    if len(running) >= limits[effort_of(queue[0], q["source"])]:
                         break
                     qid = queue.pop(0)
                     images, reason = attachments(cfg, q)
@@ -852,12 +904,18 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         log_event(pc, qid, "skip", reason)
                         summary["skipped_image"] += 1
                         continue
-                    attempt, feedback, redo = plan_attempt(cfg, pc, qid, q["source"])
-                    effort = effort_for(cfg, q["source"], qid)
+                    if review:
+                        attempt, feedback = plan_review_attempt(pc, qid)
+                        redo = False
+                        if get_status(pc, qid)["review_from"] is None:
+                            upsert_status(pc, qid, review_from=attempt)
+                    else:
+                        attempt, feedback, redo = plan_attempt(cfg, pc, qid, q["source"])
+                    effort = effort_of(qid, q["source"])
                     if redo:
                         reset_for_redo(pc, qid, effort)
                         summary["redo"] += 1
-                    fut = ex.submit(call_claude, cfg, system_file, user_text(q, feedback), effort, None, images)
+                    fut = ex.submit(call_claude, ccfg, system_file, user_text(q, feedback), effort, None, images)
                     running[fut] = (qid, attempt, effort, [n for n, _ in images])
                 if not running:
                     break
@@ -865,11 +923,11 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                 for fut in done:
                     qid, attempt, effort, names = running.pop(fut)
                     out = fut.result()
-                    info = interpret(out, cfg, version)
+                    info = interpret(out, ccfg, version)
                     kind = info["kind"]
                     raw = save_failure(qid, attempt, out, info) if kind in ("error", "stop", "cut") else None
                     if kind in ("ok", "cut"):
-                        store(pc, cfg, qid, attempt, effort, info, out.get("seconds", 0), names)
+                        store(pc, ccfg, qid, attempt, effort, info, out.get("seconds", 0), names)
                         summary["received" if kind == "ok" else info["result"]["stop_reason"]] += 1
                         if info["warning"]:
                             summary["limit_warnings"] += 1
@@ -884,7 +942,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         stop_reason = info["why"]
                         wait_on_limit = False
                     else:
-                        summary[api_failure(pc, cfg, qid, attempt, info["why"])] += 1
+                        summary[api_failure(pc, ccfg, qid, attempt, info["why"])] += 1
                     print(json.dumps({"question_id": qid, "attempt": attempt, "effort": effort, "outcome": kind,
                                       "seconds": out.get("seconds"),
                                       **({"why": info["why"]} if kind != "ok" else {}), **({"raw": raw} if raw else {}),
@@ -955,22 +1013,26 @@ def main() -> None:
     p = sp.add_parser("verify")
     p.add_argument("--qid", type=int, action="append")
     p.add_argument("--accept", action="store_true")
+    p.add_argument("--review", action="store_true", help="check a review solve (review model and effort)")
     sp.add_parser("status")
     p = sp.add_parser("queue")
     p.add_argument("--n", type=int, default=20)
-    p = sp.add_parser("solve")
-    p.add_argument("--n", type=int)
-    p.add_argument("--ids")
-    p.add_argument("--workers", type=int)
-    p.add_argument("--wait-on-limit", action="store_true")
-    p.add_argument("--force-unlock", action="store_true")
+    for name in ("solve", "review"):
+        p = sp.add_parser(name)
+        p.add_argument("--n", type=int)
+        p.add_argument("--ids")
+        p.add_argument("--workers", type=int)
+        p.add_argument("--wait-on-limit", action="store_true")
+        p.add_argument("--force-unlock", action="store_true")
+        if name == "review":
+            p.add_argument("--list", action="store_true", help="only list the questions")
     a = ap.parse_args()
 
     cfg = load_config()
     pc = conn()
     app = app_conn(cfg)
     if a.cmd == "verify":
-        s = verify(cfg, app, pc, a.qid, a.accept)
+        s = verify(cfg, app, pc, a.qid, a.accept, review=a.review)
         if not s["ok"]:
             raise SystemExit(1)
     elif a.cmd == "status":
@@ -985,6 +1047,12 @@ def main() -> None:
     elif a.cmd == "solve":
         ids = [int(x) for x in a.ids.split(",") if x.strip()] if a.ids else None
         solve(cfg, app, pc, a.n, ids, a.workers, a.wait_on_limit, a.force_unlock)
+    elif a.cmd == "review":
+        ids = [int(x) for x in a.ids.split(",") if x.strip()] if a.ids else None
+        if a.list:
+            print(",".join(str(q) for q in review_rows(cfg, app, pc, ids)))
+        else:
+            solve(cfg, app, pc, a.n, ids, a.workers, a.wait_on_limit, a.force_unlock, review=True)
 
 
 if __name__ == "__main__":
