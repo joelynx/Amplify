@@ -1,0 +1,103 @@
+{
+  "generate": {
+    "viewport": [
+      1280,
+      820
+    ],
+    "scroll": [
+      1280,
+      820
+    ],
+    "main": [
+      {
+        "client": 740,
+        "scroll": 1478
+      }
+    ],
+    "buttons": [
+      {
+        "text": "Generate PDF",
+        "y": 1445
+      }
+    ]
+  },
+  "quiz": {
+    "viewport": [
+      1280,
+      820
+    ],
+    "scroll": [
+      1280,
+      820
+    ],
+    "main": [
+      {
+        "client": 772,
+        "scroll": 1529
+      }
+    ],
+    "buttons": [
+      {
+        "text": "Start Traverse Session",
+        "y": 1449
+      }
+    ]
+  },
+  "browser": {
+    "viewport": [
+      1280,
+      820
+    ],
+    "scroll": [
+      1280,
+      820
+    ],
+    "main": [
+      {
+        "client": 772,
+        "scroll": 772
+      }
+    ],
+    "buttons": []
+  },
+  "stats": {
+    "viewport": [
+      1280,
+      820
+    ],
+    "scroll": [
+      1280,
+      820
+    ],
+    "main": [
+      {
+        "client": 699,
+        "scroll": 4229
+      }
+    ],
+    "buttons": []
+  },
+  "tabs": [
+    {
+      "text": "Generate",
+      "color": "rgb(61, 47, 77)",
+      "background": "rgb(110, 95, 134)"
+    },
+    {
+      "text": "Quizzes",
+      "color": "rgb(110, 95, 134)",
+      "background": "rgb(110, 95, 134)"
+    }
+  ],
+  "modalFocus": {
+    "active": "Filters",
+    "inside": false,
+    "label": null
+  },
+  "browser960": {
+    "viewport": 960,
+    "body": 960,
+    "main": 540,
+    "aside": 420
+  }
+}

@@ -1,0 +1,142 @@
+Home
+Generate
+Quiz
+Browser
+History
+Stats
+Settings
+Stats
+
+All subjects · 2026-10-12 → 2026-11-11
+
+Generate
+Quizzes
+Filters
+PSETS GENERATED
+0
+PARTIAL PSETS
+0
+TOTAL QUESTIONS SEEN
+0
+UNIQUE QUESTIONS SEEN
+0
+of 25,197 in scope
+FRACTION SEEN
+0.0%
+MAX IN SINGLE PSET
+0
+MAX MULTIPLICITY
+0
+AVG MULTIPLICITY
+0.00
+AVG DIFFICULTY
+—
+LEARNING
+
+Quiz answers and paper results you recorded in History. Generated 0 · shown 0 · attempted 0 · with help 0 · solved unaided 0.
+
+FIRST TRY, UNAIDED
+—
+questions met for the first time in this range
+TO REVISIT
+0
+last try missed, partial or with help
+DELAYED REVIEWS
+—
+solved unaided a day or more later
+COVERAGE
+0 of 54
+topics practised
+REVIEWS DUE
+0
+right now
+TOPIC	ATTEMPTED	FIRST TRY UNAIDED	SOLVED UNAIDED	TO REVISIT	DELAYED REVIEWS	AVG DIFFICULTY	
+Probability	0 of 3611	—	0	—	—	—	Practise this
+Linear Algebra	0 of 1863	—	0	—	—	—	Practise this
+Elementary Number Theory	0 of 1626	—	0	—	—	—	Practise this
+Thermal Power Plant Engineering	0 of 1413	—	0	—	—	—	Practise this
+Fluid Mechanics	0 of 1339	—	0	—	—	—	Practise this
+Stochastic Processes	0 of 1235	—	0	—	—	—	Practise this
+Calculus	0 of 1209	—	0	—	—	—	Practise this
+Classical Mechanics	0 of 968	—	0	—	—	—	Practise this
+Real Analysis	0 of 704	—	0	—	—	—	Practise this
+Mathematical Statistics	0 of 636	—	0	—	—	—	Practise this
+Enumerative Combinatorics	0 of 618	—	0	—	—	—	Practise this
+Heat and Mass Transfer	0 of 535	—	0	—	—	—	Practise this
+Plane Geometry	0 of 520	—	0	—	—	—	Practise this
+Elementary Algebra	0 of 488	—	0	—	—	—	Practise this
+Electromagnetism	0 of 463	—	0	—	—	—	Practise this
+Diophantine Equations	0 of 460	—	0	—	—	—	Practise this
+Extremal Combinatorics	0 of 411	—	0	—	—	—	Practise this
+Derivatives Pricing	0 of 402	—	0	—	—	—	Practise this
+Electric Machines	0 of 385	—	0	—	—	—	Practise this
+Power Plant Economics and Operation	0 of 354	—	0	—	—	—	Practise this
+Differential Equations	0 of 331	—	0	—	—	—	Practise this
+Combinatorial Games and Processes	0 of 294	—	0	—	—	—	Practise this
+Solid Mechanics	0 of 290	—	0	—	—	—	Practise this
+Structure of Materials	0 of 288	—	0	—	—	—	Practise this
+Combinatorial Geometry	0 of 280	—	0	—	—	—	Practise this
+Hydraulics and Hydraulic Machines	0 of 273	—	0	—	—	—	Practise this
+Hydroelectric Power Engineering	0 of 265	—	0	—	—	—	Practise this
+Sequences, Sums and Functional Equations	0 of 263	—	0	—	—	—	Practise this
+Oscillations and Waves	0 of 259	—	0	—	—	—	Practise this
+Thermodynamics and Kinetics of Materials	0 of 254	—	0	—	—	—	Practise this
+Logic and Algorithmic Puzzles	0 of 233	—	0	—	—	—	Practise this
+Algebraic Inequalities	0 of 229	—	0	—	—	—	Practise this
+Theory of Polynomials	0 of 224	—	0	—	—	—	Practise this
+Electrical, Magnetic, Optical and Thermal Properties	0 of 216	—	0	—	—	—	Practise this
+Macroeconomics	0 of 213	—	0	—	—	—	Practise this
+Non-Conventional Power and Energy Storage	0 of 207	—	0	—	—	—	Practise this
+Nuclear Power Engineering	0 of 188	—	0	—	—	—	Practise this
+Graph Theory	0 of 180	—	0	—	—	—	Practise this
+Complex Analysis	0 of 176	—	0	—	—	—	Practise this
+Compressible Flow	0 of 160	—	0	—	—	—	Practise this
+Engineering Materials	0 of 143	—	0	—	—	—	Practise this
+Mechanical Behavior of Materials	0 of 138	—	0	—	—	—	Practise this
+Group Theory	0 of 136	—	0	—	—	—	Practise this
+Solid Geometry	0 of 128	—	0	—	—	—	Practise this
+Optics	0 of 92	—	0	—	—	—	Practise this
+Uncategorized	0 of 91	—	0	—	—	—	Practise this
+Ring and Field Theory	0 of 88	—	0	—	—	—	Practise this
+Heat and Thermodynamics	0 of 85	—	0	—	—	—	Practise this
+Portfolio Theory and Risk Management	0 of 73	—	0	—	—	—	Practise this
+Fixed Income	0 of 68	—	0	—	—	—	Practise this
+Power Electronics	0 of 48	—	0	—	—	—	Practise this
+Special Relativity	0 of 22	—	0	—	—	—	Practise this
+Quantum, Atomic and Nuclear Physics	0 of 13	—	0	—	—	—	Practise this
+Power Systems	0 of 9	—	0	—	—	—	Practise this
+
+No answers in this range yet; every topic in scope is listed.
+
+SUBJECT DISTRIBUTION
+
+No data found for the selected filters.
+
+SOURCE FRACTION (ATTEMPTED QUESTIONS)
+
+No questions practiced in the selected range yet — generate a PSet to populate this.
+
+QUESTION MULTIPLICITY (USES IN RANGE)
+
+No questions used in the selected range under the current subject filter.
+
+ACTIVITY HEATMAP · 2026
+Today
+Mon
+Wed
+Fri
+Jan
+Feb
+Mar
+Apr
+May
+Jun
+Jul
+Aug
+Sep
+Oct
+Nov
+Dec
+ACTIVITY OVER SELECTED RANGE
+
+No activity in the selected date range.

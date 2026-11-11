@@ -1,0 +1,53 @@
+Home
+Generate
+Quiz
+Browser
+History
+Stats
+Settings
+Settings
+RESET DB DATA
+Reset active subject usage
+Factory reset…
+
+Reset subject zeroes times_used for questions in the active subject's scope. Factory reset wipes psets, templates, quizzes, subjects, and configs — question content (bodies, solutions, embeddings, outlines) is preserved.
+
+GENERAL
+Default number of questions
+Default save location
+C:\Users\Lenovo\OneDrive\Desktop
+Browse…
+Theme
+Pastel
+Themes
+Theme Lab
+Mute all sounds
+Restart App
+PDF OUTPUT
+Club letterhead
+The ampliφ logo on the left of the page header, the Coding Club logo on the right.
+Left header
+Right header
+Title line
+Instructions
+Save
+Cancel
+Reset to defaults
+
+Tokens: <S> subject · <T> topics · <N> count · <K> sources · <Q> types · <P> pset id · <d> / <D> dates
+
+SMART DIFFICULTY
+Enable smart difficulty (Phase 2)
+Recompute smart difficulty
+Train pairwise…
+DATA
+Re-run seed ingest
+Augment seed from CSV…
+Embedding model
+gemini-embedding-2
+Questions total
+25197
+With embeddings
+0 / 25197
+With outlines
+0 / 25197

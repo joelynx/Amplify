@@ -1,0 +1,27 @@
+Home
+Generate
+Quiz
+Browser
+History
+Stats
+Settings
+Traverse Mode
+End Session
+SINCE QUESTION
+0:05
+SINCE START
+0:05
+Unseen remaining:
+199
+Show Hint
+Show Solution
+Bookmark
+See Metadata
+Three counterfeiters print bills of arbitrary integral denominations. Each one prints bills totaling $100, and can pay either of the other two counterfeiters any amount up to $25, perhaps with change. Prove that together they can pay an outsider exactly any amount from $100 to $200.
+YOUR ANSWER
+Submit
+Diversity
+50%
+Random
+Similar
+Next Question

@@ -1,0 +1,58 @@
+Home
+Generate
+Quiz
+Browser
+History
+Stats
+Settings
+Themes
+
+Pick a preset, then swap any part of it in the Wardrobe. Everything applies live. Three presets are earned by practising, and one has to be found.
+
+Presets
+Wardrobe
+Settings
+Colours
+Saved
+Collection
+COLOURS
+
+Overrides apply on top of whichever palette is active, and stay when you switch presets.
+
+Background
+#fff5f7
+Surface (cards)
+#fde8ef
+Text
+#3d2f4d
+Muted text
+#6e5f86
+Borders
+#f5c8d8
+Primary
+#d96e9c
+Secondary
+#8e75c9
+Accent
+#f4a261
+Success
+#6fae8a
+Warning
+#e0a96d
+Error
+#c75b6f
+CONTRAST
+Text on background
+11.5 : 1 (min 4.5)
+Text on surface
+10.5 : 1 (min 4.5)
+Muted on background
+5.4 : 1 (min 4.5)
+Button text on primary
+3.2 : 1 (min 3)
+Error on background
+3.8 : 1 (min 3)
+Success on background
+2.4 : 1 (min 3)
+
+WCAG AA asks for 4.5 : 1 for body text and 3 : 1 for large text and buttons.

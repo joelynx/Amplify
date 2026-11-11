@@ -1,0 +1,100 @@
+Home
+Generate
+Quiz
+Browser
+History
+Stats
+Settings
+Quiz
+
+Practise interactively: review what is due, work from a lecture, or explore the bank.
+
+Review
+
+Questions due again, past mistakes, and ones you solved with help.
+
+From a lecture
+
+Paste the lecture's keywords, confirm the matches, practise.
+
+Mixed review
+
+Interleave techniques you have studied; spot which one each needs.
+
+Traverse
+
+One question at a time; a slider sets how similar the next one is.
+
+Discover
+
+A batch of N maximally diverse questions (DPP selection).
+
+Subject Filters
+Pick a template (optional)
+Save template
+(Any subject)
+Collapse leaves
+Algebraic Inequalities
+Calculus
+Classical Mechanics
+Combinatorial Games and Processes
+Combinatorial Geometry
+Complex Analysis
+Compressible Flow
+Derivatives Pricing
+Differential Equations
+Diophantine Equations
+Electric Machines
+Electrical, Magnetic, Optical and Thermal Properties
+Electromagnetism
+Elementary Algebra
+Elementary Number Theory
+Engineering Materials
+Enumerative Combinatorics
+Extremal Combinatorics
+Fixed Income
+Fluid Mechanics
+Graph Theory
+Group Theory
+Heat and Mass Transfer
+Heat and Thermodynamics
+Hydraulics and Hydraulic Machines
+Hydroelectric Power Engineering
+Linear Algebra
+Logic and Algorithmic Puzzles
+Macroeconomics
+Mathematical Statistics
+Mechanical Behavior of Materials
+Non-Conventional Power and Energy Storage
+Nuclear Power Engineering
+Optics
+Oscillations and Waves
+Plane Geometry
+Portfolio Theory and Risk Management
+Power Electronics
+Power Plant Economics and Operation
+Power Systems
+Probability
+Quantum, Atomic and Nuclear Physics
+Real Analysis
+Ring and Field Theory
+Sequences, Sums and Functional Equations
+Solid Geometry
+Solid Mechanics
+Special Relativity
+Stochastic Processes
+Structure of Materials
+Theory of Polynomials
+Thermal Power Plant Engineering
+Thermodynamics and Kinetics of Materials
+Uncategorized
+Add a tag…
+Compulsory?
+Exclude
+Add a source…
+Add a question type…
+Options
+In syllabus only
+Allow reused questions
+Seed Question?
+Start Traverse Session

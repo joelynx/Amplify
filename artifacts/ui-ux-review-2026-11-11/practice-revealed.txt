@@ -1,0 +1,193 @@
+Home
+Generate
+Quiz
+Browser
+History
+Stats
+Settings
+Traverse Mode
+End Session
+SINCE QUESTION
+0:11
+SINCE START
+0:11
+Unseen remaining:
+—
+Show Hint
+Hide Solution
+Bookmark
+See Metadata
+Three counterfeiters print bills of arbitrary integral denominations. Each one prints bills totaling $100, and can pay either of the other two counterfeiters any amount up to $25, perhaps with change. Prove that together they can pay an outsider exactly any amount from $100 to $200.
+YOUR ANSWER
+
+You opened the answer or solution before answering, so this one is not graded.
+
+Solution
+What is the problem really asking? Each counterfeiter owns a pile of bills. The bills are positive whole-dollar amounts adding up to 100. When counterfeiter X pays counterfeiter Y an amount k with change, X hands over some of his bills and Y hands back some of hers. So the hypothesis says this: for every pair X,Y and every integer k with 0≤k≤25, there is a sub-pile of X's bills worth s and a sub-pile of Y's bills worth t with s−t=k.
+
+We must show that for every integer n from 100 to 200, some collection of bills taken from the three piles is worth exactly n.
+
+It helps to name the key object. For a counterfeiter X, let P(X) be the set of all amounts that some sub-pile of X's bills can make. This set includes 0 (the empty sub-pile) and 100 (the whole pile). The whole problem is about adding and subtracting these sets.
+
+Plan of attack.
+
+
+
+Show that any two counterfeiters together can make every amount in a window around 100.
+
+Show that at least one counterfeiter can make a medium-sized amount.
+
+Use that medium amount to slide the window up so that it reaches 150.
+
+Get the amounts from 150 to 200 for free by symmetry.
+
+
+
+Step 1: a free symmetry. If a sub-pile of X is worth s, then the leftover bills are worth 100−s. So P(X) is symmetric: s∈P(X) exactly when 100−s∈P(X).
+
+The same idea works for all 300 dollars together. If a collection of bills from the three piles is worth n, then the remaining bills are worth 300−n. So it is enough to reach every amount from 100 to 150. The amounts from 150 to 200 then follow by handing over the complementary bills instead. This kind of symmetry is worth spotting early, because it halves the work.
+
+Step 2: two counterfeiters cover the window [75,125]. The hypothesis is about differences s−t, but the goal is about sums. The symmetry from Step 1 converts one into the other: subtracting t is the same as adding 100−t and then removing 100.
+
+Concretely, take any pair A,B and any k with 0≤k≤25. The hypothesis gives s∈P(A) and t∈P(B) with s−t=k. Then
+
+s+(100−t)=100+k,(100−s)+t=100−k.
+
+Each left-hand side is an amount A can make plus an amount B can make. As k runs over 0,1,…,25, these sums give every amount from 75 to 125.
+
+In words: the ability to make change of up to 25 means A and B together can produce any amount within 25 of 100. This holds for every pair of counterfeiters.
+
+Step 3: someone can make a medium amount. Two counterfeiters only get us up to 125, so the third must contribute a lump that pushes the window upward. Suppose the third counterfeiter C can make some amount c with 25≤c≤75. Then we will be done. By the symmetry of P(C), we may also assume 25≤c≤50.
+
+So the real question is whether a counterfeiter can fail to make every amount in [25,75]. Let us picture what such a pile must look like.
+
+Suppose X cannot make any amount in [25,75]. A single bill is a sub-pile, so no single bill can lie in [25,75]. Hence every bill is at most 24 or more than 75.
+
+Suppose first that all bills are at most 24. Lay them down one at a time and track the running total. It climbs from 0 to 100 in steps of at most 24. A walk with short steps cannot jump over a gap of width 51. Indeed, the first running total that reaches 25 is at most 24+24=48, which lies in the forbidden range.
+
+So X must own one huge bill b>75. The rest of the bills add up to r=100−b<25. Then every amount X can make is either small or large, with nothing in between:
+
+P(X)⊆[0,r]∪[b,100].
+
+
+Now suppose two counterfeiters A and B both have this shape. They have huge bills b
+A
+	​
+
+,b
+B
+	​
+
+ and small remainders r
+A
+	​
+
+,r
+B
+	​
+
+<25. Ask A to pay B exactly 25, so we need s−t=25. Check the cases.
+
+
+
+If s is small (s≤r
+A
+	​
+
+), then s−t≤r
+A
+	​
+
+<25.
+
+If s is large and t is large, then s−t≤100−b
+B
+	​
+
+=r
+B
+	​
+
+<25.
+
+If s is large and t is small, then s−t≥b
+A
+	​
+
+−r
+B
+	​
+
+>75−25=50.
+
+
+None of these cases gives exactly 25, which is a contradiction.
+
+Intuitively, someone with one giant bill plus small change can only pay small amounts or huge amounts. Two such people cannot settle a medium debt of 25.
+
+So among any two counterfeiters, at least one can make an amount in [25,75]. Call that person C, and fix c∈P(C) with 25≤c≤50. Call the other two A and B.
+
+Step 4: slide the window. By Step 2, A and B together make every amount in [75,125]. Now consider two options for C.
+
+
+
+If C contributes nothing, we get every amount in [75,125].
+
+If C contributes c, we get every amount in [75+c,125+c].
+
+
+Since c≤50, we have 75+c≤125, so the two windows overlap with no gap. Since c≥25, we have 125+c≥150. Together the two windows cover every integer from 75 up to 150, and in particular all of [100,150].
+
+This is exactly why c had to be medium-sized. If c were too small, the second window would not reach 150. If c were too large, a gap would open between the two windows.
+
+Sanity check. The extreme amounts behave as expected. For n=100, one person simply pays everything. For n=200, two people pay everything. For n=150, we need a genuine mixture, and that is precisely where the medium amount c is needed.
+
+Step 5: finish by symmetry. For n∈[150,200], we have 300−n∈[100,150]. Make the amount 300−n as in Step 4, then hand the outsider all the other bills instead. Those bills are worth exactly n.
+
+Final answer: Any two counterfeiters can jointly produce every amount in [75,125], and some counterfeiter can produce an amount c with 25≤c≤50. Hence all amounts in [100,150] can be paid, and by taking complements all amounts in [150,200] can be paid as well. So every amount from 100 to 200 dollars can be paid.
+
+Rigor Notes
+
+
+
+
+The argument uses the fact that 25 itself is a payable amount, so up to 25 dollars must be read inclusively. If only amounts up to 24 were guaranteed, the contradiction in Step 3 would fail, because a remainder r
+A
+	​
+
+=24 could produce a difference of exactly 24. On an exam, state this reading explicitly.
+
+Make the model of paying with change explicit. The payer gives a sub-pile and the payee returns a sub-pile, so the net transfer is s−t with s∈P(X) and t∈P(Y). The whole proof rests on this translation.
+
+The running-total argument in Step 3 needs every bill to be a positive integer. This guarantees that the steps are at most 24 and that the walk really goes from 0 to 100. Integrality is also what lets <25 become ≤24.
+
+The hypothesis is used in two places. Step 2 uses all amounts 0 to 25 for the pair A,B. Step 3 uses a single payment of 25 between two counterfeiters. Since we do not know in advance which person owns the medium amount, the hypothesis is genuinely needed for every pair.
+
+
+
+Takeaways
+
+
+
+
+Work with the set of achievable subset sums P(X). Paying with change then corresponds to the difference set P(X)−P(Y), and paying an outsider corresponds to the sum set P(A)+P(B)+P(C).
+
+Complement symmetry is a recurring trick. When the total is fixed, s is achievable if and only if the total minus s is achievable. This turns differences into sums and halves the target range.
+
+To cover a long interval, build a window and then shift it by a lump of the right size. The lump must be large enough to reach the far end, but no larger than the window width, so that no gap opens.
+
+A walk whose steps are at most d cannot jump over an interval of length greater than d. This is the standard way to show that some subset sum lands in a target range.
+
+The non-obvious leap was to ask what a pile with no medium subset sum looks like. Pushing that assumption forces a very rigid structure: one giant bill plus small change. Rigid structures are easy to contradict, here with a single payment of 25. When you need some object to exist, try assuming it does not, and describe the extreme configuration you are forced into.
+
+
+
+[Generated by Claude Opus 5.5 at high effort]
+
+What would change if one of the assumptions were removed?
+Answer in a note
+Diversity
+50%
+Random
+Similar
+Next Question

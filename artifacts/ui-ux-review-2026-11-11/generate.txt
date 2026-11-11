@@ -1,0 +1,105 @@
+Home
+Generate
+Quiz
+Browser
+History
+Stats
+Settings
+Generate
+
+Compose filters, watch the live count, then generate a PDF.
+
+REQUIRED
+Template
+Pick a template (optional)
+Subject
+(Any subject)
+TOPICS / BRANCHES / SUBTOPICS
+Collapse leaves
+Algebraic Inequalities
+Calculus
+Classical Mechanics
+Combinatorial Games and Processes
+Combinatorial Geometry
+Complex Analysis
+Compressible Flow
+Derivatives Pricing
+Differential Equations
+Diophantine Equations
+Electric Machines
+Electrical, Magnetic, Optical and Thermal Properties
+Electromagnetism
+Elementary Algebra
+Elementary Number Theory
+Engineering Materials
+Enumerative Combinatorics
+Extremal Combinatorics
+Fixed Income
+Fluid Mechanics
+Graph Theory
+Group Theory
+Heat and Mass Transfer
+Heat and Thermodynamics
+Hydraulics and Hydraulic Machines
+Hydroelectric Power Engineering
+Linear Algebra
+Logic and Algorithmic Puzzles
+Macroeconomics
+Mathematical Statistics
+Mechanical Behavior of Materials
+Non-Conventional Power and Energy Storage
+Nuclear Power Engineering
+Optics
+Oscillations and Waves
+Plane Geometry
+Portfolio Theory and Risk Management
+Power Electronics
+Power Plant Economics and Operation
+Power Systems
+Probability
+Quantum, Atomic and Nuclear Physics
+Real Analysis
+Ring and Field Theory
+Sequences, Sums and Functional Equations
+Solid Geometry
+Solid Mechanics
+Special Relativity
+Stochastic Processes
+Structure of Materials
+Theory of Polynomials
+Thermal Power Plant Engineering
+Thermodynamics and Kinetics of Materials
+Uncategorized
+TAGS
+Add a tag…
+Compulsory?
+Exclude
+SOURCES
+Add a source…
+TYPES
+Add a question type…
+OUTPUT SETTINGS
+Strategy
+Random
+Diverse
+Focused
+Frontier
+
+Uniform random over your filters.
+
+Number of questions
+Min difficulty
+Reuse questions
+In-syllabus only
+Include sources in PDF
+Solutions
+none
+Current: None
+Save directory
+C:\Users\Lenovo\OneDrive\Desktop
+Browse…
+ACTIONS
+Save Template
+Export LaTeX
+Generate PDF
+25,048 questions match your current filters

@@ -1,0 +1,40 @@
+Home
+Generate
+Quiz
+Browser
+History
+Stats
+Settings
+New
+Import
+Export
+Abstract Algebra
+Algebra
+Calculus
+Combinatorics
+Complex Analysis
+Conventional Energy Technologies
+Economics
+Electrical Machinery
+Electromagnetism and Special Relativity
+Fluid Mechanics
+Geometry
+Heat Transfer
+Linear Algebra and Differential Equations
+Material Science
+Mechanics
+Number Theory
+Power Systems and Power Electronics
+Probability and Stochastic Processes
+Quantitative Finance
+Quantum Mechanics
+Statistics
+Thermodynamics
+NEW SUBJECT
+Name
+Description
+Save changes
+TOPICS
+Add a topic…
+
+Pick at least one topic. Default everything is included; uncheck branches / subtopics to exclude.

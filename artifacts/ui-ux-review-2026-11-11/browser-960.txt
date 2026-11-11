@@ -1,0 +1,145 @@
+Home
+Generate
+Quiz
+Browser
+History
+Stats
+Settings
+TOPIC
+(All topics)
+TYPE
+(All types)
+SOURCE
+(All sources)
+SEARCH
+In-syllabus only
+Bookmarked only
+25,197 matches
+	ID
+	TOPIC
+	BRANCH
+	SUBTOPIC
+	TYPE
+	SOURCE
+	IN SYLL.
+	USED
+
+
+	1	Calculus	Single Variable Differential Calculus	Intermediate Value Theorem	explanation/reasoning	IITD-AD	✓	0
+
+	2	Calculus	Single Variable Differential Calculus	Limits (Single Variable)	proof	IITD-AD	✓	0
+
+	3	Calculus	Single Variable Differential Calculus	Limits (Single Variable)	proof	IITD-AD	✓	0
+
+	4	Calculus	Single Variable Differential Calculus	Limits (Single Variable)	proof	IITD-AD	✓	0
+
+	5	Calculus	Single Variable Differential Calculus	Limits (Single Variable)	proof	IITD-AD	✓	0
+
+	6	Calculus	Single Variable Differential Calculus	Limits (Single Variable)	proof	IITD-AD	✓	0
+
+	7	Calculus	Single Variable Differential Calculus	Intermediate Value Theorem	proof	IITD-AD	✓	0
+
+	8	Calculus	Single Variable Differential Calculus	Intermediate Value Theorem	numerical	IITD-AD	✓	0
+
+	9	Calculus	Single Variable Differential Calculus	Continuity (Single Variable)	explanation/reasoning	IITD-AD	✓	0
+
+	10	Calculus	Single Variable Differential Calculus	Continuity (Single Variable)	explanation/reasoning	IITD-AD	✓	0
+
+	11	Calculus	Single Variable Differential Calculus	Intermediate Value Theorem	proof	IITD-AD	✓	0
+
+	12	Calculus	Single Variable Differential Calculus	Curve Sketching	numerical	IITD-AD	✓	1
+
+	13	Calculus	Single Variable Differential Calculus	Curve Sketching	numerical	IITD-AD	✓	0
+
+	14	Calculus	Single Variable Differential Calculus	Intermediate Value Theorem	numerical	IITD-AD	✓	0
+
+	15	Calculus	Single Variable Differential Calculus	Maxima and Minima (Single Variable)	numerical	IITD-AD	✓	0
+
+	16	Calculus	Single Variable Differential Calculus	Mean Value Theorems	numerical	IITD-AD	✓	0
+
+	17	Calculus	Single Variable Differential Calculus	Inequalities Using Derivatives	proof	IITD-AD	✓	0
+
+	18	Calculus	Single Variable Differential Calculus	Maxima and Minima (Single Variable)	numerical	IITD-AD	✓	0
+
+	19	Calculus	Single Variable Differential Calculus	Curve Sketching	numerical	IITD-AD	✓	0
+
+	20	Calculus	Single Variable Differential Calculus	Taylor's Theorem	numerical	IITD-AD	✓	0
+
+	21	Calculus	Single Variable Differential Calculus	Taylor's Theorem	numerical	IITD-AD	✓	1
+
+	22	Real Analysis	Sequences and Series	Convergence (Sequences)	proof	IITD-AD	✓	0
+
+	23	Real Analysis	Sequences and Series	Monotone and Recursive Sequences	proof	IITD-AD	✓	0
+
+	24	Real Analysis	Sequences and Series	Monotone and Recursive Sequences	proof	IITD-AD	✓	0
+
+	25	Real Analysis	Sequences and Series	Summation of Series	numerical	IITD-AD	✓	1
+
+	26	Real Analysis	Sequences and Series	Summation of Series	numerical	IITD-AD	✓	0
+
+	27	Real Analysis	Sequences and Series	Convergence (Series)	numerical	IITD-AD	✓	0
+
+	28	Real Analysis	Sequences and Series	Convergence (Series)	proof	IITD-AD	✓	0
+
+	29	Real Analysis	Sequences and Series	Convergence (Series)	proof	IITD-AD	✓	0
+
+	30	Real Analysis	Sequences and Series	Convergence (Series)	numerical	IITD-AD	✓	0
+
+	31	Real Analysis	Sequences and Series	Convergence (Series)	numerical	IITD-AD	✓	1
+
+	32	Real Analysis	Sequences and Series	Absolute and Conditional Convergence	numerical	IITD-AD	✓	1
+
+	33	Real Analysis	Sequences and Series	Power Series and Radius of Convergence	numerical	IITD-AD	✓	1
+
+	34	Real Analysis	Sequences and Series	Taylor and Maclaurin Series	numerical	IITD-AD	✓	0
+
+	35	Real Analysis	Sequences and Series	Taylor and Maclaurin Series	numerical	IITD-AD	✓	0
+
+	36	Real Analysis	Sequences and Series	Power Series and Radius of Convergence	numerical	IITD-AD	✓	0
+
+	37	Calculus	Single Variable Integral Calculus	Riemann Sums	proof	IITD-AD	✓	0
+
+	38	Calculus	Improper and Parametric Integrals	Convergence of Improper Integrals	numerical	IITD-AD	✓	0
+
+	39	Calculus	Improper and Parametric Integrals	Convergence of Improper Integrals	numerical	IITD-AD	✓	0
+
+	40	Calculus	Improper and Parametric Integrals	Beta and Gamma Functions	numerical	IITD-AD	✓	0
+
+	41	Calculus	Single Variable Integral Calculus	Volumes and Surfaces of Revolution	numerical	IITD-AD	✓	0
+
+	42	Calculus	Single Variable Integral Calculus	Volumes and Surfaces of Revolution	numerical	IITD-AD	✓	0
+
+	43	Calculus	Single Variable Integral Calculus	Arc Length	numerical	IITD-AD	✓	1
+
+	44	Calculus	Single Variable Integral Calculus	Volumes and Surfaces of Revolution	numerical	IITD-AD	✓	1
+
+	45	Calculus	Multivariable Differential Calculus	Limits (Multivariable)	numerical	IITD-AD	✓	1
+
+	46	Calculus	Multivariable Differential Calculus	Continuity (Multivariable)	numerical	IITD-AD	✓	1
+
+	47	Calculus	Optimization	Maxima and Minima (Multivariable)	numerical	IITD-AD	✓	0
+
+	48	Calculus	Optimization	Lagrange Multipliers	numerical	IITD-AD	✓	0
+
+	49	Calculus	Multivariable Integral Calculus	Double and Triple Integrals	numerical	IITD-AD	✓	0
+
+	50	Calculus	Multivariable Integral Calculus	Double and Triple Integrals	numerical	IITD-AD	✓	0
+Page 1 of 504
+Prev
+Next
+Q1 · CALCULUS / SINGLE VARIABLE DIFFERENTIAL CALCULUS / INTERMEDIATE VALUE THEOREM
+explanation/reasoning
+IITD-AD
+in syllabus
+Bookmark
+QUESTION
+Explain why the equation cosx=x has at least one solution.
+SOLUTION
+HINTS
+The statement appears to be an undefined LaTeX command rather than an actual question. Check the original source for the macro definition, or write the problem out in standard notation.
+YOUR NOTE
+Save note
+SIMILAR QUESTIONS
+Apply filters
+
+No similar questions — this row may have no embedding (augmented seed).
