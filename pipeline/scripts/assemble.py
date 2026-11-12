@@ -101,6 +101,8 @@ def accepted_parts(row, d: Path) -> tuple[dict | None, list[str], str | None, li
 
 def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
     row = get_status(pc, qid)
+    # The version the reply was written with (the config may have moved on since it was sent).
+    pv = row["prompt_version"] or cfg["prompt_version"]
     q = fetch_question(app, qid)
     d = q_dir(qid)
     acc = int(row["accepted_attempt"])
@@ -181,7 +183,7 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
         "accepted_attempt": acc,
         "model": acc_model,
         "effort": acc_effort,
-        "prompt_version": cfg["prompt_version"],
+        "prompt_version": pv,
         "preview": preview_note,
     }
     write_json(d / "final_app.json", app_record)
@@ -193,7 +195,7 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
             more_hints_tex)
            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
         (qid, row["status"], final, solution, rigor, takeaways, parts["answer_type"], parts["answer"],
-         hint, fill_answer or replace_answer, fill_hint, 0, 0, cfg["prompt_version"], now_iso(), more),
+         hint, fill_answer or replace_answer, fill_hint, 0, 0, pv, now_iso(), more),
     )
     for field, value in ((gen_col, final), ("answer", fill_answer), ("answer_replace", replace_answer), ("hints", fill_hint)):
         if value is None:
@@ -204,10 +206,10 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
         if not exists:
             pc.execute(
                 "INSERT INTO provenance (question_id, field, value, prompt_version, created_at) VALUES (?,?,?,?,?)",
-                (qid, field, value, cfg["prompt_version"], now_iso()),
+                (qid, field, value, pv, now_iso()),
             )
             if field == "hints":
-                queue_more_hints(pc, qid, fill_more, cfg["prompt_version"])
+                queue_more_hints(pc, qid, fill_more, pv)
     pc.commit()
     upsert_status(pc, qid, assembled=1)
     log_event(pc, qid, "assemble", f"ok; preview {preview_note}; fills answer={fill_answer is not None} hint={fill_hint is not None}"

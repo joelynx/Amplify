@@ -20,7 +20,7 @@ INSTRUCTIONS:
 
 4. HINTS (write these last):
 - Hints for a student who is stuck and does not want the solution spoiled, in one to three tiers. The student sees tier 1 first and asks for the next tier only if still stuck.
-- Choose how many tiers the question needs: one when a single nudge is enough (a routine question), two or three when it has several steps or a hard key idea.
+- Choose how many tiers from the book's solution: count its non-obvious steps or key ideas, the moves a stuck student would not find on their own (looking up a property, unit conversion, arithmetic and substitution into a formula do not count). Write one tier if there is one, two if there are two, and three only if there are three or more; a routine question gets one tier.
 - Tier 1 points toward the starting idea, the governing principle, or the right method, the way the book's solution starts. Each later tier says more than the one before, following the book's method: for example, the key relation or the quantity to find first, then the plan of attack as a short outline.
 - No tier does the actual work: no computed values, no intermediate results, no worked steps. No tier may reveal or strongly imply the answer, even with the other tiers: for a numerical question no value from the solution, for a multiple-choice question nothing that names or singles out an option, for a descriptive question not the list of points itself.
 - One to three sentences per tier, matching the length, tone, and LaTeX style of these hints:

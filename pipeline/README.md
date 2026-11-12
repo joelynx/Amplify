@@ -94,11 +94,16 @@ without spending tokens.
 | hint fails its checks (rules, length, answer leak) | solution still `passed`; hint dropped | Hint cell stays empty |
 | a later hint tier fails its checks (v6/s5) | solution `passed`; that tier and the ones after it dropped | the passing tiers are stored |
 
-### Tiered hints (prompt v6 and s5, owner 2026-11-11)
+### Tiered hints (prompt v6 and s5, owner 2026-11-11; tier rule v7 and s6, 2026-11-12)
 
-The reply's hint is one to three tiers, each saying more than the one before;
-the model chooses how many (one for a routine question, two or three for a
-multi-step or hard one):
+The reply's hint is one to three tiers, each saying more than the one before.
+The model sets the count from its solution (the book's, in aids mode): one
+tier per non-obvious step or key idea, three only for three or more; routine
+work (a property lookup, a unit conversion, arithmetic, substitution) does not
+count, so a routine question gets one tier. v6 and s5 left the count to the
+model's sense of difficulty, and the first 159 s5 replies (tie-breaks on hard
+questions) used three tiers 79 percent of the time and never one. Assembly
+records each reply's own prompt version, not the config's current one:
 
 ```
 %%% BEGIN HINT 1

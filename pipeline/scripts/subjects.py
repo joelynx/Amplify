@@ -919,6 +919,8 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
     from check_pdf import check_pdf
 
     row = get_status(pc, qid)
+    # The version the reply was written with (the config may have moved on since it was sent).
+    pv = row["prompt_version"] or subj_cfg(cfg)["prompt_version"]
     q = fetch_question(app, qid)
     d = q_dir(qid)
     acc = int(row["accepted_attempt"])
@@ -991,7 +993,7 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
                                       **{f: v for f, v in fields}, **({"more_hints": fill_more} if fill_more else {}),
                                       "status": row["status"], "accepted_attempt": acc,
                                       "model": acc_model, "effort": acc_effort,
-                                      "prompt_version": subj_cfg(cfg)["prompt_version"]})
+                                      "prompt_version": pv})
     pc.execute(
         """INSERT OR REPLACE INTO finals
            (question_id, status, final_tex, solution_tex, rigor_tex, takeaways_tex, answer_type, answer_tex,
@@ -999,7 +1001,7 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
             mode, answer_key, book_check, more_hints_tex)
            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
         (qid, row["status"], final, parts.get("solution"), parts.get("notes"), parts["takeaways"], "KEY",
-         answer_value, hint, fill_answer or replace_answer, fill_hint, 0, 0, subj_cfg(cfg)["prompt_version"], now_iso(),
+         answer_value, hint, fill_answer or replace_answer, fill_hint, 0, 0, pv, now_iso(),
          mode, key_json, parts.get("book_check"), more),
     )
     for field, value in fields:
@@ -1008,9 +1010,9 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
         if not pc.execute("SELECT 1 FROM provenance WHERE question_id=? AND field=? AND applied_at IS NULL",
                           (qid, field)).fetchone():
             pc.execute("INSERT INTO provenance (question_id, field, value, prompt_version, created_at) VALUES (?,?,?,?,?)",
-                       (qid, field, value, subj_cfg(cfg)["prompt_version"], now_iso()))
+                       (qid, field, value, pv, now_iso()))
             if field == "hints":
-                queue_more_hints(pc, qid, fill_more, subj_cfg(cfg)["prompt_version"])
+                queue_more_hints(pc, qid, fill_more, pv)
     pc.commit()
     upsert_status(pc, qid, assembled=1)
     log_event(pc, qid, "assemble", f"ok ({mode}); fills answer={fill_answer is not None} hint={fill_hint is not None}"
