@@ -122,7 +122,11 @@ records each reply's own prompt version, not the config's current one:
 judge exactly as before. Mixing the two forms, a gap or wrong order, more than
 three tiers, an empty tier, or text between tiers is a structure error.
 `subjects.repair_reply` renumbers tier openers in order and reads a misnamed
-END as the open tier's. Every tier gets the single hint's checks (length,
+END as the open tier's. An END line written again right after a tier's END
+(`%%% END HINT 2` twice, `%%% END HINTS`, `%%% END ANSWER KEY`; 16 of the 159
+s5 tie-breaks of 2026-11-12 were rejected only for it) is dropped, for math
+replies too (`common.drop_doubled_hint_ends`, called from `repair_slips`).
+Every tier gets the single hint's checks (length,
 LaTeX rules, answer leak, XeLaTeX and web view, as pieces `hint`, `hint2`,
 `hint3`) and must not repeat an earlier tier; the leading tiers that pass are
 kept (`hint_tiers_ok` in `validate_<n>.json`), and `hint_ok` means tier 1

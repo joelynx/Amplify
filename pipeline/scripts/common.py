@@ -602,11 +602,35 @@ def repair_line_slips(lines: list[str]) -> list[str]:
     return notes
 
 
+HINT_END = re.compile(r"%%% END HINT(?: \d+)?")
+
+
+def drop_doubled_hint_ends(lines: list[str]) -> list[str]:
+    """An END marker line written again right after a hint's END, with only blank lines between
+    ('%%% END HINT 2' twice, '%%% END HINTS', '%%% END ANSWER KEY'; 16 of 159 tie-breaks on
+    2026-11-12), blanked in place. Only the next tier may follow a hint's END, so the line carries
+    nothing. Returns what was dropped. Used for subject replies (subjects.repair_reply) and math
+    replies (repair_slips)."""
+    notes: list[str] = []
+    after_end = False
+    for i, line in enumerate(lines):
+        s = line.strip()
+        if not s:
+            continue
+        if after_end and s.startswith("%%% END"):
+            lines[i] = ""
+            notes.append(f"line {i + 1}: stray marker '{s[:40]}' after the hint's END dropped")
+            continue
+        after_end = bool(HINT_END.fullmatch(s))
+    return notes
+
+
 def repair_slips(text: str) -> tuple[str, list[str]]:
-    """repair_line_slips on a whole math reply, before any check and again when assemble.py
-    stores the accepted reply (owner 2026-11-11), so the stored solution is the checked one."""
+    """repair_line_slips and drop_doubled_hint_ends on a whole math reply, before any check and
+    again when assemble.py stores the accepted reply (owner 2026-11-11), so the stored solution
+    is the checked one."""
     lines = text.replace("\r\n", "\n").split("\n")
-    notes = repair_line_slips(lines)
+    notes = repair_line_slips(lines) + drop_doubled_hint_ends(lines)
     return "\n".join(lines), notes
 
 

@@ -29,6 +29,7 @@ from common import (
     REPO_DIR,
     check_web_parts,
     content_problems,
+    drop_doubled_hint_ends,
     fetch_question,
     get_status,
     hint_piece_name,
@@ -270,9 +271,10 @@ def repair_reply(text: str, markers: list[str]) -> tuple[str, list[str]]:
     inside an emphasis's closing brace (\\emph{word*}) is dropped, \\lt and \\gt (web view only)
     become < and >, and POINT lines the answer key puts under a part that is not a POINTS part
     (a checklist of steps after a NUMBER) are dropped. Everything repaired still goes through
-    every check; the repairs are reported. The line repairs are common.repair_line_slips."""
+    every check; the repairs are reported. The line repairs are common.repair_line_slips, and an
+    END line written again after the hint's END goes (common.drop_doubled_hint_ends)."""
     lines = text.replace("\r\n", "\n").split("\n")
-    notes = repair_line_slips(lines)
+    notes = repair_line_slips(lines) + drop_doubled_hint_ends(lines)
 
     def same(s: str, m: str) -> bool:
         s = s.strip()
