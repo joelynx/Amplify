@@ -346,7 +346,9 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         until = float(paused_until) if paused_until else time.time() + 900
                         secs = max(60, min(int(until - time.time()) + 120, 1020))  # short polls catch a /login switch
                         print(f"{stop_reason}; waiting {secs // 60} min, then continuing", flush=True)
-                        time.sleep(secs)
+                        deadline = time.time() + secs
+                        while time.time() < deadline:  # by the clock: one long sleep does not count time the machine sleeps
+                            time.sleep(min(60, max(1, deadline - time.time())))
                         stop_reason = paused_until = None
                         continue
                     break

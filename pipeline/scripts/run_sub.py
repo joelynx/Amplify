@@ -937,8 +937,8 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
     try:
         with ThreadPoolExecutor(max_workers=max(limits.values())) as ex:
             running: dict = {}
+            paused_until = None  # kept until the wait: the replies still running can take several more rounds
             while queue or running:
-                paused_until = None
                 while queue and stop_reason is None:
                     q = fetch_question(app, queue[0])
                     if len(running) >= limits[effort_of(queue[0], q["source"])]:
@@ -998,10 +998,12 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                 if stop_reason and not running:
                     if wait_on_limit and stop_reason.startswith("usage limit") and queue:
                         until = float(paused_until) if paused_until else time.time() + 900
-                        secs = max(60, int(until - time.time()) + 120)
+                        secs = max(60, min(int(until - time.time()) + 120, 1020))  # short polls catch a /login switch
                         print(f"{stop_reason}; waiting {secs // 60} min, then continuing", flush=True)
-                        time.sleep(secs)
-                        stop_reason = None
+                        deadline = time.time() + secs
+                        while time.time() < deadline:  # by the clock: one long sleep does not count time the machine sleeps
+                            time.sleep(min(60, max(1, deadline - time.time())))
+                        stop_reason = paused_until = None
                         continue
                     break
     finally:
