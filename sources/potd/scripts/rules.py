@@ -146,7 +146,7 @@ RULES = [
     ('UK_IMC', r'UK IMC', None),
     ('IMC', r'\bIMC\b', None),
     ('SMMC', r'\bSMMC\b', None),
-    ('SCHWEITZER', r'(?:Adapted from )?Mikl[oó]s Schweitzer(?: Competition)?', None),
+    ('SCHWEITZER', r'Mikl[oó]s Schweitzer(?: Competition)?', None),
 
     # --- United States ---
     ('USA_TSTST', r'USA TSTST', None),

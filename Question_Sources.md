@@ -1,10 +1,11 @@
 # New question sources: where we left off
 
 Planning notes for adding questions from the MODS sheets and from model benchmarks.
-Status on 2026-11-12: **nothing is extracted or imported yet.** The owner asked for
-this plan, made the decisions recorded below, and paused it to work on the
-answer-checker fixes (section 9). Nothing here is approved for API spend, DB
-writes or judging; each import still needs the owner's go-ahead.
+Status on 2026-11-12: **the MODS POTD sheet is imported** (section 7): 2,678 problems
+with their 1,723 hint sets, 618 answers and 376 solutions, Uncategorized and not yet
+solved. The bank's "AIME" is renamed to its full name. Classification, solving,
+judging and embeddings are next; each still needs the owner's go-ahead, as does any
+other source.
 
 Supporting files are in `sources/potd/`. They hold only competition names, counts
 and the sheet's Source strings, no problem text:
@@ -12,11 +13,13 @@ and the sheet's Source strings, no problem text:
 | File | What it is |
 |---|---|
 | `competition_map.csv` | 816 raw contest names → full name, group, country, kind, bank match, confidence, note, regional group, total |
-| `row_assignments.csv` | One line per POTD row (sheet row, date, Source as written, full name, group, regional group, proposed subsource, confidence, skip?) |
-| `thresholds.md` | Own sources vs groups at cut-offs 5, 10 and 20 |
+| `row_assignments.csv` | One line per POTD row: POTD number, date, Source as written, full name, group, regional group, **source and subsource at the cut-off**, confidence, skip reason |
+| `duplicates.csv` | Hand-reviewed 2026-11-12: 72 rows already in the bank (`bank:<question_id>`) and 16 posted twice (`potd:<kept copy>`) |
+| `thresholds.md` | Own sources vs groups at cut-offs 5, 10, 15 and 20 |
 | `subsource_examples.md` | The subsource format, with 15 worked examples and the rough edges |
-| `scripts/build_map.py` (+ `canon.py`, `rules.py`) | Rebuilds the two CSVs: `python -I build_map.py <POTD.csv> <out_dir>` (also writes `summary.json` next to itself; `thresholds_md.py summary.json` then rebuilds `thresholds.md`, `examples.py row_assignments.csv` the examples) |
+| `scripts/build_map.py` (+ `canon.py`, `rules.py`) | Rebuilds the two CSVs: `python -I build_map.py <POTD.csv> <out_dir> [cutoff=15] [asof=today]`; reads `duplicates.csv` from `<out_dir>`, and also writes `summary.json` next to itself (not committed); `thresholds_md.py summary.json thresholds.md` then rebuilds the report, `examples.py row_assignments.csv` prints the examples |
 | `scripts/potd_stats.py`, `potd_more.py`, `potd_overlap.py` | The profiling behind the numbers in section 2. `potd_overlap.py <POTD.csv> <amplify.db>` is the quick text-overlap check |
+| `app/tools/import_mods_potd.py` (+ `mods_potd_fixes.json`) | The import (section 7); its docstring lists every repair |
 
 Keep problem text out of the repo (it is public): no raw sheet exports, no review
 pages with question text. The app DB is git-ignored.
@@ -93,7 +96,7 @@ This is a reading list, not a question set.
   - Counts: 0–3: 847 · 4–6: 921 · 7–9: 804 · 10–14: 208 · invalid (`T` ×10, `-1`, `Pi^2`): 12.
 - **Largest contest families:** IMO Shortlist 333, IMO 163, BMO1 ~100, USAMO 83, BMO2 64, EGMO 55, APMO 45, Putnam ~42, USA TSTST 42, USA TST 40.
 - **Overlap with the bank:** a text match found only 2 (AIME 1995 P3 and one Mladenovic problem). The bank has no IMO, Shortlist, USAMO or BMO source. An embedding check at import may find more, mostly old IMO problems that Engel quotes in other words.
-- **Internal repeats:** 12.
+- **Internal repeats:** 12 by the first quick check; 16 after the hand review at import (`sources/potd/duplicates.csv`), and 72 rows already in the bank (section 4).
 
 ## 3. Owner decisions (2026-11-11)
 
@@ -105,49 +108,47 @@ This is a reading list, not a question set.
 - **Small competitions are merged into groups** (e.g. Chinese, Other European, Latin American Olympiads).
 - **Unknown, Original and Folklore → "Math Olympiad Discord Server".** Named classics too; their original label goes in the subsource.
 - **POTD's D is not stored as a field.** It is used only to assign solving models.
-- **Tiered hints:** "Show hint", then "Show additional hint", greyed out after the last tier, at most 3. POTD's three hints map onto the tiers. **Built 2026-11-11, uncommitted** (section 8).
+- **Tiered hints:** "Show hint", then "Show additional hint", greyed out after the last tier, at most 3. POTD's three hints map onto the tiers. Built and committed 2026-11-11 (section 8).
+
+**Owner decisions (2026-11-12):**
+- **Cut-off 15:** a competition with at least 15 problems is its own source.
+- **Skip rows:** keep STEP and ISI (as "University Admission Exams"); skip the programming contests and the school exams.
+- **AIME:** rename the bank's 748 rows to "American Invitational Mathematics Examination", with subsources in POTD's order ("2008, AIME II").
+- **IMO Shortlist:** one source with the IMO; "Shortlist, C5" (or "Longlist") goes in the subsource.
+- Defaults taken since (not asked): the Discord server's own contests stay under "Math Olympiad Discord Server" with the contest at the head of the subsource; the POTD number and Solution Link go to a git-ignored map file; the Weekly tab waits.
 
 ## 4. Competition table (sources/potd)
 
-835 raw names → **293 competitions**, plus 22 books, journals and sites, 240 rows for the Discord server, and 26 rows flagged skip.
+835 raw names → **292 competitions**, plus books, journals and sites, the Discord server's rows, and 23 rows skipped (programming and school exams). Counts below leave out the skipped rows, the 88 duplicates and the 3 rows scheduled after the download (2026-11-12).
 
 | Cut-off | Sources in the app | Own sources (rows) | Merged (rows) |
 |---|---|---|---|
-| 5 | 127 | 98 (2,137) | 217 competitions (629) |
-| **10 (recommended)** | **80** | **55 (1,855)** | 260 (911) |
-| 20 | 48 | 28 (1,492) | 287 (1,274) |
+| 5 | 128 | 98 (2,061) | 214 competitions (617) |
+| 10 | 81 | 55 (1,779) | 257 (899) |
+| **15 (chosen)** | **62** | **37 (1,565)** | 275 (1,113) |
+| 20 | 49 | 27 (1,400) | 285 (1,278) |
 
-Rule: a competition below the cut-off goes to its country group. A country group still below it rolls up to its region, unless the region would hold only that one country. Mock, online, university, book and unidentified contests have their own groups.
+Rule: a competition below the cut-off goes to its country group, with its full name at the head of the subsource. A country group still below it rolls up to its region, unless the region would hold only that one country. Mock, online, university, book and unidentified contests have their own groups. AIME and the Cambridge Tripos are bank sources already, so their rows go there whatever their count.
 
-At cut-off 10 the groups are:
+At cut-off 15 the groups are (problems imported):
 
-| Group | Problems |
-|---|---|
-| Math Olympiad Discord Server | 254 |
-| Other European | 145 |
-| Other Asian | 69 |
-| Mock | 69 |
-| Online Community Contests | 36 |
-| Problem Books and Journals | 33 |
-| Latin American | 31 |
-| Indian | 29 |
-| British | 29 |
-| United States | 26 |
-| New Zealand | 25 |
-| Israeli | 17 |
-| Unidentified | 17 |
-| Russian | 14 |
-| Chinese | 13 |
-| Korean | 13 |
-| Serbian | 12 |
-| African | 12 |
-| Iranian | 11 |
-| University | 11 |
-| Romanian | 10 |
-| Australian | 10 |
-| South African | 10 |
-| Canadian | 9 |
-| International | 6 |
+| Group | Problems | Group | Problems |
+|---|---|---|---|
+| Math Olympiad Discord Server | 263 | Chinese Olympiads | 24 |
+| Other European Olympiads | 197 | African Olympiads | 22 |
+| Other Asian Olympiads | 96 | Australian Olympiads | 21 |
+| Mock Olympiads | 69 | Dutch Olympiads | 19 |
+| United States Competitions | 53 | Israeli Olympiads | 17 |
+| New Zealand Olympiads | 50 | Unidentified Contests | 17 |
+| British Olympiads | 39 | International Olympiads | 17 |
+| Online Community Contests | 36 | Polish Olympiads | 16 |
+| Latin American Olympiads | 31 | Taiwanese Olympiads | 16 |
+| Problem Books and Journals | 30 | Thai Olympiads | 15 |
+| Indian Olympiads | 29 | Italian Olympiads | 15 |
+| Canadian Olympiads | 9 | University Mathematics Competitions | 9 |
+| University Admission Exams | 3 | | |
+
+The 37 own sources run from the International Mathematical Olympiad (465, Shortlist included) and BMO Round 1 (106) down to six at 15–16 problems, plus the 4 AIME and 2 Tripos rows filed under their bank sources; `thresholds.md` lists them all.
 
 **Ambiguous acronyms, settled from the rows' own solution links:**
 
@@ -174,15 +175,17 @@ At cut-off 10 the groups are:
 - Loose labels: "Russia", "Iran", "Some Australian TST".
 - AoPS blocks automated lookups, so several expansions are unverified.
 
-**Flagged skip (26 rows):**
+**Skipped (23 rows; owner 2026-11-12):**
 - Programming: Codeforces 10, Project Euler 2, USACO 2, IOI 1.
-- Exams: ISI 2, STEP 1, plus one each of CIE 9709, HKDSE, a school exam, a SOF sample paper, Gaokao, Kyoto, University of Indonesia and Hanoi entrance.
-- STEP, ISI and IOI could reasonably be kept.
+- School and entrance exams: one each of CIE 9709, HKDSE, a school exam, a SOF sample paper, Gaokao, Kyoto, University of Indonesia and Hanoi entrance.
+- Kept: ISI 2 and STEP 1, as "University Admission Exams".
 
 **Bank matches:**
-- `AIME` (748 rows, subsource like `AIME II - 2008`): the acronym clashes with the full-name rule.
-- Miklos Schweitzer and Kürschák: the same contests as the Szekely book and the Hungarian Problem Books, but other years.
-- Possibly Cambridge Tripos and Winkler.
+- `AIME` (748 rows) renamed to "American Invitational Mathematics Examination" on import; POTD's 4 new AIME rows joined it (23 others were duplicates).
+- Cambridge Tripos: POTD's 2 rows go under the bank's "Cambridge Tripos".
+- Miklos Schweitzer and Kürschák: the same contests as the Szekely book and the Hungarian Problem Books, but other years; filed as POTD competitions.
+
+**Duplicates (hand-reviewed 2026-11-12, `duplicates.csv`):** a local TF-IDF and word-trigram comparison of every POTD statement with the bank and with each other, then each candidate pair read. 72 rows are already in the bank: 23 AIME; Shortlist and TST problems in "Selection Tests in Number Theory" (23); IMO problems quoted in Mladenovic (15); Engel (8); Burton, Winkler and Grimmett (one each). 16 more were posted twice; the copy with more hints, answer or solution was kept. Restatements that change the problem (a different bound, an added condition, a two-part version) were kept.
 
 ## 5. Solving: published scores and model buckets
 
@@ -247,10 +250,23 @@ Published results, gathered 2026-11-11 by a research agent from the system cards
 
 **Copyright:** keep everything in the private DB. No raw downloads, review pages or canary-string rows in the public repo. Don't scrape AoPS (it blocks automated access and asserted copyright in the MATH notice).
 
-## 7. POTD import plan (when approved)
+## 7. POTD import
 
-1. **Download** a fresh CSV of the POTD tab, plus Weekly if wanted, into a new folder outside the repo. Rebuild `sources/potd` with `build_map.py`.
-2. **Import tool** `app/tools/import_mods_potd.py`, in the style of `import_sahoo.py`: back up the DB first, idempotent on `latex_hash`, rows go in Uncategorized.
+**Done 2026-11-12 (steps 1–2):**
+- Downloaded the POTD tab at 13:21 (2,792 rows with a statement) into the session scratchpad; `build_map.py <csv> sources/potd 15 2026-11-12`.
+- `import_mods_potd.py --rename-aime --apply`, then `--csv <csv> --apply`. Backups: `app/data/appdata/amplify.db.bak-20261112-134845-rename-aime` and `…-134855-mods-potd`.
+- **Added 2,678 questions** (question_id 25,550–28,227; bank total 27,874), 62 sources: 1,723 with hints (1,389 with two or three tiers), 618 answers, 376 solutions. POTD number, date and Solution Link per question in `app/data/appdata/mods_potd_map.csv`.
+- **Checks before writing:**
+  - 0 problems from the tool's own checks (braces, `$` and `\(`/`\[` pairs, environments, leftover macros);
+  - every field rendered with the app's `renderLatex`: 0 KaTeX errors in 7,695 fields;
+  - every statement, solution and answer compiled in one XeLaTeX document with the app's preamble: 0 errors.
+  - 56 fixes in 44 rows (`mods_potd_fixes.json`): 47 LaTeX (missing `$`, braces, a cut-off hint completed, a wrong factorisation in a human solution, 2227), 6 Discord leftovers (a user mention, bot commands, a solver's name, asterisks eaten by italics), 2 rewordings for profanity, 1 spelling. General repairs (the bot's macros, enumerate labels, URLs, bare-math answers) are listed in the tool's docstring.
+- Not imported: Discussion, Message ID, Curator and the solver columns; the Curators tab.
+
+**Remaining steps** (each needs the owner's go-ahead):
+
+1. **Download** a fresh CSV of the POTD tab, plus Weekly if wanted, into a new folder outside the repo. Rebuild `sources/potd` with `build_map.py`. *(done; a later re-run with a new download adds only the new days, since the import is idempotent on `latex_hash`)*
+2. **Import tool** `app/tools/import_mods_potd.py`, in the style of `import_sahoo.py`: back up the DB first, idempotent on `latex_hash`, rows go in Uncategorized. *(done)*
    - **Field mapping:**
 
      | POTD column | Bank field |
@@ -258,14 +274,14 @@ Published results, gathered 2026-11-11 by a research agent from the system cards
      | Problem Statement | `latexcode` |
      | Hint 1 | `hints` |
      | Hint 2, Hint 3 | `more_hints` (JSON list; NULL when there is only one hint) |
-     | Answer | `answer` (minus the 2 junk ones) |
+     | Answer | `answer` (placeholders dropped; bare math gets `$…$`) |
      | Solution | `solution` |
      | Source | source and subsource from `row_assignments.csv` at the chosen cut-off |
+     | POTD number, Date, Solution Link | `app/data/appdata/mods_potd_map.csv` (by question_id) |
 
-   - **Not stored:** D, G and T. They feed classification and bucketing.
-   - **Leave out:** the 26 skip rows (pending decision), the 12 internal repeats, and rows dated after the download.
-   - **Open:** where to keep the Solution Link and the POTD number (no bank column; the import tool's own map, or provenance).
-3. **Check for duplicates** against the bank with embeddings after `reembed.py`. That uses the API, so quote the cost first.
+   - **Not stored:** D, G and T. They feed classification and bucketing; read them from the sheet by POTD number.
+   - **Left out:** the 23 skip rows, the 88 duplicates, and the 3 rows dated after the download.
+3. **Check for duplicates** against the bank with embeddings after `reembed.py` (the local text check is done; embeddings would catch reworded copies). That uses the API, so quote the cost first.
 4. **Classify** with the taxonomy pipeline on the subscription, with G/T as priors:
    - A → Algebra;
    - C → Combinatorics;
@@ -273,16 +289,16 @@ Published results, gathered 2026-11-11 by a research agent from the system cards
    - N → Number Theory;
    - CG → Combinatorics, combinatorial geometry.
 5. **Solutions:**
-   - Keep the sheet's 394.
-   - Import the official Shortlist solutions for the 496 IMO/Shortlist rows.
+   - Keep the sheet's 376 (imported as `solution`).
+   - Import the official Shortlist solutions for the 465 IMO rows (Shortlist included).
    - Solve the rest by bucket (section 5) with `run_sub.py`.
-   - Hints: POTD's human hints stay. Questions without hints get generated tiers (prompt v6).
+   - Hints: POTD's human hints stay (the pipeline never overwrites a source's hints). The 955 questions without hints get generated tiers (prompt v7).
 6. **Judge** (remote job, or locally if 20 or fewer), import, re-embed.
 
 ## 8. App and pipeline state relevant to imports
 
 - **Multi-select** already works. In `answer_key` a `choice` part whose `value` is a list is multi-select: toggle buttons, "select every correct option", all-or-nothing, no negative marking. 747 questions use it. Imports write the key as a list of letters, even for a multi-select question with one correct option.
-- **Tiered hints, built 2026-11-11, NOT committed yet:**
+- **Tiered hints, built 2026-11-11, committed (a1f4456); the tier-count rule is prompt v7/s6 (e9777fc):**
   - **App:**
     - Migration `012_more_hints.sql` (`questions.more_hints`).
     - `hint_tiers()` in `app/core/models.py`, mirrored by `hintTiers()` in `frontend/src/lib/ipc.ts`.
@@ -294,7 +310,7 @@ Published results, gathered 2026-11-11 by a research agent from the system cards
     - Prompts: math v5 → v6 and subjects s4 → s5, with `%%% BEGIN HINT 1..3` blocks; the model picks 1–3 tiers. Old single-HINT replies parse as one tier.
     - Tier 1 → `hints`; tiers 2–3 → provenance field `more_hints` (`finals.more_hints_tex`).
   - **`run_sub.py`'s request check was loosened:** it now compares the system prompt only with API batches of the same prompt version. v6 has none, so the "no drift" check passes trivially. Flagged to the owner.
-  - **Before the next solve run:** commit and push (the judge machine must match), then run a small pilot to see how many tiers the models write.
+  - **Before the next solve run:** run a small pilot to see how many tiers the models write. (The 2026-11-12 re-check gave 89 three-tier and 42 two-tier hints among 131 tie-breaks.)
 
 ## 9. Checker problems found 2026-11-12, fixed the same day
 
@@ -313,7 +329,7 @@ tests in `tests/test_answer_checker.py`):**
 - 172 tie-break replacements still hold, 1 no longer does (5886);
 - 12 were replaced by a review solve (6732 among them, so its copied book answer is already gone).
 
-The 166 and 5886 wait for the owner: tie-break and review, or leave.
+**Settled the same day:** all 167 went through the high-effort pipeline (tie-breaks, then Fable reviews of the splits). 150 book answers were replaced (the old values kept in provenance as `answer_before_replace`), 17 stand, and `recheck_answers.py` shows 0 mismatches.
 
 What the audit found before the fix:
 
@@ -335,15 +351,17 @@ Two detailed checks of solve-mode questions where the generated answer disagreed
 
 ## 10. Open decisions
 
-1. Cut-off for own sources: 5, 10 (recommended) or 20.
-2. The 26 skip rows; keep STEP, ISI or IOI?
-3. `AIME`: rename the bank's 748 rows to "American Invitational Mathematics Examination", or file POTD's 27 AIME rows under `AIME`?
-4. The Discord server's own contests (its olympiad 13, Intermediate Contest 5, April Fools): under "Math Olympiad Discord Server" with the contest in the subsource, or separate sources?
-5. IMO Shortlist as its own source, separate from the IMO (the table assumes yes). When a problem appears in both, which label wins?
-6. Where the POTD Solution Link and POTD number are kept.
-7. Weekly tab (76 multi-part problems): import or not.
-8. Which other sources to import, and in what order. Suggested: POTD → IMO Shortlist PDFs → HARP → GATE EE/ME → UGPhysics → CHAMP hints → Omni-MATH.
-9. Commit the tiered-hints work.
+Settled 2026-11-12: cut-off 15; STEP and ISI kept, the rest of the skip rows skipped; AIME renamed; the Shortlist filed with the IMO; tiered hints committed. Defaults taken without asking, open to change: the Discord server's own contests under "Math Olympiad Discord Server" (the contest heads the subsource), and the POTD number and Solution Link in the git-ignored map file.
+
+Still open:
+1. **Next POTD steps:**
+   - classification (subscription);
+   - the embedding duplicate check (API, cost to quote);
+   - the solve run by bucket (subscription);
+   - judging (remote job).
+2. Weekly tab (76 multi-part problems): import or not.
+3. Which other sources to import, and in what order. Suggested: IMO Shortlist PDFs (official solutions for the 465 IMO rows) → HARP → GATE EE/ME → UGPhysics → CHAMP hints → Omni-MATH.
+4. The 72 POTD rows already in the bank came with their own human hints (and some answers or solutions). Copy those into the bank rows where the bank has none?
 
 ## 11. Standing rules that apply
 

@@ -1,7 +1,13 @@
 """Build the POTD competition lookup table.
-usage: python -I build_map.py <sheet2.csv> <out_dir> [report.json]
+usage: python -I build_map.py <sheet2.csv> <out_dir> [cutoff] [asof]
+
+cutoff (default 15, the owner's choice of 2026-11-12): a competition with at least this many
+problems is its own source; row_assignments.csv gets each row's source and subsource at it.
+asof (YYYY-MM-DD, default today): rows dated after it are scheduled, not yet posted, and skipped.
+<out_dir>/duplicates.csv (reviewed by hand) lists rows already in the bank or posted twice.
+Skipped rows (programming and school exams, duplicates, scheduled) are left out of the counts.
 """
-import csv, re, sys, os, collections, json
+import csv, re, sys, os, collections, json, datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ns = {}
@@ -12,7 +18,33 @@ MODS = ns['MODS']
 sys.stdout.reconfigure(encoding='utf-8')
 
 src, outdir = sys.argv[1], sys.argv[2]
+CUTOFF = int(sys.argv[3]) if len(sys.argv) > 3 else 15
+ASOF = datetime.date.fromisoformat(sys.argv[4]) if len(sys.argv) > 4 else datetime.date.today()
 rows = [r for r in csv.DictReader(open(src, encoding='utf-8')) if r['Problem Statement'].strip()]
+
+DUPS = {}
+dup_path = os.path.join(outdir, 'duplicates.csv')
+if os.path.exists(dup_path):
+    DUPS = {d['potd_number']: d['duplicate_of'] for d in csv.DictReader(open(dup_path, encoding='utf-8'))}
+
+def held_back(r):
+    """Why a row is left out whatever its competition: '' when it is not."""
+    if r['/f'] in DUPS:
+        return 'duplicate of ' + DUPS[r['/f']]
+    if datetime.datetime.strptime(r['Date'].strip(), '%d %b %Y').date() > ASOF:
+        return 'scheduled'
+    return ''
+
+# Filed under another competition, with a label at the head of the subsource (owner, 2026-11-12:
+# the Shortlist is one source with the IMO).
+MERGED = {'IMOSL': ('IMO', 'Shortlist'), 'IMO_LL': ('IMO', 'Longlist')}
+
+def target(k):
+    return MERGED[k][0] if k in MERGED else k
+
+# Competitions the bank already has as a source: their own source whatever the cut-off, under the
+# bank's name (the bank's "AIME" is renamed to the full name on import; owner, 2026-11-12).
+IN_BANK = {'AIME': 'American Invitational Mathematics Examination', 'TRIPOS': 'Cambridge Tripos'}
 
 COMPILED = [(k, re.compile(p), lead) for k, p, lead in RULES]
 for k, _, _ in RULES:
@@ -62,7 +94,6 @@ COUNTRY = {
 REGION_GROUP = {'Europe': 'Other European Olympiads', 'Asia': 'Other Asian Olympiads',
                 'Latin America': 'Latin American Olympiads', 'Africa': 'African Olympiads',
                 'Oceania': 'Oceanian Olympiads', 'North America': 'Other North American Olympiads'}
-COUNTRY_GROUP_MIN = int(os.environ.get('COUNTRY_GROUP_MIN', '10'))
 
 YEAR = re.compile(r'^(\d{4})(?:\s*[/–-]\s*(\d{1,4}))?,?\s+(.*)$')
 ORD = re.compile(r'^(?:The )?(\d+(?:st|nd|rd|th))(?:\s+(.*))?$')
@@ -228,6 +259,8 @@ def subsource(key, s, m):
         toks = new
     if re.search(r'SL\b|Shortlist', matched) and 'Shortlist' not in CANON[key]['full']:
         toks.insert(0, 'Shortlist')
+    if key in MERGED:
+        toks.insert(0, MERGED[key][1])
     parts = [p for p in [year, edition] if p] + toks
     out = ', '.join(parts)
     if flags:
@@ -253,10 +286,11 @@ for i, r in enumerate(rows):
     else:
         sub = subsource(key, s, m)
         rn = raw_name(s)
-    assign.append(dict(idx=i, date=r['Date'], source=r['Source'].replace('\n', ' | '), key=key, raw=rn, sub=sub))
+    assign.append(dict(idx=i, num=r['/f'], date=r['Date'], source=r['Source'].replace('\n', ' | '),
+                       key=target(key), ckey=key, raw=rn, sub=sub, held=held_back(r)))
 
 # ---------- groups ----------
-count = collections.Counter(a['key'] for a in assign)
+count = collections.Counter(a['key'] for a in assign if not a['held'])
 country_total = collections.Counter()
 for k, n in count.items():
     c = CANON[k]
@@ -296,7 +330,7 @@ def mods_attr_detail(raw):
     return 'medium', 'Proposed: named classic/theorem with no competition, attributed to the server; label kept as subsource.'
 
 # ---------- competition_map.csv ----------
-pairs = collections.Counter((a['raw'], a['key']) for a in assign)
+pairs = collections.Counter((a['raw'], a['ckey']) for a in assign)
 out_rows = []
 for (raw, k), n in pairs.items():
     c = CANON[k]
@@ -306,9 +340,9 @@ for (raw, k), n in pairs.items():
         conf, note = mods_attr_detail(raw)
     if c['group'] in SKIP_GROUPS and not note.startswith('SKIP?'):
         note = 'SKIP? ' + note
-    out_rows.append(dict(raw_name=raw, count=n, full_name=c['full'], group_source=group_of(k),
+    out_rows.append(dict(raw_name=raw, count=n, full_name=CANON[target(k)]['full'], group_source=group_of(k),
                          country_or_region=c['country'], kind=c['kind'], existing_bank_source=c['bank'],
-                         confidence=conf, note=note, regional_group=regional_of(k), competition_total=count[k]))
+                         confidence=conf, note=note, regional_group=regional_of(k), competition_total=count[target(k)]))
 LOWRAW = {  # raw names that drop a mapping's confidence to low
     'Russia', 'Iran', 'Sweden', 'Bosnia and Herzegovina', 'Some Australian TST', 'New Zealand MO',
 }
@@ -324,26 +358,14 @@ with open(os.path.join(outdir, 'competition_map.csv'), 'w', encoding='utf-8-sig'
     for o in out_rows:
         w.writerow(o)
 
-# ---------- per-row assignment ----------
-with open(os.path.join(outdir, 'row_assignments.csv'), 'w', encoding='utf-8-sig', newline='') as f:
-    w = csv.writer(f)
-    w.writerow(['sheet_row', 'date', 'source_as_in_sheet', 'full_name', 'group_source', 'regional_group', 'proposed_subsource', 'confidence', 'skip?'])
-    for a in assign:
-        c = CANON[a['key']]
-        conf = c['conf']
-        if a['key'] == 'MODS_ATTR':
-            conf = mods_attr_detail(a['raw'])[0]
-        if a['raw'] in LOWRAW:
-            conf = 'low'
-        w.writerow([a['idx'] + 2, a['date'], a['source'], c['full'], group_of(a['key']), regional_of(a['key']), a['sub'], conf,
-                    'skip?' if c['group'] in SKIP_GROUPS else ''])
-
 # ---------- summary ----------
 summary = {}
 nonskip = {k: n for k, n in count.items() if CANON[k]['group'] not in SKIP_GROUPS}
 comp_kinds = {'national', 'international', 'TST', 'mock', 'community', 'university', 'other'}
 competitions = [k for k in nonskip if CANON[k]['kind'] in comp_kinds and k != 'MODS_ATTR']
 summary['rows'] = len(assign)
+summary['held_back'] = dict(collections.Counter(a['held'].split(':')[0] for a in assign if a['held']))
+summary['asof'] = ASOF.isoformat()
 summary['skip_rows'] = sum(n for k, n in count.items() if CANON[k]['group'] in SKIP_GROUPS)
 summary['skip_keys'] = {CANON[k]['full']: n for k, n in count.items() if CANON[k]['group'] in SKIP_GROUPS}
 summary['distinct_competitions'] = len(competitions)
@@ -352,7 +374,7 @@ summary['mods_attr_rows'] = count['MODS_ATTR']
 summary['country_total'] = dict(country_total.most_common())
 def resolve(T):
     """own source if count >= T; else first-level group; a first-level group that pools < T rows rolls up to its regional group."""
-    own = [k for k, n in nonskip.items() if n >= T and k != 'MODS_ATTR']
+    own = [k for k, n in nonskip.items() if (n >= T or k in IN_BANK) and k != 'MODS_ATTR']
     small = [k for k in nonskip if k not in own]
     pool = collections.Counter()
     for k in small:
@@ -373,24 +395,51 @@ def resolve(T):
             final[k] = first
     return own, final
 
-for T in (5, 10, 20):
+for T in sorted({5, 10, 15, 20, CUTOFF}):
     own, final = resolve(T)
     grouped, gcomps = collections.Counter(), collections.Counter()
     for k, g in final.items():
         grouped[g] += nonskip[k]
         if k != 'MODS_ATTR':
             gcomps[g] += 1
-    own_names = {CANON[k]['full'] for k in own}
+    own_names = {IN_BANK.get(k, CANON[k]['full']) for k in own}
     srcs = len(own_names | set(grouped))
     summary[f'T{T}'] = dict(
         own_competitions=len(own), own_rows=sum(nonskip[k] for k in own),
         grouped_competitions=sum(gcomps.values()), grouped_rows=sum(grouped.values()),
         total_sources=srcs,
         groups={g: [grouped[g], gcomps[g]] for g in sorted(grouped, key=lambda g: -grouped[g])},
-        own=sorted([(CANON[k]['full'], nonskip[k]) for k in own], key=lambda x: -x[1]))
+        own=sorted([(IN_BANK.get(k, CANON[k]['full']), nonskip[k]) for k in own], key=lambda x: -x[1]))
 summary['competition_counts'] = sorted([(CANON[k]['full'], n, group_of(k), CANON[k]['conf']) for k, n in count.items()], key=lambda x: -x[1])
 with open(os.path.join(HERE, 'summary.json'), 'w', encoding='utf-8') as f:
     json.dump(summary, f, indent=1, ensure_ascii=False)
+
+# ---------- per-row assignment, at the cut-off ----------
+# A row whose competition is merged into a group keeps the competition's full name at the head of
+# its subsource, so the group does not lose it.
+own, final = resolve(CUTOFF)
+with open(os.path.join(outdir, 'row_assignments.csv'), 'w', encoding='utf-8-sig', newline='') as f:
+    w = csv.writer(f)
+    w.writerow(['potd_number', 'date', 'source_as_in_sheet', 'full_name', 'group_source', 'regional_group',
+                'source', 'subsource', 'confidence', 'skip'])
+    for a in assign:
+        k = a['key']
+        c = CANON[a['ckey']]
+        conf = c['conf']
+        if k == 'MODS_ATTR':
+            conf = mods_attr_detail(a['raw'])[0]
+        if a['raw'] in LOWRAW:
+            conf = 'low'
+        full = CANON[k]['full']
+        skip = a['held'] or ('not an olympiad problem' if CANON[k]['group'] in SKIP_GROUPS else '')
+        if skip:
+            source, sub = '', a['sub']
+        elif k in own:
+            source, sub = IN_BANK.get(k, full), a['sub']
+        else:
+            source = final[k]
+            sub = a['sub'] if full == source else ', '.join(p for p in (full, a['sub']) if p)
+        w.writerow([a['num'], a['date'], a['source'], full, group_of(k), regional_of(k), source, sub, conf, skip])
 print('rows', len(assign), 'keys', len(count), 'competitions', len(competitions), 'map rows', len(out_rows))
 print('unmatched -> MODS_ATTR:', sum(unmatched.values()), 'distinct', len(unmatched))
 for s, n in sorted(unmatched.items()):

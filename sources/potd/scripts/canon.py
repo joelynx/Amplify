@@ -18,15 +18,17 @@ LATAM = 'Latin American Olympiads'
 AFR = 'African Olympiads'
 BOOKS = 'Problem Books and Journals'
 EXAMS = 'School and Admission Exams'
+ADMISSION = 'University Admission Exams'
 PROG = 'Programming Contests'
 UNID = 'Unidentified Contests'
 
 # ---------------- international ----------------
 C('IMO', 'International Mathematical Olympiad', 'International', 'international', group=INTL)
 C('IMOSL', 'International Mathematical Olympiad Shortlist', 'International', 'international', group=INTL,
-  note='Includes one "Generalization of 2001 IMOSL, C1" row (marked generalised in the subsource).')
+  note='Includes one "Generalization of 2001 IMOSL, C1" row (marked generalised in the subsource). '
+       'Filed under the IMO with "Shortlist" in the subsource (owner, 2026-11-12; see MERGED in build_map.py).')
 C('IMO_LL', 'International Mathematical Olympiad Longlist', 'International', 'international', 'medium', group=INTL,
-  note='"West German proposal for 1978 IMO" is a proposed (longlist) problem; filed here.')
+  note='"West German proposal for 1978 IMO" is a proposed (longlist) problem; filed under the IMO with "Longlist" in the subsource.')
 C('EGMO', "European Girls' Mathematical Olympiad", 'International', 'international', group=INTL)
 C('APMO', 'Asian Pacific Mathematics Olympiad', 'International', 'international', group=INTL,
   note='Official name; the sheet\'s acronym list says "Asia Pacific Mathematical Olympiad".')
@@ -446,8 +448,8 @@ C('GAOKAO', 'Gaokao (Chinese National College Entrance Examination)', 'China', '
 C('KYOTO', 'Kyoto University Entrance Examination', 'Japan', 'other', 'high', group=EXAMS, note='SKIP? admission exam.')
 C('UI_ENTRANCE', 'University of Indonesia Entrance Examination', 'Indonesia', 'other', 'high', group=EXAMS, note='SKIP? admission exam.')
 C('HANOI', 'Hanoi Grade 10 Entrance Examination', 'Vietnam', 'other', 'high', group=EXAMS, note='SKIP? admission exam.')
-C('ISI', 'Indian Statistical Institute Entrance Examination', 'India', 'other', 'high', group=EXAMS, note='SKIP? admission exam (olympiad-style subjective paper; could be kept).')
-C('STEP', 'Sixth Term Examination Paper', 'United Kingdom', 'other', 'high', group=EXAMS, note='SKIP? admission exam (could be kept; proof-style).')
+C('ISI', 'Indian Statistical Institute Entrance Examination', 'India', 'other', 'high', group=ADMISSION, note='Kept (owner, 2026-11-12): olympiad-style subjective paper.')
+C('STEP', 'Sixth Term Examination Paper', 'United Kingdom', 'other', 'high', group=ADMISSION, note='Kept (owner, 2026-11-12): proof-style admission exam.')
 C('CODEFORCES', 'Codeforces', 'Online', 'other', 'high', group=PROG, note='SKIP? programming problems.')
 C('USACO', 'USA Computing Olympiad', US, 'other', 'high', group=PROG, note='SKIP? programming olympiad.')
 C('EULER', 'Project Euler', 'Online', 'other', 'high', group=PROG, note='SKIP? programming problems.')
