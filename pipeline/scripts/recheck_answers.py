@@ -13,7 +13,18 @@ No model, no compile, and both databases are opened read-only. For each subject 
 
 Usage (from the repo root):
   python pipeline/scripts/recheck_answers.py [--ids 1,2,3]
+  python pipeline/scripts/recheck_answers.py --requeue [--ids ...]
 Output: pipeline/reports/answer_recheck.csv and a summary on stdout.
+
+--requeue (owner 2026-11-12: "send all of them through the high effort pipeline") also sends
+every reply found disagreeing back into the flow, after copying pipeline.db to pipeline/archive:
+  - no tie-break yet: human review with the mismatch flag, so `run_subjects.py tiebreak` sends
+    the high-effort third solve;
+  - a tie-break already (or a tie-break agreement that no longer holds): human review, so
+    `run_subjects.py adjudicate` sends the review solve;
+  - a review solve that now disagrees: back to `received`, so the judge applies the rule that a
+    review solve is final (it replaces the stored answer). No new solve.
+It writes pipeline.db only; the app database changes when the judged replies are imported.
 """
 
 from __future__ import annotations
@@ -23,6 +34,8 @@ import collections
 import csv
 import sqlite3
 import sys
+import time
+from collections import Counter
 
 import subjects
 from common import (
@@ -31,10 +44,13 @@ from common import (
     PIPELINE_DIR,
     app_conn,
     fetch_question,
+    get_status,
     is_blank,
     load_config,
+    log_event,
     read_text,
     strip_code_fences,
+    upsert_status,
 )
 
 REPORT = PIPELINE_DIR / "reports" / "answer_recheck.csv"
@@ -104,9 +120,43 @@ def recheck(cfg: dict, app: sqlite3.Connection, pc: sqlite3.Connection, ids: set
     return out
 
 
+def requeue(rows: list[dict]) -> Counter:
+    """Send the disagreeing replies back into the flow (see the module docstring)."""
+    stamp = time.strftime("%Y%m%d-%H%M%S")
+    backup = PIPELINE_DIR / "archive" / f"pipeline_before_recheck_requeue_{stamp}.db"
+    backup.parent.mkdir(parents=True, exist_ok=True)
+    pc = sqlite3.connect(PIPELINE_DB)
+    pc.row_factory = sqlite3.Row
+    with sqlite3.connect(backup) as dst:
+        pc.backup(dst)
+    print(f"backup: {backup}")
+    done: Counter = Counter()
+    try:
+        for r in rows:
+            if r["outcome"] not in ("mismatch", "replaced_tiebreak_broken"):
+                continue
+            qid = int(r["question_id"])
+            st = get_status(pc, qid)
+            why = f"re-check {stamp[:8]}: {r['detail'] or r['outcome']}"[:300]
+            if st["review_from"]:
+                upsert_status(pc, qid, status="received", attempts=int(st["accepted_attempt"]), accepted_attempt=None,
+                              assembled=0, hint_status="none", answer_mismatch=0, note=why)
+                step = "re-judge (review solve is final)"
+            else:
+                upsert_status(pc, qid, status="needs_human_review", answer_mismatch=1, note=why)
+                step = "review solve" if st["tiebreak"] else "tie-break"
+            log_event(pc, qid, "recheck", f"{why[:200]}; next: {step}")
+            done[step] += 1
+        pc.commit()
+    finally:
+        pc.close()
+    return done
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--ids", help="comma-separated question ids (default: every accepted subject reply)")
+    ap.add_argument("--requeue", action="store_true", help="send the disagreeing replies back into the flow")
     a = ap.parse_args()
     ids = {int(x) for x in a.ids.split(",")} if a.ids else None
     cfg = load_config()
@@ -127,6 +177,9 @@ def main() -> None:
     for (mode, outcome), n in sorted(counts.items()):
         print(f"{mode:5} {outcome:26} {n}")
     print(f"report: {REPORT}")
+    if a.requeue:
+        for step, n in requeue(rows).items():
+            print(f"requeued for {step}: {n}")
 
 
 if __name__ == "__main__":

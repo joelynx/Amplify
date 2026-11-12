@@ -208,18 +208,20 @@ def verify(cfg: dict, app, pc, quiet: bool = False, review: bool = False, accept
 
 def tiebreak_rows(cfg: dict, app, pc, ids: list[int] | None = None) -> list[dict]:
     """Solve questions whose solves disagreed with the stored answer and that have no tie-break yet:
-    those sent to human review for it, and second attempts received but not judged whose reply is
-    well formed and still disagrees (checked here without the PDF and web compiles)."""
+    those sent to human review for it (after two solves, or after one when recheck_answers.py
+    --requeue found an accepted reply disagreeing under the tightened check), and second attempts
+    received but not judged whose reply is well formed and still disagrees (checked here without
+    the PDF and web compiles)."""
     status = {r["question_id"]: r for r in pc.execute("SELECT * FROM status WHERE mode='solve' AND tiebreak=0 "
                                                       "AND review_from IS NULL")}
     rows = {x["id"]: x for x in scope_rows(cfg, app, set(status))}
     out = []
     for qid, r in sorted(status.items()):
-        if (ids and qid not in ids) or qid not in rows or int(r["attempts"] or 0) < 2:
+        if (ids and qid not in ids) or qid not in rows or int(r["attempts"] or 0) < 1:
             continue
         if r["status"] == "needs_human_review" and r["answer_mismatch"]:
             out.append(rows[qid])
-        elif r["status"] == "received":
+        elif r["status"] == "received" and int(r["attempts"]) >= 2:
             q = fetch_question(app, qid)
             stored = None if is_blank(q["answer"], cfg["empty_answer_sentinels"]) else q["answer"]
             res = subjects.validate_reply(qid, read_text(q_dir(qid) / f"solver_{r['attempts']}.tex"), cfg, q, "solve",
