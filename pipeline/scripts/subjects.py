@@ -603,9 +603,64 @@ def points_block(key: dict) -> str | None:
 # --- checks ---------------------------------------------------------------------------
 
 
+# How close a solve's number must be to the source's stored answer, or to another solve's
+# (owner 2026-11-12). The judge sets this, not the solver: a key's TOL says how close a student's
+# answer must be in the app, and using it here let a solve pass by widening its own check (to 20
+# percent and more). A stored value printed with decimals also matches within half a unit of
+# its last digit, so the book's rounded 1.1 kW accepts 1.142 kW; that allowance is capped at
+# JUDGE_ROUNDING_CAP, since a value printed to one figure says little.
+JUDGE_REL_TOL = 0.03
+JUDGE_ROUNDING_CAP = 0.05
+
+# Unit differences a stored answer often has: a power of ten (kW against MW, nm against
+# angstrom), a fraction against a percentage, per hour or per minute against per second. They
+# are tried only when the stored value's unit is missing or differs from the key's: the same
+# unit on both sides has to match as it stands (a factor of 1000 is then an error, not a unit).
+UNIT_FACTORS = (1, 10, 0.1, 1e3, 1e-3, 1e6, 1e-6, 100, 0.01, 3600, 1 / 3600, 60, 1 / 60)
+# Older units the books use, tried with the powers of ten only when one of the two units names
+# them: horsepower (metric and imperial) in kW, kilogram-force in N, kilocalories in kJ, atm in kPa.
+NAMED_UNIT_FACTORS = {"hp": (0.7355, 0.7457), "kgf": (9.80665,), "kcal": (4.1868,), "atm": (101.325,)}
+_POWERS_OF_TEN = (1, 10, 0.1, 100, 0.01, 1e3, 1e-3, 1e4, 1e-4, 1e6, 1e-6)
+
+
+def _named_factors(ua: str, ub: str) -> list[float]:
+    text = f"{ua} {ub}".lower().replace(".", "")
+    out: list[float] = []
+    for name, fs in NAMED_UNIT_FACTORS.items():
+        if name in text:
+            out += [x for f in fs for p in _POWERS_OF_TEN for x in (f * p, p / f)]
+    return out
+
+_STORED_NUM = re.compile(
+    r"(?<![\w.^#])(?P<num>-?\d+(?:\.(?P<dec>\d+))?)"
+    r"(?:\s*(?:\\times|\\cdot|×)\s*10\s*\^\s*\{?\s*(?P<exp>-?\d+)\s*\}?|[eE](?P<exp2>[-+]?\d+)\b)?")
+_STORED_UNIT = re.compile(r"[ \t]*(%|°\s*[CFK]?|Å|[A-Za-zµΩ][A-Za-z0-9µΩ/^{}·*+.-]*)")
+_UNIT_POWER = re.compile(r"(?<=[A-Za-zµΩ)}])\^\s*\{?\s*-?\d+\s*\}?")  # m^{3}, s^-1: part of a unit
+
+
+def _plain_stored(s: str) -> str:
+    """A stored answer as plain text for reading values off it: LaTeX wrappers, degrees, ohms,
+    micro and angstrom as characters; subscripts (CO_{2}, T_1), part labels and thousands
+    separators dropped."""
+    t = re.sub(r"\\(?:text|mathrm|textrm|mbox|operatorname)\s*\{([^{}]*)\}", r" \1 ", s)
+    t = t.replace("\\%", "%").replace("$", " ").replace("−", "-").replace("μ", "µ")
+    t = re.sub(r"\^\s*\{?\s*\\circ\s*\}?|\\circ\b|\\degree\b", "°", t)
+    t = re.sub(r"\\AA\b|\\r\{A\}", "Å", t)
+    t = re.sub(r"\\Omega\b", "Ω", t)
+    t = re.sub(r"\\mu\b\s*", "µ", t)
+    t = re.sub(r"\\[,;:! ]|~|\\q?quad\b|\\(?:left|right)\s*[.()\[\]|]?", " ", t)
+    t = re.sub(r"\\[()\[\]]", " ", t)
+    t = re.sub(r"_\s*\{[^{}]*\}|_\s*[A-Za-z0-9]", " ", t)
+    t = re.sub(r"\(\s*(?:[a-h]|i{1,3}|iv|v|vi{0,3}|\d)\s*\)", " ", t)  # part labels
+    t = re.sub(r"\s+\^", "^", t)  # "m ^{-3}": the power belongs to the unit before it
+    return re.sub(r"(?<=\d),(?=\d{3}\b)", "", t)  # thousands separators
+
+
 def stored_reference(stored: str | None) -> dict | None:
     """What a source's stored answer says, when it is plain enough to compare: option letters,
-    true/false, or a list of numbers (part labels and units ignored)."""
+    true/false, or a list of values, each with the half unit of its last printed digit (0 for
+    a plain integer) and the unit written after it ("" when none). Fractions, roots and powers
+    are not read."""
     if stored is None:
         return None
     s = stored.strip()
@@ -616,53 +671,106 @@ def stored_reference(stored: str | None) -> dict | None:
         return {"kind": "choice", "value": sorted({x.strip().lower() for x in s.split(",")})}
     if s.upper() in ("TRUE", "FALSE"):
         return {"kind": "truefalse", "value": s.upper() == "TRUE"}
-    if re.search(r"\\times|\^|\\frac|/\s*\d|\d\s*/", s):
-        return None  # powers of ten, fractions: not worth parsing
-    t = re.sub(r"\\text\{([^{}]*)\}|\\mathrm\{([^{}]*)\}", lambda mm: " " + (mm.group(1) or mm.group(2) or "") + " ", s)
-    t = re.sub(r"\(\s*(?:[a-h]|i{1,3}|iv|v|vi{0,3}|\d)\s*\)", " ", t)  # part labels
-    t = re.sub(r"(?<=\d),(?=\d{3}\b)", "", t)  # thousands separators
-    nums = [float(x) for x in re.findall(r"(?<![\w.])[-+]?\d+(?:\.\d+)?", t)]
-    return {"kind": "numbers", "value": nums} if nums else None
+    if re.search(r"\\d?frac|\\sqrt|\\pi\b|/\s*\d|\d\s*/", s):
+        return None
+    # Not a list of values: a product (1624 \times 4.187), a complex number or phasor (2.43+j3.97,
+    # 2.2 /-46.7), a range (0.45 < a < 0.68, a \pm), or a function of time (187 - 29.9 e^{-0.7t}).
+    if re.search(r"\\(?:times|cdot)(?!\s*10\s*\^)|(?<![A-Za-z])j\s*\d|\\angle|∠|/\s*-\s*\d|[<>]|\\[lg]eq?\b|\\pm"
+                 r"|e\s*\^|\\exp\b|\\(?:sin|cos|tan|ln|log)\b|\(\s*t\s*\)", s):
+        return None
+    if re.search(r"\\begin\s*\{(?:array|tabular|aligned|align\*?|cases)\}", s):
+        return None  # a table of values: which entry is which part is not readable here
+    t = _plain_stored(s)
+    masked = _UNIT_POWER.sub(lambda mm: "#" * len(mm.group(0)), t)  # same length as t
+    values, halves, units = [], [], []
+    for mm in _STORED_NUM.finditer(masked):
+        if masked[mm.end():].lstrip().startswith("^"):
+            return None  # a power such as 2^{10}
+        exp = int(mm.group("exp") or mm.group("exp2") or 0)
+        dec = mm.group("dec") or ""
+        values.append(float(mm.group("num")) * 10.0 ** exp)
+        halves.append(0.5 * 10.0 ** (exp - len(dec)) if dec or exp else 0.0)
+        um = _STORED_UNIT.match(t, mm.end())
+        units.append(um.group(1) if um else "")
+    if not values:
+        return None
+    return {"kind": "numbers", "value": values, "half": halves, "units": units}
 
 
-UNIT_FACTORS = (1, 1e3, 1e-3, 1e6, 1e-6, 100, 0.01, 3600, 1 / 3600, 60, 1 / 60)
+def _unit_id(u: str) -> str:
+    """A unit in one spelling for comparing two of them: no spaces or braces, powers as ^n."""
+    u = re.sub(r"[\s{}·*]", "", u or "").rstrip(".,;:")
+    return re.sub(r"\^\(?([-+]?\d+)\)?", r"^\1", u)
 
 
-def close(a: float, b: float, tol: float) -> bool:
-    """Equal within a relative tolerance, allowing a unit difference the stored answer often
-    has: a power of ten (kW against MW), a fraction against a percentage, per hour or per
-    minute against per second (kg/h against kg/s)."""
+def value_matches(a: float, a_unit: str, b: float, b_unit: str = "", b_half: float = 0.0) -> bool:
+    """`a` (a key's value in `a_unit`) is `b`: within JUDGE_REL_TOL or half a unit of b's last
+    printed digit (at most JUDGE_ROUNDING_CAP), whichever is wider. A unit factor (UNIT_FACTORS)
+    is allowed only when the two units are not the same written unit."""
+    ua, ub = _unit_id(a_unit), _unit_id(b_unit)
+    same_unit = bool(ua) and ua == ub
+    factors = (1,) if same_unit else UNIT_FACTORS + tuple(_named_factors(a_unit, b_unit))
     if b == 0:
-        return abs(a) <= 1e-9
-    return any(abs(a * f - b) <= tol * abs(b) for f in UNIT_FACTORS)
+        return abs(a) <= max(1e-9, b_half)
+    allowed = max(JUDGE_REL_TOL * abs(b), min(b_half, JUDGE_ROUNDING_CAP * abs(b))) * (1 + 1e-9)
+    candidates = [a * f for f in factors]
+    if {ua, ub} == {"K", "°C"}:  # a temperature in kelvin against one in degrees Celsius
+        candidates.append(a - 273.15 if ua == "K" else a + 273.15)
+    return any(abs(c - b) <= allowed for c in candidates)
+
+
+def _values_agree(n_key: int, n_ref: int, match) -> bool:
+    """Whether the key's values and the stored ones agree: pairwise in order, or else every
+    value of the shorter list (both lists, when as long) matches some value of the other. That
+    allows the book answering only some parts, adding intermediate values, listing the parts in
+    another order or writing a value two parts share once, but no value goes unchecked."""
+    if n_key == n_ref and all(match(i, i) for i in range(n_key)):
+        return True
+    key_in_ref = all(any(match(i, j) for j in range(n_ref)) for i in range(n_key))
+    ref_in_key = all(any(match(i, j) for i in range(n_key)) for j in range(n_ref))
+    if n_key == n_ref:
+        return key_in_ref and ref_in_key
+    return ref_in_key if n_ref < n_key else key_in_ref
 
 
 def reference_mismatch(key: dict, ref: dict | None) -> str | None:
     """Why the key disagrees with the source's stored answer, or None (also when they cannot
-    be compared)."""
+    be compared). The comparison never skips a part silently: a stored option or true/false
+    value the key has no part for is a mismatch, and differing numbers of values are matched
+    as _values_agree says."""
     if ref is None:
         return None
     parts = key["parts"]
     if ref["kind"] in ("choice", "truefalse"):
         same = [p for p in parts if p["kind"] == ref["kind"]]
-        if len(same) != 1:
-            return None
+        if not same:
+            what = "option" if ref["kind"] == "choice" else "true/false"
+            return f"stored answer {ref['value']}, but the key has no {what} part"
+        if len(same) > 1:
+            return None  # which of several parts the stored answer is for is unknown
         got = same[0]["value"]
         if ref["kind"] == "choice":
             got = sorted(got) if isinstance(got, list) else [got]
         return None if got == ref["value"] else f"key {got}, stored answer {ref['value']}"
     nums = [p for p in parts if p["kind"] == "number"]
-    if not nums or len(nums) != len(ref["value"]):
+    if not nums:
         return None
-    for p, b in zip(nums, ref["value"]):
-        if not close(float(p["value"]), b, max(p["tol"] or 0, 0.03)):
-            return f"key {[q['value'] for q in nums]}, stored answer {ref['value']}"
-    return None
+    vals = ref["value"]
+
+    def match(i: int, j: int) -> bool:
+        return value_matches(float(nums[i]["value"]), nums[i]["unit"], vals[j], ref["units"][j], ref["half"][j])
+
+    if _values_agree(len(nums), len(vals), match):
+        return None
+    shown = [q["value"] for q in nums]
+    extra = f" ({len(nums)} key values against {len(vals)} stored)" if len(nums) != len(vals) else ""
+    return f"key {shown}, stored answer {vals}{extra}"
 
 
 def keys_agree(a: list[dict], b: list[dict]) -> bool:
-    """Two answer keys give the same definite answers: as many numbers, each pair within 3
-    percent (or the larger part tolerance), and the same options and true/false values."""
+    """Two answer keys give the same definite answers: as many numbers, each pair within
+    JUDGE_REL_TOL (the solvers' own TOL plays no part), and the same options and true/false
+    values."""
     def pick(parts: list[dict], kind: str) -> list[dict]:
         return [p for p in parts if p["kind"] == kind]
 
@@ -670,8 +778,8 @@ def keys_agree(a: list[dict], b: list[dict]) -> bool:
         return sorted(v) if isinstance(v, list) else v
 
     na, nb = pick(a, "number"), pick(b, "number")
-    if len(na) != len(nb) or any(not close(float(x["value"]), float(y["value"]),
-                                           max(x.get("tol") or 0, y.get("tol") or 0, 0.03)) for x, y in zip(na, nb)):
+    if len(na) != len(nb) or not all(value_matches(float(x["value"]), x["unit"], float(y["value"]), y["unit"])
+                                     for x, y in zip(na, nb)):
         return False
     for kind in ("choice", "truefalse"):
         ca, cb = pick(a, kind), pick(b, kind)

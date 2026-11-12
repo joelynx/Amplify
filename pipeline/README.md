@@ -271,6 +271,29 @@ letter or numbers) is compared with the key, as AIME answers are for math.
 Replies are stored like run_sub.py's (status rows carry `mode` and `subject`),
 and `run.py judge` (here, or via remote_judge.py) settles them.
 
+The comparison with the stored answer (`subjects.reference_mismatch`, tightened
+on 2026-11-12 after an audit found replies passing through gaps in it):
+- The judge sets the tolerance: 3 percent (`JUDGE_REL_TOL`), or half a unit of
+  the stored value's last printed digit when it has decimals (the book's 1.1 kW
+  for 1.142 kW), at most 5 percent. A key's own `TOL` is only for grading the
+  student in the app; it no longer widens the judge's check. The same rule
+  decides whether a tie-break agrees with an earlier solve (`keys_agree`).
+- No value goes unchecked. When the key and the stored answer give different
+  numbers of values, every value of the shorter list must match one of the
+  other's (the book answering some parts only, or listing intermediate
+  values). A stored option or true/false value the key has no part for is a
+  mismatch.
+- Unit factors (powers of ten, percent, per hour or minute, nm against
+  angstrom, and hp, kgf, kcal and atm when one side names them; kelvin against
+  degrees Celsius) apply only when the two written units differ. The same unit
+  on both sides must match as it stands.
+- Subscripts (CO_{2}) and unit powers (m^{3}, s^{-1}) are not read as values.
+  Powers of ten are read. Products, complex numbers, ranges, functions of
+  time and tables are not compared.
+
+`recheck_answers.py` re-runs this comparison over every accepted subject reply
+(read-only, no model or compile) and writes `reports/answer_recheck.csv`.
+
 ```
 python pipeline/scripts/run_subjects.py status
 python pipeline/scripts/run_subjects.py prompt --subject "Conventional Energy Technologies" --mode solve

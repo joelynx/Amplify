@@ -296,7 +296,26 @@ Published results, gathered 2026-11-11 by a research agent from the system cards
   - **`run_sub.py`'s request check was loosened:** it now compares the system prompt only with API batches of the same prompt version. v6 has none, so the "no drift" check passes trivially. Flagged to the owner.
   - **Before the next solve run:** commit and push (the judge machine must match), then run a small pilot to see how many tiers the models write.
 
-## 9. Checker problems found 2026-11-12 (to fix before solving imported questions)
+## 9. Checker problems found 2026-11-12, fixed the same day
+
+**Fixed (2026-11-12, `subjects.py`; rules in `pipeline/README.md` under "Non-math subjects";
+tests in `tests/test_answer_checker.py`):**
+- the judge's own tolerance (3%, or the book's printed rounding up to 5%), not the solver's TOL;
+- every value compared even when the part counts differ;
+- unit factors only between different units;
+- conversions for hp, kgf, kcal and atm, and kelvin vs °C;
+- subscripts and unit powers no longer read as values;
+- products, complex numbers, ranges, time functions and tables not compared.
+
+**Re-check of every accepted subject reply** (`pipeline/scripts/recheck_answers.py`, read-only):
+- 1,461 agree with the book;
+- **166 now disagree:** 34 within 6%, 47 at 6–20%, 85 over 20%. Many are book typos, question misprints or factor-of-10 errors that the old blind unit factors hid;
+- 172 tie-break replacements still hold, 1 no longer does (5886);
+- 12 were replaced by a review solve (6732 among them, so its copied book answer is already gone).
+
+The 166 and 5886 wait for the owner: tie-break and review, or leave.
+
+What the audit found before the fix:
 
 Two detailed checks of solve-mode questions where the generated answer disagreed with the stored answer: the 16 tie-breaks that kept the book's answer, and the 33 retries that "matched".
 - **Code execution would not have helped:** 0 of 65 wrong first answers were arithmetic slips and 1 was a misremembered constant. The rest were modelling or convention choices, book errors, misprints, or checker artefacts.
