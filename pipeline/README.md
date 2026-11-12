@@ -164,6 +164,16 @@ whose text changed after the API solved them (owner, 2026-11-04: the
 missing-reference rewrites); each is redone the same way, once, at its source's
 effort. `submissions_closed` is the API lock and does not apply here.
 
+`subscription.assignments_file` (owner 2026-11-12, the MODS POTD import) names
+a JSON file of questions that each carry their own model and effort
+(`{"questions": {"<id>": {"model": ..., "effort": ...}}}`; built by
+`sources/potd/scripts/assign_models.py`: POTD difficulty 0-3 Opus 5.5 medium,
+4-6 Opus 5.5 high, 7+ and the hard-heavy sources Fable 5.2 high). Listing a
+question there puts it in the scope. Its request, the reply check and the
+stored record use its model, so the attribution line names it; `verify` checks
+one sample per model, and since Claude Code's environment block names the model,
+each model has its own wrapping fingerprint, every one of which must be accepted.
+
 ```
 python pipeline/scripts/run_sub.py verify [--qid N] [--accept]   # free: capture the request on a local stand-in server and check it
 python pipeline/scripts/run_sub.py status | queue [--n 20]

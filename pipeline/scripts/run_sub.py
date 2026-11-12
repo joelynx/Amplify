@@ -130,6 +130,39 @@ def sub_cfg(cfg: dict) -> dict:
     return s
 
 
+_ASSIGNED: dict[str, dict[int, dict]] = {}
+
+
+def assigned(cfg: dict) -> dict[int, dict]:
+    """config.subscription.assignments_file (repo-relative): questions with their own solving model
+    and effort, {"questions": {"<id>": {"model": ..., "effort": ...}}} (owner 2026-11-12: the MODS
+    POTD buckets, Opus 5.5 medium / high and Fable 5.2 high). Listing a question there also puts it
+    in the scope, whatever its source."""
+    path = sub_cfg(cfg).get("assignments_file")
+    if not path:
+        return {}
+    if path not in _ASSIGNED:
+        data = json.loads((PIPELINE_DIR.parent / path).read_text(encoding="utf-8"))
+        out = {int(k): v for k, v in data["questions"].items()}
+        bad = {v.get("effort") for v in out.values()} - set(EFFORTS)
+        if bad:
+            raise SystemExit(f"unknown effort level(s) in {path}: {sorted(bad)}")
+        _ASSIGNED[path] = out
+    return _ASSIGNED[path]
+
+
+def model_for(cfg: dict, qid: int | None) -> str:
+    """config.solver.model, unless the assignments file gives the question its own model."""
+    return (assigned(cfg).get(qid) or {}).get("model") or cfg["solver"]["model"]
+
+
+def question_cfg(cfg: dict, qid: int) -> dict:
+    """The config one question's request goes out with and its reply is checked and stored under:
+    its own model when the assignments file names one."""
+    model = model_for(cfg, qid)
+    return cfg if model == cfg["solver"]["model"] else dict(cfg, solver=dict(cfg["solver"], model=model))
+
+
 def conn() -> "sqlite3.Connection":  # noqa: F821
     pc = pipe_conn()
     pc.executescript(SCHEMA)
@@ -157,11 +190,11 @@ def claude_exe(cfg: dict) -> str:
 
 
 def effort_for(cfg: dict, source: str | None, qid: int | None = None) -> str:
-    """config.solver.effort, unless config.subscription.effort_by_id names the question or
-    effort_by_source names its source."""
+    """config.solver.effort, unless config.subscription.effort_by_id names the question, the
+    assignments file gives it an effort, or effort_by_source names its source."""
     s = sub_cfg(cfg)
-    return ((s.get("effort_by_id") or {}).get(str(qid)) or (s.get("effort_by_source") or {}).get(source)
-            or cfg["solver"]["effort"])
+    return ((s.get("effort_by_id") or {}).get(str(qid)) or (assigned(cfg).get(qid) or {}).get("effort")
+            or (s.get("effort_by_source") or {}).get(source) or cfg["solver"]["effort"])
 
 
 def claude_cmd(cfg: dict, system_file: Path, effort: str, stream_input: bool = False) -> list[str]:
@@ -459,7 +492,7 @@ def verify_samples(cfg: dict, app, pc) -> list[int]:
             continue
         row = get_status(pc, qid)
         kinds = ["retry" if row is not None and row["status"] == "retry" else "fresh",
-                 "effort:" + effort_for(cfg, q["source"], qid)]
+                 "effort:" + effort_for(cfg, q["source"], qid), "model:" + model_for(cfg, qid)]
         if any(ord(ch) > 127 for ch in q["latexcode"]):
             kinds.append("non-ascii")
         if images:
@@ -490,18 +523,24 @@ def verify(cfg: dict, app, pc, qids: list[int] | None = None, accept: bool = Fal
             effort = effort_for(cfg, q["source"], qid)
         text = user_text(q, feedback)
         images, _skip = attachments(cfg, q)
-        captured, out = capture_request(ccfg, system_file, text, effort, images)
-        rep = check_request(ccfg, system, text, effort, captured, out, shas, images)
-        rep.update({"question_id": qid, "source": q["source"], "effort": effort, "attempt": attempt,
-                    "with_feedback": bool(feedback), "images": len(images),
+        qc = ccfg if review else question_cfg(cfg, qid)
+        captured, out = capture_request(qc, system_file, text, effort, images)
+        rep = check_request(qc, system, text, effort, captured, out, shas, images)
+        rep.update({"question_id": qid, "source": q["source"], "effort": effort, "model": qc["solver"]["model"],
+                    "attempt": attempt, "with_feedback": bool(feedback), "images": len(images),
                     "claude_code_version": rep["init"].get("claude_code_version")})
         reports.append(rep)
-    fps = {r["fingerprint"] for r in reports}
+    # Claude Code's environment block names the model, so each model has a wrapping of its own:
+    # one fingerprint per model, each of them accepted.
+    by_model: dict[str, set] = {}
+    for r in reports:
+        by_model.setdefault(r["model"], set()).add(r["fingerprint"])
+    fps = sorted({f for r in reports if (f := r["fingerprint"])})
     versions = {r["claude_code_version"] for r in reports}
-    ok = all(r["ok"] for r in reports) and len(fps) == 1
-    fp = fps.pop() if len(fps) == 1 else None
+    ok = all(r["ok"] for r in reports) and all(len(v) == 1 for v in by_model.values())
+    fp = ",".join(fps) if ok else None
     version = versions.pop() if len(versions) == 1 else None
-    accepted_before = bool(fp) and fp in accepted_fingerprints(pc)
+    accepted_before = ok and all(f in accepted_fingerprints(pc) for f in fps)
     if accept and not ok:
         raise SystemExit("refusing --accept: the request failed a check (see " + VERIFY_REPORT.as_posix() + ")")
     summary = {"at": now_iso(), "ok": ok, "fingerprint": fp, "claude_code_version": version,
@@ -512,12 +551,12 @@ def verify(cfg: dict, app, pc, qids: list[int] | None = None, accept: bool = Fal
     pc.commit()
     if not quiet:
         for r in reports:
-            print(f"question {r['question_id']} ({r['source'][:40]}, {r['effort']} effort, attempt {r['attempt']}"
+            print(f"question {r['question_id']} ({r['source'][:40]}, {r['model']}, {r['effort']} effort, attempt {r['attempt']}"
                   f"{', with feedback' if r['with_feedback'] else ''}"
                   f"{', ' + str(r['images']) + ' image(s)' if r['images'] else ''}):")
             for name, good, detail in r["checks"]:
                 print(f"  {'ok  ' if good else 'FAIL'} {name}" + (f"  [{detail}]" if detail and not good else ""))
-        print(f"Claude Code {version}; wrapping fingerprint {fp[:16] if fp else None}; "
+        print(f"Claude Code {version}; wrapping fingerprint(s) {', '.join(f[:16] for f in fps) or None}; "
               f"{'accepted' if summary['accepted'] else 'NOT accepted yet (review the boilerplate in ' + VERIFY_REPORT.as_posix() + ', then verify --accept)'}")
     return summary
 
@@ -549,14 +588,16 @@ def scope_rows(cfg: dict, app) -> list[tuple[int, str, str | None]]:
     Kept: questions whose `solution` kind is in config.subscription.replace, every question
     of a source in effort_by_source (those are redone when their solution came from a lower effort),
     and the questions in redo_ids. Plus api_leftover_ids, figure_ok_ids (questions the API run
-    skipped for a figure they turned out not to need) and image_ids (book-solved image questions
-    of sources outside the scope), whatever their source or solution kind, after everything else."""
+    skipped for a figure they turned out not to need), image_ids (book-solved image questions
+    of sources outside the scope) and the questions of the assignments file, whatever their source
+    or solution kind, after everything else."""
     s = sub_cfg(cfg)
     srcs = s["sources"]
     kinds = set(s.get("replace") or ("missing", "gemini"))
     redo = set(s.get("effort_by_source") or {})
     redo_ids = set(s.get("redo_ids") or ())
-    leftover = set(s.get("api_leftover_ids") or ()) | set(s.get("figure_ok_ids") or ()) | set(s.get("image_ids") or ())
+    leftover = (set(s.get("api_leftover_ids") or ()) | set(s.get("figure_ok_ids") or ()) | set(s.get("image_ids") or ())
+                | set(assigned(cfg)))
     rank = {src: i for i, src in enumerate(srcs)}
     cols = "question_id, source, solution, generated_solution"
     rows = app.execute(f"SELECT {cols} FROM questions WHERE source IN ({','.join('?' * len(srcs))})", srcs).fetchall()
@@ -881,10 +922,11 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
 
     efforts = ({sub_cfg(cfg)["review_effort"]} if review else
                {cfg["solver"]["effort"], *(sub_cfg(cfg).get("effort_by_source") or {}).values(),
-                *(sub_cfg(cfg).get("effort_by_id") or {}).values()})
+                *(sub_cfg(cfg).get("effort_by_id") or {}).values(), *(v["effort"] for v in assigned(cfg).values())})
     limits = {e: workers_for(cfg, e, workers) for e in sorted(efforts, key=effort_rank)}
+    models = Counter(model_for(cfg, qid) for qid in queue) if not review else Counter({ccfg["solver"]["model"]: len(queue)})
     print(json.dumps({"questions": len(queue), "workers": limits, "claude_code_version": version,
-                      "model": ccfg["solver"]["model"], "effort": cfg["solver"]["effort"],
+                      "model": ccfg["solver"]["model"], "models_in_queue": dict(models), "effort": cfg["solver"]["effort"],
                       "effort_by_source": sub_cfg(cfg).get("effort_by_source") or {},
                       "effort_by_id": sub_cfg(cfg).get("effort_by_id") or {},
                       "max_tokens_by_effort": sub_cfg(cfg).get("max_tokens_by_effort") or {},
@@ -919,19 +961,20 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     if redo:
                         reset_for_redo(pc, qid, effort)
                         summary["redo"] += 1
-                    fut = ex.submit(call_claude, ccfg, system_file, user_text(q, feedback), effort, None, images)
-                    running[fut] = (qid, attempt, effort, [n for n, _ in images])
+                    qc = ccfg if review else question_cfg(cfg, qid)  # the question's own model, if assigned
+                    fut = ex.submit(call_claude, qc, system_file, user_text(q, feedback), effort, None, images)
+                    running[fut] = (qid, attempt, effort, [n for n, _ in images], qc)
                 if not running:
                     break
                 done, _ = wait(running, return_when=FIRST_COMPLETED)
                 for fut in done:
-                    qid, attempt, effort, names = running.pop(fut)
+                    qid, attempt, effort, names, qc = running.pop(fut)
                     out = fut.result()
-                    info = interpret(out, ccfg, version)
+                    info = interpret(out, qc, version)
                     kind = info["kind"]
                     raw = save_failure(qid, attempt, out, info) if kind in ("error", "stop", "cut") else None
                     if kind in ("ok", "cut"):
-                        store(pc, ccfg, qid, attempt, effort, info, out.get("seconds", 0), names)
+                        store(pc, qc, qid, attempt, effort, info, out.get("seconds", 0), names)
                         summary["received" if kind == "ok" else info["result"]["stop_reason"]] += 1
                         if info["warning"]:
                             summary["limit_warnings"] += 1
@@ -946,8 +989,9 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         stop_reason = info["why"]
                         wait_on_limit = False
                     else:
-                        summary[api_failure(pc, ccfg, qid, attempt, info["why"])] += 1
-                    print(json.dumps({"question_id": qid, "attempt": attempt, "effort": effort, "outcome": kind,
+                        summary[api_failure(pc, qc, qid, attempt, info["why"])] += 1
+                    print(json.dumps({"question_id": qid, "attempt": attempt, "model": qc["solver"]["model"],
+                                      "effort": effort, "outcome": kind,
                                       "seconds": out.get("seconds"),
                                       **({"why": info["why"]} if kind != "ok" else {}), **({"raw": raw} if raw else {}),
                                       "elapsed_min": round((time.time() - t0) / 60, 1), **summary}), flush=True)

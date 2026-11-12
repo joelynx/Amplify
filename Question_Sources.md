@@ -278,11 +278,18 @@ Published results, gathered 2026-11-11 by a research agent from the system cards
   - 3 left in the wastebasket (`wastebasket.csv`).
   - Every row got a type (proof 1,621, numerical 1,052) and 6,107 tag rows: 3,467 key, 1,004 supporting, 1,636 task.
   - How the final label was reached: 850 high on the first pass, 989 agreed by the second opinion, 12 second opinions accepted, 827 by Opus (452 for the first label, 310 for the second, 65 neither).
-- **Proposed tags, not added (owner's call):**
-  - Inversion: 22 questions.
-  - Projective methods: 29 questions (harmonic division, cross-ratio, poles and polars).
-  - Linear Algebra Method: 5.
-  - Quadratic Residues: 3.
+- **Proposed tags added** (owner, 2026-11-12):
+  - Defined in `taxonomy/tags_draft.md`: Inversion, Projective Methods (the proposals' harmonic division, cross-ratio and poles-and-polars variants folded in), Linear Algebra Method, Quadratic Residues.
+  - As on 11-06, they were put only on the 59 proposing questions: 56 as key tags, 3 as supporting where the question already had two key tags. The list is `taxonomy/full_run_20261112_potd/new_tags.csv`; backup `…-153502-pre-potd-tags`.
+
+**Solve run started 2026-11-12** (owner: "go ahead with the solve run"):
+- Assignments: `pipeline/potd_assignments.json`, built by `sources/potd/scripts/assign_models.py`, in run_sub.py's new `subscription.assignments_file`. Each question has its own model and effort.
+- Buckets for the 2,330 questions without a solution:
+  - Opus 5.5 medium: 618 (D 0–3).
+  - Opus 5.5 high: 595 (D 4–6).
+  - Fable 5.2 high: 1,117. That is D 7+ plus the whole of the 16 hard-heavy sources, those with a median D of 7 or more: the TSTs, the IMO Shortlist, RMM, USAMO, ELMO and its Shortlist, the Balkan Shortlist, USEMO, the mock olympiads, and others.
+- Pilot of 6, two per bucket, judged locally: 5 passed, and 1 Fable reply went to retry for a LaTeX slip in its answer. Output size: Opus about 2–5k tokens per reply, Fable 40–48k.
+- The full run is `run_sub.py solve --wait-on-limit` (12 workers, log `pipeline/run_sub_potd.log`). Judging goes to the remote machine via `remote_judge.py`.
 
 **Remaining steps** (each needs the owner's go-ahead):
 

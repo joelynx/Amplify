@@ -99,6 +99,7 @@ Families are for browsing in the app only; tags are stored flat.
 | Base Representation | digits or binary expansions carry the structure | Binary Encoding |
 | Vieta Jumping | a solution of a quadratic Diophantine equation is jumped to a smaller one | |
 | Size Estimate | a crude growth bound cuts the search to finitely many cases | Bounding by Size |
+| Quadratic Residues | squares modulo a prime, Euler's criterion, the Legendre symbol or quadratic reciprocity decide the question (added 2026-11-12) | Legendre Symbol, Quadratic Reciprocity |
 
 ### Algebraic moves
 | Tag | Use when | Aliases |
@@ -197,6 +198,9 @@ Families are for browsing in the app only; tags are stored flat.
 | Angle Chasing | angle relations in a figure carry the solution | |
 | Similar Triangles | similarity ratios carry the solution outside a similarity subtopic | |
 | Power of a Point | power of a point or radical axes do the work | Radical Axis |
+| Inversion | a circle inversion turns circles, tangencies and lines into a simpler configuration (added 2026-11-12) | Circle Inversion |
+| Projective Methods | cross-ratios, harmonic divisions, poles and polars or projective maps carry the argument (added 2026-11-12) | Harmonic Division, Cross-Ratio, Poles and Polars |
+| Linear Algebra Method | a combinatorial or number-theoretic problem is solved with vectors, rank or dimension over a field (added 2026-11-12) | Dimension Argument |
 
 ## Task tags (what the question asks)
 
