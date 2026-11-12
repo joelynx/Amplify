@@ -26,7 +26,9 @@ number and the Solution Link have no bank column; they go to app/data/appdata/mo
 Repairs on the way in:
   * Windows line ends and trailing spaces go; three or more blank lines become one.
   * Placeholder values are dropped: one-character hints and answers such as "l" or "-", a joke
-    hint or answer, links that are not URLs.
+    hint or answer, links that are not URLs. A Solution cell that is only a URL becomes the
+    solution link; solutions that are no solution (jokes, fragments, comments) are dropped by
+    "drop" entries in the fixes file, so the pipeline solves those questions.
   * A later hint with an earlier one missing moves up, so the tiers have no gaps.
   * Broken LaTeX and Discord leftovers in single rows are corrected from mods_potd_fixes.json
     (POTD number, field, the text replaced, the reason); two hints and a solution with
@@ -53,6 +55,7 @@ Usage (repo root):
   python -m app.tools.import_mods_potd --csv <potd.csv> --dry-run [--dump out.json]
   python -m app.tools.import_mods_potd --csv <potd.csv> --apply
   python -m app.tools.import_mods_potd --rename-aime --dry-run | --apply
+  python -m app.tools.import_mods_potd --csv <potd.csv> --update-solutions --dry-run | --apply
 """
 
 from __future__ import annotations
@@ -97,6 +100,8 @@ BRACKET_RE = re.compile(CMD + r"(floor|ceil)\s*\{")
 UNDEFINED_RE = re.compile(CMD + r"(" + "|".join([*MACROS, *BRACKETS, "func", "infy", "agle", "cross", "arrow", "dotsa",
                                                   "DeclareFontFamily", "DeclareSymbolFont", "DeclareMathAccent"])
                           + r")(?![A-Za-z])")
+
+URL_ONLY_RE = re.compile(r"https?://\S+")
 
 AIME_OLD, AIME_NEW = "AIME", "American Invitational Mathematics Examination"
 AIME_SUB_RE = re.compile(r"^AIME\s*(I{1,2})?\s*-\s*(\d{4})$")
@@ -149,6 +154,10 @@ def parse(csv_path: Path, assignments: dict[str, dict]) -> tuple[list[dict], lis
             continue
         tiers = [h for h in (_value(r[k], "hint") for k in HINTS) if h]
         link = r["Solution Link"].strip()
+        solution = _value(r["Solution"], "solution")
+        if solution and URL_ONLY_RE.fullmatch(solution):  # a link in the Solution column
+            link = link if link.startswith("http") else solution
+            solution = None
         out.append({
             "potd": num, "date": r["Date"].strip(),
             "source": a["source"], "subsource": a["subsource"] or None,
@@ -156,7 +165,7 @@ def parse(csv_path: Path, assignments: dict[str, dict]) -> tuple[list[dict], lis
             "hints": tiers[0] if tiers else None,
             "more_hints": json.dumps(tiers[1:], ensure_ascii=False) if len(tiers) > 1 else None,
             "answer": _answer(r["Answer"]),
-            "solution": _value(r["Solution"], "solution"),
+            "solution": solution,
             "link": link if link.startswith("http") else None,
         })
     missing = set(assignments) - {r["/f"].strip() for r in sheet}
@@ -188,7 +197,11 @@ def apply_fixes(rows: list[dict]) -> None:
         if r is None:
             continue  # a skipped row
         fld = fix["field"]
-        if fld == "more_hints":
+        if fix.get("drop"):  # a value that is no solution, hint or answer at all
+            if not r[fld]:
+                raise SystemExit(f"FIX {fix['potd']} {fld}: nothing to drop")
+            r[fld] = None
+        elif fld == "more_hints":
             tiers = _fix_text(fix, json.loads(r["more_hints"]))
             r["more_hints"] = json.dumps(tiers, ensure_ascii=False)
         else:
@@ -341,6 +354,42 @@ def apply(rows: list[dict]) -> None:
     print(f"added={added} skipped={skipped} map={MAP_PATH} ({len(mapped)} lines)")
 
 
+def update_solutions(rows: list[dict], dry_run: bool) -> None:
+    """Rewrite the solution of imported questions whose parsed solution changed (a drop fix, a link
+    that was in the Solution column), and their links in the map. Only `solution` is touched: the
+    pipeline may have filled hints or answers since the import, and those stay."""
+    by_potd = {r["potd"]: r for r in rows}
+    with MAP_PATH.open(encoding="utf-8", newline="") as f:
+        mapped = list(csv.DictReader(f))
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        changes = []
+        for m in mapped:
+            r = by_potd.get(m["potd_number"])
+            if r is None:
+                continue
+            (old,) = conn.execute("SELECT solution FROM questions WHERE question_id = ?", (int(m["question_id"]),)).fetchone()
+            if old != r["solution"]:
+                changes.append((r["solution"], int(m["question_id"])))
+                print(f"  {m['question_id']} (POTD {r['potd']}): solution {'dropped' if r['solution'] is None else 'rewritten'}")
+            m["solution_link"] = r["link"] or ""
+        print(f"solutions to change={len(changes)}")
+        if dry_run or not changes:
+            return
+        conn.close()
+        backup_db("mods-potd-solutions")
+        conn = sqlite3.connect(DB_PATH)
+        conn.executemany("UPDATE questions SET solution = ? WHERE question_id = ?", changes)
+        conn.commit()
+        with MAP_PATH.open("w", encoding="utf-8", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=["question_id", "potd_number", "date", "solution_link"])
+            w.writeheader()
+            w.writerows(mapped)
+        print(f"updated={len(changes)} map rewritten")
+    finally:
+        conn.close()
+
+
 def rename_aime(dry_run: bool) -> int:
     conn = sqlite3.connect(DB_PATH)
     try:
@@ -372,6 +421,8 @@ def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--csv", type=Path, help="a CSV download of the POTD tab")
     p.add_argument("--rename-aime", action="store_true", help="rename the bank's AIME source instead")
+    p.add_argument("--update-solutions", action="store_true",
+                   help="rewrite only the solution column (and map links) of rows already imported")
     g = p.add_mutually_exclusive_group(required=True)
     g.add_argument("--dry-run", action="store_true")
     g.add_argument("--apply", action="store_true")
@@ -398,7 +449,9 @@ def main(argv: list[str] | None = None) -> int:
     if args.apply and (problems or log):
         print("refusing to write with problems")
         return 1
-    if args.apply:
+    if args.update_solutions:
+        update_solutions(rows, args.dry_run)
+    elif args.apply:
         apply(rows)
     return 0
 

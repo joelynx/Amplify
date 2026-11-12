@@ -1,11 +1,11 @@
 # New question sources: where we left off
 
 Planning notes for adding questions from the MODS sheets and from model benchmarks.
-Status on 2026-11-12: **the MODS POTD sheet is imported** (section 7): 2,678 problems
-with their 1,723 hint sets, 618 answers and 376 solutions, Uncategorized and not yet
-solved. The bank's "AIME" is renamed to its full name. Classification, solving,
-judging and embeddings are next; each still needs the owner's go-ahead, as does any
-other source.
+Status on 2026-11-12: **the MODS POTD sheet is imported and classified** (section 7):
+2,678 problems with their 1,723 hint sets, 618 answers and 348 human solutions, all but
+3 placed in the taxonomy; none solved by the pipeline yet. The bank's "AIME" is
+renamed to its full name. Solving, judging and embeddings are next; each still needs
+the owner's go-ahead, as does any other source.
 
 Supporting files are in `sources/potd/`. They hold only competition names, counts
 and the sheet's Source strings, no problem text:
@@ -262,6 +262,27 @@ Published results, gathered 2026-11-11 by a research agent from the system cards
   - every statement, solution and answer compiled in one XeLaTeX document with the app's preamble: 0 errors.
   - 56 fixes in 44 rows (`mods_potd_fixes.json`): 47 LaTeX (missing `$`, braces, a cut-off hint completed, a wrong factorisation in a human solution, 2227), 6 Discord leftovers (a user mention, bot commands, a solver's name, asterisks eaten by italics), 2 rewordings for profanity, 1 spelling. General repairs (the bot's macros, enumerate labels, URLs, bare-math answers) are listed in the tool's docstring.
 - Not imported: Discussion, Message ID, Curator and the solver columns; the Curators tab.
+- **Solutions cleaned the same day** (`--update-solutions`, backups `…-141037-` and `…-143154-mods-potd-solutions`):
+  - 20 Solution cells held only a URL. They became the solution link.
+  - 8 were no solution: jokes, fragments, a comment, a page pointer, and one wrong proof (26666, which ends on the wrong circle). They were dropped with "drop" fixes.
+  - 348 human solutions remain. The run_sub solve pass skips questions that have a solution, so these 28 now get solved.
+
+**Classified 2026-11-12** (`taxonomy/full_run_20261112_potd/`, REPORT.md; backup `amplify.db.bak-20261112-143056-pre-classify-potd`):
+- Method: the 11-02 pipeline for olympiad sources.
+  - Sonnet first pass with the olympiad tag file.
+  - Blind second opinions: Haiku on 1,777 medium/low labels, Sonnet on 51 wastebasket/other-subject labels.
+  - Opus adjudicated the 827 disagreements (A/B order random).
+- Candidate subjects came from the curators' genre letters, and their genre and sub-tag went in as a hint. Where there was no solution, the classifier saw the sheet's hints. Run scripts are in this session's scratchpad `cls_potd/`.
+- Results:
+  - **2,675 placed**: Combinatorics 801, Geometry 688, Number Theory 654, Algebra 493, Probability 17, Calculus 12, Abstract Algebra 6, Linear Algebra and Differential Equations 3, Thermodynamics 1 (a heat-exchange puzzle).
+  - 3 left in the wastebasket (`wastebasket.csv`).
+  - Every row got a type (proof 1,621, numerical 1,052) and 6,107 tag rows: 3,467 key, 1,004 supporting, 1,636 task.
+  - How the final label was reached: 850 high on the first pass, 989 agreed by the second opinion, 12 second opinions accepted, 827 by Opus (452 for the first label, 310 for the second, 65 neither).
+- **Proposed tags, not added (owner's call):**
+  - Inversion: 22 questions.
+  - Projective methods: 29 questions (harmonic division, cross-ratio, poles and polars).
+  - Linear Algebra Method: 5.
+  - Quadratic Residues: 3.
 
 **Remaining steps** (each needs the owner's go-ahead):
 
@@ -354,14 +375,14 @@ Two detailed checks of solve-mode questions where the generated answer disagreed
 Settled 2026-11-12: cut-off 15; STEP and ISI kept, the rest of the skip rows skipped; AIME renamed; the Shortlist filed with the IMO; tiered hints committed. Defaults taken without asking, open to change: the Discord server's own contests under "Math Olympiad Discord Server" (the contest heads the subsource), and the POTD number and Solution Link in the git-ignored map file.
 
 Still open:
-1. **Next POTD steps:**
-   - classification (subscription);
+1. **Next POTD steps** (classification done 2026-11-12):
    - the embedding duplicate check (API, cost to quote);
    - the solve run by bucket (subscription);
    - judging (remote job).
+   - Also: the proposed tags (Inversion, projective methods, Linear Algebra Method, Quadratic Residues), and the 3 wastebasket questions.
 2. Weekly tab (76 multi-part problems): import or not.
 3. Which other sources to import, and in what order. Suggested: IMO Shortlist PDFs (official solutions for the 465 IMO rows) → HARP → GATE EE/ME → UGPhysics → CHAMP hints → Omni-MATH.
-4. The 72 POTD rows already in the bank came with their own human hints (and some answers or solutions). Copy those into the bank rows where the bank has none?
+4. ~~Copy POTD's hints, answers and solutions into the 72 bank duplicates where the bank has none~~ (owner: yes, 2026-11-12). Nothing to copy: all 72 bank rows already have hints, a solution and a generated solution, and the one missing answer (bank 8674, a proof problem) matches POTD's joke placeholder. The bank's hints there are single pipeline tiers; replacing them with POTD's human tiers would be a separate decision.
 
 ## 11. Standing rules that apply
 

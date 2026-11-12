@@ -47,6 +47,25 @@ def test_answers_in_bare_math_get_dollars() -> None:
     assert potd._answer(" - ") is None
 
 
+def test_solution_cells_that_are_no_solution(tmp_path, monkeypatch) -> None:
+    header = ["/f", "Date", "Source", "Problem Statement", "Hint 1", "Hint 2", "Hint 3", "Answer", "Solution",
+              "Solution Link"]
+    rows = [["7", "1 Jan 2020", "Folklore", "Prove it.", "", "", "", "", "https://x.org/sol.pdf", ""],
+            ["8", "2 Jan 2020", "Folklore", "Prove that.", "", "", "", "", "lol no", ""]]
+    path = tmp_path / "potd.csv"
+    path.write_text("\n".join(",".join(f'"{c}"' for c in r) for r in [header, *rows]) + "\n", encoding="utf-8")
+    assigned = {n: {"potd_number": n, "source_as_in_sheet": "Folklore", "skip": "",
+                    "source": "Math Olympiad Discord Server", "subsource": "Folklore"} for n in ("7", "8")}
+    fixes = tmp_path / "fixes.json"
+    fixes.write_text(json.dumps([{"potd": 8, "field": "solution", "drop": True, "reason": "a joke"}]), encoding="utf-8")
+    monkeypatch.setattr(potd, "FIXES_PATH", fixes)
+    out, _ = potd.parse(path, assigned)
+    potd.apply_fixes(out)
+    by = {r["potd"]: r for r in out}
+    assert (by["7"]["solution"], by["7"]["link"]) == (None, "https://x.org/sol.pdf")
+    assert by["8"]["solution"] is None
+
+
 def test_hint_tiers_close_gaps(tmp_path) -> None:
     header = ["/f", "Date", "Source", "Problem Statement", "Hint 1", "Hint 2", "Hint 3", "Answer", "Solution",
               "Solution Link"]
