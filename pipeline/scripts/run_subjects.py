@@ -283,6 +283,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
     t0 = time.time()
     stop_reason = None
     paused_until = None  # the reset time of the limit that stopped the run (kept until the wait)
+    run_sub.keep_awake(True)
     try:
         with ThreadPoolExecutor(max_workers=limit) as ex:
             running: dict = {}
@@ -353,6 +354,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         continue
                     break
     finally:
+        run_sub.keep_awake(False)
         LOCK.unlink(missing_ok=True)
         write_progress(pc)
     print(json.dumps({"finished": now_iso(), "stopped": stop_reason, "left_in_this_run": len(queue), **summary,

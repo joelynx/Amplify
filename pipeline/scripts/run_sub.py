@@ -892,6 +892,16 @@ def acquire_lock(force: bool) -> None:
     LOCK.write_text(str(os.getpid()))
 
 
+def keep_awake(on: bool) -> None:
+    """Ask Windows not to sleep when idle while a solve runs: a sleep cuts off every reply in flight.
+    Closing the lid or the power button still sleeps it, and the display may still turn off.
+    Elsewhere it does nothing. It holds for the calling thread, so call it from the main one."""
+    if sys.platform == "win32":
+        import ctypes
+        es_continuous, es_system_required = 0x80000000, 0x00000001
+        ctypes.windll.kernel32.SetThreadExecutionState(es_continuous | (es_system_required if on else 0))
+
+
 def workers_for(cfg: dict, effort: str, override: int | None = None) -> int:
     """How many claude processes may run while a question of this effort is next in line:
     --workers if given, else subscription.workers_by_effort, else subscription.workers."""
@@ -934,6 +944,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
     summary: Counter = Counter()
     t0 = time.time()
     stop_reason = None
+    keep_awake(True)
     try:
         with ThreadPoolExecutor(max_workers=max(limits.values())) as ex:
             running: dict = {}
@@ -1007,6 +1018,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         continue
                     break
     finally:
+        keep_awake(False)
         LOCK.unlink(missing_ok=True)
         write_progress(pc)
     print(json.dumps({"finished": now_iso(), "stopped": stop_reason, "left_in_this_run": len(queue), **summary,
