@@ -446,6 +446,9 @@ def judge_one(qid: int, cfg: dict, app, pc) -> str:
     keep_hint = not is_blank(q["hints"]) and not pipeline_wrote(pc, qid, "hints", q["hints"])
     hint_status = "skipped" if keep_hint else ("ok" if res["hint_ok"] else "failed")
     note = None if res["hint_ok"] else "hint dropped: " + "; ".join(res["hint_errors"])[:300]
+    if res["hint_ok"] and res["hint_errors"]:  # tier 1 kept; a later tier failed and is dropped with the rest
+        note = (f"hint tiers {res['hint_tiers_ok'] + 1}-{res['hint_tiers']} dropped: "
+                + "; ".join(res["hint_errors"])[:300])
     if tiebreak_note:
         note = tiebreak_note + ("; " + note if note else "")
     # A subject question's flag, and a math review solve's, says whether the accepted reply disagrees

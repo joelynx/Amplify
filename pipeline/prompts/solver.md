@@ -25,10 +25,12 @@ INSTRUCTIONS:
 - Answer type: NUMERICAL if the final answer is a number (with or without units), EXPRESSION if it is a formula, function, set, interval, or similar mathematical object, NONE if the question has no single final answer (a proof, an explanation, a sketch, a yes/no with justification as the main content, etc.).
 - Answer: the final answer only, in LaTeX, with no explanation, matching your "Final answer:" line. Write NONE if the answer type is NONE.
 
-5. HINT (write this last):
-- A hint for a student who is stuck and does not want the solution spoiled: point toward the starting idea, the key observation, or the right technique.
-- The hint does none of the actual work: no computed values, no intermediate results, no step-by-step outline. It must not reveal or strongly imply the final answer; a student could not write down the final answer from the hint alone.
-- One or two sentences, matching the length, tone, and LaTeX style of these existing hints:
+5. HINTS (write these last):
+- Hints for a student who is stuck and does not want the solution spoiled, in one to three tiers. The student sees tier 1 first and asks for the next tier only if still stuck.
+- Choose how many tiers the problem needs: one when a single nudge is enough (a routine problem), two or three when it has several steps or a hard key idea.
+- Tier 1 points toward the starting idea, the key observation, or the right technique. Each later tier says more than the one before: for example, the key observation or lemma stated plainly, then the plan of attack as a short outline.
+- No tier does the actual work: no computed values, no intermediate results, no worked steps. No tier may reveal or strongly imply the final answer; a student could not write down the final answer from all the tiers together.
+- Tier 1 is one or two sentences and each later tier at most three, matching the length, tone, and LaTeX style of these existing hints:
 {{HINT_EXAMPLES}}
 
 OUTPUT FORMAT:
@@ -51,9 +53,17 @@ Your entire reply is the structure below: nothing before the first marker line, 
 %%% BEGIN ANSWER
 <final answer only, in LaTeX, or NONE>
 %%% END ANSWER
-%%% BEGIN HINT
-<hint in LaTeX>
-%%% END HINT
+%%% BEGIN HINT 1
+<tier 1 hint in LaTeX>
+%%% END HINT 1
+%%% BEGIN HINT 2
+<tier 2 hint in LaTeX>
+%%% END HINT 2
+%%% BEGIN HINT 3
+<tier 3 hint in LaTeX>
+%%% END HINT 3
+
+Write the HINT 2 and HINT 3 blocks only for the tiers you write: a reply with one tier ends with %%% END HINT 1, one with two tiers with %%% END HINT 2.
 
 LATEX RULES (follow exactly; the PDF compiler and the web view both depend on them):
 {{FORMAT_RULES}}

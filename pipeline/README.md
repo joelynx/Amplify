@@ -1,4 +1,4 @@
-# Solution pipeline: runbook (API version, prompt_version v5)
+# Solution pipeline: runbook (API version, prompt_version v5; v6 adds tiered hints)
 
 Regenerates intuition-first solutions for the 36 math sources in `config.json`
 through the Claude **Message Batches API** on API credits. One fixed model and
@@ -92,12 +92,49 @@ without spending tokens.
 | model refusal | `needs_human_review` | |
 | API error / expired / canceled | back to `pending` (up to `max_api_failures`) | resubmitted |
 | hint fails its checks (rules, length, answer leak) | solution still `passed`; hint dropped | Hint cell stays empty |
+| a later hint tier fails its checks (v6/s5) | solution `passed`; that tier and the ones after it dropped | the passing tiers are stored |
+
+### Tiered hints (prompt v6 and s5, owner 2026-11-11)
+
+The reply's hint is one to three tiers, each saying more than the one before;
+the model chooses how many (one for a routine question, two or three for a
+multi-step or hard one):
+
+```
+%%% BEGIN HINT 1
+<tier 1>
+%%% END HINT 1
+%%% BEGIN HINT 2        (only with a second tier)
+<tier 2>
+%%% END HINT 2
+%%% BEGIN HINT 3        (only with a third tier)
+<tier 3>
+%%% END HINT 3
+```
+
+`common.split_hint_tiers` reads them; a reply in the older single-block form
+(`%%% BEGIN HINT` / `%%% END HINT`) is one tier, so replies already received
+judge exactly as before. Mixing the two forms, a gap or wrong order, more than
+three tiers, an empty tier, or text between tiers is a structure error.
+`subjects.repair_reply` renumbers tier openers in order and reads a misnamed
+END as the open tier's. Every tier gets the single hint's checks (length,
+LaTeX rules, answer leak, XeLaTeX and web view, as pieces `hint`, `hint2`,
+`hint3`) and must not repeat an earlier tier; the leading tiers that pass are
+kept (`hint_tiers_ok` in `validate_<n>.json`), and `hint_ok` means tier 1
+passed. Tier 1 fills `questions.hints` under the usual rule (only an empty or
+pipeline-written hint); tiers 2-3 go to `questions.more_hints` as a JSON list
+(app migration 012), queued as provenance field `more_hints` right after the
+hint fill and written only together with it: NULL for a one-tier hint, and a
+human or book hint keeps its own tiers. pipeline.db `finals.more_hints_tex`
+holds tiers 2-3 of the accepted reply.
 
 ### On the subscription instead of the API (run_sub.py, 2026-11-04)
 
 The same solver on the owner's Claude subscription: Claude Code in print mode,
 one fresh single-turn process per question, the pipeline's system prompt
-(`--system-prompt-file`; byte-identical to the one every API batch used), the
+(`--system-prompt-file`; byte-identical to the one every API batch used; from
+v6, which the API never ran, the check compares only with API batches of the
+same prompt version, so there is none to compare with), the
 same user message on stdin, the same model, effort and max_tokens, adaptive
 thinking, no tools, nothing saved. Replies land where an API download lands
 (`outputs/<id>/solver_<n>.tex`, `response_<n>.json`, status `received`), so

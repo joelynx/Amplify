@@ -3,8 +3,10 @@
 validate_solver_text(qid, text, cfg, stored_answer) returns a dict:
   ok           the solution, rigor notes, takeaways and answer passed every check
   errors       why not (structure, markdown/LaTeX rules, length, PDF, web view)
-  hint_ok      the hint passed its own checks (rules, length, PDF, web, leak)
+  hint_ok      the hint (tier 1) passed its own checks (rules, length, PDF, web, leak)
   hint_errors  why not; a bad hint never blocks the solution, it is just dropped
+  hint_tiers, hint_tiers_ok  how many hint tiers the reply wrote, and how many leading
+               tiers passed (those are kept; a later tier that fails is dropped with the rest)
   answer_mismatch  the NUMERICAL answer differs from a numeric stored Answer
   parts        the parsed sections (None on a structural error)
 
@@ -32,6 +34,9 @@ from common import (  # noqa: E402
     content_problems,
     fetch_question,
     format_answer,
+    hint_piece_name,
+    hint_tier_checks,
+    hint_tier_of,
     is_blank,
     load_config,
     normalize_answer,
@@ -40,6 +45,7 @@ from common import (  # noqa: E402
     q_dir,
     read_text,
     repair_slips,
+    settle_hint_tiers,
     strip_code_fences,
     write_json,
 )
@@ -119,28 +125,26 @@ def validate_solver_text(qid: int, text: str, cfg: dict, stored_answer: str | No
     if b.get("max") is not None and n > b["max"]:
         res["errors"].append(f"length: solution {n} chars > max {b['max']}")
 
-    hint = parts["hint"] or ""
-    hb = cfg.get("hint_length_bounds_chars") or {}
-    if hb.get("min") is not None and len(hint) < hb["min"]:
-        res["hint_errors"].append(f"length: hint {len(hint)} chars < min {hb['min']}")
-    if hb.get("max") is not None and len(hint) > hb["max"]:
-        res["hint_errors"].append(f"length: hint {len(hint)} chars > max {hb['max']}")
-    res["hint_errors"] += [f"rules: {p}" for p in content_problems(hint)]
-    res["hint_errors"] += hint_leak_errors(hint, parts["answer_type"], parts["answer"])
+    # Each hint tier gets the checks the single hint got; the leading tiers that pass are kept.
+    tiers = parts["hint_tiers"] or [parts["hint"] or ""]
+    tier_errs = hint_tier_checks(tiers, cfg, lambda h: hint_leak_errors(h, parts["answer_type"], parts["answer"]))
 
     # One XeLaTeX compile for everything on the happy path; per-part on failure.
     pieces = dict(main)
-    pieces["hint"] = hint
+    for k, tier in enumerate(tiers):
+        pieces[hint_piece_name(k)] = tier
     pdf = check_parts(pieces, cfg=cfg)
     res["pdf_ok"] = pdf["ok"]
     for e in pdf["errors"]:
-        (res["hint_errors"] if e.startswith("[hint]") else res["errors"]).append(f"pdf: {e}")
+        k = hint_tier_of(e, len(tiers))
+        (tier_errs[k] if k is not None else res["errors"]).append(f"pdf: {e}")
     if not pdf["ok"]:
         res["pdf_log_tail"] = pdf["log_tail"][-1200:]
     web = check_web_parts(pieces, d)
     res["web_ok"] = web["ok"]
     for e in web["errors"]:
-        (res["hint_errors"] if e.startswith("[hint]") else res["errors"]).append(f"web: {e}")
+        k = hint_tier_of(e, len(tiers))
+        (tier_errs[k] if k is not None else res["errors"]).append(f"web: {e}")
 
     # Stored numeric Answer (e.g. AIME): a free correctness signal. Only plain
     # numbers are compared; anything else is left to the solver.
@@ -152,7 +156,7 @@ def validate_solver_text(qid: int, text: str, cfg: dict, stored_answer: str | No
             res["answer_mismatch"] = sv != nv
 
     res["ok"] = not res["errors"]
-    res["hint_ok"] = not res["hint_errors"]
+    settle_hint_tiers(res, tiers, tier_errs)
     return res
 
 

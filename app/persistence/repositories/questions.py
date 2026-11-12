@@ -19,7 +19,7 @@ _QUESTION_COLS = (
     "question_id, semester, topic, branch, subtopic, latexcode, type, in_syllabus, "
     "source, subsource, answer, solution, generated_solution, solution_outline, hints, instructions, "
     "date_last_accessed, times_used, interactive_times_used, difficulty_rating, latex_hash, "
-    "answer_key, takeaways"
+    "answer_key, takeaways, more_hints"
 )
 
 # Migration 007: technique tags are 'key' or 'supporting'; task tags are 'task'.
@@ -51,6 +51,7 @@ def _row_to_question(row: sqlite3.Row, tags: list[str] | None = None) -> Questio
         latex_hash=row["latex_hash"],
         answer_key=row["answer_key"],
         takeaways=row["takeaways"],
+        more_hints=row["more_hints"],
         tags=list(tags or []),
     )
 

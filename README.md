@@ -112,6 +112,14 @@ mode (and per paper result recorded from History), plus a `revealed` row when
 the answer or solution was opened before answering. Hint use is recorded from
 009 on; older answers keep `hints_used = NULL` ("unknown"), never "no hint".
 
+Hints come in up to three tiers (migration 012): `hints` is the first, gentlest
+one and `more_hints` a JSON array of the further tiers (tier 2, then 3), or NULL
+when there is only one. The quiz's "Show hint" reveals tier 1 and then becomes
+"Show additional hint" until the last tier is out, when it greys out;
+`hints_used` is the number of tiers opened before answering. The Browser lists
+all tiers. `hint_tiers()` in `app/core/models.py` (mirrored by `hintTiers()` in
+`frontend/src/lib/ipc.ts`) reads the two columns.
+
 - **Review queue** (`app/core/review.py`, Quiz → Review, the Welcome page's
   Today card): a miss, a partial answer or an assisted one comes back the next
   day; independent successes come back after 3, 7 and 21 days (a first-try

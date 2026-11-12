@@ -114,7 +114,7 @@ const QUESTION = {
 
 describe("Quiz help", () => {
   it("puts help after the answer area and says what it costs before the click", async () => {
-    useQuizStore.setState({ showHint: false, showAnswer: false, showSolution: false, results: {} });
+    useQuizStore.setState({ hintLevel: 0, showAnswer: false, showSolution: false, results: {} });
     const el = await mount(
       <QuestionViewer question={QUESTION}>
         <div data-ui="answer-area" />
@@ -131,7 +131,7 @@ describe("Quiz help", () => {
 
   it("hides a hint the student flagged, and files a new flag", async () => {
     replies.get_content_flags = { "7": ["hint"] };
-    useQuizStore.setState({ showHint: true, showAnswer: false, showSolution: true, results: {} });
+    useQuizStore.setState({ hintLevel: 1, showAnswer: false, showSolution: true, results: {} });
     const el = await mount(<QuestionViewer question={QUESTION} />);
     const hint = el.querySelector('[data-ui="flaggable-hint"]')!;
     expect(hint.textContent).toContain("You flagged this hint as unusable.");
@@ -144,7 +144,39 @@ describe("Quiz help", () => {
     await act(async () => button(solution, "Report a problem with this solution")!.click());
     expect(calls).toContainEqual(["set_content_flag", [7, "solution", true]]);
     expect(solution.textContent).not.toContain("Squeeze it.");
-    useQuizStore.setState({ showHint: false, showSolution: false });
+    useQuizStore.setState({ hintLevel: 0, showSolution: false });
+  });
+
+  it("reveals the hint tiers one at a time, then greys the button out", async () => {
+    useQuizStore.setState({ hintLevel: 0, showAnswer: false, showSolution: false, results: {}, hintedIds: {} });
+    const tiered = {
+      ...QUESTION,
+      hint_tiers: ["Bound the sine.", "Use $|\\sin x| \\le 1$.", "Squeeze between $\\pm 1/x$."],
+    } as QuizQuestionFull;
+    const el = await mount(<QuestionViewer question={tiered} />);
+    const shown = () => Array.from(el.querySelectorAll('[data-ui="hint-tier"]'));
+
+    act(() => button(el, "Show hint")!.click());
+    expect(shown()).toHaveLength(1);
+    expect(shown()[0].textContent).toContain("Hint 1 of 3");
+    expect(useQuizStore.getState().hintedIds[7]).toBe(1);
+
+    act(() => button(el, "Show additional hint")!.click());
+    act(() => button(el, "Show additional hint")!.click());
+    expect(shown()).toHaveLength(3);
+    expect(useQuizStore.getState().hintedIds[7]).toBe(3);
+    expect(button(el, "Show additional hint")!.disabled).toBe(true);
+    useQuizStore.setState({ hintLevel: 0, hintedIds: {} });
+  });
+
+  it("greys the button out after a question's only hint", async () => {
+    useQuizStore.setState({ hintLevel: 0, showAnswer: false, showSolution: false, results: {}, hintedIds: {} });
+    const el = await mount(<QuestionViewer question={{ ...QUESTION, hint_tiers: ["Bound the sine."] }} />);
+    act(() => button(el, "Show hint")!.click());
+    expect(el.textContent).toContain("Bound the sine.");
+    expect(el.textContent).not.toContain("Hint 1 of");
+    expect(button(el, "Show additional hint")!.disabled).toBe(true);
+    useQuizStore.setState({ hintLevel: 0, hintedIds: {} });
   });
 });
 

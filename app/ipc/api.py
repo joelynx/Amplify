@@ -544,14 +544,18 @@ class Api:
             return {"error": "PBS doesn't support explicit skip"}
         return nonpbs_runner.skip(session, slot_index)
 
-    def quiz_request_hint(self, quiz_id: str, slot_index: int) -> dict[str, Any]:
+    def quiz_request_hint(self, quiz_id: str, slot_index: int, tier: int = 1) -> dict[str, Any]:
+        """Hint `tier` (1 = the first) of the question in the slot, with how many
+        tiers it has; `hint` is None past the last one."""
         session = session_manager.get(quiz_id)
         if session is None or slot_index >= len(session.visible_slots):
-            return {"hint": None, "hint_index": 0}
+            return {"hint": None, "hint_index": 0, "hint_count": 0}
         q = session.visible_slots[slot_index]
-        if q is None or not q.hints:
-            return {"hint": None, "hint_index": 0}
-        return {"hint": q.hints, "hint_index": 1}
+        tiers = q.hint_tiers() if q is not None else []
+        tier = int(tier)
+        if not 1 <= tier <= len(tiers):
+            return {"hint": None, "hint_index": 0, "hint_count": len(tiers)}
+        return {"hint": tiers[tier - 1], "hint_index": tier, "hint_count": len(tiers)}
 
     def quiz_finish(self, quiz_id: str) -> dict[str, Any]:
         session = session_manager.get(quiz_id)
@@ -1827,6 +1831,7 @@ def _question_full_dict(q: Question) -> dict[str, Any]:
         "latexcode": d["latexcode"],
         "type": d["type"],
         "hints": d["hints"],
+        "hint_tiers": q.hint_tiers(),
         "answer": d["answer"],
         "solution": q.best_solution(),
         "instructions": d["instructions"],

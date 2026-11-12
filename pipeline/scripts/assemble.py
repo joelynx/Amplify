@@ -1,10 +1,11 @@
 """Assemble and store the final solution for every passed question.
 
 For each question with a passing status that has not been assembled yet:
-  1. extract solution / rigor notes / takeaways / answer / hint from the
+  1. extract solution / rigor notes / takeaways / answer / hint tiers from the
      accepted solver reply (solver_<attempt>.tex), dropping all %%% marker
-     lines. Legacy v4 replies take rigor notes from the review file and the
-     hint from hint.tex instead;
+     lines; only the leading hint tiers the judge passed are kept. Legacy v4
+     replies take rigor notes from the review file and the hint from hint.tex
+     instead;
   2. build final.tex in the layout from format_spec.md:
          <solution>
          \\medskip\\noindent\\textbf{Rigor Notes}      (omitted when none)
@@ -18,7 +19,9 @@ For each question with a passing status that has not been assembled yet:
   5. store everything in pipeline.db (finals + provenance) and write
      final_app.json with the app's column layout;
   6. queue the generated_solution column write and the empty Answer / Hint
-     fills (apply_fields.py writes them to the app database).
+     fills (apply_fields.py writes them to the app database). The hint fill is
+     tier 1 (questions.hints); tiers 2 and 3 are queued with it as more_hints
+     and written only together with it.
 
 Usage: python assemble.py [qid ...]   (default: every passed, unassembled question)
 """
@@ -39,7 +42,9 @@ from common import (  # noqa: E402
     fetch_question,
     format_answer,
     get_status,
+    hint_piece_name,
     is_blank,
+    kept_hint_tiers,
     load_config,
     log_event,
     model_display,
@@ -48,6 +53,7 @@ from common import (  # noqa: E402
     pipe_conn,
     pipeline_wrote,
     q_dir,
+    queue_more_hints,
     read_text,
     repair_slips,
     strip_code_fences,
@@ -71,25 +77,26 @@ def build_final(solution: str, rigor: str | None, takeaways: str) -> str:
     return "\n\n".join(parts) + "\n"
 
 
-def accepted_parts(row, d: Path) -> tuple[dict | None, list[str], str | None, str | None]:
-    """(parts, errors, rigor, hint) from the accepted attempt."""
+def accepted_parts(row, d: Path) -> tuple[dict | None, list[str], str | None, list[str]]:
+    """(parts, errors, rigor, hint tiers to store) from the accepted attempt."""
     acc = int(row["accepted_attempt"])
     text, _ = repair_slips(strip_code_fences(read_text(d / f"solver_{acc}.tex"))[0])
     parts, errs = parse_solver_output(text)
     if parts is None:
-        return None, errs, None, None
+        return None, errs, None, []
     if parts["format"] == "v5":
         rigor = parts["rigor"]
-        hint = parts["hint"] if row["hint_status"] == "ok" else None
+        tiers = kept_hint_tiers(row, d, parts["hint_tiers"])
     else:  # legacy subagent-era outputs
         rp = d / f"review_{acc}_rigor.tex"
         rigor_raw = read_text(rp).strip() if rp.exists() else "%%% NONE"
         rigor = None if rigor_raw == "%%% NONE" else strip_marker_lines(rigor_raw)
-        hint = None
+        tiers = []
         if row["hint_status"] == "ok" and (d / "hint.tex").exists():
             lines = read_text(d / "hint.tex").strip().split("\n")
-            hint = "\n".join(lines[1:]).strip() or None
-    return parts, [], rigor, hint
+            hint = "\n".join(lines[1:]).strip()
+            tiers = [hint] if hint else []
+    return parts, [], rigor, tiers
 
 
 def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
@@ -97,9 +104,11 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
     q = fetch_question(app, qid)
     d = q_dir(qid)
     acc = int(row["accepted_attempt"])
-    parts, errs, rigor, hint = accepted_parts(row, d)
+    parts, errs, rigor, tiers = accepted_parts(row, d)
     if parts is None:
         return {"question_id": qid, "ok": False, "errors": errs}
+    hint = tiers[0] if tiers else None
+    more = json.dumps(tiers[1:], ensure_ascii=False) if len(tiers) > 1 else None
     solution = strip_marker_lines(parts["solution"])
     takeaways = strip_marker_lines(parts["takeaways"])
     # Owner decision (2026-10-18): every stored solution ends with an
@@ -120,10 +129,11 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
         pieces["answer"] = answer_value
         r = check_pdf(answer_value, cfg=cfg)
         errors += [f"pdf[answer]: {e}" for e in r["errors"]]
-    if hint:
-        pieces["hint"] = hint
-        r = check_pdf(hint, cfg=cfg)
-        errors += [f"pdf[hint]: {e}" for e in r["errors"]]
+    for k, tier in enumerate(tiers):
+        name = hint_piece_name(k)
+        pieces[name] = tier
+        r = check_pdf(tier, cfg=cfg)
+        errors += [f"pdf[{name}]: {e}" for e in r["errors"]]
     w = check_web_parts(pieces, d)
     errors += [f"web{e}" for e in w["errors"]]
     if errors:
@@ -156,6 +166,7 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
     if replace_answer:
         fill_answer = None
     fill_hint = hint if (hint_empty and hint) else None
+    fill_more = more if fill_hint else None  # tiers 2-3 go wherever tier 1 goes
     gen_col = cfg.get("generated_solution_column") or "generated_solution"
     app_record = {
         "question_id": qid,
@@ -163,6 +174,7 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
         "answer": fill_answer,
         **({"answer_replace": replace_answer} if replace_answer else {}),
         "hints": fill_hint,
+        **({"more_hints": fill_more} if fill_more else {}),
         "answer_type": parts["answer_type"],
         "answer_value": answer_value,
         "status": row["status"],
@@ -177,10 +189,11 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
     pc.execute(
         """INSERT OR REPLACE INTO finals
            (question_id, status, final_tex, solution_tex, rigor_tex, takeaways_tex, answer_type, answer_tex,
-            hint_tex, answer_field_value, hint_field_value, answer_filled, hint_filled, prompt_version, created_at)
-           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+            hint_tex, answer_field_value, hint_field_value, answer_filled, hint_filled, prompt_version, created_at,
+            more_hints_tex)
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
         (qid, row["status"], final, solution, rigor, takeaways, parts["answer_type"], parts["answer"],
-         hint, fill_answer or replace_answer, fill_hint, 0, 0, cfg["prompt_version"], now_iso()),
+         hint, fill_answer or replace_answer, fill_hint, 0, 0, cfg["prompt_version"], now_iso(), more),
     )
     for field, value in ((gen_col, final), ("answer", fill_answer), ("answer_replace", replace_answer), ("hints", fill_hint)):
         if value is None:
@@ -193,6 +206,8 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
                 "INSERT INTO provenance (question_id, field, value, prompt_version, created_at) VALUES (?,?,?,?,?)",
                 (qid, field, value, cfg["prompt_version"], now_iso()),
             )
+            if field == "hints":
+                queue_more_hints(pc, qid, fill_more, cfg["prompt_version"])
     pc.commit()
     upsert_status(pc, qid, assembled=1)
     log_event(pc, qid, "assemble", f"ok; preview {preview_note}; fills answer={fill_answer is not None} hint={fill_hint is not None}"

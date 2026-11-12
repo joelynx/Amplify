@@ -19,11 +19,11 @@ interface QuestionViewerProps {
 
 export function QuestionViewer({ question, children, hideLabels = false }: QuestionViewerProps) {
   const {
-    showHint,
+    hintLevel,
     showAnswer,
     showSolution,
     showMetadata,
-    setShowHint,
+    setHintLevel,
     setShowAnswer,
     setShowSolution,
     setShowMetadata,
@@ -36,7 +36,11 @@ export function QuestionViewer({ question, children, hideLabels = false }: Quest
     `flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
       on ? "bg-primary/10 text-primary" : "bg-surface text-text/80 hover:bg-background"
     }`;
-  const hasHint = Boolean(question.hints?.trim());
+  // Hint tiers are revealed one at a time; each says more than the one before.
+  const tiers = question.hint_tiers ?? (question.hints?.trim() ? [question.hints] : []);
+  const hasHint = tiers.length > 0;
+  const shownTiers = Math.min(hintLevel, tiers.length);
+  const moreHints = shownTiers < tiers.length;
   const hasAnswer = Boolean(question.answer?.trim());
   const hasSolution = Boolean(question.solution?.trim());
   // What opening help does to this answer, said before the click.
@@ -120,19 +124,21 @@ export function QuestionViewer({ question, children, hideLabels = false }: Quest
           <span className="mr-1 text-xs font-medium uppercase tracking-wide text-muted">Help</span>
           {hasHint && (
             <button
-              className={helpButton(showHint)}
-              aria-pressed={showHint}
+              className={`${helpButton(shownTiers > 0)} disabled:cursor-not-allowed disabled:opacity-50`}
+              disabled={!moreHints}
+              title={moreHints ? undefined : "No more hints for this question"}
               onClick={() => {
+                const next = shownTiers + 1;
                 // A hint opened before answering makes the answer "assisted".
-                if (!showHint && !answered) {
-                  markHinted(question.question_id);
+                if (!answered) {
+                  markHinted(question.question_id, next);
                   emit({ type: "hint" });
                 }
-                setShowHint(!showHint);
+                setHintLevel(next);
               }}
             >
-              {showHint ? <EyeOff size={16} /> : <ThemedIcon name="hint" className="h-4 w-4" />}
-              {showHint ? "Hide hint" : "Show hint"}
+              <ThemedIcon name="hint" className="h-4 w-4" />
+              {shownTiers === 0 ? "Show hint" : "Show additional hint"}
             </button>
           )}
           {hasAnswer && (
@@ -155,12 +161,23 @@ export function QuestionViewer({ question, children, hideLabels = false }: Quest
         </div>
       )}
 
-      {showHint && question.hints && (
+      {shownTiers > 0 && (
         <div className="border border-border rounded-lg overflow-hidden">
-          <div className="bg-surface px-4 py-2 font-medium border-b border-border">Hint</div>
+          <div className="bg-surface px-4 py-2 font-medium border-b border-border">
+            {tiers.length > 1 ? "Hints" : "Hint"}
+          </div>
           <div className="p-4 bg-background">
             <Flaggable questionId={question.question_id} part="hint">
-              <LatexContent source={question.hints} />
+              {tiers.slice(0, shownTiers).map((tier, i) => (
+                <div key={i} data-ui="hint-tier" className={i > 0 ? "border-t border-border pt-3" : undefined}>
+                  {tiers.length > 1 && (
+                    <div className="mb-1 text-xs font-medium uppercase tracking-wide text-muted">
+                      Hint {i + 1} of {tiers.length}
+                    </div>
+                  )}
+                  <LatexContent source={tier} />
+                </div>
+              ))}
             </Flaggable>
           </div>
         </div>

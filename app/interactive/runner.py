@@ -277,6 +277,7 @@ def _question_to_dict(q: Question) -> dict[str, Any]:
         "latexcode": q.latexcode,
         "type": q.type,
         "hints": q.hints,
+        "hint_tiers": q.hint_tiers(),
         "instructions": q.instructions,
         "answer_fields": ak.public_fields(ak.parts_for(q)),
     }

@@ -370,7 +370,7 @@ def check_request(cfg: dict, system: str, text: str, effort: str, captured: list
     chk("logged in with the subscription, not an API key", init.get("apiKeySource") == "none",
         f"apiKeySource={init.get('apiKeySource')}")
     sha = hashlib.sha256(system.encode("utf-8")).hexdigest()
-    chk("system prompt is the one every API batch used", not api_shas or sha in api_shas, sha[:16])
+    chk("system prompt is the one the API batches of this prompt version used", not api_shas or sha in api_shas, sha[:16])
     posts = [c for c in captured if c["method"] == "POST" and c["path"].split("?")[0].endswith("/v1/messages")]
     chk("exactly one model request", len(posts) == 1, f"{len(posts)} requests; all paths: {[c['path'] for c in captured]}")
     if len(posts) != 1 or not isinstance(posts[0]["body"], dict):
@@ -439,8 +439,12 @@ def accepted_fingerprints(pc) -> set[str]:
     return out
 
 
-def api_system_shas(pc) -> set[str]:
-    return {r[0] for r in pc.execute("SELECT DISTINCT system_sha256 FROM api_batches WHERE system_sha256 IS NOT NULL")}
+def api_system_shas(pc, prompt_version: str) -> set[str]:
+    """The system prompts the API batches of this prompt version used. Empty for a version the
+    API never ran (v6, tiered hints, 2026-11-11): there is then no API prompt to compare with,
+    and the request check still sends solver.md byte for byte."""
+    return {r[0] for r in pc.execute("SELECT DISTINCT system_sha256 FROM api_batches WHERE system_sha256 IS NOT NULL "
+                                     "AND prompt_version=?", (prompt_version,))}
 
 
 def verify_samples(cfg: dict, app, pc) -> list[int]:
@@ -474,7 +478,7 @@ def verify(cfg: dict, app, pc, qids: list[int] | None = None, accept: bool = Fal
     if not qids:
         raise SystemExit("no candidate question to verify with; pass --qid")
     ccfg = review_cfg(cfg) if review else cfg
-    shas = api_system_shas(pc)
+    shas = api_system_shas(pc, cfg["prompt_version"])
     reports = []
     for qid in qids:
         q = fetch_question(app, qid)

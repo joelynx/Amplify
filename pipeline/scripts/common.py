@@ -298,7 +298,8 @@ STATUS_EXTRA_COLUMNS = {
     # owner 2026-11-08); NULL when the question never went to it
     "review_from": "INTEGER",
 }
-FINALS_EXTRA_COLUMNS = {"mode": "TEXT", "answer_key": "TEXT", "book_check": "TEXT"}
+# more_hints_tex: hint tiers 2 and 3 as a JSON list (NULL with one tier); hint_tex is tier 1
+FINALS_EXTRA_COLUMNS = {"mode": "TEXT", "answer_key": "TEXT", "book_check": "TEXT", "more_hints_tex": "TEXT"}
 
 
 def pipe_conn() -> sqlite3.Connection:
@@ -361,6 +362,16 @@ def pipeline_wrote(conn: sqlite3.Connection, qid: int, field: str, value, before
     return conn.execute(sql, args).fetchone() is not None
 
 
+def queue_more_hints(conn: sqlite3.Connection, qid: int, value: str | None, prompt_version: str) -> None:
+    """Queue hint tiers 2-3 (a JSON list, or None for a one-tier hint) right after the hints
+    fill they belong to. apply_fields writes them only together with that fill, so a human or
+    book hint keeps its own tiers, and None clears the tiers of an older pipeline hint."""
+    conn.execute(
+        "INSERT INTO provenance (question_id, field, value, prompt_version, created_at) VALUES (?,?,?,?,?)",
+        (qid, "more_hints", value, prompt_version, now_iso()),
+    )
+
+
 def is_done(row: sqlite3.Row | None) -> bool:
     """A question is finished when it has a final status and, for passing
     statuses, has also been assembled."""
@@ -417,6 +428,126 @@ V4_MARKERS = [
     "%%% BEGIN ANSWER", "%%% END ANSWER",
 ]
 ANSWER_TYPES = ("NUMERICAL", "EXPRESSION", "NONE")
+
+# Tiered hints (owner 2026-11-11; prompts v6 and s5): a reply carries one to three hint tiers,
+# %%% BEGIN HINT 1 / %%% END HINT 1, then 2 and 3, each saying more than the one before. A reply
+# in the older form has one %%% BEGIN HINT / %%% END HINT block, which is one tier. The app keeps
+# tier 1 in questions.hints and the further tiers in questions.more_hints (a JSON list).
+MAX_HINT_TIERS = 3
+HINT_MARKER = re.compile(r"%%% (BEGIN|END) HINT(?: (\d+))?")
+HINT_PIECE = re.compile(r"\[hint(\d?)\]")
+
+
+def split_hint_tiers(lines: list[str]) -> tuple[list[str], list[str] | None, list[str]]:
+    """The hint tiers of a reply in the numbered form, and its lines with that section folded into
+    one %%% BEGIN HINT / %%% END HINT pair (the inner tier markers blanked), so the section parsers
+    see the single-hint layout. Returns (lines, tiers, errors); tiers is None for a reply in the
+    single-block form or with no hint markers, whose lines come back unchanged. Errors: the two
+    forms mixed, tiers not numbered 1, 2, 3 in order, more than MAX_HINT_TIERS, a tier not closed
+    before the next hint marker, an empty tier, or text between two tiers."""
+    found = [(i, m.group(1), m.group(2)) for i, line in enumerate(lines) if (m := HINT_MARKER.fullmatch(line.strip()))]
+    numbered = [f for f in found if f[2] is not None]
+    if not numbered:
+        return lines, None, []
+    if len(numbered) != len(found):
+        return lines, None, ["hint markers mix the numbered form (%%% BEGIN HINT 1) and the single one (%%% BEGIN HINT)"]
+    tiers: list[str] = []
+    errors: list[str] = []
+    for k in range(0, len(numbered), 2):
+        n = k // 2 + 1
+        i, kind, num = numbered[k]
+        if n > MAX_HINT_TIERS:
+            errors.append(f"more than {MAX_HINT_TIERS} hint tiers")
+            break
+        if kind != "BEGIN" or int(num) != n:
+            errors.append(f"line {i + 1}: expected '%%% BEGIN HINT {n}', found '{lines[i].strip()}' (tiers are numbered 1, 2, 3 in order)")
+            break
+        if k + 1 >= len(numbered) or numbered[k + 1][1] != "END" or numbered[k + 1][2] != num:
+            errors.append(f"line {i + 1}: hint tier {n} is not closed by '%%% END HINT {n}' before the next hint marker")
+            break
+        j = numbered[k + 1][0]
+        tier = "\n".join(lines[i + 1: j]).strip()
+        if not tier:
+            errors.append(f"empty hint tier {n}")
+        tiers.append(tier)
+        if k + 2 < len(numbered) and "\n".join(lines[j + 1: numbered[k + 2][0]]).strip():
+            errors.append(f"content between hint tiers after '%%% END HINT {n}'")
+    if errors:
+        return lines, None, errors
+    out = list(lines)
+    out[numbered[0][0]] = "%%% BEGIN HINT"
+    out[numbered[-1][0]] = "%%% END HINT"
+    for i, _, _ in numbered[1:-1]:
+        out[i] = ""
+    return out, tiers, []
+
+
+def hint_piece_name(k: int) -> str:
+    """Tier k's name (0-based) in the PDF and web checks: hint, hint2, hint3. Tier 1 keeps the
+    name the single hint had, so a one-tier reply is checked and reported exactly as before."""
+    return "hint" if k == 0 else f"hint{k + 1}"
+
+
+def hint_tier_of(error: str, n_tiers: int) -> int | None:
+    """The tier (0-based) a PDF or web check error names ('[hint2] ...'), or None for any other piece."""
+    m = HINT_PIECE.match(error)
+    if m is None:
+        return None
+    k = int(m.group(1) or 1) - 1
+    return k if 0 <= k < n_tiers else None
+
+
+def hint_tier_checks(tiers: list[str], cfg: dict, leak_errors) -> list[list[str]]:
+    """Per tier, why it cannot be kept: the length bounds, the LaTeX rules, an answer leak
+    (leak_errors(tier)), and a tier that repeats an earlier one. [] for a good tier."""
+    hb = cfg.get("hint_length_bounds_chars") or {}
+    out: list[list[str]] = []
+    for k, tier in enumerate(tiers):
+        errs: list[str] = []
+        if hb.get("min") is not None and len(tier) < hb["min"]:
+            errs.append(f"length: hint {len(tier)} chars < min {hb['min']}")
+        if hb.get("max") is not None and len(tier) > hb["max"]:
+            errs.append(f"length: hint {len(tier)} chars > max {hb['max']}")
+        errs += [f"rules: {p}" for p in content_problems(tier)]
+        errs += leak_errors(tier)
+        flat = re.sub(r"\s+", "", tier)
+        if flat and any(flat == re.sub(r"\s+", "", t) for t in tiers[:k]):
+            errs.append("repeats an earlier tier")
+        out.append(errs)
+    return out
+
+
+def settle_hint_tiers(res: dict, tiers: list[str], tier_errors: list[list[str]]) -> None:
+    """The hint verdict from each tier's errors: hint_errors (prefixed with the tier when the reply
+    wrote several), hint_tiers (how many it wrote), hint_tiers_ok (how many leading tiers passed:
+    those are kept, the rest dropped) and hint_ok (tier 1 passed). A one-tier reply gets the
+    verdict a single hint always got."""
+    multi = len(tiers) > 1
+    res["hint_errors"] = [f"tier {k + 1}: {e}" if multi else e for k, errs in enumerate(tier_errors) for e in errs]
+    n_ok = 0
+    for errs in tier_errors:
+        if errs:
+            break
+        n_ok += 1
+    res["hint_tiers"] = len(tiers)
+    res["hint_tiers_ok"] = n_ok
+    res["hint_ok"] = n_ok >= 1
+
+
+def kept_hint_tiers(row, d: Path, tiers: list[str]) -> list[str]:
+    """The hint tiers an accepted reply stores: none unless its hint_status is 'ok', else the
+    leading tiers that passed the judge's checks (hint_tiers_ok in validate_<attempt>.json; a
+    verdict from before tiered hints passed its one hint)."""
+    if row["hint_status"] != "ok":
+        return []
+    n = 1
+    vf = d / f"validate_{int(row['accepted_attempt'])}.json"
+    if vf.exists():
+        try:
+            n = int(json.loads(read_text(vf)).get("hint_tiers_ok", 1))
+        except (ValueError, TypeError):
+            n = 1
+    return [t for t in tiers[: max(n, 1)] if t]
 
 
 EMPH_STAR = re.compile(r"\\(textbf|textit|emph)\{([^{}\n*]+?)\*{1,2}")
@@ -493,13 +624,19 @@ def parse_solver_output(text: str, *, fmt: str = "auto") -> tuple[dict | None, l
     """Split a solver reply by its marker lines.
 
     Returns (parts, errors). parts has solution, rigor (None when NONE or v4),
-    takeaways, answer_type, answer, hint (None for v4). On a structural error
-    parts is None."""
+    takeaways, answer_type, answer, hint (tier 1; None for v4) and hint_tiers (every
+    tier, in order: one for a reply in the single-block form; [] for v4). On a
+    structural error parts is None."""
     if fmt == "auto":
         fmt = "v5" if ("%%% BEGIN RIGOR NOTES" in text or "%%% BEGIN HINT" in text) else "v4"
     markers = V5_MARKERS if fmt == "v5" else V4_MARKERS
     errors: list[str] = []
     lines = text.replace("\r\n", "\n").split("\n")
+    tiers: list[str] | None = None
+    if fmt == "v5":
+        lines, tiers, herrs = split_hint_tiers(lines)
+        if herrs:
+            return None, herrs
     positions: dict[str, list[int]] = {}
     for i, line in enumerate(lines):
         s = line.strip()
@@ -551,6 +688,9 @@ def parse_solver_output(text: str, *, fmt: str = "auto") -> tuple[dict | None, l
         if rigor == "" or rigor.rstrip(".").strip().upper() == "NONE":
             rigor = None
         hint = body("%%% BEGIN HINT", "%%% END HINT")
+        if tiers is None:  # the single-block form: one tier
+            tiers = [hint] if hint else []
+        hint = tiers[0] if tiers else hint
         if not hint:
             errors.append("empty hint body")
     if not solution:
@@ -567,6 +707,7 @@ def parse_solver_output(text: str, *, fmt: str = "auto") -> tuple[dict | None, l
         "answer_type": atype,
         "answer": answer,
         "hint": hint,
+        "hint_tiers": tiers or [],
     }
     return parts, errors
 

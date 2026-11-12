@@ -7,6 +7,11 @@ are still empty at write time. Filled fields are never overwritten, except a
 value the pipeline itself wrote earlier: a redo at a higher effort replaces it,
 while a value from the source or the owner is never touched.
 
+Hint tiers 2 and 3 (field more_hints, a JSON list, app migration 012) are queued
+right after the hints fill they belong to and written only together with it:
+when the hint is written, its tiers replace the column (NULL for a one-tier
+hint); when the hint is kept, its tiers are kept too.
+
 Usage: python apply_fields.py [--force] [--dry-run]
 """
 
@@ -33,6 +38,31 @@ def _ensure_schema(app) -> None:
     migrate(app)
 
 
+def _more_hints_row(pc, hints_row):
+    """The more_hints fill queued with a hints fill: the first pending one for the question after
+    it, and before the question's next hints fill (assemble queues the two together)."""
+    qid, hid = hints_row["question_id"], hints_row["id"]
+    return pc.execute(
+        "SELECT * FROM provenance WHERE question_id=? AND field='more_hints' AND applied_at IS NULL AND id>? "
+        "AND id < COALESCE((SELECT MIN(id) FROM provenance WHERE question_id=? AND field='hints' AND id>?), 9e18) "
+        "ORDER BY id LIMIT 1",
+        (qid, hid, qid, hid),
+    ).fetchone()
+
+
+def _apply_more_hints(app, pc, hints_row, *, has_column: bool) -> None:
+    """Write hint tiers 2-3 together with the tier-1 fill just written (NULL for a one-tier hint,
+    which clears the tiers of an older pipeline hint)."""
+    more = _more_hints_row(pc, hints_row)
+    if more is None:
+        return
+    if not has_column:  # an app database without migration 012; the value stays in provenance
+        pc.execute("UPDATE provenance SET applied_at=? WHERE id=?", (f"skipped:no-column:{now_iso()}", more["id"]))
+        return
+    app.execute("UPDATE questions SET more_hints=? WHERE question_id=?", (more["value"], more["question_id"]))
+    pc.execute("UPDATE provenance SET applied_at=? WHERE id=?", (now_iso(), more["id"]))
+
+
 def apply_pending(cfg: dict, pc, *, force: bool = False, dry_run: bool = False) -> dict:
     pending = pc.execute("SELECT * FROM provenance WHERE applied_at IS NULL ORDER BY id").fetchall()
     if not pending:
@@ -42,13 +72,14 @@ def apply_pending(cfg: dict, pc, *, force: bool = False, dry_run: bool = False) 
     app = app_conn(cfg, readonly=False)
     if not dry_run:
         _ensure_schema(app)
+    has_more = "more_hints" in {r[1] for r in app.execute("PRAGMA table_info(questions)")}
     gen_col = cfg.get("generated_solution_column") or "generated_solution"
     applied = skipped = 0
     sentinels = cfg["empty_answer_sentinels"]
     for row in pending:
         field = row["field"]
         if field not in ("answer", "hints", "answer_key", "takeaways", "answer_replace", gen_col):
-            continue
+            continue  # more_hints rows are written with their hints row (_apply_more_hints)
         # answer_replace: the source's answer, which a high-effort tie-break showed to be wrong (owner
         # 2026-11-07), is overwritten; its old value is kept in provenance as answer_before_replace.
         col = "answer" if field == "answer_replace" else field
@@ -65,6 +96,9 @@ def apply_pending(cfg: dict, pc, *, force: bool = False, dry_run: bool = False) 
             skipped += 1
             if not dry_run:
                 pc.execute("UPDATE provenance SET applied_at=? WHERE id=?", (f"skipped:not-empty:{now_iso()}", row["id"]))
+                more = _more_hints_row(pc, row) if field == "hints" else None
+                if more is not None:  # the hint kept also keeps its own tiers
+                    pc.execute("UPDATE provenance SET applied_at=? WHERE id=?", (f"skipped:not-empty:{now_iso()}", more["id"]))
             continue
         if dry_run:
             applied += 1
@@ -77,6 +111,8 @@ def apply_pending(cfg: dict, pc, *, force: bool = False, dry_run: bool = False) 
                             (row["question_id"], "answer", row["value"], row["prompt_version"], now, now)])
         app.execute(f"UPDATE questions SET {col}=? WHERE question_id=?", (row["value"], row["question_id"]))
         pc.execute("UPDATE provenance SET applied_at=? WHERE id=?", (now_iso(), row["id"]))
+        if col == "hints":
+            _apply_more_hints(app, pc, row, has_column=has_more)
         if col in ("answer", "hints"):
             flag = "answer_filled" if col == "answer" else "hint_filled"
             pc.execute(f"UPDATE finals SET {flag}=1 WHERE question_id=?", (row["question_id"],))

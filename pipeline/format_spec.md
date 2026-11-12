@@ -6,6 +6,8 @@ condensed version the models see is `prompts/format_rules.md`; the scripts
 
 > **v5 (2026-10-19):** the pipeline now runs on the Message Batches API with one solver call per question (see `README.md`). Rigor notes and the hint come from the solver reply, there is no reviewer, the old solution is never sent to a model, and questions that reference images are skipped instead of processed. Everything below about the accepted LaTeX subset, escaping, and field formats still applies.
 
+> **v6 / s5 (2026-11-11):** the hint is one to three tiers (`%%% BEGIN HINT 1` ... `%%% END HINT 3`; see `README.md`, "Tiered hints"). Each tier follows the hint format of section 9 below; tier 1 goes to `hints`, tiers 2-3 to `more_hints`.
+
 ## 1. Database field mapping (needs owner confirmation)
 
 Database: `app/data/appdata/amplify.db`, table `questions` (SQLite, plain TEXT columns, no escaping).
@@ -16,7 +18,8 @@ Database: `app/data/appdata/amplify.db`, table `questions` (SQLite, plain TEXT c
 | question text | `latexcode` | raw LaTeX, placed verbatim in the PDF and the web view |
 | old solution | `solution` | 1,221 of the 12,118 target questions have none; reviewer then sees "None", triage assigns INSIGHT |
 | Answer | `answer` | 11,159 target rows empty; `N/A` placeholders (IITD, IITD-AD) are treated as empty via `empty_answer_sentinels` |
-| Hint | `hints` | 11,632 target rows empty |
+| Hint | `hints` | 11,632 target rows empty. From v6 / s5 this is hint tier 1 |
+| Further hint tiers | `more_hints` | JSON list of tiers 2-3 (app migration 012), NULL with one tier; written only together with `hints` |
 | images | `\includegraphics{name}` inside `latexcode` | files live in `app/data/appdata/teximages/` as the bare name or name + `.jpg/.png/.jpeg`; 180 target questions reference images |
 
 Target set: the 36 sources listed in `config.json` (12,118 questions). Note the

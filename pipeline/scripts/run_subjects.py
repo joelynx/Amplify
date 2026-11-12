@@ -442,6 +442,7 @@ def precheck(cfg: dict, app, pc, ids: list[int] | None) -> dict[int, dict]:
         res["attempt"] = got[0]
         out[qid] = res
         print(json.dumps({"question_id": qid, "mode": row["mode"], "ok": res["ok"], "hint_ok": res["hint_ok"],
+                          "hint_tiers": f"{res.get('hint_tiers_ok', 0)}/{res.get('hint_tiers', 0)}",
                           "mismatch": res.get("mismatch"), "book_problem": res.get("book_problem"),
                           "errors": res["errors"][:4], "hint_errors": res["hint_errors"][:3]}, ensure_ascii=False))
     print(json.dumps({"prechecked": len(out), "ok": sum(r["ok"] for r in out.values()),
@@ -530,8 +531,10 @@ def review(cfg: dict, app, pc, ids: list[int] | None, name: str) -> Path:
             b += ["<h3>Takeaways</h3>", tex_html(parts["takeaways"]),
                   "<h3>Answer key (as the quiz will grade it)</h3>",
                   f"<pre>{html.escape(json.dumps(res.get('answer_key'), indent=1, ensure_ascii=False))}</pre>",
-                  "<h3>Answer field</h3>", tex_html(res.get("answer_display")),
-                  "<h3>Hint</h3>", tex_html(parts["hint"])]
+                  "<h3>Answer field</h3>", tex_html(res.get("answer_display"))]
+            tiers = parts["hint_tiers"] or [parts["hint"]]
+            for k, tier in enumerate(tiers):
+                b += [f"<h3>Hint{f' {k + 1} of {len(tiers)}' if len(tiers) > 1 else ''}</h3>", tex_html(tier)]
         blocks.append("\n".join(b) + "</section>")
     nav = "<nav>" + " ".join(f"<a href=#q{q}>{q}</a>" for q in checks) + "</nav>"
     page = PAGE_HEAD + f"<h1>{html.escape(name)}</h1><p class=meta>{len(checks)} questions, {now_iso()}</p>" + nav + \

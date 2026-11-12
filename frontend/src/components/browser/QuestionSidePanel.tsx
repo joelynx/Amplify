@@ -21,7 +21,7 @@ import { cn } from "../../lib/cn";
 
 import { Button } from "../ui/Button";
 import { Checkbox } from "../ui/Checkbox";
-import { bestSolution, ipc, type Filters, type Question, type SimilarQuestion } from "../../lib/ipc";
+import { bestSolution, hintTiers, ipc, type Filters, type Question, type SimilarQuestion } from "../../lib/ipc";
 import { LatexContent } from "./LatexContent";
 import { BookmarkButton, NoteEditor } from "../notes/QuestionNotes";
 import { Flaggable } from "../notes/ContentFlag";
@@ -121,6 +121,7 @@ export function QuestionSidePanel({ question, filters, textQuery, onClose, onPic
   }
 
   const solution = bestSolution(question);
+  const hints = hintTiers(question);
 
   return (
     <aside
@@ -189,10 +190,19 @@ export function QuestionSidePanel({ question, filters, textQuery, onClose, onPic
           </Disclosure>
         )}
 
-        {question.hints && (
+        {hints.length > 0 && (
           <Disclosure title="Hints" defaultOpen={false}>
             <Flaggable questionId={question.question_id} part="hint">
-              <LatexContent source={question.hints} />
+              {hints.map((hint, i) => (
+                <div key={i} data-ui="hint-tier" className={i > 0 ? "border-t border-border pt-3" : undefined}>
+                  {hints.length > 1 && (
+                    <div className="mb-1 text-xs font-medium uppercase tracking-wide text-muted">
+                      Hint {i + 1} of {hints.length}
+                    </div>
+                  )}
+                  <LatexContent source={hint} />
+                </div>
+              ))}
             </Flaggable>
           </Disclosure>
         )}

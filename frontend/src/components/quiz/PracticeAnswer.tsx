@@ -7,7 +7,7 @@
  * Opening either before answering ends the attempt at grading: the panel then
  * says the question is not graded instead of offering inputs, and the reveal
  * is logged so the question lands on the "try it independently" review list.
- * A hint opened before answering is sent as `hints_used` (an assisted answer).
+ * Hint tiers opened before answering are sent as `hints_used` (an assisted answer).
  */
 
 import { useEffect } from "react";
@@ -64,7 +64,7 @@ export function PracticeAnswer({ quizId, question }: Props) {
             answers,
             question_id: qid,
             time_taken_ms: questionStartTime ? Date.now() - questionStartTime : 0,
-            hints_used: hintedIds[qid] ? 1 : 0,
+            hints_used: hintedIds[qid] ?? 0,
           })
         }
         assess={(marks) => ipc.quiz_self_assess(quizId, 0, { marks, question_id: qid })}

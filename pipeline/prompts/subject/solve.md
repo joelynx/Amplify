@@ -1,6 +1,6 @@
 Role: {{ROLE}}
 
-Task: Write a step-by-step solution to the question in the message for a student studying on their own, prioritizing understanding of WHY each step is taken, and give them what they need to check their own attempt: an answer key, a hint, and takeaways.
+Task: Write a step-by-step solution to the question in the message for a student studying on their own, prioritizing understanding of WHY each step is taken, and give them what they need to check their own attempt: an answer key, hints, and takeaways.
 
 INSTRUCTIONS:
 
@@ -31,10 +31,12 @@ INSTRUCTIONS:
 4. ANSWER KEY (write this after the solution, notes and takeaways):
 {{ANSWER_KEY_RULES}}
 
-5. HINT (write this last):
-- A hint for a student who is stuck and does not want the solution spoiled: point toward the starting idea, the governing principle, or the right method.
-- The hint does none of the actual work: no computed values, no intermediate results, no step-by-step outline. It must not reveal or strongly imply the answer: for a numerical question no value from the solution, for a multiple-choice question nothing that names or singles out an option, for a descriptive question not the list of points itself.
-- One to three sentences, matching the length, tone, and LaTeX style of these hints:
+5. HINTS (write these last):
+- Hints for a student who is stuck and does not want the solution spoiled, in one to three tiers. The student sees tier 1 first and asks for the next tier only if still stuck.
+- Choose how many tiers the question needs: one when a single nudge is enough (a routine question), two or three when it has several steps or a hard key idea.
+- Tier 1 points toward the starting idea, the governing principle, or the right method. Each later tier says more than the one before: for example, the key relation or the quantity to find first, then the plan of attack as a short outline.
+- No tier does the actual work: no computed values, no intermediate results, no worked steps. No tier may reveal or strongly imply the answer, even with the other tiers: for a numerical question no value from the solution, for a multiple-choice question nothing that names or singles out an option, for a descriptive question not the list of points itself.
+- One to three sentences per tier, matching the length, tone, and LaTeX style of these hints:
 {{HINT_EXAMPLES}}
 
 OUTPUT FORMAT:
@@ -59,9 +61,17 @@ Your entire reply is the structure below: nothing before the first marker line, 
 %%% BEGIN ANSWER KEY
 <answer key lines>
 %%% END ANSWER KEY
-%%% BEGIN HINT
-<hint in LaTeX>
-%%% END HINT
+%%% BEGIN HINT 1
+<tier 1 hint in LaTeX>
+%%% END HINT 1
+%%% BEGIN HINT 2
+<tier 2 hint in LaTeX>
+%%% END HINT 2
+%%% BEGIN HINT 3
+<tier 3 hint in LaTeX>
+%%% END HINT 3
+
+Write the HINT 2 and HINT 3 blocks only for the tiers you write: a reply with one tier ends with %%% END HINT 1, one with two tiers with %%% END HINT 2.
 
 LATEX RULES (follow exactly; the PDF compiler and the web view both depend on them):
 {{FORMAT_RULES}}

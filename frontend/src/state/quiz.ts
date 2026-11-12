@@ -35,8 +35,8 @@ export interface QuizState {
   results: Record<number, QuizAnswerResult>;
   // Questions whose answer or solution was opened before answering: not graded
   revealedIds: Record<number, true>;
-  // Questions whose hint was opened before answering (sent as hints_used)
-  hintedIds: Record<number, true>;
+  // Hint tiers opened before answering, by question id (sent as hints_used)
+  hintedIds: Record<number, number>;
   // Lecture / mixed: the concept each question was picked for, by id
   conceptLabels: Record<string, string>;
   // Typed but unsubmitted answers, by question id (kept across page changes)
@@ -47,8 +47,8 @@ export interface QuizState {
   diversityScore: number | null;
   shortfall: number;
 
-  // Toggle states
-  showHint: boolean;
+  // Toggle states. hintLevel = hint tiers shown for the current question (0 = none).
+  hintLevel: number;
   showAnswer: boolean;
   showSolution: boolean;
   showMetadata: boolean;
@@ -73,13 +73,13 @@ export interface QuizState {
   setQuestionStartTime: (time: number | null) => void;
   setResult: (questionId: number, result: QuizAnswerResult) => void;
   markRevealed: (questionId: number) => void;
-  markHinted: (questionId: number) => void;
+  markHinted: (questionId: number, tiers: number) => void;
   setDraft: (questionId: number, inputs: string[]) => void;
   setRemaining: (remaining: number | null) => void;
   setDiversityScore: (score: number | null) => void;
   setShortfall: (shortfall: number) => void;
 
-  setShowHint: (show: boolean) => void;
+  setHintLevel: (level: number) => void;
   setShowAnswer: (show: boolean) => void;
   setShowSolution: (show: boolean) => void;
   setShowMetadata: (show: boolean) => void;
@@ -115,7 +115,7 @@ export const useQuizStore = create<QuizState>((set) => ({
   diversityScore: null,
   shortfall: 0,
 
-  showHint: false,
+  hintLevel: 0,
   showAnswer: false,
   showSolution: false,
   showMetadata: false,
@@ -139,17 +139,18 @@ export const useQuizStore = create<QuizState>((set) => ({
   setQuestionStartTime: (questionStartTime) => set({ questionStartTime }),
   setResult: (questionId, result) => set((s) => ({ results: { ...s.results, [questionId]: result } })),
   markRevealed: (questionId) => set((s) => ({ revealedIds: { ...s.revealedIds, [questionId]: true } })),
-  markHinted: (questionId) => set((s) => ({ hintedIds: { ...s.hintedIds, [questionId]: true } })),
+  markHinted: (questionId, tiers) =>
+    set((s) => ({ hintedIds: { ...s.hintedIds, [questionId]: Math.max(s.hintedIds[questionId] ?? 0, tiers) } })),
   setDraft: (questionId, inputs) => set((s) => ({ drafts: { ...s.drafts, [questionId]: inputs } })),
   setRemaining: (remaining) => set({ remaining }),
   setDiversityScore: (diversityScore) => set({ diversityScore }),
   setShortfall: (shortfall) => set({ shortfall }),
 
-  setShowHint: (showHint) => set({ showHint }),
+  setHintLevel: (hintLevel) => set({ hintLevel }),
   setShowAnswer: (showAnswer) => set({ showAnswer }),
   setShowSolution: (showSolution) => set({ showSolution }),
   setShowMetadata: (showMetadata) => set({ showMetadata }),
-  resetToggles: () => set({ showHint: false, showAnswer: false, showSolution: false, showMetadata: false }),
+  resetToggles: () => set({ hintLevel: 0, showAnswer: false, showSolution: false, showMetadata: false }),
   resetQuizState: () => set({
     isStarted: false,
     quizId: null,
@@ -165,7 +166,7 @@ export const useQuizStore = create<QuizState>((set) => ({
     remaining: null,
     diversityScore: null,
     shortfall: 0,
-    showHint: false,
+    hintLevel: 0,
     showAnswer: false,
     showSolution: false,
     showMetadata: false,

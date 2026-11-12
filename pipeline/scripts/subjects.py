@@ -6,6 +6,8 @@ Two modes (status.mode; NULL is the math run):
          (prompts/subject/solve.md). The old solution is never sent.
   aids   study aids around the book's own solution, which stays as the book wrote it:
          BOOK CHECK, TAKEAWAYS, ANSWER KEY, HINT (prompts/subject/aids.md).
+From prompt s5 the hint is one to three numbered tiers (%%% BEGIN HINT 1 ...; see
+common.split_hint_tiers); a reply with the single HINT block reads as one tier.
 Both prompts are filled from the subject's profile (prompts/subject/profiles/<slug>.md, one
 "## name" section per {{NAME}} placeholder) and the shared answer-key rules
 (prompts/subject/answer_key.md). The answer key goes to questions.answer_key as JSON
@@ -29,15 +31,22 @@ from common import (
     content_problems,
     fetch_question,
     get_status,
+    hint_piece_name,
+    hint_tier_checks,
+    hint_tier_of,
     is_blank,
+    kept_hint_tiers,
     log_event,
     model_display,
     now_iso,
     pipeline_wrote,
     q_dir,
     question_images,
+    queue_more_hints,
     read_text,
     repair_line_slips,
+    settle_hint_tiers,
+    split_hint_tiers,
     strip_code_fences,
     teximages_dir,
     upsert_status,
@@ -84,6 +93,9 @@ FIGURE_REF = re.compile(
     re.I,
 )
 IMG_RE = re.compile(r"\\includegraphics\s*(?:\[[^\]]*\])?\s*\{([^}]+)\}")
+# Hint markers of the numbered form (common.split_hint_tiers), for repair_reply.
+HINT_NUMBERED = re.compile(r"%%% (?:(?:BEGIN|END) )?HINT \d+")
+HINT_OPEN = re.compile(r"%%% (?:BEGIN )?HINT(?: \d+)?")
 
 
 def subj_cfg(cfg: dict) -> dict:
@@ -278,6 +290,9 @@ def repair_reply(text: str, markers: list[str]) -> tuple[str, list[str]]:
         if k >= len(markers):
             break
         s, want = lines[i].strip(), markers[k]
+        if want == "%%% BEGIN HINT" and any(HINT_NUMBERED.fullmatch(lines[x].strip()) for x in at[j:]):
+            repair_hint_tiers(lines, at[j:], notes)  # the hint is the last section
+            break
         if same(s, want):
             k += 1
             continue
@@ -311,14 +326,39 @@ def repair_reply(text: str, markers: list[str]) -> tuple[str, list[str]]:
     return "\n".join(line for i, line in enumerate(lines) if i not in drop), notes
 
 
+def repair_hint_tiers(lines: list[str], at: list[int], notes: list[str]) -> None:
+    """repair_reply for a hint written in numbered tiers (at: the marker lines from the hint on):
+    each opening marker ('%%% BEGIN HINT n', '%%% HINT n', or an unnumbered '%%% BEGIN HINT' among
+    numbered ones) is renumbered 1, 2, 3 in order, and an END line that closes an open tier under
+    another name ('%%% END HINT', '%%% END HINT m', the END of another section) is read as that
+    tier's END. Anything else is left for the checks to report."""
+    n, open_tier = 0, None
+    for i in at:
+        s = lines[i].strip()
+        if open_tier is None and HINT_OPEN.fullmatch(s):
+            n += 1
+            open_tier, want = n, f"%%% BEGIN HINT {n}"
+        elif open_tier is not None and s.startswith("%%% END"):
+            want, open_tier = f"%%% END HINT {open_tier}", None
+        else:
+            continue
+        if s != want:
+            lines[i] = want
+            notes.append(f"'{s}' read as '{want}'")
+
+
 def parse_reply(text: str, mode: str) -> tuple[dict | None, list[str]]:
     """Split a reply into its sections (after repair_reply). parts: solution, notes (None for
     NONE), takeaways, key_text, hint (solve); book_check, takeaways, key_text, hint (aids);
+    hint_tiers: every hint tier (one for a reply in the single-block form), hint being tier 1;
     repairs: what repair_reply changed."""
     markers = SOLVE_MARKERS if mode == "solve" else AIDS_MARKERS
     text, _ = strip_code_fences(text)
     text, repairs = repair_reply(text, markers)
-    sec, errors = split_sections(text, markers)
+    folded, tiers, herrs = split_hint_tiers(text.split("\n"))
+    if herrs:
+        return None, herrs
+    sec, errors = split_sections("\n".join(folded), markers)
     if sec is None:
         return None, errors
     lines, pos = sec["lines"], sec["pos"]
@@ -326,8 +366,11 @@ def parse_reply(text: str, mode: str) -> tuple[dict | None, list[str]]:
     def body(name: str) -> str:
         return "\n".join(lines[pos[f"%%% BEGIN {name}"] + 1: pos[f"%%% END {name}"]]).strip()
 
-    parts: dict = {"mode": mode, "takeaways": body("TAKEAWAYS"), "key_text": body("ANSWER KEY"), "hint": body("HINT"),
-                   "repairs": repairs}
+    hint = body("HINT")
+    if tiers is None:  # the single-block form: one tier
+        tiers = [hint] if hint else []
+    parts: dict = {"mode": mode, "takeaways": body("TAKEAWAYS"), "key_text": body("ANSWER KEY"),
+                   "hint": tiers[0] if tiers else hint, "hint_tiers": tiers, "repairs": repairs}
     if mode == "solve":
         parts["solution"] = body("SOLUTION")
         notes = body("NOTES")
@@ -719,31 +762,28 @@ def validate_reply(qid: int, text: str, cfg: dict, q: dict, mode: str, stored_an
         if not re.fullmatch(r"OK\.?", bc, flags=re.I):
             res["book_problem"] = bc[:300]
 
-    hint = parts["hint"] or ""
-    hb = cfg.get("hint_length_bounds_chars") or {}
-    if hb.get("min") is not None and len(hint) < hb["min"]:
-        res["hint_errors"].append(f"length: hint {len(hint)} chars < min {hb['min']}")
-    if hb.get("max") is not None and len(hint) > hb["max"]:
-        res["hint_errors"].append(f"length: hint {len(hint)} chars > max {hb['max']}")
-    res["hint_errors"] += [f"rules: {p}" for p in content_problems(hint)]
-    if key is not None:
-        res["hint_errors"] += hint_leaks(hint, key)
+    # Each hint tier gets the checks the single hint got; the leading tiers that pass are kept.
+    tiers = parts["hint_tiers"] or [parts["hint"] or ""]
+    tier_errs = hint_tier_checks(tiers, cfg, (lambda h: hint_leaks(h, key)) if key is not None else (lambda h: []))
 
     if compile_checks and not res["errors"]:
         from check_pdf import check_parts
 
         pieces = dict(main)
-        pieces["hint"] = hint
+        for k, tier in enumerate(tiers):
+            pieces[hint_piece_name(k)] = tier
         pdf = check_parts(pieces, cfg=cfg)
         res["pdf_ok"] = pdf["ok"]
         for e in pdf["errors"]:
-            (res["hint_errors"] if e.startswith("[hint]") else res["errors"]).append(f"pdf: {e}")
+            k = hint_tier_of(e, len(tiers))
+            (tier_errs[k] if k is not None else res["errors"]).append(f"pdf: {e}")
         if not pdf["ok"]:
             res["pdf_log_tail"] = pdf["log_tail"][-1200:]
         web = check_web_parts(pieces, q_dir(qid))
         res["web_ok"] = web["ok"]
         for e in web["errors"]:
-            (res["hint_errors"] if e.startswith("[hint]") else res["errors"]).append(f"web: {e}")
+            k = hint_tier_of(e, len(tiers))
+            (tier_errs[k] if k is not None else res["errors"]).append(f"web: {e}")
 
     if key is not None and not res["errors"]:
         why = reference_mismatch(key, stored_reference(stored_answer))
@@ -752,7 +792,7 @@ def validate_reply(qid: int, text: str, cfg: dict, q: dict, mode: str, stored_an
             res["stored_answer"] = stored_answer
             res["mismatch"] = why
     res["ok"] = not res["errors"]
-    res["hint_ok"] = not res["hint_errors"]
+    settle_hint_tiers(res, tiers, tier_errs)
     return res
 
 
@@ -780,7 +820,9 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
     key, kerrs = parse_key(parts["key_text"], q["latexcode"]) if parts else (None, [])
     if parts is None or key is None:
         return {"question_id": qid, "ok": False, "errors": errs + kerrs}
-    hint = parts["hint"] if row["hint_status"] == "ok" else None
+    tiers = kept_hint_tiers(row, d, parts["hint_tiers"])
+    hint = tiers[0] if tiers else None
+    more = json.dumps(tiers[1:], ensure_ascii=False) if len(tiers) > 1 else None
     acc_model = row["solver2_model"] if acc >= 2 else row["solver1_model"]
     acc_effort = row["solver2_effort"] if acc >= 2 else row["solver1_effort"]
     attribution = f"\\hfill [Generated by {model_display(cfg, acc_model)} at {acc_effort} effort]"
@@ -803,7 +845,8 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
 
     errors: list[str] = []
     pieces = {}
-    for name, body in (("final", final), ("takeaways", takeaways_value), ("answer", answer_value), ("hint", hint)):
+    tier_pieces = tuple((hint_piece_name(k), t) for k, t in enumerate(tiers))
+    for name, body in (("final", final), ("takeaways", takeaways_value), ("answer", answer_value), *tier_pieces):
         if body:
             pieces[name] = body
             r = check_pdf(body, cfg=cfg)
@@ -832,22 +875,24 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
     if replace_answer:
         fill_answer = None
     fill_hint = hint if (hint_empty and hint) else None
+    fill_more = more if fill_hint else None  # tiers 2-3 go wherever tier 1 goes
     gen_col = cfg.get("generated_solution_column") or "generated_solution"
     fields = ((gen_col, final), ("takeaways", takeaways_value), ("answer", fill_answer),
               ("answer_replace", replace_answer), ("answer_key", key_json), ("hints", fill_hint))
     write_json(d / "final_app.json", {"question_id": qid, "mode": mode, "subject": row["subject"],
-                                      **{f: v for f, v in fields}, "status": row["status"], "accepted_attempt": acc,
+                                      **{f: v for f, v in fields}, **({"more_hints": fill_more} if fill_more else {}),
+                                      "status": row["status"], "accepted_attempt": acc,
                                       "model": acc_model, "effort": acc_effort,
                                       "prompt_version": subj_cfg(cfg)["prompt_version"]})
     pc.execute(
         """INSERT OR REPLACE INTO finals
            (question_id, status, final_tex, solution_tex, rigor_tex, takeaways_tex, answer_type, answer_tex,
             hint_tex, answer_field_value, hint_field_value, answer_filled, hint_filled, prompt_version, created_at,
-            mode, answer_key, book_check)
-           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+            mode, answer_key, book_check, more_hints_tex)
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
         (qid, row["status"], final, parts.get("solution"), parts.get("notes"), parts["takeaways"], "KEY",
          answer_value, hint, fill_answer or replace_answer, fill_hint, 0, 0, subj_cfg(cfg)["prompt_version"], now_iso(),
-         mode, key_json, parts.get("book_check")),
+         mode, key_json, parts.get("book_check"), more),
     )
     for field, value in fields:
         if value is None:
@@ -856,6 +901,8 @@ def assemble_one(qid: int, cfg: dict, app, pc) -> dict:
                           (qid, field)).fetchone():
             pc.execute("INSERT INTO provenance (question_id, field, value, prompt_version, created_at) VALUES (?,?,?,?,?)",
                        (qid, field, value, subj_cfg(cfg)["prompt_version"], now_iso()))
+            if field == "hints":
+                queue_more_hints(pc, qid, fill_more, subj_cfg(cfg)["prompt_version"])
     pc.commit()
     upsert_status(pc, qid, assembled=1)
     log_event(pc, qid, "assemble", f"ok ({mode}); fills answer={fill_answer is not None} hint={fill_hint is not None}"

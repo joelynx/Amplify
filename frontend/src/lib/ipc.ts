@@ -63,6 +63,8 @@ export interface Question {
   answer_key: string | null;
   /** Pipeline-written takeaways for book-solved questions (LaTeX). */
   takeaways: string | null;
+  /** Hint tiers after `hints` (JSON array of LaTeX, tier 2 then 3); null = one hint. */
+  more_hints: string | null;
   tags: string[];
 }
 
@@ -78,6 +80,29 @@ export function bestSolution(
   if (q.generated_solution?.trim()) return q.generated_solution;
   if (q.takeaways?.trim()) return (q.solution ?? "") + TAKEAWAYS_HEADING + q.takeaways;
   return q.solution;
+}
+
+/** Hint tiers a question can have: `hints` plus up to two in `more_hints`. */
+export const MAX_HINT_TIERS = 3;
+
+/** The hints in the order the quiz reveals them: `hints` first, then the tiers
+ * in `more_hints` (mirrors `hint_tiers()` in Python). No first hint means no
+ * hints; blank, non-string or surplus entries and bad JSON are ignored. */
+export function hintTiers(q: Pick<Question, "hints"> & { more_hints?: string | null }): string[] {
+  if (!q.hints?.trim()) return [];
+  const tiers = [q.hints];
+  if (q.more_hints?.trim()) {
+    let extra: unknown = null;
+    try {
+      extra = JSON.parse(q.more_hints);
+    } catch {
+      extra = null;
+    }
+    if (Array.isArray(extra)) {
+      tiers.push(...extra.filter((t): t is string => typeof t === "string" && t.trim() !== ""));
+    }
+  }
+  return tiers.slice(0, MAX_HINT_TIERS);
 }
 
 /** A `Question` plus the cosine similarity from `get_similar_questions`. */
@@ -199,6 +224,8 @@ export interface QuizQuestion {
   latexcode: string;
   type: string | null;
   hints?: string | null;
+  /** `hints` and the tiers after it, in the order they are revealed. */
+  hint_tiers?: string[];
   instructions?: string | null;
   answer_fields: AnswerField[];
 }
@@ -217,6 +244,8 @@ export interface QuizQuestionFull {
   latexcode: string;
   type: string | null;
   hints: string | null;
+  /** `hints` and the tiers after it, in the order "Show additional hint" reveals them. */
+  hint_tiers?: string[];
   answer: string | null;
   solution: string | null;
   instructions: string | null;
@@ -576,7 +605,11 @@ interface PyWebViewApi {
     payload: QuizSelfAssessPayload,
   ) => Promise<QuizAnswerResult>;
   quiz_skip: (quiz_id: string, slot_index?: number) => Promise<QuizAnswerResult>;
-  quiz_request_hint: (quiz_id: string, slot_index: number) => Promise<{ hint: string | null; hint_index: number }>;
+  quiz_request_hint: (
+    quiz_id: string,
+    slot_index: number,
+    tier?: number,
+  ) => Promise<{ hint: string | null; hint_index: number; hint_count: number }>;
   quiz_finish: (quiz_id: string) => Promise<{ attempt_id: string; summary: QuizFinishSummary }>;
   list_quiz_attempts: (subject?: string | null, date_range?: DateRange | null) => Promise<QuizAttemptSummary[]>;
   get_quiz_attempt: (attempt_id: string) => Promise<QuizAttemptDetail | null>;
@@ -979,9 +1012,9 @@ export const ipc = {
     const api = await bridge();
     return api.quiz_skip(quiz_id, slot_index);
   },
-  async quiz_request_hint(quiz_id: string, slot_index: number) {
+  async quiz_request_hint(quiz_id: string, slot_index: number, tier = 1) {
     const api = await bridge();
-    return api.quiz_request_hint(quiz_id, slot_index);
+    return api.quiz_request_hint(quiz_id, slot_index, tier);
   },
   async quiz_finish(quiz_id: string) {
     const api = await bridge();

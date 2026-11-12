@@ -1,5 +1,6 @@
 {
-  "prompt_version": "v5",
+  "prompt_version": "v6",
+  "prompt_version_note": "v6 (owner 2026-11-11, tiered hints): the reply carries one to three hint tiers (%%% BEGIN HINT 1 ... %%% END HINT 3, the model chooses how many); tier 1 fills questions.hints and tiers 2-3 questions.more_hints (JSON list, app migration 012). Replies in the v5 single-hint form still parse as one tier. Subjects: s5, the same change.",
   "paths": {
     "app_db": "app/data/appdata/amplify.db",
     "teximages": "app/data/appdata/teximages"
@@ -20,7 +21,7 @@
   },
   "subjects": {
     "note": "run_subjects.py (owner, 2026-11-07): non-math subjects on the subscription, one system prompt per subject and mode (prompts/subject/solve.md or aids.md, filled from prompts/subject/profiles/<slug>.md). solve: questions whose own solution is missing or a Gemini one get a full solution, answer key, hint and takeaways; the old solution is never sent. aids: questions with the book's own solution get an answer key, hint and takeaways built on it; the book's solution stays. The answer key (pipeline/answer_key_spec.md) goes to questions.answer_key and, for aids, the takeaways to questions.takeaways (app migration 008). Only subjects listed in profiles are in scope.",
-    "prompt_version": "s4",
+    "prompt_version": "s5",
     "model": "claude-opus-5-5",
     "effort": "medium",
     "aids_effort": "medium",

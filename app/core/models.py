@@ -11,11 +11,33 @@ the common Generate / Browser representations small and JSON-serializable.
 
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass, field
 from typing import Any
 
 # Put between the source's own solution and the pipeline's takeaways (best_solution).
 TAKEAWAYS_HEADING = "\n\n\\medskip\\noindent\\textbf{Takeaways}\n\n"
+
+# Hint tiers a question can have: `hints` plus up to two in `more_hints`.
+MAX_HINT_TIERS = 3
+
+
+def hint_tiers(hints: str | None, more_hints: str | None) -> list[str]:
+    """The hints in the order the quiz reveals them: `hints` first, then the
+    tiers in `more_hints` (a JSON array of LaTeX strings). No first hint means
+    no hints at all; blank, non-string or surplus entries and a `more_hints`
+    that is not a JSON array are ignored."""
+    if not (hints and hints.strip()):
+        return []
+    tiers = [hints]
+    if more_hints and more_hints.strip():
+        try:
+            extra = json.loads(more_hints)
+        except ValueError:
+            extra = None
+        if isinstance(extra, list):
+            tiers += [t for t in extra if isinstance(t, str) and t.strip()]
+    return tiers[:MAX_HINT_TIERS]
 
 
 @dataclass(slots=True)
@@ -47,6 +69,12 @@ class Question:
     answer_key: str | None = None
     # Pipeline-written takeaways for book-solved questions (LaTeX, ends with its own attribution).
     takeaways: str | None = None
+    # Further hint tiers after `hints` (JSON array of LaTeX, tier 2 then 3); NULL = one hint.
+    more_hints: str | None = None
+
+    def hint_tiers(self) -> list[str]:
+        """`hints` and the tiers after it, in the order the quiz reveals them."""
+        return hint_tiers(self.hints, self.more_hints)
 
     def best_solution(self) -> str | None:
         """The solution to show: the generated one when there is one, else `solution`
