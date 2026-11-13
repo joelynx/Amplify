@@ -912,14 +912,18 @@ def content_problems(text: str) -> list[str]:
 
 def strip_math_wrappers(s: str) -> str:
     """Remove outer math delimiters, \\boxed{}, and a trailing period, in any
-    order of nesting (e.g. '\\( \\boxed{42}. \\)' -> '42')."""
+    order of nesting (e.g. '\\( \\boxed{42}. \\)' -> '42'). Delimiters are outer
+    only when the first one closes at the end: '\\(a\\), that is, \\(b\\)' is
+    two pieces of math in text and is left as it is."""
     s = s.strip()
     for _ in range(4):
         before = s
         s = s.rstrip(".").strip()
         for a, b in (("\\(", "\\)"), ("\\[", "\\]"), ("$$", "$$"), ("$", "$")):
             if s.startswith(a) and s.endswith(b) and len(s) >= len(a) + len(b):
-                s = s[len(a) : len(s) - len(b)].strip()
+                inner = s[len(a) : len(s) - len(b)]
+                if b not in inner.replace("\\$", ""):
+                    s = inner.strip()
         m = re.fullmatch(r"\\boxed\{(.*)\}", s, flags=re.S)
         if m:
             s = m.group(1).strip()
