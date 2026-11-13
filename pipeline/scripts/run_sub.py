@@ -98,6 +98,9 @@ ALLOWED_BODY_KEYS = {"model", "max_tokens", "messages", "system", "thinking", "o
 DATE_RE = re.compile(r"Today's date is \d{4}-\d{2}-\d{2}\.")
 EMAIL_RE = re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+")
 LIMIT_TEXT_RE = re.compile(r"usage limit|session limit|weekly limit|hit your (?:\w+ )?limit|limit reached|rate limit", re.I)
+# A limit on one model alone ("You've reached your Fable limit. Switch to another model to continue."):
+# that model's questions wait while the other models' questions go on.
+MODEL_LIMIT_RE = re.compile(r"switch to another model|reached your (?!(?:session|weekly|usage)\b)\w+ limit", re.I)
 RESET_RE = re.compile(r"resets\s+(?:(?P<mon>[A-Za-z]{3})[a-z]*\.?\s+(?P<day>\d{1,2}),?\s+(?:at\s+)?)?"
                       r"(?P<h>\d{1,2})(?::(?P<m>\d{2}))?\s*(?P<ap>[ap]m)\b(?:\s*\((?P<tz>[^)]+)\))?", re.I)
 # The turns Claude Code adds after a reply that did not end normally (the run is ended there).
@@ -930,6 +933,9 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
     def effort_of(qid: int, source: str) -> str:
         return sub_cfg(cfg)["review_effort"] if review else effort_for(cfg, source, qid)
 
+    def model_of(qid: int) -> str:
+        return ccfg["solver"]["model"] if review else model_for(cfg, qid)
+
     efforts = ({sub_cfg(cfg)["review_effort"]} if review else
                {cfg["solver"]["effort"], *(sub_cfg(cfg).get("effort_by_source") or {}).values(),
                 *(sub_cfg(cfg).get("effort_by_id") or {}).values(), *(v["effort"] for v in assigned(cfg).values())})
@@ -949,12 +955,17 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
         with ThreadPoolExecutor(max_workers=max(limits.values())) as ex:
             running: dict = {}
             paused_until = None  # kept until the wait: the replies still running can take several more rounds
+            parked: dict[str, tuple[float, str]] = {}  # model -> (until, why): a limit on that model alone
             while queue or running:
+                parked = {m: p for m, p in parked.items() if p[0] > time.time()}  # past its time: tried again
                 while queue and stop_reason is None:
-                    q = fetch_question(app, queue[0])
-                    if len(running) >= limits[effort_of(queue[0], q["source"])]:
+                    i = next((i for i, x in enumerate(queue) if model_of(x) not in parked), None)
+                    if i is None:
                         break
-                    qid = queue.pop(0)
+                    q = fetch_question(app, queue[i])
+                    if len(running) >= limits[effort_of(queue[i], q["source"])]:
+                        break
+                    qid = queue.pop(i)
                     images, reason = attachments(cfg, q)
                     if reason:  # a figure that cannot go with the question: not sent
                         upsert_status(pc, qid, status="skipped_image", note=reason, prompt_version=cfg["prompt_version"])
@@ -976,8 +987,12 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     fut = ex.submit(call_claude, qc, system_file, user_text(q, feedback), effort, None, images)
                     running[fut] = (qid, attempt, effort, [n for n, _ in images], qc)
                 if not running:
-                    break
-                done, _ = wait(running, return_when=FIRST_COMPLETED)
+                    if not queue or not parked or stop_reason:
+                        break
+                    until, why = min(parked.values())  # only the parked models' questions are left: wait as for a usage limit
+                    stop_reason, paused_until = "usage limit: " + why, until
+                    parked.clear()
+                done = wait(running, return_when=FIRST_COMPLETED)[0] if running else set()
                 for fut in done:
                     qid, attempt, effort, names, qc = running.pop(fut)
                     out = fut.result()
@@ -992,7 +1007,14 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     elif kind == "limited":
                         queue.insert(0, qid)  # nothing was used up; it goes again first
                         summary["limited"] += 1
-                        if stop_reason is None:
+                        model = qc["solver"]["model"]
+                        if stop_reason is None and MODEL_LIMIT_RE.search(info["why"]):
+                            if model not in parked:  # polled every 17 min at most, as a usage limit is
+                                until = min(float(info.get("resets_at") or time.time() + 900), time.time() + 1020)
+                                parked[model] = (until, info["why"])
+                                print(json.dumps({"parked": model, "until": datetime.fromtimestamp(until).strftime("%H:%M"),
+                                                  "why": info["why"]}), flush=True)
+                        elif stop_reason is None:
                             stop_reason = "usage limit: " + info["why"]
                             paused_until = info.get("resets_at")
                     elif kind == "stop":
