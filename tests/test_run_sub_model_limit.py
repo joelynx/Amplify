@@ -70,3 +70,53 @@ def test_other_model_goes_on_while_one_is_limited(tmp_path: Path, monkeypatch) -
 
     assert stored == [2, 4, 5, 1, 3]  # Opus went on while Fable waited
     assert 0 < clock.slept <= 1020    # one wait, polled as a usage limit is
+
+
+def test_a_used_up_model_window_parks_only_that_model(tmp_path: Path, monkeypatch) -> None:
+    """An account whose Fable limit is used up, refusing with no "switch to another model" text: the
+    refusal shows only Fable's own window full, so Fable waits and Opus goes on."""
+    path = tmp_path / "assign.json"
+    models = {1: FABLE, 2: OPUS, 3: FABLE, 4: OPUS}
+    path.write_text(json.dumps({"questions": {str(q): {"model": m, "effort": "high"} for q, m in models.items()}}),
+                    encoding="utf-8")
+    run_sub._ASSIGNED.clear()
+    cfg = {"solver": {"model": OPUS, "effort": "medium", "max_tokens": 32000},
+           "subscription": {"sources": ["S"], "assignments_file": str(path)}}
+    clock = FakeTime()
+    lift = clock.now + 600
+    stored: list[int] = []
+
+    def call(qc, sf, text, effort, mt, images):
+        info = {"status": "allowed", "unifiedWindows": {"five_hour": {"utilization": 0.1, "resetsAt": clock.now + 18000}}}
+        if qc["solver"]["model"] == FABLE and clock.now < lift:
+            info = {"status": "rejected", "rateLimitType": "seven_day_overage_included", "resetsAt": lift,
+                    "unifiedWindows": dict(info["unifiedWindows"])}
+        return {"seconds": 1, "events": [{"type": "rate_limit_event", "rate_limit_info": info}]}
+
+    def interpret(out: dict, qc: dict, version: str) -> dict:
+        if qc["solver"]["model"] == FABLE and clock.now < lift:
+            return {"kind": "limited", "why": "Usage limit reached", "resets_at": lift}
+        return {"kind": "ok", "warning": False}
+
+    monkeypatch.setattr(run_sub, "time", clock)
+    monkeypatch.setattr(run_sub, "LOGIN_FILE", tmp_path / "no-login.json")
+    monkeypatch.setattr(run_sub, "ACCOUNT_FILE", tmp_path / "no-account.json")
+    monkeypatch.setattr(run_sub, "CAP_STATE", tmp_path / "usage_cap_state.json")
+    monkeypatch.setattr(run_sub, "verify", lambda *a, **k: {"ok": True, "accepted": True, "claude_code_version": "t"})
+    monkeypatch.setattr(run_sub, "write_system_file", lambda cfg: (tmp_path / "system.md", None))
+    monkeypatch.setattr(run_sub, "acquire_lock", lambda force: None)
+    monkeypatch.setattr(run_sub, "LOCK", tmp_path / "run_sub.lock")
+    monkeypatch.setattr(run_sub, "keep_awake", lambda on: None)
+    monkeypatch.setattr(run_sub, "write_progress", lambda pc: None)
+    monkeypatch.setattr(run_sub, "candidates", lambda cfg, app, pc, ids: list(models))
+    monkeypatch.setattr(run_sub, "fetch_question", lambda app, qid: {"question_id": qid, "source": "S"})
+    monkeypatch.setattr(run_sub, "attachments", lambda cfg, q: ([], None))
+    monkeypatch.setattr(run_sub, "plan_attempt", lambda cfg, pc, qid, source: (1, None, False))
+    monkeypatch.setattr(run_sub, "user_text", lambda q, feedback: str(q["question_id"]))
+    monkeypatch.setattr(run_sub, "call_claude", call)
+    monkeypatch.setattr(run_sub, "interpret", interpret)
+    monkeypatch.setattr(run_sub, "store", lambda pc, qc, qid, *a: stored.append(qid))
+
+    run_sub.solve(cfg, None, None, None, None, 1, True, False)
+
+    assert stored == [2, 4, 1, 3]  # Opus went on while Fable waited for its window

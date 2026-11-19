@@ -1247,11 +1247,16 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
             started: dict = {}
             account_of: dict = {}  # the account each running reply started under
 
-            def on_limit(model: str, info: dict) -> None:
+            def on_limit(model: str, info: dict, readings: dict, probe: bool = False) -> None:
+                """A limit on one model (its questions wait, the other models' go on): a refused probe
+                (it asked for that model alone), the "switch to another model" message, or a refusal
+                in which only windows of that model's own are full (an account whose Fable limit is used
+                up); any other limit stops the run until its reset."""
                 nonlocal stop_reason, paused_until
                 if stop_reason is not None:
                     return
-                if MODEL_LIMIT_RE.search(info["why"]):
+                full = {w for w, (u, _) in readings.items() if u >= 1.0}
+                if probe or MODEL_LIMIT_RE.search(info["why"]) or (full and not full & SHARED_WINDOWS):
                     if model not in parked:  # polled every 17 min at most, as a usage limit is
                         until = min(float(info.get("resets_at") or time.time() + 900), time.time() + 1020)
                         parked[model] = (until, info["why"])
@@ -1271,7 +1276,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         if stop_reason is None and m not in parked and cap.probe_due(m, flying):
                             got = read_usage(cfg, m, version, cap, system_file.parent)
                             if got["kind"] == "limited":
-                                on_limit(m, got)
+                                on_limit(m, got, {}, probe=True)
                             elif got["kind"] == "stop" and stop_reason is None:
                                 stop_reason, wait_on_limit = got["why"], False
                     if stop_reason is not None:
@@ -1335,7 +1340,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     elif kind == "limited":
                         queue.insert(0, qid)  # nothing was used up; it goes again first
                         summary["limited"] += 1
-                        on_limit(qc["solver"]["model"], info)
+                        on_limit(qc["solver"]["model"], info, readings)
                     elif kind == "stop":
                         queue.insert(0, qid)
                         stop_reason = info["why"]
