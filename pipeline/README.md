@@ -189,14 +189,23 @@ window's usage per USD, stays under `max` less `margin`; so fewer run at once as
 usage rises. (Valuing running replies at their expected cost let windows end at
 0.97 and 0.90: the ones still running are the long ones, and one that runs to the
 token limit costs about 8% of a five-hour window.) Usage per USD is fitted from
-the readings once they span enough cost, else `prior_per_usd`. Until a model has
-a reading of its own, one of its requests runs at a time. When nothing may go,
-the run waits for the window's reset (checking every 17 minutes at most); a
-`/login` (the rewritten `~/.claude/.credentials.json`) starts the readings afresh
-at once. What is known of the account is kept in `pipeline/usage_cap_state.json`
-for the login it came under, so a restart does not send blind. Simulated on the
-POTD Fable replies, 1000 five-hour windows ended at 0.82 on average and never
-above 0.885.
+the readings once they span enough cost, else `prior_per_usd`. No question goes
+on a guess: every window its model counts toward needs a reading from the last
+`reading_max_age_min`, and a missing one (a new account, a reset window, a model
+not asked for a while) is read first by a one-word probe on that model ($0.009
+on Fable 5.2), never by a question; no probes go while a window is known to be
+over the cap. When nothing may go, the run waits for the window's reset (checking
+every 17 minutes at most). The account is Claude Code's
+`oauthAccount.accountUuid` in `~/.claude.json` (hashed; without one, the login
+file's timestamp), so a token refresh is not a new login; readings are kept per
+account in `pipeline/usage_cap_state.json`, a `/login` back to an account resumes
+what was known of it, a restart does not send blind, and a reply counts on the
+account it started under. Interactive Claude Code sessions on the same account
+use the same windows and the solver cannot see them until its next reading
+(2026-11-19: one took the account from 0.89 to 0.92 in ten minutes while the
+solver held), so `margin` is 0.05: the solver plans to 0.85 and leaves the rest
+for them. Simulated on the POTD Fable replies at margin 0.01, 1000 five-hour
+windows ended at 0.82 on average and never above 0.885.
 
 ```
 python pipeline/scripts/run_sub.py verify [--qid N] [--accept]   # free: capture the request on a local stand-in server and check it
