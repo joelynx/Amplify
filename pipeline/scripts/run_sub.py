@@ -950,22 +950,24 @@ def spent_usd(out: dict, info: dict, usd_per_token: float) -> float:
 
 
 class UsageCap:
-    """Sends a question only if every usage window its model counts toward stays at or under `max`:
-    the latest reading, plus the cost of the replies finished since, plus the replies still running
-    and this one, times the window's usage per USD. A running reply is valued at what the model's
-    replies that ran at least as long cost (mean, and 1.65 standard deviations of the total), and
-    never under its running time at the model's cost per second: the replies still running are the
-    long, costly ones (the 2026-11-19 run that valued them at the mean cost ended near 0.97).
-    Usage per USD is fitted from the readings once they span enough cost (rounded up a step of
-    0.01), else the cautious prior in config. A model with no reading of its own yet has one
-    request at a time. A new login (LOGIN_FILE rewritten) starts afresh. `running` is a list of
-    (model, start time)."""
+    """Sends a question only if every usage window its model counts toward stays at or under `max`
+    less `margin`: the latest reading, plus the cost of the replies finished since, plus every reply
+    still running and this one at the most a reply of its model can cost (its output token limit;
+    reply_max_usd, or the dearest seen), times the window's usage per USD. Usage is counted when a
+    reply finishes and the readings do not lag (2026-11-19: reading = 0.008 + 0.0215 x cost finished,
+    within rounding), so this holds the window under the cap whatever the running replies turn out
+    to cost; as usage rises fewer run at once. (Valuing them at their expected cost instead ended a
+    window near 0.97, then 0.90: the ones still running are the long, costly ones, and a reply that
+    runs to its token limit costs about 8% of a five-hour window.) Usage per USD is fitted from the
+    readings once they span enough cost (rounded up a step of 0.01), else the cautious prior in
+    config. A model with no reading of its own yet has one request at a time. A new login
+    (LOGIN_FILE rewritten) starts afresh. `running` is a list of (model, start time)."""
 
     def __init__(self, conf: dict, login_file: Path | None = None, state_file: Path | None = None):
         self.max = float(conf.get("max", 0.9))
-        self.plan = self.max - float(conf.get("margin", 0.02))  # room for the estimates' error
+        self.plan = self.max - float(conf.get("margin", 0.01))  # room for rounding and the fit's error
         self.prior = {k: float(v) for k, v in (conf.get("prior_per_usd") or {}).items()}
-        self.seed = {m: (float(v[0]), float(v[1])) for m, v in (conf.get("reply_cost_usd") or {}).items()}
+        self.worst = {m: float(v) for m, v in (conf.get("reply_max_usd") or {}).items()}
         self.login_file = login_file
         self.state_file = state_file  # what is known of the account, so a restart does not start blind
         self.stamp = self._stamp()
@@ -1059,43 +1061,23 @@ class UsageCap:
             return (max(u1 - u0, 0.0) + 0.01) / span
         return prior
 
-    def _expect(self, model: str, elapsed: float) -> tuple[float, float]:
-        """(mean, variance) of the cost of a reply of `model` that has run `elapsed` seconds."""
-        seed_mu, seed_sd = self.seed.get(model, (0.5, 0.5))
-        hist = self.hist.get(model) or []
-        if len(hist) < 5:
-            return max(seed_mu, 0.0), seed_sd * seed_sd
-        xs = [c for d, c in hist if d >= elapsed]
-        if len(xs) < 5:
-            xs = [c for _, c in sorted(hist)[-5:]]  # the five longest
-        mu = sum(xs) / len(xs)
-        var = sum((x - mu) ** 2 for x in xs) / (len(xs) - 1)
-        per_s = sum(c for _, c in hist) / max(sum(d for d, _ in hist), 1.0)
-        mu = max(mu, per_s * elapsed)
-        if len(hist) < 20:  # few replies yet, and the first to finish are the short ones
-            mu, var = max(mu, seed_mu), max(var, seed_sd * seed_sd)
-        return mu, var
+    def most(self, model: str) -> float:
+        """The most a reply of `model` can cost: reply_max_usd (its output token limit), or the dearest seen."""
+        seen = max((c for _, c in self.hist.get(model) or []), default=0.0)
+        return max(self.worst.get(model, 4.0), seen)
 
-    def _bound(self, flights: list[tuple[str, float]]) -> float:
-        mean = var = 0.0
-        for m, elapsed in flights:
-            mu, v = self._expect(m, elapsed)
-            mean, var = mean + mu, var + v
-        return mean + 1.65 * var ** 0.5
-
-    def projected(self, w: str, model: str, running: list[tuple[str, float]], now: float) -> float:
+    def projected(self, w: str, model: str, running: list[tuple[str, float]]) -> float:
         t, u, _ = self._last(w)
         after = sum(usd for end, usd, m in self.done if end > t and self._counts(w, m))
-        flights = [(m, now - s) for m, s in running if self._counts(w, m)] + [(model, 0.0)]
-        return u + self._per_usd(w) * (after + self._bound(flights))
+        flights = [m for m, _ in running if self._counts(w, m)] + [model]
+        return u + self._per_usd(w) * (after + sum(self.most(m) for m in flights))
 
     def over(self, model: str, running: list[tuple[str, float]], now: float | None = None) -> list[tuple[str, float]]:
         """The windows a question of `model` would take past the cap, with their projections."""
-        now = now if now is not None else time.time()
-        self._expire(now)
+        self._expire(now if now is not None else time.time())
         out = []
         for w in sorted(self._windows(model)):
-            p = self.projected(w, model, running, now)
+            p = self.projected(w, model, running)
             if p > self.plan:
                 out.append((w, p))
         return out

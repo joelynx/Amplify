@@ -1,10 +1,12 @@
 """run_sub.py's usage cap (owner 2026-11-19: "do not exceed 90% of usage on any account"): a question
-goes only if every usage window its model counts toward stays at or under the cap, counting the
-replies still running; otherwise the run waits for the window's reset or a new login."""
+goes only if every usage window its model counts toward stays under the cap with every reply still
+running, and this one, at the most a reply can cost; otherwise the run waits for the window's reset
+or a new login."""
 
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -13,19 +15,16 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "pipeline" / "scrip
 import run_sub  # noqa: E402
 
 FABLE, OPUS = "claude-fable-5-2", "claude-opus-5-5"
-CONF = {"max": 0.9, "prior_per_usd": {"five_hour": 0.05, "default": 0.05},
-        "reply_cost_usd": {FABLE: [0.42, 0.45], OPUS: [0.11, 0.1]}}
+CONF = {"max": 0.9, "margin": 0.01, "prior_per_usd": {"five_hour": 0.05, "default": 0.05},
+        "reply_max_usd": {FABLE: 3.6, OPUS: 2.8}}
 NOW = 1_800_000_000.0
 
 
-def event(windows: dict, status: str = "allowed", kind: str = "five_hour") -> dict:
-    return {"type": "rate_limit_event", "rate_limit_info": {
-        "status": status, "rateLimitType": kind,
-        "unifiedWindows": {w: {"utilization": u, "resetsAt": NOW + 3600} for w, u in windows.items()}}}
-
-
 def test_readings_take_every_window_and_a_rejection() -> None:
-    out = {"events": [event({"five_hour": 0.97, "seven_day": 0.41}),
+    out = {"events": [{"type": "rate_limit_event", "rate_limit_info": {
+                          "status": "allowed_warning", "rateLimitType": "five_hour", "utilization": 0.97,
+                          "unifiedWindows": {"five_hour": {"utilization": 0.97, "resetsAt": NOW + 3600},
+                                             "seven_day": {"utilization": 0.41, "resetsAt": NOW + 9e4}}}},
                       {"type": "rate_limit_event", "rate_limit_info": {
                           "status": "rejected", "rateLimitType": "seven_day_overage_included", "resetsAt": NOW + 60,
                           "unifiedWindows": {"five_hour": {"utilization": 0.2, "resetsAt": NOW + 3600}}}}]}
@@ -40,28 +39,24 @@ def test_one_at_a_time_until_the_first_reading() -> None:
     assert not cap.allows(FABLE, [(FABLE, NOW)], NOW)
 
 
-def test_running_replies_count_toward_the_cap() -> None:
-    cap = run_sub.UsageCap(CONF)  # plans to 0.88: max 0.9 less the 0.02 margin
+def test_every_running_reply_counts_at_its_most() -> None:
+    cap = run_sub.UsageCap(CONF)  # plans to 0.89
     cap.record(FABLE, NOW - 100, NOW - 10, {"five_hour": (0.5, NOW + 3600)}, 0.4)
-    # each Fable in flight at the seed while there are few replies: 0.05 * (0.42, plus 1.65 sd of the total)
-    assert cap.allows(FABLE, [], NOW)
-    assert cap.allows(FABLE, [(FABLE, NOW)] * 4, NOW)
-    assert not cap.allows(FABLE, [(FABLE, NOW)] * 12, NOW)
+    # 0.5 + 0.05 * ($0.4 finished since + $3.6 for each running reply and this one)
+    assert cap.allows(FABLE, [], NOW)                   # 0.70
+    assert cap.allows(FABLE, [(FABLE, NOW)], NOW)       # 0.88
+    assert not cap.allows(FABLE, [(FABLE, NOW)] * 2, NOW)
     cap.record(FABLE, NOW - 50, NOW - 5, {"five_hour": (0.86, NOW + 3600)}, 0.4)
     assert not cap.allows(FABLE, [], NOW)
     until, why = cap.held_until(FABLE, NOW)
     assert until == NOW + 3600 and "five_hour at 86%" in why
 
 
-def test_a_reply_that_has_run_long_counts_as_a_long_one() -> None:
+def test_the_most_a_reply_costs_is_the_larger_of_config_and_seen() -> None:
     cap = run_sub.UsageCap(CONF)
-    for i in range(30):  # short cheap replies, and a few long costly ones
-        secs, usd = (600, 2.0) if i % 6 == 0 else (60, 0.2)
-        cap.record(FABLE, NOW + 1000 * i, NOW + 1000 * i + secs, {}, usd)
-    fresh, _ = cap._expect(FABLE, 0)
-    long_run, _ = cap._expect(FABLE, 300)
-    assert abs(fresh - 0.5) < 1e-9 and long_run == 2.0
-    assert cap._expect(FABLE, 5000)[0] > 2.0  # past every finished one: at least its time at the cost per second
+    assert cap.most(FABLE) == 3.6 and cap.most("claude-other") == 4.0
+    cap.record(FABLE, NOW, NOW + 900, {}, 5.0)
+    assert cap.most(FABLE) == 5.0
 
 
 def test_a_models_own_window_holds_only_that_model() -> None:
@@ -88,8 +83,6 @@ def test_a_reset_window_and_a_new_login_start_afresh(tmp_path: Path) -> None:
     assert cap.allows(FABLE, [], NOW + 61)  # the window reset
     cap.record(FABLE, NOW - 50, NOW - 5, {"five_hour": (0.95, NOW + 3600)}, 0.4)
     assert not cap.allows(FABLE, [], NOW)
-    login.write_text("b")
-    import os
     os.utime(login, ns=(1, 1))
     assert cap.login_changed(NOW)
     assert cap.allows(FABLE, [], NOW) and not cap.allows(FABLE, [(FABLE, NOW)], NOW)
@@ -104,7 +97,6 @@ def test_a_restart_keeps_what_it_knew_of_the_same_login(tmp_path: Path) -> None:
     cap.record(FABLE, NOW - 100, NOW - 10, {"five_hour": (0.95, NOW + 3600)}, 0.4)
     again = run_sub.UsageCap(CONF, login, state)
     assert not again.allows(FABLE, [], NOW)  # it does not send blind to an account it knows is full
-    import os
     os.utime(login, ns=(1, 1))
     fresh = run_sub.UsageCap(CONF, login, state)
     assert fresh.allows(FABLE, [], NOW) and fresh.hist[FABLE] == [(90.0, 0.4)]  # another login; reply costs kept
@@ -136,7 +128,7 @@ def test_solve_waits_at_the_cap_for_the_reset(tmp_path: Path, monkeypatch) -> No
 
     def call(qc, sf, text, effort, mt, images):
         sent.append(clock.now)
-        u = 0.0 if clock.now >= reset else 0.70 + 0.05 * len(sent)  # each $1 reply uses 5%
+        u = 0.0 if clock.now >= reset else 0.55 + 0.05 * len(sent)  # each $1 reply uses 5%
         clock.now += 30
         return {"seconds": 30, "events": [
             {"type": "rate_limit_event", "rate_limit_info": {"status": "allowed", "unifiedWindows": {
@@ -164,7 +156,6 @@ def test_solve_waits_at_the_cap_for_the_reset(tmp_path: Path, monkeypatch) -> No
     run_sub.solve(cfg, None, None, None, None, 1, True, False)
 
     assert len(sent) == 7
-    before = [t for t in sent if t < reset]
-    # readings 0.75 and 0.80 at the first two; a third would project to 0.80 + 0.05 * ($1 just spent
-    # + $1.16 for the next) = 0.91, past the 0.88 the cap plans to, so the rest waited for the reset
-    assert len(before) == 2 and all(t >= reset for t in sent[2:])
+    # readings 0.60, 0.65 and 0.70 at the first three; a fourth would project to 0.70 + 0.05 * ($1 just
+    # spent + $3.6 at most for it) = 0.93, past the 0.89 the cap plans to, so the rest waited for the reset
+    assert len([t for t in sent if t < reset]) == 3 and all(t >= reset for t in sent[3:])
