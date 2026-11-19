@@ -911,6 +911,7 @@ def keep_awake(on: bool) -> None:
 # account's usage when it started (rate_limit_event: utilization 0-1 per window, every window of
 # the plan; a model's own window only on that model's requests).
 LOGIN_FILE = Path.home() / ".claude" / ".credentials.json"  # rewritten by /login: a new account
+CAP_STATE = PIPELINE_DIR / "usage_cap_state.json"  # the readings so far, for the login they came under
 SHARED_WINDOWS = {"five_hour", "seven_day"}  # count every model's replies; other windows only their model's
 
 
@@ -951,22 +952,29 @@ def spent_usd(out: dict, info: dict, usd_per_token: float) -> float:
 class UsageCap:
     """Sends a question only if every usage window its model counts toward stays at or under `max`:
     the latest reading, plus the cost of the replies finished since, plus the replies still running
-    and this one (each model's mean cost and 1.65 standard deviations of the total), times the
-    window's usage per USD. Usage per USD is fitted from the readings once they span enough cost
-    (rounded up a step of 0.01), else the cautious prior in config. A model with no reading of its
-    own yet has one request at a time. A new login (LOGIN_FILE rewritten) starts afresh."""
+    and this one, times the window's usage per USD. A running reply is valued at what the model's
+    replies that ran at least as long cost (mean, and 1.65 standard deviations of the total), and
+    never under its running time at the model's cost per second: the replies still running are the
+    long, costly ones (the 2026-11-19 run that valued them at the mean cost ended near 0.97).
+    Usage per USD is fitted from the readings once they span enough cost (rounded up a step of
+    0.01), else the cautious prior in config. A model with no reading of its own yet has one
+    request at a time. A new login (LOGIN_FILE rewritten) starts afresh. `running` is a list of
+    (model, start time)."""
 
-    def __init__(self, conf: dict, login_file: Path | None = None):
+    def __init__(self, conf: dict, login_file: Path | None = None, state_file: Path | None = None):
         self.max = float(conf.get("max", 0.9))
+        self.plan = self.max - float(conf.get("margin", 0.02))  # room for the estimates' error
         self.prior = {k: float(v) for k, v in (conf.get("prior_per_usd") or {}).items()}
         self.seed = {m: (float(v[0]), float(v[1])) for m, v in (conf.get("reply_cost_usd") or {}).items()}
         self.login_file = login_file
+        self.state_file = state_file  # what is known of the account, so a restart does not start blind
         self.stamp = self._stamp()
         self.since = 0.0  # readings and costs of runs started before this belong to an earlier login
         self.points: list[tuple[float, str, dict]] = []  # (start, model, {window: (u, reset)})
         self.done: list[tuple[float, float, str]] = []    # (finished, usd, model)
-        self.costs: dict[str, list[float]] = {}
+        self.hist: dict[str, list[tuple[float, float]]] = {}  # model -> (seconds, usd) of its finished replies
         self.tokens = [0.0, 0.0]  # usd, output tokens of the costed replies: usd per token for cut-off runs
+        self._load()
 
     def _stamp(self):
         try:
@@ -974,12 +982,35 @@ class UsageCap:
         except OSError:
             return None
 
+    def _load(self) -> None:
+        try:
+            s = json.loads(self.state_file.read_text(encoding="utf-8")) if self.state_file else None
+        except (OSError, ValueError):
+            s = None
+        if s:
+            self.hist = {m: [tuple(x) for x in xs] for m, xs in (s.get("hist") or {}).items()}
+            self.tokens = list(s.get("tokens") or self.tokens)
+        if s and s.get("stamp") == self.stamp:  # the same login: its readings still apply
+            self.since = float(s.get("since") or 0.0)
+            self.points = [(t, m, {w: tuple(v) for w, v in r.items()}) for t, m, r in s.get("points") or []]
+            self.done = [tuple(x) for x in s.get("done") or []]
+
+    def _save(self) -> None:
+        if not self.state_file:
+            return
+        tmp = self.state_file.with_suffix(".tmp")
+        tmp.write_text(json.dumps({"stamp": self.stamp, "since": self.since, "points": self.points[-2000:],
+                                   "done": self.done[-4000:], "tokens": self.tokens,
+                                   "hist": {m: xs[-2000:] for m, xs in self.hist.items()}}), encoding="utf-8")
+        tmp.replace(self.state_file)
+
     def login_changed(self, now: float | None = None) -> bool:
         stamp = self._stamp()
         if stamp == self.stamp:
             return False
         self.stamp, self.since = stamp, now if now is not None else time.time()
         self.points, self.done = [], []
+        self._save()
         return True
 
     def usd_per_token(self) -> float:
@@ -987,20 +1018,20 @@ class UsageCap:
 
     def record(self, model: str, start: float, end: float, readings: dict, usd: float, tokens: int = 0) -> None:
         if usd > 0:
-            self.costs.setdefault(model, []).append(usd)
+            self.hist.setdefault(model, []).append((max(end - start, 0.0), usd))
             if tokens:
                 self.tokens[0] += usd
                 self.tokens[1] += tokens
-        if start < self.since:
-            return
-        self.done.append((end, usd, model))
-        for w, (u, _) in readings.items():
-            last = self._last(w)
-            if last is not None and start > last[0] and u < last[1] - 0.02:  # the window reset since (or another account)
-                for _, _, r in self.points:
-                    r.pop(w, None)
-        if readings:
-            self.points.append((start, model, dict(readings)))
+        if start >= self.since:
+            self.done.append((end, usd, model))
+            for w, (u, _) in readings.items():
+                last = self._last(w)
+                if last is not None and start > last[0] and u < last[1] - 0.02:  # the window reset since (or another account)
+                    for _, _, r in self.points:
+                        r.pop(w, None)
+            if readings:
+                self.points.append((start, model, dict(readings)))
+        self._save()
 
     def _expire(self, now: float) -> None:
         for _, _, r in self.points:
@@ -1028,37 +1059,49 @@ class UsageCap:
             return (max(u1 - u0, 0.0) + 0.01) / span
         return prior
 
-    def _bound(self, models: list[str]) -> float:
+    def _expect(self, model: str, elapsed: float) -> tuple[float, float]:
+        """(mean, variance) of the cost of a reply of `model` that has run `elapsed` seconds."""
+        seed_mu, seed_sd = self.seed.get(model, (0.5, 0.5))
+        hist = self.hist.get(model) or []
+        if len(hist) < 5:
+            return max(seed_mu, 0.0), seed_sd * seed_sd
+        xs = [c for d, c in hist if d >= elapsed]
+        if len(xs) < 5:
+            xs = [c for _, c in sorted(hist)[-5:]]  # the five longest
+        mu = sum(xs) / len(xs)
+        var = sum((x - mu) ** 2 for x in xs) / (len(xs) - 1)
+        per_s = sum(c for _, c in hist) / max(sum(d for d, _ in hist), 1.0)
+        mu = max(mu, per_s * elapsed)
+        if len(hist) < 20:  # few replies yet, and the first to finish are the short ones
+            mu, var = max(mu, seed_mu), max(var, seed_sd * seed_sd)
+        return mu, var
+
+    def _bound(self, flights: list[tuple[str, float]]) -> float:
         mean = var = 0.0
-        for m in models:
-            xs = self.costs.get(m) or []
-            if len(xs) >= 5:
-                mu = sum(xs) / len(xs)
-                sd2 = sum((x - mu) ** 2 for x in xs) / (len(xs) - 1)
-            else:
-                mu, sd = self.seed.get(m, (0.5, 0.5))
-                sd2 = sd * sd
-            mean, var = mean + mu, var + sd2
+        for m, elapsed in flights:
+            mu, v = self._expect(m, elapsed)
+            mean, var = mean + mu, var + v
         return mean + 1.65 * var ** 0.5
 
-    def projected(self, w: str, model: str, running: list[str]) -> float:
+    def projected(self, w: str, model: str, running: list[tuple[str, float]], now: float) -> float:
         t, u, _ = self._last(w)
         after = sum(usd for end, usd, m in self.done if end > t and self._counts(w, m))
-        flights = [m for m in [*running, model] if self._counts(w, m) or m == model]
+        flights = [(m, now - s) for m, s in running if self._counts(w, m)] + [(model, 0.0)]
         return u + self._per_usd(w) * (after + self._bound(flights))
 
-    def over(self, model: str, running: list[str], now: float | None = None) -> list[tuple[str, float]]:
+    def over(self, model: str, running: list[tuple[str, float]], now: float | None = None) -> list[tuple[str, float]]:
         """The windows a question of `model` would take past the cap, with their projections."""
-        self._expire(now if now is not None else time.time())
+        now = now if now is not None else time.time()
+        self._expire(now)
         out = []
         for w in sorted(self._windows(model)):
-            p = self.projected(w, model, running)
-            if p > self.max:
+            p = self.projected(w, model, running, now)
+            if p > self.plan:
                 out.append((w, p))
         return out
 
-    def allows(self, model: str, running: list[str], now: float | None = None) -> bool:
-        if not any(m == model for _, m, _ in self.points) and model in running:
+    def allows(self, model: str, running: list[tuple[str, float]], now: float | None = None) -> bool:
+        if not any(m == model for _, m, _ in self.points) and any(m == model for m, _ in running):
             return False  # its own windows are not known yet: one at a time
         if not self.points and running:
             return False
@@ -1127,7 +1170,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
             running: dict = {}
             paused_until = None  # kept until the wait: the replies still running can take several more rounds
             parked: dict[str, tuple[float, str]] = {}  # model -> (until, why): a limit on that model alone
-            cap = UsageCap(sub_cfg(cfg).get("usage_cap") or {}, LOGIN_FILE)
+            cap = UsageCap(sub_cfg(cfg).get("usage_cap") or {}, LOGIN_FILE, CAP_STATE)
             started: dict = {}
             while queue or running:
                 if cap.login_changed():  # another account: its own usage, and its own model limits
@@ -1135,7 +1178,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     print(json.dumps({"login": "changed", "at": now_iso()}), flush=True)
                 parked = {m: p for m, p in parked.items() if p[0] > time.time()}  # past its time: tried again
                 while queue and stop_reason is None:
-                    flying = [v[4]["solver"]["model"] for v in running.values()]
+                    flying = [(v[4]["solver"]["model"], started[f]) for f, v in running.items()]
                     ok = {m for m in {model_of(x) for x in queue} - set(parked) if cap.allows(m, flying)}
                     i = next((i for i, x in enumerate(queue) if model_of(x) in ok), None)
                     if i is None:

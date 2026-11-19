@@ -46,6 +46,8 @@ def test_other_model_goes_on_while_one_is_limited(tmp_path: Path, monkeypatch) -
         return {"kind": "ok", "warning": False}
 
     monkeypatch.setattr(run_sub, "time", clock)
+    monkeypatch.setattr(run_sub, "LOGIN_FILE", tmp_path / "no-login.json")
+    monkeypatch.setattr(run_sub, "CAP_STATE", tmp_path / "usage_cap_state.json")
     monkeypatch.setattr(run_sub, "verify", lambda *a, **k: {"ok": True, "accepted": True, "claude_code_version": "t"})
     monkeypatch.setattr(run_sub, "write_system_file", lambda cfg: (tmp_path / "system.md", None))
     monkeypatch.setattr(run_sub, "acquire_lock", lambda force: None)

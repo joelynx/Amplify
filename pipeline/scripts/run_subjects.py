@@ -288,13 +288,14 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
         with ThreadPoolExecutor(max_workers=limit) as ex:
             running: dict = {}
             model = ccfg["solver"]["model"]
-            cap = run_sub.UsageCap((cfg.get("subscription") or {}).get("usage_cap") or {}, run_sub.LOGIN_FILE)
+            cap = run_sub.UsageCap((cfg.get("subscription") or {}).get("usage_cap") or {}, run_sub.LOGIN_FILE,
+                                   run_sub.CAP_STATE)
             started: dict = {}
             while queue or running:
                 if cap.login_changed():
                     print(json.dumps({"login": "changed", "at": now_iso()}), flush=True)
                 while (queue and stop_reason is None and len(running) < limit
-                       and cap.allows(model, [model] * len(running))):
+                       and cap.allows(model, [(model, started[f]) for f in running])):
                     x = queue.pop(0)
                     qid, mode = x["id"], x["mode"]
                     q = fetch_question(app, qid)
