@@ -30,6 +30,7 @@
  {"potd": 1846, "field": "more_hints", "old": "from $v_1$ to v_2$.)", "new": "from $v_1$ to $v_2$.)", "kind": "latex", "reason": "opening $ missing"},
  {"potd": 1848, "field": "solution", "drop": true, "kind": "junk", "reason": "a joke, not a solution"},
  {"potd": 1874, "field": "solution", "drop": true, "kind": "junk", "reason": "a joke, not a solution"},
+ {"potd": 1897, "field": "answer", "old": "10", "new": "90", "kind": "wrong", "reason": "the stored answer counts the complement of what the question asks for; both replies give 90 (checked 2026-11-19, owner approved)"},
  {"potd": 1913, "field": "hints", "old": "Consider how \\binom{4n}{2n} and \\binom{2n]{n} relate", "new": "Consider how $\\binom{4n}{2n}$ and $\\binom{2n}{n}$ relate", "kind": "latex", "reason": "math outside $ and a ] for a }"},
  {"potd": 1916, "field": "more_hints", "old": "$(BQD) \\cap", "new": "$(BQD) \\cap AD$", "kind": "latex", "reason": "the hint stops mid-formula; completed by the problem's symmetry (A and B, C and D, P and Q swapped), which takes (APC) and BC to (BQD) and AD"},
  {"potd": 2017, "field": "more_hints", "old": "$\\agle DO_1_O2=60^{\\circ}-$....", "new": "$\\angle DO_1O_2=60^{\\circ}-\\cdots$.", "kind": "latex", "reason": "\\agle for \\angle, a double subscript and the math closed too early"},
