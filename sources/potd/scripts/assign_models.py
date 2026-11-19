@@ -12,6 +12,10 @@ A row with no valid D gets its source's median. D itself is not stored in the ba
 import csv, json, sqlite3, statistics, sys, collections
 
 OPUS, FABLE = "claude-opus-5-5", "claude-fable-5-2"
+# Owner decisions on single questions after their runs: (model, effort, why), over the rule.
+OVERRIDES = {
+    26331: (OPUS, "high", "Fable 5.2 high ran to the 128k output token limit twice (owner 2026-11-19: try Opus 5.5 high)"),
+}
 
 
 def bucket(d: float) -> tuple[str, str]:
@@ -42,7 +46,10 @@ def main(potd_csv: str, db: str, map_csv: str, out: str) -> None:
     for qid, key, d, solved in rows:
         if solved:
             continue
-        if key in hard:
+        if qid in OVERRIDES:
+            model, effort, _ = OVERRIDES[qid]
+            why["override"] += 1
+        elif key in hard:
             model, effort = FABLE, "high"
             why["hard source"] += 1
         else:
