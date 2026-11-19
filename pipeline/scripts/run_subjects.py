@@ -289,13 +289,24 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
             running: dict = {}
             model = ccfg["solver"]["model"]
             cap = run_sub.UsageCap((cfg.get("subscription") or {}).get("usage_cap") or {}, run_sub.LOGIN_FILE,
-                                   run_sub.CAP_STATE)
+                                   run_sub.CAP_STATE, run_sub.ACCOUNT_FILE)
             started: dict = {}
+            account_of: dict = {}  # the account each running reply started under
+
+            def flying() -> list[tuple[str, float]]:
+                return [(model, started[f]) for f in running if account_of[f] == cap.account]
+
             while queue or running:
                 if cap.login_changed():
-                    print(json.dumps({"login": "changed", "at": now_iso()}), flush=True)
+                    print(json.dumps({"login": "changed", "account": cap.account, "at": now_iso()}), flush=True)
+                if queue and stop_reason is None and cap.probe_due(model, flying()):
+                    got = run_sub.read_usage(ccfg, model, version, cap, run_sub.SUB_CWD.parent)
+                    if got["kind"] == "limited":
+                        stop_reason, paused_until = "usage limit: " + got["why"], got.get("resets_at")
+                    elif got["kind"] == "stop":
+                        stop_reason, wait_on_limit = got["why"], False
                 while (queue and stop_reason is None and len(running) < limit
-                       and cap.allows(model, [(model, started[f]) for f in running])):
+                       and cap.allows(model, flying())):
                     x = queue.pop(0)
                     qid, mode = x["id"], x["mode"]
                     q = fetch_question(app, qid)
@@ -320,7 +331,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     fut = ex.submit(run_sub.call_claude, ccfg, files[(mode, x["subject"])],
                                     subjects.user_text(q, mode, feedback, cfg), effort, None, images)
                     running[fut] = (x, attempt, effort, [name for name, _ in images])
-                    started[fut] = time.time()
+                    started[fut], account_of[fut] = time.time(), cap.account
                 if not running:
                     held = cap.held_until(model) if queue and stop_reason is None else None
                     if not held:
@@ -338,7 +349,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     info["account_usage"] = readings
                     tokens = int(((info.get("result") or {}).get("usage") or {}).get("output_tokens") or 0) if kind == "ok" else 0
                     cap.record(model, started.pop(fut), time.time(), readings,
-                               run_sub.spent_usd(out, info, cap.usd_per_token()), tokens)
+                               run_sub.spent_usd(out, info, cap.usd_per_token()), tokens, account_of.pop(fut))
                     raw = run_sub.save_failure(qid, attempt, out, info) if kind in ("error", "stop", "cut") else None
                     if kind in ("ok", "cut"):
                         run_sub.store(pc, ccfg, qid, attempt, effort, info, out.get("seconds", 0), names)
@@ -369,7 +380,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         while time.time() < deadline:  # by the clock: one long sleep does not count time the machine sleeps
                             time.sleep(min(60, max(1, deadline - time.time())))
                             if cap.login_changed():
-                                print(json.dumps({"login": "changed", "at": now_iso()}), flush=True)
+                                print(json.dumps({"login": "changed", "account": cap.account, "at": now_iso()}), flush=True)
                                 break
                         stop_reason = paused_until = None
                         continue

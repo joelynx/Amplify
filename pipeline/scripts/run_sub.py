@@ -910,9 +910,32 @@ def keep_awake(on: bool) -> None:
 # Owner 2026-11-19: "do not exceed 90% of usage on any account." Each claude run reports the
 # account's usage when it started (rate_limit_event: utilization 0-1 per window, every window of
 # the plan; a model's own window only on that model's requests).
-LOGIN_FILE = Path.home() / ".claude" / ".credentials.json"  # rewritten by /login: a new account
-CAP_STATE = PIPELINE_DIR / "usage_cap_state.json"  # the readings so far, for the login they came under
+ACCOUNT_FILE = Path.home() / ".claude.json"  # Claude Code's settings: oauthAccount is the logged-in account
+LOGIN_FILE = Path.home() / ".claude" / ".credentials.json"  # its timestamp names the login where there is no oauthAccount
+CAP_STATE = PIPELINE_DIR / "usage_cap_state.json"  # the readings so far, per account
 SHARED_WINDOWS = {"five_hour", "seven_day"}  # count every model's replies; other windows only their model's
+PROBE_SYSTEM, PROBE_TEXT = "Reply with the single word OK.", "OK?"
+PROBE_RETRY = 300  # seconds before a probe that brought no reading goes again
+
+
+def logged_in_account(account_file: Path | None, login_file: Path | None) -> str | None:
+    """A name for the logged-in account: a hash of Claude Code's oauthAccount.accountUuid (a token
+    refresh rewrites the login file but keeps the account), else the login file's timestamp; None
+    while the settings cannot be read (Claude Code may be writing them)."""
+    acct = None
+    if account_file:
+        try:
+            acct = (json.loads(account_file.read_text(encoding="utf-8")).get("oauthAccount") or {}).get("accountUuid")
+        except FileNotFoundError:
+            pass
+        except (OSError, ValueError, AttributeError):
+            return None
+    if acct:
+        return "account " + hashlib.sha256(str(acct).encode()).hexdigest()[:12]
+    try:
+        return f"login {login_file.stat().st_mtime_ns}" if login_file else "unknown"
+    except OSError:
+        return "unknown"
 
 
 def usage_readings(out: dict) -> dict[str, tuple[float, float | None]]:
@@ -960,29 +983,46 @@ class UsageCap:
     window near 0.97, then 0.90: the ones still running are the long, costly ones, and a reply that
     runs to its token limit costs about 8% of a five-hour window.) Usage per USD is fitted from the
     readings once they span enough cost (rounded up a step of 0.01), else the cautious prior in
-    config. A model with no reading of its own yet has one request at a time. A new login
-    (LOGIN_FILE rewritten) starts afresh. `running` is a list of (model, start time)."""
+    config. Nothing goes on a guess: every window a question counts toward needs a reading from the
+    last reading_max_age_min, and where one is missing (a new account, a reset window, a model not
+    asked for a while) a one-word probe (read_usage) reads it first. Readings are kept per account
+    (logged_in_account), so a /login back to an account resumes what was known of it; a reply is
+    counted on the account it started under. `running` is a list of (model, start time) on the
+    current account."""
 
-    def __init__(self, conf: dict, login_file: Path | None = None, state_file: Path | None = None):
+    def __init__(self, conf: dict, login_file: Path | None = None, state_file: Path | None = None,
+                 account_file: Path | None = None):
         self.max = float(conf.get("max", 0.9))
         self.plan = self.max - float(conf.get("margin", 0.01))  # room for rounding and the fit's error
         self.prior = {k: float(v) for k, v in (conf.get("prior_per_usd") or {}).items()}
         self.worst = {m: float(v) for m, v in (conf.get("reply_max_usd") or {}).items()}
-        self.login_file = login_file
-        self.state_file = state_file  # what is known of the account, so a restart does not start blind
-        self.stamp = self._stamp()
-        self.since = 0.0  # readings and costs of runs started before this belong to an earlier login
-        self.points: list[tuple[float, str, dict]] = []  # (start, model, {window: (u, reset)})
-        self.done: list[tuple[float, float, str]] = []    # (finished, usd, model)
+        self.max_age = 60 * float(conf.get("reading_max_age_min", 20))  # older: the account's owner may have used it since
+        self.login_file, self.account_file = login_file, account_file
+        self.state_file = state_file  # what is known of each account, so a restart does not start blind
+        self.accounts: dict[str, dict] = {}  # account -> {"points": [(start, model, {window: (u, reset)})],
+        #                                                  "done": [(finished, usd, model)]}
         self.hist: dict[str, list[tuple[float, float]]] = {}  # model -> (seconds, usd) of its finished replies
         self.tokens = [0.0, 0.0]  # usd, output tokens of the costed replies: usd per token for cut-off runs
+        self.probed: dict[str, float] = {}  # model -> when its last probe went (this account)
         self._load()
+        self.account = None
+        for _ in range(10):  # None while Claude Code writes its settings
+            self.account = logged_in_account(account_file, login_file)
+            if self.account:
+                break
+            time.sleep(0.2)
+        self.account = self.account or "unknown"
 
-    def _stamp(self):
-        try:
-            return self.login_file.stat().st_mtime_ns if self.login_file else None
-        except OSError:
-            return None
+    @property
+    def points(self) -> list:
+        return self._acct()["points"]
+
+    @property
+    def done(self) -> list:
+        return self._acct()["done"]
+
+    def _acct(self, account: str | None = None) -> dict:
+        return self.accounts.setdefault(account or self.account, {"points": [], "done": []})
 
     def _load(self) -> None:
         try:
@@ -992,70 +1032,72 @@ class UsageCap:
         if s:
             self.hist = {m: [tuple(x) for x in xs] for m, xs in (s.get("hist") or {}).items()}
             self.tokens = list(s.get("tokens") or self.tokens)
-        if s and s.get("stamp") == self.stamp:  # the same login: its readings still apply
-            self.since = float(s.get("since") or 0.0)
-            self.points = [(t, m, {w: tuple(v) for w, v in r.items()}) for t, m, r in s.get("points") or []]
-            self.done = [tuple(x) for x in s.get("done") or []]
+            self.accounts = {a: {"points": [(t, m, {w: tuple(v) for w, v in r.items()}) for t, m, r in st.get("points") or []],
+                                 "done": [tuple(x) for x in st.get("done") or []]}
+                             for a, st in (s.get("accounts") or {}).items()}
 
     def _save(self) -> None:
         if not self.state_file:
             return
         tmp = self.state_file.with_suffix(".tmp")
-        tmp.write_text(json.dumps({"stamp": self.stamp, "since": self.since, "points": self.points[-2000:],
-                                   "done": self.done[-4000:], "tokens": self.tokens,
-                                   "hist": {m: xs[-2000:] for m, xs in self.hist.items()}}), encoding="utf-8")
+        tmp.write_text(json.dumps({"accounts": {a: {"points": st["points"][-2000:], "done": st["done"][-4000:]}
+                                                for a, st in self.accounts.items()},
+                                   "tokens": self.tokens, "hist": {m: xs[-2000:] for m, xs in self.hist.items()}}),
+                       encoding="utf-8")
         tmp.replace(self.state_file)
 
-    def login_changed(self, now: float | None = None) -> bool:
-        stamp = self._stamp()
-        if stamp == self.stamp:
+    def login_changed(self) -> bool:
+        """Whether another account is logged in now (then its own readings apply)."""
+        acct = logged_in_account(self.account_file, self.login_file)
+        if acct is None or acct == self.account:
             return False
-        self.stamp, self.since = stamp, now if now is not None else time.time()
-        self.points, self.done = [], []
+        self.account, self.probed = acct, {}
         self._save()
         return True
 
     def usd_per_token(self) -> float:
         return self.tokens[0] / self.tokens[1] if self.tokens[1] > 1e5 else 3e-5
 
-    def record(self, model: str, start: float, end: float, readings: dict, usd: float, tokens: int = 0) -> None:
-        if usd > 0:
+    def record(self, model: str, start: float, end: float, readings: dict, usd: float, tokens: int = 0,
+               account: str | None = None, probe: bool = False) -> None:
+        """A finished run of `model` (on `account`, the one it started under; default the current one)."""
+        if usd > 0 and not probe:
             self.hist.setdefault(model, []).append((max(end - start, 0.0), usd))
             if tokens:
                 self.tokens[0] += usd
                 self.tokens[1] += tokens
-        if start >= self.since:
-            self.done.append((end, usd, model))
-            for w, (u, _) in readings.items():
-                last = self._last(w)
-                if last is not None and start > last[0] and u < last[1] - 0.02:  # the window reset since (or another account)
-                    for _, _, r in self.points:
-                        r.pop(w, None)
-            if readings:
-                self.points.append((start, model, dict(readings)))
+        st = self._acct(account)
+        st["done"].append((end, usd, model))
+        for w, (u, _) in readings.items():
+            prev = [(t, r) for t, _, r in st["points"] if w in r and t < start and _live(r[w], end)]
+            if prev and u < max(prev, key=lambda p: p[0])[1][w][0] - 0.02:  # the window reset since
+                for _, r in prev:
+                    r[w] = (r[w][0], start)  # ended
+        if readings:
+            st["points"].append((start, model, dict(readings)))
         self._save()
 
-    def _expire(self, now: float) -> None:
-        for _, _, r in self.points:
-            for w in [w for w, (_, reset) in r.items() if reset is not None and float(reset) <= now]:
-                del r[w]
+    def _readings(self, w: str, now: float) -> list[tuple[float, float, float | None]]:
+        """(start, utilization, reset) of window w's readings in its current period, oldest first."""
+        return sorted(((t, r[w][0], r[w][1]) for t, _, r in self.points if w in r and _live(r[w], now)),
+                      key=lambda x: x[0])
 
-    def _last(self, w: str):
-        pts = [(t, r[w][0], r[w][1]) for t, _, r in self.points if w in r]
-        return max(pts) if pts else None
+    def _last(self, w: str, now: float):
+        pts = self._readings(w, now)
+        return pts[-1] if pts else None
 
     def _counts(self, w: str, model: str) -> bool:
         return w in SHARED_WINDOWS or any(m == model and w in r for _, m, r in self.points)
 
-    def _windows(self, model: str) -> set[str]:
-        return {w for _, m, r in self.points for w in r if w in SHARED_WINDOWS or m == model}
+    def _windows(self, model: str, now: float) -> set[str]:
+        return {w for _, m, r in self.points for w, v in r.items() if (w in SHARED_WINDOWS or m == model) and _live(v, now)}
 
-    def _per_usd(self, w: str) -> float:
+    def _per_usd(self, w: str, now: float) -> float:
         prior = self.prior.get(w, self.prior.get("default", 0.05))
-        pts = sorted((t, r[w][0]) for t, _, r in self.points if w in r)
+        pts = self._readings(w, now)
         if len(pts) < 2:
             return prior
-        (t0, u0), (t1, u1) = pts[0], pts[-1]
+        (t0, u0, _), (t1, u1, _) = pts[0], pts[-1]
         span = sum(usd for end, usd, m in self.done if t0 < end <= t1 and self._counts(w, m))
         if span >= 3 and (u1 - u0 >= 0.03 or span >= 15):
             return (max(u1 - u0, 0.0) + 0.01) / span
@@ -1066,39 +1108,81 @@ class UsageCap:
         seen = max((c for _, c in self.hist.get(model) or []), default=0.0)
         return max(self.worst.get(model, 4.0), seen)
 
-    def projected(self, w: str, model: str, running: list[tuple[str, float]]) -> float:
-        t, u, _ = self._last(w)
+    def projected(self, w: str, model: str, running: list[tuple[str, float]], now: float) -> float:
+        t, u, _ = self._last(w, now)
         after = sum(usd for end, usd, m in self.done if end > t and self._counts(w, m))
         flights = [m for m, _ in running if self._counts(w, m)] + [model]
-        return u + self._per_usd(w) * (after + sum(self.most(m) for m in flights))
+        return u + self._per_usd(w, now) * (after + sum(self.most(m) for m in flights))
 
     def over(self, model: str, running: list[tuple[str, float]], now: float | None = None) -> list[tuple[str, float]]:
-        """The windows a question of `model` would take past the cap, with their projections."""
-        self._expire(now if now is not None else time.time())
+        """The windows with a current reading that a question of `model` would take past the cap."""
+        now = now if now is not None else time.time()
         out = []
-        for w in sorted(self._windows(model)):
-            p = self.projected(w, model, running)
+        for w in sorted(self._windows(model, now)):
+            p = self.projected(w, model, running, now)
             if p > self.plan:
                 out.append((w, p))
         return out
 
-    def allows(self, model: str, running: list[tuple[str, float]], now: float | None = None) -> bool:
-        if not any(m == model for _, m, _ in self.points) and any(m == model for m, _ in running):
-            return False  # its own windows are not known yet: one at a time
-        if not self.points and running:
+    def unread(self, model: str, now: float | None = None) -> list[str]:
+        """The windows a question of `model` counts toward without a reading from the last max_age
+        (all, if `model` has not been asked on this account): a probe reads them."""
+        now = now if now is not None else time.time()
+        mine = [(t, r) for t, m, r in self.points if m == model]
+        if not mine:
+            return ["all"]
+        need = set(max(mine, key=lambda p: p[0])[1]) | {w for _, _, r in self.points for w in r if w in SHARED_WINDOWS}
+        return sorted(w for w in need if (last := self._last(w, now)) is None or last[0] < now - self.max_age)
+
+    def probe_due(self, model: str, running: list[tuple[str, float]], now: float | None = None) -> bool:
+        """Whether to read the account's usage before a question of `model`: a window it counts toward
+        has no recent reading, what is known would let it go (a window known to be over the cap
+        waits for its reset instead), and no probe for it went in the last PROBE_RETRY seconds."""
+        now = now if now is not None else time.time()
+        if not self.unread(model, now) or now - self.probed.get(model, float("-inf")) < PROBE_RETRY:
             return False
         return not self.over(model, running, now)
+
+    def allows(self, model: str, running: list[tuple[str, float]], now: float | None = None) -> bool:
+        return not self.unread(model, now) and not self.over(model, running, now)
 
     def held_until(self, model: str, now: float | None = None) -> tuple[float, str] | None:
         """With nothing running: (when a question of `model` may go, why), or None if it may go now."""
         now = now if now is not None else time.time()
         over = self.over(model, [], now)
-        if not over:
-            return None
-        resets = [self._last(w)[2] for w, _ in over]
-        until = max(float(r) for r in resets) if all(r is not None for r in resets) else now + 1020
-        why = ", ".join(f"{w} at {self._last(w)[1]:.0%}" for w, _ in over)
-        return until, f"usage cap {self.max:.0%} for {model}: {why}"
+        if over:
+            resets = [self._last(w, now)[2] for w, _ in over]
+            until = max(float(r) for r in resets) if all(r is not None for r in resets) else now + 1020
+            why = ", ".join(f"{w} at {self._last(w, now)[1]:.0%}" for w, _ in over)
+            return until, f"usage cap {self.max:.0%} for {model}: {why}"
+        unread = self.unread(model, now)
+        if unread:  # its probe brought no reading: tried again
+            return max(now + 60, self.probed.get(model, now) + PROBE_RETRY), f"no usage reading for {model}: {', '.join(unread)}"
+        return None
+
+
+def _live(reading: tuple, now: float) -> bool:
+    """Whether a (utilization, reset) reading is of the window's current period."""
+    return reading[1] is None or float(reading[1]) > now
+
+
+def read_usage(cfg: dict, model: str, version: str, cap: UsageCap, where: Path) -> dict:
+    """Ask `model` for one word: the run's rate_limit_event gives the account's usage of every window a
+    question of that model counts toward, for a fraction of a cent, so no question goes before the
+    account's usage is known (one that runs to its token limit costs ~8% of a five-hour window).
+    Returns the run's interpretation (limited: the account or the model is at its limit)."""
+    path = where / ".amplify-usage-probe-prompt.txt"
+    if not path.exists():
+        path.write_text(PROBE_SYSTEM, encoding="utf-8")
+    mcfg = cfg if model == cfg["solver"]["model"] else dict(cfg, solver=dict(cfg["solver"], model=model))
+    cap.probed[model] = start = time.time()
+    out = call_claude(mcfg, path, PROBE_TEXT, "low", None, [])
+    info = interpret(out, mcfg, version)
+    readings = usage_readings(out)
+    cap.record(model, start, time.time(), readings, spent_usd(out, info, cap.usd_per_token()), probe=True)
+    print(json.dumps({"usage_probe": model, "outcome": info["kind"], **({"why": info["why"]} if info["kind"] != "ok" else {}),
+                      "usage": {w: u for w, (u, _) in readings.items()}, "at": now_iso()}), flush=True)
+    return info
 
 
 def workers_for(cfg: dict, effort: str, override: int | None = None) -> int:
@@ -1152,15 +1236,39 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
             running: dict = {}
             paused_until = None  # kept until the wait: the replies still running can take several more rounds
             parked: dict[str, tuple[float, str]] = {}  # model -> (until, why): a limit on that model alone
-            cap = UsageCap(sub_cfg(cfg).get("usage_cap") or {}, LOGIN_FILE, CAP_STATE)
+            cap = UsageCap(sub_cfg(cfg).get("usage_cap") or {}, LOGIN_FILE, CAP_STATE, ACCOUNT_FILE)
             started: dict = {}
+            account_of: dict = {}  # the account each running reply started under
+
+            def on_limit(model: str, info: dict) -> None:
+                nonlocal stop_reason, paused_until
+                if stop_reason is not None:
+                    return
+                if MODEL_LIMIT_RE.search(info["why"]):
+                    if model not in parked:  # polled every 17 min at most, as a usage limit is
+                        until = min(float(info.get("resets_at") or time.time() + 900), time.time() + 1020)
+                        parked[model] = (until, info["why"])
+                        print(json.dumps({"parked": model, "until": datetime.fromtimestamp(until).strftime("%H:%M"),
+                                          "why": info["why"]}), flush=True)
+                else:
+                    stop_reason, paused_until = "usage limit: " + info["why"], info.get("resets_at")
+
             while queue or running:
                 if cap.login_changed():  # another account: its own usage, and its own model limits
                     parked.clear()
-                    print(json.dumps({"login": "changed", "at": now_iso()}), flush=True)
+                    print(json.dumps({"login": "changed", "account": cap.account, "at": now_iso()}), flush=True)
                 parked = {m: p for m, p in parked.items() if p[0] > time.time()}  # past its time: tried again
                 while queue and stop_reason is None:
-                    flying = [(v[4]["solver"]["model"], started[f]) for f, v in running.items()]
+                    flying = [(v[4]["solver"]["model"], started[f]) for f, v in running.items() if account_of[f] == cap.account]
+                    for m in sorted({model_of(x) for x in queue} - set(parked)):
+                        if stop_reason is None and m not in parked and cap.probe_due(m, flying):
+                            got = read_usage(cfg, m, version, cap, system_file.parent)
+                            if got["kind"] == "limited":
+                                on_limit(m, got)
+                            elif got["kind"] == "stop" and stop_reason is None:
+                                stop_reason, wait_on_limit = got["why"], False
+                    if stop_reason is not None:
+                        break
                     ok = {m for m in {model_of(x) for x in queue} - set(parked) if cap.allows(m, flying)}
                     i = next((i for i, x in enumerate(queue) if model_of(x) in ok), None)
                     if i is None:
@@ -1189,7 +1297,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     qc = ccfg if review else question_cfg(cfg, qid)  # the question's own model, if assigned
                     fut = ex.submit(call_claude, qc, system_file, user_text(q, feedback), effort, None, images)
                     running[fut] = (qid, attempt, effort, [n for n, _ in images], qc)
-                    started[fut] = time.time()
+                    started[fut], account_of[fut] = time.time(), cap.account
                 if not running:
                     if not queue or stop_reason:
                         break
@@ -1210,7 +1318,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     info["account_usage"] = readings
                     tokens = int(((info.get("result") or {}).get("usage") or {}).get("output_tokens") or 0) if kind == "ok" else 0
                     cap.record(qc["solver"]["model"], started.pop(fut), time.time(), readings,
-                               spent_usd(out, info, cap.usd_per_token()), tokens)
+                               spent_usd(out, info, cap.usd_per_token()), tokens, account_of.pop(fut))
                     raw = save_failure(qid, attempt, out, info) if kind in ("error", "stop", "cut") else None
                     if kind in ("ok", "cut"):
                         store(pc, qc, qid, attempt, effort, info, out.get("seconds", 0), names)
@@ -1220,16 +1328,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     elif kind == "limited":
                         queue.insert(0, qid)  # nothing was used up; it goes again first
                         summary["limited"] += 1
-                        model = qc["solver"]["model"]
-                        if stop_reason is None and MODEL_LIMIT_RE.search(info["why"]):
-                            if model not in parked:  # polled every 17 min at most, as a usage limit is
-                                until = min(float(info.get("resets_at") or time.time() + 900), time.time() + 1020)
-                                parked[model] = (until, info["why"])
-                                print(json.dumps({"parked": model, "until": datetime.fromtimestamp(until).strftime("%H:%M"),
-                                                  "why": info["why"]}), flush=True)
-                        elif stop_reason is None:
-                            stop_reason = "usage limit: " + info["why"]
-                            paused_until = info.get("resets_at")
+                        on_limit(qc["solver"]["model"], info)
                     elif kind == "stop":
                         queue.insert(0, qid)
                         stop_reason = info["why"]
@@ -1252,7 +1351,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                             time.sleep(min(60, max(1, deadline - time.time())))
                             if cap.login_changed():
                                 parked.clear()
-                                print(json.dumps({"login": "changed", "at": now_iso()}), flush=True)
+                                print(json.dumps({"login": "changed", "account": cap.account, "at": now_iso()}), flush=True)
                                 break
                         stop_reason = paused_until = None
                         continue

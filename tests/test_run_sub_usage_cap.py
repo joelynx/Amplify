@@ -1,7 +1,8 @@
 """run_sub.py's usage cap (owner 2026-11-19: "do not exceed 90% of usage on any account"): a question
-goes only if every usage window its model counts toward stays under the cap with every reply still
-running, and this one, at the most a reply can cost; otherwise the run waits for the window's reset
-or a new login."""
+goes only if every usage window its model counts toward has a recent reading (a one-word probe reads
+a missing one) and stays under the cap with every reply still running, and this one, at the most a
+reply can cost; otherwise the run waits for the window's reset or a new login. Readings are kept per
+account."""
 
 from __future__ import annotations
 
@@ -33,10 +34,36 @@ def test_readings_take_every_window_and_a_rejection() -> None:
     assert got["seven_day_overage_included"] == (1.0, NOW + 60)
 
 
-def test_one_at_a_time_until_the_first_reading() -> None:
+def test_nothing_goes_before_a_reading_of_every_window() -> None:
     cap = run_sub.UsageCap(CONF)
-    assert cap.allows(FABLE, [], NOW)
-    assert not cap.allows(FABLE, [(FABLE, NOW)], NOW)
+    assert cap.unread(FABLE, NOW) == ["all"] and not cap.allows(FABLE, [], NOW)
+    assert cap.probe_due(FABLE, [], NOW)
+    cap.probed[FABLE] = NOW
+    cap.record(FABLE, NOW, NOW + 5, {"five_hour": (0.3, NOW + 3600), "seven_day_overage_included": (0.4, NOW + 9e4)},
+               0.01, probe=True)
+    assert cap.allows(FABLE, [], NOW + 5) and not cap.hist  # a probe is not a reply: not in the costs seen
+    assert not cap.allows(OPUS, [], NOW + 5)                 # its own windows are not known yet
+    assert cap.probe_due(OPUS, [], NOW + 5) and not cap.probe_due(FABLE, [], NOW + 5)
+
+
+def test_a_stale_reading_is_read_again_unless_it_is_over_the_cap() -> None:
+    cap = run_sub.UsageCap(CONF)  # readings older than 20 minutes are read again before a question goes
+    cap.record(FABLE, NOW, NOW + 5, {"five_hour": (0.3, NOW + 9000)}, 0.01, probe=True)
+    later = NOW + 1300
+    assert cap.unread(FABLE, later) == ["five_hour"] and not cap.allows(FABLE, [], later)
+    assert cap.probe_due(FABLE, [], later)
+    cap.record(FABLE, NOW + 10, NOW + 15, {"five_hour": (0.88, NOW + 9000)}, 0.01, probe=True)
+    assert not cap.probe_due(FABLE, [], later)  # known to be over: it waits for the reset, no probes
+    assert cap.held_until(FABLE, later)[0] == NOW + 9000
+
+
+def test_a_failed_probe_waits_before_the_next() -> None:
+    cap = run_sub.UsageCap(CONF)
+    cap.probed[FABLE] = NOW
+    cap.record(FABLE, NOW, NOW + 5, {}, 0.0, probe=True)  # no reading came back
+    assert not cap.probe_due(FABLE, [], NOW + 10) and cap.probe_due(FABLE, [], NOW + run_sub.PROBE_RETRY)
+    until, why = cap.held_until(FABLE, NOW + 10)
+    assert until == NOW + run_sub.PROBE_RETRY and "no usage reading" in why
 
 
 def test_every_running_reply_counts_at_its_most() -> None:
@@ -71,35 +98,68 @@ def test_usage_per_usd_is_fitted_from_the_readings() -> None:
     cap = run_sub.UsageCap(CONF)
     for i in range(7):  # 0.05 of five_hour per reply of $1: 0.10 at the first reading, 0.40 at the last
         cap.record(FABLE, NOW + 100 * i, NOW + 100 * i + 50, {"five_hour": (0.10 + 0.05 * i, NOW + 9e3)}, 1.0)
-    assert abs(cap._per_usd("five_hour") - (0.30 + 0.01) / 6) < 1e-9
+    assert abs(cap._per_usd("five_hour", NOW) - (0.30 + 0.01) / 6) < 1e-9
 
 
-def test_a_reset_window_and_a_new_login_start_afresh(tmp_path: Path) -> None:
-    login = tmp_path / "credentials.json"
-    login.write_text("a")
-    cap = run_sub.UsageCap(CONF, login)
+def test_a_reset_window_is_read_again() -> None:
+    cap = run_sub.UsageCap(CONF)
     cap.record(FABLE, NOW - 100, NOW - 10, {"five_hour": (0.95, NOW + 60)}, 0.4)
+    assert not cap.allows(FABLE, [], NOW) and not cap.probe_due(FABLE, [], NOW)
+    assert cap.unread(FABLE, NOW + 61) == ["five_hour"] and cap.probe_due(FABLE, [], NOW + 61)
+    cap.record(FABLE, NOW + 61, NOW + 65, {"five_hour": (0.02, NOW + 18061)}, 0.01, probe=True)
+    assert cap.allows(FABLE, [], NOW + 65)
+
+
+def test_a_lower_reading_ends_the_window_without_a_reset_time() -> None:
+    cap = run_sub.UsageCap(CONF)
+    cap.record(FABLE, NOW - 100, NOW - 10, {"five_hour": (0.95, None)}, 0.4)
     assert not cap.allows(FABLE, [], NOW)
-    assert cap.allows(FABLE, [], NOW + 61)  # the window reset
-    cap.record(FABLE, NOW - 50, NOW - 5, {"five_hour": (0.95, NOW + 3600)}, 0.4)
-    assert not cap.allows(FABLE, [], NOW)
-    os.utime(login, ns=(1, 1))
-    assert cap.login_changed(NOW)
-    assert cap.allows(FABLE, [], NOW) and not cap.allows(FABLE, [(FABLE, NOW)], NOW)
-    cap.record(FABLE, NOW - 50, NOW + 5, {"five_hour": (0.99, NOW + 3600)}, 0.4)  # started before the login
+    cap.record(FABLE, NOW - 5, NOW, {"five_hour": (0.10, None)}, 0.01, probe=True)
     assert cap.allows(FABLE, [], NOW)
 
 
-def test_a_restart_keeps_what_it_knew_of_the_same_login(tmp_path: Path) -> None:
-    login, state = tmp_path / "credentials.json", tmp_path / "state.json"
+def account(path: Path, uuid: str) -> Path:
+    path.write_text(json.dumps({"oauthAccount": {"accountUuid": uuid, "emailAddress": "x"}, "numStartups": 1}))
+    return path
+
+
+def test_a_token_refresh_is_not_a_new_login(tmp_path: Path) -> None:
+    login, acct = tmp_path / "credentials.json", account(tmp_path / "claude.json", "A")
     login.write_text("a")
-    cap = run_sub.UsageCap(CONF, login, state)
-    cap.record(FABLE, NOW - 100, NOW - 10, {"five_hour": (0.95, NOW + 3600)}, 0.4)
-    again = run_sub.UsageCap(CONF, login, state)
-    assert not again.allows(FABLE, [], NOW)  # it does not send blind to an account it knows is full
+    cap = run_sub.UsageCap(CONF, login, None, acct)
+    cap.record(FABLE, NOW - 100, NOW - 10, {"five_hour": (0.89, NOW + 3600)}, 0.4)
+    os.utime(login, ns=(1, 1))  # Claude Code rewrote the login (a new token), same account
+    assert not cap.login_changed() and not cap.allows(FABLE, [], NOW) and not cap.probe_due(FABLE, [], NOW)
+    acct.write_text('{"oauthAccount": {"accountUu')  # half written: no change
+    assert not cap.login_changed()
+
+
+def test_each_account_keeps_its_own_readings(tmp_path: Path) -> None:
+    acct, state = account(tmp_path / "claude.json", "A"), tmp_path / "state.json"
+    cap = run_sub.UsageCap(CONF, None, state, acct)
+    cap.record(FABLE, NOW - 100, NOW - 10, {"five_hour": (0.89, NOW + 3600)}, 0.4)
+    first = cap.account
+    account(acct, "B")
+    assert cap.login_changed() and cap.account != first
+    assert cap.unread(FABLE, NOW) == ["all"] and cap.probe_due(FABLE, [], NOW)  # B is read before anything goes
+    # a reply that started on A and finishes after the switch counts on A
+    cap.record(FABLE, NOW - 50, NOW, {"five_hour": (0.89, NOW + 3600)}, 0.4, account=first)
+    assert cap.unread(FABLE, NOW) == ["all"]
+    account(acct, "A")
+    assert cap.login_changed() and cap.account == first
+    assert not cap.allows(FABLE, [], NOW) and not cap.probe_due(FABLE, [], NOW)  # A is known to be full
+    again = run_sub.UsageCap(CONF, None, state, acct)  # a restart keeps it, and the reply costs
+    assert not again.allows(FABLE, [], NOW) and again.hist[FABLE] == [(90.0, 0.4), (50.0, 0.4)]
+    assert "accountUuid" not in state.read_text() and '"A"' not in state.read_text()
+
+
+def test_without_an_account_record_the_login_names_the_account(tmp_path: Path) -> None:
+    login = tmp_path / "credentials.json"
+    login.write_text("a")
+    cap = run_sub.UsageCap(CONF, login, None, tmp_path / "missing.json")
+    assert cap.account.startswith("login ")
     os.utime(login, ns=(1, 1))
-    fresh = run_sub.UsageCap(CONF, login, state)
-    assert fresh.allows(FABLE, [], NOW) and fresh.hist[FABLE] == [(90.0, 0.4)]  # another login; reply costs kept
+    assert cap.login_changed()  # cannot tell a refresh from a new login: read the account again
 
 
 class FakeTime:
@@ -125,18 +185,26 @@ def test_solve_waits_at_the_cap_for_the_reset(tmp_path: Path, monkeypatch) -> No
     clock = FakeTime()
     reset = NOW + 7200
     sent: list[float] = []
+    probes: list[float] = []
+    acct = {"u": 0.60, "reset": reset}
 
     def call(qc, sf, text, effort, mt, images):
+        if clock.now >= acct["reset"]:  # the window reset: a new one
+            acct.update(u=0.0, reset=acct["reset"] + 18000)
+        reading = {"type": "rate_limit_event", "rate_limit_info": {"status": "allowed", "unifiedWindows": {
+            "five_hour": {"utilization": acct["u"], "resetsAt": acct["reset"]}}}}
+        if text == run_sub.PROBE_TEXT:
+            probes.append(clock.now)
+            clock.now += 2
+            return {"seconds": 2, "events": [reading, {"type": "result", "total_cost_usd": 0.001}]}
         sent.append(clock.now)
-        u = 0.0 if clock.now >= reset else 0.55 + 0.05 * len(sent)  # each $1 reply uses 5%
         clock.now += 30
-        return {"seconds": 30, "events": [
-            {"type": "rate_limit_event", "rate_limit_info": {"status": "allowed", "unifiedWindows": {
-                "five_hour": {"utilization": u, "resetsAt": reset}}}},
-            {"type": "result", "total_cost_usd": 1.0}]}
+        acct["u"] += 0.05  # each $1 reply uses 5%, counted when it finishes
+        return {"seconds": 30, "events": [reading, {"type": "result", "total_cost_usd": 1.0}]}
 
     monkeypatch.setattr(run_sub, "time", clock)
     monkeypatch.setattr(run_sub, "LOGIN_FILE", tmp_path / "no-login.json")
+    monkeypatch.setattr(run_sub, "ACCOUNT_FILE", tmp_path / "no-account.json")
     monkeypatch.setattr(run_sub, "CAP_STATE", tmp_path / "usage_cap_state.json")
     monkeypatch.setattr(run_sub, "verify", lambda *a, **k: {"ok": True, "accepted": True, "claude_code_version": "t"})
     monkeypatch.setattr(run_sub, "write_system_file", lambda cfg: (tmp_path / "system.md", None))
@@ -156,6 +224,9 @@ def test_solve_waits_at_the_cap_for_the_reset(tmp_path: Path, monkeypatch) -> No
     run_sub.solve(cfg, None, None, None, None, 1, True, False)
 
     assert len(sent) == 7
-    # readings 0.60, 0.65 and 0.70 at the first three; a fourth would project to 0.70 + 0.05 * ($1 just
-    # spent + $3.6 at most for it) = 0.93, past the 0.89 the cap plans to, so the rest waited for the reset
+    # a probe read 0.60 before anything went; readings 0.60, 0.65 and 0.70 at the first three; a fourth
+    # would project to 0.70 + 0.05 * ($1 just spent + $3.6 at most for it) = 0.93, past the 0.89 the cap
+    # plans to, so the rest waited for the reset, with no probes while the account was known to be full,
+    # and a probe read the new window before they went
     assert len([t for t in sent if t < reset]) == 3 and all(t >= reset for t in sent[3:])
+    assert len(probes) == 2 and probes[0] < sent[0] and sent[2] < reset <= probes[1] < sent[3]

@@ -47,6 +47,7 @@ def test_other_model_goes_on_while_one_is_limited(tmp_path: Path, monkeypatch) -
 
     monkeypatch.setattr(run_sub, "time", clock)
     monkeypatch.setattr(run_sub, "LOGIN_FILE", tmp_path / "no-login.json")
+    monkeypatch.setattr(run_sub, "ACCOUNT_FILE", tmp_path / "no-account.json")
     monkeypatch.setattr(run_sub, "CAP_STATE", tmp_path / "usage_cap_state.json")
     monkeypatch.setattr(run_sub, "verify", lambda *a, **k: {"ok": True, "accepted": True, "claude_code_version": "t"})
     monkeypatch.setattr(run_sub, "write_system_file", lambda cfg: (tmp_path / "system.md", None))
@@ -59,7 +60,9 @@ def test_other_model_goes_on_while_one_is_limited(tmp_path: Path, monkeypatch) -
     monkeypatch.setattr(run_sub, "attachments", lambda cfg, q: ([], None))
     monkeypatch.setattr(run_sub, "plan_attempt", lambda cfg, pc, qid, source: (1, None, False))
     monkeypatch.setattr(run_sub, "user_text", lambda q, feedback: str(q["question_id"]))
-    monkeypatch.setattr(run_sub, "call_claude", lambda qc, sf, text, effort, mt, images: {"seconds": 1})
+    low = {"type": "rate_limit_event", "rate_limit_info": {"status": "allowed", "unifiedWindows": {
+        "five_hour": {"utilization": 0.1, "resetsAt": clock.now + 18000}}}}
+    monkeypatch.setattr(run_sub, "call_claude", lambda qc, sf, text, effort, mt, images: {"seconds": 1, "events": [low]})
     monkeypatch.setattr(run_sub, "interpret", interpret)
     monkeypatch.setattr(run_sub, "store", lambda pc, qc, qid, *a: stored.append(qid))
 
