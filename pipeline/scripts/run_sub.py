@@ -854,6 +854,7 @@ def store(pc, cfg: dict, qid: int, attempt: int, effort: str, info: dict, second
         "duration_ms": res.get("duration_ms"), "model_usage": res.get("modelUsage"),
         **({"images": images} if images else {}),
         **({"cut_off": info["why"]} if info["kind"] == "cut" else {}),
+        **({"account_usage": info["account_usage"]} if info.get("account_usage") else {}),
     })
     pc.execute(
         "INSERT INTO usage (question_id, attempt, batch_id, model, effort, input_tokens, cache_write_tokens, cache_read_tokens, output_tokens, stop_reason, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
@@ -903,6 +904,176 @@ def keep_awake(on: bool) -> None:
         import ctypes
         es_continuous, es_system_required = 0x80000000, 0x00000001
         ctypes.windll.kernel32.SetThreadExecutionState(es_continuous | (es_system_required if on else 0))
+
+
+# --- usage cap ---------------------------------------------------------------------
+# Owner 2026-11-19: "do not exceed 90% of usage on any account." Each claude run reports the
+# account's usage when it started (rate_limit_event: utilization 0-1 per window, every window of
+# the plan; a model's own window only on that model's requests).
+LOGIN_FILE = Path.home() / ".claude" / ".credentials.json"  # rewritten by /login: a new account
+SHARED_WINDOWS = {"five_hour", "seven_day"}  # count every model's replies; other windows only their model's
+
+
+def usage_readings(out: dict) -> dict[str, tuple[float, float | None]]:
+    """{window: (utilization, resets_at)} from a run's rate_limit_events (the highest if several)."""
+    got: dict[str, tuple[float, float | None]] = {}
+    for e in out.get("events") or []:
+        if e.get("type") != "rate_limit_event":
+            continue
+        li = e.get("rate_limit_info") or {}
+        wins = {w: (v.get("utilization"), v.get("resetsAt")) for w, v in (li.get("unifiedWindows") or {}).items()}
+        if li.get("rateLimitType"):
+            u = 1.0 if li.get("status") == "rejected" else li.get("utilization")
+            if u is not None and (wins.get(li["rateLimitType"], (None,))[0] or 0) < u:
+                wins[li["rateLimitType"]] = (u, li.get("resetsAt"))
+        for w, (u, reset) in wins.items():
+            if u is not None and (w not in got or float(u) > got[w][0]):
+                got[w] = (float(u), reset)
+    return got
+
+
+def spent_usd(out: dict, info: dict, usd_per_token: float) -> float:
+    """What a run cost (Claude Code's total_cost_usd), or its output tokens at usd_per_token when the
+    run was cut off before Claude Code's count."""
+    res = next((e for e in reversed(out.get("events") or []) if e.get("type") == "result"), None) or {}
+    if info.get("kind") != "cut":
+        if res.get("total_cost_usd") is not None:
+            return float(res["total_cost_usd"])
+        if res.get("modelUsage"):
+            return sum(float(v.get("costUSD") or 0) for v in res["modelUsage"].values())
+    tokens = ((info.get("result") or {}).get("usage") or {}).get("output_tokens")
+    if tokens is None:
+        tokens = max((e.get("estimated_tokens") or 0 for e in out.get("events") or []
+                      if e.get("type") == "system" and e.get("subtype") == "thinking_tokens"), default=0)
+    return float(tokens) * usd_per_token
+
+
+class UsageCap:
+    """Sends a question only if every usage window its model counts toward stays at or under `max`:
+    the latest reading, plus the cost of the replies finished since, plus the replies still running
+    and this one (each model's mean cost and 1.65 standard deviations of the total), times the
+    window's usage per USD. Usage per USD is fitted from the readings once they span enough cost
+    (rounded up a step of 0.01), else the cautious prior in config. A model with no reading of its
+    own yet has one request at a time. A new login (LOGIN_FILE rewritten) starts afresh."""
+
+    def __init__(self, conf: dict, login_file: Path | None = None):
+        self.max = float(conf.get("max", 0.9))
+        self.prior = {k: float(v) for k, v in (conf.get("prior_per_usd") or {}).items()}
+        self.seed = {m: (float(v[0]), float(v[1])) for m, v in (conf.get("reply_cost_usd") or {}).items()}
+        self.login_file = login_file
+        self.stamp = self._stamp()
+        self.since = 0.0  # readings and costs of runs started before this belong to an earlier login
+        self.points: list[tuple[float, str, dict]] = []  # (start, model, {window: (u, reset)})
+        self.done: list[tuple[float, float, str]] = []    # (finished, usd, model)
+        self.costs: dict[str, list[float]] = {}
+        self.tokens = [0.0, 0.0]  # usd, output tokens of the costed replies: usd per token for cut-off runs
+
+    def _stamp(self):
+        try:
+            return self.login_file.stat().st_mtime_ns if self.login_file else None
+        except OSError:
+            return None
+
+    def login_changed(self, now: float | None = None) -> bool:
+        stamp = self._stamp()
+        if stamp == self.stamp:
+            return False
+        self.stamp, self.since = stamp, now if now is not None else time.time()
+        self.points, self.done = [], []
+        return True
+
+    def usd_per_token(self) -> float:
+        return self.tokens[0] / self.tokens[1] if self.tokens[1] > 1e5 else 3e-5
+
+    def record(self, model: str, start: float, end: float, readings: dict, usd: float, tokens: int = 0) -> None:
+        if usd > 0:
+            self.costs.setdefault(model, []).append(usd)
+            if tokens:
+                self.tokens[0] += usd
+                self.tokens[1] += tokens
+        if start < self.since:
+            return
+        self.done.append((end, usd, model))
+        for w, (u, _) in readings.items():
+            last = self._last(w)
+            if last is not None and start > last[0] and u < last[1] - 0.02:  # the window reset since (or another account)
+                for _, _, r in self.points:
+                    r.pop(w, None)
+        if readings:
+            self.points.append((start, model, dict(readings)))
+
+    def _expire(self, now: float) -> None:
+        for _, _, r in self.points:
+            for w in [w for w, (_, reset) in r.items() if reset is not None and float(reset) <= now]:
+                del r[w]
+
+    def _last(self, w: str):
+        pts = [(t, r[w][0], r[w][1]) for t, _, r in self.points if w in r]
+        return max(pts) if pts else None
+
+    def _counts(self, w: str, model: str) -> bool:
+        return w in SHARED_WINDOWS or any(m == model and w in r for _, m, r in self.points)
+
+    def _windows(self, model: str) -> set[str]:
+        return {w for _, m, r in self.points for w in r if w in SHARED_WINDOWS or m == model}
+
+    def _per_usd(self, w: str) -> float:
+        prior = self.prior.get(w, self.prior.get("default", 0.05))
+        pts = sorted((t, r[w][0]) for t, _, r in self.points if w in r)
+        if len(pts) < 2:
+            return prior
+        (t0, u0), (t1, u1) = pts[0], pts[-1]
+        span = sum(usd for end, usd, m in self.done if t0 < end <= t1 and self._counts(w, m))
+        if span >= 3 and (u1 - u0 >= 0.03 or span >= 15):
+            return (max(u1 - u0, 0.0) + 0.01) / span
+        return prior
+
+    def _bound(self, models: list[str]) -> float:
+        mean = var = 0.0
+        for m in models:
+            xs = self.costs.get(m) or []
+            if len(xs) >= 5:
+                mu = sum(xs) / len(xs)
+                sd2 = sum((x - mu) ** 2 for x in xs) / (len(xs) - 1)
+            else:
+                mu, sd = self.seed.get(m, (0.5, 0.5))
+                sd2 = sd * sd
+            mean, var = mean + mu, var + sd2
+        return mean + 1.65 * var ** 0.5
+
+    def projected(self, w: str, model: str, running: list[str]) -> float:
+        t, u, _ = self._last(w)
+        after = sum(usd for end, usd, m in self.done if end > t and self._counts(w, m))
+        flights = [m for m in [*running, model] if self._counts(w, m) or m == model]
+        return u + self._per_usd(w) * (after + self._bound(flights))
+
+    def over(self, model: str, running: list[str], now: float | None = None) -> list[tuple[str, float]]:
+        """The windows a question of `model` would take past the cap, with their projections."""
+        self._expire(now if now is not None else time.time())
+        out = []
+        for w in sorted(self._windows(model)):
+            p = self.projected(w, model, running)
+            if p > self.max:
+                out.append((w, p))
+        return out
+
+    def allows(self, model: str, running: list[str], now: float | None = None) -> bool:
+        if not any(m == model for _, m, _ in self.points) and model in running:
+            return False  # its own windows are not known yet: one at a time
+        if not self.points and running:
+            return False
+        return not self.over(model, running, now)
+
+    def held_until(self, model: str, now: float | None = None) -> tuple[float, str] | None:
+        """With nothing running: (when a question of `model` may go, why), or None if it may go now."""
+        now = now if now is not None else time.time()
+        over = self.over(model, [], now)
+        if not over:
+            return None
+        resets = [self._last(w)[2] for w, _ in over]
+        until = max(float(r) for r in resets) if all(r is not None for r in resets) else now + 1020
+        why = ", ".join(f"{w} at {self._last(w)[1]:.0%}" for w, _ in over)
+        return until, f"usage cap {self.max:.0%} for {model}: {why}"
 
 
 def workers_for(cfg: dict, effort: str, override: int | None = None) -> int:
@@ -956,10 +1127,17 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
             running: dict = {}
             paused_until = None  # kept until the wait: the replies still running can take several more rounds
             parked: dict[str, tuple[float, str]] = {}  # model -> (until, why): a limit on that model alone
+            cap = UsageCap(sub_cfg(cfg).get("usage_cap") or {}, LOGIN_FILE)
+            started: dict = {}
             while queue or running:
+                if cap.login_changed():  # another account: its own usage, and its own model limits
+                    parked.clear()
+                    print(json.dumps({"login": "changed", "at": now_iso()}), flush=True)
                 parked = {m: p for m, p in parked.items() if p[0] > time.time()}  # past its time: tried again
                 while queue and stop_reason is None:
-                    i = next((i for i, x in enumerate(queue) if model_of(x) not in parked), None)
+                    flying = [v[4]["solver"]["model"] for v in running.values()]
+                    ok = {m for m in {model_of(x) for x in queue} - set(parked) if cap.allows(m, flying)}
+                    i = next((i for i, x in enumerate(queue) if model_of(x) in ok), None)
                     if i is None:
                         break
                     q = fetch_question(app, queue[i])
@@ -986,10 +1164,15 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     qc = ccfg if review else question_cfg(cfg, qid)  # the question's own model, if assigned
                     fut = ex.submit(call_claude, qc, system_file, user_text(q, feedback), effort, None, images)
                     running[fut] = (qid, attempt, effort, [n for n, _ in images], qc)
+                    started[fut] = time.time()
                 if not running:
-                    if not queue or not parked or stop_reason:
+                    if not queue or stop_reason:
                         break
-                    until, why = min(parked.values())  # only the parked models' questions are left: wait as for a usage limit
+                    held = {m: h for m in {model_of(x) for x in queue} - set(parked) if (h := cap.held_until(m))}
+                    holds = {**parked, **held}
+                    if not holds:
+                        break
+                    until, why = min(holds.values())  # only parked or capped models' questions are left: wait as for a usage limit
                     stop_reason, paused_until = "usage limit: " + why, until
                     parked.clear()
                 done = wait(running, return_when=FIRST_COMPLETED)[0] if running else set()
@@ -998,6 +1181,11 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     out = fut.result()
                     info = interpret(out, qc, version)
                     kind = info["kind"]
+                    readings = usage_readings(out)
+                    info["account_usage"] = readings
+                    tokens = int(((info.get("result") or {}).get("usage") or {}).get("output_tokens") or 0) if kind == "ok" else 0
+                    cap.record(qc["solver"]["model"], started.pop(fut), time.time(), readings,
+                               spent_usd(out, info, cap.usd_per_token()), tokens)
                     raw = save_failure(qid, attempt, out, info) if kind in ("error", "stop", "cut") else None
                     if kind in ("ok", "cut"):
                         store(pc, qc, qid, attempt, effort, info, out.get("seconds", 0), names)
@@ -1027,6 +1215,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                                       "effort": effort, "outcome": kind,
                                       "seconds": out.get("seconds"),
                                       **({"why": info["why"]} if kind != "ok" else {}), **({"raw": raw} if raw else {}),
+                                      **({"usage": {w: u for w, (u, _) in readings.items()}} if readings else {}),
                                       "elapsed_min": round((time.time() - t0) / 60, 1), **summary}), flush=True)
                 if stop_reason and not running:
                     if wait_on_limit and stop_reason.startswith("usage limit") and queue:
@@ -1036,6 +1225,10 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         deadline = time.time() + secs
                         while time.time() < deadline:  # by the clock: one long sleep does not count time the machine sleeps
                             time.sleep(min(60, max(1, deadline - time.time())))
+                            if cap.login_changed():
+                                parked.clear()
+                                print(json.dumps({"login": "changed", "at": now_iso()}), flush=True)
+                                break
                         stop_reason = paused_until = None
                         continue
                     break

@@ -287,8 +287,14 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
     try:
         with ThreadPoolExecutor(max_workers=limit) as ex:
             running: dict = {}
+            model = ccfg["solver"]["model"]
+            cap = run_sub.UsageCap((cfg.get("subscription") or {}).get("usage_cap") or {}, run_sub.LOGIN_FILE)
+            started: dict = {}
             while queue or running:
-                while queue and stop_reason is None and len(running) < limit:
+                if cap.login_changed():
+                    print(json.dumps({"login": "changed", "at": now_iso()}), flush=True)
+                while (queue and stop_reason is None and len(running) < limit
+                       and cap.allows(model, [model] * len(running))):
                     x = queue.pop(0)
                     qid, mode = x["id"], x["mode"]
                     q = fetch_question(app, qid)
@@ -313,15 +319,25 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     fut = ex.submit(run_sub.call_claude, ccfg, files[(mode, x["subject"])],
                                     subjects.user_text(q, mode, feedback, cfg), effort, None, images)
                     running[fut] = (x, attempt, effort, [name for name, _ in images])
+                    started[fut] = time.time()
                 if not running:
-                    break
-                done, _ = wait(running, return_when=FIRST_COMPLETED)
+                    held = cap.held_until(model) if queue and stop_reason is None else None
+                    if not held:
+                        break
+                    paused_until, why = held  # the usage cap: wait as for a usage limit
+                    stop_reason = "usage limit: " + why
+                done = wait(running, return_when=FIRST_COMPLETED)[0] if running else set()
                 for fut in done:
                     x, attempt, effort, names = running.pop(fut)
                     qid, mode = x["id"], x["mode"]
                     out = fut.result()
                     info = run_sub.interpret(out, ccfg, version)
                     kind = info["kind"]
+                    readings = run_sub.usage_readings(out)
+                    info["account_usage"] = readings
+                    tokens = int(((info.get("result") or {}).get("usage") or {}).get("output_tokens") or 0) if kind == "ok" else 0
+                    cap.record(model, started.pop(fut), time.time(), readings,
+                               run_sub.spent_usd(out, info, cap.usd_per_token()), tokens)
                     raw = run_sub.save_failure(qid, attempt, out, info) if kind in ("error", "stop", "cut") else None
                     if kind in ("ok", "cut"):
                         run_sub.store(pc, ccfg, qid, attempt, effort, info, out.get("seconds", 0), names)
@@ -340,8 +356,9 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         summary[run_sub.api_failure(pc, ccfg, qid, attempt, info["why"])] += 1
                     print(json.dumps({"question_id": qid, "mode": mode, "attempt": attempt, "outcome": kind,
                                       "seconds": out.get("seconds"), **({"why": info["why"]} if kind != "ok" else {}),
-                                      **({"raw": raw} if raw else {}), "elapsed_min": round((time.time() - t0) / 60, 1),
-                                      **summary}), flush=True)
+                                      **({"raw": raw} if raw else {}),
+                                      **({"usage": {w: u for w, (u, _) in readings.items()}} if readings else {}),
+                                      "elapsed_min": round((time.time() - t0) / 60, 1), **summary}), flush=True)
                 if stop_reason and not running:
                     if wait_on_limit and stop_reason.startswith("usage limit") and queue:
                         until = float(paused_until) if paused_until else time.time() + 900
@@ -350,6 +367,9 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         deadline = time.time() + secs
                         while time.time() < deadline:  # by the clock: one long sleep does not count time the machine sleeps
                             time.sleep(min(60, max(1, deadline - time.time())))
+                            if cap.login_changed():
+                                print(json.dumps({"login": "changed", "at": now_iso()}), flush=True)
+                                break
                         stop_reason = paused_until = None
                         continue
                     break

@@ -174,6 +174,23 @@ stored record use its model, so the attribution line names it; `verify` checks
 one sample per model, and since Claude Code's environment block names the model,
 each model has its own wrapping fingerprint, every one of which must be accepted.
 
+`subscription.usage_cap` (owner 2026-11-19: "do not exceed 90% of usage on any
+account") holds both solvers (`run_sub.py`, `run_subjects.py`) under `max` of
+every usage window. Each run reports the account's usage when it started
+(`rate_limit_event`: `five_hour`, `seven_day`, and a model's own window on that
+model's requests); the reading is kept in the reply's `response_N.json`
+(`account_usage`) and printed on its log line. A question is sent only if, for
+every window its model counts toward, the latest reading plus the cost of the
+replies finished since, the replies still running and this one (mean cost plus
+1.65 standard deviations of the total) times the window's usage per USD stays at
+or under the cap. Usage per USD is fitted from the readings once they span
+enough cost, else `prior_per_usd`. Until a model has a reading of its own, one of
+its requests runs at a time. When nothing may go, the run waits for the window's
+reset (checking every 17 minutes at most); a `/login` (the rewritten
+`~/.claude/.credentials.json`) starts the readings afresh at once. In-flight
+replies are estimates, so an unusually long one can still carry a window a
+little past the cap.
+
 ```
 python pipeline/scripts/run_sub.py verify [--qid N] [--accept]   # free: capture the request on a local stand-in server and check it
 python pipeline/scripts/run_sub.py status | queue [--n 20]
