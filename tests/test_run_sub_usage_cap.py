@@ -79,6 +79,14 @@ def test_every_running_reply_counts_at_its_most() -> None:
     assert until == NOW + 3600 and "five_hour at 86%" in why
 
 
+def test_a_window_can_have_its_own_margin() -> None:
+    cap = run_sub.UsageCap(dict(CONF, margin_by_window={"five_hour": 0.2}))  # five_hour plans to 0.70, the rest to 0.89
+    readings = {"five_hour": (0.5, NOW + 3600), "seven_day": (0.5, NOW + 9e4)}
+    cap.record(FABLE, NOW - 100, NOW - 10, readings, 0.0)
+    assert cap.allows(FABLE, [], NOW)  # 0.5 + 0.05 * 3.6 = 0.68 in both
+    assert [w for w, _ in cap.over(FABLE, [(FABLE, NOW)], NOW)] == ["five_hour"]  # 0.86: past 0.70, not past 0.89
+
+
 def test_the_most_a_reply_costs_is_the_larger_of_config_and_seen() -> None:
     cap = run_sub.UsageCap(CONF)
     assert cap.most(FABLE) == 3.6 and cap.most("claude-other") == 4.0

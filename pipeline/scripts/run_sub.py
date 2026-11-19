@@ -993,7 +993,10 @@ class UsageCap:
     def __init__(self, conf: dict, login_file: Path | None = None, state_file: Path | None = None,
                  account_file: Path | None = None):
         self.max = float(conf.get("max", 0.9))
-        self.plan = self.max - float(conf.get("margin", 0.01))  # room for rounding and the fit's error
+        self.plan = self.max - float(conf.get("margin", 0.01))  # room for rounding, the fit's error and interactive use
+        # a window's own margin: more room in the five-hour window for interactive Claude Code work,
+        # which the solver cannot see, without lowering what the weekly windows may reach
+        self.plans = {w: self.max - float(m) for w, m in (conf.get("margin_by_window") or {}).items()}
         self.prior = {k: float(v) for k, v in (conf.get("prior_per_usd") or {}).items()}
         self.worst = {m: float(v) for m, v in (conf.get("reply_max_usd") or {}).items()}
         self.max_age = 60 * float(conf.get("reading_max_age_min", 20))  # older: the account's owner may have used it since
@@ -1120,7 +1123,7 @@ class UsageCap:
         out = []
         for w in sorted(self._windows(model, now)):
             p = self.projected(w, model, running, now)
-            if p > self.plan:
+            if p > self.plans.get(w, self.plan):
                 out.append((w, p))
         return out
 
