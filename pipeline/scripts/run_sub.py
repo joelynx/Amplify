@@ -139,19 +139,23 @@ _ASSIGNED: dict[str, dict[int, dict]] = {}
 def assigned(cfg: dict) -> dict[int, dict]:
     """config.subscription.assignments_file (repo-relative): questions with their own solving model
     and effort, {"questions": {"<id>": {"model": ..., "effort": ...}}} (owner 2026-11-12: the MODS
-    POTD buckets, Opus 5.5 medium / high and Fable 5.2 high). Listing a question there also puts it
-    in the scope, whatever its source."""
-    path = sub_cfg(cfg).get("assignments_file")
-    if not path:
+    POTD buckets, Opus 5.5 medium / high and Fable 5.2 high), or a list of such files (a later file's
+    entry wins). Listing a question there also puts it in the scope, whatever its source."""
+    paths = sub_cfg(cfg).get("assignments_file")
+    if not paths:
         return {}
-    if path not in _ASSIGNED:
-        data = json.loads((PIPELINE_DIR.parent / path).read_text(encoding="utf-8"))
-        out = {int(k): v for k, v in data["questions"].items()}
-        bad = {v.get("effort") for v in out.values()} - set(EFFORTS)
-        if bad:
-            raise SystemExit(f"unknown effort level(s) in {path}: {sorted(bad)}")
-        _ASSIGNED[path] = out
-    return _ASSIGNED[path]
+    key = (paths,) if isinstance(paths, str) else tuple(paths)
+    if key not in _ASSIGNED:
+        out = {}
+        for path in key:
+            data = json.loads((PIPELINE_DIR.parent / path).read_text(encoding="utf-8"))
+            got = {int(k): v for k, v in data["questions"].items()}
+            bad = {v.get("effort") for v in got.values()} - set(EFFORTS)
+            if bad:
+                raise SystemExit(f"unknown effort level(s) in {path}: {sorted(bad)}")
+            out.update(got)
+        _ASSIGNED[key] = out
+    return _ASSIGNED[key]
 
 
 def model_for(cfg: dict, qid: int | None) -> str:
