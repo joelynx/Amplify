@@ -174,6 +174,11 @@ def system_prompt(cfg: dict) -> str:
     return tpl.strip() + "\n"
 
 
+# The reason a blind re-solve gets after a disagreement with the stored answer (the stored value
+# follows in brackets: it is kept in the feedback file and the status note, never sent).
+MISMATCH_REASON = "its final answer did not match the stored reference answer"
+
+
 def user_text(q: dict, feedback: dict | None) -> str:
     text = "QUESTION (in LaTeX):\n" + q["latexcode"].strip() + "\n"
     if not feedback:
@@ -187,8 +192,13 @@ def user_text(q: dict, feedback: dict | None) -> str:
             "Do not mention the previous reply.\n\nPREVIOUS REPLY:\n" + feedback["previous_text"].strip() + "\n"
         )
     else:  # blind re-solve
+        reason = feedback["reason"]
+        if reason.startswith(MISMATCH_REASON):
+            # Never the stored answer itself (owner 2026-11-21), as in subjects.user_text: a solver
+            # told the expected value bends its working to reach it, and some keys are wrong.
+            reason = "its final answer disagreed with a reference answer, which may itself be wrong"
         text += (
-            f"\nNote: an earlier attempt at this question was rejected ({feedback['reason']}). "
+            f"\nNote: an earlier attempt at this question was rejected ({reason}). "
             "Solve it carefully from scratch and double-check the final answer before writing it.\n"
         )
     return text
@@ -436,7 +446,7 @@ def judge_one(qid: int, cfg: dict, app, pc) -> str:
         return _fail(qid, attempt, cfg, pc, kind="feedback", errors=res["errors"], previous_text=text, max_attempts=cap)
     if res.get("answer_mismatch") and tiebreak_note is None:
         return _fail(qid, attempt, cfg, pc, kind="blind",
-                     reason=f"its final answer did not match the stored reference answer ({res.get('stored_answer')})", mismatch=True)
+                     reason=f"{MISMATCH_REASON} ({res.get('stored_answer')})", mismatch=True)
     if res.get("book_problem"):  # aids: the book's own solution looks wrong; the owner decides
         upsert_status(pc, qid, status="needs_human_review", accepted_attempt=attempt,
                       note=f"book check: {res['book_problem'][:300]}")
