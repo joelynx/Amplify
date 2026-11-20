@@ -1001,8 +1001,9 @@ class UsageCap:
         # a window's own margin: more room in the five-hour window for interactive Claude Code work,
         # which the solver cannot see, without lowering what the weekly windows may reach
         self.plans = {w: self.max - float(m) for w, m in (conf.get("margin_by_window") or {}).items()}
-        # once: {window: {"max": m, "until": ISO time}}: an owner's one-off for one window period, ending at its reset
-        self.once = {w: (float(o["max"]), datetime.fromisoformat(o["until"]).timestamp())
+        # once: {window: {"max": m, "until": ISO time, "account": label}}: an owner's one-off for one window
+        # period of one account, ending at its reset
+        self.once = {w: (float(o["max"]), datetime.fromisoformat(o["until"]).timestamp(), o.get("account"))
                      for w, o in (conf.get("once") or {}).items()}
         self.prior = {k: float(v) for k, v in (conf.get("prior_per_usd") or {}).items()}
         self.worst = {m: float(v) for m, v in (conf.get("reply_max_usd") or {}).items()}
@@ -1127,8 +1128,9 @@ class UsageCap:
         return u + self._per_usd(w, now) * (after + sum(self.most(m) for m in flights))
 
     def plan_for(self, w: str, now: float) -> float:
-        """Where `w` stops: max less its margin, or an owner's one-off max until the time it names."""
-        if w in self.once and now < self.once[w][1]:
+        """Where `w` stops: max less its margin, or an owner's one-off max until the time it names, on the
+        account it names (another account keeps the usual stop)."""
+        if w in self.once and now < self.once[w][1] and self.once[w][2] in (None, self.account):
             return self.once[w][0]
         return self.plans.get(w, self.plan)
 

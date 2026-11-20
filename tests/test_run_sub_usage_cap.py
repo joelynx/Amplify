@@ -270,3 +270,16 @@ def test_an_owners_one_off_max_lasts_until_its_time() -> None:
     cap.record(OPUS, end - 600, end - 595, {"five_hour": (0.8, end), "seven_day": (0.95, end + 9e5)}, 0.01, probe=True)
     assert [w for w, _ in cap.over(OPUS, [], end - 590)] == ["seven_day"]  # five_hour may go to 1.0; the rest as before
     assert cap.plan_for("five_hour", end - 1) == 1.0 and cap.plan_for("five_hour", end) == cap.plan
+
+
+def test_an_owners_one_off_holds_only_on_its_account(tmp_path: Path) -> None:
+    """2026-11-20: a one-off for one account's five-hour window must not carry over to the next login."""
+    acct = account(tmp_path / "claude.json", "one")
+    until = "2026-11-20T09:10:00"
+    end = run_sub.datetime.fromisoformat(until).timestamp()
+    cap = run_sub.UsageCap(dict(CONF, once={"five_hour": {"max": 1.0, "until": until, "account": "x"}}), None, None, acct)
+    cap.once["five_hour"] = (1.0, end, cap.account)
+    assert cap.plan_for("five_hour", end - 1) == 1.0
+    account(acct, "two")
+    cap.login_changed()
+    assert cap.plan_for("five_hour", end - 1) == cap.plan
