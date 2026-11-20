@@ -184,7 +184,8 @@ finishes and the readings do not lag (2026-11-19: reading = 0.008 + 0.0215 x
 cost finished, within rounding). A question is sent only if, for every window
 its model counts toward, the latest reading plus the cost of the replies finished
 since, plus every reply still running and this one at the most a reply can cost
-(`reply_max_usd`: a reply that runs to its output token limit), times the
+(`reply_max_usd`: a reply that runs to its output token limit, or the dearest
+reply seen, times `reply_cost_scale`, 0.75 since 2026-11-20), times the
 window's usage per USD, stays under `max` less `margin`; so fewer run at once as
 usage rises. (Valuing running replies at their expected cost let windows end at
 0.97 and 0.90: the ones still running are the long ones, and one that runs to the

@@ -109,6 +109,9 @@ def test_the_most_a_reply_costs_is_the_larger_of_config_and_seen() -> None:
     assert cap.most(FABLE) == 3.6 and cap.most("claude-other") == 4.0
     cap.record(FABLE, NOW, NOW + 900, {}, 5.0)
     assert cap.most(FABLE) == 5.0
+    scaled = run_sub.UsageCap(dict(CONF, reply_cost_scale=0.75))  # owner 2026-11-20
+    scaled.record(FABLE, NOW, NOW + 900, {}, 5.0)
+    assert scaled.most(FABLE) == 3.75 and round(scaled.most(OPUS), 6) == 2.1
 
 
 def test_a_models_own_window_holds_only_that_model() -> None:
