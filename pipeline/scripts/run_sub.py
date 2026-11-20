@@ -1001,10 +1001,12 @@ class UsageCap:
         # a window's own margin: more room in the five-hour window for interactive Claude Code work,
         # which the solver cannot see, without lowering what the weekly windows may reach
         self.plans = {w: self.max - float(m) for w, m in (conf.get("margin_by_window") or {}).items()}
-        # once: {window: {"max": m, "until": ISO time, "account": label}}: an owner's one-off for one window
-        # period of one account, ending at its reset
-        self.once = {w: (float(o["max"]), datetime.fromisoformat(o["until"]).timestamp(), o.get("account"))
-                     for w, o in (conf.get("once") or {}).items()}
+        # once: [{"window": w, "max": m, "until": ISO time, "account": label}, ...] (or {window: {...}}): an
+        # owner's one-offs, each for one window period of one account, ending at its reset
+        raw = conf.get("once") or []
+        raw = [dict(o, window=w) for w, o in raw.items()] if isinstance(raw, dict) else raw
+        self.once = [(o["window"], float(o["max"]), datetime.fromisoformat(o["until"]).timestamp(), o.get("account"))
+                     for o in raw]
         self.prior = {k: float(v) for k, v in (conf.get("prior_per_usd") or {}).items()}
         self.worst = {m: float(v) for m, v in (conf.get("reply_max_usd") or {}).items()}
         self.scale = float(conf.get("reply_cost_scale", 1.0))  # owner 2026-11-20: worst cases scaled down (0.5)
@@ -1137,8 +1139,9 @@ class UsageCap:
     def plan_for(self, w: str, now: float) -> float:
         """Where `w` stops: max less its margin, or an owner's one-off max until the time it names, on the
         account it names (another account keeps the usual stop)."""
-        if w in self.once and now < self.once[w][1] and self.once[w][2] in (None, self.account):
-            return self.once[w][0]
+        for win, top, until, acct in self.once:
+            if win == w and now < until and acct in (None, self.account):
+                return top
         return self.plans.get(w, self.plan)
 
     def over(self, model: str, running: list[tuple[str, float]], now: float | None = None,

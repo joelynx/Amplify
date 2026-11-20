@@ -278,11 +278,27 @@ def test_an_owners_one_off_holds_only_on_its_account(tmp_path: Path) -> None:
     until = "2026-11-20T09:10:00"
     end = run_sub.datetime.fromisoformat(until).timestamp()
     cap = run_sub.UsageCap(dict(CONF, once={"five_hour": {"max": 1.0, "until": until, "account": "x"}}), None, None, acct)
-    cap.once["five_hour"] = (1.0, end, cap.account)
+    cap.once = [("five_hour", 1.0, end, cap.account)]
     assert cap.plan_for("five_hour", end - 1) == 1.0
     account(acct, "two")
     cap.login_changed()
     assert cap.plan_for("five_hour", end - 1) == cap.plan
+
+
+def test_one_offs_for_two_accounts_hold_side_by_side(tmp_path: Path) -> None:
+    """2026-11-20: 'run it till 100 for this account too': each account keeps its own one-off."""
+    acct = account(tmp_path / "claude.json", "one")
+    first = run_sub.UsageCap(CONF, None, None, acct).account
+    account(acct, "two")
+    second = run_sub.UsageCap(CONF, None, None, acct).account
+    once = [{"window": "five_hour", "max": 1.0, "until": "2026-11-20T20:00:00", "account": first},
+            {"window": "five_hour", "max": 1.0, "until": "2026-11-20T23:30:00", "account": second}]
+    cap = run_sub.UsageCap(dict(CONF, once=once), None, None, acct)
+    t = run_sub.datetime.fromisoformat("2026-11-20T21:00:00").timestamp()
+    assert cap.plan_for("five_hour", t) == 1.0  # the second account's, until 23:30
+    account(acct, "one")
+    cap.login_changed()
+    assert cap.plan_for("five_hour", t) == cap.plan  # the first account's ended at 20:00
 
 
 def test_a_reset_model_limit_is_read_again_before_its_questions_go() -> None:
