@@ -1115,18 +1115,20 @@ class UsageCap:
         seen = max((c for _, c in self.hist.get(model) or []), default=0.0)
         return max(self.worst.get(model, 4.0), seen)
 
-    def projected(self, w: str, model: str, running: list[tuple[str, float]], now: float) -> float:
+    def projected(self, w: str, model: str, running: list[tuple[str, float]], now: float, since: bool = True) -> float:
         t, u, _ = self._last(w, now)
-        after = sum(usd for end, usd, m in self.done if end > t and self._counts(w, m))
+        after = sum(usd for end, usd, m in self.done if end > t and self._counts(w, m)) if since else 0.0
         flights = [m for m, _ in running if self._counts(w, m)] + [model]
         return u + self._per_usd(w, now) * (after + sum(self.most(m) for m in flights))
 
-    def over(self, model: str, running: list[tuple[str, float]], now: float | None = None) -> list[tuple[str, float]]:
-        """The windows with a current reading that a question of `model` would take past the cap."""
+    def over(self, model: str, running: list[tuple[str, float]], now: float | None = None,
+             since: bool = True) -> list[tuple[str, float]]:
+        """The windows with a current reading that a question of `model` would take past the cap (with
+        since=False, leaving out the replies that ended after the reading: what a new reading cannot undo)."""
         now = now if now is not None else time.time()
         out = []
         for w in sorted(self._windows(model, now)):
-            p = self.projected(w, model, running, now)
+            p = self.projected(w, model, running, now, since)
             if p > self.plans.get(w, self.plan):
                 out.append((w, p))
         return out
@@ -1143,12 +1145,13 @@ class UsageCap:
 
     def probe_due(self, model: str, running: list[tuple[str, float]], now: float | None = None) -> bool:
         """Whether to read the account's usage before a question of `model`: a window it counts toward
-        has no recent reading, what is known would let it go (a window known to be over the cap
-        waits for its reset instead), and no probe for it went in the last PROBE_RETRY seconds."""
+        has no recent reading, its last reading would let it go (a window the reading itself puts past
+        the cap waits for its reset instead; one past it only by the replies since, at their estimated
+        cost, is read again), and no probe for it went in the last PROBE_RETRY seconds."""
         now = now if now is not None else time.time()
         if not self.unread(model, now) or now - self.probed.get(model, float("-inf")) < PROBE_RETRY:
             return False
-        return not self.over(model, running, now)
+        return not self.over(model, running, now, since=False)
 
     def allows(self, model: str, running: list[tuple[str, float]], now: float | None = None) -> bool:
         return not self.unread(model, now) and not self.over(model, running, now)
@@ -1158,9 +1161,13 @@ class UsageCap:
         now = now if now is not None else time.time()
         over = self.over(model, [], now)
         if over:
-            resets = [self._last(w, now)[2] for w, _ in over]
-            until = max(float(r) for r in resets) if all(r is not None for r in resets) else now + 1020
-            why = ", ".join(f"{w} at {self._last(w, now)[1]:.0%}" for w, _ in over)
+            why = ", ".join(f"{w} at {self._last(w, now)[1]:.0%} ({p:.0%} projected)" for w, p in over)
+            if self.over(model, [], now, since=False):
+                resets = [self._last(w, now)[2] for w, _ in over]
+                until = max(float(r) for r in resets) if all(r is not None for r in resets) else now + 1020
+            else:  # past the cap only by the replies since the reading: read again once it is stale
+                read = min(self._last(w, now)[0] for w, _ in over) + self.max_age + 1
+                until = max(read, now + 60, self.probed.get(model, now) + PROBE_RETRY)
             return until, f"usage cap {self.max:.0%} for {model}: {why}"
         unread = self.unread(model, now)
         if unread:  # its probe brought no reading: tried again

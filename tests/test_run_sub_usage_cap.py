@@ -57,6 +57,23 @@ def test_a_stale_reading_is_read_again_unless_it_is_over_the_cap() -> None:
     assert cap.held_until(FABLE, later)[0] == NOW + 9000
 
 
+def test_spend_since_a_reading_is_read_again_not_waited_out() -> None:
+    """2026-11-20: three cut-off replies at $5.26 put five_hour's projection past the cap at the prior's
+    usage per dollar while a reading showed 0.26: once the reading is stale a probe reads it again."""
+    cap = run_sub.UsageCap(CONF)
+    cap.record(FABLE, NOW, NOW + 5, {"five_hour": (0.0, NOW + 18000)}, 0.01, probe=True)
+    for k in range(3):
+        cap.record(FABLE, NOW + 10, NOW + 600 + k, {"five_hour": (0.0, NOW + 18000)}, 5.26)
+    soon = NOW + 700  # the reading from NOW + 10 is still fresh
+    assert cap.over(FABLE, [], soon) and not cap.probe_due(FABLE, [], soon)
+    until, why = cap.held_until(FABLE, soon)
+    assert until == NOW + 10 + 1200 + 1 and "projected" in why  # not the reset at NOW + 18000
+    later = until
+    assert cap.probe_due(FABLE, [], later)
+    cap.record(FABLE, later, later + 5, {"five_hour": (0.26, NOW + 18000)}, 0.01, probe=True)
+    assert cap.allows(FABLE, [], later + 5)  # usage per dollar is now fitted from the readings: far below the prior
+
+
 def test_a_failed_probe_waits_before_the_next() -> None:
     cap = run_sub.UsageCap(CONF)
     cap.probed[FABLE] = NOW
@@ -237,4 +254,6 @@ def test_solve_waits_at_the_cap_for_the_reset(tmp_path: Path, monkeypatch) -> No
     # plans to, so the rest waited for the reset, with no probes while the account was known to be full,
     # and a probe read the new window before they went
     assert len([t for t in sent if t < reset]) == 3 and all(t >= reset for t in sent[3:])
-    assert len(probes) == 2 and probes[0] < sent[0] and sent[2] < reset <= probes[1] < sent[3]
+    # one probe once the last reply's reading is stale (the replies since only projected past the cap;
+    # the probe shows the window itself is), then none until the reset
+    assert len(probes) == 3 and probes[0] < sent[0] and sent[2] < probes[1] < reset <= probes[2] < sent[3]
