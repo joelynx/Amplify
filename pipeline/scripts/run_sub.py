@@ -1067,6 +1067,13 @@ class UsageCap:
         self._save()
         return True
 
+    def forget(self, model: str) -> None:
+        """Drop this account's readings from `model`'s runs (its owner reset that model's limit): nothing
+        of `model` goes before a probe reads its windows again."""
+        self._acct()["points"] = [p for p in self.points if p[1] != model]
+        self.probed.pop(model, None)
+        self._save()
+
     def usd_per_token(self) -> float:
         return self.tokens[0] / self.tokens[1] if self.tokens[1] > 1e5 else 3e-5
 
@@ -1222,7 +1229,7 @@ def workers_for(cfg: dict, effort: str, override: int | None = None) -> int:
 
 
 def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int | None, wait_on_limit: bool,
-          force_unlock: bool, review: bool = False) -> None:
+          force_unlock: bool, review: bool = False, reread: list[str] | None = None) -> None:
     """Send the unfinished questions; with review, the review solve (config.subscription.review_model
     at review_effort) for the questions review_rows names. Neither sends the stored answer."""
     pre = verify(cfg, app, pc, quiet=True, review=review)
@@ -1264,6 +1271,9 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
             paused_until = None  # kept until the wait: the replies still running can take several more rounds
             parked: dict[str, tuple[float, str]] = {}  # model -> (until, why): a limit on that model alone
             cap = UsageCap(sub_cfg(cfg).get("usage_cap") or {}, LOGIN_FILE, CAP_STATE, ACCOUNT_FILE)
+            for m in reread or []:
+                cap.forget(m)
+                print(json.dumps({"reread": m, "account": cap.account}), flush=True)
             started: dict = {}
             account_of: dict = {}  # the account each running reply started under
 
@@ -1457,6 +1467,8 @@ def main() -> None:
         p.add_argument("--workers", type=int)
         p.add_argument("--wait-on-limit", action="store_true")
         p.add_argument("--force-unlock", action="store_true")
+        p.add_argument("--reread", action="append", metavar="MODEL",
+                       help="forget this account's readings from MODEL's runs (its limit was reset): a probe reads them again")
         if name == "review":
             p.add_argument("--list", action="store_true", help="only list the questions")
     a = ap.parse_args()
@@ -1479,13 +1491,13 @@ def main() -> None:
                               "will_skip": skip, "images": len(images)}))
     elif a.cmd == "solve":
         ids = [int(x) for x in a.ids.split(",") if x.strip()] if a.ids else None
-        solve(cfg, app, pc, a.n, ids, a.workers, a.wait_on_limit, a.force_unlock)
+        solve(cfg, app, pc, a.n, ids, a.workers, a.wait_on_limit, a.force_unlock, reread=a.reread)
     elif a.cmd == "review":
         ids = [int(x) for x in a.ids.split(",") if x.strip()] if a.ids else None
         if a.list:
             print(",".join(str(q) for q in review_rows(cfg, app, pc, ids)))
         else:
-            solve(cfg, app, pc, a.n, ids, a.workers, a.wait_on_limit, a.force_unlock, review=True)
+            solve(cfg, app, pc, a.n, ids, a.workers, a.wait_on_limit, a.force_unlock, review=True, reread=a.reread)
 
 
 if __name__ == "__main__":

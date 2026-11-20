@@ -283,3 +283,14 @@ def test_an_owners_one_off_holds_only_on_its_account(tmp_path: Path) -> None:
     account(acct, "two")
     cap.login_changed()
     assert cap.plan_for("five_hour", end - 1) == cap.plan
+
+
+def test_a_reset_model_limit_is_read_again_before_its_questions_go() -> None:
+    """2026-11-20: the owner reset the Fable limit on an account whose Fable window read 1.07."""
+    cap = run_sub.UsageCap(CONF)
+    cap.record(FABLE, NOW, NOW + 5, {"five_hour": (0.1, NOW + 9000), "seven_day_overage_included": (1.07, NOW + 9e5)}, 0.0, probe=True)
+    cap.record(OPUS, NOW, NOW + 5, {"five_hour": (0.1, NOW + 9000), "seven_day": (0.5, NOW + 9e5)}, 0.01, probe=True)
+    assert not cap.probe_due(FABLE, [], NOW + 2000)  # known to be over: no probes until the reset
+    cap.forget(FABLE)
+    assert cap.unread(FABLE, NOW + 10) == ["all"] and cap.probe_due(FABLE, [], NOW + 10)
+    assert cap.allows(OPUS, [], NOW + 10)  # the other model's readings stay
