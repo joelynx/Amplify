@@ -7,7 +7,9 @@ Sets (downloaded by the caller into their own folders; nothing in them is execut
     AIME 2025-26, HMMT February 2023-26 and November 2025, BRUMO, SMT and CMIMC 2025. AIME goes to the
     bank's AIME source; the others to "United States Competitions" with the contest in the subsource,
     as the bank already files HMMT. MathArena's own numbering is kept ("Problem 4 of 30"), as its
-    sets do not say which round a problem came from.
+    sets do not say which round a problem came from. APEX (2025 problems from many competitions,
+    some reworded to have a final answer) goes to each problem's own competition, mapped by hand in
+    APEX, with ", as posed in MathArena APEX" in the subsource.
   * IMO-Bench AnswerBench v2 (github.com/google-deepmind/superhuman, CC BY 4.0): 400 olympiad problems
     reworded or changed on purpose ("robustified"), many with a different answer from the original,
     so they are filed under their own source, with the original competition in the subsource.
@@ -52,6 +54,70 @@ MATHARENA = {
     "brumo_2025": (US, lambda i, n: f"Brown University Mathematics Olympiad, 2025, Problem {i} of {n}"),
     "smt_2025": (US, lambda i, n: f"Stanford Math Tournament, 2025, Problem {i} of {n}"),
     "cmimc_2025": (US, lambda i, n: f"Carnegie Mellon Informatics and Mathematics Competition, 2025, Problem {i} of {n}"),
+}
+EUR, ASIA, IND, CHN = "Other European Olympiads", "Other Asian Olympiads", "Indian Olympiads", "Chinese Olympiads"
+APEX_SETS = ("apex_2025", "apex-shortlist")
+APEX_TAG = ", as posed in MathArena APEX"  # its problems may be reworded to have a final answer
+# MathArena APEX problem label -> (source, subsource), by hand in the bank's own naming; labels that
+# do not say which competition they are (CMM, BMO: British or Balkan) keep MathArena's label
+APEX = {
+    "All Russian 2025 11.8": ("All-Russian Olympiad", "2025, Grade 11, Problem 8"),
+    "All Russian 2025 11.4": ("All-Russian Olympiad", "2025, Grade 11, Problem 4"),
+    "Turkey TST 2025 P5": (EUR, "Turkey Team Selection Test, 2025, Problem 5"),
+    "SMT 2025 P8": (US, "Stanford Math Tournament, 2025, Problem 8"),
+    "SMT 2025 P42": (US, "Stanford Math Tournament, 2025, Problem 42"),
+    "SMT 2025 P43": (US, "Stanford Math Tournament, 2025, Problem 43"),
+    "Serbian MO 2025 P6": (EUR, "Serbian Mathematical Olympiad, 2025, Problem 6"),
+    "serbian-bmotst-2025-p5": (EUR, "Serbia Team Selection Test for the Balkan Mathematical Olympiad, 2025, Problem 5"),
+    "CMM 2025 Individual P10": ("MathArena APEX", "CMM 2025 Individual P10"),
+    "CMM 2025 Team P7": ("MathArena APEX", "CMM 2025 Team P7"),
+    "BMO 2025 P4": ("MathArena APEX", "BMO 2025 P4"),
+    "ELMO Shortlist 2025 N7": ("ELMO Mathematical Olympiad Shortlist", "2025, N7"),
+    "ELMO Shortlist 2025 C7": ("ELMO Mathematical Olympiad Shortlist", "2025, C7"),
+    "ELMO Shortlist 2025 C8": ("ELMO Mathematical Olympiad Shortlist", "2025, C8"),
+    "China TST 2025 P5": ("China Team Selection Test", "2025, Problem 5"),
+    "China TST 2025 P10": ("China Team Selection Test", "2025, Problem 10"),
+    "China TST 2025 P18": ("China Team Selection Test", "2025, Problem 18"),
+    "China TST 2025 P22": ("China Team Selection Test", "2025, Problem 22"),
+    "EMCC 2025 Guts P24": (US, "Exeter Math Club Competition, 2025, Guts Round, Problem 24"),
+    "emcc-2025-guts-18": (US, "Exeter Math Club Competition, 2025, Guts Round, Problem 18"),
+    "IMO 2025 P6": ("International Mathematical Olympiad", "2025, Problem 6"),
+    "imosl-2024-c8": ("International Mathematical Olympiad", "2024, Shortlist, C8"),
+    "imosl-2024-n7": ("International Mathematical Olympiad", "2024, Shortlist, N7"),
+    "usa-tst-2025-p1": ("United States of America Team Selection Test", "2025, Problem 1"),
+    "American TSTST 2025 P3": ("United States of America Team Selection Test Selection Test", "2025, Problem 3"),
+    "bmmt-2025-team-p19": (US, "Berkeley mini Math Tournament, 2025, Team Round, Problem 19"),
+    "hmmt-2025-team-p10": (US, "Harvard-MIT Mathematics Tournament, February 2025, Team Round, Problem 10"),
+    "hmmt-2025-team-p4": (US, "Harvard-MIT Mathematics Tournament, February 2025, Team Round, Problem 4"),
+    "HMMT Feb 2025 C9": (US, "Harvard-MIT Mathematics Tournament, February 2025, Combinatorics Round, Problem 9"),
+    "HMMT Feb 2025 C10": (US, "Harvard-MIT Mathematics Tournament, February 2025, Combinatorics Round, Problem 10"),
+    "Brumo 2025 P30": (US, "Brown University Mathematics Olympiad, 2025, Problem 30"),
+    "AIME 2025 P14": (AIME, "2025, Problem 14 (AIME I or II not given)"),
+    "AIME 2025 P15": (AIME, "2025, Problem 15 (AIME I or II not given)"),
+    "indian-imotc-day2-p3": (IND, "Indian International Mathematical Olympiad Training Camp, 2025, Day 2, Problem 3"),
+    "India IMOTC 2025 Day 2 P1": (IND, "Indian International Mathematical Olympiad Training Camp, 2025, Day 2, Problem 1"),
+    "India STEMS A 2025 P4": (IND, "STEMS Mathematics Olympiad (Chennai Mathematical Institute), 2025, Category A, Problem 4"),
+    "India STEMS C 2025 P6": (IND, "STEMS Mathematics Olympiad (Chennai Mathematical Institute), 2025, Category C, Problem 6"),
+    "rmm-2025-p3": ("Romanian Masters of Mathematics", "2025, Problem 3"),
+    "Germany TST 2025 P3": (EUR, "Germany Team Selection Test, 2025, Problem 3"),
+    "Germany TST 2025 P4": (EUR, "Germany Team Selection Test, 2025, Problem 4"),
+    "Germany TST 2025 P7": (EUR, "Germany Team Selection Test, 2025, Problem 7"),
+    **{f"Korea Winter Program Practice Test 2025 P{i}": (ASIA, f"Korea Winter Program Practice Test, 2025, Problem {i}")
+       for i in (2, 3, 6, 8)},
+    "Korea Final Round 2025 P5": (ASIA, "Korean Mathematical Olympiad, 2025, Final Round, Problem 5"),
+    "Taiwan TST 2025 #3 Quiz 1C": ("Taiwan Team Selection Test", "2025, Round 3, Quiz 1, Problem C"),
+    "Taiwan TST 2025 #1 P5": ("Taiwan Team Selection Test", "2025, Round 1, Problem 5"),
+    "Taiwan TST 2025 #3 Quiz P5": ("Taiwan Team Selection Test", "2025, Round 3, Quiz, Problem 5"),
+    "China Girls MO 2025 P7": (CHN, "China Girls' Mathematical Olympiad, 2025, Problem 7"),
+    "Japan MO 2025 P3": ("Japan Mathematical Olympiad Final Round", "2025, Problem 3"),
+    "IzHO 2025 P2": (ASIA, "International Zhautykov Olympiad, 2025, Problem 2"),
+    "IzHO 2025 P4": (ASIA, "International Zhautykov Olympiad, 2025, Problem 4"),
+    "EGMO 2025 P5": ("European Girls' Mathematical Olympiad", "2025, Problem 5"),
+    "Bulgarian MO 2025 P2": (EUR, "Bulgarian Mathematical Olympiad, 2025, Problem 2"),
+    "Bulgarian MO 2025 P6": (EUR, "Bulgarian Mathematical Olympiad, 2025, Problem 6"),
+    "Swiss TST 2025 P5": (EUR, "Swiss Team Selection Test, 2025, Problem 5"),
+    "LMAO 2025 Day 1 P2": ("Mock Olympiads", "LMAO, 2025, Day 1, Problem 2"),
+    "LMAO 2025 Day 2 P1": ("Mock Olympiads", "LMAO, 2025, Day 2, Problem 1"),
 }
 NEAR = 0.85  # share of a problem's 5-word shingles found in one bank question: the same problem
 # (set, number, field) -> [(old, new)]: slips in the source data, each old matched exactly once
@@ -132,6 +198,15 @@ def load(matharena: Path, answerbench: Path) -> list[dict]:
             i = int(r["problem_idx"])
             rows.append({"set": f"MathArena {name}", "idx": str(i), "source": source, "subsource": sub(i, len(data)),
                          "latexcode": to_latex(r["problem"]), "answer": answer_latex(r["answer"]), "orig": "",
+                         "asy": "\n\n".join(m.group(0).strip() for m in ASY_RE.finditer(r["problem"]))})
+    for name in APEX_SETS:
+        for r in json.loads((matharena / f"{name}.json").read_text(encoding="utf-8")):
+            if r["source"] not in APEX:
+                raise SystemExit(f"MathArena {name} {r['problem_idx']}: no source for {r['source']!r} in APEX")
+            source, sub = APEX[r["source"]]
+            rows.append({"set": f"MathArena {name}", "idx": str(r["problem_idx"]), "source": source,
+                         "subsource": sub + ("" if source == "MathArena APEX" else APEX_TAG),
+                         "latexcode": to_latex(r["problem"]), "answer": answer_latex(r["answer"]), "orig": r["source"],
                          "asy": "\n\n".join(m.group(0).strip() for m in ASY_RE.finditer(r["problem"]))})
     for r in csv.DictReader(open(answerbench, encoding="utf-8")):
         orig = (r.get("Source") or "").strip()
