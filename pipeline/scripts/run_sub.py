@@ -1003,7 +1003,7 @@ class UsageCap:
         self.plans = {w: self.max - float(m) for w, m in (conf.get("margin_by_window") or {}).items()}
         self.prior = {k: float(v) for k, v in (conf.get("prior_per_usd") or {}).items()}
         self.worst = {m: float(v) for m, v in (conf.get("reply_max_usd") or {}).items()}
-        self.scale = float(conf.get("reply_cost_scale", 1.0))  # owner 2026-11-20: worst cases at 0.75x
+        self.scale = float(conf.get("reply_cost_scale", 1.0))  # owner 2026-11-20: worst cases scaled down (0.5)
         self.max_age = 60 * float(conf.get("reading_max_age_min", 20))  # older: the account's owner may have used it since
         self.login_file, self.account_file = login_file, account_file
         self.state_file = state_file  # what is known of each account, so a restart does not start blind
