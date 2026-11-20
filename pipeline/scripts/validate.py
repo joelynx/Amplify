@@ -21,9 +21,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 import sys
 from decimal import Decimal, InvalidOperation
+from fractions import Fraction
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -63,6 +65,251 @@ def numeric_value(s: str | None) -> Decimal | None:
         return Decimal(core)
     except InvalidOperation:
         return None
+
+
+# --- constants written in LaTeX (owner 2026-11-20: "extend the judge's answer comparison") ---------
+# An answer that is a number written with fractions, roots, powers and pi ('\frac{3}{4}',
+# '2\sqrt{3}', '\dfrac{\pi}{6}', '10\frac{2}{3}', '2^{10}-1') is compared by value; anything with a
+# variable, a word, a comma list or an interval is not read and stays unchecked.
+
+_CONST_TOKEN = re.compile(r"\\[a-zA-Z]+|\d*\.\d+|\d+|[-+*/^(){}\[\]]")
+_CONST_SKIP = re.compile(r"\^\{?\\circ\}?|\\circ|°|\\%|%|\\!|\\,|\\;|\\:")
+_THOUSANDS = re.compile(r"[-+]?\d{1,3}(?:,\d{3})+(?:\.\d+)?")
+_MAX_BITS = 20000  # a power bigger than this is not worked out
+
+
+class _NotConstant(Exception):
+    pass
+
+
+class _ConstParser:
+    r"""Recursive descent over the tokens of one answer: sums, products (also implicit, '2\sqrt3'),
+    quotients, powers, \frac, \sqrt (and \sqrt[n]), \pi, parentheses and braces. A whole number
+    directly followed by \frac of two whole numbers is a mixed number (AMC's '10\frac{2}{3}')."""
+
+    def __init__(self, tokens: list[str]) -> None:
+        self.t, self.k = tokens, 0
+
+    def peek(self) -> str | None:
+        return self.t[self.k] if self.k < len(self.t) else None
+
+    def take(self, want: str | None = None) -> str:
+        tok = self.peek()
+        if tok is None or (want is not None and tok != want):
+            raise _NotConstant
+        self.k += 1
+        return tok
+
+    def expr(self):
+        v = self.term()
+        while self.peek() in ("+", "-"):
+            op = self.take()
+            w = self.term()
+            v = _add(v, w) if op == "+" else _add(v, _neg(w))
+        return v
+
+    def starts_factor(self) -> bool:
+        tok = self.peek()
+        return tok is not None and (tok[0].isdigit() or tok[0] == "." or tok in ("(", "{", "\\frac", "\\sqrt", "\\pi"))
+
+    def term(self):
+        whole = self.peek() is not None and self.peek().isdigit()
+        v = self.factor()
+        while True:
+            if self.peek() in ("*", "/", "\\cdot", "\\times", "\\div"):
+                op = self.take()
+                w = self.factor()
+                v = _div(v, w) if op in ("/", "\\div") else _mul(v, w)
+            elif self.starts_factor():
+                mixed = whole and self.peek() == "\\frac"
+                start = self.k
+                w = self.factor()
+                if mixed and isinstance(w, Fraction) and self._plain_frac(start):
+                    v = _add(v, w) if v >= 0 else _add(v, _neg(w))
+                else:
+                    v = _mul(v, w)
+            else:
+                return v
+            whole = False
+
+    def _plain_frac(self, start: int) -> bool:
+        r"""Whether tokens start..k are \frac{digits}{digits} (or \frac12)."""
+        body = [x for x in self.t[start + 1:self.k] if x not in ("{", "}")]
+        return len(body) in (1, 2) and all(x.isdigit() for x in body)
+
+    def factor(self):
+        if self.peek() in ("-", "+"):
+            return _neg(self.factor()) if self.take() == "-" else self.factor()
+        base = self.atom()
+        if self.peek() == "^":
+            self.take()
+            exp = _neg(self.atom()) if self.peek() == "-" and self.take() else self.atom()
+            return _pow(base, exp)
+        return base
+
+    def arg(self):
+        r"""One argument of \frac or \sqrt: a braced group, or a single digit/token ('\frac12')."""
+        if self.peek() == "{":
+            return self.atom()
+        tok = self.peek()
+        if tok is not None and tok.isdigit() and len(tok) > 1:  # \frac12: the digits are separate arguments
+            self.t[self.k:self.k + 1] = [tok[0], tok[1:]]
+        return self.atom()
+
+    def atom(self):
+        tok = self.take()
+        if tok[0].isdigit() or tok[0] == ".":
+            return Fraction(tok)
+        if tok in ("(", "{"):
+            v = self.expr()
+            self.take(")" if tok == "(" else "}")
+            return v
+        if tok == "\\pi":
+            return math.pi
+        if tok == "\\frac":
+            num = self.arg()
+            return _div(num, self.arg())
+        if tok == "\\sqrt":
+            n = Fraction(2)
+            if self.peek() == "[":
+                self.take()
+                n = self.expr()
+                self.take("]")
+            return _root(self.arg(), n)
+        raise _NotConstant
+
+
+def _add(a, b):
+    return a + b if isinstance(a, Fraction) and isinstance(b, Fraction) else float(a) + float(b)
+
+
+def _neg(a):
+    return -a
+
+
+def _mul(a, b):
+    return a * b if isinstance(a, Fraction) and isinstance(b, Fraction) else float(a) * float(b)
+
+
+def _div(a, b):
+    if b == 0:
+        raise _NotConstant
+    return a / b if isinstance(a, Fraction) and isinstance(b, Fraction) else float(a) / float(b)
+
+
+def _pow(a, b):
+    if isinstance(a, Fraction) and isinstance(b, Fraction) and b.denominator == 1:
+        n = abs(b.numerator)
+        if a == 0 and b < 0:
+            raise _NotConstant
+        if n * max(abs(a.numerator).bit_length(), a.denominator.bit_length(), 1) > _MAX_BITS:
+            raise _NotConstant
+        return a ** b.numerator
+    if isinstance(b, Fraction) and b.denominator != 1 and isinstance(a, Fraction) and a >= 0:
+        return _root(a ** b.numerator, Fraction(b.denominator)) if abs(b.numerator) <= 64 else float(a) ** float(b)
+    if float(a) < 0:
+        raise _NotConstant
+    try:
+        return float(a) ** float(b)
+    except OverflowError:
+        raise _NotConstant from None
+
+
+def _iroot(x: int, n: int) -> int | None:
+    r = round(x ** (1.0 / n)) if x.bit_length() < 1000 else None
+    if r is None:
+        return None
+    for c in (r - 1, r, r + 1):
+        if c >= 0 and c ** n == x:
+            return c
+    return None
+
+
+def _root(a, n):
+    if not (isinstance(n, Fraction) and n.denominator == 1 and n > 0):
+        raise _NotConstant
+    k = n.numerator
+    if float(a) < 0:
+        if k % 2 == 0:
+            raise _NotConstant
+        return _neg(_root(_neg(a), n))
+    if isinstance(a, Fraction):
+        p, q = _iroot(a.numerator, k), _iroot(a.denominator, k)
+        if p is not None and q is not None:
+            return Fraction(p, q)
+    return float(a) ** (1.0 / k)
+
+
+def constant_value(s: str | None):
+    """The value of an answer that is a number written in LaTeX: a Fraction when exact, a float
+    when it has a root or pi; None when the answer is not such a number."""
+    if s is None:
+        return None
+    core = normalize_answer(str(s)).replace("−", "-")
+    core = re.sub(r"\\[dt]frac", r"\\frac", core)
+    core = re.sub(r"^\\?[a-zA-Z]\w*=", "", core)  # "n=5"
+    core = _CONST_SKIP.sub("", core)
+    if _THOUSANDS.fullmatch(core):
+        core = core.replace(",", "")
+    if not core or re.search(r"[^\\a-zA-Z0-9.+\-*/^(){}\[\]]", core):
+        return None
+    tokens = _CONST_TOKEN.findall(core)
+    if "".join(tokens) != core:  # a letter outside a known command, or a stray character
+        return None
+    p = _ConstParser(tokens)
+    try:
+        v = p.expr()
+        if p.peek() is not None:
+            return None
+    except (_NotConstant, ZeroDivisionError, OverflowError, ValueError):
+        return None
+    if isinstance(v, float) and not math.isfinite(v):
+        return None
+    return v
+
+
+def _decimals(s: str) -> int | None:
+    """Decimal places of an answer that is a plain decimal number ('0.333'), else None."""
+    m = re.fullmatch(r"[-+]?\d*\.(\d+)", re.sub(r"^\\?[a-zA-Z]\w*=", "", normalize_answer(str(s))))
+    return len(m.group(1)) if m else None
+
+
+def _terminates(x: Fraction) -> bool:
+    """Whether x has an exact decimal form (its denominator has no prime but 2 and 5)."""
+    q = x.denominator
+    for f in (2, 5):
+        while q % f == 0:
+            q //= f
+    return q == 1
+
+
+def _places(x: Fraction) -> int:
+    """Decimal places of a number with an exact decimal form."""
+    k = 0
+    while (x * 10 ** k).denominator != 1:
+        k += 1
+    return k
+
+
+def same_constant(stored: str, reply: str) -> bool | None:
+    r"""Whether two answers are the same number (None if either is not a number we can read).
+    Exact values must be equal; a root or pi is compared to 1e-9 relative. A plain decimal on one
+    side may be the other side rounded to its places when that side has no exact decimal form
+    ('0.333' for \frac13, a root, pi), or when the decimal has 3 places or more and the other side
+    more ('0.941' for 0.941094); a short decimal is exact: 0.52 is not 0.5."""
+    a, b = constant_value(stored), constant_value(reply)
+    if a is None or b is None:
+        return None
+    if isinstance(a, Fraction) and isinstance(b, Fraction) and a == b:
+        return True
+    tol = 1e-9 * max(1.0, abs(float(a)), abs(float(b)))
+    for text, other in ((stored, b), (reply, a)):
+        d = _decimals(text)
+        if d is not None and (not (isinstance(other, Fraction) and _terminates(other)) or (d >= 3 and _places(other) > d)):
+            tol = max(tol, 0.5 * 10 ** -d + 1e-12)
+    if isinstance(a, Fraction) and isinstance(b, Fraction) and tol <= 1e-9 * max(1.0, abs(float(a)), abs(float(b))):
+        return False
+    return abs(float(a) - float(b)) <= tol
 
 
 def hint_leak_errors(hint: str, answer_type: str, answer: str) -> list[str]:
@@ -146,14 +393,15 @@ def validate_solver_text(qid: int, text: str, cfg: dict, stored_answer: str | No
         k = hint_tier_of(e, len(tiers))
         (tier_errs[k] if k is not None else res["errors"]).append(f"web: {e}")
 
-    # Stored numeric Answer (e.g. AIME): a free correctness signal. Only plain
-    # numbers are compared; anything else is left to the solver.
-    if cfg.get("check_stored_numeric_answer", True) and parts["answer_type"] == "NUMERICAL":
-        sv = numeric_value(stored_answer)
-        nv = numeric_value(parts["answer"])
-        if sv is not None and nv is not None:
-            res["stored_answer"] = str(sv)
-            res["answer_mismatch"] = sv != nv
+    # Stored Answer (e.g. AIME, an answer key): a free correctness signal. Numbers are compared,
+    # also when written with fractions, roots, powers or pi (since 2026-11-20); anything else
+    # (variables, lists, words) is left to the solver.
+    if cfg.get("check_stored_numeric_answer", True) and parts["answer_type"] != "NONE":
+        same = same_constant(stored_answer, parts["answer"])
+        if same is not None:
+            sv = numeric_value(stored_answer)
+            res["stored_answer"] = str(sv) if sv is not None else normalize_answer(str(stored_answer))
+            res["answer_mismatch"] = not same
 
     res["ok"] = not res["errors"]
     settle_hint_tiers(res, tiers, tier_errs)

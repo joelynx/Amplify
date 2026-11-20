@@ -23,9 +23,15 @@ and fills empty Answer / Hint cells.
 - Fixed model and effort for every question: `config.solver` (default
   `claude-opus-5-5` at `high`, `max_tokens` 32000).
 - No review and no triage. Correctness checks are mechanical only; the one
-  content check is `check_stored_numeric_answer`: when the stored Answer is a
-  plain number (AIME and a few others) and the solver's NUMERICAL answer
-  differs, the question is re-solved once, then goes to human review.
+  content check is `check_stored_numeric_answer`: when the stored Answer and the
+  solver's answer are both numbers and differ, the question is re-solved once,
+  then goes to human review. Since 2026-11-20 (owner: "extend the judge's answer
+  comparison") a number may be written with fractions, roots, powers and pi
+  (`validate.constant_value`: `\frac{3}{4}`, `2\sqrt{3}`, `\pi/6`, AMC's mixed
+  `10\frac{2}{3}`), compared exactly, or to 1e-9 with a root or pi; a decimal
+  may stand for the other side rounded to its places when that side has no
+  exact decimal form, or when it has 3 places or more. Answers with variables,
+  lists or words are not compared.
 - Sources are processed in the order of `config.sources` (the list is the
   priority order).
 - The old solution (`questions.solution`) is never sent to the model and never
