@@ -300,16 +300,24 @@ def same_constant(stored: str, reply: str) -> bool | None:
     a, b = constant_value(stored), constant_value(reply)
     if a is None or b is None:
         return None
-    if isinstance(a, Fraction) and isinstance(b, Fraction) and a == b:
+    exact = isinstance(a, Fraction) and isinstance(b, Fraction)
+    if exact and a == b:
         return True
-    tol = 1e-9 * max(1.0, abs(float(a)), abs(float(b)))
+    if exact:  # in Fractions: a whole number past 1e308 has no float (2026-11-21, q33882)
+        one, rel = Fraction(1), Fraction(1, 10 ** 9) * max(1, abs(a), abs(b))
+    else:
+        try:
+            one, rel = 1.0, 1e-9 * max(1.0, abs(float(a)), abs(float(b)))
+        except OverflowError:  # such a number against a root or pi: not compared
+            return None
+    tol = rel
     for text, other in ((stored, b), (reply, a)):
         d = _decimals(text)
         if d is not None and (not (isinstance(other, Fraction) and _terminates(other)) or (d >= 3 and _places(other) > d)):
-            tol = max(tol, 0.5 * 10 ** -d + 1e-12)
-    if isinstance(a, Fraction) and isinstance(b, Fraction) and tol <= 1e-9 * max(1.0, abs(float(a)), abs(float(b))):
+            tol = max(tol, one / (2 * 10 ** d) + one / 10 ** 12)
+    if exact and tol <= rel:
         return False
-    return abs(float(a) - float(b)) <= tol
+    return abs(a - b) <= tol if exact else abs(float(a) - float(b)) <= tol
 
 
 def hint_leak_errors(hint: str, answer_type: str, answer: str) -> list[str]:

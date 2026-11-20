@@ -86,6 +86,14 @@ def test_a_different_number_is_a_mismatch(stored: str, reply: str) -> None:
     assert same_constant(stored, reply) is False
 
 
+def test_numbers_past_the_float_range() -> None:
+    # 2026-11-21 (q33882): a reply's 2^{2017} crashed the judge when turned into a float
+    assert same_constant("\\frac{2017+1}{3}", "\\dfrac{2^{2017}+1}{3}") is False
+    assert same_constant("\\frac{2^{2017}+1}{3}", "\\dfrac{2^{2017}+1}{3}") is True
+    assert same_constant("10^{400}+1", "10^{400}") is False
+    assert same_constant("\\sqrt{2}", "10^{400}") is None
+
+
 def test_unreadable_answers_are_not_compared() -> None:
     assert same_constant("n-1", "n - 1") is None
     assert same_constant("\\frac{1}{2}", "\\text{half}") is None
