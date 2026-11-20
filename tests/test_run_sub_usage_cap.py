@@ -260,3 +260,13 @@ def test_solve_waits_at_the_cap_for_the_reset(tmp_path: Path, monkeypatch) -> No
     # one probe once the last reply's reading is stale (the replies since only projected past the cap;
     # the probe shows the window itself is), then none until the reset
     assert len(probes) == 3 and probes[0] < sent[0] and sent[2] < probes[1] < reset <= probes[2] < sent[3]
+
+
+def test_an_owners_one_off_max_lasts_until_its_time() -> None:
+    """Owner 2026-11-20: "Let the 5 hour window get completely exhausted this once"."""
+    until = "2026-11-20T09:10:00"
+    end = run_sub.datetime.fromisoformat(until).timestamp()
+    cap = run_sub.UsageCap(dict(CONF, once={"five_hour": {"max": 1.0, "until": until}}))
+    cap.record(OPUS, end - 600, end - 595, {"five_hour": (0.8, end), "seven_day": (0.95, end + 9e5)}, 0.01, probe=True)
+    assert [w for w, _ in cap.over(OPUS, [], end - 590)] == ["seven_day"]  # five_hour may go to 1.0; the rest as before
+    assert cap.plan_for("five_hour", end - 1) == 1.0 and cap.plan_for("five_hour", end) == cap.plan
