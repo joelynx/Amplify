@@ -188,6 +188,11 @@ FIXES = {
     ("IMO-Bench AnswerBench v2", "imo-bench-number_theory-021", "latexcode"): [("\\textif{", "\\textit{")],
     ("MathArena hmmt_nov_2025", "1", "latexcode"): [("\\overlien{BC}", "\\overline{BC}")],
     ("MathArena hmmt_nov_2025", "14", "latexcode"): [("\\begin{array}{ccccc}", "\\begin{array}{cccccc}")],  # six columns
+    # HARP keys found wrong 2026-11-20 (two Opus solves disagreed with each; checked by hand, owner approved)
+    ("HARP", "1958 AHSME 31", "answer"): [("$24$", "$48$")],     # base 12, area 12*8/2
+    ("HARP", "1977 AHSME 10", "answer"): [("$-64$", "$128$")],   # (3*1-1)^7
+    ("HARP", "1978 AHSME 4", "answer"): [("$3333$", "$2222$")],  # 2(a+b+c+d)
+    ("HARP", "1981 AHSME 13", "answer"): [("$16$", "$22$")],     # 0.9^n <= 0.1: n >= 21.85
 }
 
 
