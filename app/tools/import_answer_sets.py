@@ -197,6 +197,11 @@ FIXES = {
     ("Omni-MATH", "945", "answer"): [("2017+1", "2^{2017}+1")],  # the set's own solution ends (2^{2017}+1)/3
     ("Omni-MATH", "101", "answer"): [("7", "6")],                 # 7 circles force a Fano plane, not drawable; an orthocentric system gives 6
 }
+# rows deleted from the bank after their import: a re-import leaves them out
+DROPPED = {
+    "Omni-MATH 79": "question 33123, owner 2026-11-21: 'Delete 33123. Its not worth the effort.' "
+                    "(key 18, Opus 20 twice; the set's solution proves only n >= 18)",
+}
 
 
 def display(m: re.Match) -> str:
@@ -351,7 +356,7 @@ def main() -> None:
     conn.close()
     for k, (q, share) in sorted(dup.items()):
         print(f"in the bank: {rows[k]['potd']} = question {q} ({share:.0%})")
-    new = [r for k, r in enumerate(rows) if k not in dup]
+    new = [r for k, r in enumerate(rows) if k not in dup and r["potd"] not in DROPPED]
     problems = check(new)
     for x in problems:
         print("CHECK", x)
