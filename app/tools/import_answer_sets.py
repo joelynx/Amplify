@@ -33,6 +33,7 @@ import csv
 import json
 import re
 import sqlite3
+import zipfile
 from pathlib import Path
 
 from app.tools.import_mods_potd import DB_PATH, UNCATEGORIZED, backup_db, check, latex_hash, pdf_safe
@@ -119,6 +120,54 @@ APEX = {
     "LMAO 2025 Day 1 P2": ("Mock Olympiads", "LMAO, 2025, Day 1, Problem 2"),
     "LMAO 2025 Day 2 P1": ("Mock Olympiads", "LMAO, 2025, Day 2, Problem 1"),
 }
+AMC = "American Mathematics Competitions"
+# HARP contest -> (source, contest in the subsource), the bank's naming ("2018, AMC 12B, Problem 21")
+HARP_CONTESTS = {"AHSME": (AMC, "AHSME"), "AJHSME": (AMC, "AJHSME"), "AMC_8": (AMC, "AMC 8"),
+                 "AMC_10": (AMC, "AMC 10"), "AMC_10A": (AMC, "AMC 10A"), "AMC_10B": (AMC, "AMC 10B"),
+                 "AMC_12": (AMC, "AMC 12"), "AMC_12A": (AMC, "AMC 12A"), "AMC_12B": (AMC, "AMC 12B"),
+                 "AIME": (AIME, ""), "AIME_I": (AIME, "AIME I"), "AIME_II": (AIME, "AIME II")}
+OMNI = "Omni-MATH"  # its problems carry the competition but no year or problem number
+OMNI_NAMES = {
+    "HMMT_2": "Harvard-MIT Mathematics Tournament, February", "HMMT_11": "Harvard-MIT Mathematics Tournament, November",
+    "pascal": "CEMC Pascal Contest", "fermat": "CEMC Fermat Contest", "cayley": "CEMC Cayley Contest",
+    "imo_shortlist": "International Mathematical Olympiad Shortlist", "imo": "International Mathematical Olympiad",
+    "imo_longlists": "International Mathematical Olympiad Longlist", "usamo": "United States of America Mathematical Olympiad",
+    "usajmo": "United States of America Junior Mathematical Olympiad", "china_team_selection_test": "China Team Selection Test",
+    "putnam": "William Lowell Putnam Mathematical Competition", "imc": "International Mathematics Competition for University Students",
+    "apmoapmo_sol": "Asian Pacific Mathematics Olympiad", "apmo": "Asian Pacific Mathematics Olympiad",
+    "asia_pacific_math_olympiad": "Asian Pacific Mathematics Olympiad", "ToT": "Tournament of Towns", "baltic_way": "Baltic Way",
+    "china_national_olympiad": "China Mathematical Olympiad", "usa_team_selection_test": "United States of America Team Selection Test",
+    "usa_team_selection_test_for_imo": "United States of America Team Selection Test",
+    "balkan_mo_shortlist": "Balkan Mathematical Olympiad Shortlist", "balkan_mo": "Balkan Mathematical Olympiad",
+    "problems_from_the_kmal_magazine": "KöMaL", "problems_from_the_kvant_magazine": "Kvant",
+    "jbmo_shortlist": "Junior Balkan Mathematical Olympiad Shortlist", "jbmo_shortlists": "Junior Balkan Mathematical Olympiad Shortlist",
+    "jbmo": "Junior Balkan Mathematical Olympiad", "junior_balkan_mo": "Junior Balkan Mathematical Olympiad",
+    "alibaba_global_contest": "Alibaba Global Mathematics Competition",
+    "middle_european_mathematical_olympiad": "Middle European Mathematical Olympiad",
+    "th_middle_european_mathematical_olympiad": "Middle European Mathematical Olympiad",
+    "cono_sur_olympiad": "Cono Sur Olympiad", "czech-polish-slovak matches": "Czech-Polish-Slovak Match",
+    "tuymaada_olympiad": "Tuymaada Olympiad", "izho": "International Zhautykov Olympiad",
+    "international_zhautykov_olympiad": "International Zhautykov Olympiad",
+    "caucasus_mathematical_olympiad": "Caucasus Mathematical Olympiad", "bero_American": "Iberoamerican Mathematical Olympiad",
+    "european_mathematical_cup": "European Mathematical Cup", "pan_african MO": "Pan-African Mathematical Olympiad",
+    "centroamerican": "Centroamerican and Caribbean Mathematical Olympiad",
+    "centroamerican_and_caribbean_math_olympiad": "Centroamerican and Caribbean Mathematical Olympiad",
+    "th_centroamerican_and_caribbean_math_olympiad_havana": "Centroamerican and Caribbean Mathematical Olympiad",
+    "rioplatense_mathematical_olympiad_level": "Rioplatense Mathematical Olympiad", "yau_contest": "S.-T. Yau College Student Mathematics Contest",
+    "benelux MO": "Benelux Mathematical Olympiad", "th_igo": "Iranian Geometry Olympiad", "iranian_geometry_olympiad": "Iranian Geometry Olympiad",
+    "lusophon_mathematical_olympiad": "Lusophon Mathematical Olympiad", "austrianpolish_competition": "Austrian-Polish Mathematics Competition",
+    "european_girls_mo": "European Girls' Mathematical Olympiad", "math_olympiad_for_the_french_speaking": "Francophone Mathematical Olympiad",
+    "nordic": "Nordic Mathematical Contest", "usomo": "United States of America Mathematical Olympiad",
+    "usojmo": "United States of America Junior Mathematical Olympiad", "iranian_combinatorics_olympiad": "Iranian Combinatorics Olympiad",
+    "silk_road_mathematics_competition": "Silk Road Mathematics Competition", "mediterranean_mathematics_olympiad": "Mediterranean Mathematics Olympiad",
+    "simon_marais_mathematics_competition": "Simon Marais Mathematics Competition", "danube_mathematical_olympiad": "Danube Mathematical Olympiad",
+    "danube_mathematical_competition": "Danube Mathematical Competition", "imor": "IMO Revenge",
+    "st_tashkent_international_mathematical_olympiad": "Tashkent International Mathematical Olympiad",
+    "hungaryisrael_binational": "Hungary-Israel Binational Mathematical Competition",
+    "competition_given_at_the_end_of_the_international_mathematics_summer_camp": "International Mathematics Summer Camp",
+}
+SET_ASIDE_PATH = Path("app/data/appdata/answer_sets_set_aside.json")  # git-ignored: rows left out for a hand fix
+SOLUTIONS_PATH = Path("app/data/appdata/answer_sets_solutions.json")  # git-ignored: the sets' own solutions, for later
 NEAR = 0.85  # share of a problem's 5-word shingles found in one bank question: the same problem
 # (set, number, field) -> [(old, new)]: slips in the source data, each old matched exactly once
 FIXES = {
@@ -149,7 +198,8 @@ def display(m: re.Match) -> str:
     return "\\[" + body.replace("\\&", "&").replace("<br>", "\\\\") + "\\]"
 
 
-ASY_RE = re.compile(r"\s*\\begin\{asy\}.*?\\end\{asy\}\s*", re.S)
+ASY_RE = re.compile(r"\s*(?:\\begin\{asy\}.*?\\end\{asy\}|\[asy\].*?\[/asy\])\s*", re.S)
+IMAGE_RE = re.compile(r"!\[[^\]]*\]\([^)]*\)|<img[^>]*>|\\includegraphics(?:\[[^\]]*\])?\{[^}]*\}")
 # statements whose figure is drawn in characters from this line to the end (an image is made from it)
 ASCII_FIGURES = {("MathArena smt_2025", "22")}
 ASCII_ART_RE = re.compile(r"\n[ \t]*_{3,}[ \t]*\n.*\Z", re.S)
@@ -159,7 +209,7 @@ def to_latex(text: str) -> str:
     """The statement in the bank's LaTeX. An Asymptote figure (neither renderer draws it) is taken
     out here; load() keeps its code for the image to be made from it (owner 2026-11-20: "convert the
     asymptote rows to images manually later")."""
-    t = text.replace("\r\n", "\n").strip()
+    t = text.replace("\r\n", "\n").replace("\\hdots", "\\dots").strip()  # no \hdots in KaTeX
     t = re.sub(r"\$\$(.+?)\$\$", lambda m: "\\[" + m.group(1).strip() + "\\]", t, flags=re.S)
     t = re.sub(r"\\\[(.+?)\\\]", display, t, flags=re.S)
     t = ASY_RE.sub("\n\n", t)
@@ -190,7 +240,7 @@ def shingles(t: str) -> set:
     return {" ".join(w[i:i + 5]) for i in range(max(len(w) - 4, 1))}
 
 
-def load(matharena: Path, answerbench: Path) -> list[dict]:
+def load(matharena: Path, answerbench: Path, harp: Path | None = None, omni: Path | None = None) -> list[dict]:
     rows = []
     for name, (source, sub) in MATHARENA.items():
         data = json.loads((matharena / f"{name}.json").read_text(encoding="utf-8"))
@@ -208,6 +258,25 @@ def load(matharena: Path, answerbench: Path) -> list[dict]:
                          "subsource": sub + ("" if source == "MathArena APEX" else APEX_TAG),
                          "latexcode": to_latex(r["problem"]), "answer": answer_latex(r["answer"]), "orig": r["source"],
                          "asy": "\n\n".join(m.group(0).strip() for m in ASY_RE.finditer(r["problem"]))})
+    if harp:
+        member = zipfile.ZipFile(harp).read("HARP.jsonl").decode("utf-8")
+        for r in (json.loads(x) for x in member.splitlines() if x.strip()):
+            source, contest = HARP_CONTESTS[r["contest"]]
+            n = r["number"]
+            sub = f"{str(r['year']).replace('_', ' ')}, {contest + ', ' if contest else ''}Problem {n}"
+            rows.append({"set": "HARP", "idx": f"{r['year']} {r['contest']} {n}", "source": source, "subsource": sub,
+                         "latexcode": to_latex(r["problem"]), "answer": answer_latex(r["answer"]), "orig": "",
+                         "asy": "\n\n".join(m.group(0).strip() for m in ASY_RE.finditer(r["problem"])),
+                         "ref_solution": r.get("solution_1") or ""})
+    if omni:
+        for k, r in enumerate(json.loads(x) for x in omni.read_text(encoding="utf-8").splitlines() if x.strip()):
+            label = r["source"]
+            name = OMNI_NAMES.get(label) or label.replace("_", " ").strip().title()
+            rows.append({"set": "Omni-MATH", "idx": str(k), "source": OMNI, "subsource": f"{name} (year not given)",
+                         "latexcode": to_latex(r["problem"]), "answer": answer_latex(r["answer"]), "orig": label,
+                         "asy": "\n\n".join(m.group(0).strip() for m in ASY_RE.finditer(r["problem"]))
+                                or "\n\n".join(IMAGE_RE.findall(r["problem"])),
+                         "ref_solution": r.get("solution") or ""})
     for r in csv.DictReader(open(answerbench, encoding="utf-8")):
         orig = (r.get("Source") or "").strip()
         rows.append({"set": "IMO-Bench AnswerBench v2", "idx": r["Problem ID"], "source": ANSWERBENCH,
@@ -215,6 +284,7 @@ def load(matharena: Path, answerbench: Path) -> list[dict]:
                      "latexcode": to_latex(r["Problem"]), "answer": answer_latex(r["Short Answer"]), "orig": orig,
                      "asy": "\n\n".join(m.group(0).strip() for m in ASY_RE.finditer(r["Problem"]))})
     for r in rows:
+        r.setdefault("ref_solution", "")
         r.update(potd=f"{r['set']} {r['idx']}", hints=None, more_hints=None, solution=None)  # for check()
         if (r["set"], r["idx"]) in ASCII_FIGURES:
             m = ASCII_ART_RE.search(r["latexcode"])
@@ -255,15 +325,19 @@ def main() -> None:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--matharena", type=Path, required=True)
     p.add_argument("--answerbench", type=Path, required=True)
+    p.add_argument("--harp", type=Path, help="HARP.jsonl.zip (github.com/aadityasingh/HARP)")
+    p.add_argument("--omni", type=Path, help="Omni-MATH test.jsonl (huggingface.co/datasets/KbsdJames/Omni-MATH)")
     p.add_argument("--model", default=OPUS)
     p.add_argument("--effort", default="high")
     p.add_argument("--dump", type=Path, help="write the rows to import as JSON")
     g = p.add_mutually_exclusive_group(required=True)
+    p.add_argument("--set-aside", action="store_true", help="leave out rows that fail the checks (listed in SET_ASIDE_PATH)")
+    p.add_argument("--exclude", type=Path, help="with --set-aside: JSON {row label: why} of rows the render checks failed")
     g.add_argument("--dry-run", action="store_true")
     g.add_argument("--apply", action="store_true")
     a = p.parse_args()
 
-    rows = load(a.matharena, a.answerbench)
+    rows = load(a.matharena, a.answerbench, a.harp, a.omni)
     conn = sqlite3.connect(f"file:{DB_PATH.as_posix()}?mode=ro", uri=True)
     dup = duplicates(rows, conn)
     conn.close()
@@ -273,6 +347,14 @@ def main() -> None:
     problems = check(new)
     for x in problems:
         print("CHECK", x)
+    if a.set_aside:  # slips in the source data: these rows wait for a hand fix
+        excluded = json.loads(a.exclude.read_text(encoding="utf-8")) if a.exclude else {}
+        why = {r["potd"]: check([r]) or [excluded[r["potd"]]] for r in new if check([r]) or r["potd"] in excluded}
+        SET_ASIDE_PATH.write_text(json.dumps([dict(r, problems=why[r["potd"]]) for r in new if r["potd"] in why],
+                                             ensure_ascii=False, indent=1), encoding="utf-8")
+        new = [r for r in new if r["potd"] not in why]
+        print(f"set aside for a hand fix: {len(why)} rows in {SET_ASIDE_PATH}")
+        problems = check(new)
     print(json.dumps({"rows": len(rows), "in_bank": len(dup), "to_add": len(new), "check_problems": len(problems),
                       "by_set": collections.Counter(r["set"] for r in new),
                       "answers_wrapped": sum(r["answer"].startswith("$") for r in new),
@@ -320,6 +402,10 @@ def main() -> None:
     figures = json.loads(FIGURES_PATH.read_text(encoding="utf-8")) if FIGURES_PATH.exists() else {}
     figures.update({str(q): {"set": r["set"], "number": r["idx"], "asy": r["asy"]} for q, r in added if r["asy"]})
     FIGURES_PATH.write_text(json.dumps(figures, ensure_ascii=False, indent=1), encoding="utf-8")
+    solutions = json.loads(SOLUTIONS_PATH.read_text(encoding="utf-8")) if SOLUTIONS_PATH.exists() else {}
+    solutions.update({str(q): {"set": r["set"], "number": r["idx"], "solution": r["ref_solution"]}
+                      for q, r in added if r["ref_solution"]})
+    SOLUTIONS_PATH.write_text(json.dumps(solutions, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"added={len(added)} ids {added[0][0] if added else '-'}..{added[-1][0] if added else '-'}; "
           f"map={MAP_PATH}; assignments={ASSIGNMENTS} ({len(doc['questions'])} questions); "
           f"figures to draw: {sorted(int(q) for q in figures)} in {FIGURES_PATH}")
