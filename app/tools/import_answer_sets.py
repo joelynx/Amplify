@@ -193,6 +193,9 @@ FIXES = {
     ("HARP", "1977 AHSME 10", "answer"): [("$-64$", "$128$")],   # (3*1-1)^7
     ("HARP", "1978 AHSME 4", "answer"): [("$3333$", "$2222$")],  # 2(a+b+c+d)
     ("HARP", "1981 AHSME 13", "answer"): [("$16$", "$22$")],     # 0.9^n <= 0.1: n >= 21.85
+    # Omni-MATH keys found wrong 2026-11-21 (Opus twice the other value; checked by hand, owner: "correct the incorrect keys")
+    ("Omni-MATH", "945", "answer"): [("2017+1", "2^{2017}+1")],  # the set's own solution ends (2^{2017}+1)/3
+    ("Omni-MATH", "101", "answer"): [("7", "6")],                 # 7 circles force a Fano plane, not drawable; an orthocentric system gives 6
 }
 
 
