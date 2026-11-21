@@ -200,11 +200,43 @@ FIXES = {
     ("HARP", "1954 AHSME 13", "answer"): [("$180^\\circ$", "$540^\\circ$")],  # an angle inscribed in an arc has its vertex on it: (4*360-360)/2
     ("HARP", "1965 AHSME 3", "answer"): [("$3$", "$\\frac{1}{3}$")],          # as written, -2^{-2} = -1/4: 81^{-1/4}
     ("IMO-Bench AnswerBench v2", "imo-bench-combinatorics-097", "answer"): [("85383238549", "20919175804480")],  # someone stays in nearly every deal
+    # Omni-MATH hand check 2026-11-21 (owner: "Go ahead with everything"): keys Opus contradicted twice, checked by
+    # computation (several against the original HMMT answer sheets); statements completed from their sources
+    ("Omni-MATH", "181", "answer"): [('2', '1+\\sqrt{3}-\\sqrt{2\\sqrt{3}}')],  # q33209
+    ("Omni-MATH", "242", "answer"): [('5183', '4983')],  # q33246
+    ("Omni-MATH", "334", "answer"): [('\\[ 541 \\]', '451')],  # q33304
+    ("Omni-MATH", "368", "answer"): [('$\\frac{\\pi}{12}$', '$\\frac{5\\pi}{24}$')],  # q33328
+    ("Omni-MATH", "377", "answer"): [('$\\frac{1}{4}$', '$\\frac{7}{36}$')],  # q33337
+    ("Omni-MATH", "378", "answer"): [('3', '7+4\\sqrt{3}')],  # q33338
+    ("Omni-MATH", "408", "answer"): [('15', '\\frac{13}{49}')],  # q33366
+    ("Omni-MATH", "412", "answer"): [('96', '-\\frac{130}{27}')],  # q33369
+    ("Omni-MATH", "449", "answer"): [('1', '\\frac{\\pi^2}{16}-\\frac{1}{2}')],  # q33402
+    ("Omni-MATH", "477", "answer"): [('\\[\\frac{1}{2}\\]', '\\frac{2}{3}')],  # q33430
+    ("Omni-MATH", "538", "answer"): [('420', '\\frac{41}{2}')],  # q33490
+    ("Omni-MATH", "590", "answer"): [('$40^{\\circ}$', '$30^{\\circ}$')],  # q33541
+    ("Omni-MATH", "614", "answer"): [('614.519...', '1129.418')],  # q33564
+    ("Omni-MATH", "630", "answer"): [('$\\sqrt{\\frac{\\sqrt{58}}{2+\\sqrt{34}+\\sqrt{58}}}$', '$\\frac{\\sqrt{58}}{2+\\sqrt{34}+\\sqrt{58}}$')],  # q33580
+    ("Omni-MATH", "632", "answer"): [('9000000', 'N \\approx 8.28 \\times 10^{6}')],  # q33582
+    ("Omni-MATH", "663", "answer"): [('66', '6')],  # q33611
+    ("Omni-MATH", "907", "answer"): [('97', '\\frac{97}{3}')],  # q33845
+    ("Omni-MATH", "911", "answer"): [('11', '1')],  # q33849
+    ("Omni-MATH", "984", "answer"): [('10', '9')],  # q33919
+    ("Omni-MATH", "1066", "answer"): [('$2^{32}$', '$4295032832$')],  # q33999
+    ("Omni-MATH", "1109", "answer"): [('5', '2')],  # q34039
+    ("Omni-MATH", "1149", "answer"): [('12', '13')],  # q34074
+    ("Omni-MATH", "1244", "answer"): [('$\\sqrt{\\frac{2^{2009}-1}{3 \\cdot 2^{2008}-1}}$', '$\\frac{2^{2009}-1}{3\\cdot 2^{2008}-1}$')],  # q34162
+    ("Omni-MATH", "909", "latexcode"): [('A restricted path of length $n$ is a path', 'A path of length $n$ is a sequence of $n$ lattice points, each one unit up or one unit to the right of the one before it, so it has $n-1$ steps. A restricted path of length $n$ is a path')],  # q33847
+    ("Omni-MATH", "1055", "latexcode"): [('Find the number of subsets', 'The order of an element of $A$ in a set of pairs is the number of pairs that contain it, and a set of pairs is consistent of order $k$ if every element of $A$ has order $k$. Find the number of subsets')],  # q33988
+    ("Omni-MATH", "559", "latexcode"): [('The $W$ in this problem has the same value as the $W$ in problem 31.', 'Here $W=8$.')],  # q33511
+    ("Omni-MATH", "741", "latexcode"): [('2024\\}', '2024!\\}')],  # q33686
 }
 # rows deleted from the bank after their import: a re-import leaves them out
 DROPPED = {
     "Omni-MATH 79": "question 33123, owner 2026-11-21: 'Delete 33123. Its not worth the effort.' "
                     "(key 18, Opus 20 twice; the set's solution proves only n >= 18)",
+    "Omni-MATH 383": "question 33343, owner 2026-11-21 (Omni-MATH hand check): a joke riddle whose official answer (in base 15, 6) contradicts its own premise",
+    "Omni-MATH 574": "question 33526, owner 2026-11-21 (Omni-MATH hand check): the recurrence holds for n >= 2, so a_2 and a_3 are undefined; the official answer assumes other starting values",
+    "Omni-MATH 971": "question 33907, owner 2026-11-21 (Omni-MATH hand check): it depends on the answers (H_1, H_6) of other contest problems that are not included",
 }
 
 
@@ -310,7 +342,9 @@ def load(matharena: Path, answerbench: Path, harp: Path | None = None, omni: Pat
             r["asy"], r["latexcode"] = "ASCII art:\n" + m.group(0).strip("\n"), r["latexcode"][:m.start()].rstrip()
         for fld in ("latexcode", "answer"):
             for old, new in FIXES.get((r["set"], r["idx"], fld), []):
-                if r[fld].count(old) != 1 or (fld == "answer" and r[fld].endswith(new)):
+                # a source that already ends with the fix is not fixed twice (a whole-answer fix such as
+                # 11 -> 1 is not mistaken for one)
+                if r[fld].count(old) != 1 or (fld == "answer" and r[fld].endswith(new) and r[fld] != old):
                     raise SystemExit(f"FIX {r['potd']} {fld}: expected one {old!r}")
                 r[fld] = r[fld].replace(old, new)
     return rows
