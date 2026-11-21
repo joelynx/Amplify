@@ -28,6 +28,7 @@ Usage (repo root):
 from __future__ import annotations
 
 import argparse
+import base64
 import collections
 import csv
 import json
@@ -127,6 +128,12 @@ HARP_CONTESTS = {"AHSME": (AMC, "AHSME"), "AJHSME": (AMC, "AJHSME"), "AMC_8": (A
                  "AMC_12": (AMC, "AMC 12"), "AMC_12A": (AMC, "AMC 12A"), "AMC_12B": (AMC, "AMC 12B"),
                  "AIME": (AIME, ""), "AIME_I": (AIME, "AIME I"), "AIME_II": (AIME, "AIME II")}
 OMNI = "Omni-MATH"  # its problems carry the competition but no year or problem number
+UMATH = "U-MATH"  # 1,100 unpublished university problems (huggingface.co/datasets/toloka/u-math, MIT), answers only
+UMATH_SUBJECTS = {"precalculus_review": "Precalculus", "algebra": "Algebra", "differential_calc": "Differential Calculus",
+                  "integral_calc": "Integral Calculus", "multivariable_calculus": "Multivariable Calculus",
+                  "sequences_series": "Sequences and Series"}
+TEXIMAGES = Path("app/data/appdata/teximages")  # the app's image folder (config paths.teximages)
+UMATH_GRAPHIC = r"\includegraphics[max width=0.5\textwidth, alt={{}}, center]{{{}}}"  # the bank's style
 OMNI_NAMES = {
     "HMMT_2": "Harvard-MIT Mathematics Tournament, February", "HMMT_11": "Harvard-MIT Mathematics Tournament, November",
     "pascal": "CEMC Pascal Contest", "fermat": "CEMC Fermat Contest", "cayley": "CEMC Cayley Contest",
@@ -245,6 +252,15 @@ FIXES = {
     ("Omni-MATH", "1325", "latexcode"): [('What is the earliest row in which the number 2004 may appear?', "An infinite table of nonnegative integers is constructed as follows: in the top row, some number is 1 and all other numbers are 0's; in each subsequent row, every number is the sum of some two of the three closest numbers in the preceding row. The top row (with the one 1) is called row 0; the next row is row 1; the next row is row 2, and so forth. Considering every table that can be constructed this way, what is the earliest row in which the number 2004 may appear?")],  # q34240
     ("Omni-MATH", "1897", "latexcode"): [('find a value of $k$, not necessarily the smallest, such that', 'find the smallest positive integer $k$ such that')],  # q34767
     ("Omni-MATH", "1897", "answer"): [('256', '83')],  # q34767
+    # U-MATH source slips (2026-11-21): money written with a bare $, a stray $ before an integral
+    ("U-MATH", "182fed94-4634-460f-a70e-7958a2033664", "answer"): [('$q(x) = $\\int', '$q(x) = \\int')],
+    ("U-MATH", "3592c6d2-0fb1-4557-b219-d88f5b8a7401", "answer"): [('$q(x) = $\\int', '$q(x) = \\int')],
+    ("U-MATH", "ef4c1961-77eb-4ec9-9674-8d37ac5fb76d", "answer"): [('$q(x) = $\\int', '$q(x) = \\int')],
+    ("U-MATH", "a328709a-3973-45ce-ac0c-956e736146fb", "answer"): [('$ $583.75$', '\\$583.75')],
+    ("U-MATH", "d41983e6-eea1-4dfa-8060-ce53dcd25940", "answer"): [('$ $583.75$', '\\$583.75')],
+    ("U-MATH", "dac50753-b5d3-4c11-a1c7-1575dde6e606", "latexcode"): [('a $10,000 raise', 'a \\$10,000 raise')],
+    ("U-MATH", "96fe4430-f908-4203-a29d-19913fae86b4", "latexcode"): [('1. $72.00 in', '1. \\$72.00 in')],
+    ("U-MATH", "ca5b0525-4e4c-4698-8367-146ba9ca18e3", "latexcode"): [('costs $3 and', 'costs \\$3 and'), ('costs $2 per', 'costs \\$2 per'), ('total of $17,', 'total of \\$17,')],
 }
 # rows deleted from the bank after their import: a re-import leaves them out
 DROPPED = {
@@ -305,7 +321,8 @@ def shingles(t: str) -> set:
     return {" ".join(w[i:i + 5]) for i in range(max(len(w) - 4, 1))}
 
 
-def load(matharena: Path, answerbench: Path, harp: Path | None = None, omni: Path | None = None) -> list[dict]:
+def load(matharena: Path, answerbench: Path, harp: Path | None = None, omni: Path | None = None,
+         umath: Path | None = None) -> list[dict]:
     rows = []
     for name, (source, sub) in MATHARENA.items():
         data = json.loads((matharena / f"{name}.json").read_text(encoding="utf-8"))
@@ -333,6 +350,22 @@ def load(matharena: Path, answerbench: Path, harp: Path | None = None, omni: Pat
                          "latexcode": to_latex(r["problem"]), "answer": answer_latex(r["answer"]), "orig": "",
                          "asy": "\n\n".join(m.group(0).strip() for m in ASY_RE.finditer(r["problem"])),
                          "ref_solution": r.get("solution_1") or ""})
+    if umath:  # a problem with a figure carries it as a PNG: written to the image folder on --apply
+        import pyarrow.parquet as pq
+        for r in pq.read_table(umath).to_pylist():
+            name = f"umath-{r['uuid']}"
+            # the dataset read some TeX commands as escapes: \frac -> form feed + "rac", \theta and
+            # \tan -> tab + "heta", \right -> carriage return + "ight" (25 places): restored
+            for f in ("problem_statement", "golden_answer"):
+                r[f] = re.sub(r"[\x0c\t\r](?=[A-Za-z])", lambda m: {"\x0c": "\\f", "\t": "\\t", "\r": "\\r"}[m.group(0)], r[f])
+            tex = to_latex(r["problem_statement"])
+            if r["has_image"]:
+                tex += "\n\n" + UMATH_GRAPHIC.format(name)
+            key = re.sub(r"^\s*the final answer\s*:\s*", "", r["golden_answer"].strip(), flags=re.I)
+            rows.append({"set": UMATH, "idx": r["uuid"], "source": UMATH,
+                         "subsource": f"{UMATH_SUBJECTS[r['subject']]}, problem {r['uuid'][:8]}",
+                         "latexcode": tex, "answer": answer_latex(to_latex(key)), "orig": "", "asy": "",
+                         "image": (name, r["image"]) if r["has_image"] else None})
     if omni:
         for k, r in enumerate(json.loads(x) for x in omni.read_text(encoding="utf-8").splitlines() if x.strip()):
             label = r["source"]
@@ -394,6 +427,7 @@ def main() -> None:
     p.add_argument("--answerbench", type=Path, required=True)
     p.add_argument("--harp", type=Path, help="HARP.jsonl.zip (github.com/aadityasingh/HARP)")
     p.add_argument("--omni", type=Path, help="Omni-MATH test.jsonl (huggingface.co/datasets/KbsdJames/Omni-MATH)")
+    p.add_argument("--umath", type=Path, help="U-MATH test parquet (huggingface.co/datasets/toloka/u-math)")
     p.add_argument("--model", default=OPUS)
     p.add_argument("--effort", default="high")
     p.add_argument("--dump", type=Path, help="write the rows to import as JSON")
@@ -404,7 +438,7 @@ def main() -> None:
     g.add_argument("--apply", action="store_true")
     a = p.parse_args()
 
-    rows = load(a.matharena, a.answerbench, a.harp, a.omni)
+    rows = load(a.matharena, a.answerbench, a.harp, a.omni, a.umath)
     conn = sqlite3.connect(f"file:{DB_PATH.as_posix()}?mode=ro", uri=True)
     dup = duplicates(rows, conn)
     conn.close()
@@ -433,6 +467,11 @@ def main() -> None:
     if problems:
         raise SystemExit("fix the check problems first")
     backup_db("answer-sets")
+    for r in new:  # U-MATH figures, before their questions exist
+        if r.get("image"):
+            name, data = r["image"]
+            assert data.startswith("data:image/png;base64,"), name
+            (TEXIMAGES / f"{name}.png").write_bytes(base64.b64decode(data.split(",", 1)[1]))
     conn = sqlite3.connect(DB_PATH)
     added = []
     try:
