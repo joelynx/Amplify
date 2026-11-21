@@ -26,9 +26,16 @@ DUPS = {}
 dup_path = os.path.join(outdir, 'duplicates.csv')
 if os.path.exists(dup_path):
     DUPS = {d['potd_number']: d['duplicate_of'] for d in csv.DictReader(open(dup_path, encoding='utf-8'))}
+# <out_dir>/deleted.csv: questions the owner had deleted from the bank, kept out of later imports.
+DELETED = {}
+del_path = os.path.join(outdir, 'deleted.csv')
+if os.path.exists(del_path):
+    DELETED = {d['potd_number']: d['reason'] for d in csv.DictReader(open(del_path, encoding='utf-8'))}
 
 def held_back(r):
     """Why a row is left out whatever its competition: '' when it is not."""
+    if r['/f'] in DELETED:
+        return 'deleted: ' + DELETED[r['/f']]
     if r['/f'] in DUPS:
         return 'duplicate of ' + DUPS[r['/f']]
     if datetime.datetime.strptime(r['Date'].strip(), '%d %b %Y').date() > ASOF:
