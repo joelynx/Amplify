@@ -1,0 +1,90 @@
+question_id,source,flags,note
+29438,"American Mathematics Competitions (1964, AHSME, Problem 31)",key_conflict,stated answer disagrees with derived f(n)
+29738,"American Mathematics Competitions (1975, AHSME, Problem 24)",broken_text,Question ends at claim; options missing
+29752,"American Mathematics Competitions (1976, AHSME, Problem 23)",broken_text,Answer options missing
+30077,"American Mathematics Competitions (1987, AHSME, Problem 12)",needs_data,options not in question; stack-sortable orders
+30194,"American Mathematics Competitions (1990, AJHSME, Problem 22)",needs_data,options not given
+30361,"American Mathematics Competitions (1993, AHSME, Problem 29)",needs_data,answer choices missing from question
+30752,"American Mathematics Competitions (2001, AMC 12, Problem 23)",needs_data,answer options absent from question
+32084,"American Mathematics Competitions (2015, AMC 10B, Problem 15)",needs_data,answer choices missing from question
+32094,"American Mathematics Competitions (2015, AMC 12A, Problem 2)",needs_data,answer choices missing from question
+32150,"American Mathematics Competitions (2016, AMC 8, Problem 7)",needs_data,Options not given in question
+32170,"American Mathematics Competitions (2016, AMC 10A, Problem 5)",needs_data,answer choices missing from question
+33035,"American Mathematics Competitions (2024, AMC 8, Problem 9)",needs_data,Answer choices not given in the question
+33140,Omni-MATH (China Team Selection Test (year not given)),key_conflict,stated answer 7; solution shows 6
+33259,Omni-MATH (Alibaba Global Mathematics Competition (year not given)),needs_data,Question (i) not quoted; answer assumed
+33315,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,game rules not given
+33364,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,game rules not given
+33381,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",broken_text,Condition lost; as written no t exists.
+33521,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,Needs Y from an earlier problem
+33533,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,X taken from another problem
+33559,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,Needs S and W from problem 32
+33561,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,A defined in a missing earlier problem
+33691,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,transformation undefined in text
+33704,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,Needs actual contest response data
+33725,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,pentomino definition from earlier problem
+33808,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,Estimation of contest submissions; needs tournament data
+33818,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,depends on problem 15
+33858,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",broken_text,question text lost; solution infers the problem
+33884,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,Data on Reals' hit probabilities not given
+33991,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,definition of 2-separable configuration not given
+34001,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,Fermi estimate of contest text
+34043,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,Two revealed dice missing from statement
+34160,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",broken_text,"Point set as printed omits endpoint (5,1)"
+34209,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,definitions of consistent configuration and cell not given
+34333,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",broken_text;needs_data,Problem statement missing; only answer sketch given
+34448,Omni-MATH (Asian Pacific Mathematics Olympiad (year not given)),broken_text;needs_data,Grid conditions omitted from statement
+34476,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,Answer depends on actual contest scores
+34492,Omni-MATH (Alibaba Global Mathematics Competition (year not given)),needs_data,Store A discount rule not given
+34565,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,Depends on answer of problem 11
+34702,Omni-MATH (Asian Pacific Mathematics Olympiad (year not given)),needs_data,A1 and A3 not defined in the question
+34714,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,juicy definition not given in question
+34723,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,Estimation of web search hits
+34729,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,Needs contest paper text
+34737,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,Estimation about contest document
+34774,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,Estimation about problem writers
+34882,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,game rules not stated
+34910,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,Ratio of search hit counts
+34920,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,game rules not stated
+34925,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,game rules not stated
+34996,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,game rules not stated
+35068,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",broken_text,Expression missing from question
+35214,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,Median of contest answers; needs the contest paper
+35220,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",broken_text,statement contradicts itself (D midpoint of BC and BD=DE)
+35275,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,no side lengths given; answer only in terms of face ACD
+35357,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,
+35369,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",broken_text,denominator printed without exponent
+35442,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,Fermi estimate about Mathematics Genealogy Project data
+35477,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,function f not given
+35487,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,Estimate of contest team statistics
+35616,Omni-MATH (CEMC Cayley Contest (year not given)),needs_data,figure data not given in question
+35653,Omni-MATH (CEMC Fermat Contest (year not given)),broken_text,sum as printed has no T and is impossible
+35737,Omni-MATH (CEMC Pascal Contest (year not given)),needs_data,dot diagram missing
+35751,Omni-MATH (CEMC Pascal Contest (year not given)),needs_data,figure entries missing
+35754,Omni-MATH (CEMC Pascal Contest (year not given)),needs_data,rectangle layout missing
+35782,Omni-MATH (CEMC Pascal Contest (year not given)),needs_data,drawings and link table missing
+35791,Omni-MATH (CEMC Pascal Contest (year not given)),needs_data,side lengths of squares in figure missing
+35827,Omni-MATH (CEMC Pascal Contest (year not given)),needs_data,Reads age off a graph that is not provided.
+35838,Omni-MATH (CEMC Pascal Contest (year not given)),needs_data,amounts given away and eaten missing
+35888,Omni-MATH (CEMC Cayley Contest (year not given)),needs_data,Die weighting not stated in question
+36068,Omni-MATH (CEMC Cayley Contest (year not given)),needs_data,shaded cells not given
+36092,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,Board rules not restated in question
+36113,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",broken_text,
+36149,Omni-MATH (Alibaba Global Mathematics Competition (year not given)),needs_data,Valuation data missing
+36156,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,
+36160,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,
+36164,Omni-MATH (Alibaba Global Mathematics Competition (year not given)),needs_data,Setup (distance bound) from earlier part
+36193,Omni-MATH (CEMC Fermat Contest (year not given)),needs_data,distance 200 km missing from text
+36221,Omni-MATH (CEMC Pascal Contest (year not given)),needs_data,distance and arrival condition missing
+36228,Omni-MATH (CEMC Pascal Contest (year not given)),needs_data,table missing
+36234,Omni-MATH (CEMC Pascal Contest (year not given)),needs_data,answer choices missing
+36237,Omni-MATH (CEMC Pascal Contest (year not given)),needs_data,answer choices missing
+36269,Omni-MATH (CEMC Pascal Contest (year not given)),needs_data,data table missing
+36278,Omni-MATH (CEMC Cayley Contest (year not given)),needs_data,Graph options not given
+36279,Omni-MATH (CEMC Cayley Contest (year not given)),needs_data,answer choices not given in question
+36284,Omni-MATH (CEMC Fermat Contest (year not given)),needs_data,shaded parts depend on missing figure
+36291,Omni-MATH (CEMC Cayley Contest (year not given)),needs_data,word list and value rule missing
+36792,Omni-MATH (International Mathematical Olympiad Shortlist (year not given)),broken_text,Question text is the proof; statement missing
+36806,Omni-MATH (International Mathematical Olympiad Shortlist (year not given)),broken_text,Question text is a pasted solution fragment
+36837,Omni-MATH (International Mathematical Olympiad Shortlist (year not given)),broken_text,"Question text is a solution, not the problem"
+36856,Omni-MATH (International Mathematical Olympiad Shortlist (year not given)),broken_text,Question text is a proof fragment

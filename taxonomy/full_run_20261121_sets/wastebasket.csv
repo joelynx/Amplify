@@ -1,0 +1,15 @@
+question_id,source,subject,kind,first_note,second_note,final_note
+31846,"American Mathematics Competitions (2013, AMC 10A, Problem 4)",Algebra,subject only,,Parity of s/2 forces the split; word problem,Prealgebra word problem; Algebra tree not provided
+33429,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",Number Theory,wastebasket,Six unrelated yes/no questions across topics,six unrelated yes/no parts,
+33598,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",Number Theory,wastebasket,Six unrelated yes/no questions across topics,six unrelated yes/no parts,
+33849,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",Combinatorics,wastebasket,,Set-image identity; no set-theory subtopic in this tree,images of sets under functions; no set-theory subtopic
+33962,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",Geometry,wastebasket,Self-isogonal cubics; no matching subtopic,"isogonal cubics intersection count, no fitting subtopic",
+34723,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",Combinatorics,wastebasket,Estimation of web search hits,Fermi estimation of search hits,
+34729,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",Combinatorics,wastebasket,Needs contest paper text,contest trivia search question,
+34737,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",Combinatorics,wastebasket,Estimation about contest document,estimation of digit count in contest,
+34774,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",Combinatorics,wastebasket,Estimation about problem writers,Fermi estimate of ages,
+34908,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",Combinatorics,wastebasket,Chronological ordering of math history,chronology of mathematical history,
+34910,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",Combinatorics,wastebasket,Ratio of search hit counts,estimation of search hit ratio,
+35487,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",Combinatorics,wastebasket,Estimate of contest team statistics,estimation of contest success rate,
+36148,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",Geometry,wastebasket,Chronological ordering of geometry theorems,history of theorems chronology,History question ordering theorem dates; no subtopic fits
+36149,Omni-MATH (Alibaba Global Mathematics Competition (year not given)),Economics,wastebasket,Valuation data missing,bundling vs separate pricing; Economics tree not given,bundling is microeconomics; tree covers only macroeconomics

@@ -1,0 +1,10 @@
+question_id,source,flags,note
+35445,"Omni-MATH (Harvard-MIT Mathematics Tournament, November (year not given))",needs_data,factual lookup of Erdos Number Project distribution
+37090,"U-MATH (Multivariable Calculus, problem 13af41aa)",mismatch,Literal solid unbounded; solution adds cap y<=0
+37301,"U-MATH (Multivariable Calculus, problem 436d359e)",mismatch,Major-axis data inconsistent with foci; solution reads minor axis
+37410,"U-MATH (Precalculus, problem 5c71f23e)",needs_data,Log table not supplied; solution assumes values
+37411,"U-MATH (Precalculus, problem 5cb50bf1)",broken_text,Answer choices referred to but not given
+37569,"U-MATH (Multivariable Calculus, problem 7eedb03b)",mismatch,Underdetermined as worded; solution adds the two intersection points
+37709,"U-MATH (Differential Calculus, problem a0840748)",mismatch,"P gives 27 not 17; solution uses c=27, not the stated curve"
+38089,"U-MATH (Multivariable Calculus, problem ff7e301b)",broken_text,Stated condition impossible; sum of distances intended.
+38317,"Concept and Hint-Annotated Math Problems (CHAMP) (Sequences, problem 10 (adapted from Engel's Problem-Solving Strategies",key_conflict,"solution's own pattern gives 2, not 3"
