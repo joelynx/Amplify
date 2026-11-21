@@ -3257,6 +3257,104 @@
   "group": "G3",
   "subject": "Algebra",
   "topic": "Elementary Algebra",
+  "branch": "Arithmetic and Pre-Algebra",
+  "subtopic": "Order of Operations and Numerical Evaluation",
+  "note": "evaluating numerical expressions: order of operations, signs, grouping, substituting values into a given formula",
+  "est": 90,
+  "orig": [
+   "Elementary Algebra",
+   "Arithmetic and Pre-Algebra",
+   "Order of Operations and Numerical Evaluation"
+  ]
+ },
+ {
+  "group": "G3",
+  "subject": "Algebra",
+  "topic": "Elementary Algebra",
+  "branch": "Arithmetic and Pre-Algebra",
+  "subtopic": "Fractions, Decimals and Place Value",
+  "note": "arithmetic with fractions, mixed numbers and decimals; place value and rounding",
+  "est": 40,
+  "orig": [
+   "Elementary Algebra",
+   "Arithmetic and Pre-Algebra",
+   "Fractions, Decimals and Place Value"
+  ]
+ },
+ {
+  "group": "G3",
+  "subject": "Algebra",
+  "topic": "Elementary Algebra",
+  "branch": "Arithmetic and Pre-Algebra",
+  "subtopic": "Exponents and Scientific Notation",
+  "note": "numerical powers with zero, negative or fractional exponents, powers of ten, scientific notation; excludes exponential equations",
+  "est": 10,
+  "orig": [
+   "Elementary Algebra",
+   "Arithmetic and Pre-Algebra",
+   "Exponents and Scientific Notation"
+  ]
+ },
+ {
+  "group": "G3",
+  "subject": "Algebra",
+  "topic": "Elementary Algebra",
+  "branch": "Arithmetic and Pre-Algebra",
+  "subtopic": "Defined Operations",
+  "note": "evaluating or analyzing an operation defined in the problem by a formula or a table",
+  "est": 15,
+  "orig": [
+   "Elementary Algebra",
+   "Arithmetic and Pre-Algebra",
+   "Defined Operations"
+  ]
+ },
+ {
+  "group": "G3",
+  "subject": "Algebra",
+  "topic": "Elementary Algebra",
+  "branch": "Arithmetic and Pre-Algebra",
+  "subtopic": "Linear Equations and Small Systems",
+  "note": "solving linear equations in one unknown and two-by-two linear systems; excludes word-problem setup (Algebraic Modeling)",
+  "est": 20,
+  "orig": [
+   "Elementary Algebra",
+   "Arithmetic and Pre-Algebra",
+   "Linear Equations and Small Systems"
+  ]
+ },
+ {
+  "group": "G3",
+  "subject": "Algebra",
+  "topic": "Elementary Algebra",
+  "branch": "Arithmetic and Pre-Algebra",
+  "subtopic": "Estimation and Comparing Numbers",
+  "note": "estimating values, bracketing between powers of ten, ordering numbers by size, number-line distances",
+  "est": 16,
+  "orig": [
+   "Elementary Algebra",
+   "Arithmetic and Pre-Algebra",
+   "Estimation and Comparing Numbers"
+  ]
+ },
+ {
+  "group": "G3",
+  "subject": "Algebra",
+  "topic": "Elementary Algebra",
+  "branch": "Arithmetic and Pre-Algebra",
+  "subtopic": "Units, Time and Calendar Arithmetic",
+  "note": "unit conversions, elapsed time and schedules, counting days, weeks or years",
+  "est": 10,
+  "orig": [
+   "Elementary Algebra",
+   "Arithmetic and Pre-Algebra",
+   "Units, Time and Calendar Arithmetic"
+  ]
+ },
+ {
+  "group": "G3",
+  "subject": "Algebra",
+  "topic": "Elementary Algebra",
   "branch": "Trigonometric Identities and Equations",
   "subtopic": "Trigonometric Identities",
   "note": "addition, multiple-angle and power identities; excludes identities in a triangle (Geometry)",
@@ -6637,6 +6735,20 @@
   "group": "G4",
   "subject": "Combinatorics",
   "topic": "Logic and Algorithmic Puzzles",
+  "branch": "Logic and Knowledge Puzzles",
+  "subtopic": "Propositional Logic and Deduction",
+  "note": "negation, converse and contrapositive, quantified statements, syllogisms, deducing an order or assignment from clues; excludes truth-teller puzzles (Knights and Knaves)",
+  "est": 12,
+  "orig": [
+   "Logic and Algorithmic Puzzles",
+   "Logic and Knowledge Puzzles",
+   "Propositional Logic and Deduction"
+  ]
+ },
+ {
+  "group": "G4",
+  "subject": "Combinatorics",
+  "topic": "Logic and Algorithmic Puzzles",
   "branch": "Weighing and Search Puzzles",
   "subtopic": "Counterfeit Coin Weighing",
   "note": "finding fake coins with a balance in fewest weighings",
@@ -6883,6 +6995,62 @@
    "Plane Geometry",
    "Triangles",
    "Ceva's and Menelaus' Theorems"
+  ]
+ },
+ {
+  "group": "G4",
+  "subject": "Geometry",
+  "topic": "Plane Geometry",
+  "branch": "Basic Measurement",
+  "subtopic": "Angle Sums and Angle Measures",
+  "note": "angle sums of triangles and polygons, exterior angles, isosceles base angles, angles at parallel lines",
+  "est": 20,
+  "orig": [
+   "Plane Geometry",
+   "Basic Measurement",
+   "Angle Sums and Angle Measures"
+  ]
+ },
+ {
+  "group": "G4",
+  "subject": "Geometry",
+  "topic": "Plane Geometry",
+  "branch": "Basic Measurement",
+  "subtopic": "Perimeter and Area of Basic Figures",
+  "note": "perimeters and areas of rectangles, triangles and composite figures by direct formula; area ratios see Area of a Triangle",
+  "est": 20,
+  "orig": [
+   "Plane Geometry",
+   "Basic Measurement",
+   "Perimeter and Area of Basic Figures"
+  ]
+ },
+ {
+  "group": "G4",
+  "subject": "Geometry",
+  "topic": "Plane Geometry",
+  "branch": "Basic Measurement",
+  "subtopic": "Circle Area and Circumference",
+  "note": "circumference, area, arc length and sector area by formula; semicircles, annuli and circle area ratios",
+  "est": 20,
+  "orig": [
+   "Plane Geometry",
+   "Basic Measurement",
+   "Circle Area and Circumference"
+  ]
+ },
+ {
+  "group": "G4",
+  "subject": "Geometry",
+  "topic": "Plane Geometry",
+  "branch": "Basic Measurement",
+  "subtopic": "Scaling of Lengths, Areas and Volumes",
+  "note": "how lengths, areas and volumes change when a figure or solid is scaled",
+  "est": 8,
+  "orig": [
+   "Plane Geometry",
+   "Basic Measurement",
+   "Scaling of Lengths, Areas and Volumes"
   ]
  },
  {

@@ -27,11 +27,11 @@ The machine-readable copy is `taxonomy.json`. The per-group drafts, with each on
 | Calculus | Calculus, Real Analysis | 17 | 102 | 1,600 |
 | Complex Analysis | Complex Analysis | 4 | 18 | 183 |
 | Linear Algebra and Differential Equations | Linear Algebra, Differential Equations | 19 | 89 | 992 |
-| Algebra | Elementary Algebra, Theory of Polynomials, Algebraic Inequalities, Sequences, Sums and Functional Equations | 17 | 68 | 1,212 |
+| Algebra | Elementary Algebra, Theory of Polynomials, Algebraic Inequalities, Sequences, Sums and Functional Equations | 18 | 75 | 1,413 |
 | Abstract Algebra | Group Theory, Ring and Field Theory | 6 | 22 | 221 |
 | Number Theory | Elementary Number Theory, Diophantine Equations | 13 | 67 | 1,843 |
-| Combinatorics | Enumerative Combinatorics, Graph Theory, Extremal Combinatorics, Combinatorial Geometry, Combinatorial Games and Processes, Logic and Algorithmic Puzzles | 26 | 117 | 2,005 |
-| Geometry | Plane Geometry, Solid Geometry | 11 | 51 | 596 |
+| Combinatorics | Enumerative Combinatorics, Graph Theory, Extremal Combinatorics, Combinatorial Geometry, Combinatorial Games and Processes, Logic and Algorithmic Puzzles | 26 | 118 | 2,017 |
+| Geometry | Plane Geometry, Solid Geometry | 12 | 55 | 664 |
 | Probability and Stochastic Processes | Probability, Stochastic Processes | 23 | 138 | 3,176 |
 | Statistics | Mathematical Statistics | 8 | 35 | 329 |
 | Quantitative Finance | Derivatives Pricing, Fixed Income, Portfolio Theory and Risk Management | 14 | 51 | 483 |
@@ -46,7 +46,7 @@ The machine-readable copy is `taxonomy.json`. The per-group drafts, with each on
 | Power Systems and Power Electronics | Power Electronics, Power Systems | 4 | 17 | 56 |
 | Material Science | Structure of Materials, Thermodynamics and Kinetics of Materials, Mechanical Behavior of Materials, Electrical, Magnetic, Optical and Thermal Properties, Engineering Materials | 26 | 131 | 1,044 |
 | Conventional Energy Technologies | Thermal Power Plant Engineering, Hydroelectric Power Engineering, Nuclear Power Engineering, Power Plant Economics and Operation, Non-Conventional Power and Energy Storage | 25 | 166 | 2,445 |
-| **Total** | 53 | 304 | 1,505 | 21,132 |
+| **Total** | 53 | 306 | 1,517 | 21,413 |
 
 Branch sizes: every branch has 3 to 13 subtopics, and 95% have 3 to 9, so each is a sensible unit to select.
 
@@ -370,7 +370,7 @@ _2 topic(s), 19 branches, 89 subtopics, ~992 questions_
 
 
 # Algebra
-_4 topic(s), 17 branches, 68 subtopics, ~1212 questions_
+_4 topic(s), 18 branches, 75 subtopics, ~1413 questions_
 
 ## Elementary Algebra
 ### Algebraic Expressions and Radicals
@@ -401,6 +401,14 @@ _4 topic(s), 17 branches, 68 subtopics, ~1212 questions_
 - **Mixtures and Concentrations** — mixing solutions, alternate pouring between vessels (~8)
 - **Percentages, Ratios and Averages** — percent change, ratios, means of data lists; excludes interest theory (Quantitative Finance) (~18)
 - **Ages, Money and Sharing** — linear equations from verbal conditions on ages, coins, prices, shares (~35)
+### Arithmetic and Pre-Algebra
+- **Order of Operations and Numerical Evaluation** — evaluating numerical expressions: order of operations, signs, grouping, substituting values into a given formula (~90)
+- **Fractions, Decimals and Place Value** — arithmetic with fractions, mixed numbers and decimals; place value and rounding (~40)
+- **Exponents and Scientific Notation** — numerical powers with zero, negative or fractional exponents, powers of ten, scientific notation; excludes exponential equations (~10)
+- **Defined Operations** — evaluating or analyzing an operation defined in the problem by a formula or a table (~15)
+- **Linear Equations and Small Systems** — solving linear equations in one unknown and two-by-two linear systems; excludes word-problem setup (Algebraic Modeling) (~20)
+- **Estimation and Comparing Numbers** — estimating values, bracketing between powers of ten, ordering numbers by size, number-line distances (~16)
+- **Units, Time and Calendar Arithmetic** — unit conversions, elapsed time and schedules, counting days, weeks or years (~10)
 ### Trigonometric Identities and Equations
 - **Trigonometric Identities** — addition, multiple-angle and power identities; excludes identities in a triangle (Geometry) (~15)
 - **Trigonometric Equations** — solving trigonometric equations and systems (~12)
@@ -591,7 +599,7 @@ _2 topic(s), 13 branches, 67 subtopics, ~1843 questions_
 
 
 # Combinatorics
-_6 topic(s), 26 branches, 117 subtopics, ~2005 questions_
+_6 topic(s), 26 branches, 118 subtopics, ~2017 questions_
 
 ## Enumerative Combinatorics
 ### Basic Counting Principles
@@ -735,6 +743,7 @@ _6 topic(s), 26 branches, 117 subtopics, ~2005 questions_
 - **Prisoner Coordination Strategies** — 100 boxes, light-switch room, agreed protocols without communication (~10)
 - **Communication Protocols** — passing information through restricted channels, card tricks, padlocked boxes (~16)
 - **Voting and Social Choice** — voting procedures, Condorcet cycles, Arrow's theorem (~4)
+- **Propositional Logic and Deduction** — negation, converse and contrapositive, quantified statements, syllogisms, deducing an order or assignment from clues; excludes truth-teller puzzles (Knights and Knaves) (~12)
 ### Weighing and Search Puzzles
 - **Counterfeit Coin Weighing** — finding fake coins with a balance in fewest weighings (~21)
 - **Measuring with Jugs, Fuses and Hourglasses** — measuring volumes or times; weight sets for a balance (~10)
@@ -750,7 +759,7 @@ _6 topic(s), 26 branches, 117 subtopics, ~2005 questions_
 
 
 # Geometry
-_2 topic(s), 11 branches, 51 subtopics, ~596 questions_
+_2 topic(s), 12 branches, 55 subtopics, ~664 questions_
 
 ## Plane Geometry
 ### Triangles
@@ -762,6 +771,11 @@ _2 topic(s), 11 branches, 51 subtopics, ~596 questions_
 - **Angle Bisectors, Incircle and Excircles** — bisector theorem, incentre, inradius, excircles, tangent lengths (~12)
 - **Altitudes and Orthocentre** — altitudes, orthic triangle, orthocentre (~4)
 - **Ceva's and Menelaus' Theorems** — concurrency of cevians, collinear points on triangle sides (~5)
+### Basic Measurement
+- **Angle Sums and Angle Measures** — angle sums of triangles and polygons, exterior angles, isosceles base angles, angles at parallel lines (~20)
+- **Perimeter and Area of Basic Figures** — perimeters and areas of rectangles, triangles and composite figures by direct formula; area ratios see Area of a Triangle (~20)
+- **Circle Area and Circumference** — circumference, area, arc length and sector area by formula; semicircles, annuli and circle area ratios (~20)
+- **Scaling of Lengths, Areas and Volumes** — how lengths, areas and volumes change when a figure or solid is scaled (~8)
 ### Quadrilaterals and Polygons
 - **Parallelograms and Trapezoids** — sides, diagonals and midlines of parallelograms, rhombi and trapezoids (~13)
 - **Areas of Quadrilaterals and Polygons** — areas and area ratios of quadrilaterals and polygons (~24)

@@ -104,14 +104,15 @@ Families are for browsing in the app only; tags are stored flat.
 ### Algebraic moves
 | Tag | Use when | Aliases |
 |---|---|---|
-| Substitution | renaming an expression simplifies the problem (algebraic or trigonometric) | Trig Substitution |
+| Substitution | renaming an expression simplifies the problem (algebraic or trigonometric) | Trig Substitution, Substitution Reduction |
 | Factorization | factoring an expression is the step that opens the problem | Difference of Squares |
 | Telescoping | consecutive terms cancel in a sum or product | |
 | Vieta's Formulas | sums and products of roots replace the roots | |
 | Polynomial Root Argument | count roots, the factor theorem, or "too many roots means zero" | Comparing Coefficients |
 | Special Values | plugging chosen values pins down a function or identity | |
 | Complex Numbers Method | complex numbers or roots of unity used outside complex analysis | Roots of Unity Filter |
-| Sum of Squares | write as a sum of squares to prove non-negativity or extremum | Completing the Square |
+| Sum of Squares | write as a sum of squares to prove non-negativity or extremum | |
+| Completing the Square | rewrite a quadratic as a perfect square plus a constant to solve it, integrate it or read off a vertex or conic (added 2026-11-21) | |
 
 ### Inequalities and estimation
 | Tag | Use when | Aliases |
@@ -138,6 +139,7 @@ Families are for browsing in the app only; tags are stored flat.
 | Compactness Argument | convergent subsequences or finite subcovers give the result | Bolzano-Weierstrass |
 | Fixed Point Argument | a contraction or fixed point theorem gives existence or a limit | Picard Iteration, Banach |
 | Linearization | expand to first order about a known state (small angles, small perturbations, delta method) | Small Perturbation |
+| Trigonometric Power Integrals | integrals of powers and products of sin, cos, tan, sec, cot, csc, by reduction identities or a substitution (added 2026-11-21) | |
 
 ### Probability moves
 | Tag | Use when | Aliases |
