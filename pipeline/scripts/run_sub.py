@@ -248,6 +248,8 @@ def child_env(cfg: dict, effort: str, base_url: str | None = None) -> dict:
     })
     if base_url:
         env["ANTHROPIC_BASE_URL"] = base_url
+    if _ACTIVE_DIR[0]:
+        env["CLAUDE_CONFIG_DIR"] = _ACTIVE_DIR[0]  # account rotation: the active account's own login
     return env
 
 
@@ -942,6 +944,80 @@ def logged_in_account(account_file: Path | None, login_file: Path | None) -> str
         return "unknown"
 
 
+# --- account rotation (owner 2026-11-21) --------------------------------------------------
+# Several accounts, each logged in once under its own Claude Code config directory; the solver uses
+# one at a time, in the accounts file's order. When the active one reaches a stop, the replies still
+# running finish and the run moves to the first account in the list that is on, logged in and free.
+# Never two accounts serving at once (Anthropic advised rotation, not a "serving" system).
+
+ACCOUNTS_FILE = PIPELINE_DIR / "accounts.json"  # git-ignored: names, config dirs, on/off, in serving order
+ACCOUNTS_HOME = Path.home() / ".claude-accounts"  # where `accounts add` puts an account's config dir
+ACCOUNTS_NOTE = ("Owner 2026-11-21: the solver rotates through these accounts one at a time, in this order. When the "
+                 "active one reaches a stop, the replies still running finish and the run moves to the first account "
+                 "here that is on, logged in and free. Each account logs in once under its own dir: in a terminal, "
+                 "set CLAUDE_CONFIG_DIR to it, run claude, type /login. Edit with run_sub.py accounts.")
+_ACTIVE_DIR: list[str | None] = [None]  # the config dir new claude runs start with (None: the default login)
+
+
+def load_accounts(path: Path | None = None) -> list[dict]:
+    """The accounts file's list in serving order ([{"name", "dir", "enabled"}]); [] without the file,
+    and then the solver uses Claude Code's default login as before."""
+    try:
+        return list(json.loads((path or ACCOUNTS_FILE).read_text(encoding="utf-8")).get("accounts") or [])
+    except FileNotFoundError:
+        return []
+
+
+def save_accounts(accounts: list[dict], path: Path | None = None) -> None:
+    path = path or ACCOUNTS_FILE
+    tmp = path.with_suffix(".tmp")
+    tmp.write_text(json.dumps({"note": ACCOUNTS_NOTE, "accounts": accounts}, indent=1), encoding="utf-8")
+    tmp.replace(path)
+
+
+def accounts_mtime(path: Path | None = None) -> float | None:
+    try:
+        return (path or ACCOUNTS_FILE).stat().st_mtime
+    except OSError:
+        return None
+
+
+def account_files(a: dict) -> tuple[Path, Path]:
+    """Claude Code's settings and login files in an account's own config dir."""
+    d = Path(a["dir"])
+    return d / ".claude.json", d / ".credentials.json"
+
+
+def account_id(a: dict) -> str | None:
+    """The account logged in under `a`'s dir (named as logged_in_account names it), None if none is."""
+    acct = logged_in_account(*account_files(a))
+    return acct if acct and acct.startswith("account ") else None
+
+
+def pick_account(accounts: list[dict], cap: "UsageCap", models, now: float | None = None,
+                 skip=()) -> tuple[dict | None, tuple[float, str] | None]:
+    """The first account in serving order that is on, logged in, not in `skip` and not blocked by its
+    own readings for `models`, else (None, (the earliest time one of them frees, why))."""
+    holds = []
+    for a in accounts:
+        if not a.get("enabled", True) or a["name"] in skip:
+            continue
+        acct = account_id(a)
+        if acct is None:
+            continue
+        b = cap.blocked(acct, models, now)
+        if b is None:
+            return a, None
+        holds.append((b[0], f"{a['name']}: {b[1]}"))
+    return None, (min(holds) if holds else None)
+
+
+def use_account(a: dict, cap: "UsageCap") -> None:
+    """From now on new claude runs start under `a`'s login, and `cap` counts on its readings."""
+    _ACTIVE_DIR[0] = str(Path(a["dir"]))
+    cap.switch(*account_files(a), name=a["name"])
+
+
 def usage_readings(out: dict) -> dict[str, tuple[float, float | None]]:
     """{window: (utilization, resets_at)} from a run's rate_limit_events (the highest if several)."""
     got: dict[str, tuple[float, float | None]] = {}
@@ -1018,6 +1094,7 @@ class UsageCap:
         self.hist: dict[str, list[tuple[float, float]]] = {}  # model -> (seconds, usd) of its finished replies
         self.tokens = [0.0, 0.0]  # usd, output tokens of the costed replies: usd per token for cut-off runs
         self.probed: dict[str, float] = {}  # model -> when its last probe went (this account)
+        self.active_name: str | None = None  # account rotation: the accounts file's name for the account in use
         self._load()
         self.account = None
         for _ in range(10):  # None while Claude Code writes its settings
@@ -1056,9 +1133,36 @@ class UsageCap:
         tmp = self.state_file.with_suffix(".tmp")
         tmp.write_text(json.dumps({"accounts": {a: {"points": st["points"][-2000:], "done": st["done"][-4000:]}
                                                 for a, st in self.accounts.items()},
-                                   "tokens": self.tokens, "hist": {m: xs[-2000:] for m, xs in self.hist.items()}}),
+                                   "tokens": self.tokens, "hist": {m: xs[-2000:] for m, xs in self.hist.items()},
+                                   "active": {"account": self.account, "name": self.active_name}}),
                        encoding="utf-8")
         tmp.replace(self.state_file)
+
+    def switch(self, account_file: Path, login_file: Path, name: str | None = None) -> None:
+        """Account rotation: another account's login from now on, with its own readings and probes."""
+        self.account_file, self.login_file, self.active_name = account_file, login_file, name
+        self.account = logged_in_account(account_file, login_file) or "unknown"
+        self.probed = {}
+        self._save()
+
+    def blocked(self, account: str, models, now: float | None = None) -> tuple[float, str] | None:
+        """Account rotation: (when it frees, why) if `account`'s last readings alone keep every one of
+        `models` from going, else None. A reading that is old, or past the stop only by the replies
+        since, does not block: the probe after a switch reads the account again."""
+        now = now if now is not None else time.time()
+        saved, self.account = self.account, account
+        try:
+            holds = []
+            for m in models:
+                over = self.over(m, [], now, since=False)
+                if not over:
+                    return None
+                resets = [self._last(w, now)[2] for w, _ in over]
+                until = max(float(r) for r in resets) if all(r is not None for r in resets) else now + 1020
+                holds.append((until, ", ".join(f"{w} at {self._last(w, now)[1]:.0%}" for w, _ in over)))
+            return min(holds) if holds else None
+        finally:
+            self.account = saved
 
     def login_changed(self) -> bool:
         """Whether another account is logged in now (then its own readings apply)."""
@@ -1235,6 +1339,9 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
           force_unlock: bool, review: bool = False, reread: list[str] | None = None) -> None:
     """Send the unfinished questions; with review, the review solve (config.subscription.review_model
     at review_effort) for the questions review_rows names. Neither sends the stored answer."""
+    rotation = [a for a in load_accounts() if a.get("enabled", True) and account_id(a)]
+    if rotation:  # account rotation: the request check runs under the first account in serving order
+        _ACTIVE_DIR[0] = str(Path(rotation[0]["dir"]))
     pre = verify(cfg, app, pc, quiet=True, review=review)
     if not pre["ok"] or not pre["accepted"]:
         raise SystemExit(f"the request check did not pass or its wrapping is not accepted; run `run_sub.py verify"
@@ -1274,11 +1381,35 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
             paused_until = None  # kept until the wait: the replies still running can take several more rounds
             parked: dict[str, tuple[float, str]] = {}  # model -> (until, why): a limit on that model alone
             cap = UsageCap(sub_cfg(cfg).get("usage_cap") or {}, LOGIN_FILE, CAP_STATE, ACCOUNT_FILE)
+            active = None  # account rotation: the accounts file's entry in use
+            name_of: dict[str, str] = {}  # account -> its name in the accounts file
+            if rotation:
+                active = pick_account(load_accounts(), cap, sorted({model_of(x) for x in queue}))[0] or rotation[0]
+                use_account(active, cap)
+                name_of[cap.account] = active["name"]
+                print(json.dumps({"rotation": [a["name"] for a in rotation], "account": active["name"], "at": now_iso()}), flush=True)
             for m in reread or []:
                 cap.forget(m)
                 print(json.dumps({"reread": m, "account": cap.account}), flush=True)
             started: dict = {}
             account_of: dict = {}  # the account each running reply started under
+            seen_list = accounts_mtime()  # an edit of the accounts file (order, on/off) applies from then on
+            tried: set[str] = set()  # accounts left since the last question went out: not taken again before a wait
+            move_to = None  # an account to move to once the replies still running are done
+            off = False  # the active account is turned off and no other is free
+            repick = False
+
+            def models_left() -> list[str]:
+                return sorted({model_of(x) for x in queue} - set(parked)) or sorted({model_of(x) for x in queue})
+
+            def rotate_to(a: dict, why: str) -> None:
+                nonlocal active
+                before = active["name"]
+                use_account(a, cap)
+                active, name_of[cap.account] = a, a["name"]
+                parked.clear()  # model limits are the account's own
+                print(json.dumps({"rotate": {"from": before, "to": a["name"], "why": why}, "account": cap.account,
+                                  "at": now_iso()}), flush=True)
 
             def on_limit(model: str, info: dict, readings: dict, probe: bool = False) -> None:
                 """A limit on one model (its questions wait, the other models' go on): a refused probe
@@ -1303,7 +1434,21 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     parked.clear()
                     print(json.dumps({"login": "changed", "account": cap.account, "at": now_iso()}), flush=True)
                 parked = {m: p for m, p in parked.items() if p[0] > time.time()}  # past its time: tried again
-                while queue and stop_reason is None:
+                if rotation:
+                    if accounts_mtime() != seen_list:  # the owner edited the list: its order applies from now
+                        seen_list, repick = accounts_mtime(), True
+                    if repick:  # the first free account in serving order; a move waits for the running replies
+                        repick = False
+                        listed = load_accounts()
+                        a = pick_account(listed, cap, models_left())[0]
+                        off = a is None and not any(x["name"] == active["name"] and x.get("enabled", True) for x in listed)
+                        move_to = a if a is not None and a["name"] != active["name"] else None
+                        if move_to is not None and running:
+                            print(json.dumps({"rotate_when_done": move_to["name"], "running": len(running)}), flush=True)
+                    if move_to is not None and not running:
+                        rotate_to(move_to, "serving order")
+                        move_to = None
+                while queue and stop_reason is None and move_to is None and not off:
                     flying = [(v[4]["solver"]["model"], started[f]) for f, v in running.items() if account_of[f] == cap.account]
                     for m in sorted({model_of(x) for x in queue} - set(parked)):
                         if stop_reason is None and m not in parked and cap.probe_due(m, flying):
@@ -1343,11 +1488,13 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     fut = ex.submit(call_claude, qc, system_file, user_text(q, feedback), effort, None, images)
                     running[fut] = (qid, attempt, effort, [n for n, _ in images], qc)
                     started[fut], account_of[fut] = time.time(), cap.account
+                    tried.clear()
                 if not running:
                     if not queue or stop_reason:
                         break
-                    held = {m: h for m in {model_of(x) for x in queue} - set(parked) if (h := cap.held_until(m))}
-                    holds = {**parked, **held}
+                    held = {} if off else {m: h for m in {model_of(x) for x in queue} - set(parked) if (h := cap.held_until(m))}
+                    holds = {**parked, **held,
+                             **({"off": (time.time() + 300, f"{active['name']} is turned off and no other account is free")} if off else {})}
                     if not holds:
                         break
                     until, why = min(holds.values())  # only parked or capped models' questions are left: wait as for a usage limit
@@ -1362,8 +1509,9 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     readings = usage_readings(out)
                     info["account_usage"] = readings
                     tokens = int(((info.get("result") or {}).get("usage") or {}).get("output_tokens") or 0) if kind == "ok" else 0
+                    acct_of_reply = account_of.pop(fut)
                     cap.record(qc["solver"]["model"], started.pop(fut), time.time(), readings,
-                               spent_usd(out, info, cap.usd_per_token()), tokens, account_of.pop(fut))
+                               spent_usd(out, info, cap.usd_per_token()), tokens, acct_of_reply)
                     raw = save_failure(qid, attempt, out, info) if kind in ("error", "stop", "cut") else None
                     if kind in ("ok", "cut"):
                         store(pc, qc, qid, attempt, effort, info, out.get("seconds", 0), names)
@@ -1382,6 +1530,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         summary[api_failure(pc, qc, qid, attempt, info["why"])] += 1
                     print(json.dumps({"question_id": qid, "attempt": attempt, "model": qc["solver"]["model"],
                                       "effort": effort, "outcome": kind,
+                                      **({"account": name_of.get(acct_of_reply)} if rotation else {}),
                                       "seconds": out.get("seconds"),
                                       **({"why": info["why"]} if kind != "ok" else {}), **({"raw": raw} if raw else {}),
                                       **({"usage": {w: u for w, (u, _) in readings.items()}} if readings else {}),
@@ -1389,6 +1538,15 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                 if stop_reason and not running:
                     if wait_on_limit and stop_reason.startswith("usage limit") and queue:
                         until = float(paused_until) if paused_until else time.time() + 900
+                        if rotation:  # the next free account in serving order, before any wait
+                            a, hold = pick_account(load_accounts(), cap, models_left(), skip=tried | {active["name"]})
+                            if a is not None:
+                                tried.add(active["name"])
+                                rotate_to(a, stop_reason)
+                                stop_reason = paused_until = None
+                                continue
+                            if hold:  # every account is held: wait for the first to free
+                                until = min(until, hold[0])
                         secs = max(60, min(int(until - time.time()) + 120, 1020))  # short polls catch a /login switch
                         print(f"{stop_reason}; waiting {secs // 60} min, then continuing", flush=True)
                         deadline = time.time() + secs
@@ -1398,7 +1556,11 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                                 parked.clear()
                                 print(json.dumps({"login": "changed", "account": cap.account, "at": now_iso()}), flush=True)
                                 break
+                            if rotation and accounts_mtime() != seen_list:
+                                break
                         stop_reason = paused_until = None
+                        tried.clear()
+                        repick = bool(rotation)
                         continue
                     break
     finally:
@@ -1453,6 +1615,102 @@ def status(cfg: dict, app, pc) -> None:
     print(f"{'':>2} {'TOTAL':56} {'':>6} " + " ".join(f"{tot[k]:>6}" for k in cols))
 
 
+def show_accounts(cfg: dict, accts: list[dict], now: float | None = None) -> None:
+    """Each account's windows (latest reading / where it stops, its reset), whether it is the one in use,
+    free or held, and the pool: the windows' mean use over the accounts on, and the room left to their stops."""
+    now = now if now is not None else time.time()
+    cap = UsageCap(sub_cfg(cfg).get("usage_cap") or {}, None, CAP_STATE, None)
+    try:
+        active = json.loads(CAP_STATE.read_text(encoding="utf-8")).get("active") or {}
+    except (OSError, ValueError):
+        active = {}
+    if not accts:
+        print("no accounts file: the solver uses Claude Code's default login (add one: run_sub.py accounts add NAME)")
+        return
+    model = cfg["solver"]["model"]
+    pool: dict[str, list[tuple[float, float]]] = {}
+    print(f"{'#':>2} {'name':10} {'on':3} {'email':34} {'five_hour':20} {'seven_day':20} state")
+    for i, a in enumerate(accts, 1):
+        acct = account_id(a)
+        try:
+            email = (json.loads(account_files(a)[0].read_text(encoding="utf-8")).get("oauthAccount") or {}).get("emailAddress") or ""
+        except (OSError, ValueError):
+            email = ""
+        cols = []
+        if acct:
+            cap.account = acct
+            for w in ("five_hour", "seven_day"):
+                last, stop = cap._last(w, now), cap.plan_for(w, now)
+                ever = any(w in r for _, _, r in cap.points)
+                u = last[1] if last else (0.0 if ever else None)  # a reading of an ended period: the window reset
+                reset = f" ->{datetime.fromtimestamp(float(last[2])).strftime('%a %H:%M')}" if last and last[2] else ""
+                cols.append(f"{u:.0%}/{stop:.0%}{reset}" if u is not None else "no reading")
+                if u is not None and a.get("enabled", True):
+                    pool.setdefault(w, []).append((u, stop))
+            held = cap.blocked(acct, [model], now)
+            newest = max((t for t, _, _ in cap.points), default=None)
+            age = f", read {int((now - newest) // 60)} min ago" if newest else ""
+            if not a.get("enabled", True):
+                state = "off"
+            elif acct == active.get("account") and a["name"] == active.get("name"):
+                state = "IN USE" + (f" (stopped until {datetime.fromtimestamp(held[0]).strftime('%a %H:%M')})" if held else "") + age
+            else:
+                state = (f"held until {datetime.fromtimestamp(held[0]).strftime('%a %H:%M')} ({held[1]})" if held else "free") + age
+        else:
+            cols, state = ["", ""], "not logged in: set CLAUDE_CONFIG_DIR to its dir, run claude, /login"
+        print(f"{i:>2} {a['name'][:10]:10} {'yes' if a.get('enabled', True) else 'no':3} {email[:34]:34} "
+              f"{cols[0]:20} {cols[1]:20} {state}")
+    for w, xs in pool.items():
+        mean = sum(u for u, _ in xs) / len(xs)
+        room = sum(max(0.0, s - u) for u, s in xs)
+        print(f"   pool {w}: {mean:.0%} used on average over {len(xs)} accounts; room to the stops {room:.2f} windows")
+
+
+def accounts_cmd(cfg: dict, action: str, names: list[str], directory: str | None) -> None:
+    """run_sub.py accounts [list | add NAME [--dir D] | remove NAME... | order NAME... | swap A B | enable NAME... |
+    disable NAME...]. A running solver applies an edit at once: it finishes the replies running, then moves."""
+    accts = load_accounts()
+    by = {a["name"]: a for a in accts}
+
+    def need(n: str) -> dict:
+        if n not in by:
+            raise SystemExit(f"no account named {n!r}; the list has: {', '.join(by) or 'none'}")
+        return by[n]
+
+    if action == "add":
+        if len(names) != 1:
+            raise SystemExit("usage: run_sub.py accounts add NAME [--dir DIR]")
+        n = names[0]
+        if n in by:
+            raise SystemExit(f"{n!r} is already in the list")
+        d = Path(directory) if directory else ACCOUNTS_HOME / n
+        d.mkdir(parents=True, exist_ok=True)
+        accts.append({"name": n, "dir": d.as_posix(), "enabled": True})
+        save_accounts(accts)
+        print(f"added {n}, last in the serving order. Log it in once, in a PowerShell window:\n"
+              f"  $env:CLAUDE_CONFIG_DIR = '{d}'; claude\nthen type /login, choose the account, and close that claude.\n")
+    elif action == "remove":
+        for n in names:
+            need(n)
+        save_accounts([a for a in accts if a["name"] not in names])
+        print("removed; each login stays in its dir until that folder is deleted\n")
+    elif action == "order":
+        for n in names:
+            need(n)
+        save_accounts([by[n] for n in names] + [a for a in accts if a["name"] not in names])
+    elif action == "swap":
+        if len(names) != 2:
+            raise SystemExit("usage: run_sub.py accounts swap A B")
+        i, j = (accts.index(need(n)) for n in names)
+        accts[i], accts[j] = accts[j], accts[i]
+        save_accounts(accts)
+    elif action in ("enable", "disable"):
+        for n in names:
+            need(n)["enabled"] = action == "enable"
+        save_accounts(accts)
+    show_accounts(cfg, load_accounts())
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sp = ap.add_subparsers(dest="cmd", required=True)
@@ -1461,6 +1719,11 @@ def main() -> None:
     p.add_argument("--accept", action="store_true")
     p.add_argument("--review", action="store_true", help="check a review solve (review model and effort)")
     sp.add_parser("status")
+    p = sp.add_parser("accounts", help="the accounts the solver rotates through, one at a time, in serving order")
+    p.add_argument("action", nargs="?", default="list",
+                   choices=("list", "add", "remove", "order", "swap", "enable", "disable"))
+    p.add_argument("names", nargs="*")
+    p.add_argument("--dir", help="add: the account's own Claude Code config dir (default ~/.claude-accounts/NAME)")
     p = sp.add_parser("queue")
     p.add_argument("--n", type=int, default=20)
     for name in ("solve", "review"):
@@ -1485,6 +1748,8 @@ def main() -> None:
             raise SystemExit(1)
     elif a.cmd == "status":
         status(cfg, app, pc)
+    elif a.cmd == "accounts":
+        accounts_cmd(cfg, a.action, a.names, a.dir)
     elif a.cmd == "queue":
         for qid in candidates(cfg, app, pc)[: a.n]:
             q = fetch_question(app, qid)

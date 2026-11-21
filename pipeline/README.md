@@ -214,9 +214,24 @@ solver held), so `margin` is 0.05: the solver plans to 0.85 and leaves the rest
 for them. Simulated on the POTD Fable replies at margin 0.01, 1000 five-hour
 windows ended at 0.82 on average and never above 0.885.
 
+Account rotation (owner 2026-11-21; Anthropic advised rotating between one's own
+accounts, never a "serving" system that uses several at once): with a
+git-ignored `pipeline/accounts.json`, each account logs in once under its own
+Claude Code config dir (`CLAUDE_CONFIG_DIR`) and the solver uses one at a time,
+in the file's order. When the active account reaches a stop (any window at the
+cap above, or a usage limit), the replies still running finish and the run moves
+to the first account in the list that is on, logged in and not held by its own
+readings; only when every account is held does it wait, for the first to free.
+An edit of the list (order, on/off) applies once the running replies are done.
+Owners' one-offs (`once`) still name one account each. `run_sub.py accounts`
+shows each account's windows (reading / stop, reset), which one is in use, free or
+held, and the pool (mean use over the accounts on, room left to the stops).
+Without the file the solver uses Claude Code's default login, as before.
+
 ```
 python pipeline/scripts/run_sub.py verify [--qid N] [--accept]   # free: capture the request on a local stand-in server and check it
 python pipeline/scripts/run_sub.py status | queue [--n 20]
+python pipeline/scripts/run_sub.py accounts [list | add NAME [--dir D] | remove NAME.. | order NAME.. | swap A B | enable NAME.. | disable NAME..]
 python pipeline/scripts/run_sub.py solve [--n N] [--ids 1,2] [--workers W] [--wait-on-limit]   # parallel processes: --workers, else subscription.workers_by_effort (medium 12, high 12)
 python pipeline/scripts/run_sub.py review [--list] [--ids 1,2] [--workers W] [--wait-on-limit]  # the review solve that replaces human review (below)
 python pipeline/scripts/run.py judge                             # XeLaTeX/KaTeX checks, assemble, app-db writes (refused while config.judge_elsewhere: see below)

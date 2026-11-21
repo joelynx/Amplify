@@ -9,11 +9,22 @@ need a DB — they assert on the generated WHERE clause directly.
 from __future__ import annotations
 
 import sqlite3
+import sys
 from collections.abc import Iterator
+from pathlib import Path
 
 import pytest
 
 from app.persistence.db import migrate
+
+
+@pytest.fixture(autouse=True)
+def _no_real_solver_accounts(monkeypatch) -> None:
+    """run_sub.py's tests never rotate through the real accounts file (pipeline/accounts.json)."""
+    mod = sys.modules.get("run_sub")
+    if mod is not None:
+        monkeypatch.setattr(mod, "ACCOUNTS_FILE", Path(__file__).parent / "_no_accounts_file.json")
+        monkeypatch.setattr(mod, "_ACTIVE_DIR", [None])
 
 
 @pytest.fixture
