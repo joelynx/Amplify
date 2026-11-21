@@ -196,6 +196,10 @@ FIXES = {
     # Omni-MATH keys found wrong 2026-11-21 (Opus twice the other value; checked by hand, owner: "correct the incorrect keys")
     ("Omni-MATH", "945", "answer"): [("2017+1", "2^{2017}+1")],  # the set's own solution ends (2^{2017}+1)/3
     ("Omni-MATH", "101", "answer"): [("7", "6")],                 # 7 circles force a Fano plane, not drawable; an orthocentric system gives 6
+    # found by the blind re-solve of 2026-11-21 (owner: "fix the keys")
+    ("HARP", "1954 AHSME 13", "answer"): [("$180^\\circ$", "$540^\\circ$")],  # an angle inscribed in an arc has its vertex on it: (4*360-360)/2
+    ("HARP", "1965 AHSME 3", "answer"): [("$3$", "$\\frac{1}{3}$")],          # as written, -2^{-2} = -1/4: 81^{-1/4}
+    ("IMO-Bench AnswerBench v2", "imo-bench-combinatorics-097", "answer"): [("85383238549", "20919175804480")],  # someone stays in nearly every deal
 }
 # rows deleted from the bank after their import: a re-import leaves them out
 DROPPED = {
