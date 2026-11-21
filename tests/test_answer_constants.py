@@ -86,6 +86,16 @@ def test_a_different_number_is_a_mismatch(stored: str, reply: str) -> None:
     assert same_constant(stored, reply) is False
 
 
+def test_degrees_and_radians_and_long_rounded_decimals() -> None:
+    # 2026-11-21 (Omni-MATH 33206, 33708, 33496): the same value written another way
+    assert same_constant("\\[ \\boxed{\\frac{\\pi}{4}} \\]", "45^\\circ") is True
+    assert same_constant("$60^{\\circ}$", "\\frac{\\pi}{3}") is True
+    assert same_constant("\\frac{\\pi}{4}", "30^\\circ") is False
+    assert same_constant("30", "30^\\circ") is True              # no pi on either side: as before
+    assert same_constant("4571.8706930", "4571.87") is True      # 6 significant digits: a rounded value
+    assert same_constant("1.25", "1.254") is False               # 3 significant digits, 2 places: exact
+
+
 def test_numbers_past_the_float_range() -> None:
     # 2026-11-21 (q33882): a reply's 2^{2017} crashed the judge when turned into a float
     assert same_constant("\\frac{2017+1}{3}", "\\dfrac{2^{2017}+1}{3}") is False

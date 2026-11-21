@@ -75,6 +75,7 @@ def numeric_value(s: str | None) -> Decimal | None:
 _CONST_TOKEN = re.compile(r"\\[a-zA-Z]+|\d*\.\d+|\d+|[-+*/^(){}\[\]]")
 _CONST_SKIP = re.compile(r"\^\{?\\circ\}?|\\circ|°|\\%|%|\\!|\\,|\\;|\\:")
 _THOUSANDS = re.compile(r"[-+]?\d{1,3}(?:,\d{3})+(?:\.\d+)?")
+_DEGREES = re.compile(r"\^\s*\{?\s*\\circ\s*\}?|°|\\degree")
 _MAX_BITS = 20000  # a power bigger than this is not worked out
 
 
@@ -291,15 +292,29 @@ def _places(x: Fraction) -> int:
     return k
 
 
+def _sig_figs(s: str) -> int:
+    """Significant digits of a plain decimal answer ('4571.87': 6, '0.0109': 3)."""
+    digits = re.sub(r"\D", "", re.sub(r"^\\?[a-zA-Z]\w*=", "", normalize_answer(str(s))))
+    return len(digits.lstrip("0"))
+
+
 def same_constant(stored: str, reply: str) -> bool | None:
     r"""Whether two answers are the same number (None if either is not a number we can read).
     Exact values must be equal; a root or pi is compared to 1e-9 relative. A plain decimal on one
     side may be the other side rounded to its places when that side has no exact decimal form
-    ('0.333' for \frac13, a root, pi), or when the decimal has 3 places or more and the other side
-    more ('0.941' for 0.941094); a short decimal is exact: 0.52 is not 0.5."""
+    ('0.333' for \frac13, a root, pi), or when the decimal has 3 places or more, or 5 significant
+    digits or more, and the other side more places ('0.941' for 0.941094, '4571.87' for
+    4571.8706930); a short decimal is exact: 0.52 is not 0.5, 1.25 is not 1.254. An angle in degrees
+    against one written with pi is compared in radians (45^\circ and \frac{\pi}{4})."""
     a, b = constant_value(stored), constant_value(reply)
     if a is None or b is None:
         return None
+    deg_a, deg_b = bool(_DEGREES.search(str(stored))), bool(_DEGREES.search(str(reply)))
+    if deg_a != deg_b and "\\pi" in (str(reply) if deg_a else str(stored)):
+        if deg_a:
+            a = float(a) * math.pi / 180
+        else:
+            b = float(b) * math.pi / 180
     exact = isinstance(a, Fraction) and isinstance(b, Fraction)
     if exact and a == b:
         return True
@@ -313,7 +328,8 @@ def same_constant(stored: str, reply: str) -> bool | None:
     tol = rel
     for text, other in ((stored, b), (reply, a)):
         d = _decimals(text)
-        if d is not None and (not (isinstance(other, Fraction) and _terminates(other)) or (d >= 3 and _places(other) > d)):
+        if d is not None and (not (isinstance(other, Fraction) and _terminates(other))
+                              or ((d >= 3 or _sig_figs(text) >= 5) and _places(other) > d)):
             tol = max(tol, one / (2 * 10 ** d) + one / 10 ** 12)
     if exact and tol <= rel:
         return False
