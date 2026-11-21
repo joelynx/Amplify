@@ -252,6 +252,60 @@ FIXES = {
     ("Omni-MATH", "1325", "latexcode"): [('What is the earliest row in which the number 2004 may appear?', "An infinite table of nonnegative integers is constructed as follows: in the top row, some number is 1 and all other numbers are 0's; in each subsequent row, every number is the sum of some two of the three closest numbers in the preceding row. The top row (with the one 1) is called row 0; the next row is row 1; the next row is row 2, and so forth. Considering every table that can be constructed this way, what is the earliest row in which the number 2004 may appear?")],  # q34240
     ("Omni-MATH", "1897", "latexcode"): [('find a value of $k$, not necessarily the smallest, such that', 'find the smallest positive integer $k$ such that')],  # q34767
     ("Omni-MATH", "1897", "answer"): [('256', '83')],  # q34767
+    # human-review check 2026-11-21 (owner: "fix 35200 and 35230"): a transcription slip in the key (official HMMT
+    # Feb 2010 answer 5/8); the source (HMMT Nov 2012) has 16x^4, which the key answers
+    ("Omni-MATH", "2357", "answer"): [('$\\sqrt[5]{8}$', '$\\frac{5}{8}$')],  # q35200
+    ("Omni-MATH", "2387", "latexcode"): [('=17x^{4}$', '=16x^{4}$')],  # q35230
+    # third Omni-MATH hand check 2026-11-21 (owner: "Go ahead with the rest"): keys the replies gave twice, checked by
+    # computation; statements completed from their sources (keys unchanged); 36669 also a typo in the second car type
+    ("Omni-MATH", "2394", "answer"): [('0.96039', '0.96040')],  # q35237
+    ("Omni-MATH", "2456", "answer"): [('3426576', '6849777')],  # q35297
+    ("Omni-MATH", "2851", "answer"): [('10000', '10080')],  # q35683
+    ("Omni-MATH", "3085", "answer"): [('86', '20+20\\sqrt{11}')],  # q35897
+    ("Omni-MATH", "3699", "answer"): [('100902018', '100891928')],  # q36439
+    ("Omni-MATH", "3725", "answer"): [('45', '1964')],  # q36462
+    ("Omni-MATH", "3728", "answer"): [('951', '931')],  # q36465
+    ("Omni-MATH", "3740", "answer"): [('32', '33')],  # q36476
+    ("Omni-MATH", "3751", "answer"): [('$\\frac{1}{99}$', '$-\\frac{1}{99}$')],  # q36487
+    ("Omni-MATH", "3834", "answer"): [('101', '100')],  # q36560
+    ("Omni-MATH", "3870", "answer"): [('1003', '337')],  # q36580
+    ("Omni-MATH", "3991", "answer"): [('$\\frac{13}{4}$', '$5$')],  # q36665
+    ("Omni-MATH", "3995", "answer"): [('2021', '2014')],  # q36669
+    ("Omni-MATH", "3999", "answer"): [('576', '162432')],  # q36672
+    ("Omni-MATH", "4032", "answer"): [('16', '9')],  # q36700
+    ("Omni-MATH", "4150", "answer"): [('$\\sqrt{9 + 6\\sqrt{3}}$', '$\\frac{1}{2}$')],  # q36786
+    ("Omni-MATH", "4170", "answer"): [('7', '3')],  # q36800
+    ("Omni-MATH", "3995", "latexcode"): [('some have the rear with north and the rear with south magnetic polarity', 'some have the front with south and the rear with north magnetic polarity')],  # q36669
+    ("Omni-MATH", "2399", "latexcode"): [('Find the number of ways to distribute 4 pieces of candy to 12 children such that no two consecutive children receive candy.', '12 children sit around a circle. Find the number of ways we can distribute 4 pieces of candy among them such that each child gets at most one piece of candy and no two adjacent children both get a piece of candy.')],  # q35242
+    ("Omni-MATH", "2401", "latexcode"): [("Find the probability that a monkey typing randomly on a typewriter will type the string 'abc' before 'aaa'.", 'A monkey forms a string of letters by repeatedly choosing one of the letters a, b, or c to type at random. Find the probability that he first types the string aaa before he first types the string abc.')],  # q35244
+    ("Omni-MATH", "2415", "latexcode"): [('Find the number of solutions to the equation $x+y+z=525$ where $x$ is a multiple of 7, $y$ is a multiple of 5, and $z$ is a multiple of 3.', 'Find the number of ordered triples of nonnegative integers $(x,y,z)$ satisfying $15x+21y+35z=525$.')],  # q35257
+    ("Omni-MATH", "2419", "latexcode"): [('Find the number of arrangements of 4 beads (2 red, 2 green, 2 blue) in a circle such that the two red beads are not adjacent.', 'Find the number of distinct arrangements of 6 beads (2 red, 2 green, 2 blue) in a circle, where two arrangements are the same if one can be rotated or reflected to give the other.')],  # q35261
+    ("Omni-MATH", "2531", "latexcode"): [('Find the total area of the region outside of an equilateral triangle but inside three circles each with radius 1, centered at the vertices of the triangle.', 'Three circles of radius 1 are drawn, whose centers form the vertices of an equilateral triangle of side length 1. Find the area of the region common to at least two of the circles.')],  # q35372
+    ("Omni-MATH", "2972", "latexcode"): [('What is the probability that the arrow stops on a shaded region if a circular spinner is divided into six regions, four regions each have a central angle of $x^{\\circ}$, and the remaining regions have central angles of $20^{\\circ}$ and $140^{\\circ}$?', 'A circular spinner is divided into six regions: four regions each have a central angle of $x^{\\circ}$, and the remaining regions have central angles of $20^{\\circ}$ and $140^{\\circ}$. The $140^{\\circ}$ region and two of the four $x^{\\circ}$ regions are shaded. What is the probability that the arrow stops on a shaded region?')],  # q35794
+    ("Omni-MATH", "2980", "latexcode"): [('What is the sum of all of the possibilities for Sam\'s number if Sam thinks of a 5-digit number, Sam\'s friend Sally tries to guess his number, Sam writes the number of matching digits beside each of Sally\'s guesses, and a digit is considered "matching" when it is the correct digit in the correct position?', 'Sam thinks of a 5-digit number and his friend Sally tries to guess it. Sam writes the number of matching digits beside each of Sally\'s guesses, where a digit is "matching" when it is the correct digit in the correct position. Sally\'s guesses and the number of matching digits Sam wrote beside each are: 51545 (2), 21531 (1), 71794 (0), 59135 (1), 58342 (2), 37348 (2), 71744 (1). What is the sum of all of the possibilities for Sam\'s number?')],  # q35801
+    ("Omni-MATH", "3021", "latexcode"): [('Each of the following 15 cards has a letter on one side and a positive integer on the other side.', 'Each of 15 cards has a letter on one side and a positive integer on the other side. Lying on a table, 1 card shows a lower case letter, 4 cards show upper case letters, 2 cards show even integers and 8 cards show odd integers.')],  # q35839
+    ("Omni-MATH", "3052", "latexcode"): [('The perimeter of $\\triangle ABC$', 'In $\\triangle ABC$, $AB=BC=3x+4$ and $AC=2x$. Rectangle $DEFG$ has side lengths $DE=2x-2$ and $EF=3x-1$. The perimeter of $\\triangle ABC$')],  # q35867
+    ("Omni-MATH", "3077", "latexcode"): [('What is the remainder when the integer equal to \\( QT^2 \\) is divided by 100, given that \\( QU = 9 \\sqrt{33} \\) and \\( UT = 40 \\)?', '$PQ$ is a diameter of the circular base of a cylinder. $RS$ is a diameter of the top face of the cylinder and is directly above $PQ$ ($R$ directly above $P$, $S$ directly above $Q$). Point $U$ is on the circumference of the top face, halfway between $R$ and $S$. Point $T$ is on the cylinder and is directly above $P$. Suppose that $QS = m$ and $PT = n$, where $m$ and $n$ are integers with $1 < n < m$. If $QU = 9\\sqrt{33}$ and $UT = 40$, what is the remainder when the integer equal to $QT^2$ is divided by 100?')],  # q35889
+    ("Omni-MATH", "3110", "latexcode"): [('What is the value of $x$ if $P Q S$ is a straight line and $\\angle P Q R=110^{\\circ}$?', '$P Q S$ is a straight line and $\\angle P Q R=110^{\\circ}$. In triangle $QRS$, the angle at $R$ is $(3x)^{\\circ}$ and the angle at $S$ is $(x+14)^{\\circ}$. What is the value of $x$?')],  # q35920
+    ("Omni-MATH", "3255", "latexcode"): [('In the subtraction shown,', 'In the subtraction $5K3L - M4N1 = 4451$ of two four-digit numbers,')],  # q36050
+    ("Omni-MATH", "3399", "latexcode"): [('is to be the same. Five numbers have been entered.', 'is to be the same. Five numbers have been entered: 3, 7, 9, 11 and 15, and the missing ones are labelled $p, q, r, s, u$; the five straight lines contain, respectively, $\\{9, p, q, 7\\}$, $\\{3, p, u, 15\\}$, $\\{3, q, r, 11\\}$, $\\{9, u, s, 11\\}$ and $\\{15, s, r, 7\\}$.')],  # q36176
+    ("Omni-MATH", "3471", "latexcode"): [('Which of the following is a possible value of $x$ if given two different numbers on a number line, the number to the right is greater than the number to the left, and the positions of $x, x^{3}$ and $x^{2}$ are marked on a number line?', 'On a number line, the number to the right is greater than the number to the left. The positions of $x$, $x^{3}$ and $x^{2}$ are marked on a number line in the order $x$, $x^{3}$, $x^{2}$ from left to right. Which of the following is a possible value of $x$? (A) $\\frac{1}{5}$ (B) $\\frac{3}{2}$ (C) $-\\frac{2}{5}$ (D) $-\\frac{4}{3}$ (E) $2$')],  # q36243
+    # U-MATH/CHAMP keys found wrong 2026-11-21 (the same reply twice against the key; checked by hand with sympy and
+    # brute force, owner: "Go ahead with ... the 12 key fixes"); U-MATH keys keep their label
+    ("U-MATH", "40a59d5b-7cc2-4527-8be9-d64c434be864", "answer"): [('$I$ = $\\frac{274}{15}$', '$I$ = $\\frac{56\\sqrt{3}}{5}$')],  # q37289
+    ("U-MATH", "51106f64-d305-4db0-b14f-2d0ec24181d3", "answer"): [('$\\frac{64\\cdot\\pi}{3}$', '$\\frac{128\\cdot\\pi}{3}$')],  # q37364
+    ("U-MATH", "5eebe4a7-75d3-4e52-913a-54badf5c3c51", "answer"): [('$3.0722$', '$3.0723$')],  # q37421
+    ("U-MATH", "722661f3-5831-4484-beba-4d3d1b7997eb", "answer"): [('$\\frac{1573}{90}$', '$\\frac{13\\sqrt{13}}{9}$')],  # q37520
+    ("U-MATH", "91c84b88-d4a5-463f-8f32-094eb4c841e8", "answer"): [('Volume = $\\frac{\\pi}{4}$', 'Volume = $\\frac{\\pi}{2}$')],  # q37635
+    ("U-MATH", "9a619d61-4b5a-41df-b77f-d40cd4de08f6", "answer"): [('Volume = $16\\cdot\\pi^2$', 'Volume = $32\\cdot\\pi^2$')],  # q37666
+    ("U-MATH", "9eee7969-14e8-4e46-af9e-f5abe22824c9", "answer"): [('$n=3$', '$n=2$')],  # q37705
+    ("U-MATH", "b78a35bf-86eb-4ed0-8899-09518687eaeb", "answer"): [('The solution is $x$ = $5$', 'The solution is $x$ = $6$')],  # q37796
+    ("U-MATH", "bcc5b742-cc7b-42d6-98eb-9db904ab8078", "answer"): [('$I$ = $\\frac{112}{5}$', '$I$ = $\\frac{16096}{405}$')],  # q37821
+    ("U-MATH", "e9c1a928-3748-44fc-8791-eaf192d07f88", "answer"): [('$S$ = $\\frac{5}{4}\\cdot\\pi$', '$S$ = $\\frac{5}{8}\\cdot\\pi$')],  # q37987
+    ("CHAMP", "P_Sequence_10", "answer"): [('3', '2')],  # q38317
+    ("CHAMP", "P_Sequence_33", "answer"): [('8', '\\frac{1}{8}')],  # q38340
+    # owner 2026-11-21: "remove 37796's misleading last sentence" (a hint pointing at the wrong method)
+    ("U-MATH", "b78a35bf-86eb-4ed0-8899-09518687eaeb", "latexcode"): [('\n\nTo find the solution, we need to find the value of $x$ such that $f(x) = 5$.', '')],  # q37796
     # U-MATH source slips (2026-11-21): money written with a bare $, a stray $ before an integral
     ("U-MATH", "182fed94-4634-460f-a70e-7958a2033664", "answer"): [('$q(x) = $\\int', '$q(x) = \\int')],
     ("U-MATH", "3592c6d2-0fb1-4557-b219-d88f5b8a7401", "answer"): [('$q(x) = $\\int', '$q(x) = \\int')],
@@ -269,6 +323,24 @@ DROPPED = {
     "Omni-MATH 383": "question 33343, owner 2026-11-21 (Omni-MATH hand check): a joke riddle whose official answer (in base 15, 6) contradicts its own premise",
     "Omni-MATH 574": "question 33526, owner 2026-11-21 (Omni-MATH hand check): the recurrence holds for n >= 2, so a_2 and a_3 are undefined; the official answer assumes other starting values",
     "Omni-MATH 971": "question 33907, owner 2026-11-21 (Omni-MATH hand check): it depends on the answers (H_1, H_6) of other contest problems that are not included",
+    # owner 2026-11-21: "delete the 3 as well as 36841, 28709, and 33146" (third Omni-MATH hand check, and the cut-offs)
+    "Omni-MATH 2866": "question 35698: the magic-square figure is missing (no entries, size or positions)",
+    "Omni-MATH 2995": "question 35814: the circle graph the answer depends on is missing",
+    "Omni-MATH 3356": "question 36135: the figure is missing: the chords 'as shown' and the points P, T, U are never defined",
+    "Omni-MATH 4227": "question 36841: IMO 2022 P6; both solves cut off at the output limit (key right)",
+    "IMO-Bench AnswerBench v2 imo-bench-combinatorics-049": "question 28709: both solves cut off at the output limit (key 1057 right)",
+    "Omni-MATH 107": "question 33146: both solves cut off at the output limit (key p^a q^b r^c right)",
+    "U-MATH 6eab7d06-a894-4b93-8479-b153c4ea7408": "question 37499, owner 2026-11-21: 'delete 37499': reads an average rate of change off a graph; the key (-0.5) holds but the solver misread the graph twice",
+    **{f"U-MATH {u}": f"question {q}, owner 2026-11-21: 'Delete the sketch the graph questions.' (opens 'Sketch the curve:')"
+       for q, u in [(37013, "02d22949-d7a2-46ca-8af8-4bda85bc8e0e"), (37016, "03b87419-fe7c-481a-9396-1d0723fc2b15"),
+                    (37067, "0fec4721-ec02-4a72-aa1a-2ed7b0f8276d"), (37259, "3b3ba848-ee8f-4978-b0c2-ceb26a88779e"),
+                    (37298, "4301fe9b-6f1c-4157-a503-c9a4a63aac9b"), (37304, "43ce18b9-35be-43a7-b18f-bff62d27b1d5"),
+                    (37395, "592ed5f2-ba58-4094-ae40-57d78056e804"), (37396, "59685710-67d1-4c31-ae2d-1177a32f16bd"),
+                    (37446, "6393eea4-766f-400b-a497-def1c92321c4"), (37501, "6eb723e9-f3be-45fb-93d2-513d7ac5c99b"),
+                    (37542, "787ba86e-1894-49ad-9a6d-bb1607e13786"), (37570, "7efd2ae1-d387-447f-ad12-4b0dc2ab7a22"),
+                    (37603, "8b909199-f22e-4b2b-90ae-f1b0e119b9d9"), (37665, "9a52c80d-be49-4c0b-b9d9-b4d7c1d76989"),
+                    (37949, "de2bd512-089e-4d1e-b577-dd185962e7cf"), (37967, "e33483e5-a385-4ce3-91af-54df50ca062b"),
+                    (37994, "ebce3086-94ba-4f5d-a9eb-d41c4104e62a"), (38057, "f928de60-dedf-4c5b-8ffc-36c6b402744a")]},
 }
 
 
