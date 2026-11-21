@@ -309,6 +309,93 @@ def to_latex(text: str) -> str:
     return pdf_safe(re.sub(r"\n{3,}", "\n\n", "\n".join(out)).strip())
 
 
+CHAMP = "Concept and Hint-Annotated Math Problems (CHAMP)"  # github.com/YilunZhou/champ-dataset (MIT)
+CHAMP_TOPICS = {"Number-Theory": "Number Theory", "Inequality": "Inequalities", "Polynomial": "Polynomials",
+                "Sequence": "Sequences", "Combinatorics": "Combinatorics"}
+CHAMP_SYMBOLS = {"≥": r"\ge ", "≤": r"\le ", "±": r"\pm ", "−": "-", "∤": r"\nmid ", "∈": r"\in ", "≠": r"\ne ",
+                 "≡": r"\equiv ", "·": r"\cdot ", "→": r"\to ", "∞": r"\infty ", "π": r"\pi ", "⊆": r"\subseteq ",
+                 "≈": r"\approx ", "∓": r"\mp ", "∘": r"\circ ", "∉": r"\notin "}
+# (problem, hint or fact) left out: it gives the answer away (the pipeline's hint-leak check)
+CHAMP_SKIP = {("P_Number-Theory_42", "H_Number-Theory_42_2"), ("P_Polynomial_20", "C_infinite_zeros")}
+CHAMP_TEXT_FIXES = {"H_Sequence_47_1": [("x_1*y*1*z_1", "x_1*y_1*z_1")]}  # slips in the dataset
+CHAMP_FUNCS = ("arctan", "gcd", "sum", "prod", "tan", "cos", "sin", "min", "max", "log", "ln")
+CHAMP_WORDS = ("and", "or", "for", "if", "then", "where", "with", "all", "not", "is")
+
+
+def _group(s: str, i: int) -> tuple[str, int]:
+    """The text of the parenthesised group starting at s[i] == '(' and the index after it."""
+    depth = 0
+    for j in range(i, len(s)):
+        depth += {"(": 1, ")": -1}.get(s[j], 0)
+        if depth == 0:
+            return s[i + 1:j], j + 1
+    return s[i + 1:], len(s)
+
+
+def champ_math(m: str) -> str:
+    """CHAMP's plain-text (AsciiMath-like) math in LaTeX: its symbols, sqrt(..), floor(..), mod,
+    function names, ^(..) and _(..) groups, multi-digit exponents and subscripts, set braces,
+    * as a centred dot, "a | b" as divides, and English words as text."""
+    for k, v in CHAMP_SYMBOLS.items():
+        m = m.replace(k, v)
+    m = m.replace("->", r"\to ").replace("<=", r"\le ").replace(">=", r"\ge ").replace("!=", r"\ne ")
+    m = m.replace("{", r"\{").replace("}", r"\}").replace("%", r"\%").replace("#", r"\#").replace("&", r"\&")
+    m = _champ_groups(m)  # the parenthesised groups first; the token rules below then run once
+    # a power tower 2^2^...^2 nests from the right; x^e_i is x^{e_i}
+    m = re.sub(r"(?:[A-Za-z0-9]+|\.\.\.)(?:\^(?:[A-Za-z0-9]+|\.\.\.)){2,}", _champ_tower, m)
+    m = re.sub(r"\^([A-Za-z0-9])_([A-Za-z0-9])", r"^{\1_\2}", m)
+    m = re.sub(r"([\^_])(\d{2,})", r"\1{\2}", m)
+    m = re.sub(r"_([a-z]{2})(?![a-zA-Z{])", r"_{\1}", m)
+    m = re.sub(r"\(mod ([^()]+)\)", r"\\pmod{\1}", m)
+    m = re.sub(r"(?<![\\a-zA-Z])mod(?![a-zA-Z])", r"\\bmod ", m)
+    m = re.sub(r"(?<![\\a-zA-Z])(" + "|".join(CHAMP_FUNCS) + r")(?![a-zA-Z])", r"\\\1 ", m)
+    m = re.sub(r"(?<![\\a-zA-Z])pi(?![a-zA-Z])", r"\\pi ", m)
+    m = re.sub(r"(?<![\\a-zA-Z])(" + "|".join(CHAMP_WORDS) + r")(?![a-zA-Z])", r"\\text{ \1 }", m)
+    m = re.sub(r"\s\|\s", r" \\mid ", m)
+    m = m.replace("*", r"\cdot ")
+    return m.strip()
+
+
+def _champ_tower(mt: re.Match) -> str:
+    parts = [r"\cdots" if p == "..." else p for p in mt.group(0).split("^")]
+    out = parts[-1]
+    for p in reversed(parts[:-1]):
+        out = p + "^{" + out + "}"
+    return out
+
+
+def _champ_groups(m: str) -> str:
+    """sqrt(..) -> \\sqrt{..}, floor(..) -> \\lfloor .. \\rfloor, ^(..) / _(..) -> ^{..} / _{..}, nested."""
+    out, i = [], 0
+    while i < len(m):
+        if m.startswith(("sqrt(", "floor("), i):
+            name = "sqrt" if m.startswith("sqrt", i) else "floor"
+            body, i = _group(m, i + len(name))
+            body = _champ_groups(body)
+            out.append(r"\sqrt{" + body + "}" if name == "sqrt" else r"\lfloor " + body + r" \rfloor ")
+            continue
+        if m[i] in "^_" and i + 1 < len(m) and m[i + 1] == "(":
+            mark = m[i]
+            body, i = _group(m, i + 1)
+            out.append(mark + "{" + _champ_groups(body) + "}")
+            continue
+        out.append(m[i])
+        i += 1
+    return "".join(out)
+
+
+def champ_text(t: str) -> str:
+    """A CHAMP text (math between @@ marks) in the bank's LaTeX: math in \\( \\), the rest escaped."""
+    parts = re.split(r"@@(.*?)@@", t.strip(), flags=re.S)
+    out = []
+    for k, p in enumerate(parts):
+        if k % 2:
+            out.append(r"\(" + champ_math(p) + r"\)")
+        else:
+            out.append(re.sub(r"([%&#$_^])", r"\\\1", p).replace("~", r"\textasciitilde{}"))
+    return "".join(out)
+
+
 def answer_latex(a: str) -> str:
     a = str(a).strip()
     if not a or "$" in a or a.startswith(("\\(", "\\[")) or not re.search(r"[\\^_{}]", a):
@@ -322,7 +409,7 @@ def shingles(t: str) -> set:
 
 
 def load(matharena: Path, answerbench: Path, harp: Path | None = None, omni: Path | None = None,
-         umath: Path | None = None) -> list[dict]:
+         umath: Path | None = None, champ: Path | None = None) -> list[dict]:
     rows = []
     for name, (source, sub) in MATHARENA.items():
         data = json.loads((matharena / f"{name}.json").read_text(encoding="utf-8"))
@@ -366,6 +453,34 @@ def load(matharena: Path, answerbench: Path, harp: Path | None = None, omni: Pat
                          "subsource": f"{UMATH_SUBJECTS[r['subject']]}, problem {r['uuid'][:8]}",
                          "latexcode": tex, "answer": answer_latex(to_latex(key)), "orig": "", "asy": "",
                          "image": (name, r["image"]) if r["has_image"] else None})
+    if champ:  # problems adapted from Engel, with their own solution, hints and named facts (owner 2026-11-21)
+        data = json.loads(champ.read_text(encoding="utf-8"))
+        hints, facts = data["hints"], data["concepts"]
+        for hid, fixes in CHAMP_TEXT_FIXES.items():
+            for old, new in fixes:
+                if hints[hid]["_raw_text"].count(old) != 1:
+                    raise SystemExit(f"CHAMP fix {hid}: expected one {old!r}")
+                hints[hid]["_raw_text"] = hints[hid]["_raw_text"].replace(old, new)
+        for pid, p in data["problems"].items():
+            p["ch_list"] = [c for c in p["ch_list"] if (pid, c) not in CHAMP_SKIP]
+            tiers = [champ_text(hints[c]["_raw_text"]) for c in p["ch_list"] if c in hints]
+            if len(tiers) > 3:  # the bank keeps at most 3 tiers: the later hints go in the third
+                tiers = tiers[:2] + [" ".join(tiers[2:])]
+            used = [facts[c] for c in p["ch_list"] if c in facts]
+            if used:  # the named facts the problem uses, in the last tier
+                fact = " ".join(f"Useful fact{' (' + c['name'] + ')' if c['name'] else ''}: {champ_text(c['_raw_text'])}"
+                                for c in used)
+                if tiers:
+                    tiers[-1] += " " + fact
+                else:
+                    tiers = [fact]
+            cat, num = pid.split("_", 1)[1].rsplit("_", 1)
+            rows.append({"set": "CHAMP", "idx": pid, "source": CHAMP, "orig": "", "asy": "", "ref_solution": "",
+                         "subsource": f"{CHAMP_TOPICS[cat]}, problem {num} (adapted from Engel's Problem-Solving Strategies)",
+                         "latexcode": champ_text(p["_raw_text"]), "answer": champ_text(p["_raw_answer"]),
+                         "solution": "\n\n".join(champ_text(s["_raw_text"]) for s in p["solution"]["steps"]),
+                         "hints": tiers[0] if tiers else None,
+                         "more_hints": json.dumps(tiers[1:], ensure_ascii=False) if len(tiers) > 1 else None})
     if omni:
         for k, r in enumerate(json.loads(x) for x in omni.read_text(encoding="utf-8").splitlines() if x.strip()):
             label = r["source"]
@@ -383,7 +498,9 @@ def load(matharena: Path, answerbench: Path, harp: Path | None = None, omni: Pat
                      "asy": "\n\n".join(m.group(0).strip() for m in ASY_RE.finditer(r["Problem"]))})
     for r in rows:
         r.setdefault("ref_solution", "")
-        r.update(potd=f"{r['set']} {r['idx']}", hints=None, more_hints=None, solution=None)  # for check()
+        r["potd"] = f"{r['set']} {r['idx']}"  # for check(); CHAMP rows bring their own solution and hints
+        for fld in ("hints", "more_hints", "solution"):
+            r.setdefault(fld, None)
         if (r["set"], r["idx"]) in ASCII_FIGURES:
             m = ASCII_ART_RE.search(r["latexcode"])
             if not m:
@@ -428,6 +545,7 @@ def main() -> None:
     p.add_argument("--harp", type=Path, help="HARP.jsonl.zip (github.com/aadityasingh/HARP)")
     p.add_argument("--omni", type=Path, help="Omni-MATH test.jsonl (huggingface.co/datasets/KbsdJames/Omni-MATH)")
     p.add_argument("--umath", type=Path, help="U-MATH test parquet (huggingface.co/datasets/toloka/u-math)")
+    p.add_argument("--champ", type=Path, help="CHAMP v0.json (github.com/YilunZhou/champ-dataset)")
     p.add_argument("--model", default=OPUS)
     p.add_argument("--effort", default="high")
     p.add_argument("--dump", type=Path, help="write the rows to import as JSON")
@@ -438,7 +556,7 @@ def main() -> None:
     g.add_argument("--apply", action="store_true")
     a = p.parse_args()
 
-    rows = load(a.matharena, a.answerbench, a.harp, a.omni, a.umath)
+    rows = load(a.matharena, a.answerbench, a.harp, a.omni, a.umath, a.champ)
     conn = sqlite3.connect(f"file:{DB_PATH.as_posix()}?mode=ro", uri=True)
     dup = duplicates(rows, conn)
     conn.close()
@@ -484,9 +602,10 @@ def main() -> None:
                 """
                 INSERT INTO questions (topic, branch, subtopic, latexcode, type, in_syllabus,
                                        source, subsource, answer, solution, hints, more_hints, latex_hash)
-                VALUES (?, ?, ?, ?, NULL, 1, ?, ?, ?, NULL, NULL, NULL, ?)
+                VALUES (?, ?, ?, ?, NULL, 1, ?, ?, ?, ?, ?, ?, ?)
                 """,
-                (UNCATEGORIZED, UNCATEGORIZED, UNCATEGORIZED, r["latexcode"], r["source"], r["subsource"], r["answer"], h),
+                (UNCATEGORIZED, UNCATEGORIZED, UNCATEGORIZED, r["latexcode"], r["source"], r["subsource"], r["answer"],
+                 r["solution"], r["hints"], r["more_hints"], h),
             )
             existing.add(h)
             added.append((cur.lastrowid, r))
