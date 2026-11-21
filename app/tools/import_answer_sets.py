@@ -229,6 +229,22 @@ FIXES = {
     ("Omni-MATH", "1055", "latexcode"): [('Find the number of subsets', 'The order of an element of $A$ in a set of pairs is the number of pairs that contain it, and a set of pairs is consistent of order $k$ if every element of $A$ has order $k$. Find the number of subsets')],  # q33988
     ("Omni-MATH", "559", "latexcode"): [('The $W$ in this problem has the same value as the $W$ in problem 31.', 'Here $W=8$.')],  # q33511
     ("Omni-MATH", "741", "latexcode"): [('2024\\}', '2024!\\}')],  # q33686
+    # second Omni-MATH hand check 2026-11-21 (owner: "Go ahead with everything")
+    ("Omni-MATH", "925", "answer"): [('0.9102805441016536', '0.9105515')],  # q33863
+    ("Omni-MATH", "1392", "answer"): [('940', '950')],  # q34302
+    ("Omni-MATH", "1465", "answer"): [('18', '17')],  # q34372
+    ("Omni-MATH", "1726", "answer"): [('$40^{\\circ}$', '$30^{\\circ}$')],  # q34603
+    ("Omni-MATH", "1851", "answer"): [('2029906', '2030981')],  # q34722
+    ("Omni-MATH", "1447", "answer"): [('2009', '-2009')],  # q34355
+    ("Omni-MATH", "1579", "answer"): [('$2^{2018}-1$', '$2^{2019}-1$')],  # q34480
+    ("Omni-MATH", "1764", "answer"): [('$\\frac{3+\\sqrt{3}}{2}$', '$\\frac{1+\\sqrt{2}+\\sqrt{6}}{2}$')],  # q34640
+    ("Omni-MATH", "1879", "answer"): [('$\\frac{341}{55}$', '$\\frac{341}{54}$')],  # q34749
+    ("Omni-MATH", "1967", "answer"): [('6', '3')],  # q34833
+    ("Omni-MATH", "2288", "answer"): [('$\\sqrt{\\frac{5}{2}}$', '$\\frac{5}{2}$')],  # q35131
+    ("Omni-MATH", "2025", "answer"): [('712.811', '\\approx 712.811')],  # q34887
+    ("Omni-MATH", "1325", "latexcode"): [('What is the earliest row in which the number 2004 may appear?', "An infinite table of nonnegative integers is constructed as follows: in the top row, some number is 1 and all other numbers are 0's; in each subsequent row, every number is the sum of some two of the three closest numbers in the preceding row. The top row (with the one 1) is called row 0; the next row is row 1; the next row is row 2, and so forth. Considering every table that can be constructed this way, what is the earliest row in which the number 2004 may appear?")],  # q34240
+    ("Omni-MATH", "1897", "latexcode"): [('find a value of $k$, not necessarily the smallest, such that', 'find the smallest positive integer $k$ such that')],  # q34767
+    ("Omni-MATH", "1897", "answer"): [('256', '83')],  # q34767
 }
 # rows deleted from the bank after their import: a re-import leaves them out
 DROPPED = {
