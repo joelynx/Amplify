@@ -31,6 +31,7 @@ import argparse
 import base64
 import collections
 import csv
+import hashlib
 import json
 import re
 import sqlite3
@@ -41,7 +42,7 @@ from app.tools.import_mods_potd import DB_PATH, UNCATEGORIZED, backup_db, check,
 
 MAP_PATH = Path("app/data/appdata/answer_sets_map.csv")  # git-ignored: question id -> set, number
 ASSIGNMENTS = Path("pipeline/answer_sets_assignments.json")
-FIGURES_PATH = Path("app/data/appdata/answer_sets_figures.json")  # git-ignored: Asymptote code to make images from
+FIGURES_PATH = Path("app/data/appdata/answer_sets_figures.json")  # git-ignored: figures not yet drawn (their code)
 OPUS = "claude-opus-5-5"
 US = "United States Competitions"
 AIME = "American Invitational Mathematics Examination"
@@ -133,7 +134,7 @@ UMATH_SUBJECTS = {"precalculus_review": "Precalculus", "algebra": "Algebra", "di
                   "integral_calc": "Integral Calculus", "multivariable_calculus": "Multivariable Calculus",
                   "sequences_series": "Sequences and Series"}
 TEXIMAGES = Path("app/data/appdata/teximages")  # the app's image folder (config paths.teximages)
-UMATH_GRAPHIC = r"\includegraphics[max width=0.5\textwidth, alt={{}}, center]{{{}}}"  # the bank's style
+GRAPHIC = r"\includegraphics[max width=0.5\textwidth, alt={{}}, center]{{{}}}"  # the bank's style
 OMNI_NAMES = {
     "HMMT_2": "Harvard-MIT Mathematics Tournament, February", "HMMT_11": "Harvard-MIT Mathematics Tournament, November",
     "pascal": "CEMC Pascal Contest", "fermat": "CEMC Fermat Contest", "cayley": "CEMC Cayley Contest",
@@ -341,7 +342,41 @@ DROPPED = {
                     (37603, "8b909199-f22e-4b2b-90ae-f1b0e119b9d9"), (37665, "9a52c80d-be49-4c0b-b9d9-b4d7c1d76989"),
                     (37949, "de2bd512-089e-4d1e-b577-dd185962e7cf"), (37967, "e33483e5-a385-4ce3-91af-54df50ca062b"),
                     (37994, "ebce3086-94ba-4f5d-a9eb-d41c4104e62a"), (38057, "f928de60-dedf-4c5b-8ffc-36c6b402744a")]},
+    # owner 2026-11-21: missing figures not obtainable without much work are deleted (AoPS refuses scripted
+    # fetches; Omni-MATH gives no year or number to look them up)
+    "HARP 1985 AIME 6": "question 29991, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: Triangle ABC cut by three cevians through an interior point into six triangles, with the areas 84, 35, 30, 40 marked on four of them",
+    "HARP 1985 AIME 15": "question 29995, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: A 12x12 square cut into a corner triangle A and pentagon B, and the net with the six pieces attached around a regular hexagon",
+    "HARP 1987 AIME 6": "question 30093, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: Rectangle ABCD with X,Y on AB and Z,W on CD, interior points P,Q with PQ||AB, and the five segments PX, PW, PQ, QY, QZ dividing it into four regions",
+    "HARP 1996 AIME 1": "question 30499, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: A 3x3 magic square with four entries filled in: x, 19, 96 and 1 in their cells",
+    "HARP 1998 AHSME 16": "question 30588, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: A circle with two semicircles of diameters a and b on a common line through its center, with the shaded and unshaded regions marked",
+    "HARP 2002 AIME_I 2": "question 30850, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: A rectangle enclosing three staggered rows of 7, 6 and 7 tangent circles, the outer rows tangent to the long sides and the end circles tangent to the short sides",
+    "HARP 2002 AIME_I 10": "question 30852, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: Right triangle ABC (right angle at B) with bisector AD, segment EF, and G marked as the intersection of AD and EF",
+    "HARP 2003 AMC_12A 13": "question 30916, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: The four-square polygon outline with the nine numbered edge positions where a fifth square may be attached",
+    "HARP 2005 AMC_10A 8": "question 31067, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: Square ABCD with a tilted inner square EFGH formed by four congruent right triangles on the sides of ABCD, BE=1 marked along one triangle leg",
+    "HARP 2023 AMC_10B 7": "question 32966, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: Square ABCD and its 20-degree clockwise rotation EFGH about the center, with vertex labels (E the image of A, ABCD labelled clockwise)",
+    "Omni-MATH 128": "question 33164, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: The 2n x 2n board with the central 2(i-1) squares removed from rows i and 2n+1-i for i=1..n (two staircase halves meeting at the middle)",
+    "Omni-MATH 286": "question 33275, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: Triangle ABC with the seven points P1..P7 (I, O, H, L, G, N, K in some order) plotted and labelled",
+    "Omni-MATH 464": "question 33417, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: Triangle ABC with D on BC, E on AC, and G the intersection of the cevians, with AE=3, CE=1, BD=CD=2, AB=5",
+    "Omni-MATH 494": "question 33447, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: The specific grid-line figure (shape and grid lines) on which rectangles are counted",
+    "Omni-MATH 822": "question 33763, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: Two solid lines (rays) meeting at O, with K at distance 2 and T at distance 4 from O and the angle between the lines shown",
+    "Omni-MATH 1224": "question 34144, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: A five-row brick wall showing how many bricks each row has and how rows are offset",
+    "Omni-MATH 1501": "question 34406, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: The calendar-shaped grid of dots from January 1 to December 31 with the allowed adjacencies",
+    "Omni-MATH 1815": "question 34690, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: Octagon COMPUTER with right/reflex angles, unit sides CO..TE, and the positions of R, E and D on RE",
+    "Omni-MATH 2246": "question 35090, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: The chocolate bar outline divided into 10 triangles, showing which triangles share edges",
+    "Omni-MATH 2639": "question 35480, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: Triangle ABC with a semicircle on diameter AB and the shaded region marked",
+    "Omni-MATH 2838": "question 35670, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: The polygon with its side lengths labelled in terms of x",
+    "Omni-MATH 3048": "question 35863, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: The first few figures of the sequence: equilateral triangles joined in a strip, each new tile sharing one edge",
+    "Omni-MATH 3083": "question 35895, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: Six unit rhombi arranged edge to edge in the specific pattern whose outer boundary is measured",
+    "Omni-MATH 3770": "question 36505, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: The 40x30 sheet with the 10x5 filled rectangle drawn at its specific offsets from the sheet's edges",
+    "Omni-MATH 3774": "question 36509, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: Parallelogram ABCD with M the midpoint of AD, segment BM, and K where the bisector of angle C meets BM",
+    "Omni-MATH 4034": "question 36702, owner 2026-11-21: missing image not obtainable without much work, so deleted: the figure is missing: The set of small polyomino shapes (e.g. the trominoes / L-shapes) that Alice needs to see in three different colours",
+    "Omni-MATH 4143": "question 36779, owner 2026-11-21: missing image not obtainable without much work, so deleted: the keypad figure is a broken placeholder and, with the standard keypad, the key looks wrong",
 }
+# the rows the imports set aside, fixed by hand (markup slips; pairs applied in order after FIXES, each old
+# matched exactly once) or dropped (garbled, truncated, not a problem)
+_SET_ASIDE = json.loads(Path(__file__).with_name("answer_sets_fixes.json").read_text(encoding="utf-8"))
+HAND_FIXES = {(e["set"], e["number"], e["field"]): [tuple(p) for p in e["fixes"]] for e in _SET_ASIDE["fixes"]}
+DROPPED.update(_SET_ASIDE["dropped"])
 
 
 def display(m: re.Match) -> str:
@@ -352,20 +387,47 @@ def display(m: re.Match) -> str:
 
 
 ASY_RE = re.compile(r"\s*(?:\\begin\{asy\}.*?\\end\{asy\}|\[asy\].*?\[/asy\])\s*", re.S)
+BB_IMG_RE = re.compile(r"\[img\](https?://[^\[\]\s]+)\[/img\]")
 IMAGE_RE = re.compile(r"!\[[^\]]*\]\([^)]*\)|<img[^>]*>|\\includegraphics(?:\[[^\]]*\])?\{[^}]*\}")
 # statements whose figure is drawn in characters from this line to the end (an image is made from it)
 ASCII_FIGURES = {("MathArena smt_2025", "22")}
 ASCII_ART_RE = re.compile(r"\n[ \t]*_{3,}[ \t]*\n.*\Z", re.S)
 
 
+def figure_name(block: str, kind: str = "asy") -> str:
+    """The image (in TEXIMAGES, without .png) drawn from an Asymptote block or a character figure."""
+    return f"{kind}-" + hashlib.sha1(block.strip("\n" if kind == "ascii" else None).encode("utf-8")).hexdigest()[:16]
+
+
+def drawn(name: str) -> bool:
+    return (TEXIMAGES / f"{name}.png").exists()
+
+
+def undrawn_asy(text: str) -> str:
+    """The Asymptote blocks of a source text that have no image yet (they wait in FIGURES_PATH)."""
+    return "\n\n".join(m.group(0).strip() for m in ASY_RE.finditer(text) if not drawn(figure_name(m.group(0))))
+
+
+def asy_figure(m: re.Match) -> str:
+    name = figure_name(m.group(0))
+    return f"\n\n{GRAPHIC.format(name)}\n\n" if drawn(name) else "\n\n"
+
+
+def linked_image(m: re.Match) -> str:
+    """An AoPS [img] link: the image, saved as img-<sha1 of the URL>, where it has been downloaded."""
+    name = figure_name(m.group(1), "img")
+    return f"\n\n{GRAPHIC.format(name)}\n\n" if drawn(name) else m.group(0)
+
+
 def to_latex(text: str) -> str:
-    """The statement in the bank's LaTeX. An Asymptote figure (neither renderer draws it) is taken
-    out here; load() keeps its code for the image to be made from it (owner 2026-11-20: "convert the
-    asymptote rows to images manually later")."""
-    t = text.replace("\r\n", "\n").replace("\\hdots", "\\dots").strip()  # no \hdots in KaTeX
+    """The statement in the bank's LaTeX. An Asymptote figure (neither renderer draws it) becomes its
+    image where one has been drawn (owner 2026-11-21: TeX Live's Asymptote with the AoPS olympiad and
+    cse5 modules, on white) and is taken out otherwise; load() keeps the code of an undrawn one. Figures
+    are replaced first, on the source text, so an image is named by the hash of its block as given."""
+    t = BB_IMG_RE.sub(linked_image, ASY_RE.sub(asy_figure, text))
+    t = t.replace("\r\n", "\n").replace("\\hdots", "\\dots").strip()  # no \hdots in KaTeX
     t = re.sub(r"\$\$(.+?)\$\$", lambda m: "\\[" + m.group(1).strip() + "\\]", t, flags=re.S)
     t = re.sub(r"\\\[(.+?)\\\]", display, t, flags=re.S)
-    t = ASY_RE.sub("\n\n", t)
     t = re.sub(r"\*\*(.+?)\*\*", r"\\textbf{\1}", t)
     out, items, depth = [], [], 0
     for line in t.split("\n") + [""]:
@@ -489,7 +551,7 @@ def load(matharena: Path, answerbench: Path, harp: Path | None = None, omni: Pat
             i = int(r["problem_idx"])
             rows.append({"set": f"MathArena {name}", "idx": str(i), "source": source, "subsource": sub(i, len(data)),
                          "latexcode": to_latex(r["problem"]), "answer": answer_latex(r["answer"]), "orig": "",
-                         "asy": "\n\n".join(m.group(0).strip() for m in ASY_RE.finditer(r["problem"]))})
+                         "asy": undrawn_asy(r["problem"])})
     for name in APEX_SETS:
         for r in json.loads((matharena / f"{name}.json").read_text(encoding="utf-8")):
             if r["source"] not in APEX:
@@ -498,7 +560,7 @@ def load(matharena: Path, answerbench: Path, harp: Path | None = None, omni: Pat
             rows.append({"set": f"MathArena {name}", "idx": str(r["problem_idx"]), "source": source,
                          "subsource": sub + ("" if source == "MathArena APEX" else APEX_TAG),
                          "latexcode": to_latex(r["problem"]), "answer": answer_latex(r["answer"]), "orig": r["source"],
-                         "asy": "\n\n".join(m.group(0).strip() for m in ASY_RE.finditer(r["problem"]))})
+                         "asy": undrawn_asy(r["problem"])})
     if harp:
         member = zipfile.ZipFile(harp).read("HARP.jsonl").decode("utf-8")
         for r in (json.loads(x) for x in member.splitlines() if x.strip()):
@@ -507,7 +569,7 @@ def load(matharena: Path, answerbench: Path, harp: Path | None = None, omni: Pat
             sub = f"{str(r['year']).replace('_', ' ')}, {contest + ', ' if contest else ''}Problem {n}"
             rows.append({"set": "HARP", "idx": f"{r['year']} {r['contest']} {n}", "source": source, "subsource": sub,
                          "latexcode": to_latex(r["problem"]), "answer": answer_latex(r["answer"]), "orig": "",
-                         "asy": "\n\n".join(m.group(0).strip() for m in ASY_RE.finditer(r["problem"])),
+                         "asy": undrawn_asy(r["problem"]),
                          "ref_solution": r.get("solution_1") or ""})
     if umath:  # a problem with a figure carries it as a PNG: written to the image folder on --apply
         import pyarrow.parquet as pq
@@ -519,7 +581,7 @@ def load(matharena: Path, answerbench: Path, harp: Path | None = None, omni: Pat
                 r[f] = re.sub(r"[\x0c\t\r](?=[A-Za-z])", lambda m: {"\x0c": "\\f", "\t": "\\t", "\r": "\\r"}[m.group(0)], r[f])
             tex = to_latex(r["problem_statement"])
             if r["has_image"]:
-                tex += "\n\n" + UMATH_GRAPHIC.format(name)
+                tex += "\n\n" + GRAPHIC.format(name)
             key = re.sub(r"^\s*the final answer\s*:\s*", "", r["golden_answer"].strip(), flags=re.I)
             rows.append({"set": UMATH, "idx": r["uuid"], "source": UMATH,
                          "subsource": f"{UMATH_SUBJECTS[r['subject']]}, problem {r['uuid'][:8]}",
@@ -559,15 +621,14 @@ def load(matharena: Path, answerbench: Path, harp: Path | None = None, omni: Pat
             name = OMNI_NAMES.get(label) or label.replace("_", " ").strip().title()
             rows.append({"set": "Omni-MATH", "idx": str(k), "source": OMNI, "subsource": f"{name} (year not given)",
                          "latexcode": to_latex(r["problem"]), "answer": answer_latex(r["answer"]), "orig": label,
-                         "asy": "\n\n".join(m.group(0).strip() for m in ASY_RE.finditer(r["problem"]))
-                                or "\n\n".join(IMAGE_RE.findall(r["problem"])),
+                         "asy": undrawn_asy(r["problem"]) or "\n\n".join(IMAGE_RE.findall(r["problem"])),
                          "ref_solution": r.get("solution") or ""})
     for r in csv.DictReader(open(answerbench, encoding="utf-8")):
         orig = (r.get("Source") or "").strip()
         rows.append({"set": "IMO-Bench AnswerBench v2", "idx": r["Problem ID"], "source": ANSWERBENCH,
                      "subsource": r["Problem ID"] + (f", adapted from {orig}" if orig else ""),
                      "latexcode": to_latex(r["Problem"]), "answer": answer_latex(r["Short Answer"]), "orig": orig,
-                     "asy": "\n\n".join(m.group(0).strip() for m in ASY_RE.finditer(r["Problem"]))})
+                     "asy": undrawn_asy(r["Problem"])})
     for r in rows:
         r.setdefault("ref_solution", "")
         r["potd"] = f"{r['set']} {r['idx']}"  # for check(); CHAMP rows bring their own solution and hints
@@ -578,12 +639,18 @@ def load(matharena: Path, answerbench: Path, harp: Path | None = None, omni: Pat
             if not m:
                 raise SystemExit(f"{r['potd']}: no character figure found")
             r["asy"], r["latexcode"] = "ASCII art:\n" + m.group(0).strip("\n"), r["latexcode"][:m.start()].rstrip()
+            if drawn(name := figure_name(m.group(0), "ascii")):  # drawn in a monospaced font
+                r["asy"], r["latexcode"] = "", r["latexcode"] + "\n\n" + GRAPHIC.format(name)
         for fld in ("latexcode", "answer"):
             for old, new in FIXES.get((r["set"], r["idx"], fld), []):
                 # a source that already ends with the fix is not fixed twice (a whole-answer fix such as
                 # 11 -> 1 is not mistaken for one)
                 if r[fld].count(old) != 1 or (fld == "answer" and r[fld].endswith(new) and r[fld] != old):
                     raise SystemExit(f"FIX {r['potd']} {fld}: expected one {old!r}")
+                r[fld] = r[fld].replace(old, new)
+            for old, new in HAND_FIXES.get((r["set"], r["idx"], fld), []):
+                if r[fld].count(old) != 1:
+                    raise SystemExit(f"HAND FIX {r['potd']} {fld}: expected one {old!r}")
                 r[fld] = r[fld].replace(old, new)
     return rows
 

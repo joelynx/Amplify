@@ -1,0 +1,4696 @@
+{
+ "note": "Markup slips in rows the 2026-11-20/21 imports set aside (they failed the XeLaTeX or web render check), fixed by hand on 2026-11-21 (owner: 'start work on the ... fixes'). import_answer_sets merges `fixes` into FIXES ((set, number, field) -> [(old, new)], each old matched exactly once) and `dropped` into DROPPED.",
+ "fixes": [
+  {
+   "set": "HARP",
+   "number": "1950 AHSME 23",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "r $1",
+     "r \\$1"
+    ],
+    [
+     "s $3",
+     "s \\$3"
+    ]
+   ],
+   "note": "currency dollars"
+  },
+  {
+   "set": "HARP",
+   "number": "1951 AHSME 5",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "worth $$10,000$.",
+     "worth \\$10,000."
+    ]
+   ],
+   "note": "currency dollar"
+  },
+  {
+   "set": "HARP",
+   "number": "1951 AHSME 5",
+   "field": "answer",
+   "fixes": [
+    [
+     "$A makes 1100 on the deal$",
+     "A makes \\$1100 on the deal"
+    ]
+   ],
+   "note": "currency dollar"
+  },
+  {
+   "set": "HARP",
+   "number": "1953 AHSME 17",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "part of $$4500$ invested",
+     "part of \\$4500 invested"
+    ],
+    [
+     "$4$% and",
+     "$4$\\% and"
+    ],
+    [
+     "$6$%.",
+     "$6$\\%."
+    ],
+    [
+     "of the $4500 is",
+     "of the \\$4500 is"
+    ]
+   ],
+   "note": "currency dollars, bare %"
+  },
+  {
+   "set": "HARP",
+   "number": "1953 AHSME 2",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "$",
+     "\\$"
+    ]
+   ],
+   "note": "currency dollar"
+  },
+  {
+   "set": "HARP",
+   "number": "1965 AHSME 32",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "r $1",
+     "r \\$1"
+    ]
+   ],
+   "note": "currency dollar"
+  },
+  {
+   "set": "HARP",
+   "number": "1985 AHSME 16",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "$\\usepackage{gensymb} A = 20 \\degree$",
+     "$A = 20^\\circ$"
+    ],
+    [
+     "$\\usepackage{gensymb} B = 25 \\degree$",
+     "$B = 25^\\circ$"
+    ]
+   ],
+   "note": "usepackage and \\degree in math"
+  },
+  {
+   "set": "HARP",
+   "number": "1985 AHSME 2",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "$\\usepackage{gensymb} 60\\degree$",
+     "$60^\\circ$"
+    ]
+   ],
+   "note": "usepackage and \\degree"
+  },
+  {
+   "set": "HARP",
+   "number": "1988 AHSME 18",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "First #5 bowls #4",
+     "First \\#5 bowls \\#4"
+    ],
+    [
+     "bowls #3",
+     "bowls \\#3"
+    ],
+    [
+     "bowls #2",
+     "bowls \\#2"
+    ],
+    [
+     "bowls #1",
+     "bowls \\#1"
+    ],
+    [
+     "#1 through #5",
+     "\\#1 through \\#5"
+    ]
+   ],
+   "note": "bare # in text"
+  },
+  {
+   "set": "HARP",
+   "number": "1999 AHSME 11",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "$137.94",
+     "\\$137.94"
+    ]
+   ],
+   "note": "currency dollar"
+  },
+  {
+   "set": "HARP",
+   "number": "2000 AMC_12 24",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "$\\overarc ",
+     "$\\widehat "
+    ],
+    [
+     "d $\\overarc{BC",
+     "d $\\widehat{BC"
+    ],
+    [
+     "\\overarc",
+     "\\widehat"
+    ]
+   ],
+   "note": "undefined \\overarc"
+  },
+  {
+   "set": "HARP",
+   "number": "2000 AMC_8 20",
+   "field": "latexcode",
+   "fixes": [
+    [
+     " $$",
+     " \\$"
+    ],
+    [
+     "2$,",
+     "2,"
+    ]
+   ],
+   "note": "currency dollar in $$"
+  },
+  {
+   "set": "HARP",
+   "number": "2002 AMC_8 2",
+   "field": "latexcode",
+   "fixes": [
+    [
+     " $5",
+     " \\$5"
+    ],
+    [
+     " $2",
+     " \\$2"
+    ],
+    [
+     " $1",
+     " \\$1"
+    ]
+   ],
+   "note": "currency dollars"
+  },
+  {
+   "set": "HARP",
+   "number": "2003 AMC_12A 2",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "cost $4 per",
+     "cost \\$4 per"
+    ],
+    [
+     "costs $5 more",
+     "costs \\$5 more"
+    ],
+    [
+     "is $2366,",
+     "is \\$2366,"
+    ]
+   ],
+   "note": "currency dollars"
+  },
+  {
+   "set": "HARP",
+   "number": "2003 AMC_12B 2",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "$$$1$ more",
+     "\\$1 more"
+    ]
+   ],
+   "note": "currency dollar"
+  },
+  {
+   "set": "HARP",
+   "number": "2003 AMC_12B 3",
+   "field": "latexcode",
+   "fixes": [
+    [
+     " \\[$1",
+     " \\$1"
+    ],
+    [
+     "1$ ",
+     "1 "
+    ],
+    [
+     "nias\\]$1",
+     "nias \\]$1"
+    ],
+    [
+     " \\]$1",
+     " \\$1"
+    ],
+    [
+     "1.50$ eac",
+     "1.50 eac"
+    ],
+    [
+     "\\[$",
+     "\\$"
+    ],
+    [
+     "2$ ",
+     "2 "
+    ],
+    [
+     "s\\",
+     "s \\"
+    ],
+    [
+     "\\]$",
+     "\\$"
+    ],
+    [
+     "0$ ",
+     "0 "
+    ],
+    [
+     "$$",
+     "\\"
+    ],
+    [
+     "3$ ",
+     "3 "
+    ]
+   ],
+   "note": "currency dollars mangled with \\[ \\]"
+  },
+  {
+   "set": "HARP",
+   "number": "2003 AMC_12B 7",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "$8.35",
+     "\\$8.35"
+    ]
+   ],
+   "note": "currency dollar"
+  },
+  {
+   "set": "HARP",
+   "number": "2005 AMC_12B 11",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "sum is $$20$ or more",
+     "sum is \\$20 or more"
+    ]
+   ],
+   "note": "currency dollar"
+  },
+  {
+   "set": "HARP",
+   "number": "2005 AMC_8 11",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "s $90",
+     "s \\$90"
+    ],
+    [
+     "gs up $90.00 ",
+     "gs up \\$90.00 "
+    ],
+    [
+     " $9",
+     " \\$9"
+    ],
+    [
+     "6%.",
+     "6\\%."
+    ],
+    [
+     "d 20% fro",
+     "d 20\\% fro"
+    ],
+    [
+     " 6% s",
+     " 6\\% s"
+    ],
+    [
+     "20% f",
+     "20\\% f"
+    ],
+    [
+     "0% ",
+     "0\\% "
+    ],
+    [
+     "6% ",
+     "6\\% "
+    ]
+   ],
+   "note": "currency dollars and bare percent"
+  },
+  {
+   "set": "HARP",
+   "number": "2006 AMC_10B 22",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "$4\\cent$",
+     "$4$ cents"
+    ],
+    [
+     "$5\\cent$",
+     "$5$ cents"
+    ]
+   ],
+   "note": "undefined \\cent"
+  },
+  {
+   "set": "HARP",
+   "number": "2006 AMC_12A 10",
+   "field": "answer",
+   "fixes": [
+    [
+     ".$",
+     "."
+    ]
+   ],
+   "note": "stray $ in answer"
+  },
+  {
+   "set": "HARP",
+   "number": "2010 AMC_10A 8",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\[0.50$",
+     "\\$0.50"
+    ],
+    [
+     "earned\\]630$",
+     "earned \\$630"
+    ]
+   ],
+   "note": "currency dollars"
+  },
+  {
+   "set": "HARP",
+   "number": "2011 AMC_8 10",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "s $2.",
+     "s \\$2."
+    ],
+    [
+     " $0",
+     " \\$0"
+    ],
+    [
+     " $2",
+     " \\$2"
+    ],
+    [
+     " $1",
+     " \\$1"
+    ]
+   ],
+   "note": "currency dollars"
+  },
+  {
+   "set": "HARP",
+   "number": "2013 AMC_10A 5",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "paid $105",
+     "paid \\$105"
+    ],
+    [
+     "paid $125",
+     "paid \\$125"
+    ],
+    [
+     "paid $175",
+     "paid \\$175"
+    ]
+   ],
+   "note": "currency dollars; currency dollars; currency dollars"
+  },
+  {
+   "set": "HARP",
+   "number": "2013 AMC_12A 5",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "paid \\[105$,",
+     "paid \\$105,"
+    ],
+    [
+     "paid\\]125$,",
+     "paid \\$125,"
+    ],
+    [
+     "paid $$175$.",
+     "paid \\$175."
+    ]
+   ],
+   "note": "garbled dollar signs"
+  },
+  {
+   "set": "HARP",
+   "number": "2013 AMC_8 12",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "f $5",
+     "f \\$5"
+    ],
+    [
+     "0%",
+     "0\\%"
+    ],
+    [
+     " $",
+     " \\$"
+    ]
+   ],
+   "note": "currency dollars, bare %"
+  },
+  {
+   "set": "HARP",
+   "number": "2013 AMC_8 2",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "just $3 per",
+     "just \\$3 per"
+    ]
+   ],
+   "note": "currency dollar"
+  },
+  {
+   "set": "HARP",
+   "number": "2013 AMC_8 4",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "$2.50",
+     "\\$2.50"
+    ]
+   ],
+   "note": "currency dollar"
+  },
+  {
+   "set": "HARP",
+   "number": "2014 AMC_8 5",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "costs $$4$ per",
+     "costs \\$4 per"
+    ]
+   ],
+   "note": "currency dollar"
+  },
+  {
+   "set": "HARP",
+   "number": "2015 AIME_I 15",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\overarc{AB}",
+     "\\widehat{AB}"
+    ]
+   ],
+   "note": "undefined \\overarc"
+  },
+  {
+   "set": "HARP",
+   "number": "2017 AMC_8 25",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "s $\\overar",
+     "s $\\widerar"
+    ],
+    [
+     "derar",
+     "dehar"
+    ],
+    [
+     "harc{T",
+     "hat{T"
+    ],
+    [
+     " $\\overa",
+     " $\\widera"
+    ],
+    [
+     "era",
+     "eha"
+    ],
+    [
+     "arc{",
+     "at{"
+    ]
+   ],
+   "note": "\\overarc undefined"
+  },
+  {
+   "set": "HARP",
+   "number": "2019 AMC_12B 15",
+   "field": "latexcode",
+   "fixes": [
+    [
+     " $\\overarc{A",
+     " $\\widehat{A"
+    ],
+    [
+     ",\\overarc{",
+     ",\\widehat{"
+    ],
+    [
+     "\\overarc",
+     "\\widehat"
+    ]
+   ],
+   "note": "undefined \\overarc"
+  },
+  {
+   "set": "HARP",
+   "number": "2020 AMC_8 20",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\begingroup \\setlength{\\tabcolsep}{10pt} \\renewcommand{\\arraystretch}{1.5} ",
+     ""
+    ],
+    [
+     " \\endgroup",
+     ""
+    ]
+   ],
+   "note": "remove group/length/renewcommand lines"
+  },
+  {
+   "set": "HARP",
+   "number": "2022 AMC_8 13",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "is _____ more",
+     "is \\_\\_\\_\\_\\_ more"
+    ]
+   ],
+   "note": "underscores in text"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "100",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "x^3 \\equal{} 3x\\minus{}12y\\plus{}50",
+     "x^3 = 3x-12y+50"
+    ],
+    [
+     "y^3 \\equal{} 12y\\plus{}3z\\minus{}2",
+     "y^3 = 12y+3z-2"
+    ],
+    [
+     "z^3 \\equal{} 27z \\plus{} 27x",
+     "z^3 = 27z + 27x"
+    ]
+   ],
+   "note": "old \\equal/\\plus/\\minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1004",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "quadratics \\pm x^{2} \\pm p x \\pm c all",
+     "quadratics $\\pm x^{2} \\pm p x \\pm c$ all"
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1076",
+   "field": "answer",
+   "fixes": [
+    [
+     "2^{20}$",
+     "2^{20}}$"
+    ]
+   ],
+   "note": "missing brace"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1080",
+   "field": "answer",
+   "fixes": [
+    [
+     " 0",
+     " } 0"
+    ]
+   ],
+   "note": "unclosed \\text"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1086",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "find \\left[A_{3} B_{3} C_{3}\\right] /[A B C].",
+     "find $\\left[A_{3} B_{3} C_{3}\\right] /[A B C]$."
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "113",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "12^n \\plus{} 1, k",
+     "12^n + 1, k"
+    ],
+    [
+     "^n \\plus{} 1,",
+     "^n + 1,"
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ]
+   ],
+   "note": "legacy \\equal/\\plus/\\minus macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1142",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "numbers \\left(x_{1}, y_{1}\\right),\\left(x_{2}, y_{2}\\right), and \\left(x_{3}, y_{3}\\right) that",
+     "numbers $\\left(x_{1}, y_{1}\\right),\\left(x_{2}, y_{2}\\right)$, and $\\left(x_{3}, y_{3}\\right)$ that"
+    ],
+    [
+     "Compute \\left(1",
+     "Compute $\\left(1"
+    ],
+    [
+     "\\frac{x_{3}}{y_{3}}\\right).",
+     "\\frac{x_{3}}{y_{3}}\\right)$."
+    ]
+   ],
+   "note": "bare math not in $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1340",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "less than \\frac{1}{4}$",
+     "less than $\\frac{1}{4}$"
+    ],
+    [
+     "q$ is \\frac{1}{a_{1}}",
+     "q$ is $\\frac{1}{a_{1}}"
+    ],
+    [
+     "triple \\left(a_{1}, a_{2}, a_{3}\\right).",
+     "triple $\\left(a_{1}, a_{2}, a_{3}\\right)$."
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1396",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "t \\l",
+     "t $\\l"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "144",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "B\\equal{}a",
+     "B=a"
+    ],
+    [
+     "C\\equal{}b",
+     "C=b"
+    ],
+    [
+     "D\\equal{}c",
+     "D=c"
+    ],
+    [
+     "A\\equal{}d",
+     "A=d"
+    ],
+    [
+     "C\\equal{}e",
+     "C=e"
+    ],
+    [
+     "D\\equal{}f",
+     "D=f"
+    ],
+    [
+     "\\equal{}",
+     "="
+    ]
+   ],
+   "note": "undefined \\minus/\\plus/\\equal macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1451",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "-tuples \\left(a_{1}",
+     "-tuples $\\left(a_{1}"
+    ],
+    [
+     "and \\left(b_{1}",
+     "and $\\left(b_{1}"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1475",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "that \\angle A B D$",
+     "that $\\angle A B D$"
+    ],
+    [
+     "bisects \\angle E B C$",
+     "bisects $\\angle E B C$"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1484",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "Let \\mathbb{N} denote",
+     "Let $\\mathbb{N}$ denote"
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1518",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "t \\|",
+     "t $\\|"
+    ],
+    [
+     "| ",
+     "|$ "
+    ],
+    [
+     " \\",
+     " $\\"
+    ],
+    [
+     "=3 s",
+     "=3$ s"
+    ]
+   ],
+   "note": "\\| outside math"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1532",
+   "field": "latexcode",
+   "fixes": [
+    [
+     " ZBoz2 \\pi, and n",
+     " ZBoz2 $\\pi$, and n"
+    ],
+    [
+     " \\pi,",
+     " $\\pi$,"
+    ],
+    [
+     " \\pi ",
+     " $\\pi$ "
+    ],
+    [
+     " \\pi.",
+     " $\\pi$."
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1561",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "Find \\operatorname",
+     "Find $\\operatorname"
+    ],
+    [
+     "b_{501}\\right).",
+     "b_{501}\\right)$."
+    ]
+   ],
+   "note": "bare math not in $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "157",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "A_{2n \\plus{} 1}",
+     "A_{2n + 1}"
+    ],
+    [
+     "$ 2n\\plus{}1$",
+     "$ 2n+1$"
+    ]
+   ],
+   "note": "\\plus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1586",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "Let \\{a_{n}\\}_",
+     "Let $\\{a_{n}\\}_"
+    ],
+    [
+     "and \\{g_{n}\\}_",
+     "and $\\{g_{n}\\}_"
+    ],
+    [
+     "terms of \\{a_{n}",
+     "terms of $\\{a_{n}"
+    ],
+    [
+     "term of \\{a_{n}",
+     "term of $\\{a_{n}"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1603",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "that \\frac{x^{2}",
+     "that $\\frac{x^{2}"
+    ],
+    [
+     "and \\frac{x^{4}",
+     "and $\\frac{x^{4}"
+    ],
+    [
+     "of \\frac{x^{6}",
+     "of $\\frac{x^{6}"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1624",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "h the edges e_{1}, e_{2}",
+     "h the edges $e_{1}, e_{2}"
+    ],
+    [
+     "m} i",
+     "m}$ i"
+    ],
+    [
+     "e e,",
+     "e $e,"
+    ],
+    [
+     "$e, ",
+     "$e$, "
+    ],
+    [
+     "y P_",
+     "y $P_"
+    ],
+    [
+     "].",
+     "]$."
+    ],
+    [
+     "s e_",
+     "s $e_"
+    ],
+    [
+     "m} a",
+     "m}$ a"
+    ],
+    [
+     "e P_",
+     "e $P_"
+    ],
+    [
+     "}.",
+     "}$."
+    ],
+    [
+     "e e ",
+     "e $e "
+    ],
+    [
+     "$e a",
+     "$e$ a"
+    ]
+   ],
+   "note": "math not delimited"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1648",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "at price p_{12}.",
+     "at price $p_{12}$."
+    ],
+    [
+     "item is t(c_{1} + c_{2}), where 0 < t < 1.",
+     "item is $t(c_{1} + c_{2})$, where $0 < t < 1$."
+    ],
+    [
+     "if (S_{1} + S_{2}) >= p_{12}, and",
+     "if $(S_{1} + S_{2}) >= p_{12}$, and"
+    ],
+    [
+     "profit is p_{12} - t(c_{1} + c_{2}).",
+     "profit is $p_{12} - t(c_{1} + c_{2})$."
+    ],
+    [
+     "the price p_{12} to",
+     "the price $p_{12}$ to"
+    ]
+   ],
+   "note": "bare math not in $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1649",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "Find \\lfloor 2017 P(2017)\\rfloor.",
+     "Find $\\lfloor 2017 P(2017)\\rfloor$."
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "167",
+   "field": "answer",
+   "fixes": [
+    [
+     "$The assertion",
+     "The assertion"
+    ],
+    [
+     "\\( n = 25 \\) is a counter-example.$",
+     "$n = 25$ is a counter-example."
+    ]
+   ],
+   "note": "\\( \\) inside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "17",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "B \\equal{} \\",
+     "B = \\"
+    ],
+    [
+     "B \\equal{} 4",
+     "B = 4"
+    ],
+    [
+     "P \\equal{} \\",
+     "P = \\"
+    ],
+    [
+     "C \\equal{} 7",
+     "C = 7"
+    ],
+    [
+     "C \\equal{} 1",
+     "C = 1"
+    ],
+    [
+     "\\equal{}",
+     "="
+    ]
+   ],
+   "note": "old-style macros equal/plus/minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "175",
+   "field": "answer",
+   "fixes": [
+    [
+     "$A",
+     "A"
+    ],
+    [
+     "\\(",
+     "$"
+    ],
+    [
+     "\\)",
+     "$"
+    ],
+    [
+     ".$",
+     "."
+    ]
+   ],
+   "note": "\\( \\) inside $...$ in answer"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1846",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "triples \\left(a_{1}, a_{2}, a_{3}\\right) and \\left(b_{1}, b_{2}, b_{3}\\right) such",
+     "triples $\\left(a_{1}, a_{2}, a_{3}\\right)$ and $\\left(b_{1}, b_{2}, b_{3}\\right)$ such"
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1849",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "Let \\mathcal{V}",
+     "Let $\\mathcal{V}$"
+    ],
+    [
+     "Find \\mathcal{V}",
+     "Find $\\mathcal{V}$"
+    ]
+   ],
+   "note": "bare math not in $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1867",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "that \\operatorname{gcd}(n, 2015)=1?",
+     "that $\\operatorname{gcd}(n, 2015)=1$?"
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "190",
+   "field": "answer",
+   "fixes": [
+    [
+     "$T",
+     "T"
+    ],
+    [
+     "$",
+     ""
+    ]
+   ],
+   "note": "text answer wrapped in $...$ with \\( \\) inside"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1918",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "of \\frac{1}{998}$",
+     "of $\\frac{1}{998}$"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "192",
+   "field": "answer",
+   "fixes": [
+    [
+     "$The only",
+     "The only"
+    ],
+    [
+     "permutations.$",
+     "permutations."
+    ]
+   ],
+   "note": "answer text wrapped in $ with \\( \\)"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1921",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "y \\f",
+     "y $\\f"
+    ],
+    [
+     "s \\f",
+     "s $\\f"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1933",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\frac{P_{n}}{B_{n}}$",
+     "$\\frac{P_{n}}{B_{n}}$"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1952",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "let \\operatorname{gcd}(m, n) denote",
+     "let $\\operatorname{gcd}(m, n)$ denote"
+    ]
+   ],
+   "note": "bare math not in $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1975",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "sequence \\left\\{x_{i}\\right\\}_{i \\geq 0} by",
+     "sequence $\\left\\{x_{i}\\right\\}_{i \\geq 0}$ by"
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "1983",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "circle \\omega is",
+     "circle $\\omega$ is"
+    ],
+    [
+     "intersects \\omega at",
+     "intersects $\\omega$ at"
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2000",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "t \\o",
+     "t $\\o"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "205",
+   "field": "latexcode",
+   "fixes": [
+    [
+     " \nContents   1  Solution (Explanation of Video)  2  Solution 2  3  Video Solution  4  See Also",
+     ""
+    ]
+   ],
+   "note": "scraped table of contents removed; \\( \\) inside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "205",
+   "field": "answer",
+   "fixes": [
+    [
+     "$The integers",
+     "The integers"
+    ],
+    [
+     "\\( n \\geq 3 \\) that",
+     "$n \\geq 3$ that"
+    ],
+    [
+     "\\( n = 3 \\) and \\( n = 4 \\).$",
+     "$n = 3$ and $n = 4$."
+    ]
+   ],
+   "note": "scraped table of contents removed; \\( \\) inside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2050",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "e \\omega s",
+     "e $\\omega$ s"
+    ],
+    [
+     " \\omega ",
+     " $\\omega$ "
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2056",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "integer \\overline{A B C},",
+     "integer $\\overline{A B C}$,"
+    ]
+   ],
+   "note": "bare math not in $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2058",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "Point P_{1} is located 600 miles West of point P_{2}.",
+     "Point $P_{1}$ is located 600 miles West of point $P_{2}$."
+    ],
+    [
+     "from P_{1} and",
+     "from $P_{1}$ and"
+    ],
+    [
+     "from P_{2} and",
+     "from $P_{2}$ and"
+    ],
+    [
+     "speed of x miles",
+     "speed of $x$ miles"
+    ],
+    [
+     "between P_{1} and P_{2}, what is the value of x?",
+     "between $P_{1}$ and $P_{2}$, what is the value of $x$?"
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2063",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "of \\angle A intersect",
+     "of $\\angle A$ intersect"
+    ],
+    [
+     "of \\angle A be",
+     "of $\\angle A$ be"
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "207",
+   "field": "answer",
+   "fixes": [
+    [
+     "$T",
+     "T"
+    ],
+    [
+     "\\(",
+     "$"
+    ],
+    [
+     "\\)",
+     "$"
+    ],
+    [
+     ".$",
+     "."
+    ]
+   ],
+   "note": "\\( \\) inside $...$ in answer"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2074",
+   "field": "latexcode",
+   "fixes": [
+    [
+     " \\",
+     " $\\"
+    ],
+    [
+     "}?",
+     "}$?"
+    ]
+   ],
+   "note": "missing $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2076",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\{1,2, \\ldots, 10\\}$",
+     "$\\{1,2, \\ldots, 10\\}$"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2079",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "Let P_{1} P_{2} \\ldots P_{8} be",
+     "Let $P_{1} P_{2} \\ldots P_{8}$ be"
+    ]
+   ],
+   "note": "bare math not in $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2093",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "and \\angle N E P",
+     "and $\\angle N E P"
+    ],
+    [
+     "in \\mathrm{cm}^{2}$",
+     "in $\\mathrm{cm}^{2}$"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2098",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "players: \\mathrm{DBR}, \\mathrm{RB}, and",
+     "players: $\\mathrm{DBR}$, $\\mathrm{RB}$, and"
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2099",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "t \\o",
+     "t $\\o"
+    ],
+    [
+     "ga b",
+     "ga$ b"
+    ],
+    [
+     "e \\o",
+     "e $\\o"
+    ],
+    [
+     "ga i",
+     "ga$ i"
+    ]
+   ],
+   "note": "missing $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "210",
+   "field": "answer",
+   "fixes": [
+    [
+     "$The pos",
+     "The pos"
+    ],
+    [
+     "umbers.$",
+     "umbers."
+    ]
+   ],
+   "note": "outer $ around text answer containing \\( \\)"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2110",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "A_{1}, A_{2} \\cdots A_{10} in",
+     "$A_{1}, A_{2} \\cdots A_{10}$ in"
+    ],
+    [
+     "on A_{i}, remove",
+     "on $A_{i}$, remove"
+    ],
+    [
+     "on A_{i+1}, or",
+     "on $A_{i+1}$, or"
+    ],
+    [
+     "on A_{i+1}, remove",
+     "on $A_{i+1}$, remove"
+    ],
+    [
+     "A_{i+2} and A_{i}.",
+     "$A_{i+2}$ and $A_{i}$."
+    ],
+    [
+     "on point A_{1}.",
+     "on point $A_{1}$."
+    ],
+    [
+     "chip on A_{10} through",
+     "chip on $A_{10}$ through"
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2122",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "makes \\frac{1}{2} of",
+     "makes $\\frac{1}{2}$ of"
+    ]
+   ],
+   "note": "bare math not in $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2125",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "Omkar, \\mathrm{Krit}_{1}, \\mathrm{Krit}_{2}, and \\mathrm{Krit}_{3} are",
+     "Omkar, $\\mathrm{Krit}_{1}$, $\\mathrm{Krit}_{2}$, and $\\mathrm{Krit}_{3}$ are"
+    ],
+    [
+     "takes \\frac{1}{6}$",
+     "takes $\\frac{1}{6}$"
+    ],
+    [
+     "takes \\frac{1}{5}$",
+     "takes $\\frac{1}{5}$"
+    ],
+    [
+     "takes \\frac{1}{4}$",
+     "takes $\\frac{1}{4}$"
+    ],
+    [
+     "order of Omkar, \\mathrm{Krit}_{1}, \\mathrm{Krit}_{2}, \\mathrm{Krit}_{3}$,",
+     "order of Omkar, $\\mathrm{Krit}_{1}$, $\\mathrm{Krit}_{2}$, $\\mathrm{Krit}_{3}$,"
+    ],
+    [
+     "and \\mathrm{Krit}_{3}$ always",
+     "and $\\mathrm{Krit}_{3}$ always"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2140",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "Let P_{1}, P_{2}, \\ldots, P_{6} be",
+     "Let $P_{1}, P_{2}, \\ldots, P_{6}$ be"
+    ],
+    [
+     "equation x^{6}+6 x^{3}-216=0.",
+     "equation $x^{6}+6 x^{3}-216=0$."
+    ],
+    [
+     "that P_{1} P_{2} P_{3} P_{4} P_{5} P_{6} is",
+     "that $P_{1} P_{2} P_{3} P_{4} P_{5} P_{6}$ is"
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2166",
+   "field": "answer",
+   "fixes": [
+    [
+     "$Joint d",
+     "Joint d"
+    ],
+    [
+     "lution.$",
+     "lution."
+    ]
+   ],
+   "note": "outer $ around text answer containing \\( \\)"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2197",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "integers \\pi, let",
+     "integers $\\pi$, let"
+    ],
+    [
+     "subsequences in \\pi with",
+     "subsequences in $\\pi$ with"
+    ],
+    [
+     "order \\pi from",
+     "order $\\pi$ from"
+    ],
+    [
+     "orders \\pi of",
+     "orders $\\pi$ of"
+    ]
+   ],
+   "note": "bare \\pi not in $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "220",
+   "field": "answer",
+   "fixes": [
+    [
+     "$T",
+     "T"
+    ],
+    [
+     "$",
+     ""
+    ]
+   ],
+   "note": "text answer wrapped in $...$ with \\( \\) inside"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2235",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "at most \\frac{2}{3}$",
+     "at most $\\frac{2}{3}$"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "226",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "f: \\mathbb{Q}^{\\plus{}}",
+     "f: \\mathbb{Q}^{+}"
+    ],
+    [
+     "\\mathbb{Q}^{\\plus{}}$",
+     "\\mathbb{Q}^{+}$"
+    ],
+    [
+     "f(x) \\plus{} f(y) \\plus{} 2xy f(xy) \\equal{}",
+     "f(x) + f(y) + 2xy f(xy) ="
+    ],
+    [
+     "f(x\\plus{}y)",
+     "f(x+y)"
+    ]
+   ],
+   "note": "\\plus, \\equal"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2264",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "distance \\sqrt{2} away",
+     "distance $\\sqrt{2}$ away"
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "229",
+   "field": "answer",
+   "fixes": [
+    [
+     "$The functions \\( f \\) that",
+     "The functions $f$ that"
+    ],
+    [
+     "x^2 \\]$",
+     "x^2 \\]"
+    ]
+   ],
+   "note": "\\( \\) inside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "237",
+   "field": "answer",
+   "fixes": [
+    [
+     "$T",
+     "T"
+    ],
+    [
+     "\\(",
+     "$"
+    ],
+    [
+     "\\)",
+     "$"
+    ],
+    [
+     ".$",
+     "."
+    ]
+   ],
+   "note": "\\( \\) inside $...$ in answer"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "240",
+   "field": "answer",
+   "fixes": [
+    [
+     "$The com",
+     "The com"
+    ],
+    [
+     "primes.$",
+     "primes."
+    ]
+   ],
+   "note": "outer $ around text answer containing \\( \\)"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2407",
+   "field": "answer",
+   "fixes": [
+    [
+     "!$",
+     "!}$"
+    ]
+   ],
+   "note": "unclosed brace in answer"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "241",
+   "field": "answer",
+   "fixes": [
+    [
+     "$T",
+     "T"
+    ],
+    [
+     "$",
+     ""
+    ]
+   ],
+   "note": "text answer wrapped in $...$ with \\( \\) inside"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "262",
+   "field": "answer",
+   "fixes": [
+    [
+     "$T",
+     "T"
+    ],
+    [
+     "n \\( f",
+     "n $ f"
+    ],
+    [
+     "f \\) t",
+     "f $ t"
+    ],
+    [
+     "s \\( f",
+     "s $ f"
+    ],
+    [
+     " \\) ",
+     " $ "
+    ],
+    [
+     "\\(",
+     "$"
+    ],
+    [
+     "\\)",
+     "$"
+    ],
+    [
+     ".$",
+     "."
+    ]
+   ],
+   "note": "\\( \\) inside $...$ in answer"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2644",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "}$ the number of permutations \\left(x_{1}, \\ldo",
+     "}$ the number of permutations $\\left(x_{1}, \\ldo"
+    ],
+    [
+     " permutations \\",
+     " permutations $\\"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2659",
+   "field": "answer",
+   "fixes": [
+    [
+     "& \text{if } n \text{ is even}, \\ \n     \text{any perfect square} & \text{if } n \text{ is odd}",
+     "& \\text{if } n \\text{ is even}, \\\\\n     \\text{any perfect square} & \\text{if } n \\text{ is odd}"
+    ],
+    [
+     "\\quad \text{for every",
+     "\\quad \\text{for every"
+    ]
+   ],
+   "note": "tab and lost backslash restored in answer"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "266",
+   "field": "answer",
+   "fixes": [
+    [
+     "$The min",
+     "The min"
+    ],
+    [
+     "( 6 \\).$",
+     "( 6 \\)."
+    ]
+   ],
+   "note": "outer $ around text answer containing \\( \\)"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "270",
+   "field": "answer",
+   "fixes": [
+    [
+     "$T",
+     "T"
+    ],
+    [
+     "$",
+     ""
+    ]
+   ],
+   "note": "text answer wrapped in $...$ with \\( \\) inside"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2730",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\frac{1}{2}",
+     "\\frac{1}{2}"
+    ],
+    [
+     "\frac{3}{4}",
+     "\\frac{3}{4}"
+    ],
+    [
+     "\frac{1}{3}",
+     "\\frac{1}{3}"
+    ]
+   ],
+   "note": "form feed for \\f"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2743",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\f",
+     "\\f"
+    ]
+   ],
+   "note": "form-feed char for \\f"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2765",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "$\frac{",
+     "$\\frac{"
+    ],
+    [
+     "+ \frac{1",
+     "+ \\frac{1"
+    ],
+    [
+     "\frac",
+     "\\frac"
+    ]
+   ],
+   "note": "form feed character instead of \\f in \\frac"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "279",
+   "field": "answer",
+   "fixes": [
+    [
+     "$The intersections of \\(OA\\) and \\(OB\\) with",
+     "The intersections of $OA$ and $OB$ with"
+    ],
+    [
+     "at \\(P\\).$",
+     "at $P$."
+    ]
+   ],
+   "note": "\\( \\) inside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2805",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\frac",
+     "\\frac"
+    ]
+   ],
+   "note": "form feed in place of \\f of \\frac"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2811",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "$\frac{4}{5}$",
+     "$\\frac{4}{5}$"
+    ]
+   ],
+   "note": "form feed for \f of \frac"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2813",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\frac{5}{7}",
+     "\\frac{5}{7}"
+    ],
+    [
+     "\frac{28}{3}",
+     "\\frac{28}{3}"
+    ]
+   ],
+   "note": "form feed for \\f"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "285",
+   "field": "answer",
+   "fixes": [
+    [
+     "$T",
+     "T"
+    ],
+    [
+     "s \\( P",
+     "s $ P"
+    ],
+    [
+     "P \\) o",
+     "P $ o"
+    ],
+    [
+     "\\(",
+     "$"
+    ],
+    [
+     "\\)",
+     "$"
+    ],
+    [
+     "]$",
+     "]"
+    ]
+   ],
+   "note": "\\( \\) inside $...$ in answer"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2874",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\f",
+     "\\f"
+    ]
+   ],
+   "note": "form-feed char for \\f"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "292",
+   "field": "answer",
+   "fixes": [
+    [
+     "$There d",
+     "There d"
+    ],
+    [
+     " order.$",
+     " order."
+    ]
+   ],
+   "note": "outer $ around text answer containing \\( \\)"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "294",
+   "field": "answer",
+   "fixes": [
+    [
+     "$T",
+     "T"
+    ],
+    [
+     "$",
+     ""
+    ]
+   ],
+   "note": "text answer wrapped in $...$ with \\( \\) inside"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2971",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "$0.78",
+     "\\$0.78"
+    ]
+   ],
+   "note": "currency dollar"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "298",
+   "field": "answer",
+   "fixes": [
+    [
+     "$The pairs",
+     "The pairs"
+    ],
+    [
+     "\\((x, y)\\) that",
+     "$(x, y)$ that"
+    ],
+    [
+     "\\(x^y = y^{x - y}\\)",
+     "$x^y = y^{x - y}$"
+    ],
+    [
+     "\\]$",
+     "\\]"
+    ]
+   ],
+   "note": "\\( \\) inside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "2985",
+   "field": "latexcode",
+   "fixes": [
+    [
+     " $\frac{1",
+     " $\\frac{1"
+    ],
+    [
+     "\frac",
+     "\\frac"
+    ]
+   ],
+   "note": "form feed in place of \\f of \\frac"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "301",
+   "field": "answer",
+   "fixes": [
+    [
+     "$T",
+     "T"
+    ],
+    [
+     "r \\( N",
+     "r $ N"
+    ],
+    [
+     "N \\) f",
+     "N $ f"
+    ],
+    [
+     "t \\( N",
+     "t $ N"
+    ],
+    [
+     " \\) ",
+     " $ "
+    ],
+    [
+     "\\(",
+     "$"
+    ],
+    [
+     "\\)",
+     "$"
+    ],
+    [
+     ".$",
+     "."
+    ]
+   ],
+   "note": "\\( \\) inside $...$ in answer"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3014",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "$\frac{3}{10}+\frac{3}{100}+\frac{3}{1000}$",
+     "$\\frac{3}{10}+\\frac{3}{100}+\\frac{3}{1000}$"
+    ]
+   ],
+   "note": "form feed for \f of \frac"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3033",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\frac{1}{2}",
+     "\\frac{1}{2}"
+    ],
+    [
+     "\frac{2}{3}",
+     "\\frac{2}{3}"
+    ],
+    [
+     "\frac{3}{4}",
+     "\\frac{3}{4}"
+    ],
+    [
+     "\frac{4}{5}",
+     "\\frac{4}{5}"
+    ],
+    [
+     "\frac{5}{6}",
+     "\\frac{5}{6}"
+    ]
+   ],
+   "note": "form feed for \\f"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3036",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\n",
+     "\n"
+    ]
+   ],
+   "note": "literal \\n"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3064",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\frac",
+     "\\frac"
+    ]
+   ],
+   "note": "form feed character instead of \\f in \\frac"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3070",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\frac",
+     "\\frac"
+    ]
+   ],
+   "note": "form feed in place of \\f of \\frac"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3087",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "$\frac{4x}{x+2x}$",
+     "$\\frac{4x}{x+2x}$"
+    ]
+   ],
+   "note": "form feed for \frac"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3087",
+   "field": "answer",
+   "fixes": [
+    [
+     "$rac{4}{3}$",
+     "$\\frac{4}{3}$"
+    ]
+   ],
+   "note": "form feed for \frac"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "309",
+   "field": "answer",
+   "fixes": [
+    [
+     "$The sim",
+     "The sim"
+    ],
+    [
+     "q i \\).$",
+     "q i \\)."
+    ]
+   ],
+   "note": "outer $ around text answer containing \\( \\)"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "312",
+   "field": "answer",
+   "fixes": [
+    [
+     "$T",
+     "T"
+    ],
+    [
+     "$",
+     ""
+    ]
+   ],
+   "note": "text answer wrapped in $...$ with \\( \\) inside"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3139",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\frac{1}{3}",
+     "\\frac{1}{3}"
+    ]
+   ],
+   "note": "form feed for \\f"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3152",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\f",
+     "\\f"
+    ]
+   ],
+   "note": "form-feed char for \\f"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "320",
+   "field": "answer",
+   "fixes": [
+    [
+     "$Tony can",
+     "Tony can"
+    ],
+    [
+     "friends.$",
+     "friends."
+    ]
+   ],
+   "note": "answer text wrapped in $ with \\( \\)"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3211",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "Evaluate \\int_0^1 \\frac{\\ln(x+1)}{x^2+1}\\,dx.",
+     "Evaluate $\\int_0^1 \\frac{\\ln(x+1)}{x^2+1}\\,dx$."
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "322",
+   "field": "answer",
+   "fixes": [
+    [
+     "$The only",
+     "The only"
+    ],
+    [
+     "\\( 18 \\).$",
+     "$18$."
+    ]
+   ],
+   "note": "\\( \\) inside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3221",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "let \\langle n\\rangle denote",
+     "let $\\langle n\\rangle$ denote"
+    ],
+    [
+     "integer to \\sqrt{n}.",
+     "integer to $\\sqrt{n}$."
+    ]
+   ],
+   "note": "bare math not in $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3235",
+   "field": "answer",
+   "fixes": [
+    [
+     "n$ is odd",
+     "$n$ is odd"
+    ]
+   ],
+   "note": "answer text in math"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "324",
+   "field": "answer",
+   "fixes": [
+    [
+     "$T",
+     "T"
+    ],
+    [
+     "r \\( n",
+     "r $ n"
+    ],
+    [
+     " \\) ",
+     " $ "
+    ],
+    [
+     "\\(",
+     "$"
+    ],
+    [
+     "\\)",
+     "$"
+    ],
+    [
+     ".$",
+     "."
+    ]
+   ],
+   "note": "\\( \\) inside $...$ in answer"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3248",
+   "field": "answer",
+   "fixes": [
+    [
+     "\\geq 1.",
+     "\\geq 1$."
+    ]
+   ],
+   "note": "missing closing $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3274",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "If $\frac{",
+     "If $\\frac{"
+    ],
+    [
+     "\f",
+     "\\f"
+    ]
+   ],
+   "note": "form-feed char for \\f"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3285",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\equal{}",
+     "="
+    ],
+    [
+     "n} \\plus{}  \\",
+     "n} +  \\"
+    ],
+    [
+     "} \\plus{}  ",
+     "} +  "
+    ],
+    [
+     "} \\plus{} \\",
+     "} + \\"
+    ],
+    [
+     "s \\plus{} \\",
+     "s + \\"
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ],
+    [
+     "n \\minus{} 1",
+     "n - 1"
+    ],
+    [
+     "\\minus{}",
+     "-"
+    ]
+   ],
+   "note": "old-style macros equal/plus/minus; old-style macros equal/plus/minus; old-style macros equal/plus/minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3291",
+   "field": "answer",
+   "fixes": [
+    [
+     "$T",
+     "T"
+    ],
+    [
+     "$",
+     ""
+    ]
+   ],
+   "note": "text answer wrapped in $...$ with \\( \\) inside"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3299",
+   "field": "answer",
+   "fixes": [
+    [
+     "$The set",
+     "The set"
+    ],
+    [
+     "finite.$",
+     "finite."
+    ]
+   ],
+   "note": "answer text wrapped in $ with \\( \\)"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3300",
+   "field": "answer",
+   "fixes": [
+    [
+     "$Player B",
+     "Player B"
+    ],
+    [
+     "\\( n \\geq 4 \\).$",
+     "$n \\geq 4$."
+    ]
+   ],
+   "note": "\\( \\) inside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "332",
+   "field": "answer",
+   "fixes": [
+    [
+     "$Cathy c",
+     "Cathy c"
+    ],
+    [
+     "-1} \\).$",
+     "-1} \\)."
+    ]
+   ],
+   "note": "outer $ around text answer containing \\( \\)"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3320",
+   "field": "latexcode",
+   "fixes": [
+    [
+     " \\",
+     " $\\"
+    ],
+    [
+     "} ",
+     "}$ "
+    ]
+   ],
+   "note": "missing $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3324",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "roots of \\prod_{k=1}^{2012}\\left(x^{k}-1\\right)$.",
+     "roots of $\\prod_{k=1}^{2012}\\left(x^{k}-1\\right)$."
+    ],
+    [
+     "will be \\left[\\frac{23}{(U / L)^{1.7}}\\right\\rfloor$.",
+     "will be $\\left[\\frac{23}{(U / L)^{1.7}}\\right\\rfloor$."
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3325",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "Let Q be",
+     "Let $Q$ be"
+    ],
+    [
+     "subsets of \\{1,2",
+     "subsets of $\\{1,2"
+    ],
+    [
+     "$M=$ \\log",
+     "$M=\\log"
+    ],
+    [
+     "will be \\min",
+     "will be $\\min"
+    ]
+   ],
+   "note": "misplaced dollars"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3326",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "moves \\frac{\\sqrt{5}}{5}$",
+     "moves $\\frac{\\sqrt{5}}{5}$"
+    ],
+    [
+     "then \\sqrt{5}$",
+     "then $\\sqrt{5}$"
+    ],
+    [
+     "then \\frac{3 \\sqrt{5}}{5}$",
+     "then $\\frac{3 \\sqrt{5}}{5}$"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3398",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "$\frac{1}{2+",
+     "$\\frac{1}{2+"
+    ],
+    [
+     "+\frac{2}{3}",
+     "+\\frac{2}{3}"
+    ]
+   ],
+   "note": "form feed for \\f"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "340",
+   "field": "answer",
+   "fixes": [
+    [
+     "$1",
+     "1"
+    ],
+    [
+     "$",
+     ""
+    ]
+   ],
+   "note": "text answer wrapped in $...$ with \\( \\) inside"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3417",
+   "field": "answer",
+   "fixes": [
+    [
+     "$",
+     "\\$"
+    ]
+   ],
+   "note": "currency dollar"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3426",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\frac",
+     "\\frac"
+    ]
+   ],
+   "note": "form feed character instead of \\f in \\frac"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3426",
+   "field": "answer",
+   "fixes": [
+    [
+     "\frac",
+     "\\frac"
+    ]
+   ],
+   "note": "form feed character instead of \\f in \\frac"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3440",
+   "field": "latexcode",
+   "fixes": [
+    [
+     ": $\frac{11",
+     ": $\\frac{11"
+    ],
+    [
+     "$, $\frac{111",
+     "$, $\\frac{111"
+    ],
+    [
+     "\frac",
+     "\\frac"
+    ]
+   ],
+   "note": "form feed in place of \\f of \\frac"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "346",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "=A\\] x_{2}(x_{2}+1) =A \\[",
+     "=A\\] $x_{2}(x_{2}+1) =A$ \\["
+    ]
+   ],
+   "note": "unwrapped equation"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "348",
+   "field": "answer",
+   "fixes": [
+    [
+     "$There are 4 possible values of \\( P \\).$",
+     "There are 4 possible values of $P$."
+    ]
+   ],
+   "note": "\\( \\) inside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "350",
+   "field": "answer",
+   "fixes": [
+    [
+     "$T",
+     "T"
+    ],
+    [
+     " \\((",
+     " $("
+    ],
+    [
+     ")\\) ",
+     ")$ "
+    ],
+    [
+     " \\(P",
+     " $P"
+    ],
+    [
+     "P\\) ",
+     "P$ "
+    ],
+    [
+     " \\(\\",
+     " $\\"
+    ],
+    [
+     "]\\) ",
+     "]$ "
+    ],
+    [
+     "\\(",
+     "$"
+    ],
+    [
+     "\\)",
+     "$"
+    ],
+    [
+     ".$",
+     "."
+    ]
+   ],
+   "note": "\\( \\) inside $...$ in answer"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3508",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "$\frac{1}{7}$",
+     "$\\frac{1}{7}$"
+    ]
+   ],
+   "note": "form feed for \frac"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3513",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "-\frac",
+     "-\\frac"
+    ],
+    [
+     "x=\frac",
+     "x=\\frac"
+    ]
+   ],
+   "note": "form feed for \\f"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3513",
+   "field": "answer",
+   "fixes": [
+    [
+     "$rac",
+     "$\\frac"
+    ]
+   ],
+   "note": "form feed for \\f"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3529",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "mbo",
+     "te"
+    ],
+    [
+     "x{",
+     "xt{"
+    ],
+    [
+     "r $k$",
+     "r } k$"
+    ],
+    [
+     "k$ ",
+     "k \\text{ "
+    ],
+    [
+     " $k",
+     " } k"
+    ],
+    [
+     "k$t",
+     "k\\text{t"
+    ]
+   ],
+   "note": "\\mbox with nested $ closing the outer math"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3532",
+   "field": "latexcode",
+   "fixes": [
+    [
+     " \\mbox{",
+     " \\text{"
+    ],
+    [
+     "\\mbox",
+     "\\text"
+    ]
+   ],
+   "note": "\\mbox unsupported in web renderer"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3535",
+   "field": "answer",
+   "fixes": [
+    [
+     "$C",
+     "C"
+    ],
+    [
+     "$",
+     ""
+    ]
+   ],
+   "note": "text answer wrapped in $...$ with \\( \\) inside"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3542",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "-1 & \\mbox{with probability $p$,}",
+     "-1 & \\text{with probability } p\\text{,}"
+    ],
+    [
+     "1 & \\mbox{with probability $p$,}",
+     "1 & \\text{with probability } p\\text{,}"
+    ],
+    [
+     "0 & \\mbox{with probability $1-2p$,}",
+     "0 & \\text{with probability } 1-2p\\text{,}"
+    ]
+   ],
+   "note": "$ inside \\mbox in math (KaTeX)"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3565",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "(4\\minus{}x)\\equal{}2x\\plus{}4",
+     "(4-x)=2x+4"
+    ]
+   ],
+   "note": "old \\equal/\\plus/\\minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "358",
+   "field": "answer",
+   "fixes": [
+    [
+     "$1. When",
+     "1. When"
+    ],
+    [
+     " space.$",
+     " space."
+    ]
+   ],
+   "note": "outer $ around text answer containing \\( \\)"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3590",
+   "field": "answer",
+   "fixes": [
+    [
+     "$T",
+     "T"
+    ],
+    [
+     " \\( ",
+     " $ "
+    ],
+    [
+     " \\) ",
+     " $ "
+    ],
+    [
+     "\\(",
+     "$"
+    ],
+    [
+     "\\)",
+     "$"
+    ],
+    [
+     ".$",
+     "."
+    ]
+   ],
+   "note": "\\( \\) inside $...$ in answer"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3618",
+   "field": "latexcode",
+   "fixes": [
+    [
+     ")\\equal{}\\",
+     ")=\\"
+    ],
+    [
+     "\\equal{}",
+     "="
+    ],
+    [
+     "x\\plus{}1",
+     "x+1"
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ],
+    [
+     "\\minus{}",
+     "-"
+    ]
+   ],
+   "note": "old-style macros equal/plus/minus; old-style macros equal/plus/minus; old-style macros equal/plus/minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3625",
+   "field": "answer",
+   "fixes": [
+    [
+     "$T",
+     "T"
+    ],
+    [
+     "$",
+     ""
+    ]
+   ],
+   "note": "text answer wrapped in $...$ with \\( \\) inside"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "363",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "{i \\plus{} 1}",
+     "{i + 1}"
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ],
+    [
+     "1 \\equal{} 1",
+     "1 = 1"
+    ],
+    [
+     "\\equal{}",
+     "="
+    ]
+   ],
+   "note": "undefined \\minus/\\plus/\\equal macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3647",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\bigg {\\{}\\frac{n}{202}\\bigg {\\}}",
+     "\\bigg\\{\\frac{n}{202}\\bigg\\}"
+    ],
+    [
+     "\\bigg {\\{}\\frac{2n}{202}\\bigg {\\}}",
+     "\\bigg\\{\\frac{2n}{202}\\bigg\\}"
+    ],
+    [
+     "\\bigg {\\{}\\frac{kn}{202}\\bigg {\\}}",
+     "\\bigg\\{\\frac{kn}{202}\\bigg\\}"
+    ]
+   ],
+   "note": "\bigg with braced delimiter (KaTeX)"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3658",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "a^2\\plus{}b^2\\plus{}c^2\\equal{}a^2b^2",
+     "a^2+b^2+c^2=a^2b^2"
+    ]
+   ],
+   "note": "old \\equal/\\plus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "366",
+   "field": "answer",
+   "fixes": [
+    [
+     "$The very",
+     "The very"
+    ],
+    [
+     "2079. \\]$",
+     "2079. \\]"
+    ]
+   ],
+   "note": "answer text wrapped in $ with \\[ \\]"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3673",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "p^2 \\plus{} 4$,",
+     "p^2 + 4$,"
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ]
+   ],
+   "note": "legacy \\equal/\\plus/\\minus macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3703",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "x\\plus{}a",
+     "x+a"
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ]
+   ],
+   "note": "old-style macros equal/plus/minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3768",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "5px",
+     "5pt"
+    ]
+   ],
+   "note": "invalid unit px"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3831",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "AB \\equal{} AC",
+     "AB = AC"
+    ],
+    [
+     "K \\equal{} 45",
+     "K = 45"
+    ]
+   ],
+   "note": "\\equal"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3844",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "S \\equal{} \\{",
+     "S = \\{"
+    ]
+   ],
+   "note": "old \\equal"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3849",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\plus{}",
+     "+"
+    ]
+   ],
+   "note": "legacy \\equal/\\plus/\\minus macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3856",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "n\\minus{}1",
+     "n-1"
+    ],
+    [
+     "}\\minus{}m",
+     "}-m"
+    ],
+    [
+     "\\minus{}",
+     "-"
+    ]
+   ],
+   "note": "old-style macros equal/plus/minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3866",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "^\\plus{}$",
+     "^+$"
+    ],
+    [
+     " \\plus{} ",
+     " + "
+    ],
+    [
+     " \\plus{}$",
+     " +$"
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ],
+    [
+     "\\equal{}",
+     "="
+    ]
+   ],
+   "note": "undefined \\minus/\\plus/\\equal macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3876",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "f(f(n) \\plus{} f(m)) \\equal{} m \\plus{} n",
+     "f(f(n) + f(m)) = m + n"
+    ]
+   ],
+   "note": "\\plus, \\equal"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3900",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\right) \\equal{} x$",
+     "\\right) = x$"
+    ],
+    [
+     "(x \\minus{} 1)y^{xy \\minus{} 1}",
+     "(x - 1)y^{xy - 1}"
+    ]
+   ],
+   "note": "old \\equal/\\minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3901",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "x \\plus{} y",
+     "x + y"
+    ],
+    [
+     "y \\plus{} z",
+     "y + z"
+    ],
+    [
+     " z \\equal{} a ",
+     " z = a "
+    ],
+    [
+     "a \\plus{} b",
+     "a + b"
+    ],
+    [
+     "b \\plus{} c",
+     "b + c"
+    ],
+    [
+     "\\equal{}",
+     "="
+    ],
+    [
+     "x \\plus{} b",
+     "x + b"
+    ],
+    [
+     "y \\plus{} c",
+     "y + c"
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ]
+   ],
+   "note": "legacy \\equal/\\plus/\\minus macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3926",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\equal{}",
+     "="
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ]
+   ],
+   "note": "old-style macros equal/plus/minus; old-style macros equal/plus/minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3928",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\minus{}",
+     "-"
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ]
+   ],
+   "note": "undefined \\minus/\\plus/\\equal macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "393",
+   "field": "answer",
+   "fixes": [
+    [
+     "$The only solution is \\((a, b, c, d) = (5, -3, 2, 3)\\).$",
+     "The only solution is $(a, b, c, d) = (5, -3, 2, 3)$."
+    ]
+   ],
+   "note": "\\( \\) inside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3956",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "f(m \\plus{} n) \\geq f(m) \\plus{} f(f(n)) \\minus{} 1",
+     "f(m + n) \\geq f(m) + f(f(n)) - 1"
+    ]
+   ],
+   "note": "\\plus, \\minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3963",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "a_{1}\\equal{}",
+     "a_{1}="
+    ],
+    [
+     "a_{n\\plus{}1}\\equal{}a_{n}",
+     "a_{n+1}=a_{n}"
+    ],
+    [
+     "\\pi\\right\\rceil\\equal{}4",
+     "\\pi\\right\\rceil=4"
+    ],
+    [
+     "2007\\right\\rceil\\equal{}2007",
+     "2007\\right\\rceil=2007"
+    ]
+   ],
+   "note": "old \\equal/\\plus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "3990",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\equal{}",
+     "="
+    ]
+   ],
+   "note": "legacy \\equal/\\plus/\\minus macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "401",
+   "field": "answer",
+   "fixes": [
+    [
+     "$T",
+     "T"
+    ],
+    [
+     "n \\( p",
+     "n $ p"
+    ],
+    [
+     "2 \\) h",
+     "2 $ h"
+    ],
+    [
+     "h \\( x",
+     "h $ x"
+    ],
+    [
+     "} \\) i",
+     "} $ i"
+    ],
+    [
+     "f \\( p",
+     "f $ p"
+    ],
+    [
+     " \\) ",
+     " $ "
+    ],
+    [
+     "\\(",
+     "$"
+    ],
+    [
+     "\\)",
+     "$"
+    ],
+    [
+     ".$",
+     "."
+    ]
+   ],
+   "note": "\\( \\) inside $...$ in answer"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4024",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "B\\equal{}A",
+     "B=A"
+    ],
+    [
+     "A\\equal{}2",
+     "A=2"
+    ],
+    [
+     "\\equal{}",
+     "="
+    ]
+   ],
+   "note": "old-style macros equal/plus/minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4040",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\plus{}",
+     "+"
+    ]
+   ],
+   "note": "undefined \\minus/\\plus/\\equal macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4041",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "a_1 \\equal{} 11^{11}, \\, a_2 \\equal{} 12^{12}, \\, a_3 \\equal{} 13^{13}",
+     "a_1 = 11^{11}, \\, a_2 = 12^{12}, \\, a_3 = 13^{13}"
+    ],
+    [
+     "a_n \\equal{} |a_{n \\minus{} 1} \\minus{} a_{n \\minus{} 2}| \\plus{} |a_{n \\minus{} 2} \\minus{} a_{n \\minus{} 3}|",
+     "a_n = |a_{n - 1} - a_{n - 2}| + |a_{n - 2} - a_{n - 3}|"
+    ]
+   ],
+   "note": "\\plus, \\minus, \\equal"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4049",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\equal{} F(F(n)) \\plus{} F",
+     "= F(F(n)) + F"
+    ]
+   ],
+   "note": "old \\equal/\\plus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4057",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\n[i]",
+     ""
+    ]
+   ],
+   "note": "stray \\$ in answer, stray [i]"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4057",
+   "field": "answer",
+   "fixes": [
+    [
+     ".\\$",
+     ".$"
+    ]
+   ],
+   "note": "stray \\$ in answer, stray [i]"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4068",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\equal{}",
+     "="
+    ]
+   ],
+   "note": "old-style macros equal/plus/minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4080",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\equal{}",
+     "="
+    ]
+   ],
+   "note": "undefined \\minus/\\plus/\\equal macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4082",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "f: \\mathbb{R}^{ \\plus{} }\\to\\mathbb{R}^{ \\plus{} }$",
+     "f: \\mathbb{R}^{ + }\\to\\mathbb{R}^{ + }$"
+    ],
+    [
+     "f\\left(x \\plus{} f\\left(y\\right)\\right) \\equal{} f\\left(x \\plus{} y\\right) \\plus{} f\\left(y\\right)",
+     "f\\left(x + f\\left(y\\right)\\right) = f\\left(x + y\\right) + f\\left(y\\right)"
+    ],
+    [
+     "Here, $ \\mathbb{R}^{ \\plus{} }$",
+     "Here, $ \\mathbb{R}^{ + }$"
+    ],
+    [
+     "\n\n[i]",
+     ""
+    ]
+   ],
+   "note": "\\plus, \\equal, stray [i]"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4085",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "x^2 \\minus{} 2009y \\plus{} 2y^2 \\equal{} 0",
+     "x^2 - 2009y + 2y^2 = 0"
+    ]
+   ],
+   "note": "old \\equal/\\plus/\\minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4087",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\plus{}",
+     "+"
+    ]
+   ],
+   "note": "legacy \\equal/\\plus/\\minus macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4088",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "y \u0015\\g",
+     "y \\g"
+    ],
+    [
+     "\u0015",
+     ""
+    ],
+    [
+     "x\u0001y z",
+     "xyz"
+    ]
+   ],
+   "note": "control characters"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4095",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "[color=#BF0000]",
+     ""
+    ],
+    [
+     "[/color]",
+     ""
+    ]
+   ],
+   "note": "BBCode colour tag with #"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4131",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "a_1!\\plus{}a_2!\\plus{}\\cdots\\plus{}a_n!",
+     "a_1!+a_2!+\\cdots+a_n!"
+    ]
+   ],
+   "note": "\\plus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4135",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "n \\minus{} 1",
+     "n - 1"
+    ]
+   ],
+   "note": "old \\minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4165",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "z \\plus{} y",
+     "z + y"
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ],
+    [
+     "} \\equal{} x",
+     "} = x"
+    ],
+    [
+     "\\equal{}",
+     "="
+    ]
+   ],
+   "note": "legacy \\equal/\\plus/\\minus macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4176",
+   "field": "latexcode",
+   "fixes": [
+    [
+     " (n \\minus{} 1) ",
+     " (n - 1) "
+    ],
+    [
+     " (n \\minus{} 1)$",
+     " (n - 1)$"
+    ],
+    [
+     "\\minus{}",
+     "-"
+    ]
+   ],
+   "note": "old-style macros equal/plus/minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4202",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "n\\plus{}1",
+     "n+1"
+    ],
+    [
+     "n \\plus{} \\",
+     "n + \\"
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ],
+    [
+     "0 \\equal{} a",
+     "0 = a"
+    ],
+    [
+     "n \\equal{} 0",
+     "n = 0"
+    ],
+    [
+     "\\equal{}",
+     "="
+    ]
+   ],
+   "note": "undefined \\minus/\\plus/\\equal macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4220",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "S \\equal{} \\{1",
+     "S = \\{1"
+    ],
+    [
+     "x \\plus{} y \\plus{} z$",
+     "x + y + z$"
+    ]
+   ],
+   "note": "\\plus, \\equal"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4223",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "a^m \\plus{} 1",
+     "a^m + 1"
+    ],
+    [
+     "(a \\plus{} 1)",
+     "(a + 1)"
+    ]
+   ],
+   "note": "old \\plus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4224",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "M \\equal{} \\",
+     "M = \\"
+    ],
+    [
+     "a \\plus{} b",
+     "a + b"
+    ],
+    [
+     ") \\equal{} \\",
+     ") = \\"
+    ],
+    [
+     "n \\plus{} a",
+     "n + a"
+    ],
+    [
+     "\\minus{}",
+     "-"
+    ],
+    [
+     "(n) \\equal{} f(n",
+     "(n) = f(n"
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ],
+    [
+     ") \\equal{} f",
+     ") = f"
+    ],
+    [
+     "i \\equal{} 1",
+     "i = 1"
+    ],
+    [
+     "\\equal{}",
+     "="
+    ]
+   ],
+   "note": "legacy \\equal/\\plus/\\minus macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4228",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\equal{}",
+     "="
+    ],
+    [
+     "x^n \\plus{} (2 ",
+     "x^n + (2 "
+    ],
+    [
+     "2 \\plus{} x",
+     "2 + x"
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ],
+    [
+     "\\minus{}",
+     "-"
+    ]
+   ],
+   "note": "old-style macros equal/plus/minus; old-style macros equal/plus/minus; old-style macros equal/plus/minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4239",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\mathbb{Z}^\\plus{}",
+     "\\mathbb{Z}^+"
+    ],
+    [
+     "a^2\\plus{}b^2\\plus{}c^2\\plus{}d^2 \\equal{} 1989",
+     "a^2+b^2+c^2+d^2 = 1989"
+    ],
+    [
+     "a\\plus{}b\\plus{}c\\plus{}d \\equal{} m^2",
+     "a+b+c+d = m^2"
+    ]
+   ],
+   "note": "\\plus, \\equal"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4241",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\minus{}$ tournament is",
+     "-$ tournament is"
+    ],
+    [
+     "\\minus{}$ tournament.",
+     "-$ tournament."
+    ]
+   ],
+   "note": "old \\minus; lost minus sign in answer"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4241",
+   "field": "answer",
+   "fixes": [
+    [
+     "2^t ? 1",
+     "2^t - 1"
+    ]
+   ],
+   "note": "old \\minus; lost minus sign in answer"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4245",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "cancel{\\",
+     ""
+    ],
+    [
+     "4}}",
+     "4}"
+    ]
+   ],
+   "note": "\\cancel not in preamble"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4263",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\plus{}",
+     "+"
+    ]
+   ],
+   "note": "old-style macros equal/plus/minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4270",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\minus{}",
+     "-"
+    ],
+    [
+     "^2 \\plus{} n}",
+     "^2 + n}"
+    ],
+    [
+     "2 \\plus{} n",
+     "2 + n"
+    ],
+    [
+     "i \\plus{} 1",
+     "i + 1"
+    ],
+    [
+     "+ 1} \\plus{} a_{i",
+     "+ 1} + a_{i"
+    ],
+    [
+     "{i \\plus{} 2}",
+     "{i + 2}"
+    ],
+    [
+     "+ 2} \\plus{} \\ldo",
+     "+ 2} + \\ldo"
+    ],
+    [
+     "+ \\ldots \\plus{} a_{i \\pl",
+     "+ \\ldots + a_{i \\pl"
+    ],
+    [
+     "{i \\plus{} n}",
+     "{i + n}"
+    ],
+    [
+     "< a_{i \\plus{} n \\plu",
+     "< a_{i + n \\plu"
+    ],
+    [
+     "n \\plus{} 1",
+     "n + 1"
+    ],
+    [
+     "} \\plus{} a",
+     "} + a"
+    ],
+    [
+     "i \\plus{} n",
+     "i + n"
+    ],
+    [
+     "n \\plus{} 2",
+     "n + 2"
+    ],
+    [
+     "} \\plus{} \\",
+     "} + \\"
+    ],
+    [
+     "s \\plus{} a",
+     "s + a"
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ]
+   ],
+   "note": "undefined \\minus/\\plus/\\equal macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4272",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\mathbb{Z}^{\\plus{}}",
+     "\\mathbb{Z}^{+}"
+    ]
+   ],
+   "note": "\\plus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4308",
+   "field": "answer",
+   "fixes": [
+    [
+     "$[\n\\boxed",
+     "$\\boxed"
+    ],
+    [
+     "}.}\n\\]$",
+     "}.}$"
+    ]
+   ],
+   "note": "stray \\[ \\] around boxed"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4314",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\equal{}",
+     "="
+    ],
+    [
+     "\\minus{}",
+     "-"
+    ]
+   ],
+   "note": "old-style macros equal/plus/minus; old-style macros equal/plus/minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4333",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "S_1 \\minus{} S_2 \\equal{} 1989",
+     "S_1 - S_2 = 1989"
+    ]
+   ],
+   "note": "\\minus, \\equal"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4356",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "a\\minus{}b,b\\minus{}c,c\\minus{}d,d\\minus{}a",
+     "a-b,b-c,c-d,d-a"
+    ],
+    [
+     "bc\\minus{}ad",
+     "bc-ad"
+    ],
+    [
+     "ac \\minus{} bd",
+     "ac - bd"
+    ],
+    [
+     "ab \\minus{} cd",
+     "ab - cd"
+    ]
+   ],
+   "note": "old \\minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4386",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\equal{}",
+     "="
+    ],
+    [
+     "i \\plus{} 1",
+     "i + 1"
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ],
+    [
+     "i \\minus{} j",
+     "i - j"
+    ],
+    [
+     "\\minus{}",
+     "-"
+    ]
+   ],
+   "note": "legacy \\equal/\\plus/\\minus macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4407",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "} \\minus{} x",
+     "} - x"
+    ],
+    [
+     "\\minus{}",
+     "-"
+    ]
+   ],
+   "note": "old-style macros equal/plus/minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4409",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\minus{}",
+     "-"
+    ],
+    [
+     "\\equal{}",
+     "="
+    ]
+   ],
+   "note": "undefined \\minus/\\plus/\\equal macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "4422",
+   "field": "answer",
+   "fixes": [
+    [
+     "$\\begin{align*}",
+     "$\\begin{aligned}"
+    ],
+    [
+     "\\end{align*}$",
+     "\\end{aligned}$"
+    ]
+   ],
+   "note": "align* inside $ -> aligned"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "445",
+   "field": "answer",
+   "fixes": [
+    [
+     "t{3}}{2$",
+     "t{3}}{2}$"
+    ]
+   ],
+   "note": "missing closing brace in answer"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "57",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "n \\minus{} 1",
+     "n - 1"
+    ],
+    [
+     "\\minus{}",
+     "-"
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ]
+   ],
+   "note": "undefined \\minus/\\plus/\\equal macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "612",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "formulated n different",
+     "formulated $n$ different"
+    ],
+    [
+     "statements A_{1}, A_{2}, \\ldots, A_{n}.",
+     "statements $A_{1}, A_{2}, \\ldots, A_{n}$."
+    ],
+    [
+     "implication A_{i} \\Rightarrow A_{j}, i \\neq j.",
+     "implication $A_{i} \\Rightarrow A_{j}$, $i \\neq j$."
+    ],
+    [
+     "if A_{i} \\Rightarrow A_{j} and A_{j} \\Rightarrow A_{k} have",
+     "if $A_{i} \\Rightarrow A_{j}$ and $A_{j} \\Rightarrow A_{k}$ have"
+    ],
+    [
+     "use A_{i} \\Rightarrow A_{k} as",
+     "use $A_{i} \\Rightarrow A_{k}$ as"
+    ]
+   ],
+   "note": "bare math not in $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "649",
+   "field": "answer",
+   "fixes": [
+    [
+     "$There does",
+     "There does"
+    ],
+    [
+     "\\).$",
+     "\\)."
+    ]
+   ],
+   "note": "answer text wrapped in $ with \\( \\)"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "68",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "f(a) \\minus{} f(b)",
+     "f(a) - f(b)"
+    ],
+    [
+     "{a \\minus{} b}",
+     "{a - b}"
+    ]
+   ],
+   "note": "\\minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "685",
+   "field": "answer",
+   "fixes": [
+    [
+     "$\\begin{tabular}{ll} 00000000 & 00110101 \\ 11001010 & 10011110 \\ 11100001 & 01101011 \\ 11010100 & 01100110 \\ 10111001 & 10010011 \\ 01111100 & 11001101 \\ 00111010 & 10101100 \\ 01010111 & 11110010 \\ 00001111 & 01011001 \\ 10100111 & 11111111 \\ \\end{tabular}$",
+     "$\\begin{array}{ll} 00000000 & 00110101 \\\\ 11001010 & 10011110 \\\\ 11100001 & 01101011 \\\\ 11010100 & 01100110 \\\\ 10111001 & 10010011 \\\\ 01111100 & 11001101 \\\\ 00111010 & 10101100 \\\\ 01010111 & 11110010 \\\\ 00001111 & 01011001 \\\\ 10100111 & 11111111 \\\\ \\end{array}$"
+    ]
+   ],
+   "note": "tabular in $ -> array, row breaks restored"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "719",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "n \\o",
+     "n $\\o"
+    ],
+    [
+     "If \\me",
+     "If $\\me"
+    ],
+    [
+     "f \\m",
+     "f $\\m"
+    ]
+   ],
+   "note": "unwrapped math"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "722",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\overline{A B}$ is",
+     "$\\overline{A B}$ is"
+    ],
+    [
+     "\\overline{A D}$ is",
+     "$\\overline{A D}$ is"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "744",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "of \\pi / 6$",
+     "of $\\pi / 6$"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "75",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\minus{}",
+     "-"
+    ]
+   ],
+   "note": "old \\minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "769",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "Let \\left\\{a_{i}\\right\\} be",
+     "Let $\\left\\{a_{i}\\right\\}$ be"
+    ],
+    [
+     "of \\{0,1\\} such",
+     "of $\\{0,1\\}$ such"
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "78",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\plus{}",
+     "+"
+    ]
+   ],
+   "note": "legacy \\equal/\\plus/\\minus macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "783",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "any \\pi \\in",
+     "any $\\pi \\in"
+    ],
+    [
+     "such that \\pi(1)",
+     "such that $\\pi(1)"
+    ],
+    [
+     "Compute \\sum",
+     "Compute $\\sum"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "795",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "f \\s",
+     "f $\\s"
+    ],
+    [
+     " \\",
+     " $\\"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "8",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "A \\equal{} (",
+     "A = ("
+    ],
+    [
+     "B \\equal{} (",
+     "B = ("
+    ],
+    [
+     "\\equal{}",
+     "="
+    ],
+    [
+     "1 \\minus{} x",
+     "1 - x"
+    ],
+    [
+     "\\plus{}",
+     "+"
+    ],
+    [
+     "\\minus{}",
+     "-"
+    ]
+   ],
+   "note": "legacy \\equal/\\plus/\\minus macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "85",
+   "field": "latexcode",
+   "fixes": [
+    [
+     ")\\equal{}\\",
+     ")=\\"
+    ],
+    [
+     "\\equal{}",
+     "="
+    ]
+   ],
+   "note": "old-style macros equal/plus/minus"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "889",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "=1 ?",
+     "=1$ ?"
+    ]
+   ],
+   "note": "missing closing $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "89",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\plus{}",
+     "+"
+    ]
+   ],
+   "note": "undefined \\minus/\\plus/\\equal macros"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "904",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "and \\left(3 x",
+     "and $\\left(3 x"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "905",
+   "field": "answer",
+   "fixes": [
+    [
+     "2^{15}$",
+     "2^{15}}$"
+    ]
+   ],
+   "note": "answer brace"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "92",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\angle{A}\\equal{}60^o",
+     "\\angle{A}=60^\\circ"
+    ],
+    [
+     "BC\\equal{}CD\\equal{}1",
+     "BC=CD=1"
+    ]
+   ],
+   "note": "\\equal, degree"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "934",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "lines \\overline{A B}",
+     "lines $\\overline{A B}"
+    ],
+    [
+     "and \\overline{C D}$",
+     "and $\\overline{C D}$"
+    ]
+   ],
+   "note": "missing opening $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "947",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "$ ?=",
+     "$ $?="
+    ],
+    [
+     "5.",
+     "5$."
+    ]
+   ],
+   "note": "math not delimited"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "976",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "Find \\lim _{n \\rightarrow \\infty} c(n) / n.",
+     "Find $\\lim _{n \\rightarrow \\infty} c(n) / n$."
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "976",
+   "field": "answer",
+   "fixes": [
+    [
+     "1-65 / 24 e",
+     "$1-65 / 24 e$"
+    ]
+   ],
+   "note": "math outside $"
+  },
+  {
+   "set": "Omni-MATH",
+   "number": "997",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "that \\frac{A G}",
+     "that $\\frac{A G}"
+    ],
+    [
+     "=\\rho. For",
+     "=\\rho$. For"
+    ]
+   ],
+   "note": "bare math not in $"
+  },
+  {
+   "set": "U-MATH",
+   "number": "01683c2c-a5b7-4bff-8e4f-d8fdad3cac45",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\arccot",
+     "\\operatorname{arccot}"
+    ]
+   ],
+   "note": "undefined \\arccot"
+  },
+  {
+   "set": "U-MATH",
+   "number": "1ea61b4b-45e2-493c-8d9a-14357d27796d",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "### ",
+     ""
+    ]
+   ],
+   "note": "markdown heading marks"
+  },
+  {
+   "set": "U-MATH",
+   "number": "558c9ebf-be00-40bc-a0cd-e1a4432bac21",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "x=_)",
+     "x=\\_)"
+    ],
+    [
+     "y=_)",
+     "y=\\_)"
+    ]
+   ],
+   "note": "underscore in text"
+  },
+  {
+   "set": "U-MATH",
+   "number": "a3940e7d-d8a4-47f5-a5b8-fd8850fea3e8",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\arccot",
+     "\\operatorname{arccot}"
+    ]
+   ],
+   "note": "undefined \\arccot"
+  },
+  {
+   "set": "U-MATH",
+   "number": "b39f8c2e-5c3c-474e-a7e1-adce52e0feaf",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "[Image_0]\n\n",
+     ""
+    ]
+   ],
+   "note": "image placeholder with bare underscore removed"
+  },
+  {
+   "set": "U-MATH",
+   "number": "e613669c-e828-4933-8ad1-68615e2e0b67",
+   "field": "answer",
+   "fixes": [
+    [
+     "\\left\\langlet,",
+     "\\left\\langle t,"
+    ]
+   ],
+   "note": "macro glued to variable"
+  }
+ ],
+ "dropped": {
+  "HARP 1962 AHSME 27": "owner 2026-11-21 (set-aside hand fix): The three rules to judge are missing and the text is garbled ('with = a$', '$\\textbf{(1)}\\ = = a ! = ...'), so it cannot be repaired by markup.",
+  "Omni-MATH 134": "owner 2026-11-21 (set-aside hand fix): the text is a forum solution post (generalization with proof), not a problem statement",
+  "Omni-MATH 1380": "owner 2026-11-21 (set-aside hand fix): The text is a fragment of a solution ('We can view these conditions as a geometry diagram...'), not a problem statement.",
+  "Omni-MATH 1434": "owner 2026-11-21 (set-aside hand fix): the text is a garbled worked solution about a limit of n-gon perimeters, not a problem statement",
+  "Omni-MATH 1630": "owner 2026-11-21 (set-aside hand fix): refers to parts a and b of a larger question that are not given; not a standalone problem",
+  "Omni-MATH 1725": "owner 2026-11-21 (set-aside hand fix): The problem depends on an attached graph (nodes and edge lengths) that is not in the text, so it cannot be answered or fixed by markup.",
+  "Omni-MATH 1753": "owner 2026-11-21 (set-aside hand fix): statement says three questions but only part of the first is given; the answer (p*, r*) covers a profit quantity that is never asked",
+  "Omni-MATH 176": "owner 2026-11-21 (set-aside hand fix): the second equation of the system is missing from the statement (\"$x+y+z=3$ , , $x^3+y^3+z^3=3$\")",
+  "Omni-MATH 2142": "owner 2026-11-21 (set-aside hand fix): the answer key is not an answer (\"as described in the solution\"), so the proof-style question has no checkable key",
+  "Omni-MATH 2428": "owner 2026-11-21 (set-aside hand fix): depends on missing context (the pairs of students and the setup are not given); not self-contained",
+  "Omni-MATH 243": "owner 2026-11-21 (set-aside hand fix): statement truncated: the three properties (a)-(c) have lost their formulas",
+  "Omni-MATH 247": "owner 2026-11-21 (set-aside hand fix): The answer is cut off after '\\{2, 3, 4, 5, 6, 7' (no closing brace or end of the list), so the full set(s) cannot be recovered.",
+  "Omni-MATH 275": "owner 2026-11-21 (set-aside hand fix): statement truncated: the functional equation is missing",
+  "Omni-MATH 297": "owner 2026-11-21 (set-aside hand fix): statement truncated: conditions (i)-(iii) have lost their formulas",
+  "Omni-MATH 4232": "owner 2026-11-21 (set-aside hand fix): Statement is a fragment of a solution (proof text), not a problem; answer empty.",
+  "Omni-MATH 4311": "owner 2026-11-21 (set-aside hand fix): the answer key (a product of f(a_i)) uses undefined symbols and does not answer the question",
+  "Omni-MATH 4328": "owner 2026-11-21 (set-aside hand fix): Statement is a solution write-up with the actual problem missing; not a problem."
+ }
+}
