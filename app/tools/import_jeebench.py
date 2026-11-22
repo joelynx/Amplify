@@ -1,10 +1,13 @@
-"""Import the maths and physics questions of JEEBench (huggingface.co/datasets/daman1209arora/jeebench, MIT):
-the IIT JEE Advanced papers of 2016-2023 with the problems that need a figure left out, each with a gold
-answer and no solution. Chemistry is skipped (the bank has no chemistry subject).
+"""Import the questions of JEEBench (huggingface.co/datasets/daman1209arora/jeebench, MIT): the IIT JEE
+Advanced papers of 2016-2023 with the problems that need a figure left out, each with a gold answer and no
+solution. Maths and physics came first; chemistry followed (owner 2026-11-22: "import chemistry as well and keep
+in unsolved and uncategorized for now"): the bank has no chemistry subject, so those rows stay Uncategorized and
+no solver takes them.
 
 Filed under the original exam ("Joint Entrance Examination Advanced"), subsource "<year>, Paper <p>, Question
 <n>" (the question number in the paper), original source "JEEBench". Maths rows go to the maths solver (the
-assignments file, as for the answer sets), physics rows wait for the subjects solver.
+assignments file, as for the answer sets), physics rows wait for the subjects solver, chemistry rows wait.
+--only math,phy,chem limits a run to those dataset subjects.
 
 Conversions: option labels "[A]" and "$[\\mathrm{A}]$" become "(A)", options on their own lines; a single-answer
 MCQ gets "Exactly one option is correct." and a multi-answer one "One or more options may be correct." when the
@@ -14,7 +17,7 @@ and drops are in jeebench_fixes.json.
 
 Usage (repo root):
   python -m app.tools.import_jeebench --data DIR --dry-run [--dump rows.json] [--set-aside]
-  python -m app.tools.import_jeebench --data DIR --apply
+  python -m app.tools.import_jeebench --data DIR --apply [--only chem]
 """
 
 from __future__ import annotations
@@ -37,7 +40,7 @@ MAP_PATH = Path("app/data/appdata/benchmarks_map.csv")
 SOLUTIONS_PATH = Path("app/data/appdata/benchmarks_solutions.json")
 ASSIGNMENTS = Path("pipeline/benchmarks_assignments.json")
 SET_ASIDE_PATH = Path("app/data/appdata/benchmarks_set_aside.json")
-GROUPS = {"math": "math", "phy": "subject"}  # chemistry has no bank subject
+GROUPS = {"math": "math", "phy": "subject", "chem": "chemistry"}  # chemistry has no bank subject: no solver
 ONE = "Exactly one option is correct."
 MANY = "One or more options may be correct."
 ONE_RE = re.compile(r"exactly one|only one|one correct|single correct", re.I)
@@ -136,6 +139,10 @@ def display_body(b: str) -> str:
 def mcq(text: str, kind: str) -> str:
     text = tidy(text)
     marks = list(OPTION_RE.finditer(text))
+    if [m.group(2) for m in marks] != ["A", "B", "C", "D"]:
+        # options run on in the text ("... energy. (C) higher ..."; two chemistry rows): each label on its own line
+        text = re.sub(r"[ \t]+\(([A-D])\)[ \t]+", r"\n\n(\1) ", text)
+        marks = list(OPTION_RE.finditer(text))
     labels = [m.group(2) for m in marks]
     if labels != ["A", "B", "C", "D"]:
         raise ValueError(f"option labels {labels}")
@@ -157,11 +164,11 @@ def mcq(text: str, kind: str) -> str:
     return stem + "\n\n" + "\n\n".join(opts)
 
 
-def load(data: Path) -> list[dict]:
+def load(data: Path, only: set[str] | None = None) -> list[dict]:
     raw = json.loads((data / "test.json").read_text(encoding="utf-8"))
     rows = []
     for x in raw:
-        if x["subject"] not in GROUPS:
+        if x["subject"] not in GROUPS or (only and x["subject"] not in only):
             continue
         year, paper = re.fullmatch(r"JEE Adv (\d{4}) Paper (\d)", x["description"]).groups()
         label = f"{year}-P{paper}-{x['index']}"
@@ -195,12 +202,16 @@ def main() -> None:
     p.add_argument("--dump", type=Path, help="write the rows to import as JSON")
     p.add_argument("--set-aside", action="store_true", help="leave out rows that fail the checks (listed in SET_ASIDE_PATH)")
     p.add_argument("--exclude", type=Path, help="with --set-aside: JSON {row label: why} of rows the render checks failed")
+    p.add_argument("--only", help=f"comma-separated dataset subjects to import ({', '.join(GROUPS)}); default all")
     g = p.add_mutually_exclusive_group(required=True)
     g.add_argument("--dry-run", action="store_true")
     g.add_argument("--apply", action="store_true")
     a = p.parse_args()
 
-    rows = load(a.data)
+    only = {s.strip() for s in a.only.split(",")} if a.only else None
+    if only and only - set(GROUPS):
+        raise SystemExit(f"--only: unknown subjects {sorted(only - set(GROUPS))}")
+    rows = load(a.data, only)
     conn = sqlite3.connect(f"file:{DB_PATH.as_posix()}?mode=ro", uri=True)
     dup = duplicates(rows, conn)
     conn.close()

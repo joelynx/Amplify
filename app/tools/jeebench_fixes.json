@@ -1,5 +1,8 @@
 {"fixes": [
  {"key": "JEEBench 2018-P1-37", "field": "latexcode", "fixes": [["\\end{itemize}\n\n", ""]], "note": "stray end of a list that is not in the question"},
  {"key": "JEEBench 2023-P1-17", "field": "latexcode", "fixes": [["(A) (P)", "(A) $(P)"], ["\\rightarrow$ (4)", "\\rightarrow(4)$"]], "note": "option A had its $ in the wrong places"},
- {"key": "JEEBench 2023-P2-11", "field": "latexcode", "fixes": [["A_{8}?", "A_{8}$?"]], "note": "the closing $ of the product was missing"}
+ {"key": "JEEBench 2023-P2-11", "field": "latexcode", "fixes": [["A_{8}?", "A_{8}$?"]], "note": "the closing $ of the product was missing"},
+ {"key": "JEEBench 2016-P1-24", "field": "latexcode", "fixes": [["dependence of\n\nthe rate constant", "dependence of the rate constant"]], "note": "a paragraph break in the middle of option C"},
+ {"key": "JEEBench 2019-P1-26", "field": "latexcode", "fixes": [["\\varepsilon_{av}}$", "\\varepsilon_{av}$"]], "note": "option B had a stray closing brace"},
+ {"key": "JEEBench 2020-P2-19", "field": "latexcode", "fixes": [["\\hline \\text{{} \\begin{array}{c}\\text { Atomic } \\\\\n\\text { number }\\end{array} \\text{}} & \\text{\\multicolumn{3}{|c|}{Ionization Enthalpy} (\\mathrm{kJ} / \\mathrm{mol}) \\text{}} \\\\\n\\text{\\cline { 2 - 4 }} & I_{1} & I_{2} & I_{3} \\\\\n", "\\hline \\text{Atomic number} & I_{1} & I_{2} & I_{3} \\\\\n"], ["are tabulated below.", "are tabulated below (in $\\mathrm{kJ/mol}$)."]], "note": "the tabular conversion mangled the two-row header; one plain header row, the unit in the sentence"}
 ], "dropped": {}}
