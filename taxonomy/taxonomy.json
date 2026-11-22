@@ -13683,6 +13683,454 @@
   ]
  },
  {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum, Atomic and Nuclear Physics",
+  "branch": "Atoms and Nuclei",
+  "subtopic": "Nuclear Properties and Models",
+  "note": "nuclear size, spin and moments, binding-energy formula, shell model; power-plant questions see CET",
+  "est": 50,
+  "orig": [
+   "Quantum, Atomic and Nuclear Physics",
+   "Atoms and Nuclei",
+   "Nuclear Properties and Models"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum, Atomic and Nuclear Physics",
+  "branch": "Atoms and Nuclei",
+  "subtopic": "Nuclear Reactions and Q-Values",
+  "note": "reaction energetics, Q-values, thresholds, cross sections and yields",
+  "est": 50,
+  "orig": [
+   "Quantum, Atomic and Nuclear Physics",
+   "Atoms and Nuclei",
+   "Nuclear Reactions and Q-Values"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum, Atomic and Nuclear Physics",
+  "branch": "Atomic and Molecular Spectra",
+  "subtopic": "Fine Structure and Spin-Orbit Coupling",
+  "note": "spin-orbit splitting, fine structure, Lande g-factor, hyperfine structure",
+  "est": 60,
+  "orig": [
+   "Quantum, Atomic and Nuclear Physics",
+   "Atomic and Molecular Spectra",
+   "Fine Structure and Spin-Orbit Coupling"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum, Atomic and Nuclear Physics",
+  "branch": "Atomic and Molecular Spectra",
+  "subtopic": "Zeeman and Stark Effects",
+  "note": "normal and anomalous Zeeman effect, Paschen-Back, Stark shifts of atomic levels",
+  "est": 50,
+  "orig": [
+   "Quantum, Atomic and Nuclear Physics",
+   "Atomic and Molecular Spectra",
+   "Zeeman and Stark Effects"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum, Atomic and Nuclear Physics",
+  "branch": "Atomic and Molecular Spectra",
+  "subtopic": "Multi-Electron Atoms and Term Symbols",
+  "note": "electron configurations, LS and jj coupling, term symbols, Hund's rules, alkali spectra",
+  "est": 60,
+  "orig": [
+   "Quantum, Atomic and Nuclear Physics",
+   "Atomic and Molecular Spectra",
+   "Multi-Electron Atoms and Term Symbols"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum, Atomic and Nuclear Physics",
+  "branch": "Atomic and Molecular Spectra",
+  "subtopic": "X-Ray Spectra",
+  "note": "characteristic X-rays, Moseley's law, absorption edges, Auger effect",
+  "est": 30,
+  "orig": [
+   "Quantum, Atomic and Nuclear Physics",
+   "Atomic and Molecular Spectra",
+   "X-Ray Spectra"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum, Atomic and Nuclear Physics",
+  "branch": "Atomic and Molecular Spectra",
+  "subtopic": "Molecular Rotation and Vibration Spectra",
+  "note": "rotational and vibrational levels and spectra of molecules, Raman lines",
+  "est": 40,
+  "orig": [
+   "Quantum, Atomic and Nuclear Physics",
+   "Atomic and Molecular Spectra",
+   "Molecular Rotation and Vibration Spectra"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum, Atomic and Nuclear Physics",
+  "branch": "Particle Physics",
+  "subtopic": "Conservation Laws and Particle Reactions",
+  "note": "quantum numbers, allowed and forbidden reactions and decays; kinematics see Relativistic Collisions and Decays",
+  "est": 70,
+  "orig": [
+   "Quantum, Atomic and Nuclear Physics",
+   "Particle Physics",
+   "Conservation Laws and Particle Reactions"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum, Atomic and Nuclear Physics",
+  "branch": "Particle Physics",
+  "subtopic": "Quark Model and Particle Properties",
+  "note": "quark content, isospin, hadron multiplets, particle masses, lifetimes and interactions",
+  "est": 50,
+  "orig": [
+   "Quantum, Atomic and Nuclear Physics",
+   "Particle Physics",
+   "Quark Model and Particle Properties"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum, Atomic and Nuclear Physics",
+  "branch": "Radiation and Detection",
+  "subtopic": "Interaction of Radiation with Matter",
+  "note": "stopping power, range, attenuation of gamma rays, ionization and dose",
+  "est": 60,
+  "orig": [
+   "Quantum, Atomic and Nuclear Physics",
+   "Radiation and Detection",
+   "Interaction of Radiation with Matter"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum, Atomic and Nuclear Physics",
+  "branch": "Radiation and Detection",
+  "subtopic": "Detectors and Accelerators",
+  "note": "counters, spectrometers, Cherenkov detectors, cyclotrons and synchrotrons, beam measurements",
+  "est": 60,
+  "orig": [
+   "Quantum, Atomic and Nuclear Physics",
+   "Radiation and Detection",
+   "Detectors and Accelerators"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Foundations of Quantum Mechanics",
+  "subtopic": "Wave Functions and the Schrodinger Equation",
+  "note": "normalization, probability current, stationary states, time evolution of superpositions",
+  "est": 60,
+  "orig": [
+   "Quantum Mechanics",
+   "Foundations of Quantum Mechanics",
+   "Wave Functions and the Schrodinger Equation"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Foundations of Quantum Mechanics",
+  "subtopic": "Operators, Commutators and Measurement",
+  "note": "Hermitian operators, eigenvalues, expectation values, commutators, uncertainty relations, measurement outcomes",
+  "est": 60,
+  "orig": [
+   "Quantum Mechanics",
+   "Foundations of Quantum Mechanics",
+   "Operators, Commutators and Measurement"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Foundations of Quantum Mechanics",
+  "subtopic": "Representations and Dirac Notation",
+  "note": "bras and kets, matrix representations, change of basis, momentum space, Heisenberg picture",
+  "est": 40,
+  "orig": [
+   "Quantum Mechanics",
+   "Foundations of Quantum Mechanics",
+   "Representations and Dirac Notation"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "One-Dimensional Problems",
+  "subtopic": "Square Wells and Bound States",
+  "note": "infinite and finite wells, delta potentials, bound-state energies and wave functions in one dimension",
+  "est": 70,
+  "orig": [
+   "Quantum Mechanics",
+   "One-Dimensional Problems",
+   "Square Wells and Bound States"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "One-Dimensional Problems",
+  "subtopic": "Potential Barriers and Tunnelling",
+  "note": "steps and barriers, reflection and transmission coefficients, tunnelling probabilities",
+  "est": 40,
+  "orig": [
+   "Quantum Mechanics",
+   "One-Dimensional Problems",
+   "Potential Barriers and Tunnelling"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "One-Dimensional Problems",
+  "subtopic": "Harmonic Oscillator and Ladder Operators",
+  "note": "quantum harmonic oscillator, ladder operators, oscillator eigenstates and coherent combinations",
+  "est": 60,
+  "orig": [
+   "Quantum Mechanics",
+   "One-Dimensional Problems",
+   "Harmonic Oscillator and Ladder Operators"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Angular Momentum and Spin",
+  "subtopic": "Orbital Angular Momentum",
+  "note": "L^2 and L_z eigenstates, spherical harmonics, rigid rotor, angular momentum commutators",
+  "est": 50,
+  "orig": [
+   "Quantum Mechanics",
+   "Angular Momentum and Spin",
+   "Orbital Angular Momentum"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Angular Momentum and Spin",
+  "subtopic": "Spin and Pauli Matrices",
+  "note": "spin-1/2 states, Pauli matrices, spin precession, Stern-Gerlach measurements",
+  "est": 60,
+  "orig": [
+   "Quantum Mechanics",
+   "Angular Momentum and Spin",
+   "Spin and Pauli Matrices"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Angular Momentum and Spin",
+  "subtopic": "Addition of Angular Momenta",
+  "note": "coupled bases, Clebsch-Gordan coefficients, singlet and triplet states, total angular momentum",
+  "est": 40,
+  "orig": [
+   "Quantum Mechanics",
+   "Angular Momentum and Spin",
+   "Addition of Angular Momenta"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Central Potentials",
+  "subtopic": "Hydrogen Atom (Schrodinger Treatment)",
+  "note": "radial equation, hydrogen wave functions and expectation values; Bohr-model estimates see Bohr Model",
+  "est": 50,
+  "orig": [
+   "Quantum Mechanics",
+   "Central Potentials",
+   "Hydrogen Atom (Schrodinger Treatment)"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Central Potentials",
+  "subtopic": "Three-Dimensional Wells and Oscillators",
+  "note": "3D boxes, spherical wells, isotropic oscillators, degeneracies of three-dimensional bound states",
+  "est": 40,
+  "orig": [
+   "Quantum Mechanics",
+   "Central Potentials",
+   "Three-Dimensional Wells and Oscillators"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Approximation Methods",
+  "subtopic": "Time-Independent Perturbation Theory",
+  "note": "first- and second-order energy shifts, degenerate perturbation theory",
+  "est": 60,
+  "orig": [
+   "Quantum Mechanics",
+   "Approximation Methods",
+   "Time-Independent Perturbation Theory"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Approximation Methods",
+  "subtopic": "Variational Method",
+  "note": "trial wave functions, upper bounds on ground-state energies",
+  "est": 25,
+  "orig": [
+   "Quantum Mechanics",
+   "Approximation Methods",
+   "Variational Method"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Approximation Methods",
+  "subtopic": "Time-Dependent Perturbation and Transition Rates",
+  "note": "transition probabilities, Fermi golden rule, selection rules, sudden perturbations",
+  "est": 60,
+  "orig": [
+   "Quantum Mechanics",
+   "Approximation Methods",
+   "Time-Dependent Perturbation and Transition Rates"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Approximation Methods",
+  "subtopic": "Adiabatic and WKB Approximations",
+  "note": "adiabatic theorem, Berry phase, WKB quantization and tunnelling",
+  "est": 50,
+  "orig": [
+   "Quantum Mechanics",
+   "Approximation Methods",
+   "Adiabatic and WKB Approximations"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Scattering Theory",
+  "subtopic": "Born Approximation",
+  "note": "scattering amplitude and cross section in the Born approximation",
+  "est": 40,
+  "orig": [
+   "Quantum Mechanics",
+   "Scattering Theory",
+   "Born Approximation"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Scattering Theory",
+  "subtopic": "Partial Waves and Phase Shifts",
+  "note": "partial-wave expansion, phase shifts, low-energy and resonance scattering",
+  "est": 40,
+  "orig": [
+   "Quantum Mechanics",
+   "Scattering Theory",
+   "Partial Waves and Phase Shifts"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Many-Particle and Field Problems",
+  "subtopic": "Identical Particles and Exchange Symmetry",
+  "note": "bosons and fermions, symmetrized states, Pauli exclusion, exchange energy, helium-like systems",
+  "est": 50,
+  "orig": [
+   "Quantum Mechanics",
+   "Many-Particle and Field Problems",
+   "Identical Particles and Exchange Symmetry"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Many-Particle and Field Problems",
+  "subtopic": "Landau Levels and Gauge Invariance",
+  "note": "quantum charged particle in magnetic fields, Landau levels, gauge transformations, Aharonov-Bohm effect",
+  "est": 30,
+  "orig": [
+   "Quantum Mechanics",
+   "Many-Particle and Field Problems",
+   "Landau Levels and Gauge Invariance"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Quantum Optics and Information",
+  "subtopic": "Quantized Light and Coherent States",
+  "note": "photon number and coherent states, beam splitters, photon statistics, atom-field interaction",
+  "est": 60,
+  "orig": [
+   "Quantum Mechanics",
+   "Quantum Optics and Information",
+   "Quantized Light and Coherent States"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Quantum Optics and Information",
+  "subtopic": "Qubits, Entanglement and Quantum Gates",
+  "note": "qubit states, density matrices, entanglement, Bell inequalities, quantum gates and circuits",
+  "est": 50,
+  "orig": [
+   "Quantum Mechanics",
+   "Quantum Optics and Information",
+   "Qubits, Entanglement and Quantum Gates"
+  ]
+ },
+ {
   "group": "G8",
   "subject": "Thermodynamics",
   "topic": "Heat and Thermodynamics",
@@ -13897,6 +14345,132 @@
    "Heat and Thermodynamics",
    "Phase Change and Moist Air",
    "Humidity and Psychrometrics"
+  ]
+ },
+ {
+  "group": "G8",
+  "subject": "Thermodynamics",
+  "topic": "Heat and Thermodynamics",
+  "branch": "Thermodynamic Relations",
+  "subtopic": "Thermodynamic Potentials and Maxwell Relations",
+  "note": "free energies, Maxwell relations, response functions, derivative identities",
+  "est": 50,
+  "orig": [
+   "Heat and Thermodynamics",
+   "Thermodynamic Relations",
+   "Thermodynamic Potentials and Maxwell Relations"
+  ]
+ },
+ {
+  "group": "G8",
+  "subject": "Thermodynamics",
+  "topic": "Heat and Thermodynamics",
+  "branch": "Thermodynamic Relations",
+  "subtopic": "Phase Equilibrium and the Clausius-Clapeyron Equation",
+  "note": "coexistence curves, Clausius-Clapeyron, chemical potential equality, phase rule",
+  "est": 40,
+  "orig": [
+   "Heat and Thermodynamics",
+   "Thermodynamic Relations",
+   "Phase Equilibrium and the Clausius-Clapeyron Equation"
+  ]
+ },
+ {
+  "group": "G8",
+  "subject": "Thermodynamics",
+  "topic": "Heat and Thermodynamics",
+  "branch": "Thermodynamic Relations",
+  "subtopic": "Non-Equilibrium and Transport Processes",
+  "note": "entropy production, Onsager relations, thermoelectric and transport coefficients",
+  "est": 25,
+  "orig": [
+   "Heat and Thermodynamics",
+   "Thermodynamic Relations",
+   "Non-Equilibrium and Transport Processes"
+  ]
+ },
+ {
+  "group": "G8",
+  "subject": "Thermodynamics",
+  "topic": "Statistical Mechanics",
+  "branch": "Statistical Ensembles",
+  "subtopic": "Microcanonical Ensemble and Statistical Entropy",
+  "note": "counting microstates, Boltzmann entropy, two-level and spin systems",
+  "est": 50,
+  "orig": [
+   "Statistical Mechanics",
+   "Statistical Ensembles",
+   "Microcanonical Ensemble and Statistical Entropy"
+  ]
+ },
+ {
+  "group": "G8",
+  "subject": "Thermodynamics",
+  "topic": "Statistical Mechanics",
+  "branch": "Statistical Ensembles",
+  "subtopic": "Canonical Ensemble and Partition Functions",
+  "note": "partition functions, free energy, thermal averages and fluctuations from the canonical ensemble",
+  "est": 90,
+  "orig": [
+   "Statistical Mechanics",
+   "Statistical Ensembles",
+   "Canonical Ensemble and Partition Functions"
+  ]
+ },
+ {
+  "group": "G8",
+  "subject": "Thermodynamics",
+  "topic": "Statistical Mechanics",
+  "branch": "Statistical Ensembles",
+  "subtopic": "Grand Canonical Ensemble",
+  "note": "chemical potential, grand partition function, adsorption, particle-number fluctuations",
+  "est": 40,
+  "orig": [
+   "Statistical Mechanics",
+   "Statistical Ensembles",
+   "Grand Canonical Ensemble"
+  ]
+ },
+ {
+  "group": "G8",
+  "subject": "Thermodynamics",
+  "topic": "Statistical Mechanics",
+  "branch": "Quantum and Classical Gases",
+  "subtopic": "Maxwell-Boltzmann Statistics and Equipartition",
+  "note": "classical ideal gas from statistics, internal degrees of freedom; speed distributions see Kinetic Theory",
+  "est": 90,
+  "orig": [
+   "Statistical Mechanics",
+   "Quantum and Classical Gases",
+   "Maxwell-Boltzmann Statistics and Equipartition"
+  ]
+ },
+ {
+  "group": "G8",
+  "subject": "Thermodynamics",
+  "topic": "Statistical Mechanics",
+  "branch": "Quantum and Classical Gases",
+  "subtopic": "Fermi-Dirac Gases",
+  "note": "degenerate Fermi gases, electron gas thermodynamics, white dwarfs; solids see Material Science",
+  "est": 70,
+  "orig": [
+   "Statistical Mechanics",
+   "Quantum and Classical Gases",
+   "Fermi-Dirac Gases"
+  ]
+ },
+ {
+  "group": "G8",
+  "subject": "Thermodynamics",
+  "topic": "Statistical Mechanics",
+  "branch": "Quantum and Classical Gases",
+  "subtopic": "Bose-Einstein Gases and Photon Gas",
+  "note": "Bose condensation, photon and phonon gases derived statistically; engineering radiation see Heat Transfer",
+  "est": 60,
+  "orig": [
+   "Statistical Mechanics",
+   "Quantum and Classical Gases",
+   "Bose-Einstein Gases and Photon Gas"
   ]
  },
  {

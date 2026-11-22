@@ -1,0 +1,199 @@
+question_id,source,flags,note
+41841,TheoremQA (Physics / Quantum / tonyxia/quantum1),needs_data,photoelectric timing; target atom area not given
+41883,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 577)",mismatch,solution proves the converse; forbidden does not force l=0
+41926,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 620)",key_conflict,Zn nucleus Z=30; solution used Z=29 (12.24 keV expected)
+41934,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 628)",needs_data,"regime call needs 2p fine-structure splitting, not given"
+41946,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 640)",needs_data,incident flux and alpha energy not given; only proportionality
+41949,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 643)",key_conflict,0.105 nm does not follow from its inputs (about 0.146 nm)
+41951,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 645)",key_conflict,"own numbers give b about 1.004, not 1.04"
+41981,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 675)",needs_data,no atom or field given; 21 cm hyperfine line assumed
+42028,"UGPhysics (Atomic Physics, Nuclear Physics, problem 722)",broken_text;needs_data,Source data missing; neutron mass excess misstated as MeV
+42029,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 723)",key_conflict,1/2 dmu/mu is about 1 percent; 'cannot' does not follow
+42036,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 730)",key_conflict,"displayed numbers give about 1e6-1e7 s-1, not 1e-2"
+42043,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 737)",key_conflict;broken_text,"'Raman series' means Lyman; 5.4e-4 nm is 0.54 pm, not 5.4 pm"
+42051,"UGPhysics (Atomic Physics, Nuclear Physics, problem 745)",needs_data,Decay-energy efficiency referred to but no value given
+42080,"UGPhysics (Atomic Physics, Nuclear Physics, problem 776)",needs_data,Parent nuclide data missing from question
+42082,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 778)",needs_data,differential cross section (1.07e-25 cm2/sr) not given in question
+42091,"UGPhysics (Atomic Physics, Nuclear Physics, problem 789)",key_conflict,"Solution gives 0+ to 5+, then says actually 1+"
+42118,"UGPhysics (Atomic Physics, Nuclear Physics, problem 816)",needs_data,Alpha source energy not given in question
+42135,"UGPhysics (Atomic Physics, Nuclear Physics, problem 834)",key_conflict,"Hour-to-second conversion gives 6.1e10, not stated 2.4e10"
+42156,"UGPhysics (Atomic Physics, Nuclear Physics, problem 855)",broken_text,No explicit question; body is a worked derivation
+42163,"UGPhysics (Atomic Physics, Nuclear Physics, problem 863)",key_conflict,Solution says M1 or E2; L=1 allows only M1
+42165,"UGPhysics (Atomic Physics, Particle Physics, problem 865)",broken_text,Second final state promised but not listed.
+42191,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 891)",needs_data,Solution's 0.770 MeV term is not derived from the given data.
+42208,"UGPhysics (Atomic Physics, Nuclear Physics, problem 909)",mismatch,Solution treats a parity-conserving transition; question gives 0- emission
+42218,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 920)",key_conflict,"Solution's n=2.90e22 is wrong; 13/207 N_A gives 3.78e22, sigma ~5.3 b."
+42219,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 921)",broken_text,Stray (C) label; yes/no statement with no option set.
+42225,"UGPhysics (Atomic Physics, Nuclear Physics, problem 927)",needs_data,Alpha source energy not given in question
+42260,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 963)",needs_data,Incident pi- momentum not given; solution's gamma=1.019 is unexplained.
+42261,"UGPhysics (Atomic Physics, Particle Physics, problem 964)",needs_data,"refers to a decay described above, not given"
+42294,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1001)",needs_data,Decay channel and muon mass not stated
+42302,"UGPhysics (Atomic Physics, Particle Physics, problem 1011)",broken_text,Delta resonance name missing from text
+42307,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1017)",key_conflict,Stray -938 in printed expression; the fraction alone gives 286.1
+42311,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1021)",broken_text,Parts (1) and (2) missing; the average distance is undefined
+42324,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1036)",needs_data,Initial pion and proton energies (at rest) not stated
+42373,"UGPhysics (Atomic Physics, Particle Physics, problem 1093)",broken_text,Wire diameter printed as 50 m (likely um)
+42380,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1100)",needs_data,Target thickness not given; solution assumes 100 cm
+42401,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1124)",needs_data,electron-impact excitation rate balance; gas temperature missing
+42402,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1125)",key_conflict,Printed 29.93 MeV; (60.86-1)x0.511 gives about 30.6 MeV
+42412,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1136)",key_conflict,"Rutherford deflection, Mechanics; final 8mE formula does not follow"
+42418,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1142)",needs_data,Energy-to-charge calibration (4 MeV = 3.2e-10 C) not in question
+42419,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1143)",needs_data,"rest wavelengths (H-delta, H-gamma) not given"
+42428,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1153)",key_conflict,stated 2.264e-12 m; h/(m_e c) is about 2.426e-12 m
+42432,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1157)",key_conflict,stated 7e9 Hz; 14 GHz/T x 5 T gives 7e10 Hz
+42436,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1161)",key_conflict,stated 6.6e-5 nm; h/(2Mc) for H is about 6.6e-7 nm
+42440,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1165)",key_conflict,"solution intermediates wrong (4/9, 36/207); final 1380 correct"
+42445,"UGPhysics (Atomic Physics, Particle Physics, problem 1170)",needs_data,Resonance cross-section formula not given in question
+42447,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1172)",mismatch,"solution formula dimensionally wrong; ignores h, c, k, m_p"
+42449,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1174)",broken_text;key_conflict,question's relation missing; 1.566e3 m/s wrong for 1 u (gives 2.2e3)
+42456,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1181)",key_conflict,"a_n = n^2 a0 ~530 nm, so C not A"
+42458,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1183)",needs_data,Bragg law; Bragg angle and spacing not given
+42463,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1188)",broken_text,part (2) instruction missing; transition table orphaned
+42466,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1191)",key_conflict,own result 207 nm; D (248 nm) reached by changing energy sum
+42467,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1192)",mismatch,question says average KE = kT; solution uses 3/2 kT
+42485,"UGPhysics (Atomic Physics, Nuclear Physics, problem 1211)",key_conflict,"Formula gives 239/235 x 5.1 = 5.19 MeV, not 5.232."
+42487,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1213)",needs_data,bond length not given; B value 1036 m-1 unsourced
+42491,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1217)",mismatch,3.79 keV is an electron energy; L-line max ~1.2 keV (~1 nm)
+42493,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1219)",key_conflict,own formula gives pi/8; correct is R h c alpha^2/16
+42495,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1221)",broken_text,part (a) missing; only (b) 2H2 given
+42509,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1235)",broken_text,parts (a)-(c) missing; only (d) given
+42511,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1237)",broken_text,term value units garbled (2.44927 m-1)
+42512,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1238)",key_conflict,sigma-pi allowed by dLambda=1; none unsupported; no electronic-state subtopic
+42514,"UGPhysics (Atomic Physics, Nuclear Physics, problem 1240)",needs_data,Target thickness and solid angle not given; solution's 10^25 and 10^-3 unexplained.
+42519,"UGPhysics (Atomic Physics, Nuclear Physics, problem 1245)",broken_text;key_conflict,"1H+2H cannot form 4He (A 3 to 4); the given values are u, not MeV."
+42523,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1249)",key_conflict,3 eps/4 + 2 mu B from given H; solution gives eps/3
+42531,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1257)",key_conflict,"2/3 exp(-0.122) = 0.59, not 0.059"
+42539,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1265)",key_conflict,own formula gives 1:3.00:4.98
+42548,"UGPhysics (Atomic Physics, Nuclear Physics, problem 1274)",key_conflict,Asks rms radius; solution gives <r^2> = 5.8 fm^2 (rms is 2.4 fm).
+42552,"UGPhysics (Atomic Physics, Nuclear Physics, problem 1278)",needs_data,"Refers to part (1) allowed states, which the question does not give."
+42560,"UGPhysics (Atomic Physics, Nuclear Physics, problem 1286)",broken_text,"X and Y defined as Mo and La, yet said to beta-decay into them."
+42561,"UGPhysics (Atomic Physics, Nuclear Physics, problem 1287)",needs_data,Needs masses given in the previous part; not in this question.
+42563,"UGPhysics (Atomic Physics, Nuclear Physics, problem 1289)",needs_data,Tl-205 capture matrix element and parts (1)-(2) not given.
+42579,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1305)",key_conflict,"own formula gives 7.5e-2 rad, not 2.72e-2 rad"
+42582,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1308)",key_conflict;needs_data,"Radii/voltage from problem 15.7 absent; solution gives V/m, option V/cm"
+42601,"UGPhysics (Atomic Physics, Particle Physics, problem 1327)",mismatch,Solution gives total energy 4.3 GeV; question asks kinetic energy.
+42609,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1336)",key_conflict,"own step hf=(3/8)alpha^2 mc^2 implies 3/8, not 3/(16 pi)"
+42611,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1338)",key_conflict,Printed flux 1.1e2/(m2 s sr) = 0.66/(cm2 min sr): option B
+42615,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1342)",needs_data,Needs atomic masses of 3H and 3He (not given)
+42618,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1345)",needs_data,pi0 speed and gamma (5.8e7 m/s) not given in question
+42624,"UGPhysics (Atomic Physics, Nuclear Physics, problem 1351)",needs_data,Resonance energy 2.55 MeV used in solution is not given.
+42633,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1360)",needs_data,"H and C neutron cross sections (1.5, 1.0 b) not given"
+42635,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1362)",needs_data,"Pion speed (equal to proton's, gamma 426) not stated"
+42637,"UGPhysics (Atomic Physics, Nuclear Physics, problem 1364)",broken_text,Level energy wording garbled ('higher than the split energy level').
+42642,"UGPhysics (Atomic Physics, Particle Physics, problem 1369)",needs_data,Matrix element comes from a previous problem; not given.
+42643,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1370)",mismatch,"Solution treats collider (CM = lab); question has stationary electron, giving about 8e6 GeV"
+42650,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1381)",key_conflict,Printed 85.7 MeV; 1429 x 30 MeV x 2 is 85.7 GeV
+42655,"UGPhysics (Atomic Physics, Nuclear Physics, problem 1386)",needs_data,Irradiation time and fission rate not given; N(T) cannot be fixed.
+42665,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1397)",key_conflict,"own relation gives 0.116 nm, not 0.16 nm"
+42670,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1403)",needs_data,"Pion momentum (59.7 GeV/c, speed equal to proton's) not given"
+42683,"UGPhysics (Atomic Physics, Particle Physics, problem 1417)",needs_data,"Refers to wave function (3), which is not given."
+42690,"UGPhysics (Atomic Physics, Nuclear Physics, problem 1426)",broken_text;needs_data,Setup and original angle missing; solution's 1.05e-3 rad unexplained.
+42692,"UGPhysics (Atomic Physics, Nuclear Physics, problem 1428)",needs_data,Nuclide and its Q-value (654 keV) not given in the question.
+42695,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1431)",needs_data;key_conflict,population n not given; displayed 10^10 gives 0.074 not 0.22
+42701,"UGPhysics (Atomic Physics, Nuclear Physics, problem 1437)",mismatch,Question asks neutron rate; solution gives radioactive-nuclei production rate.
+42703,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1439)",needs_data;mismatch,Ba binding energies not given; solution uses tungsten K edge (69.7 keV)
+42708,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1444)",needs_data,"Relies on part (1) values (+-50 yr, 5000 yr) not restated"
+42711,"UGPhysics (Atomic Physics, Particle Physics, problem 1447)",needs_data,"Needs the |Vcb| value, which the question does not give."
+42712,"UGPhysics (Atomic Physics, Nuclear Physics, problem 1448)",needs_data,19% beta+ branching used by solution; not given in question.
+42720,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1458)",broken_text,asks to reduce intensity to its original value; solution needs no absorber
+42729,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1468)",needs_data,N-shell binding energy (0.4 keV) not given in question
+42740,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1479)",needs_data,Needs pre-thermalization energy and momentum from an earlier part
+42754,"UGPhysics (Atomic Physics, Nuclear Physics, problem 1495)",needs_data,Number of target nuclei not given
+42762,"UGPhysics (Atomic Physics, Atomic and Molecular Physics, problem 1504)",needs_data,initial velocity v0 not given; answer 3.56e4 unexplained
+42779,"UGPhysics (Atomic Physics, Experimental Methods and Particle Beams, problem 1522)",mismatch,Question asks photon energy (500 MeV); solution gives opening angle
+44335,"UGPhysics (Quantum Mechanics, Central Force and Scattering Problems, problem 4270)",key_conflict,Large-n limit should be sqrt(5/6) n^2 a0 from its own formula
+44340,"UGPhysics (Quantum Mechanics, Orbital and Spin Angular Momentum Problems, problem 4275)",needs_data,Q undefined here; P = |<0|Q>|^2 = 1/4
+44393,"UGPhysics (Quantum Mechanics, Adiabatic Approximation Problems, problem 4329)",needs_data,asks about an earlier answer that is not given
+44398,"UGPhysics (Quantum Mechanics, Central Force and Scattering Problems, problem 4334)",key_conflict,Final state drops the 1/2 factor its own C0 gives
+44431,"UGPhysics (Quantum Mechanics, Central Force and Scattering Problems, problem 4369)",key_conflict,"Own bound minimized gives -54 m^3 lambda^4/hbar^6, not -27/32"
+44478,"UGPhysics (Quantum Mechanics, Central Force and Scattering Problems, problem 4418)",key_conflict,Solution calls 0.5 necessary but its sufficient bound is e/4
+44502,"UGPhysics (Quantum Mechanics, Adiabatic Approximation Problems, problem 4442)",key_conflict,final formula not an energy; 1120 suggests r0^4/a^5
+44532,"UGPhysics (Quantum Mechanics, Quantum Information Physics, problem 4472)",needs_data,Refers to previous problem setup not given
+44553,"UGPhysics (Quantum Mechanics, Quantum Information Physics, problem 4493)",needs_data,"Relies on earlier problems' results, not given"
+44580,"UGPhysics (Quantum Mechanics, Linear Dynamics Problems, problem 4521)",mismatch,Question says a->0; solution takes alpha->0
+44611,"UGPhysics (Quantum Mechanics, Central Force and Scattering Problems, problem 4553)",broken_text,"Second table E3 row garbled (l=0, m=0); true l=1,3"
+44635,"UGPhysics (Quantum Mechanics, Scattering Problems, problem 4578)",needs_data,Refers to earlier calculations not included in the text
+44686,"UGPhysics (Quantum Mechanics, Adiabatic Approximation Problems, problem 4629)",needs_data,refers to the matrix of the previous problem
+44688,"UGPhysics (Quantum Mechanics, Linear Dynamics Problems, problem 4631)",needs_data,Which constant? Not defined in the question
+44717,"UGPhysics (Quantum Mechanics, Basic Principles of Quantum Mechanics, problem 4660)",key_conflict,Solution uses 9/13 for P(a1|chi1); setup gives 4/13 (16/169)
+44734,"UGPhysics (Quantum Mechanics, Linear Dynamics Problems, problem 4678)",mismatch,Question is about a nitrogen atom; solution is generic 1D talk
+44742,"UGPhysics (Quantum Mechanics, Central Force and Scattering Problems, problem 4686)",mismatch,"Solution gives <1/r>, not the asked <r>"
+44750,"UGPhysics (Quantum Mechanics, Central Force and Scattering Problems, problem 4694)",key_conflict,"Own dV/dr gives mu^2 w0^2 in the denominator, not mu w0^2"
+44752,"UGPhysics (Quantum Mechanics, Linear Dynamics Problems, problem 4696)",key_conflict,Solution's |2> phase should be e^{-2i w0 t}; its <A> arithmetic also wrong
+44758,"UGPhysics (Quantum Mechanics, Central Force and Scattering Problems, problem 4702)",key_conflict,11/20 E1 with E1=-13.6 eV gives -7.48 eV
+44759,"UGPhysics (Quantum Mechanics, Linear Dynamics Problems, problem 4703)",key_conflict,Solution drops hbar^2/(2mu) in E; should be -hbar^2/(2 mu a^2)
+44766,"UGPhysics (Quantum Mechanics, Central Force and Scattering Problems, problem 4710)",key_conflict,Own u (exponent Zr/a0) gives n a0/Z; correct exponent is Zr/(n a0)
+44770,"UGPhysics (Quantum Mechanics, Orbital and Spin Angular Momentum Problems, problem 4714)",broken_text,Z undefined; normalization fits lowercase z (p-state)
+44793,"UGPhysics (Quantum Mechanics, Adiabatic Approximation Problems, problem 4737)",key_conflict,constant looks wrong; <p^4>=3(m hbar w/2)^2 gives -3/32
+44806,"UGPhysics (Quantum Mechanics, Adiabatic Approximation Problems, problem 4750)",key_conflict,solution's own Hamiltonian gives -q^2F^2/2k; stated shift has + sign
+44808,"UGPhysics (Quantum Mechanics, Adiabatic Approximation Problems, problem 4752)",key_conflict,"4pi factor dropped; <r^2>=12a0^2, rms 2sqrt3 a0"
+44820,"UGPhysics (Quantum Mechanics, Adiabatic Approximation Problems, problem 4764)",key_conflict,extra hbar*omega inside bracket; correct is (3/2 - lambda^2/32) hbar*omega
+44840,"UGPhysics (Quantum Mechanics, Orbital and Spin Angular Momentum Problems, problem 4784)",needs_data,Refers to previous problem's system; not given
+44844,"UGPhysics (Quantum Mechanics, Orbital and Spin Angular Momentum Problems, problem 4788)",needs_data,"Spin-1 Hamiltonian is in the previous problem, not given"
+44850,"UGPhysics (Quantum Mechanics, Adiabatic Approximation Problems, problem 4794)",key_conflict,induced moment is -dE/dB; gives -e^2a^2B/(2mc^2)
+44851,"UGPhysics (Quantum Mechanics, Variational Methods and Perturbation Theory, problem 4795)",needs_data,"Refers to part (3) answer, not included"
+44853,"UGPhysics (Quantum Mechanics, Orbital and Spin Angular Momentum Problems, problem 4797)",needs_data,Region II field not stated in this question
+44855,"UGPhysics (Quantum Mechanics, Adiabatic Approximation Problems, problem 4799)",key_conflict,second term lacks the factor hbar*omega_L
+44873,"UGPhysics (Quantum Mechanics, Central Force and Scattering Problems, problem 4817)",key_conflict,"Should be (1+x^2)^-2 outside the square root, per its own integral"
+44895,"UGPhysics (Quantum Mechanics, Others, problem 4839)",mismatch,Solution uses Sz=+1/2; question says -1/2
+44919,"UGPhysics (Quantum Mechanics, Central Force and Scattering Problems, problem 4863)",key_conflict,"Own step gives mu*V0*a^2/hbar^2 > 27/32; line drops mu, 4 misplaced"
+44940,"UGPhysics (Quantum Mechanics, Others, problem 4884)",needs_data,Trial function with parameter lambda not given
+44992,"UGPhysics (Quantum Mechanics, Variational Methods and Perturbation Theory, problem 4936)",needs_data,Lorentzian spectrum defined in omitted text
+44993,"UGPhysics (Quantum Mechanics, Adiabatic Approximation Problems, problem 4937)",needs_data,transition element epsilon not defined in question
+45006,"UGPhysics (Quantum Mechanics, Others, problem 4950)",needs_data,Trial wave function (lambda) not given in question
+45012,"UGPhysics (Quantum Mechanics, Adiabatic Approximation Problems, problem 4956)",needs_data;key_conflict,2*Delta=cosh(gamma) dimensionally invalid; 1.4e5 V/m does not follow
+45044,"UGPhysics (Quantum Mechanics, Orbital and Spin Angular Momentum Problems, problem 4988)",needs_data,Setup and assumptions referred to but not given
+45055,"UGPhysics (Quantum Mechanics, Linear Dynamics Problems, problem 4999)",broken_text;needs_data,No question asked; refers to part (1) wave functions
+45065,"UGPhysics (Quantum Mechanics, Linear Dynamics Problems, problem 5009)",needs_data,Energy-level expression (Eq. 8) not provided
+45067,"UGPhysics (Quantum Mechanics, Others, problem 5011)",broken_text,Operator definitions missing after 'Define the following operators'
+45068,"UGPhysics (Quantum Mechanics, Adiabatic Approximation Problems, problem 5012)",key_conflict,second-order shift is negative; sign dropped (E1-En<0)
+45078,"UGPhysics (Quantum Mechanics, Adiabatic Approximation Problems, problem 5022)",needs_data,well width a and n=1 state basis not given in question
+45081,"UGPhysics (Quantum Mechanics, Adiabatic Approximation Problems, problem 5025)",needs_data,epsilon and H' defined only in part (1)
+45084,"UGPhysics (Quantum Mechanics, Others, problem 5028)",broken_text,Ellipse sentence garbled and irrelevant; circle circumference 1 given
+45085,"UGPhysics (Quantum Mechanics, Adiabatic Approximation Problems, problem 5029)",broken_text,given eigenstate should read cos(theta/2); solution uses that
+45100,"UGPhysics (Quantum Mechanics, Quantum Optics, problem 5074)",key_conflict,Solution ratio 3.63 vs stated factor 2.63
+45117,"UGPhysics (Quantum Mechanics, Quantum Optics, problem 5112)",key_conflict,Stated 2e8 m^-2 s^-1; I*lambda/(hc) gives about 2e18
+45160,"UGPhysics (Quantum Mechanics, Quantum Optics, problem 5289)",key_conflict,Luminance (photometry); no subtopic. Stated 5.25e3 but 525/(0.025x0.4)=5.25e4
+45179,"UGPhysics (Quantum Mechanics, Quantum Optics, problem 5353)",key_conflict,"Radiance = P/(S Omega); own values give 1e9, stated 5e8"
+45182,"UGPhysics (Quantum Mechanics, Quantum Optics, problem 5371)",key_conflict,"sqrt(mu0 c S) with S=1.4e3 gives about 726 V/m, not 419"
+45187,"UGPhysics (Quantum Mechanics, Quantum Optics, problem 5400)",key_conflict,"Formula gives (2.25)^2 = 5.06, not stated 2.25"
+45188,"UGPhysics (Quantum Mechanics, Quantum Optics, problem 5402)",key_conflict,Stated 0.70 rad but 4 degrees is about 0.07 rad
+45195,"UGPhysics (Quantum Mechanics, Quantum Optics, problem 5430)",key_conflict,"gamma 1.2 gives v=0.55c, not 0.53c"
+45197,"UGPhysics (Quantum Mechanics, Quantum Optics, problem 5440)",key_conflict,"Photoelectric effect (no subtopic); formula gives 3.82e-7 m, not 4.93e-7 m"
+45202,"UGPhysics (Quantum Mechanics, Quantum Optics, problem 5451)",key_conflict,Printed lambda^3/lambda^2 exponents; stated 2.12e15 needs lambda^5/lambda^4
+45210,"UGPhysics (Quantum Mechanics, Quantum Optics, problem 5507)",key_conflict,Luminance (photometry); given 5.25e3 but I/(l d) gives 5.25e4
+45529,"UGPhysics (Semiconductor Physics, Others, problem 4007)",broken_text,Option C baryon symbol garbled (E for Xi)
+45764,"UGPhysics (Statistical Mechanics, Distribution Function and Statistical Entropy, problem 2968)",needs_data,"Relies on previous section's setup, not given"
+45799,"UGPhysics (Statistical Mechanics, Maxwell-Boltzmann Statistics, problem 3030)",needs_data,Solar radiation balance; radiation belongs to Heat Transfer.
+45815,"UGPhysics (Statistical Mechanics, Maxwell-Boltzmann Statistics, problem 3052)",needs_data,Gas type (degrees of freedom) not stated for air.
+45831,"UGPhysics (Statistical Mechanics, Maxwell-Boltzmann Statistics, problem 3070)",key_conflict,"Stated 1.9e3 cm/s; sqrt(3kT/M) gives 1.9e5 cm/s (rms, not mean)."
+45858,"UGPhysics (Statistical Mechanics, Maxwell-Boltzmann Statistics, problem 3098)",broken_text,First case is not described in the question.
+45863,"UGPhysics (Statistical Mechanics, Distribution Function and Statistical Entropy, problem 3104)",mismatch,"Table rows (+-1,+-1,0) have n=2, not n=4"
+45912,"UGPhysics (Statistical Mechanics, Bose-Einstein Statistics, problem 3155)",broken_text,Refers to an expression not given in the text
+45922,"UGPhysics (Statistical Mechanics, Bose-Einstein Statistics, problem 3165)",broken_text,"Parts (1)-(2) and definitions of d, lambda, g_s missing"
+45977,"UGPhysics (Statistical Mechanics, Kinetic Theory of Gases, problem 3247)",broken_text,"No explicit ask; relation stated, solution absent."
+45985,"UGPhysics (Statistical Mechanics, Kinetic Theory of Gases, problem 3256)",broken_text,Wavelength lambda not defined in the question.
+46008,"UGPhysics (Statistical Mechanics, Distribution Function and Statistical Entropy, problem 3313)",needs_data,Results (2) and (3) it refers to are not given
+46036,"UGPhysics (Statistical Mechanics, Distribution Function and Statistical Entropy, problem 3425)",needs_data,Relies on W and 'above hypothesis' from earlier parts
+46041,"UGPhysics (Statistical Mechanics, Maxwell-Boltzmann Statistics, problem 3437)",needs_data,Metal work function W is not given in the question
+46062,"UGPhysics (Statistical Mechanics, Maxwell-Boltzmann Statistics, problem 3471)",mismatch,"Solution computes mean velocity (zero), not mean speed"
+46068,"UGPhysics (Statistical Mechanics, Ensemble Theory, problem 3479)",key_conflict,Given Z yields u = -2 lambda m/(3+lambda^2); solution's u differs
+46078,"UGPhysics (Statistical Mechanics, Distribution Function and Statistical Entropy, problem 3493)",key_conflict,Table lists 12 states (4 signs x 3 rows) but gives g=3
+46121,"UGPhysics (Statistical Mechanics, Bose-Einstein Statistics, problem 3542)",needs_data,"Occupancy N1=2N/3 comes from another problem, not stated"
+46136,"UGPhysics (Statistical Mechanics, Fermi-Dirac Statistics, problem 3560)",key_conflict,Own relation V=3h^3A/(16pi pF^3) gives (9/64pi^2)^(1/3) h/R0
+46144,"UGPhysics (Statistical Mechanics, Ensemble Theory, problem 3568)",mismatch,"Solution's Z follows from levels n*e1, not the stated 0, e1, e2"
+46175,"UGPhysics (Statistical Mechanics, Fermi-Dirac Statistics, problem 3602)",key_conflict,(3/8pi)^(1/3) inconsistent: own formula gives about 61 MeV with nucleon mass
+46183,"UGPhysics (Statistical Mechanics, Fermi-Dirac Statistics, problem 3610)",key_conflict,"Own formula gives about 3.4e30 kg (1.7 Msun), not 8.5e30 kg"
+46205,"UGPhysics (Statistical Mechanics, Kinetic Theory of Gases, problem 3633)",mismatch,Chlorine asked; solution value matches argon; low T unspecified.
+46213,"UGPhysics (Statistical Mechanics, Kinetic Theory of Gases, problem 3645)",mismatch,Question is chlorine; solution uses argon gamma 5/3.
+46218,"UGPhysics (Statistical Mechanics, Bose-Einstein Statistics, problem 3651)",needs_data,"N2=N/3 used in solution is from another part, not stated"
+46219,"UGPhysics (Statistical Mechanics, Kinetic Theory of Gases, problem 3652)",key_conflict,Stated rms 2.7e-3 cm; formula gives about 8.6e-4 cm.
+46222,"UGPhysics (Statistical Mechanics, Bose-Einstein Statistics, problem 3655)",needs_data,"System setup (frequencies, E0, n_j, d_m) not given"
+46227,"UGPhysics (Statistical Mechanics, Kinetic Theory of Gases, problem 3660)",mismatch,Chlorine asked; solution uses argon mass 39.9 amu.
+46240,"UGPhysics (Statistical Mechanics, Bose-Einstein Statistics, problem 3676)",key_conflict,Stated 2.0e-28 g cm/s; own formula gives 9.4e-29
+46241,"UGPhysics (Statistical Mechanics, Fermi-Dirac Statistics, problem 3678)",broken_text,Pressure formula has g^2 where theta^2 is meant.
+46243,"UGPhysics (Statistical Mechanics, Maxwell-Boltzmann Statistics, problem 3681)",broken_text,No explicit ask; reads as a statement of a result
+46252,"UGPhysics (Statistical Mechanics, Fermi-Dirac Statistics, problem 3692)",broken_text,Pressure formula has g^2 where theta^2 is meant.
+46254,"UGPhysics (Statistical Mechanics, Kinetic Theory of Gases, problem 3694)",mismatch,Chlorine asked; 431 m/s matches argon mass.
+46305,"UGPhysics (Statistical Mechanics, Kinetic Theory of Gases, problem 3776)",key_conflict,Stated N(E) ~E^-1/2; own steps give constant A m/(pi hbar^2).
+47194,"UGPhysics (Wave Optics, Diffraction, problem 5372)",needs_data;broken_text,Holography setup; question has no explicit ask
