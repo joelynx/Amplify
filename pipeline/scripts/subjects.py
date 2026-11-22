@@ -433,18 +433,21 @@ def unit_latex(u: str) -> str:
 
 def option_count(latex: str) -> int | None:
     """How many options a multiple-choice question prints: the \\items of its first enumerate,
-    else (a), (b), ... labels."""
+    else (a), (b), ... labels, else (A), (B), ... labels that start a line (JEE and UGPhysics)."""
     m = re.search(r"\\begin\{enumerate\}(.*?)\\end\{enumerate\}", latex, flags=re.S)
     if m:
         n = len(re.findall(r"\\item\b", m.group(1)))
         if n:
             return n
-    labels = re.findall(r"\(([a-h])\)", latex)
-    seq = 0
-    for lab in labels:
-        if ord(lab) - ord("a") == seq:
-            seq += 1
-    return seq or None
+    for labels, first in ((re.findall(r"\(([a-h])\)", latex), "a"),
+                          (re.findall(r"(?m)^[ \t]*\(([A-H])\)", latex), "A")):
+        seq = 0
+        for lab in labels:
+            if ord(lab) - ord(first) == seq:
+                seq += 1
+        if seq:
+            return seq
+    return None
 
 
 def parse_key(key_text: str, question_latex: str) -> tuple[dict | None, list[str]]:
