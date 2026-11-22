@@ -1766,6 +1766,20 @@
   "group": "G2",
   "subject": "Linear Algebra and Differential Equations",
   "topic": "Linear Algebra",
+  "branch": "Matrix Algebra",
+  "subtopic": "Variation-Diminishing Matrices",
+  "note": "sign changes of vectors, variation-diminishing and totally positive matrices, sign-consistent minors",
+  "est": 5,
+  "orig": [
+   "Linear Algebra",
+   "Matrix Algebra",
+   "Variation-Diminishing Matrices"
+  ]
+ },
+ {
+  "group": "G2",
+  "subject": "Linear Algebra and Differential Equations",
+  "topic": "Linear Algebra",
   "branch": "Systems of Linear Equations",
   "subtopic": "Elementary Matrices and Row Equivalence",
   "note": "elementary matrices, row equivalence, factoring into elementary matrices, PAQ normal form",
@@ -4290,6 +4304,20 @@
    "Ring and Field Theory",
    "Fields and Extensions",
    "Multiplicative Groups of Fields"
+  ]
+ },
+ {
+  "group": "G3",
+  "subject": "Abstract Algebra",
+  "topic": "Lattice Theory",
+  "branch": "Lattices",
+  "subtopic": "Distributive and Modular Lattices",
+  "note": "lattice homomorphisms and ideals, sublattices, lattice identities, projective geometries as lattices",
+  "est": 5,
+  "orig": [
+   "Lattice Theory",
+   "Lattices",
+   "Distributive and Modular Lattices"
   ]
  },
  {
@@ -6887,6 +6915,48 @@
  },
  {
   "group": "G4",
+  "subject": "Combinatorics",
+  "topic": "Logic and Algorithmic Puzzles",
+  "branch": "Brainteasers",
+  "subtopic": "Lateral Thinking and Trick Questions",
+  "note": "riddles that turn on wording, a hidden assumption or an unexpected reading rather than computation",
+  "est": 12,
+  "orig": [
+   "Logic and Algorithmic Puzzles",
+   "Brainteasers",
+   "Lateral Thinking and Trick Questions"
+  ]
+ },
+ {
+  "group": "G4",
+  "subject": "Combinatorics",
+  "topic": "Logic and Algorithmic Puzzles",
+  "branch": "Brainteasers",
+  "subtopic": "Trivia and General Knowledge",
+  "note": "geography, census and history-of-mathematics questions answered from general knowledge",
+  "est": 12,
+  "orig": [
+   "Logic and Algorithmic Puzzles",
+   "Brainteasers",
+   "Trivia and General Knowledge"
+  ]
+ },
+ {
+  "group": "G4",
+  "subject": "Combinatorics",
+  "topic": "Logic and Algorithmic Puzzles",
+  "branch": "Brainteasers",
+  "subtopic": "Fermi Estimation",
+  "note": "order-of-magnitude estimates of real-world quantities from stated assumptions, scored by closeness",
+  "est": 5,
+  "orig": [
+   "Logic and Algorithmic Puzzles",
+   "Brainteasers",
+   "Fermi Estimation"
+  ]
+ },
+ {
+  "group": "G4",
   "subject": "Geometry",
   "topic": "Plane Geometry",
   "branch": "Triangles",
@@ -8499,6 +8569,20 @@
   "group": "G5",
   "subject": "Probability and Stochastic Processes",
   "topic": "Probability",
+  "branch": "Joint Distributions",
+  "subtopic": "Graphical Models and Message Passing",
+  "note": "directed and undirected tree models, factor graphs, the sum-product algorithm, marginals",
+  "est": 3,
+  "orig": [
+   "Probability",
+   "Joint Distributions",
+   "Graphical Models and Message Passing"
+  ]
+ },
+ {
+  "group": "G5",
+  "subject": "Probability and Stochastic Processes",
+  "topic": "Probability",
   "branch": "Conditioning and Compounding",
   "subtopic": "Conditional Expectation",
   "note": "E(Y given X), tower property, conditional expectation as best predictor",
@@ -9564,6 +9648,20 @@
    "Stochastic Processes",
    "Brownian Motion and Diffusions",
    "Lévy Processes and Subordinators"
+  ]
+ },
+ {
+  "group": "G5",
+  "subject": "Statistics",
+  "topic": "Mathematical Statistics",
+  "branch": "Descriptive Statistics",
+  "subtopic": "Types of Data and Graphical Displays",
+  "note": "qualitative and quantitative variables, choosing bar graphs, dot plots, histograms and time plots",
+  "est": 4,
+  "orig": [
+   "Mathematical Statistics",
+   "Descriptive Statistics",
+   "Types of Data and Graphical Displays"
   ]
  },
  {
@@ -10800,6 +10898,76 @@
  },
  {
   "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Portfolio Theory and Risk Management",
+  "branch": "Corporate Finance",
+  "subtopic": "Cost of Capital, Corporate Actions and Margin",
+  "note": "WACC, stock splits and dividends, margin purchases and margin calls",
+  "est": 3,
+  "orig": [
+   "Portfolio Theory and Risk Management",
+   "Corporate Finance",
+   "Cost of Capital, Corporate Actions and Margin"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Economics",
+  "topic": "Microeconomics",
+  "branch": "Consumer Theory",
+  "subtopic": "Utility Maximization and Demand",
+  "note": "preferences, indifference curves, budget constraints, demand, elasticity, labor-leisure choice",
+  "est": 4,
+  "orig": [
+   "Microeconomics",
+   "Consumer Theory",
+   "Utility Maximization and Demand"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Economics",
+  "topic": "Microeconomics",
+  "branch": "Firms and Markets",
+  "subtopic": "Perfect Competition",
+  "note": "cost curves, firm supply, short- and long-run industry equilibrium, input demand",
+  "est": 4,
+  "orig": [
+   "Microeconomics",
+   "Firms and Markets",
+   "Perfect Competition"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Economics",
+  "topic": "Microeconomics",
+  "branch": "Firms and Markets",
+  "subtopic": "Monopoly, Oligopoly and Pricing",
+  "note": "monopoly and monopsony pricing, deadweight loss, Bertrand and Cournot competition, advertising, bundling",
+  "est": 6,
+  "orig": [
+   "Microeconomics",
+   "Firms and Markets",
+   "Monopoly, Oligopoly and Pricing"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Economics",
+  "topic": "Microeconomics",
+  "branch": "Information and Incentives",
+  "subtopic": "Asymmetric Information and Contracts",
+  "note": "adverse selection and lemons, principal-agent contracts, participation and incentive constraints",
+  "est": 2,
+  "orig": [
+   "Microeconomics",
+   "Information and Incentives",
+   "Asymmetric Information and Contracts"
+  ]
+ },
+ {
+  "group": "G6",
   "subject": "Economics",
   "topic": "Macroeconomics",
   "branch": "National Income Accounting",
@@ -11244,6 +11412,20 @@
    "Macroeconomics",
    "Modern Business Cycle Theory",
    "Menu Costs and Imperfect-Information Models"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Mechanics",
+  "topic": "Classical Mechanics",
+  "branch": "Units and Measurement",
+  "subtopic": "Dimensional Analysis and Measurement",
+  "note": "dimensional formulas, dimensions in other unit systems, measuring instruments and their errors",
+  "est": 4,
+  "orig": [
+   "Classical Mechanics",
+   "Units and Measurement",
+   "Dimensional Analysis and Measurement"
   ]
  },
  {
@@ -13210,6 +13392,20 @@
   "group": "G7",
   "subject": "Electromagnetism and Special Relativity",
   "topic": "Electromagnetism",
+  "branch": "Electronic Circuits",
+  "subtopic": "Transistor and Operational Amplifiers",
+  "note": "BJT small-signal gain, emitter followers, op-amp feedback circuits, integrators, saturation",
+  "est": 4,
+  "orig": [
+   "Electromagnetism",
+   "Electronic Circuits",
+   "Transistor and Operational Amplifiers"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Electromagnetism and Special Relativity",
+  "topic": "Electromagnetism",
   "branch": "Maxwell's Equations and Electromagnetic Waves",
   "subtopic": "Maxwell's Equations",
   "note": "differential and integral forms, displacement current, continuity, gauge conditions",
@@ -13378,6 +13574,20 @@
   "group": "G7",
   "subject": "Electromagnetism and Special Relativity",
   "topic": "Optics",
+  "branch": "Geometrical Optics",
+  "subtopic": "Photometry",
+  "note": "luminous flux and intensity, illuminance, luminance of extended sources",
+  "est": 4,
+  "orig": [
+   "Optics",
+   "Geometrical Optics",
+   "Photometry"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Electromagnetism and Special Relativity",
+  "topic": "Optics",
   "branch": "Interference",
   "subtopic": "Two-Source Interference",
   "note": "Young's double slit, Fresnel biprism, fringe width, two-beam intensity",
@@ -13512,6 +13722,34 @@
    "Optics",
    "Polarisation",
    "Birefringence and Optical Activity"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Electromagnetism and Special Relativity",
+  "topic": "Optics",
+  "branch": "Fourier Optics and Holography",
+  "subtopic": "Fourier Optics and Beam Propagation",
+  "note": "Fresnel and Fraunhofer integrals, lens Fourier transforms, phase objects, Gaussian beams",
+  "est": 3,
+  "orig": [
+   "Optics",
+   "Fourier Optics and Holography",
+   "Fourier Optics and Beam Propagation"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Electromagnetism and Special Relativity",
+  "topic": "Optics",
+  "branch": "Fourier Optics and Holography",
+  "subtopic": "Holography",
+  "note": "recording and reconstruction, reference waves, magnification with a change of wavelength",
+  "est": 2,
+  "orig": [
+   "Optics",
+   "Fourier Optics and Holography",
+   "Holography"
   ]
  },
  {
@@ -13652,6 +13890,20 @@
    "General Relativity and Cosmology",
    "Cosmology",
    "Early Universe and Cosmic Background"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum, Atomic and Nuclear Physics",
+  "branch": "Wave-Particle Duality",
+  "subtopic": "Photoelectric Effect",
+  "note": "work function, stopping potential, threshold wavelength, photon energy and flux",
+  "est": 12,
+  "orig": [
+   "Quantum, Atomic and Nuclear Physics",
+   "Wave-Particle Duality",
+   "Photoelectric Effect"
   ]
  },
  {
