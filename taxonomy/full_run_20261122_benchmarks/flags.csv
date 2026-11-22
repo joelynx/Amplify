@@ -1,0 +1,329 @@
+question_id,source,flags,note
+39059,"Joint Entrance Examination Advanced (2022, Paper 1, Question 17)",broken_text,List-II has stray cut-off lines (III) and (IV)
+39062,"Joint Entrance Examination Advanced (2022, Paper 1, Question 20)",broken_text,Threshold reaction; CM-frame Mechanics subtopic also fits; units garbled.
+39337,"UGMathBench (Algebra, Variation and power functions, Algebra_0424)",broken_text,Stray 'NO.' before blank; answer is sqrt(7)
+39427,"UGMathBench (Arithmetic, Integers, Arithmetic_0049)",broken_text,Implicit product 48 / (8)6 is ambiguous: 1 or 36
+39607,"UGMathBench (Calculus - multivariable, Calculus of vector valued functions, Calculus_-_multivariable_0048)",broken_text,x(t) missing; curve not fully specified
+40438,"UGMathBench (Differential equations, First order differential equations, Differential_equations_0111)",needs_data,refers to a logistic model 'explained above'; not given
+40439,"UGMathBench (Differential equations, First order differential equations, Differential_equations_0125)",broken_text,answer blank says V(t); the unknown is I(t)
+40513,"UGMathBench (Financial mathematics, Annuities, Financial_mathematics_0015)",broken_text,Sentence garbled ('the following that'); the equation is complete
+41023,"UGMathBench (Probability, Sample Space, Probability_0138)",broken_text,Threshold value cut off; implied 0.033 from the two given shares.
+41317,TheoremQA (Physics / Atomic physics / tonyxia/nuclear2),needs_data,Neutron capture attenuation; needs silver atom density; QM not in batch
+41342,TheoremQA (Physics / Wave / tonyxia/wave1),needs_data,NaCl lattice spacing not given
+41349,TheoremQA (Math / Combinatorics / jianyu_xu/Stirling_number_first_kind_2),mismatch,Solution uses 3 tables; question says 2
+41361,TheoremQA (Physics / Wave / panlu/wave_length1),needs_data,speed of sound in water not given
+41407,TheoremQA (Math / Number theory / tonyxia/divisibility6),key_conflict,Lists 3 pairs; a+3b = 11 mod 13 gives 7 digit pairs.
+41424,TheoremQA (Math / Number theory / tonyxia/divisibility2),mismatch,Answers for k (-3 is k at x=-8); largest x is -3 anyway.
+41481,TheoremQA (Math / Calculus / wenhuchen/trapezoidal_rule1),broken_text,Number of subintervals n is missing
+41537,TheoremQA (Math / Number theory / tonyxia/divisibility4),key_conflict,Solution drops residue 2 mod 6; true count is 17.
+41601,TheoremQA (Finance / Fixed income / xueguangma/yield),key_conflict,Code gives 91.24 for the stated formula; the text says 91.1
+41662,TheoremQA (Physics / Relativity / wenhuchen/relativity3),broken_text,Asked interval is given; second observer's frame missing
+41685,TheoremQA (Physics / Atomic physics / tonyxia/nuclear1),needs_data,Attenuation of neutrons; needs U-238 atom density; QM not in batch
+41688,TheoremQA (Finance / Economics / elainewan/econ_micro_19),needs_data,No public-economics topic in tree; private cost not given.
+41802,TheoremQA (Math / Complex analysis / wenhuchen/cauchy_integral2),broken_text,Exponent lost in 'z^ + 4'; read as z^2 + 4
+41813,TheoremQA (Math / Calculus / wenhuchen/divergence1),broken_text,side constraint 1 <= z <= 1 is degenerate
+42801,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 21)",key_conflict,Stated 1.11e-11 C; the solution's formula gives 1.11e-10 C
+42803,"UGPhysics (Classical Electromagnetism, Magstatics, problem 23)",mismatch,"Solution gives flux density 0.05 T, not flux"
+42837,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 59)",key_conflict,"Own integral of r e^(-2r/a) is a^2/4, giving -q0^2/(4 eps0 a)"
+42841,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 63)",key_conflict,"With Q=1.11e-11 C its own formula gives 5e-10 J, not 5e-8 J"
+42850,"UGPhysics (Classical Electromagnetism, Circuit Analysis, problem 76)",needs_data,Wire mass not given; it comes from an earlier problem
+42908,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 158)",mismatch,Solution gives current density; question asks current
+42958,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 240)",needs_data;key_conflict,"Condition (b) not given; formula gives 9.1e3 V, not 9.2e3"
+42962,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 245)",key_conflict,"Own V gives I=4pi K V^2/ln^2(b/a); stated has ln, not ln^2"
+42964,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 248)",needs_data,"Refers to condition (a), not given in the question"
+42974,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 268)",key_conflict,Eq (3) is not -dW/da of Eq (2): sign and q^2 factor differ
+42979,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 282)",key_conflict,Stated E has 1/r^3; its own integral gives 1/r^2
+42981,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 285)",mismatch,Voltage taken to image wire; wire-to-plate voltage is half
+42983,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 288)",mismatch,Ignores constant-energy condition; E proportional to r is not Gauss's result
+42992,"UGPhysics (Classical Electromagnetism, Circuit Analysis, problem 304)",needs_data,Solenoid dimensions come from an earlier problem
+42994,"UGPhysics (Classical Electromagnetism, Circuit Analysis, problem 307)",needs_data,Mutual inductance M is not given in the question
+43009,"UGPhysics (Classical Electromagnetism, Magstatics, problem 332)",mismatch,"Solution computes Poynting energy flux, not electric flux"
+43015,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 342)",key_conflict,Stated F does not follow from its own bracket in general
+43016,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 343)",key_conflict,Own phi1=phi2 at z=0 forces q1'=q1''; stated values differ
+43023,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 352)",key_conflict,Own W formula gives Q^2/(8 pi e0)(1/a - 1/a'); sign reversed
+43024,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 354)",needs_data,Quadrupole moment said to be given earlier; not in question
+43025,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 356)",needs_data,Sphere size given only as same diameter as in (a)
+43033,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 365)",needs_data,Refers to the aforementioned capacitor; its dimensions are not given
+43042,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 378)",needs_data,"Symbols a, b, V0, eps, rho, g not defined in question"
+43045,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 382)",needs_data,Relies on coefficients from an earlier part; not given
+43051,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 394)",needs_data,"Sphere radius R and charge positions z1, z2 are not defined"
+43055,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 401)",needs_data,"Refers to equations (a)-(3), not given in question"
+43070,"UGPhysics (Classical Electromagnetism, Circuit Analysis, problem 430)",needs_data,L and M from part (a) are not given
+43073,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 435)",needs_data,"Symbols E, K and equations (1)-(2) not given in question"
+43076,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 439)",needs_data,Point charge q not defined in question
+43077,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 440)",needs_data,Relies on B_l from an earlier part; values not given
+43079,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 442)",key_conflict,Eq (8) does not follow from Eq (7) with m=(3/4)pi tau R^3
+43082,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 446)",key_conflict,"Own phi gives 2/r^3 in E_r, not 1/r^3; eps0 dropped"
+43084,"UGPhysics (Classical Electromagnetism, Circuit Analysis, problem 451)",needs_data,EMF and internal resistance values not in the question
+43089,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 458)",needs_data,E and E' undefined; applied potential from earlier part not given
+43091,"UGPhysics (Classical Electromagnetism, Circuit Analysis, problem 460)",needs_data,Capacitor voltage not stated in the question
+43093,"UGPhysics (Classical Electromagnetism, Magstatics, problem 462)",key_conflict,"Says opposite direction, but its own formula gives I' = +I"
+43097,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 467)",needs_data,Relies on field E_f from an earlier equation (8); not given
+43098,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 468)",needs_data,Surface density sigma(r) comes from an earlier part; not given
+43100,"UGPhysics (Classical Electromagnetism, Circuit Analysis, problem 471)",needs_data,Refers to above conditions not given in the question
+43105,"UGPhysics (Classical Electromagnetism, Circuit Analysis, problem 482)",needs_data,Horn field strength not stated in the question
+43111,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 491)",broken_text;key_conflict,Question says gravitational; stated F_max disagrees with own formula
+43113,"UGPhysics (Classical Electromagnetism, Circuit Analysis, problem 493)",needs_data,Time constant tau not stated in the question
+43123,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 514)",needs_data,"E_l, lambda and f defined in earlier equations; not given"
+43128,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 525)",needs_data,Charge distribution sigma(r) and f not specified in question
+43138,"UGPhysics (Classical Electromagnetism, Electrostatics, problem 543)",needs_data,Dipole half-length R and angle alpha not defined in question
+43159,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 1527)",broken_text,Question says phidot = c2 but a_phi needs r*phidot = c2; solution steps garbled
+43179,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 1548)",broken_text,No subtopic fits density scaling; M given yet asked
+43207,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 1577)",needs_data,Drag law and v(x) from prior problem not stated here
+43240,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 1611)",needs_data,Earth-Sun distance and Earth radius not given
+43315,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 1687)",needs_data,Refers to an earlier problem's ratio not stated here
+43330,"UGPhysics (Classical Mechanics, Rigid-Body Dynamics, problem 1702)",broken_text,"says mass m, then asks for mass; intended density rho"
+43331,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 1703)",key_conflict,Solution omega and nu differ by factor 2; check
+43356,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 1728)",broken_text,Question stops after part (1); later parts missing
+43361,"UGPhysics (Classical Mechanics, Rigid-Body Dynamics, problem 1734)",key_conflict,shown integral evaluates to 2/3 m a^2 (edge axis); 1/6 is the diagonal value
+43362,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 1735)",key_conflict,Solution omega inconsistent with its nu by factor 2
+43388,"UGPhysics (Classical Mechanics, Rigid-Body Dynamics, problem 1761)",broken_text,"says friction neglected, yet asks energy lost to friction"
+43458,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2006)",mismatch,Tangent construction needs an outside point; 1.2 m is inside r=6 m
+43463,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2014)",broken_text,Multi-part question shows only part (1)
+43466,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2021)",mismatch,Says completely inelastic; solution has balls separating
+43484,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2045)",needs_data,lambda is not defined in the question
+43506,"UGPhysics (Classical Mechanics, Central Force Motion, problem 2068)",needs_data,refers to a previously derived equation not given
+43584,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2172)",needs_data,Solution uses an unstated 160 Hz adjacent mode
+43603,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2209)",needs_data,Needs point S and vertical motion from earlier part
+43607,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2214)",needs_data,Damping ratio (sqrt3/2) not stated in question
+43608,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2216)",needs_data,Mode needs tension from earlier problem; solution assumes n=2
+43613,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2221)",needs_data,Uses wave speed 160 m/s from an earlier problem
+43619,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2228)",needs_data,Only k/m is determined here; m and k need later data
+43621,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2230)",needs_data,Solution uses period T=2 s not given here
+43623,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2233)",needs_data,Electron mass and omitted part (1) not given
+43632,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2243)",needs_data,Uses superposed wave with phase pi/10 from an earlier problem
+43644,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2256)",needs_data,Uses wave speed 160 m/s from an earlier problem
+43649,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2261)",key_conflict,Solution omega and nu disagree by factor 2
+43655,"UGPhysics (Classical Mechanics, Central Force Motion, problem 2267)",needs_data,relies on v_r from a previous problem
+43658,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2271)",mismatch,"solves first-order equation, not the given second-order ODE"
+43660,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2273)",key_conflict,"Solution's own product evaluates to about 1.8e4 J, not 1"
+43665,"UGPhysics (Classical Mechanics, Central Force Motion, problem 2279)",needs_data,destination radius from a previous problem
+43666,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2281)",broken_text,force typo m2+m2+m3; solution uses m1+m2+m3
+43667,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2282)",mismatch,thrust work used; fuel energy is half vr^2(m0-m1)
+43670,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2285)",key_conflict,final x(t)=a cosh(...) contradicts own x=-a arsinh(ct/a)
+43676,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2292)",key_conflict,"integrand gives 32pi over 0..2pi, not 16pi"
+43682,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2298)",key_conflict,eta(1.01)=0.997 exceeds eta(1.031); claimed maximum wrong
+43684,"UGPhysics (Classical Mechanics, Central Force Motion, problem 2300)",needs_data,Map e to e' (new orbit) not defined in this question
+43692,"UGPhysics (Classical Mechanics, Fluid Mechanics, problem 2309)",key_conflict,"Solution differentiates vz wrongly; div = 4(x+y) not zero, so impossible"
+43699,"UGPhysics (Classical Mechanics, Fluid Mechanics, problem 2316)",key_conflict,Solution integral off by factor 2; correct p = -rho k^2/(2r^2) + c
+43705,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2323)",needs_data,"Depends on A, omega, v from the previous problem"
+43706,"UGPhysics (Classical Mechanics, Fluid Mechanics, problem 2324)",key_conflict,Solution gradient term 6.95e4 should be 6.95e3; flow then ~0.446 kg/s
+43708,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2326)",needs_data,refers to earlier parts (1)-(2) not given
+43712,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2330)",needs_data,Depends on previous question's k/m relation
+43714,"UGPhysics (Classical Mechanics, Fluid Mechanics, problem 2332)",broken_text,Only F_x given; F_y and F_z missing from the question
+43715,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2333)",key_conflict,own energy equations give a=R(m+dm)/(m+3dm); R is apogee
+43730,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2352)",needs_data,"Needs electron mass m, not given"
+43736,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2361)",broken_text,Labelled part (1); other parts missing
+43748,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2377)",needs_data,assumes component equations from an earlier part not given
+43749,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2378)",key_conflict,"own formula gives elapsed pi/4*sqrt(a/mu), not (1+3pi/4)"
+43751,"UGPhysics (Classical Mechanics, Fluid Mechanics, problem 2381)",needs_data,"Refers to problem 8.3.4 data (h, H0, H1, S) not given"
+43762,"UGPhysics (Classical Mechanics, Fluid Mechanics, problem 2402)",broken_text,Only F_z given; F_x and F_y missing from the question
+43766,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2413)",broken_text,Labelled part (4); earlier parts missing
+43775,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2452)",broken_text,Labelled part (2); earlier parts missing
+43784,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2513)",broken_text,Labelled part (3); earlier parts missing
+43793,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2541)",key_conflict,"text says h must exceed R, then answers 3R/4"
+43794,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2542)",key_conflict,denominator uses sin=0.4; correct substitution gives about 3.2 rad/s
+43796,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2549)",needs_data,"uses v2 and v_r1, not given; only v1 is"
+43801,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2558)",key_conflict,Euler-term sign slip in working; final +1.51j is correct
+43803,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2566)",broken_text,Labelled part (3); earlier parts missing
+43813,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2581)",needs_data,"uses v2 (second rod speed), not defined in question"
+43817,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2586)",key_conflict,drops factor r in e_r term; should be 2m w r phidot
+43821,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2591)",needs_data,Solution uses sound travel time t2 from an earlier problem
+43822,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2592)",needs_data,uses undefined v1; question gives only v2
+43828,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2601)",needs_data,"uses R and v1 from an earlier part, not given"
+43829,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2602)",broken_text,text puts O at centre; solution needs O on the rim
+43855,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2639)",needs_data,distance a used in solution is not defined in question
+43871,"UGPhysics (Classical Mechanics, Fluid Mechanics, problem 2657)",needs_data,Alpha (v at A) not given; taken from companion problem
+43898,"UGPhysics (Classical Mechanics, Fluid Mechanics, problem 2685)",needs_data,"Flow defined in problem 8.1.5, not given here"
+43914,"UGPhysics (Classical Mechanics, Particle Dynamics, problem 2704)",key_conflict,dx lacks v0^2 factor; dimensionally wrong
+43937,"UGPhysics (Classical Mechanics, Fluid Mechanics, problem 2734)",needs_data,Slope beta of v(x) not given; needed for the acceleration
+43941,"UGPhysics (Classical Mechanics, Vibrations and Waves, problem 2739)",needs_data,Part (2) cites an 'above' relation that is not in the text
+43978,"UGPhysics (Electrodynamics, Propagation and Radiation of Electromagnetic Waves, problem 75)",mismatch,"Solution text is a conductor wave derivation, not solenoid inductance"
+43989,"UGPhysics (Electrodynamics, Interaction of Electromagnetic Fields with Matter, problem 136)",needs_data,Refers to an aforementioned depth defined in another problem
+44000,"UGPhysics (Electrodynamics, Propagation and Radiation of Electromagnetic Waves, problem 162)",needs_data,Refers to n and theta defined in an earlier part
+44003,"UGPhysics (Electrodynamics, Relativistic Electrodynamics, problem 167)",key_conflict,"Own formula gives about 2e13 s, not 1.1e-7 s"
+44017,"UGPhysics (Electrodynamics, Propagation and Radiation of Electromagnetic Waves, problem 209)",needs_data,Medium conductivity and permittivity not given here
+44048,"UGPhysics (Electrodynamics, Propagation and Radiation of Electromagnetic Waves, problem 284)",key_conflict,Own E = J/sigma and B give S with 1/sigma; final drops it
+44056,"UGPhysics (Electrodynamics, Relativistic Electrodynamics, problem 316)",mismatch,"Asks for pure-B frame; solution gives B'=0, pure-E frame"
+44061,"UGPhysics (Electrodynamics, Relativistic Electrodynamics, problem 338)",key_conflict,"Own expression e^2 w0/(6 eps0 m c^3) gives about 2e-18, not 3.9e-8"
+44074,"UGPhysics (Electrodynamics, Propagation and Radiation of Electromagnetic Waves, problem 389)",needs_data,Sphere radius and permittivity not given here
+44089,"UGPhysics (Electrodynamics, Interaction of Electromagnetic Fields with Matter, problem 423)",needs_data,"P taken from an earlier part, not stated here"
+44091,"UGPhysics (Electrodynamics, Propagation and Radiation of Electromagnetic Waves, problem 425)",needs_data,Conditions a to d referenced but not stated here
+44094,"UGPhysics (Electrodynamics, Interaction of Electromagnetic Fields with Matter, problem 437)",needs_data,"Refers to v_r and I, R from earlier parts"
+44096,"UGPhysics (Electrodynamics, Propagation and Radiation of Electromagnetic Waves, problem 447)",mismatch,Gives flux density with 1/r^2; energy per solid angle needs r^2 factor
+44098,"UGPhysics (Electrodynamics, Propagation and Radiation of Electromagnetic Waves, problem 449)",mismatch;needs_data,"Solution gives resistance per unit area, not for the square sheet"
+44100,"UGPhysics (Electrodynamics, Propagation and Radiation of Electromagnetic Waves, problem 465)",needs_data,Solution assumes 50 Hz frequency not stated in question
+44105,"UGPhysics (Electrodynamics, Propagation and Radiation of Electromagnetic Waves, problem 477)",needs_data,Guide dimension l not given in this item
+44109,"UGPhysics (Electrodynamics, Propagation and Radiation of Electromagnetic Waves, problem 490)",needs_data,Mass m of the charge is used but never given
+44110,"UGPhysics (Electrodynamics, Relativistic Electrodynamics, problem 496)",mismatch,Question says plates move in s'; solution uses their rest frame
+44114,"UGPhysics (Electrodynamics, Propagation and Radiation of Electromagnetic Waves, problem 503)",key_conflict,"Own formula (2e/T)(pi l^2) gives e omega l^2, not 2e omega l^2"
+44131,"UGPhysics (Electrodynamics, Propagation and Radiation of Electromagnetic Waves, problem 535)",needs_data,"Refers to the form in part (b), not given here"
+44135,"UGPhysics (Electrodynamics, Propagation and Radiation of Electromagnetic Waves, problem 545)",needs_data,"Asks for the same as an earlier result, not stated"
+44136,"UGPhysics (Electrodynamics, Propagation and Radiation of Electromagnetic Waves, problem 546)",needs_data,Mass m of the charge is used but never given
+44140,"UGPhysics (Electrodynamics, Interaction of Electromagnetic Fields with Matter, problem 556)",key_conflict,Stated S-bar has eps-eps0 to power 1; given E and B imply power 2
+44166,"UGPhysics (Geometrical Optics, Reflection and Refraction of Light, problem 5224)",needs_data,Uses a ray-trajectory equation from an earlier part
+44198,"UGPhysics (Geometrical Optics, Imaging of Light, problem 5472)",needs_data,Refers to an earlier system and figure not given
+45218,"UGPhysics (Relativity, General Relativity, problem 1025)",needs_data,Uses an energy deviation estimated in an earlier problem
+45294,"UGPhysics (Relativity, Special Relativity, problem 1919)",needs_data,"Relies on problem 12.4.15, not given"
+45356,"UGPhysics (Relativity, Special Relativity, problem 2420)",needs_data,"Solution assumes dt' = 300 s, not in question"
+45367,"UGPhysics (Relativity, Special Relativity, problem 2466)",mismatch,Uses uncontracted 1 m rod; contracted analysis gives 1.67 m
+45368,"UGPhysics (Relativity, Special Relativity, problem 2469)",mismatch,Gives frame length 1.62 m; proper length is gamma times it
+45371,"UGPhysics (Relativity, Special Relativity, problem 2488)",broken_text,Parent mass written m0; solution uses M0
+45373,"UGPhysics (Relativity, Special Relativity, problem 2490)",broken_text,Muon omitted from question; solution uses 106 MeV
+45379,"UGPhysics (Relativity, Special Relativity, problem 2509)",needs_data,"Relies on earlier-part values t1 and pulse rate, not given"
+45381,"UGPhysics (Relativity, Special Relativity, problem 2512)",broken_text,Parent mass written m0; solution uses M0
+45384,"UGPhysics (Relativity, Special Relativity, problem 2522)",broken_text;needs_data,"Refers to solutions (1)-(3), not given"
+45389,"UGPhysics (Relativity, Special Relativity, problem 2534)",needs_data,Refers to reaction and particle of an earlier part
+45396,"UGPhysics (Relativity, Special Relativity, problem 2560)",needs_data,Relies on earlier-part journey time t1 and pulse rate
+45399,"UGPhysics (Relativity, Special Relativity, problem 2570)",needs_data,Electron Lagrangian and h come from earlier parts
+45404,"UGPhysics (Relativity, Special Relativity, problem 2607)",needs_data,Speed v of B not given in question
+45405,"UGPhysics (Relativity, Special Relativity, problem 2608)",needs_data,Criterion (2) not defined in question
+45410,"UGPhysics (Relativity, Special Relativity, problem 2744)",needs_data,Package speed and direction not given in question
+45418,"UGPhysics (Relativity, Special Relativity, problem 2839)",needs_data;mismatch,Light-travel setup missing; solution assumes dx = 1 m
+45428,"UGPhysics (Semiconductor Physics, Transport Properties, problem 3799)",key_conflict,"2.3026 x 8.06e-3 = 1.86e-2 cm, not 1.85e-4 cm."
+45440,"UGPhysics (Semiconductor Physics, Transport Properties, problem 3839)",key_conflict,"1/(6.25e-8 x 1.6e-19) = 1e26 m^-3, not 1e24."
+45456,"UGPhysics (Semiconductor Physics, Transport Properties, problem 3875)",broken_text,No explicit question; solution gives tau proportional to T^-3/2.
+45464,"UGPhysics (Semiconductor Physics, Others, problem 3891)",key_conflict,"Substitution gives about 5.6e7 s^-1, not the stated 10^7."
+45512,"UGPhysics (Semiconductor Physics, Others, problem 3970)",key_conflict,Gain fluctuation ignored; rms should be G*sqrt(N)=2.5e7 charges.
+45516,"UGPhysics (Semiconductor Physics, Others, problem 3978)",key_conflict,Liquid hydrogen boils near 20 K; 77.36 K is nitrogen's boiling point.
+45517,"UGPhysics (Semiconductor Physics, Others, problem 3979)",key_conflict,Stated prefactor sqrt(pi)/2 gives 2.8e14 Pa; the solution's own V gives 8.9e13 Pa.
+45518,"UGPhysics (Semiconductor Physics, Magnetic, Optical, and Superconducting Properties, problem 3982)",key_conflict,Sign of the Laplacian step contradicts the solution's own line.
+45537,"UGPhysics (Semiconductor Physics, Others, problem 4024)",key_conflict,Gain noise ignored; with G*sqrt(N) the SNR is sqrt(N)=25.
+45540,"UGPhysics (Semiconductor Physics, Others, problem 4035)",key_conflict,"Exponent sign: e^{-lambda} with lambda=-1/x gives e^{+1/x}, not e^{-1/x}."
+45549,"UGPhysics (Semiconductor Physics, Magnetic, Optical, and Superconducting Properties, problem 4059)",key_conflict,Solution's window ratio sqrt(eps0) disagrees with LST sqrt(eps0/eps_inf)=1.62.
+45555,"UGPhysics (Semiconductor Physics, Statistical Distribution of Electrons and Holes in Space, problem 4072)",key_conflict,Fermi-level offset 0.051 eV conflicts with later 1.4kT = 0.036 eV.
+45561,"UGPhysics (Semiconductor Physics, Magnetic, Optical, and Superconducting Properties, problem 4083)",key_conflict,Final denominator (2/3)NV does not follow from the solution's own E_tot (3/2)NV.
+45565,"UGPhysics (Semiconductor Physics, Statistical Distribution of Electrons and Holes in Space, problem 4090)",key_conflict,Stated 8.67e-36 kg is off by 1e4; 8.67e-32 kg matches the 0.095 m0 result.
+45619,"UGPhysics (Solid-State Physics, Transport Properties of Electrons and Holes in Solids, problem 3860)",needs_data,"Copper mobility comes from an earlier problem, not given here."
+45634,"UGPhysics (Solid-State Physics, Lattice Vibrations and Mechanical Properties of Solids, problem 3898)",key_conflict,"substituting Theta_D gives pi, not pi^2, in the final c_V"
+45665,"UGPhysics (Solid-State Physics, Transport Properties of Electrons and Holes in Solids, problem 3994)",key_conflict,Stated 5.43e-14 s; the given formula gives 2.71e-14 s.
+45666,"UGPhysics (Solid-State Physics, Crystal Defects and Motion, problem 3996)",key_conflict,"Q=3.38e4 cal gives D about 8.7e-7, not 6.53e-7; t about 3.5 h"
+45680,"UGPhysics (Solid-State Physics, Motion of Electrons in Electromagnetic Fields, problem 4029)",key_conflict,Stated v has a^2 in the denominator; dE/dk gives hbar/(m a).
+45696,"UGPhysics (Solid-State Physics, Crystal Defects and Motion, problem 4054)",key_conflict,D=1.5e-6 not reproduced: Q=3.38e4 cal gives D about 2.0e-6
+45698,"UGPhysics (Solid-State Physics, Transport Properties of Electrons and Holes in Solids, problem 4057)",key_conflict,Stated -5.92e-9 T; its own formula gives -5.98e-9 T.
+45710,"UGPhysics (Solid-State Physics, Motion of Electrons in Electromagnetic Fields, problem 4082)",needs_data,Fermi-surface area S_F is not given; taken from an earlier problem.
+45711,"UGPhysics (Solid-State Physics, Binding in Solids, problem 4085)",key_conflict,"K=2.41e12 gives n about 681, not 7.8; 7.8 needs 2.41e10"
+45728,"UGPhysics (Solid-State Physics, Transport Properties of Electrons and Holes in Solids, problem 4112)",needs_data,Work functions 4.8 and 1.8 eV are not given in the question.
+45734,"UGPhysics (Solid-State Physics, Transport Properties of Electrons and Holes in Solids, problem 4118)",needs_data,Work functions 4.8 and 1.8 eV are not given in the question.
+46311,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 1574)",mismatch,"Solution is a forced-oscillation text, not this question"
+46312,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 1630)",mismatch,"Solution is a forced-oscillation text, not this question"
+46352,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 1859)",mismatch,"Solution is a forced-oscillation text, not this question"
+46360,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 1879)",mismatch,"Solution is a forced-oscillation text, not this question"
+46378,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 1935)",mismatch,"Solution is a forced-oscillation text, not this question"
+46384,"UGPhysics (Theoretical Mechanics, Hamiltonian Formulation of Mechanics, problem 1969)",broken_text;needs_data,"Refers to auxiliary functions F,X,Y,P,Q from missing parts"
+46392,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2002)",mismatch,"Solution is a forced-oscillation text, not this question"
+46395,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2034)",mismatch,"Solution is a forced-oscillation text, not this question"
+46396,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2043)",mismatch,"Solution is a forced-oscillation text, not this question"
+46432,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2200)",mismatch,"Solution is a forced-oscillation text, not this question"
+46433,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2201)",broken_text,Text reads theta1 = R theta1 where x1 = R theta1 is meant
+46437,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2235)",needs_data,"The system 'above' and symbols m, M, k, R are not given"
+46439,"UGPhysics (Theoretical Mechanics, Lagrangian Formulation of Mechanics, problem 2308)",needs_data,The dissipation function R is not given in the question
+46443,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2355)",needs_data,"Refers to T and V from an earlier part, not given"
+46444,"UGPhysics (Theoretical Mechanics, Lagrangian Formulation of Mechanics, problem 2359)",needs_data,"Refers to the previous problem, which is not given"
+46447,"UGPhysics (Theoretical Mechanics, Lagrangian Formulation of Mechanics, problem 2369)",needs_data,"Refers to the previous problem, which is not given"
+46459,"UGPhysics (Theoretical Mechanics, Lagrangian Formulation of Mechanics, problem 2400)",needs_data,"Refers to the previous problem, which is not given"
+46461,"UGPhysics (Theoretical Mechanics, Lagrangian Formulation of Mechanics, problem 2408)",needs_data,"Refers to problem 9.1.10, which is not given"
+46475,"UGPhysics (Theoretical Mechanics, Lagrangian Formulation of Mechanics, problem 2434)",needs_data,Circular-path data from part (1) is not given
+46478,"UGPhysics (Theoretical Mechanics, Hamiltonian Formulation of Mechanics, problem 2439)",needs_data,"Refers to 'the above' canonical transformation, which is not in the text"
+46487,"UGPhysics (Theoretical Mechanics, Lagrangian Formulation of Mechanics, problem 2464)",needs_data,"Refers to problem 9.1.12, which is not given"
+46492,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2471)",needs_data,r' (sphere separation) is not defined in the question
+46493,"UGPhysics (Theoretical Mechanics, Lagrangian Formulation of Mechanics, problem 2472)",needs_data,The dissipation function R is not given in the question
+46502,"UGPhysics (Theoretical Mechanics, Hamiltonian Formulation of Mechanics, problem 2483)",needs_data,"Refers to 'the given problem conditions', which are not in the text"
+46511,"UGPhysics (Theoretical Mechanics, Lagrangian Formulation of Mechanics, problem 2500)",needs_data,"Refers to problem 9.1.10, which is not given"
+46513,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2503)",needs_data,"System equations come from an earlier part, not given"
+46518,"UGPhysics (Theoretical Mechanics, Hamiltonian Formulation of Mechanics, problem 2516)",needs_data,"Relies on a canonical transformation from an earlier, unshown part"
+46526,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2543)",mismatch,"Solution is a forced-oscillation text, not this question"
+46533,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2568)",needs_data,"Relies on generalized forces and equations from earlier parts, not given"
+46538,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2625)",mismatch,"Solution treats forced oscillator normal coordinates, not precession."
+46540,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2631)",needs_data,Needs the system's transform and force from an earlier problem.
+46541,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2633)",mismatch,Light Doppler shift; solution is about spring normal coordinates.
+46545,"UGPhysics (Theoretical Mechanics, Lagrangian Formulation of Mechanics, problem 2678)",mismatch,Solution only restates the given definition of alpha
+46546,"UGPhysics (Theoretical Mechanics, Lagrangian Formulation of Mechanics, problem 2693)",needs_data,Relies on a displacement derived in an earlier problem
+46582,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2795)",mismatch,Solution is for generalized forces and normal coordinates.
+46589,"UGPhysics (Theoretical Mechanics, Lagrangian Formulation of Mechanics, problem 2804)",needs_data,"Circuit variables L1, L2, M, q1, q2 are not defined in the question"
+46590,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2805)",needs_data,"Depends on M' from Problem 2, not given."
+46591,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2806)",needs_data,V_A and V_B expressions come from an earlier problem.
+46592,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2807)",needs_data,Uses transformed equation and initial conditions from earlier problem.
+46597,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2818)",key_conflict,Final omega3 denominator MRl; own equation gives MR^2 l.
+46599,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2823)",needs_data,"Depends on problem 10.1.40, not given."
+46607,"UGPhysics (Theoretical Mechanics, Small Vibrations of Finite System, problem 2835)",needs_data,"Depends on problem 10.1.40, not given."
+46611,"UGPhysics (Theoretical Mechanics, Hamiltonian Formulation of Mechanics, problem 2840)",needs_data,"Refers to an EOM derived in an earlier, unshown part"
+46619,"UGPhysics (Theoretical Mechanics, Lagrangian Formulation of Mechanics, problem 2848)",needs_data,Setup and symbols come from an earlier problem not given
+46672,"UGPhysics (Thermodynamics, Second Law of Thermodynamics and Entropy, problem 2904)",key_conflict,Freezing lowers entropy; solution writes +0.62 cal/K
+46698,"UGPhysics (Thermodynamics, Phase Transition and Equilibrium, problem 2933)",needs_data,"Latent heat 93 J/mol taken from an earlier part, not given"
+46730,"UGPhysics (Thermodynamics, Phase Transition and Equilibrium, problem 2979)",broken_text,Question shows only a result; the derivation it cites is missing
+46744,"UGPhysics (Thermodynamics, Thermodynamic Functions and Equilibrium Conditions, problem 3007)",needs_data,Fuel-cell EMF via Gibbs energy; no electrochemistry subtopic
+46745,"UGPhysics (Thermodynamics, Phase Transition and Equilibrium, problem 3010)",needs_data,Part (3) of a series; the van der Waals equation is not stated
+46752,"UGPhysics (Thermodynamics, Thermodynamic Functions and Equilibrium Conditions, problem 3037)",needs_data,Ion equilibrium in gravity and field; Electromagnetism tree not given
+46774,"UGPhysics (Thermodynamics, Second Law of Thermodynamics and Entropy, problem 3223)",broken_text,Five-row table has no case labels; scenario list missing
+46809,"UGPhysics (Thermodynamics, Second Law of Thermodynamics and Entropy, problem 3295)",key_conflict,Cooling gives -0.33 cal/K; solution writes +0.33
+46818,"UGPhysics (Thermodynamics, Second Law of Thermodynamics and Entropy, problem 3307)",broken_text,Unlabeled option grid; blank answer tables; layout garbled
+46819,"UGPhysics (Thermodynamics, Second Law of Thermodynamics and Entropy, problem 3308)",key_conflict,9.8e4 erg is not 0.24 cal; h=100 m gives 9.8e8 erg (0.23 cal)
+46827,"UGPhysics (Thermodynamics, Second Law of Thermodynamics and Entropy, problem 3318)",broken_text,Unlabeled option grid; blank answer tables; layout garbled
+46841,"UGPhysics (Thermodynamics, Second Law of Thermodynamics and Entropy, problem 3336)",broken_text,Unlabeled option grid; blank answer tables; layout garbled
+46856,"UGPhysics (Thermodynamics, Thermodynamic Functions and Equilibrium Conditions, problem 3355)",key_conflict,Given F has T^2 but state equation implies T^n; solution uses T^n
+46861,"UGPhysics (Thermodynamics, Second Law of Thermodynamics and Entropy, problem 3360)",key_conflict,Displayed (V0/V1)^(gamma-1) gives 10^(2/3); numeric uses 0.1^(2/3)
+46862,"UGPhysics (Thermodynamics, Thermodynamic Functions and Equilibrium Conditions, problem 3361)",broken_text,Question names no ratio; solution gives c_p - c_v
+46866,"UGPhysics (Thermodynamics, Thermodynamic Functions and Equilibrium Conditions, problem 3365)",needs_data,Magnetostriction via Maxwell-type relation; no potentials subtopic
+46871,"UGPhysics (Thermodynamics, Thermodynamic Functions and Equilibrium Conditions, problem 3371)",key_conflict,Given F has T^2 but state equation implies T^n; solution uses T^n
+46875,"UGPhysics (Thermodynamics, Second Law of Thermodynamics and Entropy, problem 3379)",mismatch,Solution gives final pressure 1.9e5 Pa; change is about 2.8e3 Pa
+46900,"UGPhysics (Thermodynamics, Non-equilibrium Thermodynamics, problem 3418)",broken_text,Question cut before its ask; f>> direction looks inverted
+46913,"UGPhysics (Thermodynamics, Non-equilibrium Thermodynamics, problem 3442)",needs_data,"Surface temperature Ts comes from an earlier part, not given"
+46916,"UGPhysics (Thermodynamics, Phase Transition and Equilibrium, problem 3451)",needs_data,"Refers to 'the above results', which are not given"
+46923,"UGPhysics (Thermodynamics, Second Law of Thermodynamics and Entropy, problem 3469)",key_conflict,Eq. (4) gives Tf>Ti (denominator smaller); solution concludes Tf<Ti
+46947,"UGPhysics (Thermodynamics, Second Law of Thermodynamics and Entropy, problem 3647)",needs_data,Refers to an earlier derived expression not in the text
+46948,"UGPhysics (Thermodynamics, Second Law of Thermodynamics and Entropy, problem 3663)",mismatch,Solution never gives a value; calls it equal to scenario 1
+46950,"UGPhysics (Thermodynamics, Second Law of Thermodynamics and Entropy, problem 3673)",needs_data,Cycle temperatures and volumes come from an unseen figure
+46963,"UGPhysics (Thermodynamics, Second Law of Thermodynamics and Entropy, problem 3717)",broken_text,Unlabeled option grid; blank answer tables; layout garbled
+46973,"UGPhysics (Thermodynamics, Second Law of Thermodynamics and Entropy, problem 3737)",needs_data,Heat flow Q through rod not given; answer left symbolic
+46976,"UGPhysics (Thermodynamics, Phase Transition and Equilibrium, problem 3749)",key_conflict,Printed formula gives 307 K; stated 279 K matches inverse exponent
+46981,"UGPhysics (Thermodynamics, Non-equilibrium Thermodynamics, problem 3762)",key_conflict,Stated 114 W/m2; cement layer alone gives 362.5 W/m2
+46993,"UGPhysics (Wave Optics, Polarization, problem 5044)",mismatch,"solution opens with Brewster-angle text, not this question"
+47002,"UGPhysics (Wave Optics, Diffraction, problem 5056)",key_conflict,Solution 5e-3 um conflicts with 1/N = 0.5 um from stated resolution
+47006,"UGPhysics (Wave Optics, Interference, problem 5063)",key_conflict,"c/nu with nu=0.5e14 Hz gives 6e-6 m, not 6e-5 m"
+47009,"UGPhysics (Wave Optics, Polarization, problem 5066)",mismatch,"solution opens with Brewster-angle text, not this question"
+47011,"UGPhysics (Wave Optics, Polarization, problem 5068)",mismatch,"solution opens with Brewster-angle text, not this question"
+47013,"UGPhysics (Wave Optics, Polarization, problem 5070)",mismatch,"solution opens with Brewster-angle text, not this question"
+47014,"UGPhysics (Wave Optics, Interference, problem 5073)",mismatch,gives peak wavelengths only; passband width from R=0.80 not computed
+47018,"UGPhysics (Wave Optics, Polarization, problem 5080)",mismatch,"solution opens with Brewster-angle text, not this question"
+47019,"UGPhysics (Wave Optics, Diffraction, problem 5082)",needs_data,holography: no subtopic in tree; solution cites earlier eqs (9)-(11)
+47022,"UGPhysics (Wave Optics, Polarization, problem 5088)",mismatch,"solution opens with Brewster-angle text, not this question"
+47025,"UGPhysics (Wave Optics, Polarization, problem 5091)",mismatch,"solution opens with Brewster-angle text, not this question"
+47026,"UGPhysics (Wave Optics, Polarization, problem 5098)",mismatch,"solution opens with Brewster-angle text, not this question"
+47032,"UGPhysics (Wave Optics, Polarization, problem 5108)",mismatch,"solution opens with Brewster-angle text, not this question"
+47046,"UGPhysics (Wave Optics, Polarization, problem 5134)",needs_data,"Babinet setup comes from the previous question, not given"
+47052,"UGPhysics (Wave Optics, Polarization, problem 5150)",needs_data,"Refers to 'above conditions', not given"
+47081,"UGPhysics (Wave Optics, Polarization, problem 5190)",needs_data,"Setup of P1, P2 and incident light not given"
+47105,"UGPhysics (Wave Optics, Interference, problem 5226)",needs_data,"solution cites equation (2) of part (1), not given"
+47124,"UGPhysics (Wave Optics, Interference, problem 5249)",broken_text,width 10^3 A should be 10^-3 A (minus sign lost); solution uses 10^-3
+47143,"UGPhysics (Wave Optics, Interference, problem 5283)",needs_data,"v = 15 um/s taken from an earlier question, not given"
+47147,"UGPhysics (Wave Optics, Polarization, problem 5290)",broken_text,Wavelength given as 510 m; visible light means 510 nm
+47151,"UGPhysics (Wave Optics, Interference, problem 5296)",key_conflict,"bound is 1/M <= 0.0116, i.e. M >= 87, not 90"
+47159,"UGPhysics (Wave Optics, Polarization, problem 5312)",needs_data,Red and blue wavelengths and filter spacing not given
+47161,"UGPhysics (Wave Optics, Diffraction, problem 5315)",needs_data,"relies on an earlier derived intensity formula, not given"
+47194,"UGPhysics (Wave Optics, Diffraction, problem 5372)",broken_text,"holography, no subtopic; question has no explicit ask"
+47202,"UGPhysics (Wave Optics, Polarization, problem 5384)",needs_data,Crystal indices not given; solution uses quartz values
+47210,"UGPhysics (Wave Optics, Interference, problem 5393)",needs_data,wave expression and eq (2) are not given here
+47213,"UGPhysics (Wave Optics, Polarization, problem 5397)",needs_data,Crystal indices not given in the question
+47214,"UGPhysics (Wave Optics, Diffraction, problem 5398)",needs_data,"relies on an earlier derived intensity formula, not given"
+47215,"UGPhysics (Wave Optics, Polarization, problem 5401)",needs_data,"Babinet setup taken from a previous problem, not given"
+47216,"UGPhysics (Wave Optics, Polarization, problem 5403)",needs_data,Crossed-polarizer setup not stated in this question
+47217,"UGPhysics (Wave Optics, Diffraction, problem 5405)",key_conflict,"cos(theta1)=1-lambda/d gives 0.9987, so y is about 0.50 m not 0.24 m"
+47219,"UGPhysics (Wave Optics, Interference, problem 5408)",needs_data,the two waves are not described in this question
+47222,"UGPhysics (Wave Optics, Polarization, problem 5411)",needs_data,Filter thickness and indices not given; refers to earlier problem
+47223,"UGPhysics (Wave Optics, Polarization, problem 5414)",needs_data,Crystal indices not given; solution uses quartz values
+47227,"UGPhysics (Wave Optics, Polarization, problem 5419)",needs_data,ADP indices not given; solution values not in question
+47233,"UGPhysics (Wave Optics, Diffraction, problem 5436)",key_conflict,"1.898 x 956 x 6e-8 = 1.09e-4 rad = 0.37 arcmin, not 0.53"
+47236,"UGPhysics (Wave Optics, Polarization, problem 5439)",needs_data,Wavelength not given; solution implies about 6328 Angstrom
+47238,"UGPhysics (Wave Optics, Polarization, problem 5443)",needs_data,Screen distance or lens focal length not given
+47246,"UGPhysics (Wave Optics, Interference, problem 5457)",needs_data,initial order k0=40 and h come from an earlier question
+47251,"UGPhysics (Wave Optics, Diffraction, problem 5466)",needs_data,"setup and plane Pi' come from an earlier discussion, not given"
+47262,"UGPhysics (Wave Optics, Polarization, problem 5481)",needs_data,Crystal indices not given; solution uses quartz values
+47269,"UGPhysics (Wave Optics, Polarization, problem 5491)",needs_data,Crystal birefringence not given in the question
+47280,"UGPhysics (Wave Optics, Polarization, problem 5511)",broken_text,Unit cut off after arcseconds; presumably per Angstrom
+47281,"UGPhysics (Wave Optics, Polarization, problem 5513)",mismatch,"Shown solution is Brewster-angle preamble, not this question."
+47282,"UGPhysics (Wave Optics, Polarization, problem 5514)",mismatch,"Shown solution is Brewster-angle preamble, not this question."
+47283,"UGPhysics (Wave Optics, Polarization, problem 5515)",mismatch,"Shown solution is Brewster-angle preamble, not this question."
+47285,"UGPhysics (Wave Optics, Polarization, problem 5517)",mismatch,"Shown solution is Brewster-angle preamble, not this question."
+47286,"UGPhysics (Wave Optics, Polarization, problem 5519)",mismatch,"Shown solution is Brewster-angle preamble, not this question."
+47287,"UGPhysics (Wave Optics, Interference, problem 5520)",key_conflict;needs_data,"t_min=100 us with v=c/3 gives d=5 km, not 5 m; 100 ns?"

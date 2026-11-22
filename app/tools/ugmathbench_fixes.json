@@ -1,0 +1,11 @@
+{
+ "fixes": [],
+ "dropped": {
+  "UGMathBench Calculus_-_multivariable_0163": "old \\cases{...} with & separators: not valid in the web renderer, a rewrite is a hand job",
+  "UGMathBench Calculus_-_multivariable_0575": "garbled source: the surface equation is bare text with the constraints cut in half",
+  "UGMathBench Calculus_-_single_variable_0568": "garbled source: the integral is bare TeX that stops at \\, dt",
+  "UGMathBench Calculus_-_single_variable_0573": "garbled source: \\frac{d\\}{dt} in the statement",
+  "UGMathBench Calculus_-_single_variable_0679": "garbled source: the interval bounds are scrambled (\\frac{\\pi2 ... \\frac}{3\\pi}2)",
+  "UGMathBench Complex_analysis_0045": "garbled source: \\+, \\-, \\= escapes and an unbalanced \\) in the hint"
+ }
+}

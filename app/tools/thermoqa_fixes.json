@@ -1,0 +1,11 @@
+{
+ "fixes": [
+  {"key": "T3-CCGT-MX-C-001", "field": "latexcode",
+   "fixes": [["component, total exergy destruction, and combined second-law efficiency ($\\eta_{\\mathrm{II}}$).", "component and total exergy destruction."]],
+   "note": "the dataset has no value for the combined second-law efficiency, so it is not asked"},
+  {"key": "T3-CCGT-MX-C-002", "field": "latexcode",
+   "fixes": [["component, total exergy destruction, and combined second-law efficiency ($\\eta_{\\mathrm{II}}$).", "component and total exergy destruction."]],
+   "note": "as above"}
+ ],
+ "dropped": {}
+}

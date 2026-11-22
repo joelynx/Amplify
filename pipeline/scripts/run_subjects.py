@@ -42,6 +42,7 @@ from common import (  # noqa: E402
     IMG_RE,
     OUTPUTS_DIR,
     PIPELINE_DIR,
+    REPO_DIR,
     app_conn,
     fetch_question,
     get_status,
@@ -92,11 +93,12 @@ def scope_rows(cfg: dict, app, ours: set[int] = frozenset()) -> list[dict]:
     s = scfg(cfg)
     order = {name: i for i, name in enumerate(s["profiles"])}
     solve_kinds, aids_kinds = set(s.get("solve_kinds") or ()), set(s.get("aids_kinds") or ())
+    hold = set(s.get("hold_ids") or ())  # held for the owner (statement needs data it does not give, or is garbled)
     out = []
     for r in app.execute("SELECT question_id, source, topic, branch, subtopic, type, latexcode, solution, "
                          "generated_solution FROM questions ORDER BY question_id"):
         subject = subjects.subject_of(dict(r))
-        if subject not in order:
+        if subject not in order or r["question_id"] in hold:
             continue
         kind = run_sub.solution_kind(r["solution"])
         mode = "solve" if kind in solve_kinds else "aids" if kind in aids_kinds else None
@@ -140,10 +142,19 @@ def plan_attempt(pc, qid: int) -> tuple[int, dict | None]:
     return attempt, (read_json(fb) if (row is not None and row["status"] == "retry" and fb.exists()) else None)
 
 
-def system_file(cfg: dict, mode: str, subject: str) -> tuple[Path, str]:
+def uses_tools(cfg: dict, subject: str, mode: str) -> bool:
+    """Tools mode (config.tools, owner 2026-11-21): the solver gets the calc tool to check its work
+    in the subjects and modes listed there."""
+    t = run_sub.tools_cfg(cfg)
+    return bool(t.get("enabled")) and subject in (t.get("subjects") or ()) and mode in (t.get("modes") or ("solve",))
+
+
+def system_file(cfg: dict, mode: str, subject: str, tools: bool = False) -> tuple[Path, str]:
     text = subjects.system_prompt(cfg, mode, subject)
+    if tools:  # the subject's prompt, then how to use the calc tool
+        text = text.rstrip() + "\n\n" + read_text(REPO_DIR / run_sub.tools_cfg(cfg).get("prompt", "pipeline/prompts/subject/tools.md")).strip() + "\n"
     run_sub.SUB_CWD.mkdir(parents=True, exist_ok=True)
-    path = run_sub.SUB_CWD.parent / f".amplify-subject-{mode}-{scfg(cfg)['profiles'][subject]}.txt"
+    path = run_sub.SUB_CWD.parent / f".amplify-subject-{mode}-{scfg(cfg)['profiles'][subject]}{'-tools' if tools else ''}.txt"
     path.write_bytes(text.encode("utf-8"))
     return path, text
 
@@ -159,8 +170,16 @@ def verify(cfg: dict, app, pc, quiet: bool = False, review: bool = False, accept
     picks: dict[str, dict] = {}
     pool = [dict(x, mode="solve") for x in review_rows(cfg, app, pc)] if review else []
     for x in pool or candidates(cfg, app, pc) or scope_rows(cfg, app):
-        if not x["figure"]:  # one question of each mode, and one with images of each mode when sent
-            picks.setdefault(x["mode"] + (" with images" if x["images"] else ""), x)
+        if not x["figure"]:  # one question of each mode, and one with images of each mode when sent (each with and without tools)
+            tools = uses_tools(cfg, x["subject"], x["mode"])
+            picks.setdefault(x["mode"] + (" with images" if x["images"] else "") + (" with tools" if tools else ""), x)
+    if not review and run_sub.tools_cfg(cfg).get("enabled") and not any(k.endswith("with tools") for k in picks):
+        # tools mode on but nothing waiting uses it: check (and let the owner accept) its wrapping on a solved question
+        ours = {r[0] for r in pc.execute("SELECT question_id FROM status WHERE mode IS NOT NULL")}
+        x = next((x for x in scope_rows(cfg, app, ours) if not x["figure"] and not x["images"]
+                  and uses_tools(cfg, x["subject"], x["mode"])), None)
+        if x is not None:
+            picks[x["mode"] + " with tools"] = x
     if not picks:
         raise SystemExit("no question to verify with")
     accepted = run_sub.accepted_fingerprints(pc)
@@ -168,13 +187,14 @@ def verify(cfg: dict, app, pc, quiet: bool = False, review: bool = False, accept
     for x in picks.values():
         mode = x["mode"]
         q = fetch_question(app, x["id"])
-        path, system = system_file(cfg, mode, x["subject"])
+        tools = uses_tools(cfg, x["subject"], mode)
+        path, system = system_file(cfg, mode, x["subject"], tools)
         text = subjects.user_text(q, mode, None, cfg)
         images, _skip = subjects.attachments(cfg, q, mode)
         effort = scfg(cfg)["review_effort"] if review else effort_for(cfg, mode)
-        captured, out = run_sub.capture_request(ccfg, path, text, effort, images)
-        rep = run_sub.check_request(ccfg, system, text, effort, captured, out, set(), images)
-        rep.update(question_id=x["id"], mode=mode, effort=effort, images=len(images),
+        captured, out = run_sub.capture_request(ccfg, path, text, effort, images, tools)
+        rep = run_sub.check_request(ccfg, system, text, effort, captured, out, set(), images, tools)
+        rep.update(question_id=x["id"], mode=mode, effort=effort, images=len(images), tools=tools,
                    claude_code_version=rep["init"].get("claude_code_version"),
                    accepted=rep["fingerprint"] in accepted)
         reports.append(rep)
@@ -258,7 +278,16 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
           force_unlock: bool, tiebreak: bool = False, review: bool = False) -> None:
     """Send the unfinished questions; with tiebreak, a third solve at config.subjects.tiebreak_effort
     for the questions tiebreak_rows names; with review, the review solve (config.subjects.review_model
-    at review_effort, solve mode) for the questions review_rows names. Neither sends the stored answer."""
+    at review_effort, solve mode) for the questions review_rows names. Neither sends the stored answer.
+    Accounts rotate as in run_sub.py (owner 2026-11-21: "port the rotation"): one account at a time, in
+    pipeline/accounts.json's serving order, moving on when the active one reaches a stop. Only one of the
+    two solvers runs at a time, so no two accounts ever serve together."""
+    if run_sub.LOCK.exists():
+        raise SystemExit(f"the math solver is running ({run_sub.LOCK.as_posix()}, pid {run_sub.LOCK.read_text().strip()}): "
+                         "one solver at a time, so that only one account serves; wait for it or remove a stale lock")
+    rotation = [a for a in run_sub.load_accounts() if a.get("enabled", True) and run_sub.account_id(a)]
+    if rotation:  # account rotation: the request check runs under the first account in serving order
+        run_sub._ACTIVE_DIR[0] = str(Path(rotation[0]["dir"]))
     pre = verify(cfg, app, pc, quiet=True, review=review)
     if not pre["ok"]:
         raise SystemExit("the request check failed or the wrapping is not accepted; run `run_subjects.py verify`")
@@ -274,7 +303,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
     if n is not None:
         queue = queue[:n]
     limit = workers or int(scfg(cfg).get("workers", 4))
-    files: dict[tuple[str, str], Path] = {}
+    files: dict[tuple[str, str, bool], Path] = {}  # (mode, subject, tools mode)
     print(json.dumps({"questions": len(queue), "workers": limit, "claude_code_version": version,
                       "model": ccfg["solver"]["model"], "modes": dict(Counter(x["mode"] for x in queue)),
                       "prompt_version": ccfg["prompt_version"], **({"tiebreak": True} if tiebreak else {}),
@@ -292,20 +321,54 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                                    run_sub.CAP_STATE, run_sub.ACCOUNT_FILE)
             started: dict = {}
             account_of: dict = {}  # the account each running reply started under
+            active = None  # account rotation (as run_sub.solve): the accounts file's entry in use
+            name_of: dict[str, str] = {}  # account -> its name in the accounts file
+            if rotation:
+                active = run_sub.pick_account(run_sub.load_accounts(), cap, [model])[0] or rotation[0]
+                run_sub.use_account(active, cap)
+                name_of[cap.account] = active["name"]
+                print(json.dumps({"rotation": [a["name"] for a in rotation], "account": active["name"], "at": now_iso()}), flush=True)
+            seen_list = run_sub.accounts_mtime()  # an edit of the accounts file (order, on/off) applies from then on
+            tried: set[str] = set()  # accounts left since the last question went out: not taken again before a wait
+            move_to = None  # an account to move to once the replies still running are done
+            off = False  # the active account is turned off and no other is free
+            repick = False
 
             def flying() -> list[tuple[str, float]]:
                 return [(model, started[f]) for f in running if account_of[f] == cap.account]
 
+            def rotate_to(a: dict, why: str) -> None:
+                nonlocal active
+                before = active["name"]
+                run_sub.use_account(a, cap)
+                active, name_of[cap.account] = a, a["name"]
+                print(json.dumps({"rotate": {"from": before, "to": a["name"], "why": why}, "account": cap.account,
+                                  "at": now_iso()}), flush=True)
+
             while queue or running:
                 if cap.login_changed():
                     print(json.dumps({"login": "changed", "account": cap.account, "at": now_iso()}), flush=True)
-                if queue and stop_reason is None and cap.probe_due(model, flying()):
+                if rotation:
+                    if run_sub.accounts_mtime() != seen_list:  # the owner edited the list: its order applies from now
+                        seen_list, repick = run_sub.accounts_mtime(), True
+                    if repick:  # the first free account in serving order; a move waits for the running replies
+                        repick = False
+                        listed = run_sub.load_accounts()
+                        a = run_sub.pick_account(listed, cap, [model])[0]
+                        off = a is None and not any(x["name"] == active["name"] and x.get("enabled", True) for x in listed)
+                        move_to = a if a is not None and a["name"] != active["name"] else None
+                        if move_to is not None and running:
+                            print(json.dumps({"rotate_when_done": move_to["name"], "running": len(running)}), flush=True)
+                    if move_to is not None and not running:
+                        rotate_to(move_to, "serving order")
+                        move_to = None
+                if queue and stop_reason is None and move_to is None and not off and cap.probe_due(model, flying()):
                     got = run_sub.read_usage(ccfg, model, version, cap, run_sub.SUB_CWD.parent)
                     if got["kind"] == "limited":
                         stop_reason, paused_until = "usage limit: " + got["why"], got.get("resets_at")
                     elif got["kind"] == "stop":
                         stop_reason, wait_on_limit = got["why"], False
-                while (queue and stop_reason is None and len(running) < limit
+                while (queue and stop_reason is None and move_to is None and not off and len(running) < limit
                        and cap.allows(model, flying())):
                     x = queue.pop(0)
                     qid, mode = x["id"], x["mode"]
@@ -317,8 +380,9 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         log_event(pc, qid, "skip", figure)
                         summary["skipped_image"] += 1
                         continue
-                    if (mode, x["subject"]) not in files:
-                        files[(mode, x["subject"])] = system_file(cfg, mode, x["subject"])[0]
+                    tools = uses_tools(cfg, x["subject"], mode)
+                    if (mode, x["subject"], tools) not in files:
+                        files[(mode, x["subject"], tools)] = system_file(cfg, mode, x["subject"], tools)[0]
                     attempt, feedback = plan_attempt(pc, qid)
                     extra = {"tiebreak": 1} if tiebreak else {}
                     if review:
@@ -328,16 +392,23 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     else:
                         effort = scfg(cfg)["tiebreak_effort"] if tiebreak else effort_for(cfg, mode)
                     upsert_status(pc, qid, mode=mode, subject=x["subject"], **extra)
-                    fut = ex.submit(run_sub.call_claude, ccfg, files[(mode, x["subject"])],
-                                    subjects.user_text(q, mode, feedback, cfg), effort, None, images)
+                    fut = ex.submit(run_sub.call_claude, ccfg, files[(mode, x["subject"], tools)],
+                                    subjects.user_text(q, mode, feedback, cfg), effort, None, images,
+                                    q_dir(qid) / f"tools_{attempt}.jsonl" if tools else None)
                     running[fut] = (x, attempt, effort, [name for name, _ in images])
                     started[fut], account_of[fut] = time.time(), cap.account
+                    tried.clear()
                 if not running:
-                    held = cap.held_until(model) if queue and stop_reason is None else None
-                    if not held:
+                    if not queue:
                         break
-                    paused_until, why = held  # the usage cap: wait as for a usage limit
-                    stop_reason = "usage limit: " + why
+                    if stop_reason is None:  # (a limit a probe found falls through to the move or the wait below)
+                        held = cap.held_until(model)
+                        if off:
+                            held = (time.time() + 300, f"{active['name']} is turned off and no other account is free")
+                        if not held:
+                            break
+                        paused_until, why = held  # the usage cap: wait as for a usage limit (with rotation: move on first)
+                        stop_reason = "usage limit: " + why
                 done = wait(running, return_when=FIRST_COMPLETED)[0] if running else set()
                 for fut in done:
                     x, attempt, effort, names = running.pop(fut)
@@ -348,8 +419,9 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     readings = run_sub.usage_readings(out)
                     info["account_usage"] = readings
                     tokens = int(((info.get("result") or {}).get("usage") or {}).get("output_tokens") or 0) if kind == "ok" else 0
+                    acct_of_reply = account_of.pop(fut)
                     cap.record(model, started.pop(fut), time.time(), readings,
-                               run_sub.spent_usd(out, info, cap.usd_per_token()), tokens, account_of.pop(fut))
+                               run_sub.spent_usd(out, info, cap.usd_per_token()), tokens, acct_of_reply)
                     raw = run_sub.save_failure(qid, attempt, out, info) if kind in ("error", "stop", "cut") else None
                     if kind in ("ok", "cut"):
                         run_sub.store(pc, ccfg, qid, attempt, effort, info, out.get("seconds", 0), names)
@@ -367,6 +439,8 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     else:
                         summary[run_sub.api_failure(pc, ccfg, qid, attempt, info["why"])] += 1
                     print(json.dumps({"question_id": qid, "mode": mode, "attempt": attempt, "outcome": kind,
+                                      **({"account": name_of.get(acct_of_reply)} if rotation else {}),
+                                      **({"tool_calls": info["tool_calls"]} if info.get("tool_calls") is not None else {}),
                                       "seconds": out.get("seconds"), **({"why": info["why"]} if kind != "ok" else {}),
                                       **({"raw": raw} if raw else {}),
                                       **({"usage": {w: u for w, (u, _) in readings.items()}} if readings else {}),
@@ -374,6 +448,17 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                 if stop_reason and not running:
                     if wait_on_limit and stop_reason.startswith("usage limit") and queue:
                         until = float(paused_until) if paused_until else time.time() + 900
+                        if rotation:  # the next free account in serving order, before any wait
+                            a, hold = run_sub.pick_account(run_sub.load_accounts(), cap, [model],
+                                                           skip=tried | {active["name"]})
+                            if a is not None:
+                                tried.add(active["name"])
+                                rotate_to(a, stop_reason)
+                                stop_reason = paused_until = None
+                                off = False
+                                continue
+                            if hold:  # every account is held: wait for the first to free
+                                until = min(until, hold[0])
                         secs = max(60, min(int(until - time.time()) + 120, 1020))  # short polls catch a /login switch
                         print(f"{stop_reason}; waiting {secs // 60} min, then continuing", flush=True)
                         deadline = time.time() + secs
@@ -382,7 +467,11 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                             if cap.login_changed():
                                 print(json.dumps({"login": "changed", "account": cap.account, "at": now_iso()}), flush=True)
                                 break
+                            if rotation and run_sub.accounts_mtime() != seen_list:
+                                break
                         stop_reason = paused_until = None
+                        tried.clear()
+                        repick = bool(rotation)
                         continue
                     break
     finally:
