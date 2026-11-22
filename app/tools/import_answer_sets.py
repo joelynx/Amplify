@@ -198,6 +198,7 @@ FIXES = {
     ("MathArena hmmt_nov_2025", "14", "latexcode"): [("\\begin{array}{ccccc}", "\\begin{array}{cccccc}")],  # six columns
     # HARP keys found wrong 2026-11-20 (two Opus solves disagreed with each; checked by hand, owner approved)
     ("HARP", "1958 AHSME 31", "answer"): [("$24$", "$48$")],     # base 12, area 12*8/2
+    ("HARP", "1964 AHSME 29", "answer"): [("$6\\dfrac{1}{2}$", "$6\\dfrac{1}{4}$")],  # q29436: RS = 25/4 (hand check 2026-11-21)
     ("HARP", "1977 AHSME 10", "answer"): [("$-64$", "$128$")],   # (3*1-1)^7
     ("HARP", "1978 AHSME 4", "answer"): [("$3333$", "$2222$")],  # 2(a+b+c+d)
     ("HARP", "1981 AHSME 13", "answer"): [("$16$", "$22$")],     # 0.9^n <= 0.1: n >= 21.85
@@ -332,6 +333,7 @@ DROPPED = {
     "IMO-Bench AnswerBench v2 imo-bench-combinatorics-049": "question 28709: both solves cut off at the output limit (key 1057 right)",
     "Omni-MATH 107": "question 33146: both solves cut off at the output limit (key p^a q^b r^c right)",
     "U-MATH 6eab7d06-a894-4b93-8479-b153c4ea7408": "question 37499, owner 2026-11-21: 'delete 37499': reads an average rate of change off a graph; the key (-0.5) holds but the solver misread the graph twice",
+    "IMO-Bench AnswerBench v2 imo-bench-combinatorics-090": "question 28748, owner 2026-11-21: 'delete 28748': the key 2450 is right (KoMaL A.783) but both solves answered 2520",
     **{f"U-MATH {u}": f"question {q}, owner 2026-11-21: 'Delete the sketch the graph questions.' (opens 'Sketch the curve:')"
        for q, u in [(37013, "02d22949-d7a2-46ca-8af8-4bda85bc8e0e"), (37016, "03b87419-fe7c-481a-9396-1d0723fc2b15"),
                     (37067, "0fec4721-ec02-4a72-aa1a-2ed7b0f8276d"), (37259, "3b3ba848-ee8f-4978-b0c2-ceb26a88779e"),
