@@ -1,0 +1,3375 @@
+{
+ "rows": 2792,
+ "held_back": {
+  "scheduled": 3,
+  "duplicate of bank": 72,
+  "duplicate of potd": 16
+ },
+ "asof": "2026-11-12",
+ "skip_rows": 23,
+ "skip_keys": {
+  "Codeforces": 10,
+  "Cambridge International A Level Mathematics 9709": 1,
+  "Project Euler": 2,
+  "USA Computing Olympiad": 2,
+  "Hanoi Grade 10 Entrance Examination": 1,
+  "Hong Kong Diploma of Secondary Education Mathematics": 1,
+  "Science Olympiad Foundation International Mathematics Olympiad (sample paper)": 1,
+  "Kyoto University Entrance Examination": 1,
+  "International Olympiad in Informatics": 1,
+  "St. Mary's Canossian College Form 4 Final Exam": 1,
+  "University of Indonesia Entrance Examination": 1,
+  "Gaokao (Chinese National College Entrance Examination)": 1
+ },
+ "distinct_competitions": 292,
+ "distinct_books_journals": 20,
+ "mods_attr_rows": 236,
+ "country_total": {
+  "United States": 300,
+  "United Kingdom": 220,
+  "China": 55,
+  "Australia": 55,
+  "Canada": 54,
+  "Iran": 52,
+  "New Zealand": 50,
+  "Russia": 41,
+  "Israel": 37,
+  "Taiwan": 36,
+  "Singapore": 35,
+  "Ireland": 30,
+  "India": 29,
+  "Germany": 28,
+  "Japan": 23,
+  "Netherlands": 19,
+  "Hong Kong": 17,
+  "Austria": 17,
+  "Poland": 16,
+  "Thailand": 15,
+  "Italy": 15,
+  "South Korea": 13,
+  "Serbia": 11,
+  "Malaysia": 11,
+  "Romania": 10,
+  "South Africa": 10,
+  "Spain": 8,
+  "Brazil": 8,
+  "Philippines": 7,
+  "Mexico": 7,
+  "Indonesia": 6,
+  "Croatia": 6,
+  "Norway": 5,
+  "Sweden": 5,
+  "Vietnam": 5,
+  "Greece": 5,
+  "Switzerland": 5,
+  "Belgium": 5,
+  "France": 5,
+  "Bulgaria": 4,
+  "Kazakhstan": 4,
+  "Turkey": 4,
+  "Bangladesh": 4,
+  "Kosovo": 4,
+  "Nepal": 3,
+  "Belarus": 3,
+  "Slovenia": 3,
+  "Ukraine": 3,
+  "Portugal": 3,
+  "Moldova": 3,
+  "Ecuador": 2,
+  "Argentina": 2,
+  "Mongolia": 2,
+  "Armenia": 2,
+  "Saudi Arabia": 2,
+  "Finland": 2,
+  "Bosnia and Herzegovina": 2,
+  "Azerbaijan": 2,
+  "Chile": 2,
+  "Costa Rica": 2,
+  "Latvia": 1,
+  "Nigeria": 1,
+  "Lithuania": 1,
+  "Morocco": 1,
+  "Cyprus": 1,
+  "Albania": 1,
+  "Hungary": 1,
+  "Paraguay": 1,
+  "North Korea": 1,
+  "Yugoslavia": 1
+ },
+ "T5": {
+  "own_competitions": 98,
+  "own_rows": 2061,
+  "grouped_competitions": 214,
+  "grouped_rows": 617,
+  "total_sources": 128,
+  "groups": {
+   "Math Olympiad Discord Server": [
+    245,
+    3
+   ],
+   "Other European Olympiads": [
+    59,
+    37
+   ],
+   "Mock Olympiads": [
+    55,
+    34
+   ],
+   "Other Asian Olympiads": [
+    38,
+    16
+   ],
+   "Problem Books and Journals": [
+    24,
+    18
+   ],
+   "Latin American Olympiads": [
+    18,
+    11
+   ],
+   "United States Competitions": [
+    18,
+    7
+   ],
+   "Unidentified Contests": [
+    17,
+    13
+   ],
+   "Online Community Contests": [
+    15,
+    8
+   ],
+   "Russian Olympiads": [
+    14,
+    7
+   ],
+   "Indian Olympiads": [
+    11,
+    5
+   ],
+   "Israeli Olympiads": [
+    10,
+    6
+   ],
+   "Canadian Olympiads": [
+    9,
+    5
+   ],
+   "Irish Olympiads": [
+    8,
+    3
+   ],
+   "Japanese Olympiads": [
+    7,
+    3
+   ],
+   "British Olympiads": [
+    7,
+    6
+   ],
+   "Croatian Olympiads": [
+    6,
+    2
+   ],
+   "Thai Olympiads": [
+    5,
+    2
+   ],
+   "Singaporean Olympiads": [
+    5,
+    3
+   ],
+   "South African Olympiads": [
+    5,
+    2
+   ],
+   "Vietnamese Olympiads": [
+    5,
+    2
+   ],
+   "Greek Olympiads": [
+    5,
+    3
+   ],
+   "Swiss Olympiads": [
+    5,
+    2
+   ],
+   "Belgian Olympiads": [
+    5,
+    2
+   ],
+   "Australian Olympiads": [
+    5,
+    3
+   ],
+   "International Olympiads": [
+    4,
+    2
+   ],
+   "African Olympiads": [
+    3,
+    3
+   ],
+   "University Admission Exams": [
+    3,
+    2
+   ],
+   "University Mathematics Competitions": [
+    3,
+    2
+   ],
+   "New Zealand Olympiads": [
+    3,
+    2
+   ]
+  },
+  "own": [
+   [
+    "International Mathematical Olympiad",
+    465
+   ],
+   [
+    "British Mathematical Olympiad Round 1",
+    106
+   ],
+   [
+    "United States of America Mathematical Olympiad",
+    83
+   ],
+   [
+    "British Mathematical Olympiad Round 2",
+    63
+   ],
+   [
+    "European Girls' Mathematical Olympiad",
+    54
+   ],
+   [
+    "Asian Pacific Mathematics Olympiad",
+    45
+   ],
+   [
+    "Canadian Mathematical Olympiad",
+    45
+   ],
+   [
+    "William Lowell Putnam Mathematical Competition",
+    42
+   ],
+   [
+    "United States of America Team Selection Test Selection Test",
+    40
+   ],
+   [
+    "Romanian Masters of Mathematics",
+    39
+   ],
+   [
+    "United States of America Team Selection Test",
+    39
+   ],
+   [
+    "Tournament of Towns",
+    35
+   ],
+   [
+    "Australian Mathematical Olympiad",
+    34
+   ],
+   [
+    "Balkan Mathematical Olympiad",
+    34
+   ],
+   [
+    "China Team Selection Test",
+    31
+   ],
+   [
+    "Singapore Mathematical Olympiad",
+    30
+   ],
+   [
+    "All-Russian Olympiad",
+    29
+   ],
+   [
+    "ELMO Mathematical Olympiad",
+    29
+   ],
+   [
+    "United States Ersatz Math Olympiad",
+    23
+   ],
+   [
+    "Iranian Geometry Olympiad",
+    23
+   ],
+   [
+    "Intermediate Mathematical Olympiad and Kangaroo",
+    23
+   ],
+   [
+    "Irish Mathematical Olympiad",
+    22
+   ],
+   [
+    "Israel Team Selection Test",
+    20
+   ],
+   [
+    "Taiwan Team Selection Test",
+    20
+   ],
+   [
+    "Imperial-Cambridge Mathematics Competition",
+    20
+   ],
+   [
+    "United States of America Mathematical Talent Search",
+    19
+   ],
+   [
+    "Iran Team Selection Test",
+    18
+   ],
+   [
+    "ELMO Mathematical Olympiad Shortlist",
+    17
+   ],
+   [
+    "Austrian Mathematical Olympiad",
+    17
+   ],
+   [
+    "American Mathematics Competitions",
+    16
+   ],
+   [
+    "German Mathematical Olympiad",
+    16
+   ],
+   [
+    "Japan Mathematical Olympiad Final Round",
+    16
+   ],
+   [
+    "Di Pasquale, Do and Mathews' Problem Solving Tactics",
+    16
+   ],
+   [
+    "Balkan Mathematical Olympiad Shortlist",
+    15
+   ],
+   [
+    "Hong Kong Team Selection Test",
+    15
+   ],
+   [
+    "United States of America Junior Mathematical Olympiad",
+    14
+   ],
+   [
+    "New Zealand Mathematical Olympiad Round 1",
+    14
+   ],
+   [
+    "Harvard-MIT Mathematics Tournament",
+    14
+   ],
+   [
+    "Taiwan IMOC Mathematical Olympiad",
+    14
+   ],
+   [
+    "Romanian Masters of Mathematics Shortlist",
+    13
+   ],
+   [
+    "Math Olympiad Discord Server Mathematical Olympiad",
+    13
+   ],
+   [
+    "Polish Mathematical Olympiad",
+    12
+   ],
+   [
+    "Middle European Mathematical Olympiad",
+    12
+   ],
+   [
+    "New Zealand Camp Selection Problems",
+    12
+   ],
+   [
+    "China Mathematical Olympiad",
+    11
+   ],
+   [
+    "Australian Mathematical Olympiad Committee Senior Contest",
+    11
+   ],
+   [
+    "Italian Mathematical Olympiad",
+    11
+   ],
+   [
+    "Bundeswettbewerb Mathematik",
+    11
+   ],
+   [
+    "Dutch Team Selection Tests",
+    11
+   ],
+   [
+    "European Mathematical Cup",
+    11
+   ],
+   [
+    "Thailand Mathematical Olympiad",
+    10
+   ],
+   [
+    "Malaysian Team Selection Tests",
+    10
+   ],
+   [
+    "UK-Australia Pre-IMO Camp Exchange Paper",
+    10
+   ],
+   [
+    "India Team Selection Test",
+    9
+   ],
+   [
+    "DGGMaths Riddles",
+    9
+   ],
+   [
+    "UK Mathematical Olympiad for Girls",
+    9
+   ],
+   [
+    "New Zealand Mathematical Olympiad Round 2",
+    9
+   ],
+   [
+    "Indian National Mathematical Olympiad",
+    9
+   ],
+   [
+    "Iranian Mathematical Olympiad",
+    9
+   ],
+   [
+    "Pan-African Mathematics Olympiad",
+    9
+   ],
+   [
+    "Korean Mathematical Olympiad",
+    9
+   ],
+   [
+    "Spanish Mathematical Olympiad",
+    8
+   ],
+   [
+    "Amateur Geometer's Olympiad",
+    8
+   ],
+   [
+    "Benelux Mathematical Olympiad",
+    8
+   ],
+   [
+    "Dutch Mathematical Olympiad",
+    8
+   ],
+   [
+    "UK Senior Mathematical Challenge",
+    7
+   ],
+   [
+    "Israel Olympic Revenge",
+    7
+   ],
+   [
+    "Bay Area Mathematical Olympiad",
+    7
+   ],
+   [
+    "Philippine Mathematical Olympiad",
+    7
+   ],
+   [
+    "Online Math Contest (Japan)",
+    7
+   ],
+   [
+    "Mexican Mathematical Olympiad",
+    7
+   ],
+   [
+    "Serbian Mathematical Olympiad",
+    6
+   ],
+   [
+    "LMAO Mock Olympiad",
+    6
+   ],
+   [
+    "Brazilian Mathematical Olympiad",
+    6
+   ],
+   [
+    "International Mathematics Competition for University Students",
+    6
+   ],
+   [
+    "Zeitz's The Art and Craft of Problem Solving",
+    6
+   ],
+   [
+    "Junior Balkan Mathematical Olympiad",
+    6
+   ],
+   [
+    "Czech-Austrian-Polish-Slovak Match",
+    6
+   ],
+   [
+    "Indonesian National Mathematics Olympiad",
+    6
+   ],
+   [
+    "UK Junior Mathematical Olympiad",
+    6
+   ],
+   [
+    "New Zealand Squad Selection Test",
+    6
+   ],
+   [
+    "New Zealand Senior Mathematics Competition",
+    6
+   ],
+   [
+    "Serbia Team Selection Test",
+    5
+   ],
+   [
+    "Romania Team Selection Test",
+    5
+   ],
+   [
+    "China Western Mathematical Invitational",
+    5
+   ],
+   [
+    "Math Olympiad Discord Server Intermediate Contest",
+    5
+   ],
+   [
+    "Baltic Way",
+    5
+   ],
+   [
+    "Niels Henrik Abel Mathematics Contest",
+    5
+   ],
+   [
+    "China Girls' Mathematical Olympiad",
+    5
+   ],
+   [
+    "Australian Intermediate Mathematics Olympiad",
+    5
+   ],
+   [
+    "Iran-Singapore-Taiwan Friendly Competition",
+    5
+   ],
+   [
+    "Swedish Mathematical Olympiad",
+    5
+   ],
+   [
+    "South Africa Team Selection Test Selection Test",
+    5
+   ],
+   [
+    "DGO Geometry Olympiad (Team Round)",
+    5
+   ],
+   [
+    "Romanian National Mathematical Olympiad",
+    5
+   ],
+   [
+    "France Team Selection Test",
+    5
+   ],
+   [
+    "American Invitational Mathematics Examination",
+    4
+   ],
+   [
+    "Cambridge Tripos",
+    2
+   ]
+  ]
+ },
+ "T10": {
+  "own_competitions": 55,
+  "own_rows": 1779,
+  "grouped_competitions": 257,
+  "grouped_rows": 899,
+  "total_sources": 81,
+  "groups": {
+   "Math Olympiad Discord Server": [
+    250,
+    4
+   ],
+   "Other European Olympiads": [
+    143,
+    57
+   ],
+   "Other Asian Olympiads": [
+    69,
+    26
+   ],
+   "Mock Olympiads": [
+    69,
+    36
+   ],
+   "Online Community Contests": [
+    36,
+    11
+   ],
+   "Latin American Olympiads": [
+    31,
+    13
+   ],
+   "Problem Books and Journals": [
+    30,
+    19
+   ],
+   "Indian Olympiads": [
+    29,
+    7
+   ],
+   "British Olympiads": [
+    29,
+    9
+   ],
+   "United States Competitions": [
+    25,
+    8
+   ],
+   "New Zealand Olympiads": [
+    24,
+    5
+   ],
+   "Israeli Olympiads": [
+    17,
+    7
+   ],
+   "Unidentified Contests": [
+    17,
+    13
+   ],
+   "Russian Olympiads": [
+    14,
+    7
+   ],
+   "Chinese Olympiads": [
+    13,
+    3
+   ],
+   "Korean Olympiads": [
+    13,
+    2
+   ],
+   "Serbian Olympiads": [
+    12,
+    3
+   ],
+   "African Olympiads": [
+    12,
+    4
+   ],
+   "Iranian Olympiads": [
+    11,
+    2
+   ],
+   "Romanian Olympiads": [
+    10,
+    2
+   ],
+   "Australian Olympiads": [
+    10,
+    4
+   ],
+   "South African Olympiads": [
+    10,
+    3
+   ],
+   "Canadian Olympiads": [
+    9,
+    5
+   ],
+   "University Mathematics Competitions": [
+    9,
+    3
+   ],
+   "International Olympiads": [
+    4,
+    2
+   ],
+   "University Admission Exams": [
+    3,
+    2
+   ]
+  },
+  "own": [
+   [
+    "International Mathematical Olympiad",
+    465
+   ],
+   [
+    "British Mathematical Olympiad Round 1",
+    106
+   ],
+   [
+    "United States of America Mathematical Olympiad",
+    83
+   ],
+   [
+    "British Mathematical Olympiad Round 2",
+    63
+   ],
+   [
+    "European Girls' Mathematical Olympiad",
+    54
+   ],
+   [
+    "Asian Pacific Mathematics Olympiad",
+    45
+   ],
+   [
+    "Canadian Mathematical Olympiad",
+    45
+   ],
+   [
+    "William Lowell Putnam Mathematical Competition",
+    42
+   ],
+   [
+    "United States of America Team Selection Test Selection Test",
+    40
+   ],
+   [
+    "Romanian Masters of Mathematics",
+    39
+   ],
+   [
+    "United States of America Team Selection Test",
+    39
+   ],
+   [
+    "Tournament of Towns",
+    35
+   ],
+   [
+    "Australian Mathematical Olympiad",
+    34
+   ],
+   [
+    "Balkan Mathematical Olympiad",
+    34
+   ],
+   [
+    "China Team Selection Test",
+    31
+   ],
+   [
+    "Singapore Mathematical Olympiad",
+    30
+   ],
+   [
+    "All-Russian Olympiad",
+    29
+   ],
+   [
+    "ELMO Mathematical Olympiad",
+    29
+   ],
+   [
+    "United States Ersatz Math Olympiad",
+    23
+   ],
+   [
+    "Iranian Geometry Olympiad",
+    23
+   ],
+   [
+    "Intermediate Mathematical Olympiad and Kangaroo",
+    23
+   ],
+   [
+    "Irish Mathematical Olympiad",
+    22
+   ],
+   [
+    "Israel Team Selection Test",
+    20
+   ],
+   [
+    "Taiwan Team Selection Test",
+    20
+   ],
+   [
+    "Imperial-Cambridge Mathematics Competition",
+    20
+   ],
+   [
+    "United States of America Mathematical Talent Search",
+    19
+   ],
+   [
+    "Iran Team Selection Test",
+    18
+   ],
+   [
+    "ELMO Mathematical Olympiad Shortlist",
+    17
+   ],
+   [
+    "Austrian Mathematical Olympiad",
+    17
+   ],
+   [
+    "American Mathematics Competitions",
+    16
+   ],
+   [
+    "German Mathematical Olympiad",
+    16
+   ],
+   [
+    "Japan Mathematical Olympiad Final Round",
+    16
+   ],
+   [
+    "Di Pasquale, Do and Mathews' Problem Solving Tactics",
+    16
+   ],
+   [
+    "Balkan Mathematical Olympiad Shortlist",
+    15
+   ],
+   [
+    "Hong Kong Team Selection Test",
+    15
+   ],
+   [
+    "United States of America Junior Mathematical Olympiad",
+    14
+   ],
+   [
+    "New Zealand Mathematical Olympiad Round 1",
+    14
+   ],
+   [
+    "Harvard-MIT Mathematics Tournament",
+    14
+   ],
+   [
+    "Taiwan IMOC Mathematical Olympiad",
+    14
+   ],
+   [
+    "Romanian Masters of Mathematics Shortlist",
+    13
+   ],
+   [
+    "Math Olympiad Discord Server Mathematical Olympiad",
+    13
+   ],
+   [
+    "Polish Mathematical Olympiad",
+    12
+   ],
+   [
+    "Middle European Mathematical Olympiad",
+    12
+   ],
+   [
+    "New Zealand Camp Selection Problems",
+    12
+   ],
+   [
+    "China Mathematical Olympiad",
+    11
+   ],
+   [
+    "Australian Mathematical Olympiad Committee Senior Contest",
+    11
+   ],
+   [
+    "Italian Mathematical Olympiad",
+    11
+   ],
+   [
+    "Bundeswettbewerb Mathematik",
+    11
+   ],
+   [
+    "Dutch Team Selection Tests",
+    11
+   ],
+   [
+    "European Mathematical Cup",
+    11
+   ],
+   [
+    "Thailand Mathematical Olympiad",
+    10
+   ],
+   [
+    "Malaysian Team Selection Tests",
+    10
+   ],
+   [
+    "UK-Australia Pre-IMO Camp Exchange Paper",
+    10
+   ],
+   [
+    "American Invitational Mathematics Examination",
+    4
+   ],
+   [
+    "Cambridge Tripos",
+    2
+   ]
+  ]
+ },
+ "T15": {
+  "own_competitions": 37,
+  "own_rows": 1565,
+  "grouped_competitions": 275,
+  "grouped_rows": 1113,
+  "total_sources": 62,
+  "groups": {
+   "Math Olympiad Discord Server": [
+    263,
+    5
+   ],
+   "Other European Olympiads": [
+    197,
+    68
+   ],
+   "Other Asian Olympiads": [
+    96,
+    28
+   ],
+   "Mock Olympiads": [
+    69,
+    36
+   ],
+   "United States Competitions": [
+    53,
+    10
+   ],
+   "New Zealand Olympiads": [
+    50,
+    7
+   ],
+   "British Olympiads": [
+    39,
+    10
+   ],
+   "Online Community Contests": [
+    36,
+    11
+   ],
+   "Latin American Olympiads": [
+    31,
+    13
+   ],
+   "Problem Books and Journals": [
+    30,
+    19
+   ],
+   "Indian Olympiads": [
+    29,
+    7
+   ],
+   "Chinese Olympiads": [
+    24,
+    4
+   ],
+   "African Olympiads": [
+    22,
+    7
+   ],
+   "Australian Olympiads": [
+    21,
+    5
+   ],
+   "Dutch Olympiads": [
+    19,
+    2
+   ],
+   "Israeli Olympiads": [
+    17,
+    7
+   ],
+   "Unidentified Contests": [
+    17,
+    13
+   ],
+   "International Olympiads": [
+    17,
+    3
+   ],
+   "Polish Olympiads": [
+    16,
+    2
+   ],
+   "Taiwanese Olympiads": [
+    16,
+    2
+   ],
+   "Thai Olympiads": [
+    15,
+    3
+   ],
+   "Italian Olympiads": [
+    15,
+    3
+   ],
+   "Canadian Olympiads": [
+    9,
+    5
+   ],
+   "University Mathematics Competitions": [
+    9,
+    3
+   ],
+   "University Admission Exams": [
+    3,
+    2
+   ]
+  },
+  "own": [
+   [
+    "International Mathematical Olympiad",
+    465
+   ],
+   [
+    "British Mathematical Olympiad Round 1",
+    106
+   ],
+   [
+    "United States of America Mathematical Olympiad",
+    83
+   ],
+   [
+    "British Mathematical Olympiad Round 2",
+    63
+   ],
+   [
+    "European Girls' Mathematical Olympiad",
+    54
+   ],
+   [
+    "Asian Pacific Mathematics Olympiad",
+    45
+   ],
+   [
+    "Canadian Mathematical Olympiad",
+    45
+   ],
+   [
+    "William Lowell Putnam Mathematical Competition",
+    42
+   ],
+   [
+    "United States of America Team Selection Test Selection Test",
+    40
+   ],
+   [
+    "Romanian Masters of Mathematics",
+    39
+   ],
+   [
+    "United States of America Team Selection Test",
+    39
+   ],
+   [
+    "Tournament of Towns",
+    35
+   ],
+   [
+    "Australian Mathematical Olympiad",
+    34
+   ],
+   [
+    "Balkan Mathematical Olympiad",
+    34
+   ],
+   [
+    "China Team Selection Test",
+    31
+   ],
+   [
+    "Singapore Mathematical Olympiad",
+    30
+   ],
+   [
+    "All-Russian Olympiad",
+    29
+   ],
+   [
+    "ELMO Mathematical Olympiad",
+    29
+   ],
+   [
+    "United States Ersatz Math Olympiad",
+    23
+   ],
+   [
+    "Iranian Geometry Olympiad",
+    23
+   ],
+   [
+    "Intermediate Mathematical Olympiad and Kangaroo",
+    23
+   ],
+   [
+    "Irish Mathematical Olympiad",
+    22
+   ],
+   [
+    "Israel Team Selection Test",
+    20
+   ],
+   [
+    "Taiwan Team Selection Test",
+    20
+   ],
+   [
+    "Imperial-Cambridge Mathematics Competition",
+    20
+   ],
+   [
+    "United States of America Mathematical Talent Search",
+    19
+   ],
+   [
+    "Iran Team Selection Test",
+    18
+   ],
+   [
+    "ELMO Mathematical Olympiad Shortlist",
+    17
+   ],
+   [
+    "Austrian Mathematical Olympiad",
+    17
+   ],
+   [
+    "American Mathematics Competitions",
+    16
+   ],
+   [
+    "German Mathematical Olympiad",
+    16
+   ],
+   [
+    "Japan Mathematical Olympiad Final Round",
+    16
+   ],
+   [
+    "Di Pasquale, Do and Mathews' Problem Solving Tactics",
+    16
+   ],
+   [
+    "Balkan Mathematical Olympiad Shortlist",
+    15
+   ],
+   [
+    "Hong Kong Team Selection Test",
+    15
+   ],
+   [
+    "American Invitational Mathematics Examination",
+    4
+   ],
+   [
+    "Cambridge Tripos",
+    2
+   ]
+  ]
+ },
+ "T20": {
+  "own_competitions": 27,
+  "own_rows": 1400,
+  "grouped_competitions": 285,
+  "grouped_rows": 1278,
+  "total_sources": 49,
+  "groups": {
+   "Other European Olympiads": [
+    267,
+    75
+   ],
+   "Math Olympiad Discord Server": [
+    263,
+    5
+   ],
+   "Other Asian Olympiads": [
+    141,
+    36
+   ],
+   "United States Competitions": [
+    105,
+    13
+   ],
+   "Mock Olympiads": [
+    69,
+    36
+   ],
+   "New Zealand Olympiads": [
+    50,
+    7
+   ],
+   "Problem Books and Journals": [
+    46,
+    20
+   ],
+   "British Olympiads": [
+    39,
+    10
+   ],
+   "Online Community Contests": [
+    36,
+    11
+   ],
+   "Latin American Olympiads": [
+    31,
+    13
+   ],
+   "Indian Olympiads": [
+    29,
+    7
+   ],
+   "Iranian Olympiads": [
+    29,
+    3
+   ],
+   "German Olympiads": [
+    28,
+    3
+   ],
+   "Chinese Olympiads": [
+    24,
+    4
+   ],
+   "Japanese Olympiads": [
+    23,
+    4
+   ],
+   "African Olympiads": [
+    22,
+    7
+   ],
+   "Australian Olympiads": [
+    21,
+    5
+   ],
+   "Unidentified Contests": [
+    17,
+    13
+   ],
+   "International Olympiads": [
+    17,
+    3
+   ],
+   "Canadian Olympiads": [
+    9,
+    5
+   ],
+   "University Mathematics Competitions": [
+    9,
+    3
+   ],
+   "University Admission Exams": [
+    3,
+    2
+   ]
+  },
+  "own": [
+   [
+    "International Mathematical Olympiad",
+    465
+   ],
+   [
+    "British Mathematical Olympiad Round 1",
+    106
+   ],
+   [
+    "United States of America Mathematical Olympiad",
+    83
+   ],
+   [
+    "British Mathematical Olympiad Round 2",
+    63
+   ],
+   [
+    "European Girls' Mathematical Olympiad",
+    54
+   ],
+   [
+    "Asian Pacific Mathematics Olympiad",
+    45
+   ],
+   [
+    "Canadian Mathematical Olympiad",
+    45
+   ],
+   [
+    "William Lowell Putnam Mathematical Competition",
+    42
+   ],
+   [
+    "United States of America Team Selection Test Selection Test",
+    40
+   ],
+   [
+    "Romanian Masters of Mathematics",
+    39
+   ],
+   [
+    "United States of America Team Selection Test",
+    39
+   ],
+   [
+    "Tournament of Towns",
+    35
+   ],
+   [
+    "Australian Mathematical Olympiad",
+    34
+   ],
+   [
+    "Balkan Mathematical Olympiad",
+    34
+   ],
+   [
+    "China Team Selection Test",
+    31
+   ],
+   [
+    "Singapore Mathematical Olympiad",
+    30
+   ],
+   [
+    "All-Russian Olympiad",
+    29
+   ],
+   [
+    "ELMO Mathematical Olympiad",
+    29
+   ],
+   [
+    "United States Ersatz Math Olympiad",
+    23
+   ],
+   [
+    "Iranian Geometry Olympiad",
+    23
+   ],
+   [
+    "Intermediate Mathematical Olympiad and Kangaroo",
+    23
+   ],
+   [
+    "Irish Mathematical Olympiad",
+    22
+   ],
+   [
+    "Israel Team Selection Test",
+    20
+   ],
+   [
+    "Taiwan Team Selection Test",
+    20
+   ],
+   [
+    "Imperial-Cambridge Mathematics Competition",
+    20
+   ],
+   [
+    "American Invitational Mathematics Examination",
+    4
+   ],
+   [
+    "Cambridge Tripos",
+    2
+   ]
+  ]
+ },
+ "competition_counts": [
+  [
+   "International Mathematical Olympiad",
+   465,
+   "International Olympiads",
+   "high"
+  ],
+  [
+   "Math Olympiad Discord Server",
+   236,
+   "Math Olympiad Discord Server",
+   "high"
+  ],
+  [
+   "British Mathematical Olympiad Round 1",
+   106,
+   "British Olympiads",
+   "high"
+  ],
+  [
+   "United States of America Mathematical Olympiad",
+   83,
+   "United States Competitions",
+   "high"
+  ],
+  [
+   "British Mathematical Olympiad Round 2",
+   63,
+   "British Olympiads",
+   "high"
+  ],
+  [
+   "European Girls' Mathematical Olympiad",
+   54,
+   "International Olympiads",
+   "high"
+  ],
+  [
+   "Asian Pacific Mathematics Olympiad",
+   45,
+   "International Olympiads",
+   "high"
+  ],
+  [
+   "Canadian Mathematical Olympiad",
+   45,
+   "Canadian Olympiads",
+   "high"
+  ],
+  [
+   "William Lowell Putnam Mathematical Competition",
+   42,
+   "University Mathematics Competitions",
+   "high"
+  ],
+  [
+   "United States of America Team Selection Test Selection Test",
+   40,
+   "United States Competitions",
+   "high"
+  ],
+  [
+   "Romanian Masters of Mathematics",
+   39,
+   "International Olympiads",
+   "high"
+  ],
+  [
+   "United States of America Team Selection Test",
+   39,
+   "United States Competitions",
+   "high"
+  ],
+  [
+   "Tournament of Towns",
+   35,
+   "International Olympiads",
+   "high"
+  ],
+  [
+   "Australian Mathematical Olympiad",
+   34,
+   "Australian Olympiads",
+   "high"
+  ],
+  [
+   "Balkan Mathematical Olympiad",
+   34,
+   "Other European Olympiads",
+   "high"
+  ],
+  [
+   "China Team Selection Test",
+   31,
+   "Chinese Olympiads",
+   "high"
+  ],
+  [
+   "Singapore Mathematical Olympiad",
+   30,
+   "Singaporean Olympiads",
+   "high"
+  ],
+  [
+   "All-Russian Olympiad",
+   29,
+   "Russian Olympiads",
+   "high"
+  ],
+  [
+   "ELMO Mathematical Olympiad",
+   29,
+   "United States Competitions",
+   "medium"
+  ],
+  [
+   "United States Ersatz Math Olympiad",
+   23,
+   "Online Community Contests",
+   "high"
+  ],
+  [
+   "Iranian Geometry Olympiad",
+   23,
+   "Iranian Olympiads",
+   "high"
+  ],
+  [
+   "Intermediate Mathematical Olympiad and Kangaroo",
+   23,
+   "British Olympiads",
+   "high"
+  ],
+  [
+   "Irish Mathematical Olympiad",
+   22,
+   "Irish Olympiads",
+   "high"
+  ],
+  [
+   "Israel Team Selection Test",
+   20,
+   "Israeli Olympiads",
+   "high"
+  ],
+  [
+   "Taiwan Team Selection Test",
+   20,
+   "Taiwanese Olympiads",
+   "high"
+  ],
+  [
+   "Imperial-Cambridge Mathematics Competition",
+   20,
+   "University Mathematics Competitions",
+   "high"
+  ],
+  [
+   "United States of America Mathematical Talent Search",
+   19,
+   "United States Competitions",
+   "high"
+  ],
+  [
+   "Iran Team Selection Test",
+   18,
+   "Iranian Olympiads",
+   "high"
+  ],
+  [
+   "ELMO Mathematical Olympiad Shortlist",
+   17,
+   "United States Competitions",
+   "medium"
+  ],
+  [
+   "Austrian Mathematical Olympiad",
+   17,
+   "Austrian Olympiads",
+   "high"
+  ],
+  [
+   "American Mathematics Competitions",
+   16,
+   "United States Competitions",
+   "medium"
+  ],
+  [
+   "German Mathematical Olympiad",
+   16,
+   "German Olympiads",
+   "medium"
+  ],
+  [
+   "Japan Mathematical Olympiad Final Round",
+   16,
+   "Japanese Olympiads",
+   "high"
+  ],
+  [
+   "Di Pasquale, Do and Mathews' Problem Solving Tactics",
+   16,
+   "Problem Books and Journals",
+   "high"
+  ],
+  [
+   "Balkan Mathematical Olympiad Shortlist",
+   15,
+   "Other European Olympiads",
+   "high"
+  ],
+  [
+   "Hong Kong Team Selection Test",
+   15,
+   "Hong Kong Olympiads",
+   "high"
+  ],
+  [
+   "United States of America Junior Mathematical Olympiad",
+   14,
+   "United States Competitions",
+   "high"
+  ],
+  [
+   "New Zealand Mathematical Olympiad Round 1",
+   14,
+   "New Zealand Olympiads",
+   "high"
+  ],
+  [
+   "Harvard-MIT Mathematics Tournament",
+   14,
+   "United States Competitions",
+   "high"
+  ],
+  [
+   "Taiwan IMOC Mathematical Olympiad",
+   14,
+   "Taiwanese Olympiads",
+   "medium"
+  ],
+  [
+   "Romanian Masters of Mathematics Shortlist",
+   13,
+   "International Olympiads",
+   "high"
+  ],
+  [
+   "Math Olympiad Discord Server Mathematical Olympiad",
+   13,
+   "Math Olympiad Discord Server",
+   "high"
+  ],
+  [
+   "Polish Mathematical Olympiad",
+   12,
+   "Polish Olympiads",
+   "high"
+  ],
+  [
+   "Middle European Mathematical Olympiad",
+   12,
+   "Other European Olympiads",
+   "high"
+  ],
+  [
+   "New Zealand Camp Selection Problems",
+   12,
+   "New Zealand Olympiads",
+   "medium"
+  ],
+  [
+   "China Mathematical Olympiad",
+   11,
+   "Chinese Olympiads",
+   "high"
+  ],
+  [
+   "Australian Mathematical Olympiad Committee Senior Contest",
+   11,
+   "Australian Olympiads",
+   "high"
+  ],
+  [
+   "Italian Mathematical Olympiad",
+   11,
+   "Italian Olympiads",
+   "high"
+  ],
+  [
+   "Bundeswettbewerb Mathematik",
+   11,
+   "German Olympiads",
+   "high"
+  ],
+  [
+   "Dutch Team Selection Tests",
+   11,
+   "Dutch Olympiads",
+   "high"
+  ],
+  [
+   "European Mathematical Cup",
+   11,
+   "Other European Olympiads",
+   "high"
+  ],
+  [
+   "Codeforces",
+   10,
+   "Programming Contests",
+   "high"
+  ],
+  [
+   "Thailand Mathematical Olympiad",
+   10,
+   "Thai Olympiads",
+   "high"
+  ],
+  [
+   "Malaysian Team Selection Tests",
+   10,
+   "Malaysian Olympiads",
+   "medium"
+  ],
+  [
+   "UK-Australia Pre-IMO Camp Exchange Paper",
+   10,
+   "British Olympiads",
+   "medium"
+  ],
+  [
+   "India Team Selection Test",
+   9,
+   "Indian Olympiads",
+   "high"
+  ],
+  [
+   "DGGMaths Riddles",
+   9,
+   "Online Community Contests",
+   "medium"
+  ],
+  [
+   "UK Mathematical Olympiad for Girls",
+   9,
+   "British Olympiads",
+   "high"
+  ],
+  [
+   "New Zealand Mathematical Olympiad Round 2",
+   9,
+   "New Zealand Olympiads",
+   "high"
+  ],
+  [
+   "Indian National Mathematical Olympiad",
+   9,
+   "Indian Olympiads",
+   "high"
+  ],
+  [
+   "Iranian Mathematical Olympiad",
+   9,
+   "Iranian Olympiads",
+   "high"
+  ],
+  [
+   "Pan-African Mathematics Olympiad",
+   9,
+   "African Olympiads",
+   "high"
+  ],
+  [
+   "Korean Mathematical Olympiad",
+   9,
+   "Korean Olympiads",
+   "medium"
+  ],
+  [
+   "Spanish Mathematical Olympiad",
+   8,
+   "Spanish Olympiads",
+   "high"
+  ],
+  [
+   "Amateur Geometer's Olympiad",
+   8,
+   "Mock Olympiads",
+   "high"
+  ],
+  [
+   "Benelux Mathematical Olympiad",
+   8,
+   "Other European Olympiads",
+   "high"
+  ],
+  [
+   "Dutch Mathematical Olympiad",
+   8,
+   "Dutch Olympiads",
+   "high"
+  ],
+  [
+   "UK Senior Mathematical Challenge",
+   7,
+   "British Olympiads",
+   "high"
+  ],
+  [
+   "Israel Olympic Revenge",
+   7,
+   "Israeli Olympiads",
+   "high"
+  ],
+  [
+   "Bay Area Mathematical Olympiad",
+   7,
+   "United States Competitions",
+   "high"
+  ],
+  [
+   "Philippine Mathematical Olympiad",
+   7,
+   "Philippine Olympiads",
+   "high"
+  ],
+  [
+   "Online Math Contest (Japan)",
+   7,
+   "Online Community Contests",
+   "medium"
+  ],
+  [
+   "Mexican Mathematical Olympiad",
+   7,
+   "Mexican Olympiads",
+   "high"
+  ],
+  [
+   "Serbian Mathematical Olympiad",
+   6,
+   "Serbian Olympiads",
+   "high"
+  ],
+  [
+   "LMAO Mock Olympiad",
+   6,
+   "Mock Olympiads",
+   "medium"
+  ],
+  [
+   "Brazilian Mathematical Olympiad",
+   6,
+   "Brazilian Olympiads",
+   "high"
+  ],
+  [
+   "International Mathematics Competition for University Students",
+   6,
+   "University Mathematics Competitions",
+   "high"
+  ],
+  [
+   "Zeitz's The Art and Craft of Problem Solving",
+   6,
+   "Problem Books and Journals",
+   "high"
+  ],
+  [
+   "Junior Balkan Mathematical Olympiad",
+   6,
+   "Other European Olympiads",
+   "high"
+  ],
+  [
+   "Czech-Austrian-Polish-Slovak Match",
+   6,
+   "Other European Olympiads",
+   "medium"
+  ],
+  [
+   "Indonesian National Mathematics Olympiad",
+   6,
+   "Indonesian Olympiads",
+   "medium"
+  ],
+  [
+   "UK Junior Mathematical Olympiad",
+   6,
+   "British Olympiads",
+   "high"
+  ],
+  [
+   "New Zealand Squad Selection Test",
+   6,
+   "New Zealand Olympiads",
+   "high"
+  ],
+  [
+   "New Zealand Senior Mathematics Competition",
+   6,
+   "New Zealand Olympiads",
+   "high"
+  ],
+  [
+   "Serbia Team Selection Test",
+   5,
+   "Serbian Olympiads",
+   "high"
+  ],
+  [
+   "Romania Team Selection Test",
+   5,
+   "Romanian Olympiads",
+   "high"
+  ],
+  [
+   "China Western Mathematical Invitational",
+   5,
+   "Chinese Olympiads",
+   "high"
+  ],
+  [
+   "Math Olympiad Discord Server Intermediate Contest",
+   5,
+   "Math Olympiad Discord Server",
+   "high"
+  ],
+  [
+   "Baltic Way",
+   5,
+   "Other European Olympiads",
+   "high"
+  ],
+  [
+   "Niels Henrik Abel Mathematics Contest",
+   5,
+   "Norwegian Olympiads",
+   "medium"
+  ],
+  [
+   "China Girls' Mathematical Olympiad",
+   5,
+   "Chinese Olympiads",
+   "high"
+  ],
+  [
+   "Australian Intermediate Mathematics Olympiad",
+   5,
+   "Australian Olympiads",
+   "high"
+  ],
+  [
+   "Iran-Singapore-Taiwan Friendly Competition",
+   5,
+   "Other Asian Olympiads",
+   "medium"
+  ],
+  [
+   "Swedish Mathematical Olympiad",
+   5,
+   "Swedish Olympiads",
+   "high"
+  ],
+  [
+   "South Africa Team Selection Test Selection Test",
+   5,
+   "South African Olympiads",
+   "high"
+  ],
+  [
+   "DGO Geometry Olympiad (Team Round)",
+   5,
+   "Online Community Contests",
+   "low"
+  ],
+  [
+   "Romanian National Mathematical Olympiad",
+   5,
+   "Romanian Olympiads",
+   "high"
+  ],
+  [
+   "France Team Selection Test",
+   5,
+   "French Olympiads",
+   "high"
+  ],
+  [
+   "Indian Regional Mathematical Olympiad",
+   4,
+   "Indian Olympiads",
+   "high"
+  ],
+  [
+   "AMM (unidentified)",
+   4,
+   "Unidentified Contests",
+   "low"
+  ],
+  [
+   "Canadian Junior Mathematical Olympiad",
+   4,
+   "Canadian Olympiads",
+   "high"
+  ],
+  [
+   "Korean Junior Mathematical Olympiad",
+   4,
+   "Korean Olympiads",
+   "high"
+  ],
+  [
+   "XOOK Mock Olympiad",
+   4,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "Japan Mathematical Olympiad Preliminary Round",
+   4,
+   "Japanese Olympiads",
+   "high"
+  ],
+  [
+   "Kazakhstan National Mathematical Olympiad",
+   4,
+   "Kazakh Olympiads",
+   "high"
+  ],
+  [
+   "KoMaL (Kozepiskolai Matematikai es Fizikai Lapok)",
+   4,
+   "Problem Books and Journals",
+   "high"
+  ],
+  [
+   "National Internet Math Olympiad",
+   4,
+   "Online Community Contests",
+   "high"
+  ],
+  [
+   "American Invitational Mathematics Examination",
+   4,
+   "United States Competitions",
+   "high"
+  ],
+  [
+   "Israel Mathematical Olympiad",
+   4,
+   "Israeli Olympiads",
+   "medium"
+  ],
+  [
+   "South African Mathematics Olympiad",
+   4,
+   "South African Olympiads",
+   "high"
+  ],
+  [
+   "Vietnam Team Selection Test",
+   4,
+   "Vietnamese Olympiads",
+   "high"
+  ],
+  [
+   "Polish Junior Mathematical Olympiad",
+   4,
+   "Polish Olympiads",
+   "high"
+  ],
+  [
+   "Bangladesh Mathematical Olympiad",
+   4,
+   "Bangladeshi Olympiads",
+   "high"
+  ],
+  [
+   "International Zhautykov Olympiad",
+   4,
+   "Other Asian Olympiads",
+   "high"
+  ],
+  [
+   "IGMO Mock Olympiad",
+   4,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "Swiss Team Selection Test",
+   4,
+   "Swiss Olympiads",
+   "high"
+  ],
+  [
+   "Sharygin Geometry Olympiad",
+   4,
+   "Russian Olympiads",
+   "high"
+  ],
+  [
+   "Math Olympiad Discord Server Geometry Contest",
+   4,
+   "Math Olympiad Discord Server",
+   "high"
+  ],
+  [
+   "SEIF Mock Olympiad",
+   4,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "Kosovo Mathematical Olympiad",
+   4,
+   "Kosovar Olympiads",
+   "high"
+  ],
+  [
+   "Harvard-MIT Invitational Competition",
+   4,
+   "United States Competitions",
+   "high"
+  ],
+  [
+   "Caltech Harvey Mudd Mathematics Competition",
+   4,
+   "United States Competitions",
+   "high"
+  ],
+  [
+   "Math Olympiad Discord Server April Fools' Olympiad",
+   4,
+   "Math Olympiad Discord Server",
+   "medium"
+  ],
+  [
+   "Irish Team Selection Test for the European Girls' Mathematical Olympiad",
+   4,
+   "Irish Olympiads",
+   "high"
+  ],
+  [
+   "Croatia Team Selection Test",
+   4,
+   "Croatian Olympiads",
+   "high"
+  ],
+  [
+   "Nepal Team Selection Test",
+   3,
+   "Nepali Olympiads",
+   "high"
+  ],
+  [
+   "China National High School Mathematics League",
+   3,
+   "Chinese Olympiads",
+   "high"
+  ],
+  [
+   "Singapore Team Selection Test for the China Western Mathematical Invitational",
+   3,
+   "Singaporean Olympiads",
+   "high"
+  ],
+  [
+   "Nebraska Math Day PROBE II",
+   3,
+   "United States Competitions",
+   "medium"
+  ],
+  [
+   "Pan-American Girls' Mathematical Olympiad",
+   3,
+   "Latin American Olympiads",
+   "high"
+  ],
+  [
+   "Cono Sur Mathematical Olympiad",
+   3,
+   "Latin American Olympiads",
+   "high"
+  ],
+  [
+   "Christmas American Mathematical Olympiad",
+   3,
+   "Mock Olympiads",
+   "medium"
+  ],
+  [
+   "Cyberspace Mathematical Competition",
+   3,
+   "International Olympiads",
+   "medium"
+  ],
+  [
+   "Greek Mathematical Olympiad",
+   3,
+   "Greek Olympiads",
+   "high"
+  ],
+  [
+   "Thailand Mock International Mathematical Olympiad",
+   3,
+   "Thai Olympiads",
+   "medium"
+  ],
+  [
+   "Portuguese Mathematical Olympiad",
+   3,
+   "Portuguese Olympiads",
+   "high"
+  ],
+  [
+   "Flanders Junior Mathematical Olympiad",
+   3,
+   "Belgian Olympiads",
+   "high"
+  ],
+  [
+   "GIMO Mock Olympiad",
+   3,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "DEMO Mock International Mathematical Olympiad",
+   3,
+   "Mock Olympiads",
+   "high"
+  ],
+  [
+   "Princeton University Mathematics Competition",
+   3,
+   "United States Competitions",
+   "high"
+  ],
+  [
+   "Online Math Open",
+   3,
+   "Online Community Contests",
+   "high"
+  ],
+  [
+   "India-Singapore Friendly Contest",
+   2,
+   "Other Asian Olympiads",
+   "medium"
+  ],
+  [
+   "Indian International Mathematical Olympiad Training Camp",
+   2,
+   "Indian Olympiads",
+   "medium"
+  ],
+  [
+   "Thailand Team Selection Test Selection Test",
+   2,
+   "Thai Olympiads",
+   "medium"
+  ],
+  [
+   "Japan Team Selection Test",
+   2,
+   "Japanese Olympiads",
+   "high"
+  ],
+  [
+   "International Mathematical Summer Camp",
+   2,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "Ecuadorian Junior Mathematical Olympiad",
+   2,
+   "Ecuadorian Olympiads",
+   "high"
+  ],
+  [
+   "Andreescu and Dospinescu's Problems from the Book",
+   2,
+   "Problem Books and Journals",
+   "high"
+  ],
+  [
+   "Francophone Mathematical Olympiad",
+   2,
+   "Other European Olympiads",
+   "high"
+  ],
+  [
+   "Project Euler",
+   2,
+   "Programming Contests",
+   "high"
+  ],
+  [
+   "Turkey Team Selection Test",
+   2,
+   "Turkish Olympiads",
+   "high"
+  ],
+  [
+   "OpenPOTD Duels",
+   2,
+   "Online Community Contests",
+   "medium"
+  ],
+  [
+   "India Team Selection Test for the European Girls' Mathematical Olympiad",
+   2,
+   "Indian Olympiads",
+   "high"
+  ],
+  [
+   "United States of America Team Selection Test for the European Girls' Mathematical Olympiad",
+   2,
+   "United States Competitions",
+   "high"
+  ],
+  [
+   "USA Computing Olympiad",
+   2,
+   "Programming Contests",
+   "high"
+  ],
+  [
+   "Mongolian Mathematical Olympiad",
+   2,
+   "Mongolian Olympiads",
+   "high"
+  ],
+  [
+   "Belarusian Mathematical Olympiad",
+   2,
+   "Belarusian Olympiads",
+   "high"
+  ],
+  [
+   "Russia Team Selection Test",
+   2,
+   "Russian Olympiads",
+   "high"
+  ],
+  [
+   "Slovenia Team Selection Test",
+   2,
+   "Slovenian Olympiads",
+   "high"
+  ],
+  [
+   "STEMS Mathematics Olympiad (Chennai Mathematical Institute)",
+   2,
+   "Indian Olympiads",
+   "medium"
+  ],
+  [
+   "Mediterranean Mathematics Competition",
+   2,
+   "Other European Olympiads",
+   "high"
+  ],
+  [
+   "G2 Math Camp Application Problems",
+   2,
+   "Online Community Contests",
+   "medium"
+  ],
+  [
+   "China Hong Kong Mathematical Olympiad",
+   2,
+   "Hong Kong Olympiads",
+   "high"
+  ],
+  [
+   "Armenian National Mathematical Olympiad",
+   2,
+   "Armenian Olympiads",
+   "medium"
+  ],
+  [
+   "Fake United States of America Mathematical Olympiad",
+   2,
+   "Mock Olympiads",
+   "medium"
+  ],
+  [
+   "Moscow Mathematical Olympiad",
+   2,
+   "Russian Olympiads",
+   "high"
+  ],
+  [
+   "UK Intermediate Mathematical Challenge",
+   2,
+   "British Olympiads",
+   "high"
+  ],
+  [
+   "Saudi Arabia Team Selection Tests",
+   2,
+   "Saudi Olympiads",
+   "medium"
+  ],
+  [
+   "Italian Senior Camp Admission Test",
+   2,
+   "Italian Olympiads",
+   "high"
+  ],
+  [
+   "International Functional Equations Olympiad",
+   2,
+   "Mock Olympiads",
+   "medium"
+  ],
+  [
+   "Finnish Mathematical Olympiad",
+   2,
+   "Finnish Olympiads",
+   "high"
+  ],
+  [
+   "Indian Statistical Institute Entrance Examination",
+   2,
+   "University Admission Exams",
+   "high"
+  ],
+  [
+   "Grossman Mathematical Olympiad",
+   2,
+   "Israeli Olympiads",
+   "high"
+  ],
+  [
+   "Bosnia and Herzegovina Mathematical Olympiad",
+   2,
+   "Bosnian Olympiads",
+   "medium"
+  ],
+  [
+   "Iranian Combinatorics Olympiad",
+   2,
+   "Iranian Olympiads",
+   "high"
+  ],
+  [
+   "Nordic Mathematical Contest",
+   2,
+   "Other European Olympiads",
+   "high"
+  ],
+  [
+   "Saint Petersburg Mathematical Olympiad",
+   2,
+   "Russian Olympiads",
+   "high"
+  ],
+  [
+   "All-Union Mathematical Olympiad (USSR)",
+   2,
+   "Russian Olympiads",
+   "high"
+  ],
+  [
+   "Miklos Schweitzer Mathematical Competition",
+   2,
+   "University Mathematics Competitions",
+   "high"
+  ],
+  [
+   "Australian Mathematical Olympiad Committee Training",
+   2,
+   "Australian Olympiads",
+   "medium"
+  ],
+  [
+   "Azerbaijan Junior Mathematical Olympiad",
+   2,
+   "Azerbaijani Olympiads",
+   "high"
+  ],
+  [
+   "Moldova Team Selection Test",
+   2,
+   "Moldovan Olympiads",
+   "high"
+  ],
+  [
+   "Giochi di Archimede",
+   2,
+   "Italian Olympiads",
+   "high"
+  ],
+  [
+   "Taiwan Mathematical Olympiad",
+   2,
+   "Taiwanese Olympiads",
+   "high"
+  ],
+  [
+   "Chilean Mathematical Olympiad",
+   2,
+   "Chilean Olympiads",
+   "medium"
+  ],
+  [
+   "DEMO Mock United States of America Mathematical Olympiad",
+   2,
+   "Mock Olympiads",
+   "high"
+  ],
+  [
+   "Croatian Mathematical Olympiad",
+   2,
+   "Croatian Olympiads",
+   "high"
+  ],
+  [
+   "Costa Rican Mathematical Olympiad",
+   2,
+   "Costa Rican Olympiads",
+   "high"
+  ],
+  [
+   "Cambridge Mathematical Tripos",
+   2,
+   "University Mathematics Competitions",
+   "high"
+  ],
+  [
+   "New Zealand Monday Maths Workshop",
+   2,
+   "New Zealand Olympiads",
+   "medium"
+  ],
+  [
+   "\"Real IMO Shortlist\" Mock",
+   2,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "\"Leaked RMM\" Mock",
+   2,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "Prasolov's Problems in Plane and Solid Geometry",
+   2,
+   "Problem Books and Journals",
+   "medium"
+  ],
+  [
+   "Lee's Problems in Elementary Number Theory",
+   2,
+   "Problem Books and Journals",
+   "medium"
+  ],
+  [
+   "FIST (unidentified)",
+   2,
+   "Unidentified Contests",
+   "low"
+  ],
+  [
+   "Canadian Winter Camp Buffet Contest",
+   2,
+   "Canadian Olympiads",
+   "medium"
+  ],
+  [
+   "Irish Mathematical Olympiad Training",
+   2,
+   "Irish Olympiads",
+   "medium"
+  ],
+  [
+   "Maynooth University Mathematical Olympiad",
+   2,
+   "Irish Olympiads",
+   "low"
+  ],
+  [
+   "Hungary-Israel Binational Mathematical Competition",
+   2,
+   "Other European Olympiads",
+   "high"
+  ],
+  [
+   "Australian Team Selection Test",
+   2,
+   "Australian Olympiads",
+   "high"
+  ],
+  [
+   "Flanders Mathematical Olympiad",
+   2,
+   "Belgian Olympiads",
+   "high"
+  ],
+  [
+   "Cambridge International A Level Mathematics 9709",
+   1,
+   "School and Admission Exams",
+   "high"
+  ],
+  [
+   "Brazil Team Selection Test for the European Girls' Mathematical Olympiad",
+   1,
+   "Brazilian Olympiads",
+   "high"
+  ],
+  [
+   "MIST (unidentified)",
+   1,
+   "Unidentified Contests",
+   "low"
+  ],
+  [
+   "239 School Mathematical Olympiad",
+   1,
+   "Russian Olympiads",
+   "high"
+  ],
+  [
+   "April Mock Olympiad",
+   1,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "Crux Mathematicorum",
+   1,
+   "Problem Books and Journals",
+   "high"
+  ],
+  [
+   "Bulgaria Team Selection Test",
+   1,
+   "Bulgarian Olympiads",
+   "high"
+  ],
+  [
+   "Argentina Team Selection Test",
+   1,
+   "Argentine Olympiads",
+   "high"
+  ],
+  [
+   "Latvian Baltic Way Team Selection Test",
+   1,
+   "Latvian Olympiads",
+   "high"
+  ],
+  [
+   "SMO (unidentified)",
+   1,
+   "Unidentified Contests",
+   "low"
+  ],
+  [
+   "Kvant",
+   1,
+   "Problem Books and Journals",
+   "medium"
+  ],
+  [
+   "EMO (unidentified)",
+   1,
+   "Unidentified Contests",
+   "low"
+  ],
+  [
+   "Solvefire Contests",
+   1,
+   "Online Community Contests",
+   "low"
+  ],
+  [
+   "PGMO Mock Olympiad",
+   1,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "OTIS Mock American Invitational Mathematics Examination",
+   1,
+   "Mock Olympiads",
+   "high"
+  ],
+  [
+   "India-Iran Friendly Competition",
+   1,
+   "Other Asian Olympiads",
+   "medium"
+  ],
+  [
+   "IMBT (unidentified)",
+   1,
+   "Unidentified Contests",
+   "low"
+  ],
+  [
+   "Lain Mock Olympiad",
+   1,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "Christmas Special Mock Geometry Olympiad",
+   1,
+   "Mock Olympiads",
+   "high"
+  ],
+  [
+   "MEOW Mock Olympiad",
+   1,
+   "Mock Olympiads",
+   "medium"
+  ],
+  [
+   "Junior Balkan Mathematical Olympiad Shortlist",
+   1,
+   "Other European Olympiads",
+   "high"
+  ],
+  [
+   "Iberoamerican Mathematical Olympiad",
+   1,
+   "Latin American Olympiads",
+   "high"
+  ],
+  [
+   "Pascal Mathematics Contest",
+   1,
+   "Canadian Olympiads",
+   "medium"
+  ],
+  [
+   "Fermat Mathematics Contest",
+   1,
+   "Canadian Olympiads",
+   "medium"
+  ],
+  [
+   "GOTEEM Mock Geometry Olympiad",
+   1,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "International Festival of Young Mathematicians Sozopol",
+   1,
+   "Bulgarian Olympiads",
+   "medium"
+  ],
+  [
+   "Silk Road Mathematics Competition",
+   1,
+   "Other Asian Olympiads",
+   "high"
+  ],
+  [
+   "Nigerian Junior Mathematics Olympiad",
+   1,
+   "Nigerian Olympiads",
+   "high"
+  ],
+  [
+   "Israel Spring Group Competition",
+   1,
+   "Israeli Olympiads",
+   "medium"
+  ],
+  [
+   "Hanoi Grade 10 Entrance Examination",
+   1,
+   "School and Admission Exams",
+   "high"
+  ],
+  [
+   "Math Olympiad Discord Server Beginner Contest",
+   1,
+   "Math Olympiad Discord Server",
+   "high"
+  ],
+  [
+   "Winkler's Mathematical Puzzles",
+   1,
+   "Problem Books and Journals",
+   "low"
+  ],
+  [
+   "Israel National Mathematics Championship",
+   1,
+   "Israeli Olympiads",
+   "medium"
+  ],
+  [
+   "POGCHAMP Mock Olympiad",
+   1,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "Centennial Schools Mathematics Competition",
+   1,
+   "Unidentified Contests",
+   "low"
+  ],
+  [
+   "Hong Kong Diploma of Secondary Education Mathematics",
+   1,
+   "School and Admission Exams",
+   "high"
+  ],
+  [
+   "GGG4 Mock Geometry Contest",
+   1,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "Kyiv City Mathematical Olympiad",
+   1,
+   "Ukrainian Olympiads",
+   "high"
+  ],
+  [
+   "Sauna Final Round",
+   1,
+   "Unidentified Contests",
+   "low"
+  ],
+  [
+   "Lithuanian Baltic Way Team Selection Test",
+   1,
+   "Lithuanian Olympiads",
+   "high"
+  ],
+  [
+   "United Kingdom Team Selection Test",
+   1,
+   "British Olympiads",
+   "high"
+  ],
+  [
+   "Science Olympiad Foundation International Mathematics Olympiad (sample paper)",
+   1,
+   "School and Admission Exams",
+   "high"
+  ],
+  [
+   "Greek Junior Mathematical Olympiad",
+   1,
+   "Greek Olympiads",
+   "high"
+  ],
+  [
+   "Infinity Mock Olympiad",
+   1,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "Singapore Team Selection Test",
+   1,
+   "Singaporean Olympiads",
+   "high"
+  ],
+  [
+   "Christmas Mock Olympiad",
+   1,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "Sharp Calculator Competition",
+   1,
+   "Unidentified Contests",
+   "low"
+  ],
+  [
+   "South African Olympiad Training Camp",
+   1,
+   "South African Olympiads",
+   "medium"
+  ],
+  [
+   "International Olympiad of Metropolises",
+   1,
+   "International Olympiads",
+   "high"
+  ],
+  [
+   "Slovenian Mathematical Olympiad",
+   1,
+   "Slovenian Olympiads",
+   "high"
+  ],
+  [
+   "Athemath Camp Application Problems",
+   1,
+   "Online Community Contests",
+   "medium"
+  ],
+  [
+   "Geometry 1 Problem Bounty Hunt Contest",
+   1,
+   "Mock Olympiads",
+   "medium"
+  ],
+  [
+   "Kyoto University Entrance Examination",
+   1,
+   "School and Admission Exams",
+   "high"
+  ],
+  [
+   "Mocktest Geometry Olympiad",
+   1,
+   "Mock Olympiads",
+   "high"
+  ],
+  [
+   "SYMO Mock Olympiad",
+   1,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "International Olympiad in Informatics",
+   1,
+   "Programming Contests",
+   "high"
+  ],
+  [
+   "Lotus Olympiad",
+   1,
+   "Unidentified Contests",
+   "low"
+  ],
+  [
+   "Bulgaria Team Selection Test for the European Girls' Mathematical Olympiad",
+   1,
+   "Bulgarian Olympiads",
+   "high"
+  ],
+  [
+   "Turkey Team Selection Test for the European Girls' Mathematical Olympiad",
+   1,
+   "Turkish Olympiads",
+   "high"
+  ],
+  [
+   "Israel IMO Team Practice",
+   1,
+   "Israeli Olympiads",
+   "medium"
+  ],
+  [
+   "\"Blish\" Summer Competition",
+   1,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "Moroccan National Mathematical Olympiad",
+   1,
+   "Moroccan Olympiads",
+   "high"
+  ],
+  [
+   "Japan Junior Mathematical Olympiad",
+   1,
+   "Japanese Olympiads",
+   "high"
+  ],
+  [
+   "T4MO Mock Olympiad",
+   1,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "Pan-African Mathematics Olympiad Shortlist",
+   1,
+   "African Olympiads",
+   "high"
+  ],
+  [
+   "CCCCC Mock Contest",
+   1,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "Singapore Junior Team Training",
+   1,
+   "Singaporean Olympiads",
+   "medium"
+  ],
+  [
+   "Israel Team Selection Test for the International Mathematics Competition",
+   1,
+   "Israeli Olympiads",
+   "low"
+  ],
+  [
+   "Discord SMP Competition",
+   1,
+   "Online Community Contests",
+   "low"
+  ],
+  [
+   "Ukraine Team Selection Test",
+   1,
+   "Ukrainian Olympiads",
+   "high"
+  ],
+  [
+   "Khurmi's Modern Olympiad Number Theory",
+   1,
+   "Problem Books and Journals",
+   "medium"
+  ],
+  [
+   "St. Mary's Canossian College Form 4 Final Exam",
+   1,
+   "School and Admission Exams",
+   "high"
+  ],
+  [
+   "UK Pink Kangaroo",
+   1,
+   "British Olympiads",
+   "high"
+  ],
+  [
+   "Germany Team Selection Test",
+   1,
+   "German Olympiads",
+   "high"
+  ],
+  [
+   "Greece Junior Balkan Team Selection Test",
+   1,
+   "Greek Olympiads",
+   "high"
+  ],
+  [
+   "Cyprus Junior Balkan Team Selection Test",
+   1,
+   "Cypriot Olympiads",
+   "high"
+  ],
+  [
+   "OliMaTo",
+   1,
+   "Unidentified Contests",
+   "low"
+  ],
+  [
+   "Andreescu and Enescu's Mathematical Olympiad Treasures",
+   1,
+   "Problem Books and Journals",
+   "medium"
+  ],
+  [
+   "Swiss Mathematical Olympiad Final Round",
+   1,
+   "Swiss Olympiads",
+   "high"
+  ],
+  [
+   "Geometry Olympiad Without A Cool Acronym",
+   1,
+   "Mock Olympiads",
+   "high"
+  ],
+  [
+   "Sierpinski's 250 Problems in Elementary Number Theory",
+   1,
+   "Problem Books and Journals",
+   "high"
+  ],
+  [
+   "Argentine Mathematical Olympiad",
+   1,
+   "Argentine Olympiads",
+   "high"
+  ],
+  [
+   "Albanian Mathematical Olympiad",
+   1,
+   "Albanian Olympiads",
+   "high"
+  ],
+  [
+   "Geolympiad",
+   1,
+   "Online Community Contests",
+   "high"
+  ],
+  [
+   "Indian Olympiad Qualifier in Mathematics",
+   1,
+   "Indian Olympiads",
+   "high"
+  ],
+  [
+   "Turkey Junior National Olympiad",
+   1,
+   "Turkish Olympiads",
+   "high"
+  ],
+  [
+   "Kurschak Mathematics Competition",
+   1,
+   "Hungarian Olympiads",
+   "high"
+  ],
+  [
+   "Chisinau City Mathematical Olympiad",
+   1,
+   "Moldovan Olympiads",
+   "high"
+  ],
+  [
+   "Malaysia Junior Olympiad of Mathematics",
+   1,
+   "Malaysian Olympiads",
+   "high"
+  ],
+  [
+   "American Regions Mathematics League",
+   1,
+   "United States Competitions",
+   "high"
+  ],
+  [
+   "Stanford Math Tournament",
+   1,
+   "United States Competitions",
+   "high"
+  ],
+  [
+   "Ukrainian Mathematical Olympiad",
+   1,
+   "Ukrainian Olympiads",
+   "high"
+  ],
+  [
+   "NICE Mock Contest",
+   1,
+   "Mock Olympiads",
+   "low"
+  ],
+  [
+   "Paraguayan Mathematical Olympiad",
+   1,
+   "Paraguayan Olympiads",
+   "high"
+  ],
+  [
+   "Brazilian Olympic Revenge",
+   1,
+   "Brazilian Olympiads",
+   "high"
+  ],
+  [
+   "AoPS Practice American Mathematics Competition 12",
+   1,
+   "Mock Olympiads",
+   "high"
+  ],
+  [
+   "Problems in Set Theory (author unknown)",
+   1,
+   "Problem Books and Journals",
+   "low"
+  ],
+  [
+   "Andreescu and Pohoata's 110 Geometry Problems for the International Mathematical Olympiad",
+   1,
+   "Problem Books and Journals",
+   "medium"
+  ],
+  [
+   "Mathematical Reflections",
+   1,
+   "Problem Books and Journals",
+   "high"
+  ],
+  [
+   "Sixth Term Examination Paper",
+   1,
+   "University Admission Exams",
+   "high"
+  ],
+  [
+   "UK IMO Team Training",
+   1,
+   "British Olympiads",
+   "low"
+  ],
+  [
+   "UK Senior Team Maths Challenge",
+   1,
+   "British Olympiads",
+   "high"
+  ],
+  [
+   "Chen's OTIS Anti-Problems",
+   1,
+   "Problem Books and Journals",
+   "medium"
+  ],
+  [
+   "West Australian Geometry Olympiad",
+   1,
+   "Australian Olympiads",
+   "low"
+  ],
+  [
+   "Golberg's Olympiad Handout",
+   1,
+   "Problem Books and Journals",
+   "low"
+  ],
+  [
+   "Kazanlak Spring Mathematics Tournament",
+   1,
+   "Bulgarian Olympiads",
+   "high"
+  ],
+  [
+   "Soberon's Problem-Solving Methods in Combinatorics",
+   1,
+   "Problem Books and Journals",
+   "medium"
+  ],
+  [
+   "North Korea Team Selection Test",
+   1,
+   "North Korean Olympiads",
+   "high"
+  ],
+  [
+   "LuMaT",
+   1,
+   "Unidentified Contests",
+   "low"
+  ],
+  [
+   "Vietnam Mathematical Olympiad",
+   1,
+   "Vietnamese Olympiads",
+   "high"
+  ],
+  [
+   "University of Indonesia Entrance Examination",
+   1,
+   "School and Admission Exams",
+   "high"
+  ],
+  [
+   "Moscow Oral Geometry Olympiad",
+   1,
+   "Russian Olympiads",
+   "high"
+  ],
+  [
+   "Leader's Introductory Problems",
+   1,
+   "Problem Books and Journals",
+   "low"
+  ],
+  [
+   "ICL-plus (unidentified)",
+   1,
+   "Unidentified Contests",
+   "low"
+  ],
+  [
+   "New Zealand IMO Camp Problem Sets",
+   1,
+   "New Zealand Olympiads",
+   "medium"
+  ],
+  [
+   "Christmas Junior Mathematical Olympiad",
+   1,
+   "Mock Olympiads",
+   "medium"
+  ],
+  [
+   "Mock Indonesian National Mathematics Olympiad",
+   1,
+   "Mock Olympiads",
+   "medium"
+  ],
+  [
+   "how-did-i-get-here.com",
+   1,
+   "Problem Books and Journals",
+   "medium"
+  ],
+  [
+   "Simon Marais Mathematics Competition",
+   1,
+   "University Mathematics Competitions",
+   "high"
+  ],
+  [
+   "Gaokao (Chinese National College Entrance Examination)",
+   1,
+   "School and Admission Exams",
+   "high"
+  ],
+  [
+   "Mathematical Ashes",
+   1,
+   "British Olympiads",
+   "high"
+  ],
+  [
+   "Belarus Team Selection Test",
+   1,
+   "Belarusian Olympiads",
+   "high"
+  ],
+  [
+   "Yugoslav Federal Mathematical Competition",
+   1,
+   "Serbian Olympiads",
+   "high"
+  ],
+  [
+   "Euclid Mathematics Contest",
+   1,
+   "Canadian Olympiads",
+   "high"
+  ]
+ ]
+}
