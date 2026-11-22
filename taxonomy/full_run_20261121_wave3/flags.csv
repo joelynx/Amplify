@@ -1,0 +1,4 @@
+question_id,source,flags,note
+38465,"Omni-MATH (Harvard-MIT Mathematics Tournament, February (year not given))",needs_data,"Definitions of 2-configuration, order and cell not given"
+38515,Omni-MATH (CEMC Pascal Contest (year not given)),broken_text,Multiplication sign garbled as 'imes'
+38544,Omni-MATH (CEMC Cayley Contest (year not given)),broken_text,Answer options missing from question
