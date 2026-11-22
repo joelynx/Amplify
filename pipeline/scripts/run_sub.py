@@ -59,6 +59,7 @@ from common import (  # noqa: E402
     IMG_RE,
     OUTPUTS_DIR,
     PIPELINE_DIR,
+    REPO_DIR,
     app_conn,
     fetch_question,
     get_status,
@@ -204,14 +205,44 @@ def effort_for(cfg: dict, source: str | None, qid: int | None = None) -> str:
             or (s.get("effort_by_source") or {}).get(source) or cfg["solver"]["effort"])
 
 
-def claude_cmd(cfg: dict, system_file: Path, effort: str, stream_input: bool = False) -> list[str]:
+# Tools mode (owner 2026-11-21: "we need some way to enable tools to verify physics and engineering
+# solves"): the one tool is `python` from calc_server.py, an MCP server Claude Code starts per question.
+# Claude Code's own sandbox does not run on native Windows and never covers MCP servers, so
+# calc_server/calc_runner do the isolating. --safe-mode would switch MCP servers off, so tools mode
+# drops it and switches off what it covered one by one (CLAUDE.md, attachments, skills).
+CALC_TOOL = "mcp__calc__python"
+CALC_SERVER = Path(__file__).resolve().with_name("calc_server.py")
+
+
+def tools_cfg(cfg: dict) -> dict:
+    return cfg.get("tools") or {}
+
+
+def mcp_config(cfg: dict, tools_log: Path) -> Path:
+    """A one-server MCP config for one run; the server appends every call to tools_log."""
+    t = tools_cfg(cfg)
+    py = str((REPO_DIR / t.get("python", "pipeline/calc/.venv/Scripts/python.exe")).resolve())
+    path = SUB_CWD.parent / f".amplify-calc-mcp-{os.getpid()}-{threading.get_ident()}-{time.time_ns()}.json"
+    path.write_text(json.dumps({"mcpServers": {"calc": {"command": py, "args": [
+        "-I", str(CALC_SERVER), "--python", py, "--log", str(tools_log),
+        "--timeout", str(int(t.get("timeout_seconds", 60))), "--max-calls", str(int(t.get("max_calls", 40)))]}}}),
+        encoding="utf-8")
+    return path
+
+
+def claude_cmd(cfg: dict, system_file: Path, effort: str, stream_input: bool = False,
+               mcp_file: Path | None = None) -> list[str]:
+    # --restricted: user, project and local settings files are ignored, so their hooks and enabled plugins
+    # do not load either (only --settings and managed settings apply); --mcp-config still does.
+    tools = (["--mcp-config", str(mcp_file), "--allowedTools", CALC_TOOL, "--disable-slash-commands", "--restricted",
+              "--max-turns", str(int(tools_cfg(cfg).get("max_turns", 30)))] if mcp_file else [])
     return [claude_exe(cfg), "-p",
             "--system-prompt-file", str(system_file),  # replaces Claude Code's own system prompt
             "--model", cfg["solver"]["model"], "--effort", effort,
-            "--tools", "",                             # no tools: a single reply, as over the API
+            "--tools", "",                             # no built-in tools: a single reply, as over the API (tools mode: only the calc tool)
             "--output-format", "stream-json", "--verbose",
-            "--no-session-persistence", "--strict-mcp-config", "--safe-mode",
-            "--permission-mode", "dontAsk",
+            "--no-session-persistence", "--strict-mcp-config", *([] if mcp_file else ["--safe-mode"]),
+            "--permission-mode", "dontAsk", *tools,
             *(["--input-format", "stream-json"] if stream_input else [])]  # a message with image blocks
 
 
@@ -237,7 +268,7 @@ def max_tokens_for(cfg: dict, effort: str) -> int:
     return int((sub_cfg(cfg).get("max_tokens_by_effort") or {}).get(effort) or cfg["solver"]["max_tokens"])
 
 
-def child_env(cfg: dict, effort: str, base_url: str | None = None) -> dict:
+def child_env(cfg: dict, effort: str, base_url: str | None = None, tools: bool = False) -> dict:
     env = {k: v for k, v in os.environ.items()
            if k in KEEP_ENV or not k.upper().startswith(DROP_ENV_PREFIXES)}
     env.update({
@@ -246,6 +277,8 @@ def child_env(cfg: dict, effort: str, base_url: str | None = None) -> dict:
         "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
         "DISABLE_AUTOUPDATER": "1",
     })
+    if tools:  # what --safe-mode switched off, without switching off the MCP server
+        env.update({"CLAUDE_CODE_DISABLE_CLAUDE_MDS": "1", "CLAUDE_CODE_DISABLE_ATTACHMENTS": "1"})
     if base_url:
         env["ANTHROPIC_BASE_URL"] = base_url
     if _ACTIVE_DIR[0]:
@@ -261,22 +294,40 @@ def write_system_file(cfg: dict) -> tuple[Path, str]:
     return path, system
 
 
+def tool_results_only(ev: dict) -> bool:
+    """A `user` event that only hands back calc tool results (tools mode), not a turn of Claude Code's own."""
+    c = (ev.get("message") or {}).get("content")
+    return isinstance(c, list) and bool(c) and all(isinstance(b, dict) and b.get("type") == "tool_result" for b in c)
+
+
 def call_claude(cfg: dict, system_file: Path, text: str, effort: str, base_url: str | None = None,
-                images: list[tuple[str, Path]] | None = None) -> dict:
+                images: list[tuple[str, Path]] | None = None, tools_log: Path | None = None) -> dict:
     """Run one question; return the parsed stream-json events (no interpretation). When Claude
     Code follows the reply with a turn of its own (a `user` event: "Output token limit hit.
     Resume directly...", a stalled stream, a safety-classifier stop), the process is ended
     there: a second turn is never used, so letting it run would only cost time and usage.
     With images, the same text goes as the first block of a stream-json user message and each
-    image follows it (image_blocks); Claude Code's wrapping is the same either way."""
+    image follows it (image_blocks); Claude Code's wrapping is the same either way.
+    With tools_log (tools mode) the calc tool is offered and its results come back as `user`
+    events of tool_result blocks, which go on; every call is appended to tools_log."""
     t0 = time.time()
     if images:
         msg = {"role": "user", "content": [{"type": "text", "text": text}, *image_blocks(images)]}
         payload = json.dumps({"type": "user", "message": msg}) + "\n"
     else:
         payload = text
-    p = subprocess.Popen(claude_cmd(cfg, system_file, effort, stream_input=bool(images)), stdin=subprocess.PIPE,
-                         stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=SUB_CWD, env=child_env(cfg, effort, base_url))
+    mcp_file = None
+    if tools_log is not None:
+        tools_log.unlink(missing_ok=True)  # an earlier failed run of this attempt
+        mcp_file = mcp_config(cfg, tools_log)
+    try:
+        p = subprocess.Popen(claude_cmd(cfg, system_file, effort, stream_input=bool(images), mcp_file=mcp_file),
+                             stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=SUB_CWD,
+                             env=child_env(cfg, effort, base_url, tools=mcp_file is not None))
+    except BaseException:
+        if mcp_file:
+            mcp_file.unlink(missing_ok=True)
+        raise
     timed_out = threading.Event()
 
     def on_timeout() -> None:
@@ -308,7 +359,7 @@ def call_claude(cfg: dict, system_file: Path, text: str, effort: str, base_url: 
             except json.JSONDecodeError:
                 continue
             events.append(ev)
-            if ev.get("type") == "user":
+            if ev.get("type") == "user" and not (mcp_file and tool_results_only(ev)):
                 p.kill()
                 break
         p.wait()
@@ -317,10 +368,13 @@ def call_claude(cfg: dict, system_file: Path, text: str, effort: str, base_url: 
         for t in helpers:
             t.join(timeout=5)
         p.stdout.close()
+        if mcp_file:
+            mcp_file.unlink(missing_ok=True)
+    tools = {"tools": True} if mcp_file else {}
     if timed_out.is_set():
-        return {"error": "timed out", "seconds": int(time.time() - t0)}
+        return {"error": "timed out", "seconds": int(time.time() - t0), **tools}
     return {"events": events, "returncode": p.returncode, "seconds": int(time.time() - t0),
-            "stderr": b"".join(err).decode("utf-8", "replace")[-2000:]}
+            "stderr": b"".join(err).decode("utf-8", "replace")[-2000:], **tools}
 
 
 # --- verify: capture the real request on a local stand-in server ----------------------
@@ -371,16 +425,19 @@ class _StandIn(BaseHTTPRequestHandler):
 
 
 def capture_request(cfg: dict, system_file: Path, text: str, effort: str,
-                    images: list[tuple[str, Path]] | None = None) -> tuple[list, dict]:
+                    images: list[tuple[str, Path]] | None = None, tools: bool = False) -> tuple[list, dict]:
     _StandIn.captured = []
     srv = ThreadingHTTPServer(("127.0.0.1", 0), _StandIn)
     th = threading.Thread(target=srv.serve_forever, daemon=True)
     th.start()
+    log = SUB_CWD.parent / f".amplify-calc-verify-{os.getpid()}.jsonl" if tools else None
     try:
         out = call_claude(cfg, system_file, text, effort, base_url=f"http://127.0.0.1:{srv.server_address[1]}",
-                          images=images)
+                          images=images, tools_log=log)
     finally:
         srv.shutdown()
+        if log:
+            log.unlink(missing_ok=True)
     return list(_StandIn.captured), out
 
 
@@ -398,10 +455,12 @@ def _block_core(b) -> dict:
 
 
 def check_request(cfg: dict, system: str, text: str, effort: str, captured: list, out: dict, api_shas: set[str],
-                  images: list[tuple[str, Path]] | None = None) -> dict:
+                  images: list[tuple[str, Path]] | None = None, tools: bool = False) -> dict:
     """Field-by-field comparison with the request run.py sends for the same question (with images:
     the same request plus the image blocks right after the question; they are not part of the
-    wrapping, so its fingerprint is the one a text question gives)."""
+    wrapping, so its fingerprint is the one a text question gives). With tools (tools mode) the
+    request must offer exactly the calc tool, and its definition is part of the wrapping, so a
+    changed tool description needs the owner's acceptance again."""
     st = dict(cfg["solver"], effort=effort, max_tokens=max_tokens_for(cfg, effort))
     checks: list[tuple[str, bool, str]] = []
 
@@ -423,7 +482,11 @@ def check_request(cfg: dict, system: str, text: str, effort: str, captured: list
     chk("max_tokens", b.get("max_tokens") == int(st["max_tokens"]), str(b.get("max_tokens")))
     chk("adaptive thinking (the API default for this model)", b.get("thinking") == {"type": "adaptive"},
         json.dumps(b.get("thinking")))
-    chk("no tools", not b.get("tools") and "tool_choice" not in b, json.dumps(b.get("tools")))
+    if tools:
+        chk("only the calc tool", [t.get("name") for t in b.get("tools") or []] == [CALC_TOOL] and "tool_choice" not in b,
+            json.dumps([t.get("name") for t in b.get("tools") or []]))
+    else:
+        chk("no tools", not b.get("tools") and "tool_choice" not in b, json.dumps(b.get("tools")))
     chk("no other request fields", set(b) <= ALLOWED_BODY_KEYS, str(sorted(set(b) - ALLOWED_BODY_KEYS)))
 
     sys_blocks = _texts(b.get("system") or [])
@@ -459,6 +522,8 @@ def check_request(cfg: dict, system: str, text: str, effort: str, captured: list
         "request_fields": sorted(b),
         "context_management": b.get("context_management"),
         "stream": b.get("stream"),
+        **({"tools": [{k: t.get(k) for k in ("name", "description", "input_schema")} for t in b.get("tools") or []]}
+           if tools else {}),
     }
     return {"ok": all(ok for _, ok, _ in checks), "checks": checks, "fingerprint": wrap_fingerprint(boilerplate),
             "boilerplate": boilerplate, "init": init}
@@ -776,7 +841,7 @@ def turn_text(e: dict) -> str:
     return "".join(b.get("text", "") for b in c or [] if isinstance(b, dict))
 
 
-def cut_off(ev: list, turn: dict, init: dict, limits: list, cfg: dict) -> dict:
+def cut_off(ev: list, turn: dict, init: dict, limits: list, cfg: dict, tools_mode: bool = False) -> dict:
     """Claude Code followed the reply with a turn of its own. The reply as far as it went is stored
     the way the API returns such a reply, so `run.py judge` settles it exactly as in the API run:
     the output token limit -> stop_reason max_tokens (a blind re-solve, then human review); a
@@ -788,6 +853,8 @@ def cut_off(ev: list, turn: dict, init: dict, limits: list, cfg: dict) -> dict:
         return {"kind": "error", "why": f"Claude Code added a turn: {said[:160]}"}
     before = ev[:ev.index(turn)]
     msgs = [e["message"] for e in before if e.get("type") == "assistant" and e.get("message")]
+    if tools_mode and msgs:  # the reply is the message being written when the turn came, after any tool calls
+        msgs = [m for m in msgs if m.get("id") == msgs[-1].get("id")]
     model = cfg["solver"]["model"]
     if len({m.get("id") for m in msgs}) != 1 or any(m.get("model") != model for m in msgs):
         return {"kind": "error", "why": f"{stop}, but not a single reply by {model} before it"}
@@ -816,20 +883,32 @@ def interpret(out: dict, cfg: dict, version: str) -> dict:
         return {"kind": "stop", "why": f"Claude Code is now {init.get('claude_code_version')}, verified {version}"}
     if init.get("apiKeySource") != "none":
         return {"kind": "stop", "why": f"not logged in with the subscription (apiKeySource={init.get('apiKeySource')})"}
-    turn = next((e for e in ev if e.get("type") == "user"), None)
+    tools_mode = bool(out.get("tools"))
+    if tools_mode:  # only the calc tool, from a server that connected; anything else stops the run
+        servers = {s.get("name"): s.get("status") for s in init.get("mcp_servers") or []}
+        if init.get("tools") != [CALC_TOOL] or servers != {"calc": "connected"}:
+            return {"kind": "stop", "why": f"tools mode: tools {init.get('tools')}, MCP servers {servers}"}
+    turn = next((e for e in ev if e.get("type") == "user" and not (tools_mode and tool_results_only(e))), None)
     if turn is not None:
-        return cut_off(ev, turn, init, limits, cfg)
+        return cut_off(ev, turn, init, limits, cfg, tools_mode)
     rejected = [li for li in limits if li.get("status") == "rejected"]
     if result is None or result.get("is_error") or result.get("subtype") != "success":
         msg = (result or {}).get("result") or out.get("stderr", "")
         if rejected or (result or {}).get("api_error_status") == 429 or LIMIT_TEXT_RE.search(str(msg)):
             reset = next((li.get("resetsAt") for li in rejected if li.get("resetsAt")), None) or reset_from_text(str(msg))
             return {"kind": "limited", "why": str(msg)[:200], "resets_at": reset}
+        if (result or {}).get("subtype") == "error_max_turns":
+            return {"kind": "error", "why": f"used all {result.get('num_turns')} turns without a final reply"}
         return {"kind": "error", "why": str(msg)[:300] or f"exit code {out.get('returncode')}"}
     msgs = [e["message"] for e in ev if e.get("type") == "assistant" and e.get("message")]
     ids = list(dict.fromkeys(m.get("id") for m in msgs))
     model = cfg["solver"]["model"]
-    if len(ids) != 1 or result.get("num_turns") != 1:
+    calls = sum(1 for m in msgs for c in m.get("content", []) if c.get("type") == "tool_use")
+    if tools_mode:  # the reply is the last message; every earlier one ended in a tool call
+        if not msgs or any(c.get("type") == "tool_use" for m in msgs if m.get("id") == ids[-1] for c in m.get("content", [])):
+            return {"kind": "error", "why": "tools mode: the last message is a tool call, not a reply"}
+        msgs = [m for m in msgs if m.get("id") == ids[-1]]
+    elif len(ids) != 1 or result.get("num_turns") != 1:
         return {"kind": "error", "why": f"not a single reply ({len(ids)} messages, {result.get('num_turns')} turns)"}
     if any(m.get("model") != model for m in msgs):
         return {"kind": "error", "why": f"answered by {sorted({m.get('model') for m in msgs})}, not {model}"}
@@ -839,7 +918,8 @@ def interpret(out: dict, cfg: dict, version: str) -> dict:
     if text != (result.get("result") or ""):
         return {"kind": "error", "why": "reply text and result text differ"}
     return {"kind": "ok", "text": text, "result": result, "init": init, "model": msgs[0].get("model"),
-            "warning": any(li.get("status") == "allowed_warning" for li in limits)}
+            "warning": any(li.get("status") == "allowed_warning" for li in limits),
+            **({"tool_calls": calls, "turns": result.get("num_turns")} if tools_mode else {})}
 
 
 def store(pc, cfg: dict, qid: int, attempt: int, effort: str, info: dict, seconds: int,
@@ -861,6 +941,9 @@ def store(pc, cfg: dict, qid: int, attempt: int, effort: str, info: dict, second
         **({"images": images} if images else {}),
         **({"cut_off": info["why"]} if info["kind"] == "cut" else {}),
         **({"account_usage": info["account_usage"]} if info.get("account_usage") else {}),
+        **({"tools": {"tool": CALC_TOOL, "calls": info.get("tool_calls"), "turns": info.get("turns"),
+                      "log": f"tools_{attempt}.jsonl", "cost_usd": res.get("total_cost_usd")}}
+           if info.get("tool_calls") is not None else {}),
     })
     pc.execute(
         "INSERT INTO usage (question_id, attempt, batch_id, model, effort, input_tokens, cache_write_tokens, cache_read_tokens, output_tokens, stop_reason, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
@@ -872,7 +955,8 @@ def store(pc, cfg: dict, qid: int, attempt: int, effort: str, info: dict, second
                   prompt_version=cfg["prompt_version"],
                   **{f"solver{min(attempt, 2)}_model": st["model"], f"solver{min(attempt, 2)}_effort": st["effort"]})
     log_event(pc, qid, "sub", f"attempt {attempt} received in {seconds}s, {u.get('output_tokens')} output tokens, stop {res.get('stop_reason')}"
-              + (f", sent with {len(images)} image(s)" if images else ""))
+              + (f", sent with {len(images)} image(s)" if images else "")
+              + (f", {info['tool_calls']} calc tool call(s) in {info.get('turns')} turns" if info.get("tool_calls") is not None else ""))
 
 
 def api_failure(pc, cfg: dict, qid: int, attempt: int, why: str) -> str:
@@ -895,7 +979,13 @@ def save_failure(qid: int, attempt: int, out: dict, info: dict) -> str:
     return path.name
 
 
+SUBJECTS_LOCK = PIPELINE_DIR / "run_subjects.lock"  # run_subjects.py's: one solver at a time, so one account serves
+
+
 def acquire_lock(force: bool) -> None:
+    if SUBJECTS_LOCK.exists():
+        raise SystemExit(f"the subjects solver is running ({SUBJECTS_LOCK.as_posix()}, pid {SUBJECTS_LOCK.read_text().strip()}): "
+                         "one solver at a time, so that only one account serves; wait for it or remove a stale lock")
     if LOCK.exists() and not force:
         raise SystemExit(f"{LOCK.as_posix()} exists: another solve may be running (pid {LOCK.read_text().strip()}); "
                          "pass --force-unlock if it is not")
