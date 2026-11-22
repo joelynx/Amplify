@@ -99,6 +99,7 @@
   {"key": "wenhuchen/green2", "field": "latexcode", "note": "\\oiint is not defined; the curve C is closed", "fixes": [["\\oiint_{s}", "\\oint_C"]]}
  ],
  "dropped": {
+  "elainewan/econ_micro_19": "deleted 2026-11-22 (owner 2026-11-22: 'Delete the held problems'): Private marginal cost of the firm is not given anywhere; tax of 4 cannot be derived without it.",
   "panlu/shock_wave1": "the speed of sound is missing from the text",
   "panlu/standing_sound_wave1": "the speed of sound is missing from the text",
   "panlu/pojectile_motion1": "the time, speed and position are missing from the text",

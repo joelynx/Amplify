@@ -1,0 +1,38 @@
+{
+ "45216": {
+  "topic": "General Relativity and Cosmology",
+  "branch": "General Relativity",
+  "subtopic": "Schwarzschild Geometry and Black Holes",
+  "conf": "high",
+  "how": "opus-relativity",
+  "db": [
+   "Classical Mechanics",
+   "Central-Force Motion",
+   "Orbit Equation and Force Laws"
+  ]
+ },
+ "45220": {
+  "topic": "General Relativity and Cosmology",
+  "branch": "Cosmology",
+  "subtopic": "Expanding Universe and Friedmann Equations",
+  "conf": "medium",
+  "how": "opus-relativity",
+  "db": [
+   "Classical Mechanics",
+   "Gravitation",
+   "Gravitational Field and Potential"
+  ]
+ },
+ "45232": {
+  "topic": "General Relativity and Cosmology",
+  "branch": "General Relativity",
+  "subtopic": "Schwarzschild Geometry and Black Holes",
+  "conf": "high",
+  "how": "opus-relativity",
+  "db": [
+   "Classical Mechanics",
+   "Gravitation",
+   "Two-Body Problem and Binary Stars"
+  ]
+ }
+}

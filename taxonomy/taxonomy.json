@@ -13600,6 +13600,62 @@
  },
  {
   "group": "G7",
+  "subject": "Electromagnetism and Special Relativity",
+  "topic": "General Relativity and Cosmology",
+  "branch": "General Relativity",
+  "subtopic": "Equivalence Principle and Gravitational Redshift",
+  "note": "equivalence principle, gravitational time dilation and redshift, weak-field metric, linearized gravity",
+  "est": 6,
+  "orig": [
+   "General Relativity and Cosmology",
+   "General Relativity",
+   "Equivalence Principle and Gravitational Redshift"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Electromagnetism and Special Relativity",
+  "topic": "General Relativity and Cosmology",
+  "branch": "General Relativity",
+  "subtopic": "Schwarzschild Geometry and Black Holes",
+  "note": "metrics and geodesics, orbits and photon spheres, light bending, Shapiro delay, horizons, gravitational waves",
+  "est": 10,
+  "orig": [
+   "General Relativity and Cosmology",
+   "General Relativity",
+   "Schwarzschild Geometry and Black Holes"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Electromagnetism and Special Relativity",
+  "topic": "General Relativity and Cosmology",
+  "branch": "Cosmology",
+  "subtopic": "Expanding Universe and Friedmann Equations",
+  "note": "Robertson-Walker metric, scale factor, Hubble law, cosmological redshift, distances, Friedmann equations",
+  "est": 8,
+  "orig": [
+   "General Relativity and Cosmology",
+   "Cosmology",
+   "Expanding Universe and Friedmann Equations"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Electromagnetism and Special Relativity",
+  "topic": "General Relativity and Cosmology",
+  "branch": "Cosmology",
+  "subtopic": "Early Universe and Cosmic Background",
+  "note": "cosmic microwave background, radiation era, nucleosynthesis, age and contents of the universe",
+  "est": 3,
+  "orig": [
+   "General Relativity and Cosmology",
+   "Cosmology",
+   "Early Universe and Cosmic Background"
+  ]
+ },
+ {
+  "group": "G7",
   "subject": "Quantum Mechanics",
   "topic": "Quantum, Atomic and Nuclear Physics",
   "branch": "Wave-Particle Duality",
