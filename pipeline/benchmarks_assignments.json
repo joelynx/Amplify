@@ -1,0 +1,11389 @@
+{
+"note": "Benchmark sets imported 2026-11-22 by app/tools/import_<set>.py (ThermoQA, JEEBench, TheoremQA, UGPhysics, UGMathBench; owner 2026-11-21: 'Go ahead with all recommendations'): the maths questions with the model and effort that solve them. Listing a question here puts it in run_sub.py's scope. Physics, engineering and economics questions are not listed: run_subjects.py takes them after classification.",
+"questions": {
+"38795": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38796": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38797": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38798": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38799": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38800": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38801": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38802": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38803": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38804": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38805": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38806": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38807": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38808": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38809": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38810": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38811": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38812": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38820": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38821": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38822": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38823": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38824": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38825": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38826": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38827": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38828": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38829": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38830": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38838": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38839": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38840": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38841": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38842": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38843": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38844": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38845": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38846": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38847": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38848": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38854": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38855": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38856": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38857": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38858": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38859": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38860": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38861": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38862": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38863": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38864": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38865": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38874": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38875": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38876": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38877": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38878": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38879": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38880": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38881": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38882": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38883": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38884": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38885": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38886": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38899": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38900": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38901": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38902": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38903": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38904": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38905": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38906": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38907": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38908": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38917": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38918": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38919": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38920": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38921": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38922": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38923": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38924": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38925": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38926": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38927": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38928": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38929": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38930": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38931": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38932": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38938": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38939": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38940": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38941": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38942": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38943": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38944": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38945": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38946": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38947": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38948": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38956": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38957": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38958": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38959": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38960": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38961": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38962": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38963": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38964": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38965": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38966": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38967": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38968": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38969": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38970": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38971": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38972": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38973": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38982": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38983": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38984": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38985": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38986": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38987": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38988": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38989": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38990": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38991": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38992": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38993": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38994": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38995": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38996": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38997": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38998": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"38999": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39006": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39007": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39008": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39009": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39010": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39011": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39012": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39013": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39014": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39015": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39016": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39017": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39018": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39019": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39020": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39021": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39022": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39023": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39031": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39032": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39033": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39034": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39035": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39036": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39037": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39038": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39039": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39040": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39041": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39042": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39043": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39044": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39045": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39046": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39047": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39048": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39049": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39050": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39051": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39052": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39053": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39054": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39055": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39056": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39057": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39058": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39059": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39060": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39068": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39069": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39070": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39071": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39072": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39073": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39074": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39075": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39076": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39077": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39078": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39079": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39080": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39081": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39082": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39083": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39084": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39085": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39094": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39095": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39096": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39097": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39098": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39099": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39100": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39101": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39102": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39103": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39104": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39105": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39106": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39107": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39108": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39109": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39110": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39121": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39122": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39123": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39124": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39125": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39126": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39127": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39128": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39129": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39130": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39131": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39132": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39133": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39134": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39135": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"39142": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39143": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39144": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39145": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39146": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39147": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39148": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39149": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39150": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39151": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39152": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39153": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39154": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39155": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39156": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39157": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39158": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39159": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39160": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39161": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39162": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39163": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39164": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39165": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39166": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39167": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39168": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39169": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39170": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39171": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39172": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39173": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39174": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39175": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39176": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39177": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39178": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39179": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39180": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39181": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39182": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39183": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39184": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39185": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39186": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39187": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39188": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39189": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39190": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39191": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39192": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39193": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39194": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39195": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39196": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39197": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39198": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39199": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39200": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39201": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39202": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39203": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39204": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39205": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39206": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39207": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39208": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39209": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39210": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39211": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39212": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39213": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39214": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39215": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39216": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39217": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39218": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39219": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39220": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39221": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39222": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39223": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39224": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39225": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39226": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39227": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39228": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39229": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39230": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39231": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39232": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39233": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39234": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39235": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39236": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39237": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39238": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39239": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39240": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39241": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39242": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39243": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39244": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39245": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39246": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39247": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39248": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39249": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39250": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39251": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39252": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39253": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39254": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39255": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39256": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39257": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39258": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39259": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39260": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39261": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39262": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39263": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39264": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39265": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39266": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39267": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39268": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39269": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39270": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39271": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39272": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39273": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39274": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39275": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39276": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39277": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39278": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39279": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39280": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39281": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39282": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39283": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39284": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39285": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39286": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39287": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39288": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39289": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39290": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39291": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39292": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39293": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39294": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39295": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39296": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39297": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39298": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39299": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39300": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39301": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39302": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39303": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39304": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39305": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39306": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39307": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39308": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39309": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39310": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39311": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39312": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39313": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39314": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39315": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39316": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39317": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39318": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39319": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39320": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39321": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39322": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39323": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39324": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39325": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39326": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39327": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39328": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39329": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39330": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39331": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39332": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39333": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39334": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39335": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39336": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39337": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39338": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39339": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39340": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39341": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39342": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39343": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39344": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39345": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39346": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39347": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39348": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39349": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39350": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39351": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39352": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39353": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39354": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39355": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39356": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39357": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39358": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39359": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39360": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39361": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39362": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39363": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39364": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39365": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39366": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39367": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39368": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39369": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39370": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39371": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39372": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39373": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39374": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39375": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39376": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39377": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39378": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39379": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39380": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39381": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39382": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39383": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39384": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39385": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39386": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39387": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39388": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39389": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39390": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39391": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39392": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39393": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39394": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39395": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39396": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39397": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39398": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39399": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39400": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39401": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39402": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39403": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39404": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39405": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39406": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39407": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39408": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39409": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39410": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39411": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39412": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39413": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39414": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39415": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39416": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39417": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39418": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39419": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39420": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39421": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39422": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39423": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39424": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39425": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39426": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39427": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39428": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39429": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39430": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39431": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39432": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39433": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39434": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39435": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39436": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39437": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39438": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39439": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39440": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39441": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39442": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39443": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39444": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39445": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39446": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39447": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39448": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39449": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39450": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39451": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39452": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39453": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39454": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39455": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39456": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39457": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39458": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39459": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39460": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39461": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39462": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39463": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39464": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39465": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39466": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39467": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39468": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39469": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39470": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39471": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39472": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39473": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39474": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39475": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39476": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39477": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39478": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39479": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39480": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39481": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39482": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39483": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39484": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39485": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39486": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39487": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39488": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39489": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39490": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39491": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39492": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39493": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39494": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39495": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39496": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39497": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39498": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39499": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39500": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39501": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39502": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39503": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39504": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39505": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39506": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39507": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39508": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39509": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39510": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39511": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39512": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39513": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39514": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39515": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39516": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39517": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39518": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39519": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39520": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39521": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39522": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39523": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39524": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39525": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39526": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39527": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39528": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39529": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39530": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39531": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39532": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39533": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39534": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39535": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39536": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39537": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39538": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39539": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39540": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39541": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39542": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39543": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39544": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39545": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39546": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39547": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39548": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39549": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39550": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39551": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39552": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39553": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39554": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39555": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39556": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39557": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39558": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39559": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39560": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39561": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39562": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39563": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39564": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39565": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39566": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39567": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39568": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39569": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39570": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39571": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39572": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39573": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39574": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39575": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39576": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39577": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39578": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39579": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39580": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39581": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39582": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39583": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39584": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39585": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39586": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39587": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39588": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39589": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39590": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39591": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39592": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39593": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39594": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39595": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39596": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39597": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39598": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39599": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39600": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39601": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39602": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39603": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39604": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39605": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39606": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39607": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39608": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39609": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39610": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39611": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39612": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39613": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39614": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39615": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39616": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39617": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39618": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39619": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39620": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39621": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39622": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39623": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39624": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39625": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39626": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39627": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39628": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39629": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39630": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39631": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39632": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39633": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39634": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39635": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39636": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39637": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39638": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39639": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39640": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39641": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39642": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39643": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39644": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39645": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39646": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39647": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39648": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39649": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39650": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39651": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39652": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39653": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39654": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39655": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39656": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39657": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39658": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39659": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39660": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39661": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39662": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39663": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39664": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39665": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39666": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39667": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39668": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39669": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39670": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39671": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39672": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39673": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39674": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39675": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39676": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39677": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39678": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39679": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39680": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39681": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39682": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39683": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39684": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39685": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39686": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39687": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39688": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39689": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39690": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39691": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39692": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39693": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39694": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39695": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39696": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39697": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39698": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39699": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39700": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39701": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39702": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39703": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39704": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39705": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39706": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39707": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39708": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39709": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39710": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39711": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39712": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39713": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39714": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39715": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39716": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39717": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39718": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39719": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39720": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39721": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39722": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39723": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39724": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39725": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39726": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39727": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39728": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39729": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39730": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39731": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39732": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39733": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39734": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39735": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39736": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39737": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39738": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39739": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39740": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39741": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39742": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39743": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39744": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39745": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39746": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39747": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39748": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39749": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39750": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39751": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39752": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39753": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39754": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39755": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39756": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39757": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39758": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39759": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39760": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39761": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39762": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39763": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39764": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39765": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39766": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39767": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39768": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39769": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39770": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39771": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39772": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39773": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39774": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39775": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39776": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39777": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39778": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39779": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39780": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39781": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39782": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39783": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39784": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39785": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39786": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39787": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39788": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39789": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39790": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39791": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39792": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39793": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39794": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39795": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39796": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39797": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39798": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39799": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39800": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39801": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39802": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39803": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39804": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39805": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39806": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39807": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39808": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39809": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39810": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39811": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39812": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39813": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39814": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39815": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39816": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39817": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39818": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39819": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39820": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39821": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39822": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39823": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39824": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39825": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39826": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39827": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39828": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39829": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39830": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39831": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39832": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39833": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39834": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39835": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39836": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39837": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39838": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39839": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39840": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39841": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39842": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39843": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39844": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39845": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39846": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39847": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39848": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39849": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39850": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39851": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39852": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39853": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39854": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39855": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39856": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39857": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39858": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39859": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39860": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39861": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39862": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39863": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39864": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39865": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39866": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39867": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39868": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39869": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39870": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39871": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39872": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39873": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39874": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39875": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39876": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39877": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39878": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39879": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39880": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39881": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39882": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39883": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39884": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39885": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39886": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39887": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39888": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39889": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39890": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39891": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39892": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39893": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39894": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39895": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39896": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39897": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39898": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39899": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39900": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39901": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39902": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39903": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39904": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39905": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39906": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39907": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39908": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39909": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39910": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39911": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39912": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39913": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39914": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39915": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39916": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39917": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39918": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39919": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39920": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39921": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39922": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39923": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39924": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39925": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39926": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39927": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39928": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39929": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39930": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39931": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39932": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39933": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39934": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39935": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39936": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39937": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39938": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39939": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39940": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39941": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39942": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39943": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39944": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39945": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39946": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39947": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39948": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39949": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39950": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39951": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39952": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39953": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39954": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39955": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39956": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39957": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39958": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39959": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39960": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39961": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39962": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39963": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39964": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39965": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39966": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39967": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39968": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39969": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39970": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39971": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39972": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39973": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39974": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39975": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39976": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39977": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39978": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39979": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39980": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39981": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39982": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39983": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39984": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39985": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39986": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39987": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39988": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39989": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39990": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39991": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39992": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39993": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39994": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39995": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39996": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39997": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39998": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"39999": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40000": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40001": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40002": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40003": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40004": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40005": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40006": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40007": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40008": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40009": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40010": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40011": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40012": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40013": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40014": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40015": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40016": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40017": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40018": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40019": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40020": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40021": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40022": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40023": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40024": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40025": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40026": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40027": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40028": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40029": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40030": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40031": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40032": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40033": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40034": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40035": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40036": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40037": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40038": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40039": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40040": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40041": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40042": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40043": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40044": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40045": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40046": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40047": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40048": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40049": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40050": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40051": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40052": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40053": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40054": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40055": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40056": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40057": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40058": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40059": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40060": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40061": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40062": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40063": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40064": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40065": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40066": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40067": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40068": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40069": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40070": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40071": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40072": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40073": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40074": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40075": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40076": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40077": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40078": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40079": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40080": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40081": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40082": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40083": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40084": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40085": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40086": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40087": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40088": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40089": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40090": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40091": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40092": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40093": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40094": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40095": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40096": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40097": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40098": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40099": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40100": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40101": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40102": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40103": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40104": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40105": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40106": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40107": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40108": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40109": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40110": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40111": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40112": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40113": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40114": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40115": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40116": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40117": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40118": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40119": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40120": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40121": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40122": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40123": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40124": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40125": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40126": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40127": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40128": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40129": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40130": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40131": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40132": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40133": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40134": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40135": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40136": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40137": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40138": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40139": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40140": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40141": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40142": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40143": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40144": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40145": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40146": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40147": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40148": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40149": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40150": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40151": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40152": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40153": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40154": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40155": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40156": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40157": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40158": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40159": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40160": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40161": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40162": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40163": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40164": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40165": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40166": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40167": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40168": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40169": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40170": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40171": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40172": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40173": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40174": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40175": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40176": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40177": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40178": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40179": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40180": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40181": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40182": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40183": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40184": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40185": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40186": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40187": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40188": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40189": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40190": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40191": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40192": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40193": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40194": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40195": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40196": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40197": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40198": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40199": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40200": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40201": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40202": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40203": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40204": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40205": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40206": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40207": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40208": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40209": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40210": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40211": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40212": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40213": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40214": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40215": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40216": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40217": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40218": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40219": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40220": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40221": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40222": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40223": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40224": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40225": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40226": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40227": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40228": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40229": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40230": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40231": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40232": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40233": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40234": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40235": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40236": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40237": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40238": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40239": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40240": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40241": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40242": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40243": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40244": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40245": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40246": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40247": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40248": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40249": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40250": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40251": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40252": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40253": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40254": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40255": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40256": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40257": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40258": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40259": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40260": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40261": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40262": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40263": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40264": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40265": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40266": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40267": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40268": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40269": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40270": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40271": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40272": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40273": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40274": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40275": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40276": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40277": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40278": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40279": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40280": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40281": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40282": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40283": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40284": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40285": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40286": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40287": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40288": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40289": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40290": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40291": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40292": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40293": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40294": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40295": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40296": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40297": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40298": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40299": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40300": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40301": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40302": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40303": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40304": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40305": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40306": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40307": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40308": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40309": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40310": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40311": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40312": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40313": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40314": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40315": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40316": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40317": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40318": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40319": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40320": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40321": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40322": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40323": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40324": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40325": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40326": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40327": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40328": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40329": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40330": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40331": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40332": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40333": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40334": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40335": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40336": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40337": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40338": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40339": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40340": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40341": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40342": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40343": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40344": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40345": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40346": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40347": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40348": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40349": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40350": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40351": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40352": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40353": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40354": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40355": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40356": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40357": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40358": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40359": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40360": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40361": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40362": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40363": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40364": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40365": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40366": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40367": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40368": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40369": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40370": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40371": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40372": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40373": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40374": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40375": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40376": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40377": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40378": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40379": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40380": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40381": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40382": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40383": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40384": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40385": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40386": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40387": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40388": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40389": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40390": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40391": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40392": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40393": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40394": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40395": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40396": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40397": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40398": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40399": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40400": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40401": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40402": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40403": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40404": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40405": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40406": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40407": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40408": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40409": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40410": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40411": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40412": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40413": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40414": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40415": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40416": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40417": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40418": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40419": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40420": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40421": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40422": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40423": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40424": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40425": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40426": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40427": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40428": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40429": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40430": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40431": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40432": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40433": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40434": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40435": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40436": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40437": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40438": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40439": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40440": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40441": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40442": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40443": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40444": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40445": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40446": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40447": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40448": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40449": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40450": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40451": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40452": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40453": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40454": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40455": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40456": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40457": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40458": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40459": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40460": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40461": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40462": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40463": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40464": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40465": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40466": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40467": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40468": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40469": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40470": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40471": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40472": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40473": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40474": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40475": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40476": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40477": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40478": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40479": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40480": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40481": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40482": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40483": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40484": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40485": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40486": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40487": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40488": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40489": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40490": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40491": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40492": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40493": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40494": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40495": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40496": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40497": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40498": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40499": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40500": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40501": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40502": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40503": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40504": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40505": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40506": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40507": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40508": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40509": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40510": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40511": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40512": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40513": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40514": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40515": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40516": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40517": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40518": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40519": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40520": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40521": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40522": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40523": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40524": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40525": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40526": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40527": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40528": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40529": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40530": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40531": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40532": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40533": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40534": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40535": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40536": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40537": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40538": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40539": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40540": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40541": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40542": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40543": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40544": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40545": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40546": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40547": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40548": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40549": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40550": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40551": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40552": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40553": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40554": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40555": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40556": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40557": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40558": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40559": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40560": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40561": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40562": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40563": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40564": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40565": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40566": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40567": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40568": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40569": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40570": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40571": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40572": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40573": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40574": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40575": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40576": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40577": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40578": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40579": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40580": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40581": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40582": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40583": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40584": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40585": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40586": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40587": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40588": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40589": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40590": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40591": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40592": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40593": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40594": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40595": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40596": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40597": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40598": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40599": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40600": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40601": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40602": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40603": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40604": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40605": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40606": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40607": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40608": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40609": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40610": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40611": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40612": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40613": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40614": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40615": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40616": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40617": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40618": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40619": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40620": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40621": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40622": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40623": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40624": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40625": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40626": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40627": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40628": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40629": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40630": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40631": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40632": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40633": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40634": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40635": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40636": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40637": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40638": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40639": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40640": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40641": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40642": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40643": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40644": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40645": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40646": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40647": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40648": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40649": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40650": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40651": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40652": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40653": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40654": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40655": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40656": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40657": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40658": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40659": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40660": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40661": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40662": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40663": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40664": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40665": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40666": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40667": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40668": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40669": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40670": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40671": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40672": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40673": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40674": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40675": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40676": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40677": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40678": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40679": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40680": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40681": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40682": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40683": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40684": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40685": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40686": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40687": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40688": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40689": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40690": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40691": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40692": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40693": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40694": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40695": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40696": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40697": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40698": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40699": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40700": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40701": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40702": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40703": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40704": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40705": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40706": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40707": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40708": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40709": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40710": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40711": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40712": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40713": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40714": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40715": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40716": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40717": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40718": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40719": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40720": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40721": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40722": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40723": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40724": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40725": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40726": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40727": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40728": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40729": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40730": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40731": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40732": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40733": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40734": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40735": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40736": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40737": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40738": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40739": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40740": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40741": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40742": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40743": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40744": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40745": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40746": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40747": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40748": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40749": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40750": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40751": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40752": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40753": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40754": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40755": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40756": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40757": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40758": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40759": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40760": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40761": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40762": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40763": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40764": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40765": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40766": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40767": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40768": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40769": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40770": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40771": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40772": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40773": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40774": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40775": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40776": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40777": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40778": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40779": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40780": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40781": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40782": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40783": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40784": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40785": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40786": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40787": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40788": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40789": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40790": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40791": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40792": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40793": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40794": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40795": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40796": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40797": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40798": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40799": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40800": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40801": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40802": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40803": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40804": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40805": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40806": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40807": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40808": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40809": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40810": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40811": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40812": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40813": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40814": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40815": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40816": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40817": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40818": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40819": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40820": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40821": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40822": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40823": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40824": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40825": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40826": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40827": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40828": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40829": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40830": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40831": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40832": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40833": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40834": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40835": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40836": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40837": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40838": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40839": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40840": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40841": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40842": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40843": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40844": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40845": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40846": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40847": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40848": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40849": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40850": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40851": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40852": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40853": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40854": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40855": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40856": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40857": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40858": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40859": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40860": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40861": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40862": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40863": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40864": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40865": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40866": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40867": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40868": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40869": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40870": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40871": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40872": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40873": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40874": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40875": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40876": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40877": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40878": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40879": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40880": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40881": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40882": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40883": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40884": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40885": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40886": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40887": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40888": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40889": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40890": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40891": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40892": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40893": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40894": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40895": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40896": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40897": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40898": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40899": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40900": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40901": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40902": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40903": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40904": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40905": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40906": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40907": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40908": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40909": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40910": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40911": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40912": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40913": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40914": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40915": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40916": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40917": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40918": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40919": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40920": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40921": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40922": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40923": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40924": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40925": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40926": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40927": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40928": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40929": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40930": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40931": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40932": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40933": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40934": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40935": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40936": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40937": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40938": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40939": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40940": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40941": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40942": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40943": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40944": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40945": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40946": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40947": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40948": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40949": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40950": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40951": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40952": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40953": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40954": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40955": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40956": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40957": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40958": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40959": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40960": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40961": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40962": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40963": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40964": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40965": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40966": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40967": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40968": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40969": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40970": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40971": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40972": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40973": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40974": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40975": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40976": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40977": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40978": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40979": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40980": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40981": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40982": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40983": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40984": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40985": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40986": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40987": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40988": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40989": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40990": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40991": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40992": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40993": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40994": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40995": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40996": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40997": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40998": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"40999": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41000": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41001": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41002": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41003": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41004": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41005": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41006": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41007": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41008": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41009": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41010": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41011": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41012": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41013": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41014": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41015": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41016": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41017": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41018": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41019": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41020": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41021": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41022": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41023": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41024": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41025": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41026": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41027": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41028": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41029": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41030": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41031": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41032": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41033": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41034": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41035": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41036": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41037": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41038": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41039": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41040": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41041": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41042": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41043": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41044": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41045": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41046": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41047": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41048": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41049": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41050": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41051": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41052": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41053": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41054": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41055": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41056": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41057": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41058": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41059": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41060": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41061": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41062": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41063": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41064": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41065": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41066": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41067": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41068": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41069": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41070": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41071": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41072": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41073": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41074": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41075": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41076": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41077": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41078": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41079": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41080": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41081": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41082": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41083": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41084": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41085": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41086": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41087": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41088": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41089": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41090": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41091": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41092": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41093": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41094": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41095": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41096": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41097": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41098": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41099": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41100": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41101": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41102": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41103": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41104": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41105": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41106": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41107": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41108": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41109": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41110": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41111": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41112": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41113": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41114": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41115": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41116": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41117": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41118": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41119": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41120": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41121": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41122": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41123": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41124": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41125": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41126": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41127": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41128": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41129": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41130": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41131": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41132": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41133": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41134": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41135": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41136": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41137": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41138": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41139": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41140": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41141": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41142": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41143": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41144": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41145": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41146": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41147": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41148": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41149": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41150": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41151": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41152": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41153": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41154": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41155": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41156": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41157": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41158": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41159": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41160": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41161": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41162": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41163": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41164": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41165": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41166": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41167": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41168": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41169": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41170": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41171": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41172": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41173": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41174": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41175": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41176": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41177": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41178": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41179": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41180": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41181": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41182": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41183": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41184": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41185": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41186": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41187": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41188": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41189": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41190": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41191": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41192": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41193": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41194": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41195": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41196": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41197": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41198": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41199": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41200": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41201": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41202": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41203": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41204": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41205": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41206": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41207": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41208": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41209": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41210": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41211": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41212": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41213": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41214": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41215": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41216": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41217": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41218": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41219": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41220": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41221": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41222": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41223": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41224": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41225": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41226": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41227": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41228": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41229": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41230": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41231": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41232": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41233": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41234": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41235": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41236": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41237": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41238": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41239": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41240": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41241": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41242": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41243": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41244": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41245": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41246": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41247": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41248": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41249": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41250": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41251": {
+"model": "claude-opus-5-5",
+"effort": "medium"
+},
+"41252": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41253": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41254": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41255": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41256": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41257": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41259": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41260": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41262": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41263": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41264": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41265": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41266": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41267": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41268": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41269": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41270": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41271": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41273": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41274": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41275": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41276": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41277": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41280": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41281": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41282": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41283": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41284": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41285": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41286": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41288": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41290": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41291": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41292": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41293": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41294": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41295": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41296": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41297": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41299": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41300": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41302": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41303": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41304": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41305": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41306": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41308": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41309": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41310": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41311": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41312": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41313": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41314": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41315": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41316": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41318": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41319": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41320": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41322": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41323": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41325": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41326": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41327": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41328": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41329": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41330": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41331": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41332": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41333": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41334": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41335": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41336": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41337": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41338": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41339": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41340": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41341": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41344": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41345": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41346": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41347": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41349": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41350": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41351": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41353": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41354": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41355": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41356": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41358": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41359": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41362": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41363": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41364": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41365": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41366": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41367": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41369": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41370": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41371": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41372": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41373": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41374": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41375": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41377": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41378": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41379": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41381": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41382": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41383": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41384": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41386": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41387": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41388": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41389": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41390": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41391": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41392": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41393": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41394": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41397": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41401": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41402": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41403": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41404": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41405": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41407": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41409": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41410": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41411": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41412": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41414": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41415": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41416": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41418": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41419": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41420": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41421": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41422": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41423": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41424": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41425": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41427": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41428": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41429": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41430": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41431": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41432": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41433": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41434": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41435": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41436": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41437": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41438": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41439": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41441": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41442": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41443": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41444": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41445": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41446": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41447": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41448": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41449": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41451": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41452": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41454": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41455": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41459": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41460": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41461": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41462": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41465": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41467": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41469": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41470": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41471": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41472": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41473": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41474": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41475": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41476": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41477": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41478": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41479": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41481": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41482": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41483": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41484": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41485": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41486": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41488": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41489": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41490": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41491": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41493": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41494": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41495": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41496": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41497": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41498": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41499": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41500": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41503": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41504": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41505": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41506": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41508": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41511": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41512": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41513": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41514": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41515": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41517": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41519": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41520": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41521": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41522": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41523": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41524": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41526": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41527": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41528": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41530": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41531": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41533": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41535": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41536": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41537": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41538": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41540": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41541": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41542": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41543": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41544": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41545": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41546": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41547": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41548": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41549": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41550": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41551": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41553": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41554": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41556": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41557": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41558": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41559": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41560": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41561": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41563": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41565": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41568": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41569": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41570": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41571": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41572": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41573": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41574": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41575": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41576": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41577": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41578": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41579": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41580": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41581": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41582": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41583": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41584": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41586": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41587": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41591": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41592": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41593": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41594": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41595": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41597": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41598": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41599": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41600": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41601": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41602": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41604": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41605": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41606": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41607": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41608": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41610": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41611": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41612": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41613": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41615": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41616": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41617": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41618": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41619": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41621": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41622": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41623": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41624": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41625": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41626": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41627": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41628": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41630": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41631": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41632": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41633": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41634": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41635": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41636": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41637": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41638": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41639": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41640": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41641": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41642": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41643": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41644": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41645": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41646": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41647": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41648": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41649": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41652": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41653": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41654": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41655": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41656": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41657": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41658": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41659": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41660": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41661": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41664": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41665": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41666": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41667": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41668": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41669": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41670": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41671": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41672": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41676": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41677": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41678": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41679": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41680": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41681": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41682": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41683": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41687": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41690": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41691": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41692": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41693": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41695": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41696": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41698": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41699": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41700": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41701": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41702": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41703": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41704": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41705": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41706": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41707": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41708": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41709": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41710": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41711": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41712": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41714": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41716": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41717": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41718": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41719": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41721": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41723": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41724": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41725": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41726": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41727": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41728": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41729": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41730": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41731": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41732": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41733": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41734": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41735": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41736": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41738": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41739": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41740": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41741": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41742": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41743": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41744": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41745": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41746": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41747": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41748": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41749": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41750": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41751": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41752": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41753": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41757": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41758": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41759": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41760": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41762": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41763": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41765": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41766": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41767": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41768": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41769": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41770": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41772": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41774": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41775": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41776": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41777": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41778": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41779": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41780": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41782": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41783": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41784": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41787": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41789": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41791": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41792": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41793": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41794": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41797": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41798": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41800": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41801": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41802": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41803": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41804": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41805": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41806": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41810": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41811": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41812": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41813": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41814": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41815": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41817": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41818": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41819": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41821": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41822": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41823": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41824": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41825": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41826": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41827": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41829": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41830": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41831": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41833": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41834": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41835": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41836": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41838": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41840": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41842": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41843": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41844": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41845": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41846": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41847": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41848": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41850": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41851": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41852": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41853": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41859": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41860": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41861": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41862": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41863": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41864": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41866": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41867": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41868": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41869": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41871": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41872": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41873": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41874": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41875": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41876": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41879": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"41880": {
+"model": "claude-opus-5-5",
+"effort": "high"
+}
+}
+}

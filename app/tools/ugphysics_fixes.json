@@ -1,0 +1,326 @@
+{
+ "fixes": [
+  {
+   "key": "UGPhysics ClassicalMechanics 2054",
+   "field": "answer",
+   "fixes": [
+    [
+     "\\mathrm{年}",
+     "\\mathrm{yr}"
+    ]
+   ],
+   "note": "unit written in Chinese in the dataset"
+  },
+  {
+   "key": "UGPhysics Relativity 1819",
+   "field": "answer",
+   "fixes": [
+    [
+     "\\mathrm{光秒}",
+     "\\text{light-s}"
+    ]
+   ],
+   "note": "unit written in Chinese in the dataset"
+  },
+  {
+   "key": "UGPhysics Relativity 1820",
+   "field": "answer",
+   "fixes": [
+    [
+     "\\mathrm{天}",
+     "\\text{days}"
+    ]
+   ],
+   "note": "unit written in Chinese in the dataset"
+  },
+  {
+   "key": "UGPhysics Relativity 1946",
+   "field": "answer",
+   "fixes": [
+    [
+     "\\mathrm{米}",
+     "\\mathrm{m}"
+    ]
+   ],
+   "note": "unit written in Chinese in the dataset"
+  },
+  {
+   "key": "UGPhysics Relativity 2420",
+   "field": "answer",
+   "fixes": [
+    [
+     "\\ 光分",
+     "\\ \\text{light-min}"
+    ]
+   ],
+   "note": "unit written in Chinese in the dataset"
+  },
+  {
+   "key": "UGPhysics Relativity 2445",
+   "field": "answer",
+   "fixes": [
+    [
+     "13\\ 30\\ \\mathrm{点} \\ \\mathrm{分}",
+     "13:30"
+    ]
+   ],
+   "note": "unit written in Chinese in the dataset"
+  },
+  {
+   "key": "UGPhysics Relativity 2510",
+   "field": "answer",
+   "fixes": [
+    [
+     "\\mathrm{米}",
+     "\\mathrm{m}"
+    ]
+   ],
+   "note": "unit written in Chinese in the dataset"
+  },
+  {
+   "key": "UGPhysics SemiconductorPhysics 3792",
+   "field": "answer",
+   "fixes": [
+    [
+     "\\mathrm{秒}",
+     "\\mathrm{s}"
+    ]
+   ],
+   "note": "unit written in Chinese in the dataset"
+  },
+  {
+   "key": "UGPhysics SemiconductorPhysics 3828",
+   "field": "answer",
+   "fixes": [
+    [
+     "\\mathrm{事件/秒}",
+     "\\text{events/s}"
+    ]
+   ],
+   "note": "unit written in Chinese in the dataset"
+  },
+  {
+   "key": "UGPhysics SemiconductorPhysics 3972",
+   "field": "answer",
+   "fixes": [
+    [
+     "\\ \\mathrm{托}$, $10^{-7}\\ \\mathrm{托}",
+     "\\ \\mathrm{Torr}$, $10^{-7}\\ \\mathrm{Torr}"
+    ]
+   ],
+   "note": "unit written in Chinese in the dataset"
+  },
+  {
+   "key": "UGPhysics Solid-StatePhysics 3931",
+   "field": "answer",
+   "fixes": [
+    [
+     "\\mathrm{位错}",
+     "\\text{dislocations}"
+    ]
+   ],
+   "note": "unit written in Chinese in the dataset"
+  },
+  {
+   "key": "UGPhysics StatisticalMechanics 3230",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "Sub-problem 2:**\n",
+     ""
+    ]
+   ],
+   "note": "stray Markdown heading"
+  },
+  {
+   "key": "UGPhysics AtomicPhysics 929",
+   "field": "answer",
+   "fixes": [
+    [
+     "$\\theta_{1}=26 \\, 2\\ ^\\circ ''$, $\\theta_{2}=61 \\, 21\\ ^\\circ ''$",
+     "$\\theta_{1}=26^{\\circ}2'$, $\\theta_{2}=61^{\\circ}21'$"
+    ]
+   ],
+   "note": "degrees and minutes garbled"
+  },
+  {
+   "key": "UGPhysics QuantumMechanics 4717",
+   "field": "answer",
+   "fixes": [
+    [
+     "\\text{J$\\cdot$s}",
+     "\\mathrm{J\\cdot s}"
+    ]
+   ],
+   "note": "math inside \\text"
+  },
+  {
+   "key": "UGPhysics StatisticalMechanics 3527",
+   "field": "answer",
+   "fixes": [
+    [
+     "\\right)]$",
+     "\\right)\\right]$"
+    ]
+   ],
+   "note": "missing \\right"
+  },
+  {
+   "key": "UGPhysics ClassicalMechanics 2093",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "3 \\mathrm{~N} force",
+     "$3\\ \\mathrm{N}$ force"
+    ]
+   ],
+   "note": "math without $"
+  },
+  {
+   "key": "UGPhysics SemiconductorPhysics 3869",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\frac{e B \\omega/m c}",
+     "\\frac{e B \\omega}{m c}"
+    ]
+   ],
+   "note": "misplaced brace"
+  },
+  {
+   "key": "UGPhysics SemiconductorPhysics 3896",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\frac{e B \\omega/m c}",
+     "\\frac{e B \\omega}{m c}"
+    ]
+   ],
+   "note": "misplaced brace"
+  },
+  {
+   "key": "UGPhysics SemiconductorPhysics 3925",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\frac{e B \\omega/m c}",
+     "\\frac{e B \\omega}{m c}"
+    ]
+   ],
+   "note": "misplaced brace"
+  },
+  {
+   "key": "UGPhysics StatisticalMechanics 3096",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "10^{-8} cm apart",
+     "$10^{-8}$ cm apart"
+    ]
+   ],
+   "note": "math without $"
+  },
+  {
+   "key": "UGPhysics StatisticalMechanics 3096",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "1.66  10^{-24} g",
+     "$1.66 \\times 10^{-24}$ g"
+    ]
+   ],
+   "note": "math without $; lost times sign"
+  },
+  {
+   "key": "UGPhysics StatisticalMechanics 3373",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\($E_{2}>E_{1}$\\)",
+     "($E_{2}>E_{1}$)"
+    ]
+   ],
+   "note": "stray \\( \\)"
+  },
+  {
+   "key": "UGPhysics AtomicPhysics 1517",
+   "field": "solution",
+   "fixes": [
+    [
+     "\\),\\) we get:",
+     "\\), we get:"
+    ]
+   ],
+   "note": "stray \\)"
+  }
+ ],
+ "dropped": {
+  "UGPhysics AtomicPhysics 784": "needs a figure the dataset does not ship",
+  "UGPhysics AtomicPhysics 912": "needs a figure the dataset does not ship",
+  "UGPhysics AtomicPhysics 1007": "needs a figure the dataset does not ship",
+  "UGPhysics AtomicPhysics 1372": "needs a figure the dataset does not ship",
+  "UGPhysics ClassicalElectromagnetism 374": "needs a figure the dataset does not ship",
+  "UGPhysics ClassicalElectromagnetism 375": "needs a figure the dataset does not ship",
+  "UGPhysics ClassicalElectromagnetism 402": "needs a figure the dataset does not ship",
+  "UGPhysics ClassicalElectromagnetism 426": "needs a figure the dataset does not ship",
+  "UGPhysics ClassicalMechanics 1599": "needs a figure the dataset does not ship",
+  "UGPhysics ClassicalMechanics 1983": "needs a figure the dataset does not ship",
+  "UGPhysics ClassicalMechanics 2182": "needs a figure the dataset does not ship",
+  "UGPhysics ClassicalMechanics 2247": "needs a figure the dataset does not ship",
+  "UGPhysics ClassicalMechanics 2287": "needs a figure the dataset does not ship",
+  "UGPhysics ClassicalMechanics 2340": "needs a figure the dataset does not ship",
+  "UGPhysics ClassicalMechanics 2462": "needs a figure the dataset does not ship",
+  "UGPhysics ClassicalMechanics 2505": "needs a figure the dataset does not ship",
+  "UGPhysics QuantumMechanics 4356": "needs a figure the dataset does not ship",
+  "UGPhysics QuantumMechanics 5072": "needs a figure the dataset does not ship",
+  "UGPhysics QuantumMechanics 5374": "needs a figure the dataset does not ship",
+  "UGPhysics QuantumMechanics 5151": "needs a figure the dataset does not ship",
+  "UGPhysics SemiconductorPhysics 3820": "needs a figure the dataset does not ship",
+  "UGPhysics SemiconductorPhysics 3999": "needs a figure the dataset does not ship",
+  "UGPhysics TheoreticalMechanics 1776": "needs a figure the dataset does not ship",
+  "UGPhysics TheoreticalMechanics 1782": "needs a figure the dataset does not ship",
+  "UGPhysics TheoreticalMechanics 1822": "needs a figure the dataset does not ship",
+  "UGPhysics TheoreticalMechanics 2019": "needs a figure the dataset does not ship",
+  "UGPhysics TheoreticalMechanics 2321": "needs a figure the dataset does not ship",
+  "UGPhysics TheoreticalMechanics 2388": "needs a figure the dataset does not ship",
+  "UGPhysics TheoreticalMechanics 2438": "needs a figure the dataset does not ship",
+  "UGPhysics TheoreticalMechanics 2460": "needs a figure the dataset does not ship",
+  "UGPhysics TheoreticalMechanics 2559": "needs a figure the dataset does not ship",
+  "UGPhysics Thermodynamics 3337": "needs a figure the dataset does not ship",
+  "UGPhysics Thermodynamics 3338": "needs a figure the dataset does not ship",
+  "UGPhysics Thermodynamics 3348": "needs a figure the dataset does not ship",
+  "UGPhysics Thermodynamics 3450": "needs a figure the dataset does not ship",
+  "UGPhysics AtomicPhysics 958": "needs Table 3.3, which the dataset does not ship",
+  "UGPhysics ClassicalMechanics 1543": "refers to a system or equations of an earlier part that the statement does not give",
+  "UGPhysics ClassicalMechanics 2280": "refers to a system or equations of an earlier part that the statement does not give",
+  "UGPhysics ClassicalMechanics 2609": "refers to a system or equations of an earlier part that the statement does not give",
+  "UGPhysics ClassicalMechanics 2630": "refers to a system or equations of an earlier part that the statement does not give",
+  "UGPhysics Relativity 995": "same problem as Relativity 974",
+  "UGPhysics ClassicalMechanics 1863": "the answer field holds tooling output, not an answer",
+  "UGPhysics Thermodynamics 3100": "the answer field holds tooling output, not an answer",
+  "UGPhysics AtomicPhysics 1108": "table with merged cells that cannot be rebuilt",
+  "UGPhysics AtomicPhysics 1332": "symbols lost in the statement (decay modes)",
+  "UGPhysics QuantumMechanics 4552": "statement garbled in the dataset",
+  "UGPhysics QuantumMechanics 4664": "answer cut off in the dataset"
+ },
+ "solution_dropped": {
+  "UGPhysics AtomicPhysics 894": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one",
+  "UGPhysics AtomicPhysics 914": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one",
+  "UGPhysics AtomicPhysics 935": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one",
+  "UGPhysics AtomicPhysics 1490": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one",
+  "UGPhysics AtomicPhysics 1512": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one",
+  "UGPhysics ClassicalMechanics 1592": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one",
+  "UGPhysics ClassicalMechanics 1662": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one",
+  "UGPhysics ClassicalMechanics 2071": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one",
+  "UGPhysics ClassicalMechanics 2095": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one",
+  "UGPhysics ClassicalMechanics 2536": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one",
+  "UGPhysics QuantumMechanics 4672": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one",
+  "UGPhysics QuantumMechanics 4942": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one",
+  "UGPhysics QuantumMechanics 4983": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one",
+  "UGPhysics StatisticalMechanics 2958": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one",
+  "UGPhysics TheoreticalMechanics 2278": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one",
+  "UGPhysics TheoreticalMechanics 2507": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one",
+  "UGPhysics WaveOptics 5392": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one",
+  "UGPhysics WaveOptics 5474": "the translated solution has broken TeX (cut off or unbalanced): the solver writes one"
+ }
+}

@@ -1,0 +1,5 @@
+{"fixes": [
+ {"key": "JEEBench 2018-P1-37", "field": "latexcode", "fixes": [["\\end{itemize}\n\n", ""]], "note": "stray end of a list that is not in the question"},
+ {"key": "JEEBench 2023-P1-17", "field": "latexcode", "fixes": [["(A) (P)", "(A) $(P)"], ["\\rightarrow$ (4)", "\\rightarrow(4)$"]], "note": "option A had its $ in the wrong places"},
+ {"key": "JEEBench 2023-P2-11", "field": "latexcode", "fixes": [["A_{8}?", "A_{8}$?"]], "note": "the closing $ of the product was missing"}
+], "dropped": {}}
