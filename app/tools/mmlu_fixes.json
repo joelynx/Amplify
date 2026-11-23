@@ -1,0 +1,9 @@
+{"fixes": [
+ {"key": "MMLU econometrics 19", "field": "latexcode", "fixes": [["$$\\hat{u}^t \\hat{u}$", "$\\hat{u}^t \\hat{u}$"]], "note": "doubled opening dollar sign in the dataset"}
+], "dropped": {
+ "MMLU-Pro 4470": "formula garbled in the dataset (unbalanced exponent and subscript markup)",
+ "MMLU-Pro 11601": "formula garbled in the dataset (prime and subscript markup)",
+ "MMLU-Pro 11963": "formula garbled in the dataset (broken subscripts in a chemical formula)",
+ "MMLU-Pro 12044": "formula garbled in the dataset (broken subscript)",
+ "MMLU-Pro 12189": "formula garbled in the dataset (nested superscripts)"
+}}
