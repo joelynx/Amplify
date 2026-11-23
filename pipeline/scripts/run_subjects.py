@@ -149,10 +149,22 @@ def uses_tools(cfg: dict, subject: str, mode: str) -> bool:
     return bool(t.get("enabled")) and subject in (t.get("subjects") or ()) and mode in (t.get("modes") or ("solve",))
 
 
+# solve.md's rule for solves without the tool, and what tools mode says instead (owner 2026-11-23: the solver
+# had the tool but the prompt told it "You have no tools here", so re-solves often made no call)
+NO_TOOLS_RULE = "- You have no tools here: do every calculation in the reply itself."
+TOOLS_RULE = ("- Check every calculation with your python tool (described at the end), and still write all the working "
+              "in the reply itself.")
+
+
 def system_file(cfg: dict, mode: str, subject: str, tools: bool = False) -> tuple[Path, str]:
     text = subjects.system_prompt(cfg, mode, subject)
-    if tools:  # the subject's prompt, then how to use the calc tool
+    if tools and NO_TOOLS_RULE in text:
+        text = text.replace(NO_TOOLS_RULE, TOOLS_RULE)
+    if tools:  # the subject's prompt, then how to use the calc tool, then the profile's own tool notes (## tools)
         text = text.rstrip() + "\n\n" + read_text(REPO_DIR / run_sub.tools_cfg(cfg).get("prompt", "pipeline/prompts/subject/tools.md")).strip() + "\n"
+        extra = subjects.load_profile(cfg, subject).get("tools")
+        if extra:
+            text += "\n" + extra.strip() + "\n"
     run_sub.SUB_CWD.mkdir(parents=True, exist_ok=True)
     path = run_sub.SUB_CWD.parent / f".amplify-subject-{mode}-{scfg(cfg)['profiles'][subject]}{'-tools' if tools else ''}.txt"
     path.write_bytes(text.encode("utf-8"))

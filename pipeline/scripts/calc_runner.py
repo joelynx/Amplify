@@ -90,6 +90,11 @@ import scipy.special  # noqa: E402,F401
 import scipy.stats  # noqa: E402,F401
 import sympy  # noqa: E402
 
+try:  # thermo and chemicals (chemical engineering) load pandas, which reads the time zones from the registry
+    import pandas  # noqa: E402,F401
+except ImportError:  # a venv without the chemistry packages
+    pass
+
 UREG = pint.UnitRegistry()  # built before the guard: it reads its definition files
 IN, OUT, ERR = sys.stdin, sys.stdout, sys.stderr  # the protocol streams, kept before user code can touch sys
 INSTALL = tuple({os.path.realpath(p) + os.sep for p in (sys.prefix, sys.base_prefix, sys.exec_prefix, sys.base_exec_prefix)})
