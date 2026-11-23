@@ -15900,6 +15900,90 @@
 "59936": {
 "model": "claude-opus-5-5",
 "effort": "high"
+},
+"49264": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"49274": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"51644": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"55399": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"55912": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"56010": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"56116": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"57128": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"58856": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"59520": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"59644": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"49420": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"51725": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"54280": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"54748": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"55063": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"55673": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"55795": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"55796": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"55908": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"56000": {
+"model": "claude-opus-5-5",
+"effort": "high"
 }
 }
 }

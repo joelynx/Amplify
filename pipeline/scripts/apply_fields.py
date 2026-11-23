@@ -117,6 +117,11 @@ def apply_pending(cfg: dict, pc, *, force: bool = False, dry_run: bool = False) 
             flag = "answer_filled" if col == "answer" else "hint_filled"
             pc.execute(f"UPDATE finals SET {flag}=1 WHERE question_id=?", (row["question_id"],))
         applied += 1
+        if not dry_run:
+            # one field at a time: a solver writing pipeline.db meanwhile waits seconds, not the whole import
+            # (2026-11-23: a 2,098-field import held the write lock ~40 min and both running solvers failed)
+            app.commit()
+            pc.commit()
     if not dry_run:
         app.commit()
         pc.commit()
