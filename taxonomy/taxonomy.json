@@ -10132,7 +10132,7 @@
   "topic": "Mathematical Statistics",
   "branch": "Linear Models",
   "subtopic": "General Linear Model",
-  "note": "matrix least squares, Gauss-Markov, projection matrices, ridge penalty",
+  "note": "matrix least squares, Gauss-Markov, projection matrices; ridge and lasso see Statistical Learning",
   "est": 18,
   "orig": [
    "Mathematical Statistics",
@@ -11154,7 +11154,7 @@
   "topic": "Portfolio Theory and Risk Management",
   "branch": "Utility and Optimal Investment",
   "subtopic": "Expected Utility Maximization",
-  "note": "utility functions, risk aversion, CARA-optimal portfolios, Kelly betting",
+  "note": "utility functions, risk aversion, CARA-optimal portfolios; Kelly betting see Trading and Market Making",
   "est": 6,
   "orig": [
    "Portfolio Theory and Risk Management",
@@ -11384,6 +11384,48 @@
    "Trading and Market Making",
    "Betting, Edge and the Kelly Criterion",
    "Fractional and Multi-Outcome Kelly"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Trading and Market Making",
+  "branch": "Game Theory",
+  "subtopic": "Nash Equilibrium in Strategic Games",
+  "note": "dominant strategies, pure and mixed Nash equilibria of matrix games, zero-sum games and minimax",
+  "est": 14,
+  "orig": [
+   "Trading and Market Making",
+   "Game Theory",
+   "Nash Equilibrium in Strategic Games"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Trading and Market Making",
+  "branch": "Game Theory",
+  "subtopic": "Sequential Games and Bargaining",
+  "note": "game trees, backward induction, subgame perfection, ultimatum and alternating-offer bargaining",
+  "est": 10,
+  "orig": [
+   "Trading and Market Making",
+   "Game Theory",
+   "Sequential Games and Bargaining"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Trading and Market Making",
+  "branch": "Game Theory",
+  "subtopic": "Auctions and Bidding",
+  "note": "first- and second-price auctions, optimal bids, winner's curse, revenue equivalence",
+  "est": 10,
+  "orig": [
+   "Trading and Market Making",
+   "Game Theory",
+   "Auctions and Bidding"
   ]
  },
  {
@@ -20729,7 +20771,7 @@
   "topic": "Power Electronics",
   "branch": "Power Converters",
   "subtopic": "Diode Rectifiers",
-  "note": "single- and three-phase uncontrolled rectifiers, ripple factor, filtering",
+  "note": "uncontrolled rectifiers in power converters, ripple factor, filtering; small-signal diode circuits see Circuits and Electronics",
   "est": 4,
   "orig": [
    "Power Electronics",
@@ -22479,7 +22521,7 @@
   "topic": "Engineering Materials",
   "branch": "Polymers",
   "subtopic": "Polymerization and Polymer Processing",
-  "note": "addition and condensation polymerization, additives, forming techniques",
+  "note": "polymerization and processing of polymers as materials, additives, forming; reaction mechanisms see Chemistry",
   "est": 7,
   "orig": [
    "Engineering Materials",
