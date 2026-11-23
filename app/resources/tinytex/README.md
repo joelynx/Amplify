@@ -12,7 +12,7 @@ shell out to `xelatex` from here in production builds.
 
 Get TinyTeX from <https://yihui.org/tinytex/>. Install with the project's required
 packages via `tlmgr install amsmath amsfonts amssymb caption graphicx fancyhdr
-geometry enumitem circuitikz chemfig pgfplots mathtools stmaryrd ulem` (the spec's
+geometry enumitem circuitikz chemfig mhchem pgfplots mathtools stmaryrd ulem` (the spec's
 fixed preamble; see §6.2 of `Files/AMPLIFY_BUILD_SPEC (3).md`).
 
 Bundles are **committed to the repo** rather than fetched out-of-band, so a clean

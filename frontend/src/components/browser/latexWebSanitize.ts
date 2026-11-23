@@ -133,6 +133,7 @@ const MATH_CMDS = words(`
   left right bigl bigr Bigl Bigr biggl biggr Biggl Biggr big Big bigg Bigg langle rangle lfloor rfloor
   lceil rceil vert Vert lvert rvert lVert rVert
   pmod bmod mod choose not displaystyle textstyle scriptstyle scriptscriptstyle limits nolimits substack
+  ce pu
   boxed cancel bcancel xcancel circledast circledcirc
 `);
 

@@ -34,6 +34,7 @@
 
 import { useMemo, useState, useEffect, useRef } from "react";
 import katex from "katex";
+import "katex/contrib/mhchem"; // \ce and \pu for chemistry (the PDF preamble loads mhchem too)
 import "katex/dist/katex.min.css";
 
 import { cn } from "../../lib/cn";

@@ -32,6 +32,12 @@ PREAMBLE_TEMPLATE = r"""\documentclass{article}
 \usepackage{enumitem}
 \usepackage{circuitikz}
 \usepackage{chemfig}
+% Chemistry questions write formulas and quantities with \ce{...} and \pu{...};
+% the web view loads KaTeX's mhchem extension for the same commands. LaTeX's
+% mhchem has no \pu (only the KaTeX/MathJax port does): importers rewrite it,
+% and this fallback keeps a stray one compiling as plain text.
+\usepackage[version=4]{mhchem}
+\providecommand{\pu}[1]{\text{#1}}
 \usepackage{pgfplots}
 \usepackage{mathtools}
 \usepackage{stmaryrd}
