@@ -1,0 +1,22 @@
+{"fixes": [
+ {"key": "1.4", "field": "answer", "note": "key written from the worked solution", "set": "(a) $y_A(t) = -\\frac{1}{2}y(t)$; (b) $y_B(t) = y(t) + y(t-10)$"},
+ {"key": "1.5", "field": "answer", "note": "key written from the worked solution", "set": "(a) $\\ddot{y} + 20\\dot{y} + 99y = -6u$; (b) $\\ddot{y} + 20\\dot{y} + 99y = -\\dot{u} - 5u$"},
+ {"key": "1.6", "field": "answer", "note": "key written from the worked solution", "set": "$[-0.2, 1]$"},
+ {"key": "1.7", "field": "answer", "note": "key written from the worked solution", "set": "(a) $x = 1$ and $x = -1$; (b) $x = 1$ is unstable, $x = -1$ is stable"},
+ {"key": "1.8", "field": "answer", "note": "key written from the worked solution", "set": "(a) $A = \\begin{bmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ 0 & 0 & 0 \\end{bmatrix}$, $B = \\begin{bmatrix} 0 \\\\ 0 \\\\ 1 \\end{bmatrix}$; (b) $e^{At} = \\begin{bmatrix} 1 & t & t^2/2 \\\\ 0 & 1 & t \\\\ 0 & 0 & 1 \\end{bmatrix}$, $x(t) = \\begin{bmatrix} 1+t+t^2/2 \\\\ 1+t \\\\ 1 \\end{bmatrix}$"},
+ {"key": "3.16", "field": "answer", "note": "key written from the worked solution", "set": "$G(s)$ has a zero at $2j$"},
+ {"key": "3.17", "field": "answer", "note": "key written from the worked solution", "set": "$0^{\\circ}$ or $180^{\\circ}$"},
+ {"key": "5.5", "field": "answer", "note": "key written from the worked solution", "set": "(a) False; (b) False; (c) True; (d) True; (e) True"},
+ {"key": "5.6", "field": "answer", "note": "key written from the worked solution", "set": "PI controller with $K_p = 1$, $K_i = 0.5$"},
+ {"key": "6.1", "field": "answer", "note": "key written from the worked solution", "set": "(a) $\\omega_0 = 20$ rad/s; (b) $g_0 = 2$; (c) Yes"},
+ {"key": "6.2", "field": "answer", "note": "key written from the worked solution", "set": "(a) $\\omega_0 = 10$ rad/s; (b) $\\theta_0 = 45^{\\circ}$"},
+ {"key": "6.5", "field": "answer", "note": "key written from the worked solution", "set": "$G(s) = -\\frac{6}{s+3}$"},
+ {"key": "6.7", "field": "answer", "note": "key written from the worked solution", "set": "(i) Subplot 2; (ii) Subplot 1; (iii) Subplot 4; (iv) Subplot 3"},
+ {"key": "6.11", "field": "answer", "note": "key written from the worked solution", "set": "$G_1$-B, $G_2$-D, $G_3$-A, $G_4$-C"},
+ {"key": "9.5", "field": "answer", "note": "key written from the worked solution", "set": "(a) False; (b) True"},
+ {"key": "5.3", "field": "solution", "note": "verbatim MATLAB line as inline code", "fixes": [["\\begin{verbatim}\n>> [L,P]=paq([1 -1 -2],1,[1 14 71 154 120])\n\\end{verbatim}", "\\texttt{[L,P]=paq([1 -1 -2],1,[1 14 71 154 120])}"]]},
+ {"key": "3.18", "field": "latexcode", "note": "an operator name after an alignment & stops XeLaTeX with the app's preamble: set upright by hand", "fixes": [["=6 \\cos (t+4)", "=6 \\mathrm{cos}\\,(t+4)"], ["=-\\cos (2 t)", "=-\\mathrm{cos}\\,(2 t)"]]}
+],
+ "dropped": {
+ "3.12": "its solution is only two sketches (figures, no text)"
+}}
