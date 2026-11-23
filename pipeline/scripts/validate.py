@@ -325,15 +325,16 @@ def same_constant(stored: str, reply: str) -> bool | None:
             one, rel = 1.0, 1e-9 * max(1.0, abs(float(a)), abs(float(b)))
         except OverflowError:  # such a number against a root or pi: not compared
             return None
-    tol = rel
+    rnd = None  # the rounding a plain decimal on either side allows
     for text, other in ((stored, b), (reply, a)):
         d = _decimals(text)
         if d is not None and (not (isinstance(other, Fraction) and _terminates(other))
                               or ((d >= 3 or _sig_figs(text) >= 5) and _places(other) > d)):
-            tol = max(tol, one / (2 * 10 ** d) + one / 10 ** 12)
-    if exact and tol <= rel:
-        return False
-    return abs(a - b) <= tol if exact else abs(float(a) - float(b)) <= tol
+            rnd = max(rnd or 0, one / (2 * 10 ** d) + one / 10 ** 12)
+    if exact:  # equal, or one side the other rounded (even to more places than the 1e-9 relative allows:
+        # 2026-11-23, '0.0019807923' for \dfrac{33}{16660} was refused while the allowance was max'ed with it)
+        return rnd is not None and abs(a - b) <= rnd
+    return abs(float(a) - float(b)) <= max(rel, rnd or 0)
 
 
 def hint_leak_errors(hint: str, answer_type: str, answer: str) -> list[str]:

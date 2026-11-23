@@ -70,6 +70,8 @@ def test_other_answers_are_not_read(text: str) -> None:
     ("\\pi/6", "\\frac{\\pi}{6}"),
     ("0.941.", "0.941094"),                     # a key of 3+ places is a rounded value
     ("\\(\\alpha=0.0109\\).", "0.010935"),
+    ("0.0019807923", "\\dfrac{33}{16660}"),      # 2026-11-23: a 10-place key, finer than 1e-9 relative
+    ("3.9906121399", "\\frac{31031}{7776}"),
 ])
 def test_the_same_number_agrees(stored: str, reply: str) -> None:
     assert same_constant(stored, reply) is True
@@ -81,6 +83,8 @@ def test_the_same_number_agrees(stored: str, reply: str) -> None:
     ("\\frac{1}{3}", "0.34"),
     ("2\\sqrt{3}", "3\\sqrt{2}"),
     ("2^{999}-2^{499}", "2^{999}-2^{498}"),
+    ("0.0019807923", "\\dfrac{33}{16661}"),
+    ("1234567890.12", "1234567890.2"),           # exact values: equal, or one rounded; not 1e-9 relative
 ])
 def test_a_different_number_is_a_mismatch(stored: str, reply: str) -> None:
     assert same_constant(stored, reply) is False
