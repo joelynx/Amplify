@@ -1,16 +1,19 @@
 """
-Import MMLU-Pro (STEMEZ chemistry and engineering) and MMLU (chemistry, econometrics)
-------------------------------------------------------------------------------------
+Import MMLU-Pro (STEMEZ chemistry, engineering and physics) and MMLU (chemistry, econometrics)
+----------------------------------------------------------------------------------------------
 Two multiple-choice benchmarks, both MIT-licensed (Amplify is private):
 
 MMLU-Pro (huggingface.co/datasets/TIGER-Lab/MMLU-Pro, test split, data/test-00000-of-00001.parquet), 10 options
 (some questions have fewer), one correct. Only the STEMEZ rows (REA "Problem Solver" textbook problems) of
   chemistry:   stemez-Chemistry, stemez-PhysicalChemistry, stemez-OrganicChemistry
   engineering: stemez-ElectricCircuits, stemez-ElectronicCommunications, stemez-Electromagnetics,
-               stemez-ElectricalMachines (the EE report's E3), stemez-TransportPhenomena, stemez-HeatTransfer (C6)
-are read. Not read: the scibench-* rows (SciBench has its own importer), the ori_mmlu-* rows (MMLU is imported
-below, from MMLU), stemez-Thermodynamics / FluidMechanics / MachineDesign (mechanical subjects the bank has),
-and the business, economics and engineering rest (econometrics comes from MMLU).
+               stemez-ElectricalMachines (the EE report's E3), stemez-TransportPhenomena, stemez-HeatTransfer (C6),
+               stemez-Thermodynamics, stemez-FluidMechanics, stemez-MachineDesign
+  physics:     stemez-Physics, stemez-Optics, stemez-Mechanics
+are read (the mechanical and physics groups added 2026-11-23, owner: "import the 304 and the physics ones").
+Not read: the scibench-* rows (SciBench has its own importer), the ori_mmlu-* rows (MMLU is imported below, from
+MMLU), and the business, economics, biology, psychology, genetics and computer-science rest (econometrics comes
+from MMLU).
 Source "MMLU-Pro", subsource empty (owner rule of 2026-11-23: no ids or category labels in the subsource);
 benchmarks_map.csv keeps "<category>, <src>, question <question_id>" as the original source.
 
@@ -66,7 +69,11 @@ PRO_SRCS = {
         "stemez-ElectricalMachines",
         "stemez-TransportPhenomena",
         "stemez-HeatTransfer",
+        "stemez-Thermodynamics",
+        "stemez-FluidMechanics",
+        "stemez-MachineDesign",
     ],
+    "physics": ["stemez-Physics", "stemez-Optics", "stemez-Mechanics"],
 }
 MMLU_SET = "MMLU"
 MMLU_SUBJECTS = ["college_chemistry", "high_school_chemistry", "econometrics"]
@@ -90,7 +97,9 @@ ALLOWED = set(
     "Gamma Delta Theta Lambda Pi Sigma Phi Psi Omega rightarrow leftarrow rightleftarrows leftrightarrow "
     "Rightarrow infty sum int surd sqrt pm times cdot leq geq sim approx equiv bullet angle oplus vert frac "
     "AA partial nabla propto ldots circ mathrm text ce hat bar dot ast sin cos tan ln log exp to prime "
-    "uparrow downarrow rightleftharpoons oint cong mid forall neq ll gg".split()
+    "uparrow downarrow rightleftharpoons oint cong mid forall neq ll gg "
+    # physics groups (2026-11-23): standard commands the chemistry and EE rows never needed
+    "upsilon Upsilon varphi vartheta kappa chi Xi ddot".split()
 )
 # commands the datasets spell in a form neither LaTeX nor KaTeX knows
 RENAME = {
