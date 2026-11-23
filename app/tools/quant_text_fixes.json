@@ -1,0 +1,11 @@
+{
+ "fixes": [],
+ "dropped": {
+  "FinanceMath test-19": "statement garbled in the dataset (list items run together)",
+  "FinanceMath test-164": "statement garbled in the dataset (math duplicated as plain text)",
+  "FinanceMath test-215": "statement garbled in the dataset (math duplicated as plain text)",
+  "FinanceMath test-549": "statement garbled in the dataset (math duplicated as plain text)",
+  "FinanceMath test-852": "statement garbled in the dataset (math duplicated as plain text)",
+  "XFinBench test_1684": "table cut off in the dataset (quote line with cdots)"
+ }
+}
