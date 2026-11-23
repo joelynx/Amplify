@@ -354,6 +354,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
             seen_list = run_sub.accounts_mtime()  # an edit of the accounts file (order, on/off) applies from then on
             tried: set[str] = set()  # accounts left since the last question went out: not taken again before a wait
             move_to = None  # an account to move to once the replies still running are done
+            move_why = "serving order"
             off = False  # the active account is turned off and no other is free
             repick = False
 
@@ -380,10 +381,11 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         a = run_sub.pick_account(listed, cap, [model])[0]
                         off = a is None and not any(x["name"] == active["name"] and x.get("enabled", True) for x in listed)
                         move_to = a if a is not None and a["name"] != active["name"] else None
+                        move_why = "serving order"
                         if move_to is not None and running:
                             print(json.dumps({"rotate_when_done": move_to["name"], "running": len(running)}), flush=True)
                     if move_to is not None and not running:
-                        rotate_to(move_to, "serving order")
+                        rotate_to(move_to, move_why)
                         move_to = None
                 if queue and stop_reason is None and move_to is None and not off and cap.probe_due(model, flying()):
                     got = run_sub.read_usage(ccfg, model, version, cap, run_sub.SUB_CWD.parent)
@@ -421,6 +423,11 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     running[fut] = (x, attempt, effort, [name for name, _ in images])
                     started[fut], account_of[fut] = time.time(), cap.account
                     tried.clear()
+                if rotation and queue and running and stop_reason is None and move_to is None and not off:
+                    move_to = run_sub.tail_move(cap, active, [model])  # as run_sub.solve
+                    if move_to is not None:
+                        move_why = f"{active['name']} has room for fewer than {cap.room} replies at once"
+                        print(json.dumps({"rotate_when_done": move_to["name"], "running": len(running), "why": move_why}), flush=True)
                 if not running:
                     if not queue:
                         break

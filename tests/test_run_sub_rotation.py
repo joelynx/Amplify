@@ -115,7 +115,8 @@ class FakeTime:
         self.slept += secs
 
 
-def _solve_harness(tmp_path: Path, monkeypatch, accounts: list[dict], usage_of, on_store=None) -> tuple[list, list]:
+def _solve_harness(tmp_path: Path, monkeypatch, accounts: list[dict], usage_of, on_store=None,
+                   conf: dict = CONF) -> tuple[list, list]:
     """Run solve() on 4 questions with a fake claude: usage_of(dir) is the five-hour utilization a run
     under that account's login reports. Returns (the dir each run started under, the questions stored)."""
     run_sub.save_accounts(accounts, tmp_path / "accounts.json")
@@ -154,7 +155,7 @@ def _solve_harness(tmp_path: Path, monkeypatch, accounts: list[dict], usage_of, 
     monkeypatch.setattr(run_sub, "interpret", lambda out, qc, version: {"kind": "ok", "warning": False})
     monkeypatch.setattr(run_sub, "store", store)
     cfg = {"solver": {"model": OPUS, "effort": "medium", "max_tokens": 32000},
-           "subscription": {"sources": ["S"], "usage_cap": CONF}}
+           "subscription": {"sources": ["S"], "usage_cap": conf}}
     run_sub.solve(cfg, None, None, None, None, 1, True, False)
     assert clock.slept == 0  # no waiting while another account was free
     return dirs, stored
@@ -183,3 +184,39 @@ def test_a_new_serving_order_applies_once_the_running_replies_are_done(tmp_path:
     assert stored == [1, 2, 3, 4]
     a, b = str(Path(first["dir"])), str(Path(second["dir"]))
     assert dirs[:3] == [a, a, a] and dirs[3:] and set(dirs[3:]) == {b}  # probe + 2 questions, then the move
+
+
+def test_an_account_with_room_goes_before_one_near_its_stop(tmp_path: Path) -> None:
+    near, fresh = _account(tmp_path, "near", "u1"), _account(tmp_path, "fresh", "u2")
+    cap = run_sub.UsageCap(dict(CONF, rotate_room=3))
+    _read(cap, near, 0.55, 0.30)    # a reply counts 0.07 at most here: room for two before the 0.70 stop
+    _read(cap, fresh, 0.10, 0.20)
+    assert run_sub.pick_account([near, fresh], cap, [OPUS], NOW + 10) == (fresh, None)
+    assert run_sub.pick_account([near], cap, [OPUS], NOW + 10) == (near, None)  # its last stretch is still used
+    assert run_sub.pick_account([near], cap, [OPUS], NOW + 10, strict=True) == (None, None)
+
+
+def test_the_rotation_leaves_an_account_near_its_stop_for_one_with_room(tmp_path: Path, monkeypatch) -> None:
+    near, fresh, other = (_account(tmp_path, n, u) for n, u in (("near", "u1"), ("fresh", "u2"), ("other", "u3")))
+    cap = run_sub.UsageCap(dict(CONF, rotate_room=3))
+    _read(cap, near, 0.55, 0.30)
+    _read(cap, fresh, 0.10, 0.20)
+    _read(cap, other, 0.60, 0.20)
+    monkeypatch.setattr(run_sub, "load_accounts", lambda path=None: [near, other, fresh])
+    run_sub.use_account(near, cap)
+    assert run_sub.tail_move(cap, near, [OPUS], NOW + 10) == fresh  # "other" is near its stop too
+    run_sub.use_account(fresh, cap)
+    assert run_sub.tail_move(cap, fresh, [OPUS], NOW + 10) is None  # room enough where it is
+    monkeypatch.setattr(run_sub, "load_accounts", lambda path=None: [near, other])
+    run_sub.use_account(near, cap)
+    assert run_sub.tail_move(cap, near, [OPUS], NOW + 10) is None  # nowhere better: it stays to its stop
+    assert run_sub.tail_move(run_sub.UsageCap(CONF), near, [OPUS], NOW + 10) is None  # rotate_room unset: off
+
+
+def test_a_run_moves_on_from_an_account_near_its_stop(tmp_path: Path, monkeypatch) -> None:
+    first, second = _account(tmp_path, "first", "u1"), _account(tmp_path, "second", "u2")
+    dirs, stored = _solve_harness(tmp_path, monkeypatch, [first, second],
+                                  lambda d: 0.55 if d == str(Path(first["dir"])) else 0.10, conf=dict(CONF, rotate_room=3))
+    assert stored == [1, 2, 3, 4]
+    a, b = str(Path(first["dir"])), str(Path(second["dir"]))
+    assert dirs[:2] == [a, a] and set(dirs[2:]) == {b}  # probe + 1 question (room for 2, not 3), then the move

@@ -1090,10 +1090,11 @@ def account_id(a: dict) -> str | None:
 
 
 def pick_account(accounts: list[dict], cap: "UsageCap", models, now: float | None = None,
-                 skip=()) -> tuple[dict | None, tuple[float, str] | None]:
+                 skip=(), strict: bool = False) -> tuple[dict | None, tuple[float, str] | None]:
     """The first account in serving order that is on, logged in, not in `skip` and not blocked by its
-    own readings for `models`, else (None, (the earliest time one of them frees, why))."""
-    holds = []
+    own readings for `models`, else (None, (the earliest time one of them frees, why)). An account with
+    room for cap.room replies at once goes before one near its stop; with strict, only such an account."""
+    holds, near = [], None
     for a in accounts:
         if not a.get("enabled", True) or a["name"] in skip:
             continue
@@ -1101,10 +1102,29 @@ def pick_account(accounts: list[dict], cap: "UsageCap", models, now: float | Non
         if acct is None:
             continue
         b = cap.blocked(acct, models, now)
-        if b is None:
+        if b is not None:
+            holds.append((b[0], f"{a['name']}: {b[1]}"))
+        elif cap.room <= 1 or cap.blocked(acct, models, now, cap.room) is None:
             return a, None
-        holds.append((b[0], f"{a['name']}: {b[1]}"))
+        else:
+            near = near or a
+    if near is not None and not strict:
+        return near, None
     return None, (min(holds) if holds else None)
+
+
+def tail_move(cap: "UsageCap", active: dict, models, now: float | None = None) -> dict | None:
+    """Account rotation before a stop: if the account in use has room for fewer than cap.room replies at
+    once of every one of `models` (the last stretch before its stop, where the cap lets one or two go at a
+    time), the first other account with room for cap.room, to move to once the running replies are done;
+    else None. The stretch left is not lost: a later stop takes the account back while its window lasts.
+    (2026-11-23: a 6-worker run spent 20 min under one reply a minute on an account at 68% of its 70%
+    stop while three accounts sat free.)"""
+    now = now if now is not None else time.time()
+    if cap.room <= 1 or not models or any(cap.unread(m, now) or not cap.over(m, [(m, now)] * (cap.room - 1), now)
+                                          for m in models):
+        return None
+    return pick_account(load_accounts(), cap, models, now, skip={active["name"]}, strict=True)[0]
 
 
 def use_account(a: dict, cap: "UsageCap") -> None:
@@ -1182,6 +1202,9 @@ class UsageCap:
         # a period of w that lies wholly between from and to of one day, local time, may reach m
         self.hours = [(o["window"], float(o["max"]), o["from"], o["to"]) for o in conf.get("hours") or []]
         self.prior = {k: float(v) for k, v in (conf.get("prior_per_usd") or {}).items()}
+        # account rotation: an account with room for fewer replies at once than this is near its stop, and the
+        # rotation moves to one with room once its running replies are done (tail_move)
+        self.room = max(1, int(conf.get("rotate_room", 1)))
         self.worst = {m: float(v) for m, v in (conf.get("reply_max_usd") or {}).items()}
         self.scale = float(conf.get("reply_cost_scale", 1.0))  # owner 2026-11-20: worst cases scaled down (0.5)
         self.max_age = 60 * float(conf.get("reading_max_age_min", 20))  # older: the account's owner may have used it since
@@ -1243,16 +1266,16 @@ class UsageCap:
         self.probed = {}
         self._save()
 
-    def blocked(self, account: str, models, now: float | None = None) -> tuple[float, str] | None:
+    def blocked(self, account: str, models, now: float | None = None, room: int = 1) -> tuple[float, str] | None:
         """Account rotation: (when it frees, why) if `account`'s last readings alone keep every one of
-        `models` from going, else None. A reading that is old, or past the stop only by the replies
-        since, does not block: the probe after a switch reads the account again."""
+        `models` from going (`room` replies of it at once), else None. A reading that is old, or past the
+        stop only by the replies since, does not block: the probe after a switch reads the account again."""
         now = now if now is not None else time.time()
         saved, self.account = self.account, account
         try:
             holds = []
             for m in models:
-                over = self.over(m, [], now, since=False)
+                over = self.over(m, [(m, now)] * (room - 1), now, since=False)
                 if not over:
                     return None
                 resets = [self._last(w, now)[2] for w, _ in over]
@@ -1503,6 +1526,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
             seen_list = accounts_mtime()  # an edit of the accounts file (order, on/off) applies from then on
             tried: set[str] = set()  # accounts left since the last question went out: not taken again before a wait
             move_to = None  # an account to move to once the replies still running are done
+            move_why = "serving order"
             off = False  # the active account is turned off and no other is free
             repick = False
 
@@ -1550,10 +1574,11 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         a = pick_account(listed, cap, models_left())[0]
                         off = a is None and not any(x["name"] == active["name"] and x.get("enabled", True) for x in listed)
                         move_to = a if a is not None and a["name"] != active["name"] else None
+                        move_why = "serving order"
                         if move_to is not None and running:
                             print(json.dumps({"rotate_when_done": move_to["name"], "running": len(running)}), flush=True)
                     if move_to is not None and not running:
-                        rotate_to(move_to, "serving order")
+                        rotate_to(move_to, move_why)
                         move_to = None
                 while queue and stop_reason is None and move_to is None and not off:
                     flying = [(v[4]["solver"]["model"], started[f]) for f, v in running.items() if account_of[f] == cap.account]
@@ -1596,6 +1621,11 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     running[fut] = (qid, attempt, effort, [n for n, _ in images], qc)
                     started[fut], account_of[fut] = time.time(), cap.account
                     tried.clear()
+                if rotation and queue and running and stop_reason is None and move_to is None and not off:
+                    move_to = tail_move(cap, active, models_left())
+                    if move_to is not None:
+                        move_why = f"{active['name']} has room for fewer than {cap.room} replies at once"
+                        print(json.dumps({"rotate_when_done": move_to["name"], "running": len(running), "why": move_why}), flush=True)
                 if not running:
                     if not queue or stop_reason:
                         break
