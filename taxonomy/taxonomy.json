@@ -10407,6 +10407,34 @@
   ]
  },
  {
+  "group": "G5",
+  "subject": "Statistics",
+  "topic": "Mathematical Statistics",
+  "branch": "Econometrics",
+  "subtopic": "Instrumental Variables and Simultaneous Equations",
+  "note": "endogeneity, instruments, two-stage least squares, identification of simultaneous equation systems",
+  "est": 20,
+  "orig": [
+   "Mathematical Statistics",
+   "Econometrics",
+   "Instrumental Variables and Simultaneous Equations"
+  ]
+ },
+ {
+  "group": "G5",
+  "subject": "Statistics",
+  "topic": "Mathematical Statistics",
+  "branch": "Econometrics",
+  "subtopic": "Panel Data Models",
+  "note": "pooled, fixed- and random-effects models, within transformation, Hausman test",
+  "est": 20,
+  "orig": [
+   "Mathematical Statistics",
+   "Econometrics",
+   "Panel Data Models"
+  ]
+ },
+ {
   "group": "G6",
   "subject": "Quantitative Finance",
   "topic": "Derivatives Pricing",
@@ -10418,6 +10446,20 @@
    "Derivatives Pricing",
    "Derivative Contracts and No-Arbitrage",
    "Forward and Futures Pricing"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Derivatives Pricing",
+  "branch": "Derivative Contracts and No-Arbitrage",
+  "subtopic": "Margin and Marking to Market",
+  "note": "initial and maintenance margin, daily settlement of futures, margin calls, buying on margin",
+  "est": 15,
+  "orig": [
+   "Derivatives Pricing",
+   "Derivative Contracts and No-Arbitrage",
+   "Margin and Marking to Market"
   ]
  },
  {
@@ -11426,6 +11468,174 @@
    "Trading and Market Making",
    "Game Theory",
    "Auctions and Bidding"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Corporate Finance and Valuation",
+  "branch": "Capital Budgeting",
+  "subtopic": "NPV and IRR Decision Rules",
+  "note": "NPV, IRR, MIRR, payback and profitability index, ranking mutually exclusive projects, equivalent annual cost",
+  "est": 120,
+  "orig": [
+   "Corporate Finance and Valuation",
+   "Capital Budgeting",
+   "NPV and IRR Decision Rules"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Corporate Finance and Valuation",
+  "branch": "Capital Budgeting",
+  "subtopic": "Project Cash Flows",
+  "note": "incremental cash flows, working capital, depreciation tax shields, salvage value, replacement decisions",
+  "est": 80,
+  "orig": [
+   "Corporate Finance and Valuation",
+   "Capital Budgeting",
+   "Project Cash Flows"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Corporate Finance and Valuation",
+  "branch": "Cost of Capital and Capital Structure",
+  "subtopic": "Cost of Equity, Cost of Debt and WACC",
+  "note": "cost of equity by CAPM or dividend growth, after-tax cost of debt, WACC, flotation costs",
+  "est": 60,
+  "orig": [
+   "Corporate Finance and Valuation",
+   "Cost of Capital and Capital Structure",
+   "Cost of Equity, Cost of Debt and WACC"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Corporate Finance and Valuation",
+  "branch": "Cost of Capital and Capital Structure",
+  "subtopic": "Capital Structure and Leverage",
+  "note": "Modigliani-Miller with and without taxes, interest tax shield, operating and financial leverage",
+  "est": 50,
+  "orig": [
+   "Corporate Finance and Valuation",
+   "Cost of Capital and Capital Structure",
+   "Capital Structure and Leverage"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Corporate Finance and Valuation",
+  "branch": "Cost of Capital and Capital Structure",
+  "subtopic": "Dividends, Buybacks and Corporate Actions",
+  "note": "payout policy, stock dividends and splits, repurchases, rights issues and their price effects",
+  "est": 30,
+  "orig": [
+   "Corporate Finance and Valuation",
+   "Cost of Capital and Capital Structure",
+   "Dividends, Buybacks and Corporate Actions"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Corporate Finance and Valuation",
+  "branch": "Valuation and Financial Statements",
+  "subtopic": "Dividend Discount Models",
+  "note": "Gordon growth, multistage dividend models, required return and growth from payout and ROE",
+  "est": 60,
+  "orig": [
+   "Corporate Finance and Valuation",
+   "Valuation and Financial Statements",
+   "Dividend Discount Models"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Corporate Finance and Valuation",
+  "branch": "Valuation and Financial Statements",
+  "subtopic": "Free Cash Flow Valuation",
+  "note": "FCFF and FCFE, discounted cash flow valuation, terminal value",
+  "est": 40,
+  "orig": [
+   "Corporate Finance and Valuation",
+   "Valuation and Financial Statements",
+   "Free Cash Flow Valuation"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Corporate Finance and Valuation",
+  "branch": "Valuation and Financial Statements",
+  "subtopic": "Valuation Multiples and Enterprise Value",
+  "note": "P/E, price-to-book, EV/EBITDA and EV/sales, comparables, enterprise value from equity and debt",
+  "est": 40,
+  "orig": [
+   "Corporate Finance and Valuation",
+   "Valuation and Financial Statements",
+   "Valuation Multiples and Enterprise Value"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Corporate Finance and Valuation",
+  "branch": "Valuation and Financial Statements",
+  "subtopic": "Financial Statement Analysis and Ratios",
+  "note": "profitability, liquidity, turnover and solvency ratios, DuPont analysis, reading statements for valuation",
+  "est": 150,
+  "orig": [
+   "Corporate Finance and Valuation",
+   "Valuation and Financial Statements",
+   "Financial Statement Analysis and Ratios"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Corporate Finance and Valuation",
+  "branch": "Valuation and Financial Statements",
+  "subtopic": "Working Capital and Cash Management",
+  "note": "cash conversion cycle, cash budgets, receivables and inventory policy, short-term financing",
+  "est": 60,
+  "orig": [
+   "Corporate Finance and Valuation",
+   "Valuation and Financial Statements",
+   "Working Capital and Cash Management"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Corporate Finance and Valuation",
+  "branch": "Alternative Investments",
+  "subtopic": "Hedge Fund and Private Equity Fees and Returns",
+  "note": "management and incentive fees, high-water marks, carried interest and waterfalls, net-of-fee returns",
+  "est": 30,
+  "orig": [
+   "Corporate Finance and Valuation",
+   "Alternative Investments",
+   "Hedge Fund and Private Equity Fees and Returns"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Corporate Finance and Valuation",
+  "branch": "Alternative Investments",
+  "subtopic": "Real Estate Valuation",
+  "note": "net operating income, capitalization rates, direct capitalization and DCF of property, REIT valuation",
+  "est": 25,
+  "orig": [
+   "Corporate Finance and Valuation",
+   "Alternative Investments",
+   "Real Estate Valuation"
   ]
  },
  {
@@ -20963,6 +21173,174 @@
  },
  {
   "group": "G9b",
+  "subject": "Power Systems and Power Electronics",
+  "topic": "Power Systems",
+  "branch": "Transmission and Network Analysis",
+  "subtopic": "Transmission Line Parameters and Models",
+  "note": "line resistance, inductance and capacitance, short, medium and long line models, ABCD constants, regulation",
+  "est": 25,
+  "orig": [
+   "Power Systems",
+   "Transmission and Network Analysis",
+   "Transmission Line Parameters and Models"
+  ]
+ },
+ {
+  "group": "G9b",
+  "subject": "Power Systems and Power Electronics",
+  "topic": "Power Systems",
+  "branch": "Transmission and Network Analysis",
+  "subtopic": "Per-Unit System",
+  "note": "base quantities, per-unit impedances, changing bases, per-unit impedance diagrams of networks",
+  "est": 15,
+  "orig": [
+   "Power Systems",
+   "Transmission and Network Analysis",
+   "Per-Unit System"
+  ]
+ },
+ {
+  "group": "G9b",
+  "subject": "Power Systems and Power Electronics",
+  "topic": "Power Systems",
+  "branch": "Transmission and Network Analysis",
+  "subtopic": "Load Flow Analysis",
+  "note": "bus admittance matrix, bus types, Gauss-Seidel and Newton-Raphson power flow",
+  "est": 15,
+  "orig": [
+   "Power Systems",
+   "Transmission and Network Analysis",
+   "Load Flow Analysis"
+  ]
+ },
+ {
+  "group": "G9b",
+  "subject": "Power Systems and Power Electronics",
+  "topic": "Power Systems",
+  "branch": "Faults and Protection",
+  "subtopic": "Symmetrical Fault Analysis",
+  "note": "three-phase short circuits, subtransient and transient reactances, fault MVA, breaker ratings",
+  "est": 20,
+  "orig": [
+   "Power Systems",
+   "Faults and Protection",
+   "Symmetrical Fault Analysis"
+  ]
+ },
+ {
+  "group": "G9b",
+  "subject": "Power Systems and Power Electronics",
+  "topic": "Power Systems",
+  "branch": "Faults and Protection",
+  "subtopic": "Symmetrical Components and Unsymmetrical Faults",
+  "note": "sequence components and networks, line-to-ground, line-to-line and double line-to-ground faults",
+  "est": 30,
+  "orig": [
+   "Power Systems",
+   "Faults and Protection",
+   "Symmetrical Components and Unsymmetrical Faults"
+  ]
+ },
+ {
+  "group": "G9b",
+  "subject": "Power Systems and Power Electronics",
+  "topic": "Power Systems",
+  "branch": "Faults and Protection",
+  "subtopic": "Protective Relaying and Circuit Breakers",
+  "note": "overcurrent, distance and differential relays, relay coordination, circuit breakers and reclosing",
+  "est": 15,
+  "orig": [
+   "Power Systems",
+   "Faults and Protection",
+   "Protective Relaying and Circuit Breakers"
+  ]
+ },
+ {
+  "group": "G9b",
+  "subject": "Power Systems and Power Electronics",
+  "topic": "Power Systems",
+  "branch": "Stability and Control",
+  "subtopic": "Power System Stability",
+  "note": "swing equation, equal-area criterion, critical clearing angle, steady-state and transient stability",
+  "est": 25,
+  "orig": [
+   "Power Systems",
+   "Stability and Control",
+   "Power System Stability"
+  ]
+ },
+ {
+  "group": "G9b",
+  "subject": "Power Systems and Power Electronics",
+  "topic": "Power Systems",
+  "branch": "Stability and Control",
+  "subtopic": "Reactive Power and Voltage Control",
+  "note": "reactive compensation, capacitors, synchronous condensers and SVCs, tap changers, voltage regulation",
+  "est": 20,
+  "orig": [
+   "Power Systems",
+   "Stability and Control",
+   "Reactive Power and Voltage Control"
+  ]
+ },
+ {
+  "group": "G9b",
+  "subject": "Power Systems and Power Electronics",
+  "topic": "Power Systems",
+  "branch": "Stability and Control",
+  "subtopic": "Economic Dispatch and Load-Frequency Control",
+  "note": "incremental cost dispatch, losses and penalty factors, governor droop, area control error",
+  "est": 15,
+  "orig": [
+   "Power Systems",
+   "Stability and Control",
+   "Economic Dispatch and Load-Frequency Control"
+  ]
+ },
+ {
+  "group": "G9b",
+  "subject": "Power Systems and Power Electronics",
+  "topic": "Power Systems",
+  "branch": "High Voltage Engineering",
+  "subtopic": "Breakdown in Gases, Liquids and Solids",
+  "note": "Townsend and streamer breakdown, Paschen's law, corona, breakdown of liquid and solid insulation",
+  "est": 25,
+  "orig": [
+   "Power Systems",
+   "High Voltage Engineering",
+   "Breakdown in Gases, Liquids and Solids"
+  ]
+ },
+ {
+  "group": "G9b",
+  "subject": "Power Systems and Power Electronics",
+  "topic": "Power Systems",
+  "branch": "High Voltage Engineering",
+  "subtopic": "Overvoltages and Insulation Coordination",
+  "note": "lightning and switching surges, travelling waves, surge arresters, insulation levels and coordination",
+  "est": 20,
+  "orig": [
+   "Power Systems",
+   "High Voltage Engineering",
+   "Overvoltages and Insulation Coordination"
+  ]
+ },
+ {
+  "group": "G9b",
+  "subject": "Power Systems and Power Electronics",
+  "topic": "Power Systems",
+  "branch": "High Voltage Engineering",
+  "subtopic": "Generation and Measurement of High Voltages",
+  "note": "voltage multipliers, Marx impulse generators, resonant transformers, sphere gaps and dividers, partial discharge",
+  "est": 15,
+  "orig": [
+   "Power Systems",
+   "High Voltage Engineering",
+   "Generation and Measurement of High Voltages"
+  ]
+ },
+ {
+  "group": "G9b",
   "subject": "Material Science",
   "topic": "Structure of Materials",
   "branch": "Atomic Structure and Bonding",
@@ -21197,6 +21575,20 @@
    "Structure of Materials",
    "X-Ray Diffraction",
    "Powder Method and Indexing"
+  ]
+ },
+ {
+  "group": "G9b",
+  "subject": "Material Science",
+  "topic": "Structure of Materials",
+  "branch": "X-Ray Diffraction",
+  "subtopic": "Materials Characterization Techniques",
+  "note": "choosing between X-ray, neutron and electron diffraction and microscopy; Bragg's-law calculations see Bragg's Law",
+  "est": 15,
+  "orig": [
+   "Structure of Materials",
+   "X-Ray Diffraction",
+   "Materials Characterization Techniques"
   ]
  },
  {
@@ -22793,6 +23185,34 @@
    "Engineering Materials",
    "Corrosion and Oxidation",
    "Oxidation Rate Laws"
+  ]
+ },
+ {
+  "group": "G9b",
+  "subject": "Material Science",
+  "topic": "Engineering Materials",
+  "branch": "Nanomaterials and Biomaterials",
+  "subtopic": "Nanomaterials and Porous Frameworks",
+  "note": "quantum dots, nanoparticles and size effects, metal-organic frameworks and zeolites, pore size",
+  "est": 15,
+  "orig": [
+   "Engineering Materials",
+   "Nanomaterials and Biomaterials",
+   "Nanomaterials and Porous Frameworks"
+  ]
+ },
+ {
+  "group": "G9b",
+  "subject": "Material Science",
+  "topic": "Engineering Materials",
+  "branch": "Nanomaterials and Biomaterials",
+  "subtopic": "Biomaterials",
+  "note": "biocompatibility, bone and tooth minerals such as apatite, implant materials",
+  "est": 10,
+  "orig": [
+   "Engineering Materials",
+   "Nanomaterials and Biomaterials",
+   "Biomaterials"
   ]
  },
  {
@@ -25295,6 +25715,34 @@
    "Analytical Chemistry",
    "Instrumental Methods",
    "Solvent Extraction and Distribution Ratio"
+  ]
+ },
+ {
+  "group": "G10",
+  "subject": "Chemistry",
+  "topic": "Analytical Chemistry",
+  "branch": "Instrumental Methods",
+  "subtopic": "X-ray and Electron Spectroscopy",
+  "note": "X-ray fluorescence, XPS binding energies and surface composition, choosing a surface technique",
+  "est": 15,
+  "orig": [
+   "Analytical Chemistry",
+   "Instrumental Methods",
+   "X-ray and Electron Spectroscopy"
+  ]
+ },
+ {
+  "group": "G10",
+  "subject": "Chemistry",
+  "topic": "Analytical Chemistry",
+  "branch": "Instrumental Methods",
+  "subtopic": "Thermal Analysis",
+  "note": "thermogravimetry, differential scanning calorimetry and DTA, reading thermal-analysis curves",
+  "est": 15,
+  "orig": [
+   "Analytical Chemistry",
+   "Instrumental Methods",
+   "Thermal Analysis"
   ]
  },
  {
