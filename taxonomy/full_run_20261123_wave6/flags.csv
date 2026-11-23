@@ -1,0 +1,608 @@
+question_id,source,flags,note
+42541,UGPhysics,key_conflict,"Printed formula gives about 5.6e-34, not the stated 2.87e-47 kg m2"
+44653,UGPhysics,broken_text,Printed table mislabels H2 rows as deuterium and protium
+47493,"SciBench (Atkins, Physical Chemistry)",needs_data,Gas amount given by mass; needs molar mass not stated
+47804,ChemBench,needs_data,Requires structure image to count peaks
+47805,ChemBench,needs_data,Requires structure image to count peaks
+47813,ChemBench,needs_data,Requires structure image to count peaks
+47820,ChemBench,needs_data,Requires structure image to count peaks
+47821,ChemBench,needs_data,Requires structure image to count peaks
+47822,ChemBench,needs_data,Requires structure image to count peaks
+47825,ChemBench,needs_data,Requires structure image to count peaks
+47829,ChemBench,needs_data,Requires structure image to count peaks
+47830,ChemBench,needs_data,Requires structure image to count peaks
+47833,ChemBench,needs_data,Requires structure image to count peaks
+47835,ChemBench,needs_data,Requires structure image to count peaks
+47842,ChemBench,needs_data,Requires structure image to count peaks
+47845,ChemBench,needs_data,Requires structure image to count peaks
+47846,ChemBench,needs_data,Requires structure image to count peaks
+47847,ChemBench,needs_data,Requires structure image to count peaks
+47902,ChemBench,key_conflict,Mole arithmetic with Fe and Cl2; the key looks inconsistent with 2Fe+3Cl2 stoichiometry
+47935,ChemBench,broken_text,Question mixes proton and electron counts; carbonate charge wording is inconsistent
+48037,ChemBench,key_conflict,Option A 'All answers correct' conflicts with B-E content; key unclear
+48065,ChemBench,broken_text,Units of Eea given inconsistently (eV vs kJ/mol)
+48069,ChemBench,broken_text,'Tetramethylamine diaquacopper' is ill-defined
+48086,ChemBench,broken_text,Ill-defined complex name
+48178,ChemBench,broken_text,Options incomplete; only three listed
+48190,ChemBench,broken_text,Nucleophilic acyl substitution reactivity; SMILES images not provided
+48193,ChemBench,needs_data,Solid-state photoreaction; SMILES images not provided
+48194,ChemBench,needs_data,Structure given as image only; name matching needs the drawing
+48197,ChemBench,needs_data,SMILES given as images; acidity ordering needs the drawings
+48312,ChemBench,broken_text,Option images missing; ordering unverifiable
+48320,ChemBench,broken_text,Option images missing; ordering unverifiable
+48322,ChemBench,broken_text,"Question refers to thiol amino acids; Cys absent, text inconsistent"
+48326,ChemBench,broken_text,Option images missing; ordering unverifiable
+48335,ChemBench,broken_text,Structure image missing; SMILES alone gives point group
+48341,ChemBench,broken_text,Structure image missing; SMILES alone gives point group
+48350,ChemBench,broken_text,Structure image missing; SMILES given; name matching
+48371,ChemBench,broken_text,Reagent SMILES CC(=O)(Cl)Cl is chemically invalid (5-valent carbon)
+48404,ChemBench,broken_text,Point group of a molecule; symmetry best fit is Molecular Symmetry in Inorganic
+48406,ChemBench,broken_text,Photochemical rearrangement of a diol ketone; best guess
+48415,ChemBench,key_conflict,Acyl-CoA synthetase gives CoA and AMP; no option matches
+48452,ChemBench,broken_text,"Options list acidity ordering; sulfonic acid, thiophenol, acetone; SMILES sulfonic acid oxygen malformed"
+48466,ChemBench,needs_data,CASSCF active space for furan; computational chemistry methods
+48485,ChemBench,broken_text,Photochemical allene cycloaddition; stereochemistry of product
+48499,ChemBench,broken_text,"Acidity ordering of acetone, sulfonic acid, phenol; SMILES sulfonic oxygen malformed"
+48553,ChemBench,key_conflict,Activating-group ordering; check option key against structures
+48558,ChemBench,key_conflict,SMILES is a quinone; check whether option B matches structure
+48566,ChemBench,broken_text,"Point group question; subtopic is in Inorganic, SMILES lost"
+48568,ChemBench,key_conflict,Structure is bis-thiazolidinone; no option matches it
+48575,ChemBench,key_conflict,Name-to-SMILES; check whether option D matches the named salt
+48582,ChemBench,broken_text,"Point group; subtopic in Inorganic tree, SMILES lost"
+48589,ChemBench,key_conflict,Check option key against ring activating order
+48620,ChemBench,broken_text,Formula notation AgNOx is odd; nomenclature question
+48647,ChemBench,broken_text,Double minus signs in enthalpy values
+48719,ChemBench,needs_data,Talc formula not given in question
+48776,ChemBench,needs_data,Flame speed and burner flow; flame physics may fit elsewhere.
+48789,ChemBench,broken_text,Options include a garbled 'feedback conditioning' item.
+48808,SUPERChem,mismatch,Boranes; solution truncated; the question needs counting of triangular faces in borane skeleton.
+48811,SUPERChem,key_conflict,Hydroformylation cycle; solution's stated answer C conflicts with its own analysis of CO count.
+48814,SUPERChem,needs_data,Metal-organic compound identification with thiolate complexes; solution truncated.
+48817,SUPERChem,needs_data,"Silsesquioxane-type polymer; structural counting; silicon chemistry, not in tree closely."
+48821,SUPERChem,key_conflict,NaCl-type cell; solution's own calculation of N coordination conflicts with stated answer.
+48824,SUPERChem,key_conflict,Peptide disulfide mapping; solution's analysis unfinished and may not match stated key.
+48845,SUPERChem,key_conflict,Iodometric back-titration of resorcinol; key set unverified against solution
+48846,SUPERChem,broken_text,Atom-correspondence ratio for IMP and UMP biosynthesis; solution truncated
+48852,SUPERChem,broken_text,Iminoborane transfer reagent synthesis; solution truncated
+48855,SUPERChem,broken_text,"Phosphorus ylide, bis-ylide and Au/Be complexes; solution truncated"
+48859,SUPERChem,broken_text,Point-group counting for AB6C12 cluster; solution truncated
+48860,SUPERChem,broken_text,Sigmatropic ring expansion road map; solution truncated
+48861,SUPERChem,broken_text,Benzofuran one-pot synthesis; statement ratio computed; solution truncated
+48862,SUPERChem,broken_text,"Iodine-centred polyvanadate cage; vanadium-oxygen framework counting, truncated"
+48937,SUPERChem,broken_text,Biochemical interaction detection methods; no biochemistry subtopic; solution truncated.
+48944,SUPERChem,broken_text,Reactant SMILES contains LaTeX artifacts
+48949,SUPERChem,broken_text,Balancing inorganic reactions across five processes; solution truncated.
+48956,SUPERChem,broken_text,"Solution truncated; subject matter is ammonia-urea identification and Ti/V-type complex chemistry, unclear fit"
+48957,SUPERChem,broken_text,Nitrogen loss from diazo compounds giving spiro product; solution truncated
+48958,SUPERChem,broken_text,Equilibrium of NH4HS decomposition with van der Waals gases; solution truncated
+48959,SUPERChem,broken_text,Pt salts identification via formula and mass fraction; solution truncated
+48960,SUPERChem,broken_text,Silver periodato complex formula from mass fraction; solution truncated
+48962,SUPERChem,broken_text,Multistep alkyne synthesis with Glaser couplings; solution truncated
+48963,SUPERChem,broken_text,"Arsenic and rhenium recovery process; mixed statement-counting question, solution truncated"
+48964,SUPERChem,broken_text,Woodward-Hoffmann analysis of H2 elimination to furan; solution truncated
+48965,SUPERChem,broken_text,"Enzyme concentration dependence of kcat,app; solution truncated"
+48969,SUPERChem,key_conflict,Empirical BE rule; stated option E error sign and reaction C estimate mismatch
+49033,SUPERChem,key_conflict,SeO2/SeF4 chemistry; solution says C is correct-check unclear; key may conflict
+49035,SUPERChem,broken_text,Boroxine dynamic covalent PDMS; solution truncated
+49041,SUPERChem,broken_text,Swern oxidation product count; solution truncated
+49045,SUPERChem,broken_text,Acetoacetate ethylene oxide sequence; solution truncated
+49046,SUPERChem,open_problem,Nickel nitrosyl complex; propositions with computed ratio
+49049,SUPERChem,key_conflict,Na2MgSn layered crystal; solution derives formula; check key
+49072,SUPERChem,broken_text,Cyclopropyl imine fragmentation mechanism; question text garbled
+49077,SUPERChem,mismatch,Oxime formation and heterocycle; solution's structure looks inconsistent
+49109,SUPERChem,needs_data,Multi-reaction stoichiometry; metallurgy subtopics also fit; solution truncated
+49110,SUPERChem,needs_data,Peroxo carbonate salts; no exact subtopic; solution truncated
+49111,SUPERChem,needs_data,Vanadium oxo kinetics; mechanism-based; no close subtopic; solution truncated
+49114,SUPERChem,needs_data,Iron double salt identification; counting truths; solution truncated
+49115,SUPERChem,needs_data,Cluster-based fcc oxide; shortest B-B distance; solution truncated
+49116,SUPERChem,needs_data,Peroxide natural product; iodometric content; no matching subtopic; truncated
+49117,SUPERChem,needs_data,Clathrate cage faces in cubic cell; counting; solution truncated
+49119,SUPERChem,needs_data,Mixed inorganic equations across five processes; solution truncated
+49121,SUPERChem,key_conflict,"Xe-F2 equilibria; solution gives 4.2e-7, not an option"
+49122,SUPERChem,needs_data,Five reaction equations; coefficient sums; solution truncated
+49123,SUPERChem,needs_data,Organoaluminium oxo cluster structure; solution truncated
+49124,SUPERChem,key_conflict,ZnS dissolution in HCl; solution's own answer 0.097 M not an option
+49127,SUPERChem,needs_data,Beta-sheet hydrogen bonding pairing; solution truncated
+49159,SUPERChem,needs_data,"Antimony/arsenic-type chemistry puzzle; multi-part, options ambiguous"
+49163,SUPERChem,open_problem,"Metal-string cluster chemistry; solution truncated, answer not verifiable."
+49165,SUPERChem,key_conflict,"Solution gives A=6, B=5 (option B-style sum); check key against options."
+49167,SUPERChem,open_problem,Sulfur oxofluoride chemistry; solution truncated.
+49171,SUPERChem,open_problem,"Sulfonium [3,3] rearrangement mechanism; solution truncated."
+49173,SUPERChem,broken_text,Fluorine chemistry puzzle; solution truncated.
+49177,SUPERChem,open_problem,Cobalt-phosphine-sulfide cluster; solution empty.
+49178,SUPERChem,open_problem,Element identity puzzle; solution truncated.
+49180,SUPERChem,open_problem,Iodometric cobalt determination; solution truncated.
+49200,SUPERChem,key_conflict,Redox equation of N2O with CS2; sulfur and nitrogen oxide products; key unverifiable
+49213,SUPERChem,broken_text,High-pressure NaCl_x cubic cell; density and coordination; question garbled
+49229,SUPERChem,key_conflict,"Spin-spin dipolar distance from EPR; not in given trees, closest is Chemistry"
+49230,SUPERChem,key_conflict,"Solution gives Ca acetate hydrate; key choice unclear, solution text truncated"
+49236,SUPERChem,broken_text,Ring-opening polymer of ethylene oxide with MALDI end-group analysis
+49237,SUPERChem,key_conflict,"Solution gives 86.79% for statement 1, so statement 1 is false; check option key"
+49238,SUPERChem,broken_text,"Solution truncated; oxygenation and thermal rearrangement chemistry, mechanism-level"
+49239,SUPERChem,broken_text,Supramolecular Rh/Zn catalyst; solution truncated; subtopic is a weak fit
+49264,QuantQA,open_problem,Expected hours over n; optimal n may be infinite
+49274,QuantQA,needs_data,Rate equations for canoe trip; Algebra not in given trees
+49420,QuantQA,broken_text,No explicit question asked; compares two expected values.
+49585,QuantQA,broken_text,Two unrelated questions merged; bus divisibility and dice square
+50270,OpenStax Chemistry 2e,needs_data,"Needs current gold price, not given"
+50489,OpenStax Chemistry 2e,needs_data,Requires interactive simulator; not answerable as text.
+50491,OpenStax Chemistry 2e,needs_data,Simulator-based; S2O model angle requires outside tool.
+50589,OpenStax Chemistry 2e,needs_data,Needs water vapour pressure at 29 C to correct the collected N2.
+51028,OpenStax Chemistry 2e,needs_data,Ksp of Ag3PO4 not given in question
+51029,OpenStax Chemistry 2e,needs_data,Ksp of CaF2 not given in question
+51030,OpenStax Chemistry 2e,needs_data,Ksp of Ag2CO3 not given in question
+51031,OpenStax Chemistry 2e,needs_data,Ksp of Ag2CO3 not given in question
+51032,OpenStax Chemistry 2e,needs_data,Ksp of CaF2 not given in question
+51035,OpenStax Chemistry 2e,needs_data,Ksp of Fe(OH)2 not given in question
+51036,OpenStax Chemistry 2e,needs_data,Ksp of CuS and CdS not given in question
+51037,OpenStax Chemistry 2e,needs_data,Ksp of PbCl2 and AgCl not given in question
+51038,OpenStax Chemistry 2e,needs_data,Ksp of AgBr and AgCl not given in question
+51039,OpenStax Chemistry 2e,needs_data,Ksp of AgI and AgCl not given in question
+51040,OpenStax Chemistry 2e,needs_data,Ksp of Ca3(PO4)2 not given in question
+51041,OpenStax Chemistry 2e,needs_data,Ksp of Mg(OH)2 not given; sea-water precipitation stoichiometry
+51042,OpenStax Chemistry 2e,needs_data,Sulfide precipitation with H2S equilibrium; metal sulfide Ksp not given
+51050,OpenStax Chemistry 2e,needs_data,pH of saturated Ca(OH)2; Ksp not given
+51053,OpenStax Chemistry 2e,needs_data,Cd-ammonia formation constant not given in question
+51056,OpenStax Chemistry 2e,needs_data,Kf for Co(NH3)6 2+ not given in question
+51061,OpenStax Chemistry 2e,needs_data,AgCN Ksp and Ag(CN)2- Kf not given
+51062,OpenStax Chemistry 2e,needs_data,Ag(NH3)2+ formation constant and AgBr Ksp not given
+51065,OpenStax Chemistry 2e,needs_data,Formation constant of HgCl4 2- not given
+51066,OpenStax Chemistry 2e,needs_data,AgCN Ksp needed; complete-complex stoichiometry used
+51067,OpenStax Chemistry 2e,needs_data,AgCN Ksp and Ag(CN)2- Kf not given
+51070,OpenStax Chemistry 2e,needs_data,Ni(NH3)6 2+ formation constant not given
+51071,OpenStax Chemistry 2e,needs_data,Zn(CN)4 2- formation constant not given
+51072,OpenStax Chemistry 2e,needs_data,Cu(NH3)4 2+ formation constant not given
+51073,OpenStax Chemistry 2e,needs_data,Zn(CN)4 2- formation constant not given
+51074,OpenStax Chemistry 2e,needs_data,Fe(CN)6 3- dissociation constant not given here
+51075,OpenStax Chemistry 2e,needs_data,Co(NH3)6 2+ formation constant not given
+51076,OpenStax Chemistry 2e,needs_data,Sn(OH)2 Ksp and ammine constants not given
+51077,OpenStax Chemistry 2e,needs_data,Al(OH)3 Ksp and buffer constants not given
+51126,OpenStax Chemistry 2e,needs_data,Needs formation enthalpies and entropies for CaCO3 and CaO.
+51127,OpenStax Chemistry 2e,needs_data,Needs Kp for NH4Cl formation from tabulated thermodynamic data.
+51427,TheoremQA,needs_data,"Requires the spectrum figure, not given"
+51503,TheoremQA,needs_data,Requires the figure for the noise shaper structure
+51510,TheoremQA,needs_data,Block-matching motion estimation; figure values needed; no clean subtopic
+51531,ControlBench,broken_text,ODE garbled ('= 2y ='); assumed y''+3y'+2y=u+u'.
+51538,ControlBench,broken_text,"A matrix has duplicated x1-dot and (1,1) entry 1; likely typo for 0."
+51573,ControlBench,key_conflict,Sinusoidal steady state; part (b) solution sign appears inconsistent
+51588,ControlBench,broken_text,Solution truncated; Diophantine pole placement via polynomial equation
+51589,ControlBench,broken_text,Solution truncated; pole cancellation with polynomial design
+51593,ControlBench,key_conflict,"Solution gives K_p < -11.75, inconsistent with K_p < 3/4 stability"
+51595,ControlBench,key_conflict,Part (b) gains inconsistent with stated omega_n and zeta
+51601,ControlBench,broken_text,Cruise control PI design; solution truncated; no exact subtopic name
+51602,ControlBench,key_conflict,"Solution's final interval [-0.2,1] inconsistent with its own bounds"
+51609,ControlBench,key_conflict,Angle condition; stated answer pi conflicts with computed angle
+51615,ControlBench,key_conflict,"Disk margin from peak of S; answer 1/2 vs 6 dB peak, plausible"
+51616,ControlBench,broken_text,Matching Bode plots from images; solution absent
+51620,ControlBench,broken_text,Matching images; no solution given
+51625,ControlBench,broken_text,Asymptote behavior for large gain; solution truncated
+51628,ControlBench,broken_text,Phase-lag design for velocity error constant
+51631,ControlBench,key_conflict,"Pole placement, observer and Nyquist; claimed stability contradicts count"
+51632,ControlBench,key_conflict,Routh gives -10<K<26 but Nyquist bound arithmetic inconsistent
+51644,ControlBench,broken_text,Lyapunov quadratic cost minimised over damping; truncated solution
+51649,ControlBench,key_conflict,"Linearisation; source gives (4,10) but b0 is 2 from df/du"
+51656,ControlBench,key_conflict,Kp=2 claimed; crossover 7.82 inconsistent with gain
+51657,ControlBench,broken_text,Loop-shaping design with integral boost; solution truncated
+51700,"Woolf, Chemical Process Dynamics and Controls (Chapter 3)",key_conflict,"Conductivity cell; solution computes 3.17 kmol, unit issues"
+51725,"Woolf, Chemical Process Dynamics and Controls (Chapter 13)",broken_text,Hypothesis test question; Statistics tree not supplied
+51732,"Woolf, Chemical Process Dynamics and Controls (Chapter 13)",key_conflict,Solution ignores that 5s removed; answer as written
+51748,"Verrett et al., Foundations of Chemical and Biological Engineering I (Chapter 10)",key_conflict,Equipment tag nomenclature; key option D says 'duplication' and solution wording is loose.
+51752,"Verrett et al., Foundations of Chemical and Biological Engineering I (Chapter 13)",needs_data,Solution missing; order from initial-rate ratio.
+51757,"Verrett et al., Foundations of Chemical and Biological Engineering I (Chapter 21)",key_conflict,Key says B coefficient -1 but solution text favours A/extent; check.
+51766,"Verrett et al., Foundations of Chemical and Biological Engineering I (Chapter 29)",key_conflict,"Henry's law gas solubility; Chemistry Solutions tree lacks it, Henry's law sits in Chemistry."
+51772,"Verrett et al., Foundations of Chemical and Biological Engineering I (Chapter 36)",broken_text,Hess's law sum; solution truncated.
+51782,"Verrett et al., Foundations of Chemical and Biological Engineering I (Chapter 44)",key_conflict,Key says filtration; option text in solution differs from question.
+51784,"Verrett et al., Foundations of Chemical and Biological Engineering I (Chapter 44)",key_conflict,Solution's 95% target arithmetic inconsistent; answer 15 min questionable.
+51797,"Verrett et al., Foundations of Chemical and Biological Engineering I (Chapter 56)",mismatch,Environmental fate of chemicals; not in tree; Lead as hydrocarbon nonsense
+51859,XFinBench,needs_data,Requires binomial tree stock prices not given.
+51877,XFinBench,needs_data,Recapitalization context not given.
+51913,XFinBench,needs_data,Current stock price S0 is missing from the question
+51916,XFinBench,broken_text,Forward 80.0750 vs strike 0.0800 suggests a lost decimal point
+52051,XFinBench,needs_data,"Refers to Problem 15.30 for stock data, not given."
+52065,XFinBench,needs_data,Beginning total assets not given
+52067,XFinBench,needs_data,Collection and disbursement pattern not given
+52082,XFinBench,needs_data,No aggregate demand curve equation given
+52085,XFinBench,needs_data,Equity beta not given; CAPM cannot be applied
+52091,XFinBench,needs_data,Context missing from original multi-part question
+52092,XFinBench,needs_data,Comparable Treasury yield not given in quote
+52096,XFinBench,needs_data,Reserve requirement ratio not given
+52101,XFinBench,needs_data,No option price given; total value undefined
+52134,XFinBench,broken_text,Question text ambiguous about call and put style
+52171,XFinBench,needs_data,Needs stock price path; not given
+52180,XFinBench,needs_data;broken_text,Question text is incomplete; no model given
+52284,XFinBench,needs_data,Betas or stock C data missing
+52529,XFinBench,key_conflict,"Option A values are wrong: 1/1.2 is 0.83, 1/1.1 is 0.91"
+52576,XFinBench,needs_data,Call price with cash dividend refers to Problem 15.30
+52611,XFinBench,broken_text,Cash break-even is a project-cash-flow concept; table is garbled
+52620,XFinBench,broken_text,Aftertax cost of debt needs YTM from bond table; table garbled
+52630,XFinBench,key_conflict,Option (A) reasoning is wrong; European call can be below intrinsic only if ...
+52633,XFinBench,mismatch,Bond futures cheapest-to-deliver; dates inconsistent (2014 vs 2013)
+52659,XFinBench,needs_data,Option type and strike not given
+52672,XFinBench,needs_data,Option type and strike not given
+52706,XFinBench,broken_text,Options garbled; bond price and rate expectations link
+52832,XFinBench,needs_data,CDS recovery rate; spread data needed to decide the option.
+52874,XFinBench,needs_data,Option prices for the strikes are not given
+52909,XFinBench,needs_data,Refers to recapitalization details not given
+52916,XFinBench,needs_data,Bond option on binomial lattice; calibration data partly external
+52951,XFinBench,needs_data,Refers to Figure 13.1 not given
+52997,XFinBench,broken_text,Question text truncated mid-sentence; capital intensity ratio
+53054,XFinBench,mismatch,Misfiled; belongs to Quantitative Finance corporate accounting (cost of goods).
+53142,XFinBench,needs_data,Requires stock price and delta inputs not given
+53228,XFinBench,mismatch,Question asks for call real-world payoff; solution text mentions put
+53277,XFinBench,needs_data,Hedge ratio comparison; needs full hedge table
+53281,XFinBench,broken_text,Table columns misaligned; PV from FV
+53285,XFinBench,needs_data,Tree calibration setup; probability from DerivaGem output
+53363,XFinBench,needs_data,Factor volatilities from the text are not given
+53467,XFinBench,needs_data,EFN from pro forma statements; question text truncated.
+53496,XFinBench,needs_data,Treasury bond futures conversion factor; no exact subtopic.
+53611,XFinBench,needs_data,Bond 2 details not given
+53644,XFinBench,needs_data,No copper futures price given
+53698,XFinBench,key_conflict,Keynesian consumption function; no exact Economics subtopic
+53766,XFinBench,needs_data,"Refers to a previous problem's policy details, not given."
+53781,XFinBench,needs_data,Time to delivery missing from the question.
+53785,XFinBench,needs_data,Reserve requirement ratio not given.
+53847,XFinBench,needs_data,Asks futures price paid; no price data given
+53903,XFinBench,needs_data,"Refers to rates in Problem 4.5, not given"
+53929,XFinBench,needs_data,Tax rate missing from statement; subject name corrected below
+53935,XFinBench,needs_data,Tax-rate table not given; subject name corrected below
+53943,XFinBench,needs_data,Tax rate missing; subject name corrected below
+54006,XFinBench,needs_data,Index-tracking portfolio; beta-based index value; underspecified
+54007,XFinBench,needs_data,Requires tree node values not given in the question
+54011,XFinBench,needs_data,ABS CDO tranche cash flows; no subtopic fits well
+54014,XFinBench,needs_data,Requires company financial statements not provided
+54052,FinanceMath,broken_text,Technical chart pattern; no subtopic fits
+54108,FinanceMath,broken_text,Question lacks its answer options and ends abruptly
+54119,FinanceMath,broken_text,Table row labelled Z is garbled where 2y1y should be
+54187,FinanceMath,broken_text,Question text cut off before the asked quantity.
+54249,FinanceMath,needs_data,Investment A not in data table
+54280,FinanceMath,broken_text,Seasonal AR forecast; question text cut off
+54351,FinanceMath,broken_text,Income term garbled; wage W not given
+54443,FinanceMath,needs_data,PE fund cash flow table; references pamphlet not given
+54453,FinanceMath,needs_data,Justified forward P/E; depends on earlier exhibit data
+54455,FinanceMath,broken_text,CDS on defaulted bond; question text truncated
+54513,FinanceMath,needs_data,2017 real GDP not given
+54539,FinanceMath,needs_data,"Put delta needs volatility and rate, not given"
+54569,FinanceMath,needs_data,Security B beta is not given in the table
+54586,FinanceMath,broken_text,Forward rate label Z is garbled in the table
+54658,FinanceMath,broken_text,
+54724,FinanceMath,needs_data,Portfolios X and Z are not defined in the table
+54748,FinanceMath,broken_text,Conditional probability; question text is cut off.
+54758,FinanceMath,broken_text,Asks which option is most precise; options missing.
+54829,FinanceMath,broken_text,Mixed currency symbols in source table
+54846,FinanceMath,needs_data,Share B's beta is not in the table.
+54894,MMLU-Pro,broken_text,Reaction as written is unbalanced; formula and units garbled
+54897,MMLU-Pro,key_conflict,Binding energy of C-12; stated key may not match
+54902,MMLU-Pro,broken_text,Second part of question is incomplete
+54921,MMLU-Pro,broken_text,Embedded choice list in question is garbled
+54927,MMLU-Pro,needs_data,Heat of fusion of naphthalene not given
+54928,MMLU-Pro,broken_text,Chemical formulas in the reaction are garbled
+54947,MMLU-Pro,key_conflict,Correct empirical formula C23H30ClN3O is not offered
+54953,MMLU-Pro,broken_text,'half-life' wording missing; 8.0 min assumed half-life
+55011,MMLU-Pro,broken_text,"Question text garbled (PbS, Ksp) but solvable"
+55018,MMLU-Pro,key_conflict,Reaction as printed is unbalanced; check option key
+55042,MMLU-Pro,broken_text,Options are incomplete and do not match the question
+55063,MMLU-Pro,broken_text,Logarithm identity; Algebra not in given trees
+55121,MMLU-Pro,broken_text,Source writes P-90 for phosphorus; reaction intends P-30.
+55139,MMLU-Pro,needs_data,Phase volume ratio not given; answer assumes equal volumes.
+55184,MMLU-Pro,broken_text,Formula garbled (C6H10C4); equivalent-weight counting of protons
+55208,MMLU-Pro,broken_text,Reservoir temperature underspecified; subtopic name must be copied exactly
+55212,MMLU-Pro,broken_text,Garbled question text
+55214,MMLU-Pro,broken_text,Free expansion into vacuum; statements garbled
+55215,MMLU-Pro,broken_text,Cell voltage from free energies; Nernst step needed
+55217,MMLU-Pro,broken_text,Reaction stoichiometry garbled; E-degree from equilibrium ratio
+55223,MMLU-Pro,broken_text,Photon energy of Avogadro quanta; no matching subtopic
+55226,MMLU-Pro,broken_text,Electronic partition function; population ratio
+55229,MMLU-Pro,broken_text,Entropy change from thermal expansion; pressure data garbled
+55235,MMLU-Pro,broken_text,Hydrogenation and formation enthalpies; text garbled
+55276,MMLU-Pro,broken_text,Reaction equation garbled (NaCO3); stoichiometry is clear
+55313,MMLU-Pro,broken_text,Reaction equation garbled; stated enthalpy sign unclear
+55327,MMLU-Pro,key_conflict,No option matches s = (Ksp/4)^(1/3) = 2.15e-4 M
+55337,MMLU-Pro,broken_text,Option D kcal-kJ conversion inconsistent (only B converts correctly)
+55399,MMLU-Pro,mismatch,Subject not in my trees; Algebra tree not provided
+55412,MMLU-Pro,broken_text,Choices in stem differ from lettered options.
+55415,MMLU-Pro,key_conflict,"Part (c) gives about 1370 lb, not the keyed 1333 lb."
+55426,MMLU-Pro,needs_data,Reaction sequence for the chain is not given.
+55428,MMLU-Pro,broken_text,Embedded choices differ from lettered options.
+55471,MMLU-Pro,broken_text,"Temperature given as 10^50 K, likely a typo"
+55479,MMLU-Pro,broken_text,Reduced Berthelot equation garbled; fugacity from equation of state
+55508,MMLU-Pro,broken_text,Water product formula garbled; equation unbalanced as given.
+55509,MMLU-Pro,key_conflict,Constant-volume heat vs ΔH; no option matches -212 kcal convention cleanly.
+55518,MMLU-Pro,broken_text,Cathode reaction formula garbled; subject label corrected to Chemistry.
+55519,MMLU-Pro,broken_text,Reaction equations garbled; water stoichiometry unclear.
+55522,MMLU-Pro,key_conflict,Isothermal ideal-gas compression; options mismatch unit and sign conventions.
+55525,MMLU-Pro,broken_text,Kinetic theory of 2D gas; options garbled.
+55527,MMLU-Pro,key_conflict,Options do not match bond-energy estimate; data incomplete.
+55551,MMLU-Pro,key_conflict,Stated answer may not match given heats of formation.
+55566,MMLU-Pro,broken_text,Electron charge given as 4.8e-18; key needs 4.8e-10.
+55604,MMLU-Pro,needs_data,Body weight missing from question.
+55608,MMLU-Pro,broken_text,Option configurations are garbled in the source text.
+55617,MMLU-Pro,key_conflict,Correct h[n]=3(1/2)^n-2(1/3)^n; no option matches
+55621,MMLU-Pro,key_conflict,Derived result matches D only if 3n is read as 3^n
+55644,MMLU-Pro,broken_text,"Preemphasis in FM; subtopic best-fit, text garbled"
+55673,MMLU-Pro,broken_text,Matrix product; matrix entries garbled
+55725,MMLU-Pro,key_conflict,"fm 100 Hz, beta 10 and 20; no option matches"
+55795,MMLU-Pro,broken_text,Matrix sum and difference; matrix entries garbled
+55796,MMLU-Pro,broken_text,Subject not given; gradient of scalar field
+55797,MMLU-Pro,broken_text,Gradient in cylindrical coordinates; subject not in given trees
+55802,MMLU-Pro,broken_text,State equation with impulse input; matrices garbled
+55832,MMLU-Pro,key_conflict,Correct n!/s^(n+1) absent from options
+55834,MMLU-Pro,broken_text,Question text garbled; exponent and sine argument unclear
+55849,MMLU-Pro,broken_text,Average current and charge; question text garbled
+55861,MMLU-Pro,key_conflict,State form of ODE; no option matches exactly
+55871,MMLU-Pro,broken_text,Partial fraction inverse Laplace; expression garbled
+55908,MMLU-Pro,broken_text,Subject not given; divergence theorem integral
+55912,MMLU-Pro,broken_text,Subject not given; velocity and acceleration of a curve
+55929,MMLU-Pro,broken_text,PSD of thermal noise in PCM; garbled statement
+55931,MMLU-Pro,broken_text,PCM output SNR with threshold; expression garbled
+55963,MMLU-Pro,key_conflict,Laplace of t^n is n!/s^(n+1); no option matches
+56000,MMLU-Pro,broken_text,
+56006,MMLU-Pro,broken_text,Power absorbed by element; part (b) garbled; part (a) gives G
+56010,MMLU-Pro,broken_text,
+56017,MMLU-Pro,broken_text,Normalized power from Fourier coefficients; expression garbled
+56096,MMLU-Pro,broken_text,
+56116,MMLU-Pro,broken_text,"Cosine series of step function; defined piecewise, text garbled"
+56181,MMLU-Pro,broken_text,FM receiver IF bandwidth comparison; question garbled
+56403,MMLU,broken_text,Option D makes question ill-posed; closest atomic structure
+56676,SuperGPQA,broken_text,Options garbled; question asks direction of slip shift
+56700,SuperGPQA,broken_text,Nyquist pulse sample values; question text has escaped characters
+56702,SuperGPQA,broken_text,Bandwidth blank in question text
+56706,SuperGPQA,key_conflict,Radio link budget; no tree fit; option key values inconsistent
+56715,SuperGPQA,broken_text,"Second initial condition names Br, not Br2"
+56717,SuperGPQA,needs_data,Complex-ion equilibria combined with Ksp; branch wording corrected
+56739,SuperGPQA,broken_text,Problem statement garbled in source
+56747,SuperGPQA,key_conflict,Solution absent; K scales with pressure drop for incompressible cake
+56774,SuperGPQA,broken_text,Options garbled; radiation power and resistance of dipoles
+56803,SuperGPQA,key_conflict,Expected power from random batteries; subject not in given trees
+56804,SuperGPQA,broken_text,Insulation dielectric loss equivalent circuit; no exact fit
+56823,SuperGPQA,broken_text,Question garbled; 'silver pattern' unclear
+56838,SuperGPQA,key_conflict,Stated fluorite but describes CsCl; packing check may disagree
+56893,SuperGPQA,broken_text,Garbled text; intent is Griffith crack-tip ratio
+56897,SuperGPQA,broken_text,Current value garbled in question text
+56906,SuperGPQA,broken_text,Options are garbled; saturated hydrocarbons absorb far UV
+56991,SuperGPQA,broken_text,Question sentence is garbled; subtopic is a best guess
+56992,SuperGPQA,broken_text,"Melting-point capillary technique; no subtopic fits, question unclear"
+57013,SuperGPQA,broken_text,Information rate garbled as 'l $0^{6}'.
+57042,SuperGPQA,needs_data,Magnetic circuit with air gap; Ampère-turn calculation; subtopic approximate
+57044,SuperGPQA,broken_text,Heat conduction through refractory; Heat Transfer not in given trees
+57077,SuperGPQA,needs_data,Anion concentrations unspecified; system underdetermined as stated
+57080,SuperGPQA,broken_text,Iodide count fixed at 1; equation cannot balance as written
+57092,SuperGPQA,broken_text,Solenoid question truncated; options incomplete
+57099,SuperGPQA,key_conflict,Stated options may not match density calculation
+57102,SuperGPQA,broken_text,Garbled voltage expression and options
+57123,SuperGPQA,broken_text,Nonsensical vocabulary question; no science content
+57128,SuperGPQA,needs_data,LP duality; operations research outside given trees.
+57133,SuperGPQA,broken_text,Battery marketing question; no clear physics content
+57150,SuperGPQA,broken_text,Question as posed is ill-defined: state equation and response given inconsistently.
+57151,SuperGPQA,broken_text,Discrete stability of companion-form system with garbled matrix entries.
+57191,SuperGPQA,broken_text,Rotor flowmeter instrumentation; fits no listed subtopic cleanly
+57249,SuperGPQA,broken_text,Chirp z-transform feasibility; options garbled.
+57261,SuperGPQA,broken_text,Leaky spherical capacitor; options contain garbled symbols
+57270,SuperGPQA,needs_data,Rate constant not given; fluidised-bed rate unclear
+57271,SuperGPQA,broken_text,ODE solution with state-space options; ODE topic outside given trees.
+57304,SuperGPQA,broken_text,Garbled statement about series and parallel resistance ratio
+57306,SuperGPQA,broken_text,Sensor-measurement recall; options are garbled
+57321,SuperGPQA,broken_text,Vague question about circuit analysis method suitability
+57322,SuperGPQA,broken_text,"Options are voltage-class ranges, not matching the question"
+57364,SuperGPQA,broken_text,"Wire loop in field; tree is Electromagnetism, not in given list"
+57408,SuperGPQA,broken_text,Statements refer to reaction data not given in the question.
+57426,SuperGPQA,broken_text,Options garbled (theta); RL transient voltage across inductor
+57462,SuperGPQA,key_conflict,Stated 412V vs options; solution to check
+57567,SuperGPQA,open_problem,"Voltmeter range with series resistance; ambiguous, no solution given"
+57568,SuperGPQA,open_problem,"Ring current field at centre; physics, not in given trees"
+57579,SuperGPQA,key_conflict,K1 = 1/(0.4*0.6)=1/0.24; no option matches
+57585,SuperGPQA,broken_text,Iodide written as 'l' in mechanism and options
+57586,SuperGPQA,key_conflict,Mass from dT≈1.2 K gives ~96-110; check options
+57592,SuperGPQA,broken_text,Target named Cs2 but reaction is S32; text garbled
+57593,SuperGPQA,broken_text,Answer options garbled with epsilon symbols
+57600,SuperGPQA,open_problem,Trivia about Yamaha YM2203 sound chip
+57608,SuperGPQA,open_problem,"Piezoelectric sensor transducer; sensor physics, no tree fit"
+57620,SuperGPQA,key_conflict,Options malformed; partial fraction realisation of transfer function
+57625,SuperGPQA,needs_data,"Pareto front property; multi-objective optimisation, not in given trees"
+57633,SuperGPQA,key_conflict,"Decision-tree expected-value problem; subject is decision analysis, not clearly in tree."
+57634,SuperGPQA,key_conflict,Linear program with dual; stated optimum may be inconsistent
+57637,SuperGPQA,open_problem,Dental instrument identification; not an engineering subject
+57677,SuperGPQA,broken_text,Options write carbon as G; formula from freezing point
+57678,SuperGPQA,key_conflict,"My Kc estimate (~0.4 mol/dm3, check units) matches no option"
+57681,SuperGPQA,key_conflict,Chain length ~1254 nm fits; rms ~11 nm does not
+57716,SuperGPQA,broken_text,Load impedance '6.4n' garbled in question text
+57730,SuperGPQA,broken_text,NMOS overdrive from current; question text terse
+57750,SuperGPQA,broken_text,DFT of cosine over N points; question garbled
+57751,SuperGPQA,needs_data,"Loudspeaker electromechanical parameters; acoustics, no exact fit"
+57810,SuperGPQA,broken_text,MIMO transfer matrix from state equations
+57817,SuperGPQA,broken_text,Transfer function from state-space; options garbled
+57823,SuperGPQA,key_conflict,Mass percent Br in KBrOx; formula determination
+57827,SuperGPQA,broken_text,Vibrational partition function of N2; question text garbled
+57868,SuperGPQA,broken_text,Noise PSD symbol garbled in options
+57877,SuperGPQA,broken_text,Asks for data-quality characteristics; no subtopic fits well.
+57909,SuperGPQA,broken_text,Input n(n-1) likely garbled u(n-1); answer A fits
+57915,SuperGPQA,broken_text,Question text garbled in the gas-fraction clause
+57935,SuperGPQA,broken_text,Random-coil chain geometry; end-to-end distance model choice
+57940,SuperGPQA,open_problem,Electromagnetic flowmeter liquid limits; instrumentation
+57967,SuperGPQA,broken_text,Noise density exponent garbled (100^-15)
+57977,SuperGPQA,broken_text,Redox coupling and pe/ΔG; options inconsistent
+57985,SuperGPQA,broken_text,ΔE from ΔH for gas-generating decomposition
+57989,SuperGPQA,broken_text,Bond dissociation and C-O bond energy from formation data
+57991,SuperGPQA,broken_text,Combustion and formation heats from given data
+57999,SuperGPQA,broken_text,Ionic character from radii; options unclear
+58020,SuperGPQA,broken_text,Question underspecified; power gain not determinable from given data
+58024,SuperGPQA,key_conflict,Options show no clearly correct Ka; verify key
+58027,SuperGPQA,broken_text,RC charging power; options garbled
+58083,SuperGPQA,mismatch,History question on right-hand rule attribution; loosely magnetostatics
+58094,SuperGPQA,key_conflict,Routh gives K=110; no option matches.
+58097,SuperGPQA,key_conflict,"Pole placement gives K=[6,16/3]; no option matches."
+58148,SuperGPQA,key_conflict,Electron-density potential; options use units likely inconsistent
+58194,SuperGPQA,needs_data,Mass of the added 7e4 fraction is not given
+58198,SuperGPQA,needs_data,Electrochemical hydrogen evolution overpotential; not in given trees
+58214,SuperGPQA,broken_text,No condition on closed loop given for K.
+58216,SuperGPQA,broken_text,Stem says HgO(g) where Hg(g) is meant
+58217,SuperGPQA,broken_text,Options in K^-1 though asked temperature; entropy value garbled
+58233,SuperGPQA,needs_data;broken_text,H2 combustion enthalpy missing; options garbled as km
+58239,SuperGPQA,broken_text,"Extremum analyzer electrode; term unclear, no fitting subtopic"
+58240,SuperGPQA,broken_text,Garbled question; meaning of notation unclear
+58248,SuperGPQA,broken_text,Options garbled in stem (NH and C1); common-ion effect
+58253,SuperGPQA,broken_text,Garbled reagent names; no clear subtopic
+58296,SuperGPQA,broken_text,Options garbled; pe-based redox half-reaction balancing
+58297,SuperGPQA,broken_text,Garbled rod-gap margin question; subtopic is a best fit only
+58298,SuperGPQA,broken_text,Garbled text; Hall voltage and magnetic field question
+58309,SuperGPQA,broken_text,"Chain length of zigzag alkane; geometric, weakly fits conformational analysis."
+58310,SuperGPQA,key_conflict,Entropy units likely mistyped; solve for T from ΔG=0.
+58315,SuperGPQA,broken_text,Figure-dependent; square geometry not given
+58324,SuperGPQA,broken_text,
+58331,SuperGPQA,broken_text,Cell notation and electrode data garbled.
+58338,SuperGPQA,broken_text,Alt should be a subtopic name; see Boiling-Point Elevation and Freezing-Point Depression.
+58348,SuperGPQA,broken_text,Phase lead between voltage and current; expression garbled
+58390,SuperGPQA,broken_text,Elastic energy of composite wire; length value garbled
+58415,SuperGPQA,broken_text,Reaction scheme missing; amine basicity order in water
+58470,SuperGPQA,key_conflict,"Conductance tree subtopic under Electrochemistry branch, not Ionic Equilibrium"
+58491,SuperGPQA,key_conflict,Assertion-reason; reason formula and assertion both doubtful
+58508,SuperGPQA,broken_text,Organic dibasic acid; no organic subtopic fits Stoichiometry directly
+58533,SuperGPQA,broken_text,E_a2 value and units missing from the question.
+58617,SuperGPQA,broken_text,Tau_c exponent garbled (10^s)
+58621,SuperGPQA,broken_text,N-point DFT samples of a discrete sinusoid sum
+58622,SuperGPQA,broken_text,DFT of the DFT gives reversed circular sequence
+58628,SuperGPQA,broken_text,Conduction with temperature-dependent conductivity; subtopic tree not given
+58659,SuperGPQA,broken_text,Three-phase half-wave controlled rectifier with overlap; E value garbled
+58664,SuperGPQA,broken_text,Options garbled; derivation of nucleation work for cubic nucleus
+58686,SuperGPQA,needs_data,Loudspeaker acoustics; not in given trees
+58693,SuperGPQA,key_conflict,At 50% conversion Xn should be 500; options all state 1000.
+58712,SuperGPQA,key_conflict,Options' Re formulas inconsistent with stated mass flow; solution sketchy
+58719,SuperGPQA,key_conflict;broken_text,Transient quench of steel ball; options garbled and key unclear
+58752,SuperGPQA,broken_text,Open-loop from closed-loop; ramp error from it
+58761,SuperGPQA,broken_text,"Stoichiometry to find atomic weight; text says XI5, likely XI3"
+58784,SuperGPQA,key_conflict,Stated 68C conflicts with 20C to 68F; options unclear
+58808,SuperGPQA,broken_text,Wetting is interfacial Gibbs energy; options garbled
+58814,SuperGPQA,broken_text,Question wording is ambiguous about feedback topology
+58816,SuperGPQA,broken_text,Asymmetric Y matrix reasoning is vague; option set unclear
+58817,SuperGPQA,broken_text,Group synchronization states; fill-in vocabulary
+58818,SuperGPQA,broken_text,Minimum distance and error correction capability of even code
+58819,SuperGPQA,broken_text,MSK continuity properties; fill-in wording garbled
+58820,SuperGPQA,broken_text,Minimum distance and correctable errors; source term garbled
+58822,SuperGPQA,broken_text,Amplifier input and output resistance interpretation; garbled options
+58824,SuperGPQA,broken_text,Garbled options about contingency gate inputs
+58825,SuperGPQA,broken_text,Sifting property of delta with scaled argument
+58827,SuperGPQA,broken_text,ROC of two-sided exponential sequence
+58828,SuperGPQA,broken_text,Fourier coefficients under time reversal and conjugation
+58830,SuperGPQA,broken_text,z-transform of two-sided sum with ROC
+58831,SuperGPQA,broken_text,Sifting property of delta function under integral
+58843,SuperGPQA,broken_text,"Creep in structures; garbled options, no matching subtopic"
+58849,SuperGPQA,broken_text,Garbled transform name and options; no option matches (t+1)u(t)
+58856,SuperGPQA,broken_text,Symmetric primal-dual simplex table question; subtopic unclear
+58862,SuperGPQA,broken_text,Three stages of self-assembly kinetics; unclear fit
+58865,SuperGPQA,broken_text,Sonar correlator integration gain; garbled question
+58881,SuperGPQA,broken_text,Options are nonsensical animal-method names; question unclear
+58883,SuperGPQA,broken_text,Polymer aging prevention; options garbled
+58884,SuperGPQA,broken_text,Moisture hysteresis of materials; no matching subtopic
+58889,SuperGPQA,broken_text,Air gap insulation measure; options garbled
+58896,SuperGPQA,broken_text,Pt-Rh thermocouple alloy specification; no matching subtopic
+58928,SuperGPQA,broken_text,"Given 0.00168 g gives Ksp near 4e-11, not any option; data likely mistyped"
+58935,SuperGPQA,broken_text,Formula C6H10C4 is garbled; acid-base equivalent count
+58939,SuperGPQA,broken_text,Options contain formatting artefacts; numbers usable
+58951,SuperGPQA,broken_text,LC circuit max inductor energy; options inconsistent
+58953,SuperGPQA,broken_text,Aromatisation energy data inconsistent; options garbled
+58958,SuperGPQA,key_conflict,Phase-angle RC/RL circuit; options A and B duplicate; key unclear
+58963,SuperGPQA,broken_text,Dielectric slab in isolated capacitor; physics-course electrostatics
+58968,SuperGPQA,broken_text,Thermal stress energy in rail; subtopic tree not given
+58970,SuperGPQA,broken_text,Steel and brass wires under load; position of mass unclear
+58981,SuperGPQA,broken_text,K2 given as 5x10^4; likely 5x10^-8
+59038,SuperGPQA,broken_text,Step response expression appears garbled
+59049,SuperGPQA,needs_data,Requires thermodynamic data for WO3 reduction not given
+59083,SuperGPQA,needs_data,Heat load from energy balance with heat loss; no exact subtopic
+59111,SuperGPQA,broken_text,Question text garbled; 'containing P' undefined
+59154,SuperGPQA,broken_text,Options carry kJ/mol units though a rate constant is asked
+59155,SuperGPQA,needs_data,Needs CO2 and H2O formation enthalpies; fusion equation unbalanced
+59167,SuperGPQA,broken_text,Formula C3H10 is impossible; question garbled
+59168,SuperGPQA,broken_text,Flatbed instrument setup; unclear and not in given subjects
+59171,SuperGPQA,broken_text,Garbled wording; stability of LTI discrete systems
+59172,SuperGPQA,broken_text,Lime dissolution phenomenon; no matching subtopic
+59212,SuperGPQA,broken_text,Rate-determining step method; options are garbled
+59221,SuperGPQA,broken_text,Hydraulic diameter of rectangular duct; dimensions ambiguous
+59224,SuperGPQA,needs_data,Refers to Problem 4.18 composition data not given
+59229,SuperGPQA,broken_text,NO reduction rate in gas film; units and data garbled
+59255,SuperGPQA,broken_text,Reversible first-order kinetics; units and equilibrium data inconsistent
+59259,SuperGPQA,key_conflict,Enthalpy data given; pKa relation is not derivable from it
+59273,SuperGPQA,key_conflict,Arrhenius ratio comparison; option (I) and key ambiguous
+59298,SuperGPQA,key_conflict,Ethanol mass for freezing protection; options inconsistent
+59320,SuperGPQA,broken_text,Product charges missing in the equation; reaction is garbled
+59323,SuperGPQA,needs_data,Temperature needed to get entropy is not given
+59324,SuperGPQA,broken_text,Vapour equilibrium written as toluene(l) to toluene(l)
+59333,SuperGPQA,broken_text,Component symbol garbled ('∧'); which species is asked is unclear
+59341,SuperGPQA,broken_text,Says NH4 where NH4I is meant; the reactant is unclear
+59346,SuperGPQA,broken_text,The reaction the question refers to is missing
+59350,SuperGPQA,broken_text,Current value has no unit and the sentence is cut off
+59389,SuperGPQA,broken_text,Premise about vapour pressure equal to solid phase is garbled
+59396,SuperGPQA,broken_text,"Given enthalpies give -1510 cal, not among options"
+59416,SuperGPQA,broken_text,Zn3+ appears where Zn2+ is meant
+59448,SuperGPQA,key_conflict,"Options C, F and J all hold; 'All of these' is false"
+59456,SuperGPQA,broken_text,"Question text garbled; V_L, V_C, V_R relation unclear."
+59514,SuperGPQA,key_conflict,Only options with z^2 factor are ambiguous; no solution given
+59519,SuperGPQA,broken_text,Assignment problem with garbled constraints; fits Operations Research
+59520,SuperGPQA,broken_text,Exponential service time; appointment interpretation unclear
+59524,SuperGPQA,broken_text,Garbled phasor and time-domain conversion question
+59532,SuperGPQA,broken_text,Options garbled; answer key unreliable
+59555,SuperGPQA,broken_text,Coaxial cavity resonator; microwave cavity not in given trees
+59568,SuperGPQA,needs_data,Pressure-dependent undercooling data partly garbled
+59576,SuperGPQA,broken_text,Options garbled; radiation field derivation from current distribution
+59600,SuperGPQA,broken_text,Options garbled; directivity from pattern
+59644,SuperGPQA,broken_text,Yes-No versus 2AFC detection; design-type prompt
+59668,SuperGPQA,key_conflict,Temperature profile with generation; options may not match
+59703,SuperGPQA,broken_text,Steady-state sinusoidal response of lead-lag network
+59749,SuperGPQA,broken_text,Non-technical vocabulary question about wireless power
+59750,SuperGPQA,broken_text,Phase crossover definition
+59762,SuperGPQA,broken_text,Vague temperature-effect question; equilibrium shift is general chemistry
+59793,SuperGPQA,broken_text,Asymptote and branch-count rules
+59795,SuperGPQA,broken_text,Options are generic; no clear subtopic match
+59810,SuperGPQA,broken_text,Question is ill-posed; standard potential of gas-phase noble species
+59811,SuperGPQA,broken_text,
+59815,SuperGPQA,broken_text,
+59969,SuperGPQA,needs_data,Requires decomposition Kp at 800 C from outside data
+59971,SuperGPQA,broken_text,Options contain garbled expressions
+59980,SuperGPQA,broken_text,Water and AgNO3 amounts garbled in text
+59982,SuperGPQA,broken_text,Garbled ion symbols in question text
+60025,SuperGPQA,needs_data,"Needs K-40 decay constant and branching, outside data"
+60045,SuperGPQA,key_conflict,Lower-impedance unit I gets 73.4 V; option C lists the values in reverse order.
+60057,SuperGPQA,broken_text,Water mass 258 mg implausible for 2.78 mg sample
+60071,SuperGPQA,key_conflict,"Options contain invalid species (Ag2+, Ag+(s)); no option is clean"
+60074,SuperGPQA,broken_text,"Bomb-combustion work; options are bare integers, no units"
+60082,SuperGPQA,broken_text,Garbled options; no clear power-system concept matches.
+60086,SuperGPQA,broken_text,Garbled question text; filtrate and cake data unclear
+60095,SuperGPQA,broken_text,Garbled; suspension agent rate not covered by tree
+60115,SuperGPQA,key_conflict,Ring-network natural power distribution; closest fit is loop flow in network analysis
+60124,SuperGPQA,needs_data,Exchanger area and oil flow rate not given
+60126,SuperGPQA,needs_data,Pipe diameter or viscosity not given
+60129,SuperGPQA,broken_text,Basicity ranking; compound names garbled
+60144,SuperGPQA,broken_text,Efficiency and enthalpy given; cell-potential link unclear
+60155,SuperGPQA,key_conflict,Alkane identity from combustion; one monochloride; key options look inconsistent
+60188,SuperGPQA,broken_text,Parallel first-order reactions; time when concentrations equal; statement garbled
+60193,SuperGPQA,key_conflict,Second ionisation potential from successive ionisation enthalpies; options inconsistent
+60238,SuperGPQA,broken_text,Effusion of gas mixture; options H and J reference other parts
+60272,SuperGPQA,broken_text,Resonance structure stability; some structures malformed
+60288,SuperGPQA,broken_text,Equal-current condition gives R = r; the current symbol is garbled.
+60320,SuperGPQA,key_conflict,"Options given; neutralisation enthalpy reasoning, check key"
+60355,SuperGPQA,broken_text,Formula garbled; polymer bromine percentage
+60361,SuperGPQA,needs_data,"R and L values are not given, so no option can be verified."
+60366,SuperGPQA,broken_text,"Voltage leads current, so circuit is inductive; RC options are garbled."
+60372,SuperGPQA,broken_text,Bismuth nitrate and NO gas; option text garbled
+60397,SuperGPQA,broken_text,Vague definitional question; subtopic fit weak
+60449,MMLU-Pro,broken_text,Density units garbled in question
+60493,MMLU-Pro,broken_text,Mass '015lbm' likely 0.15; check
+60496,MMLU-Pro,mismatch,Bond-energy enthalpy of formation; no clean subtopic fits
+60498,MMLU-Pro,broken_text,Equilibrium composition with inert gas; question is incomplete
+60503,MMLU-Pro,key_conflict,Supercooled solidification entropy; check stated key
+60544,MMLU-Pro,key_conflict,Mixture entropy and cooling at constant volume; verify key
+60548,MMLU-Pro,key_conflict,Refrigerant compression work and heat; options look inconsistent
+60730,MMLU-Pro,broken_text,Question says 'during the 10 second half'; garbled timing.
+60736,MMLU-Pro,needs_data,Laser population inversion from gain and lifetime; no laser subtopic exists
+60780,MMLU-Pro,key_conflict,Options and answer key may disagree; check the proper-time option.
+60802,MMLU-Pro,key_conflict,"Fuel-cell electrochemistry; 100/(0.9x2300) = 0.048 m², no option matches"
+60806,MMLU-Pro,key_conflict,Option (C) mixes units; the key looks unreliable
+60866,MMLU-Pro,mismatch,Cherenkov-like wake angle in shallow water; no exact subtopic
+60942,MMLU-Pro,key_conflict,Secular equilibrium gives about 1.6e-4 s; no option matches
+60955,MMLU-Pro,key_conflict,Computed 3.8e7 dyn; no option matches
+60983,MMLU-Pro,key_conflict;broken_text,Simple range ~3.2e6 m; no option matches; options garbled
+60985,MMLU-Pro,key_conflict,Room temperature gives ~484 m/s; option J needs 273 K
+61023,MMLU-Pro,broken_text,Question text duplicated and garbled; range conversion 116 F to C.
+61027,MMLU-Pro,broken_text,Decay constant garbled in the question.
+61045,MMLU-Pro,broken_text,Proton charge exponent garbled in the question.
+61134,MMLU-Pro,key_conflict,"Relativistic composition gives 0.96c, not listed as option key"
+61162,MMLU-Pro,key_conflict,Relativistic velocity addition; option key 0.96c absent from options
+61257,MMLU-Pro,broken_text,Option text garbled ('extthetä'); key not verified

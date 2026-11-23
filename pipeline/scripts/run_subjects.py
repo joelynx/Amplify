@@ -98,6 +98,7 @@ def scope_rows(cfg: dict, app, ours: set[int] = frozenset()) -> list[dict]:
     # and no aids for questions too easy to need them ("Don't add aids for extremely easy questions, like the SOA ones")
     aids_only = set(s.get("aids_only") or ())
     skip_src, skip_ids = set(s.get("aids_skip_sources") or ()), set(s.get("aids_skip_ids") or ())
+    sub_solves = set(run_sub.assigned(cfg)) if aids_only else set()  # run_sub solves these whatever their solution
     out = []
     for r in app.execute("SELECT question_id, source, topic, branch, subtopic, type, latexcode, solution, "
                          "generated_solution FROM questions ORDER BY question_id"):
@@ -106,8 +107,9 @@ def scope_rows(cfg: dict, app, ours: set[int] = frozenset()) -> list[dict]:
             continue
         kind = run_sub.solution_kind(r["solution"])
         mode = "solve" if kind in solve_kinds else "aids" if kind in aids_kinds else None
-        if subject in aids_only and (mode == "solve" or (not is_blank(r["generated_solution"]) and r["question_id"] not in ours)):
-            continue  # a generated solution already carries hints and takeaways
+        if subject in aids_only and (mode == "solve" or r["question_id"] in sub_solves
+                                     or (not is_blank(r["generated_solution"]) and r["question_id"] not in ours)):
+            continue  # a generated solution (or the one run_sub will write) carries hints and takeaways
         if mode == "aids" and (r["source"] in skip_src or r["question_id"] in skip_ids) and r["question_id"] not in ours:
             continue
         if mode is None or (mode == "solve" and not is_blank(r["generated_solution"]) and r["question_id"] not in ours):

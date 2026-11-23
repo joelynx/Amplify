@@ -1,0 +1,304 @@
+question_id,source,subject,kind,first_note,second_note,final_note
+47305,"Joint Entrance Examination Advanced (2016, Paper 2)",Chemistry,wastebasket,Crystal packing; Material Science crystal structures fit better,Solid-state packing; no solid-state subtopic in Chemistry tree,
+47889,ChemBench,Chemistry,wastebasket,Separation methods; no exact subtopic,Separation method; crystallization from solution,General separation techniques; no crystallisation subtopic
+48173,ChemBench,Chemistry,wastebasket,Dynamic combinatorial chemistry; drug discovery method.,Dynamic combinatorial chemistry; no matching subtopic,
+48177,ChemBench,Chemistry,wastebasket,Antibacterial drug targets.,Pharmacology: quinolone enzyme targets,"Pharmacology drug target, no chemistry subtopic"
+48179,ChemBench,Chemistry,wastebasket,RISC composition.,Molecular biology: RISC composition,"Molecular biology, no chemistry subtopic"
+48200,ChemBench,Chemistry,wastebasket,Polyketide biosynthesis.,Natural product biosynthesis pathway,"Natural product biosynthesis, no subtopic"
+48202,ChemBench,Chemistry,wastebasket,Biology; no matching subject tree,Molecular biology: siRNA versus miRNA,"Molecular biology, no chemistry subtopic"
+48203,ChemBench,Chemistry,wastebasket,Receptor pharmacology; no matching subject tree,Pharmacology: receptor tyrosine kinases,"Pharmacology receptors, no chemistry subtopic"
+48213,ChemBench,Chemistry,wastebasket,Sequencing methods; no matching subject tree,DNA sequencing template; biology,"DNA sequencing technique, molecular biology"
+48224,ChemBench,Chemistry,wastebasket,PCR technique; no matching subject tree,PCR primers; molecular biology,"PCR, molecular biology"
+48227,ChemBench,Chemistry,wastebasket,Drug design; no matching subject tree,Medicinal chemistry drug design,"Medicinal chemistry drug design, no subtopic"
+48228,ChemBench,Chemistry,wastebasket,Polyketide biosynthesis; no matching subtopic,Polyketide biosynthesis building blocks,"Polyketide biosynthesis, no subtopic"
+48232,ChemBench,Chemistry,wastebasket,shRNA validation assay; no matching subject tree,shRNA validation by RT-PCR; biology,"shRNA validation, molecular biology"
+48233,ChemBench,Chemistry,wastebasket,Drug binding concept; no matching subject tree,"Drug-binding concept, medicinal chemistry","Drug-receptor binding, pharmacology"
+48238,ChemBench,Chemistry,wastebasket,Sequencing chromatogram; no matching subject tree,Sequencing chromatogram interpretation; biology,"Sanger sequencing chromatogram, molecular biology"
+48239,ChemBench,Chemistry,wastebasket,Library design goals; no matching subject tree,Diversity-oriented synthesis goals,"Medicinal chemistry library design, no subtopic"
+48244,ChemBench,Chemistry,wastebasket,Bioavailability from AUC ratio; no matching subject tree,Pharmacokinetics bioavailability,"Pharmacokinetics bioavailability, no subtopic"
+48245,ChemBench,Chemistry,wastebasket,Chemical toxicity; best fit among organic groups,"Toxicity of amines, phosphines, pyridines","Toxicology of compound classes, no subtopic"
+48254,ChemBench,Chemistry,wastebasket,RNAi and gene silencing in cell biology,siRNA limitations; molecular biology,"siRNA gene silencing, molecular biology"
+48273,ChemBench,Chemistry,wastebasket,Receptor classification in pharmacology,Pharmacology receptors; no fitting subtopic,Pharmacology receptor classification; no fitting chemistry subtopic
+48275,ChemBench,Chemistry,wastebasket,Expression host strain choice in molecular biology,Molecular biology E. coli expression strains,Molecular biology expression strains; no fitting subtopic
+48281,ChemBench,Chemistry,wastebasket,Drug bioavailability and first-pass elimination,Pharmacokinetics bioavailability; no fitting subtopic,Pharmacokinetics first-pass effect; no fitting subtopic
+48283,ChemBench,Chemistry,wastebasket,Beta-blocker dose equivalence,Pharmacology dose calculation,Clinical dose conversion; no fitting subtopic
+48285,ChemBench,Chemistry,wastebasket,Receptor agonist definition,Pharmacology agonist definition,Pharmacology terminology; no fitting subtopic
+48311,ChemBench,Chemistry,wastebasket,Combinatorial synthesis methods.,Parallel vs combinatorial synthesis concepts,Combinatorial/parallel synthesis methodology not in tree
+48334,ChemBench,Chemistry,wastebasket,Drug development terminology.,Drug development terminology,Drug discovery terminology; no fitting subtopic
+48338,ChemBench,Chemistry,wastebasket,Nuclear receptor classification.,receptor biology; no good node,Pharmacology receptor types; no fitting subtopic
+48340,ChemBench,Chemistry,wastebasket,Odorants in natural gas; no fitting subtopic.,thiol odorant in natural gas,Industrial odorant use; no fitting subtopic
+48345,ChemBench,Chemistry,wastebasket,Drug specifications terminology.,"drug specifications, pharmaceutical quality; no matching node",Pharmaceutical regulatory term; no fitting subtopic
+48425,ChemBench,Chemistry,wastebasket,,"CYP450 enzyme families, pharmacology","Pharmacology gene-family fact, no chemistry subtopic"
+48436,ChemBench,Chemistry,wastebasket,,medicinal chemistry drug-likeness rule; no fitting subtopic,"Medicinal chemistry drug-likeness rule, no subtopic"
+48442,ChemBench,Chemistry,wastebasket,,diversity-oriented synthesis concept,"Drug-discovery library strategy, not retrosynthesis"
+48457,ChemBench,Chemistry,wastebasket,Sulfonate and phosphonate uses; no matching subtopic,uses of organophosphorus compounds; no fitting subtopic,
+48464,ChemBench,Chemistry,wastebasket,Clinical trial design,clinical trial design with antisense oligonucleotide,"Clinical trial design, not chemistry"
+48465,ChemBench,Chemistry,wastebasket,Physiological reaction conditions; multiple answers,biochemical reaction conditions in organisms,"General biochemical reaction conditions, no subtopic"
+48512,ChemBench,Chemistry,wastebasket,Metabolic physiology; no matching chemistry subtopic,Metabolism of starvation and diabetes,"Metabolic physiology, no chemistry subtopic"
+48514,ChemBench,Chemistry,wastebasket,Blood-brain barrier pharmacology; not in subject list,"Blood-brain barrier, drug permeability","Pharmacology/physiology, no chemistry subtopic"
+48555,ChemBench,Chemistry,wastebasket,ADME definition,"ADME acronym, pharmacokinetics",Pharmacokinetics terminology; no fitting subtopic
+48592,ChemBench,Chemistry,wastebasket,,fragment-based drug discovery terminology,Medicinal chemistry terminology; no fitting subtopic
+48762,ChemBench,Chemistry,wastebasket,,green chemistry principles; no fitting subtopic,Green chemistry principles; no fitting subtopic
+48764,ChemBench,Chemical Engineering,wastebasket,Scale-up suitability of separation methods,Scale-up suitability of lab separation methods; no fitting subtopic,Scale-up suitability of lab separation methods; no subtopic fits
+48768,ChemBench,Chemistry,wastebasket,,medicinal chemistry drug design strategy,Medicinal chemistry drug-design strategy; no subtopic covers it
+48785,ChemBench,Chemical Engineering,wastebasket,Structured monolith catalysts; no exact subtopic.,Monolithic catalyst structure advantages,
+48937,SUPERChem,Chemistry,wastebasket,Biochemical interaction detection methods; no biochemistry subtopic; solution truncated.,"Biomolecular interaction detection techniques (ITC, SPR, MST); no fitting subtopic",
+49202,SUPERChem,Chemistry,wastebasket,Bioluminescent probe mechanisms; chemical biology not in tree,Luciferin-based bioluminescent probes,Chemical-biology luciferin probe design; no fitting subtopic
+49537,QuantQA,Combinatorics,wastebasket,Keystroke optimisation; no direct subtopic,Copy-paste minimum operations optimization,
+49983,OpenStax Chemistry 2e,Chemistry,wastebasket,Scientific method; no matching subtopic,Qualitative intro question; freezing of water test,
+49984,OpenStax Chemistry 2e,Chemistry,wastebasket,"Hypothesis, law, theory classification; no matching subtopic","Scientific method: hypothesis, law, theory",
+49985,OpenStax Chemistry 2e,Chemistry,wastebasket,"Hypothesis, law, theory classification; no matching subtopic","Scientific method: hypothesis, law, theory",
+49986,OpenStax Chemistry 2e,Chemistry,wastebasket,Macroscopic versus microscopic domains; no matching subtopic,"Macroscopic/microscopic/symbolic domains, no fitting subtopic",
+49987,OpenStax Chemistry 2e,Chemistry,wastebasket,Macroscopic versus microscopic domains; no matching subtopic,"Macroscopic/microscopic/symbolic domains, no fitting subtopic",
+49988,OpenStax Chemistry 2e,Chemistry,wastebasket,Macroscopic versus microscopic description; no matching subtopic,Macroscopic vs microscopic description,
+49989,OpenStax Chemistry 2e,Chemistry,wastebasket,Macroscopic versus microscopic description; no matching subtopic,Macroscopic vs microscopic description,
+49990,OpenStax Chemistry 2e,Chemistry,wastebasket,Mass versus weight concept; no matching subtopic,Mass versus weight concept,
+49992,OpenStax Chemistry 2e,Chemistry,wastebasket,Mixture classification; no matching subtopic in tree,Classification of matter: mixtures,
+49993,OpenStax Chemistry 2e,Chemistry,wastebasket,Mixture versus pure substance; no matching subtopic,Classification of matter: mixtures,
+49994,OpenStax Chemistry 2e,Chemistry,wastebasket,Element versus compound; no matching subtopic in tree,Classification of matter: elements and compounds,
+49995,OpenStax Chemistry 2e,Chemistry,wastebasket,Element versus compound molecules; no matching subtopic,Classification of matter: molecules,
+49996,OpenStax Chemistry 2e,Chemistry,wastebasket,Atom versus molecule basics; no matching subtopic,"Atoms versus molecules, qualitative",
+49997,OpenStax Chemistry 2e,Chemistry,wastebasket,"Consumer product ingredients; open-ended, no matching subtopic",Pure compounds in commercial mixtures,
+49998,OpenStax Chemistry 2e,Chemistry,wastebasket,"Element, compound or mixture classification; no matching subtopic","Classifying matter: element, compound, mixture; no node fits",
+49999,OpenStax Chemistry 2e,Chemistry,wastebasket,"Element, compound or mixture classification; no matching subtopic","Classifying matter: element, compound, mixture; no node fits",
+50000,OpenStax Chemistry 2e,Chemistry,wastebasket,Atom versus molecule of sulfur; no matching subtopic,Conceptual atom versus molecule; no node fits,
+50001,OpenStax Chemistry 2e,Chemistry,wastebasket,"Molecular comparison of O2, H2, H2O; no matching subtopic",Conceptual molecule comparison; no node fits,
+50003,OpenStax Chemistry 2e,Chemistry,wastebasket,Chemicals consumed and produced by automobile; no matching subtopic,Descriptive list of automobile chemicals,
+50004,OpenStax Chemistry 2e,Chemistry,wastebasket,Listing everyday matter by category; no matching subtopic,Classifying everyday matter; no node fits,
+50007,OpenStax Chemistry 2e,Chemistry,wastebasket,Chemical versus physical properties of fluorine; no matching subtopic,Chemical versus physical properties; no node,
+50008,OpenStax Chemistry 2e,Chemistry,wastebasket,Physical versus chemical change classification; no matching subtopic,Chemical versus physical changes; no node,
+50009,OpenStax Chemistry 2e,Chemistry,wastebasket,Physical versus chemical change classification; no matching subtopic,Chemical versus physical changes; no node,
+50010,OpenStax Chemistry 2e,Chemistry,wastebasket,Physical versus chemical change for gas volume; could fit gas laws,Chemical versus physical change; no node,
+50011,OpenStax Chemistry 2e,Chemistry,wastebasket,Chemical versus physical change in gas reaction; no matching subtopic,Chemical versus physical change; no node,
+50012,OpenStax Chemistry 2e,Chemistry,wastebasket,Extensive versus intensive properties; no matching subtopic,Extensive versus intensive properties concept,
+50013,OpenStax Chemistry 2e,Chemistry,wastebasket,Extensive versus intensive property identification; no matching subtopic,Extensive versus intensive properties concept,
+50079,OpenStax Chemistry 2e,Chemistry,wastebasket,"Electron versus proton comparison; basic atomic structure, no subtopic",Subatomic particle comparison; no node,
+50080,OpenStax Chemistry 2e,Chemistry,wastebasket,"Proton versus neutron comparison; basic atomic structure, no subtopic",Subatomic particle comparison; no node,
+50081,OpenStax Chemistry 2e,Chemistry,wastebasket,"Isotope similarities and differences; basic atomic structure, no subtopic",Isotope concept; no node,
+50082,OpenStax Chemistry 2e,Chemistry,wastebasket,Writing ion nuclide symbols; no subtopic for nuclide notation,Nuclide and ion symbols; no node,
+50083,OpenStax Chemistry 2e,Chemistry,wastebasket,Writing ion nuclide symbols; no subtopic for nuclide notation,Nuclide and ion symbols; no node,
+50084,OpenStax Chemistry 2e,Chemistry,wastebasket,"Counting protons, neutrons, electrons; no matching subtopic","Counting protons, neutrons, electrons in ions",
+50085,OpenStax Chemistry 2e,Chemistry,wastebasket,Counting subatomic particles in isotopes; no matching subtopic,"Counting protons, neutrons, electrons in ions",
+50086,OpenStax Chemistry 2e,Chemistry,wastebasket,Counting subatomic particles in isotopes; no matching subtopic,Counting subatomic particles in isotopes,
+50087,OpenStax Chemistry 2e,Chemistry,wastebasket,Counting subatomic particles in isotopes; no matching subtopic,Counting subatomic particles in isotopes,
+50088,OpenStax Chemistry 2e,Chemistry,wastebasket,Simulation-based isotope abundance exercise; no matching subtopic,Isotope simulation of boron abundances,
+50098,OpenStax Chemistry 2e,Chemistry,wastebasket,Periodic table classification of elements; no matching subtopic,Periodic table classification of elements,
+50099,OpenStax Chemistry 2e,Chemistry,wastebasket,Periodic table classification of elements; no matching subtopic,Periodic table classification of elements,
+50100,OpenStax Chemistry 2e,Chemistry,wastebasket,Periodic table group membership; no matching subtopic,Periodic table group identification,
+50101,OpenStax Chemistry 2e,Chemistry,wastebasket,Periodic table group membership; no matching subtopic,Periodic table group identification,
+50102,OpenStax Chemistry 2e,Chemistry,wastebasket,Periodic table name and symbol lookup; no matching subtopic,Periodic table group and period lookup,
+50103,OpenStax Chemistry 2e,Chemistry,wastebasket,Periodic table name and symbol lookup; no matching subtopic,Periodic table group and period lookup,
+50104,OpenStax Chemistry 2e,Chemistry,wastebasket,Writing isotope symbols from periodic table; no matching subtopic,"isotope symbols; protons, neutrons, mass number; no exact subtopic",No subtopic for isotope notation and atomic composition
+50105,OpenStax Chemistry 2e,Chemistry,wastebasket,Writing isotope symbols from periodic table; no matching subtopic,"isotope symbols; protons, neutrons, mass number; no exact subtopic",No subtopic for isotope notation and atomic composition
+50112,OpenStax Chemistry 2e,Chemistry,wastebasket,"Naming binary compounds; nomenclature, loose fit",inorganic compound nomenclature; no subtopic,Inorganic nomenclature not in tree
+50113,OpenStax Chemistry 2e,Chemistry,wastebasket,Naming binary compounds including covalent ones; loose fit,inorganic compound nomenclature; no subtopic,Inorganic nomenclature not in tree
+50114,OpenStax Chemistry 2e,Chemistry,wastebasket,Writing formulas from compound names; loose fit,inorganic compound nomenclature; no subtopic,Inorganic nomenclature not in tree
+50115,OpenStax Chemistry 2e,Chemistry,wastebasket,Writing formulas from compound names; loose fit,inorganic compound nomenclature; no subtopic,Inorganic nomenclature not in tree
+50116,OpenStax Chemistry 2e,Chemistry,wastebasket,Writing formulas from compound names; loose fit,inorganic compound nomenclature; no subtopic,Inorganic nomenclature not in tree
+50117,OpenStax Chemistry 2e,Chemistry,wastebasket,Writing formulas from compound names; loose fit,inorganic compound nomenclature; no subtopic,Inorganic nomenclature not in tree
+50118,OpenStax Chemistry 2e,Chemistry,wastebasket,,inorganic compound nomenclature; no subtopic,Inorganic nomenclature not in tree
+50119,OpenStax Chemistry 2e,Chemistry,wastebasket,,inorganic compound nomenclature; no subtopic,Inorganic nomenclature not in tree
+50120,OpenStax Chemistry 2e,Chemistry,wastebasket,Writing formulas of household ionic compounds; loose fit,inorganic compound nomenclature; no subtopic,Inorganic nomenclature not in tree
+50121,OpenStax Chemistry 2e,Chemistry,wastebasket,Naming ionic compounds; loose fit,inorganic compound nomenclature; no subtopic,Inorganic nomenclature not in tree
+50122,OpenStax Chemistry 2e,Chemistry,wastebasket,"Naming of simple binary and ionic compounds; no exact tree match, likely Chemistry basics.",inorganic compound nomenclature; no subtopic,Inorganic nomenclature not in tree
+50718,OpenStax Chemistry 2e,Chemistry,wastebasket,Macroscopic versus microscopic classification of solution concepts; no exact subtopic.,macroscopic vs microscopic classification of terms,Macroscopic versus microscopic domain vocabulary; no subtopic fits
+51415,TheoremQA,"Signals, Systems and Control",wastebasket,Image morphology; no close subtopic in tree,Image morphology; no matching subtopic,
+51426,TheoremQA,"Signals, Systems and Control",wastebasket,Colour space comparison; no close subtopic,HSI color model; no matching subtopic,HSI colour model; image processing has no subtopic
+51436,TheoremQA,"Signals, Systems and Control",wastebasket,Fourier descriptors of contours; no close subtopic,Image Fourier descriptors; no matching subtopic,
+51439,TheoremQA,"Signals, Systems and Control",wastebasket,MPEG error propagation; no close subtopic,MPEG video coding; no matching subtopic,
+51445,TheoremQA,"Signals, Systems and Control",wastebasket,Colour-space image processing; no image subtopic in tree,Color chrominance; no matching subtopic,
+51446,TheoremQA,"Signals, Systems and Control",wastebasket,Hue-saturation colour model; no image subtopic in tree,Color saturation; no matching subtopic,
+51450,TheoremQA,"Signals, Systems and Control",wastebasket,Video frame storage size; no image subtopic in tree,Video frame memory size; no matching subtopic,
+51452,TheoremQA,"Signals, Systems and Control",wastebasket,Morphological image operations; no image subtopic in tree,Image morphology; no matching subtopic,
+51458,TheoremQA,"Signals, Systems and Control",wastebasket,Fourier descriptors for shape recognition; no image subtopic,Image Fourier descriptors; no matching subtopic,
+51459,TheoremQA,"Signals, Systems and Control",wastebasket,Video storage with chroma subsampling; no image subtopic,Video storage size; no matching subtopic,
+51464,TheoremQA,"Signals, Systems and Control",wastebasket,Histogram contrast of image; no image subtopic in tree,Image histogram contrast; no image-processing subtopic,
+51465,TheoremQA,"Signals, Systems and Control",wastebasket,Histogram specification; no image subtopic in tree,Histogram specification; image processing not in tree,
+51474,TheoremQA,"Signals, Systems and Control",wastebasket,Image thresholding; no image subtopic in tree,Image thresholding; no matching subtopic,
+51486,TheoremQA,"Signals, Systems and Control",wastebasket,HSI colour brightness; no image subtopic in tree,HSI color model; image processing,
+51490,TheoremQA,"Signals, Systems and Control",wastebasket,Video frame storage with chroma subsampling; no image subtopic,Video frame memory size; image processing,
+51494,TheoremQA,"Signals, Systems and Control",wastebasket,Shape descriptors for image object detection; no image subtopic,Fourier descriptors of contours; image processing,
+51495,TheoremQA,"Signals, Systems and Control",wastebasket,Shape descriptors for image object detection; no image subtopic,Fourier descriptors of contours; image processing,
+51510,TheoremQA,"Signals, Systems and Control",wastebasket,Block-matching motion estimation; figure values needed; no clean subtopic,Block-matching motion estimation; video processing,video motion estimation; no image-processing subtopic
+51524,ControlBench,Linear Algebra and Differential Equations,wastebasket,,classifying ODE vs PDE; no matching subtopic,ODE vs PDE classification has no subtopic
+51743,"Woolf, Chemical Process Dynamics and Controls (Chapter 14)",Chemical Engineering,wastebasket,Experimental design (DOE) for process optimisation; no DOE subtopic,design of experiments; no matching subtopic,
+51744,"Woolf, Chemical Process Dynamics and Controls (Chapter 14)",Chemical Engineering,wastebasket,Taguchi quality philosophy; no fitting subtopic,Taguchi quality philosophy; no matching subtopic,
+51745,"Verrett et al., Foundations of Chemical and Biological Engineering I (Chapter 1)",Chemical Engineering,wastebasket,Battery-limit concept; no matching subtopic in tree,Battery limits classification in process design,
+51746,"Verrett et al., Foundations of Chemical and Biological Engineering I (Chapter 10)",Chemical Engineering,wastebasket,Design basis memorandum schedule content; no exact subtopic fits.,Design basis memorandum contents,design basis memorandum document structure
+51748,"Verrett et al., Foundations of Chemical and Biological Engineering I (Chapter 10)",Chemical Engineering,wastebasket,Equipment tag nomenclature; key option D says 'duplication' and solution wording is loose.,Equipment labelling convention on process diagrams,
+51884,XFinBench,Quantitative Finance,wastebasket,Hedging motives; no exact subtopic fits well.,"Conceptual corporate hedging policy, no matching subtopic",Corporate hedging rationale; no subtopic fits
+52027,XFinBench,Economics,wastebasket,Financial intermediation and economies of scale; no fitting subtopic.,financial intermediation; no matching node,
+52048,XFinBench,Economics,wastebasket,Housing-crisis bank losses; no fitting subtopic.,financial crisis history; no matching node,
+52071,XFinBench,Economics,wastebasket,Campaign-finance political economy; no fitting subtopic,political economy; no matching node,
+52522,XFinBench,Economics,wastebasket,Financial liberalization and crises; no exact subtopic,financial crises and liberalization; no matching subtopic,
+52574,XFinBench,Economics,wastebasket,Consequences of weak financial regulation and supervision,financial regulation; no matching subtopic,
+52613,XFinBench,Quantitative Finance,wastebasket,Investment-bank spinning conflict; no clear subtopic in tree,investment bank conflicts of interest; no node,
+52819,XFinBench,Economics,wastebasket,Bank size distribution by institution type; no matching subtopic.,bank industry structure,
+52865,XFinBench,Quantitative Finance,wastebasket,Corporate legal form; no fitting corporate subtopic,corporate organization form; no good fit,Business organization forms; no subtopic fits
+52899,XFinBench,Economics,wastebasket,Electricity price volatility; no fitting economics subtopic,electricity price volatility; no matching subtopic,
+53133,XFinBench,Quantitative Finance,wastebasket,GNMA mortgage-backed securities history; no fitting subtopic,"GNMA conceptual question, no good fit",MBS market institutional history; no fitting subtopic
+53192,XFinBench,Quantitative Finance,wastebasket,Business organization forms; no matching subtopic in tree.,double taxation corporate form,business organization forms; no matching subtopic
+53305,XFinBench,Quantitative Finance,wastebasket,Organizational structure of corporate finance; no subtopic fits well,treasurer vs controller conceptual,corporate organizational structure; no matching subtopic
+53651,XFinBench,Quantitative Finance,wastebasket,Not-for-profit goal; no corporate-finance goal subtopic fits,"Corporate goals, not-for-profit; no good fit",goal of financial management; no subtopic covers it
+53733,XFinBench,Quantitative Finance,wastebasket,"Not-for-profit goals; no exact subtopic, weak fit.",Goals of not-for-profit financial management,Goals of financial management; no matching subtopic
+53759,XFinBench,Economics,wastebasket,Credit union structure; no banking-structure subtopic in tree.,"credit union institutional structure, no matching subtopic",
+53812,XFinBench,Quantitative Finance,wastebasket,Employee option expense revaluation; no clear subtopic,stock option grant accounting; no exact node,Employee stock option accounting; no fitting subtopic
+54052,FinanceMath,Quantitative Finance,wastebasket,Technical chart pattern; no subtopic fits,technical analysis chart pattern price target,Technical analysis chart pattern; no fitting subtopic
+54402,FinanceMath,Quantitative Finance,wastebasket,Real return objective with distributions; no clear subtopic,Return objective for foundation portfolio,Investment policy return objective; no subtopic
+54505,FinanceMath,Quantitative Finance,wastebasket,Chart-pattern technical analysis; no subtopic fits,technical analysis price target,Technical analysis chart pattern; no subtopic
+54546,FinanceMath,Quantitative Finance,wastebasket,Household economic net worth; no matching subject tree,economic net worth of individual; no fitting node,Private wealth economic balance sheet; no subtopic
+54589,FinanceMath,Quantitative Finance,wastebasket,Cost-plus pricing of bank savings products; no matching tree,bank cost-plus pricing of savings services,bank deposit service pricing fits no subtopic
+54663,FinanceMath,Quantitative Finance,wastebasket,,Liquidity coverage ratio of bank,bank liquidity coverage ratio fits no subtopic
+55027,MMLU-Pro,Chemistry,wastebasket,Sedimentation-diffusion protein molar mass; biophysical,Stokes-Einstein diffusion molecular weight,Stokes-Einstein diffusion of macromolecules; no transport subtopic
+55039,MMLU-Pro,Chemistry,wastebasket,"Ultracentrifuge sedimentation coefficient; no exact node, closest fit",sedimentation coefficient ultracentrifuge,Ultracentrifuge sedimentation coefficient; no transport subtopic
+55317,MMLU-Pro,Chemistry,wastebasket,Sedimentation and diffusion molar mass; no matching subtopic,Svedberg equation molecular weight; no exact node,Svedberg sedimentation molar mass has no subtopic
+55373,MMLU-Pro,Chemistry,wastebasket,Svedberg molar mass; no matching subtopic,Svedberg equation molecular weight; no exact node,Svedberg sedimentation molar mass has no subtopic
+55667,MMLU-Pro,Electrical Machinery,wastebasket,Rotary synchronous converter; no subtopic fits,Synchronous converter; no matching subtopic,
+56122,MMLU-Pro,Electrical Machinery,wastebasket,Rotary synchronous converters have no subtopic in tree,Synchronous converter; no matching subtopic,
+56271,MMLU,Chemistry,wastebasket,Environmental water pollutants; no matching subtopic,environmental chemistry of water pollutants,environmental water pollutants; no subtopic
+56413,MMLU,Chemistry,wastebasket,Chemical nomenclature of ionic compounds; no matching subtopic,inorganic compound naming; no exact node,No subtopic for naming simple ionic compounds
+56430,MMLU,Chemistry,wastebasket,Ionic compound naming with Roman numerals; no matching subtopic,naming with Roman numerals; transition metal cation,No subtopic for naming simple ionic compounds
+56686,SuperGPQA,"Signals, Systems and Control",wastebasket,GSM A5 cipher recall; not in the trees,GSM cipher trivia; no fitting subtopic,GSM encryption trivia; no fitting node
+56809,SuperGPQA,"Signals, Systems and Control",wastebasket,"Loudness and sones; psychoacoustics, no tree fit",psychoacoustic loudness,psychoacoustic loudness; no fitting node
+56810,SuperGPQA,"Signals, Systems and Control",wastebasket,"Masking and critical ratio; psychoacoustics, no tree fit",auditory masking critical ratio,auditory masking; no fitting node
+56903,SuperGPQA,"Signals, Systems and Control",wastebasket,Data backup and recovery; no matching subject,Data recovery trivia; no fitting subtopic,database recovery trivia; no fitting node
+56907,SuperGPQA,"Signals, Systems and Control",wastebasket,Image grayscale log transform; image processing not in tree,image processing log transform,
+56918,SuperGPQA,"Signals, Systems and Control",wastebasket,HDLC data-link framing; no matching subtopic,HDLC bit stuffing framing,HDLC bit stuffing is networking protocol
+56933,SuperGPQA,Circuits and Electronics,wastebasket,Computer bus synchronisation; no matching subject,Computer bus architecture,Computer bus architecture; no matching subtopic
+56938,SuperGPQA,Circuits and Electronics,wastebasket,Computer I/O channels; no matching subject,Computer I/O channels,Computer I/O channel architecture; no matching subtopic
+56982,SuperGPQA,"Signals, Systems and Control",wastebasket,Image processing question; no image-processing subtopic in these trees.,Image processing contrast stretching; no matching subtopic,
+56984,SuperGPQA,"Signals, Systems and Control",wastebasket,,Neural prosthesis general knowledge; no fitting subtopic,"biomedical device trivia, no control content"
+56999,SuperGPQA,"Signals, Systems and Control",wastebasket,Heating-system valve device; no matching subtopic.,Thermostatic valve heating control; general knowledge,HVAC component trivia
+57000,SuperGPQA,Circuits and Electronics,wastebasket,Vague general statement about circuit functions,General conceptual question on circuit functions; no subtopic fits,
+57027,SuperGPQA,"Signals, Systems and Control",wastebasket,History of radio broadcasting; not a fitting subtopic,Radio history trivia,"History-of-radio trivia, no technical subtopic"
+57046,SuperGPQA,"Signals, Systems and Control",wastebasket,Network security scanning types; outside given trees.,Network security scanning trivia,"network security, not in tree"
+57047,SuperGPQA,"Signals, Systems and Control",wastebasket,"TCP RTO estimation; networking, outside given trees.",TCP RTO Jacobson calculation; networking,"TCP networking, not in tree"
+57125,SuperGPQA,"Signals, Systems and Control",wastebasket,,IPsec AH protocol security trivia,network security protocol
+57127,SuperGPQA,Combinatorics,wastebasket,"Branch-and-bound integer programming; operations research, not in given trees.",Integer programming branch-and-bound; no matching subtopic,Integer programming branch-and-bound; no fitting node
+57129,SuperGPQA,"Signals, Systems and Control",wastebasket,IEEE 802.16 standard history; no matching subtopic.,WiMAX standard trivia,standards trivia
+57130,SuperGPQA,Chemistry,wastebasket,Award trivia; no subtopic fits,"trivia question, no fitting subtopic",Trivia about award winner
+57134,SuperGPQA,"Signals, Systems and Control",wastebasket,,MPEG-DASH history trivia,historical trivia
+57135,SuperGPQA,"Signals, Systems and Control",wastebasket,Operator safety switch terminology; no matching subtopic.,Dead-man switch terminology; no fitting subtopic,safety device terminology
+57136,SuperGPQA,"Signals, Systems and Control",wastebasket,,Biographical trivia about telecom engineer,biographical trivia
+57137,SuperGPQA,"Signals, Systems and Control",wastebasket,,History of multiplex telegraphy,historical trivia
+57140,SuperGPQA,Electromagnetism and Special Relativity,wastebasket,GPS L1 carrier frequency; no navigation subtopic,GPS frequency trivia,"GPS frequency trivia, no fitting node"
+57141,SuperGPQA,Circuits and Electronics,wastebasket,Factual recall about Canon nanoimprint product launch date,Nanoimprint lithography trivia; no fitting subtopic,"Industry news trivia about lithography, not circuits"
+57142,SuperGPQA,Circuits and Electronics,wastebasket,Battery case standards; not in given trees,"Battery case safety standard, not circuit analysis",Battery case standard trivia; no subtopic fits
+57143,SuperGPQA,Electromagnetism and Special Relativity,wastebasket,History of CISPR; no fitting subtopic,History trivia,"CISPR history trivia, no fitting node"
+57144,SuperGPQA,"Signals, Systems and Control",wastebasket,,Amateur radio modem designer trivia,biographical trivia
+57146,SuperGPQA,"Signals, Systems and Control",wastebasket,,PIR protocol history trivia,historical trivia
+57257,SuperGPQA,Chemistry,wastebasket,Food-safety regulatory fact; no subtopic fits,trivia on lead in tea,"Food-science trivia, no chemistry subtopic fits"
+57301,SuperGPQA,Material Science,wastebasket,Factual recall about LCD spacer materials,LCD spacer materials trivia,LCD spacer materials; no fitting subtopic
+57321,SuperGPQA,Circuits and Electronics,wastebasket,Vague question about circuit analysis method suitability,Conceptual: circuit analysis applies to linear circuits,Distribution network analysis question; no fitting subtopic
+57338,SuperGPQA,Chemistry,wastebasket,Humic substance solubility; no closer subtopic fits,humic substance fractions,"Soil humic substances, no fitting subtopic"
+57597,SuperGPQA,"Signals, Systems and Control",wastebasket,,Recall of EEG paper result; no matching subtopic,paper-specific result trivia
+57598,SuperGPQA,Chemistry,wastebasket,CAS registry lookup; no subtopic covers chemical identifiers,CAS number lookup of alginate,CAS number lookup trivia
+57600,SuperGPQA,Circuits and Electronics,wastebasket,Trivia about Yamaha YM2203 sound chip,"FM synthesis chip trivia, no good fit",Trivia about a sound chip
+57601,SuperGPQA,Chemistry,wastebasket,CAS registry lookup; no subtopic covers chemical identifiers,CAS number lookup,CAS number lookup trivia
+57606,SuperGPQA,Chemistry,wastebasket,KEGG identifier lookup; no subtopic covers chemical identifiers,database ID lookup; no fitting subtopic,KEGG ID lookup trivia
+57607,SuperGPQA,Chemistry,wastebasket,CAS registry lookup for vitamin A2; no fitting subtopic,CAS number lookup,CAS number lookup trivia
+57616,SuperGPQA,"Signals, Systems and Control",wastebasket,,Distance vector routing; networking,"network routing, not in tree"
+57624,SuperGPQA,Circuits and Electronics,wastebasket,On-chip power grid IR drop; no subtopic fits,Chip power grid IR drop; no good subtopic,VLSI power-grid routing; no fitting subtopic
+57625,SuperGPQA,Combinatorics,wastebasket,"Pareto front property; multi-objective optimisation, not in given trees",Pareto front in multiobjective optimisation; no matching subtopic,Multi-objective Pareto optimization; no fitting node
+57626,SuperGPQA,"Signals, Systems and Control",wastebasket,IP subnetting and routing,IP subnet routing; networking,"IP subnetting, not in tree"
+57630,SuperGPQA,"Signals, Systems and Control",wastebasket,Geometric dilution of precision in navigation,GDOP navigation concept,"navigation GDOP, not in tree"
+57637,SuperGPQA,Circuits and Electronics,wastebasket,Dental instrument identification; not an engineering subject,"dental endodontic instrument, off-topic",Dental endodontic instrument trivia
+57641,SuperGPQA,"Signals, Systems and Control",wastebasket,History of wireless; no subtopic fits,Marconi history trivia; no good fit,History trivia about Marconi
+57855,SuperGPQA,"Signals, Systems and Control",wastebasket,Television colour standards; no matching subtopic,TV standards trivia,TV standards trivia
+57859,SuperGPQA,"Signals, Systems and Control",wastebasket,Image sampling; image processing not covered,Image sampling definition; no matching subtopic,
+57860,SuperGPQA,"Signals, Systems and Control",wastebasket,Morphological opening; image processing not covered,Morphological image processing; no matching subtopic,
+57865,SuperGPQA,"Signals, Systems and Control",wastebasket,General communication system block components,Communication system model components,"general communication model, no subtopic"
+57877,SuperGPQA,Statistics,wastebasket,Asks for data-quality characteristics; no subtopic fits well.,General data-quality characteristics; no subtopic covers this.,
+57923,SuperGPQA,"Signals, Systems and Control",wastebasket,Pulse noise measurement criteria; no acoustics subject,Acoustics noise definition; no matching subtopic,Acoustic noise standards; no fitting subtopic
+57943,SuperGPQA,Chemistry,wastebasket,Sample purity requirement; no fitting subtopic,purity requirement of recrystallized samples,vague lab-practice trivia
+57949,SuperGPQA,Chemistry,wastebasket,General sample preparation purpose; no fitting subtopic,general sample preparation purpose,general sample preparation concept
+57950,SuperGPQA,Material Science,wastebasket,Carrier-lifetime measurement; no semiconductor subtopic fits,Carrier lifetime measurement method; no exact subtopic,Carrier generation-recombination measurement; no fitting subtopic
+57952,SuperGPQA,Chemical Engineering,wastebasket,Ink pigment properties; no matching subject,"ink pigments; off-topic, no fitting subtopic",Ink pigment formulation; no matching subtopic
+57966,SuperGPQA,"Signals, Systems and Control",wastebasket,Rayleigh fading channels not covered by tree,Rayleigh fading multipath concept,Fading channels not covered by any subtopic
+57997,SuperGPQA,"Signals, Systems and Control",wastebasket,Network enumeration tools; no matching subject tree.,Network security tool; no fitting subtopic,Network security tooling; outside the tree
+58005,SuperGPQA,"Signals, Systems and Control",wastebasket,Hex-to-binary bit counting for disk occupancy; no matching subtopic.,Hex bit counting; computer science,Counting bits in a hex string; computer science
+58060,SuperGPQA,Calculus,wastebasket,Network planning time-cost trade-off; no matching subtopic.,network planning time-cost tradeoff,"project time-cost tradeoff, no fitting subtopic"
+58065,SuperGPQA,"Signals, Systems and Control",wastebasket,,Cipher concept; no fitting subtopic,Cryptography; outside the tree
+58070,SuperGPQA,"Signals, Systems and Control",wastebasket,Factual recall of a paper's EEG sampling rate.,Recall of EEG paper detail; no matching subtopic,Trivia about a research paper
+58071,SuperGPQA,Chemistry,wastebasket,CAS registry lookup; no subtopic covers chemical identifiers,CAS number lookup of TiF4,
+58076,SuperGPQA,Circuits and Electronics,wastebasket,Consumer electronics protocol standard; no fitting subtopic,HDMI CEC protocol trivia; no fitting node,Consumer protocol standards trivia
+58080,SuperGPQA,"Signals, Systems and Control",wastebasket,Scanning formats and vertical blanking interval; no matching subtopic.,Video scanning trivia; no fitting subtopic,Television scanning; no fitting subtopic
+58081,SuperGPQA,"Signals, Systems and Control",wastebasket,Historical date recall.,Telephone exchange history trivia,Historical trivia
+58086,SuperGPQA,"Signals, Systems and Control",wastebasket,Historical recall of cable project leaders.,Submarine cable trivia,Historical trivia
+58088,SuperGPQA,"Signals, Systems and Control",wastebasket,,Wi-Fi security trivia,Wireless security protocols; outside the tree
+58105,SuperGPQA,Circuits and Electronics,wastebasket,Patent infringement reasoning; fits no listed subject,"patent law question, not electronics",Patent law question
+58240,SuperGPQA,Material Science,wastebasket,Garbled question; meaning of notation unclear,Unclear notation; likely material grade/composition code,"Obscure regulatory notation, no matching subtopic"
+58247,SuperGPQA,Chemistry,wastebasket,Vitamin stability fact; no tree subtopic fits,Vitamin stability fact; no vitamin subtopic,
+58254,SuperGPQA,Circuits and Electronics,wastebasket,Gyro compass component detail; closest is transducers,gyrocompass maintenance; no matching node,Gyrocompass maintenance detail
+58269,SuperGPQA,Chemistry,wastebasket,Dry ashing sample preparation; no clear subtopic,Sample preparation dry ashing temperature,
+58271,SuperGPQA,Power Systems and Power Electronics,wastebasket,Power supply for secondary loads; no subtopic fits well,load classification supply design; no matching subtopic,
+58291,SuperGPQA,Chemistry,wastebasket,Humic acid solubility; soil chemistry fact,Humic acid salt solubility; no fitting subtopic,
+58543,SuperGPQA,"Signals, Systems and Control",wastebasket,Factual recall of publication date.,Paper publication date recall; no matching subtopic,Publication-date trivia
+58546,SuperGPQA,Chemistry,wastebasket,Database identifier lookup for a drug; no subtopic fits,Database ID recall,
+58547,SuperGPQA,Chemistry,wastebasket,Formula lookup for a pesticide; no subtopic fits,Molecular formula recall of pesticide,
+58548,SuperGPQA,Chemistry,wastebasket,Biographical fact about a chemist's thesis title.,History of chemistry trivia,"Biographical trivia, no chemistry content"
+58565,SuperGPQA,"Signals, Systems and Control",wastebasket,Bit-to-byte unit conversion; no matching subtopic.,Unit conversion bits to bytes,Unit conversion only
+58570,SuperGPQA,"Signals, Systems and Control",wastebasket,Historical recall.,History of sound recording; no matching subtopic,Historical trivia
+58707,SuperGPQA,Chemistry,wastebasket,Factual question about tea composition; no subtopic fits,Tea composition trivia,
+58806,SuperGPQA,"Signals, Systems and Control",wastebasket,Computer networks store-and-forward timing; not in trees,Packet vs message switching delay; networking,Computer networking switching delays
+58821,SuperGPQA,"Signals, Systems and Control",wastebasket,Feedback topology for voltage amplifier; Circuits and Electronics,"Feedback amplifier choice; electronics, no fitting subtopic",Feedback amplifier topology belongs to Circuits and Electronics
+58823,SuperGPQA,"Signals, Systems and Control",wastebasket,Optical disk recording analogy; not a signals topic,Optical disk storage trivia,Computer storage hardware
+58842,SuperGPQA,"Signals, Systems and Control",wastebasket,Classification terminology question; no specific subtopic fits,Control system classification terminology,Classification of control systems; no fitting subtopic
+58868,SuperGPQA,"Signals, Systems and Control",wastebasket,Vocabulary question on informatization; no subject fits,General informatization text; no fit,General information-technology text
+58876,SuperGPQA,Chemistry,wastebasket,Water-sample preservation practice; no analytical subtopic fits,water sample preservation; no good subtopic,Water sample preservation; no matching node
+58881,SuperGPQA,Chemistry,wastebasket,Options are nonsensical animal-method names; question unclear,nonsense options; likely plant sap/phloem analysis method,"Plant physiology aphid stylet method, not chemistry"
+58884,SuperGPQA,Material Science,wastebasket,Moisture hysteresis of materials; no matching subtopic,Moisture regain hysteresis of materials,"Textile moisture regain hysteresis, no matching subtopic"
+58891,SuperGPQA,"Signals, Systems and Control",wastebasket,Hall's three-dimensional structure of systems engineering,Hall systems engineering framework,Systems engineering methodology
+58893,SuperGPQA,"Signals, Systems and Control",wastebasket,Classification of control systems by input pattern; no subtopic fits,Control system classification terminology,Classification of control systems; no fitting subtopic
+58897,SuperGPQA,"Signals, Systems and Control",wastebasket,Synchronous vs asynchronous transmission; no clean subtopic,Synchronous communication concept,Data-communication concepts; no fitting subtopic
+58926,SuperGPQA,"Signals, Systems and Control",wastebasket,IP forwarding hops and tables; networking not in subjects,IP routing interfaces; networking,IP routing; computer networking
+59011,SuperGPQA,Chemistry,wastebasket,CAS registry lookup; no subtopic fits,CAS number trivia; no fitting subtopic,
+59012,SuperGPQA,Circuits and Electronics,wastebasket,Historical sound-chip specification; no fitting subject,sound chip trivia; no fitting node,Trivia about a sound chip
+59014,SuperGPQA,Chemistry,wastebasket,"Awards and biography recall, not chemistry content",award trivia; no fitting subtopic,"Prize trivia, no chemistry content"
+59016,SuperGPQA,"Signals, Systems and Control",wastebasket,EnOcean standard history; no subject fits,Wireless standard date trivia,Standards trivia
+59017,SuperGPQA,"Signals, Systems and Control",wastebasket,Anonymous network terminology; no subject fits,Privacy network trivia,Network privacy; outside the tree
+59019,SuperGPQA,"Signals, Systems and Control",wastebasket,Bibliographic detail of a specific paper; no subject fits,EEG paper trivia; no matching subtopic,Trivia about a specific paper's dataset
+59050,SuperGPQA,Power Systems and Power Electronics,wastebasket,"Mining lamp safe voltage; safety regulation, not in trees",Electrical safety voltage limit for lighting,Electrical safety regulation recall; no fitting subtopic
+59128,SuperGPQA,Chemistry,wastebasket,"Food chemistry (tea polyphenols), no matching subtopic",tea polyphenol trivia; no good subtopic,"Tea steeping trivia, no chemistry subtopic fits"
+59168,SuperGPQA,Circuits and Electronics,wastebasket,Flatbed instrument setup; unclear and not in given subjects,flatbed instrument setup; no matching node,Surveying plane-table setup
+59184,SuperGPQA,Circuits and Electronics,wastebasket,Gyrocompass damping; instrumentation not among given subjects,gyrocompass damping torque; no matching node,Gyrocompass mechanics
+59186,SuperGPQA,Circuits and Electronics,wastebasket,Vibration test-controller hardware; no matching subject tree.,vibration test system components,Vibration test system components
+59205,SuperGPQA,Power Systems and Power Electronics,wastebasket,Distribution supply voltage; no exact subtopic,distribution supply voltage design; no matching subtopic,
+59486,SuperGPQA,Chemistry,wastebasket,"Factual trivia, not a chemistry problem","Award trivia, no fitting subtopic","award trivia, no chemistry content"
+59487,SuperGPQA,Chemistry,wastebasket,Drug compound CAS lookup; no fitting subject in the trees,CAS number trivia,CAS number trivia
+59488,SuperGPQA,Chemistry,wastebasket,"Factual trivia, not a chemistry problem","Award trivia, no chemistry content","award trivia, no chemistry content"
+59489,SuperGPQA,Chemistry,wastebasket,"CAS number lookup, not a chemistry problem",CAS number lookup; no fitting subtopic,CAS number trivia
+59491,SuperGPQA,Chemistry,wastebasket,"Factual trivia, not a chemistry problem","Award trivia, no fitting subtopic",award history trivia
+59492,SuperGPQA,Chemistry,wastebasket,"Factual trivia, not a chemistry problem","Award trivia, no fitting subtopic","award trivia, no chemistry content"
+59494,SuperGPQA,"Signals, Systems and Control",wastebasket,Factual recall of a specific paper's sampling rate,EEG paper trivia; no matching subtopic,
+59508,SuperGPQA,"Signals, Systems and Control",wastebasket,"TRIZ laws, not in any given subject",TRIZ trivia; no fitting subtopic,"TRIZ innovation theory, not control"
+59609,SuperGPQA,Power Systems and Power Electronics,wastebasket,Spot welding supply sensitivity; no matching subtopic,spot welding supply voltage drop compensation,welding practice; no fitting subtopic
+59747,SuperGPQA,Chemistry,wastebasket,Vague decomposition question; no specific chemistry concept,"Vague deterioration question, no fitting subtopic",
+59749,SuperGPQA,Electromagnetism and Special Relativity,wastebasket,Non-technical vocabulary question about wireless power,reading comprehension on wireless power transfer,"reading-comprehension trivia, no physics content"
+59760,SuperGPQA,"Signals, Systems and Control",wastebasket,"RIP distance-vector question; networking, not in subject list","RIP routing protocol, computer networking",
+59804,SuperGPQA,"Signals, Systems and Control",wastebasket,"Definition of a system; general systems theory, no subtopic",Conceptual definition of system; no matching subtopic,"Verbal definition of system, no technical content"
+59830,SuperGPQA,"Signals, Systems and Control",wastebasket,Doppler radar; no radar subtopic exists,Doppler radar classification; no fitting subtopic,"Radar terminology recall, no fitting subtopic"
+59842,SuperGPQA,"Signals, Systems and Control",wastebasket,Control system commissioning steps; no matching subtopic,General commissioning procedure question; no matching subtopic,
+59937,SuperGPQA,Circuits and Electronics,wastebasket,Historical LED modulation frequency question,LED history trivia; no fitting subtopic,LED history trivia; no technical subtopic fits
+59944,SuperGPQA,Circuits and Electronics,wastebasket,Company founding year trivia,Company founding trivia; no fitting subtopic,Company founding-year trivia; no subtopic fits
+59945,SuperGPQA,Electromagnetism and Special Relativity,wastebasket,Publication-date trivia,History trivia about Heaviside,History trivia about Heaviside; no technical subtopic fits
+60043,SuperGPQA,Chemistry,wastebasket,Natural-product food chemistry; no fitting subtopic,"Tea chemistry, natural products not covered",
+60095,SuperGPQA,Chemical Engineering,wastebasket,Garbled; suspension agent rate not covered by tree,"Suspension agent suspension rate, no clear fit",
+60108,SuperGPQA,Power Systems and Power Electronics,wastebasket,Distribution wiring layout; no matching subtopic in the tree.,distribution wiring forms; no matching subtopic,
+60130,SuperGPQA,"Signals, Systems and Control",wastebasket,Rudin-Shapiro sequence; no close subtopic,Rudin-Shapiro sequence term computation; combinatorics-like,
+60392,SuperGPQA,Circuits and Electronics,wastebasket,Historical trivia about a specific device; no subtopic fits,"Toshiba chip clock frequency trivia, likely audio converter",Product spec trivia; no subtopic fits
+60393,SuperGPQA,"Signals, Systems and Control",wastebasket,Journal editor lookup; no subject content,EEG paper editor trivia,Paper editor trivia
+60394,SuperGPQA,Circuits and Electronics,wastebasket,,Scanning tunneling microscope history trivia,History-of-microscopy trivia; no subtopic fits
+60396,SuperGPQA,"Signals, Systems and Control",wastebasket,Factual recall about a cipher standard,cryptography standard trivia,Standards history trivia
+60398,SuperGPQA,"Signals, Systems and Control",wastebasket,Paper detail recall; no subject content,EEG paper trivia; no matching subtopic,Paper detail trivia
+60400,SuperGPQA,Chemistry,wastebasket,History of fluorine discovery; no matching subtopic,History of chemistry trivia about fluorine discovery,
+60401,SuperGPQA,Chemistry,wastebasket,Drug CAS registry lookup; no matching subtopic,CAS registry number lookup,
+60442,MMLU-Pro,Mechanics,wastebasket,Machine design bearing selection from catalogue table; no matching subtopic,bearing selection from catalogue table; no fitting subtopic,
+60468,MMLU-Pro,Mechanics,wastebasket,Wire rope selection and sheave sizing; no matching subtopic,wire rope and sheave selection from tables,
+60603,MMLU-Pro,Mechanics,wastebasket,Spherical roller bearing life; no matching subtopic,"rolling bearing life rating, no fitting subtopic",
+60633,MMLU-Pro,Mechanics,wastebasket,"Roller chain power; machine design, no fitting subtopic",chain power rating,Chain rating from machine-design catalog tables
+60653,MMLU-Pro,Mechanics,wastebasket,"Journal bearing oil film; machine design, no fitting subtopic",journal bearing friction power and film temperature,Journal bearing lubrication from charts; no fitting subtopic
+60693,MMLU-Pro,Mechanics,wastebasket,Roller chain sprocket selection; machine design,"roller chain sprocket selection, machine design",Sprocket selection from catalog tables
+60694,MMLU-Pro,Mechanics,wastebasket,Roller chain power rating; machine design,roller chain power rating,Roller chain power rating from catalog formula
+60866,MMLU-Pro,Electromagnetism and Special Relativity,wastebasket,Cherenkov-like wake angle in shallow water; no exact subtopic,"Cerenkov analogy, shallow water wave speed",Water-wave bow shock; really Mechanics waves
+61281,MMLU-Pro,Electromagnetism and Special Relativity,wastebasket,Rayleigh scattering intensity ratio; no subtopic fits.,Rayleigh scattering 1/lambda^4 ratio; no good fit,Rayleigh scattering not covered by any subtopic

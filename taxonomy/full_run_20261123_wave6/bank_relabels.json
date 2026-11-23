@@ -1,0 +1,1226 @@
+{
+"5368": {
+"topic": "Inorganic Chemistry",
+"branch": "Atomic Structure and Periodicity",
+"subtopic": "Quantum Numbers and Atomic Orbitals",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Structure of Materials",
+"Atomic Structure and Bonding",
+"Electron Configuration and the Periodic Table"
+]
+},
+"5369": {
+"topic": "Inorganic Chemistry",
+"branch": "Atomic Structure and Periodicity",
+"subtopic": "Electron Configurations",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Structure of Materials",
+"Atomic Structure and Bonding",
+"Electron Configuration and the Periodic Table"
+]
+},
+"5371": {
+"topic": "Inorganic Chemistry",
+"branch": "Atomic Structure and Periodicity",
+"subtopic": "Electron Configurations",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Structure of Materials",
+"Atomic Structure and Bonding",
+"Electron Configuration and the Periodic Table"
+]
+},
+"5372": {
+"topic": "Inorganic Chemistry",
+"branch": "Atomic Structure and Periodicity",
+"subtopic": "Electron Configurations",
+"conf": "high",
+"how": "wave6-move-agree",
+"db": [
+"Structure of Materials",
+"Atomic Structure and Bonding",
+"Electron Configuration and the Periodic Table"
+]
+},
+"5373": {
+"topic": "Inorganic Chemistry",
+"branch": "Atomic Structure and Periodicity",
+"subtopic": "Electron Affinity and Electronegativity",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Structure of Materials",
+"Atomic Structure and Bonding",
+"Electron Configuration and the Periodic Table"
+]
+},
+"5681": {
+"topic": "Inorganic Chemistry",
+"branch": "Atomic Structure and Periodicity",
+"subtopic": "Electron Configurations",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Structure of Materials",
+"Atomic Structure and Bonding",
+"Electron Configuration and the Periodic Table"
+]
+},
+"5682": {
+"topic": "Inorganic Chemistry",
+"branch": "Atomic Structure and Periodicity",
+"subtopic": "Quantum Numbers and Atomic Orbitals",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Structure of Materials",
+"Atomic Structure and Bonding",
+"Electron Configuration and the Periodic Table"
+]
+},
+"5683": {
+"topic": "Inorganic Chemistry",
+"branch": "Atomic Structure and Periodicity",
+"subtopic": "Atomic and Ionic Radii",
+"conf": "medium",
+"how": "wave6-move-opus",
+"db": [
+"Structure of Materials",
+"Atomic Structure and Bonding",
+"Electron Configuration and the Periodic Table"
+]
+},
+"16112": {
+"topic": "Mass Transfer and Separation Processes",
+"branch": "Diffusion and Mass Transfer Coefficients",
+"subtopic": "Equimolar Counterdiffusion and Stefan Flow",
+"conf": "medium",
+"how": "wave6-move-agree",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Steady Mass Diffusion"
+]
+},
+"18280": {
+"topic": "Heat and Mass Transfer",
+"branch": "Free Convection",
+"subtopic": "Cylinders and Spheres in Still Fluid",
+"conf": "medium",
+"how": "wave6-move-opus-outside-move",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Evaporation and Stefan Flow"
+]
+},
+"18336": {
+"topic": "Mass Transfer and Separation Processes",
+"branch": "Diffusion and Mass Transfer Coefficients",
+"subtopic": "Equimolar Counterdiffusion and Stefan Flow",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Steady Mass Diffusion"
+]
+},
+"18337": {
+"topic": "Mass Transfer and Separation Processes",
+"branch": "Diffusion and Mass Transfer Coefficients",
+"subtopic": "Heat and Mass Transfer Analogies",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Simultaneous Heat and Mass Transfer"
+]
+},
+"18338": {
+"topic": "Mass Transfer and Separation Processes",
+"branch": "Diffusion and Mass Transfer Coefficients",
+"subtopic": "Equimolar Counterdiffusion and Stefan Flow",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Evaporation and Stefan Flow"
+]
+},
+"18424": {
+"topic": "Heat and Mass Transfer",
+"branch": "Forced Convection",
+"subtopic": "Cylinders and Spheres in Crossflow",
+"conf": "medium",
+"how": "wave6-move-opus-outside-move",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Evaporation and Stefan Flow"
+]
+},
+"18521": {
+"topic": "Mass Transfer and Separation Processes",
+"branch": "Diffusion and Mass Transfer Coefficients",
+"subtopic": "Equimolar Counterdiffusion and Stefan Flow",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Evaporation and Stefan Flow"
+]
+},
+"18523": {
+"topic": "Mass Transfer and Separation Processes",
+"branch": "Diffusion and Mass Transfer Coefficients",
+"subtopic": "Equimolar Counterdiffusion and Stefan Flow",
+"conf": "high",
+"how": "wave6-move-agree",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Evaporation and Stefan Flow"
+]
+},
+"18524": {
+"topic": "Mass Transfer and Separation Processes",
+"branch": "Diffusion and Mass Transfer Coefficients",
+"subtopic": "Equimolar Counterdiffusion and Stefan Flow",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Steady Mass Diffusion"
+]
+},
+"18525": {
+"topic": "Mass Transfer and Separation Processes",
+"branch": "Diffusion and Mass Transfer Coefficients",
+"subtopic": "Heat and Mass Transfer Analogies",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Simultaneous Heat and Mass Transfer"
+]
+},
+"18629": {
+"topic": "Mass Transfer and Separation Processes",
+"branch": "Diffusion and Mass Transfer Coefficients",
+"subtopic": "Fick's Law and Diffusion Coefficients",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Steady Mass Diffusion"
+]
+},
+"18630": {
+"topic": "Mass Transfer and Separation Processes",
+"branch": "Diffusion and Mass Transfer Coefficients",
+"subtopic": "Fick's Law and Diffusion Coefficients",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Steady Mass Diffusion"
+]
+},
+"18631": {
+"topic": "Chemical Process Principles",
+"branch": "Material Balances",
+"subtopic": "Process Variables and Flow Rates",
+"conf": "medium",
+"how": "wave6-move-opus",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Steady Mass Diffusion"
+]
+},
+"18632": {
+"topic": "Mass Transfer and Separation Processes",
+"branch": "Diffusion and Mass Transfer Coefficients",
+"subtopic": "Equimolar Counterdiffusion and Stefan Flow",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Evaporation and Stefan Flow"
+]
+},
+"19506": {
+"topic": "Fluid Mechanics",
+"branch": "Boundary Layers and External Flow",
+"subtopic": "Terminal Velocity and Sphere Drag",
+"conf": "high",
+"how": "wave6-move-opus-outside-move",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Particle Settling and Separation"
+]
+},
+"19513": {
+"topic": "Fluid Mechanics",
+"branch": "Boundary Layers and External Flow",
+"subtopic": "Terminal Velocity and Sphere Drag",
+"conf": "high",
+"how": "wave6-move-opus-outside-move",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Particle Settling and Separation"
+]
+},
+"21599": {
+"topic": "Particle and Fluid-Solid Operations",
+"branch": "Settling, Filtration and Fluidisation",
+"subtopic": "Fluidisation and Packed-Bed Pressure Drop",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Fluidized and Packed Beds"
+]
+},
+"21600": {
+"topic": "Particle and Fluid-Solid Operations",
+"branch": "Settling, Filtration and Fluidisation",
+"subtopic": "Cyclones and Centrifugal Separators",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Particle Settling and Separation"
+]
+},
+"21601": {
+"topic": "Particle and Fluid-Solid Operations",
+"branch": "Settling, Filtration and Fluidisation",
+"subtopic": "Fluidisation and Packed-Bed Pressure Drop",
+"conf": "medium",
+"how": "wave6-move-agree",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Fluidized and Packed Beds"
+]
+},
+"21602": {
+"topic": "Particle and Fluid-Solid Operations",
+"branch": "Settling, Filtration and Fluidisation",
+"subtopic": "Fluidisation and Packed-Bed Pressure Drop",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Fluidized and Packed Beds"
+]
+},
+"21603": {
+"topic": "Particle and Fluid-Solid Operations",
+"branch": "Settling, Filtration and Fluidisation",
+"subtopic": "Fluidisation and Packed-Bed Pressure Drop",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Fluidized and Packed Beds"
+]
+},
+"21604": {
+"topic": "Particle and Fluid-Solid Operations",
+"branch": "Settling, Filtration and Fluidisation",
+"subtopic": "Cyclones and Centrifugal Separators",
+"conf": "high",
+"how": "wave6-move-opus",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Particle Settling and Separation"
+]
+},
+"21685": {
+"topic": "Fluid Mechanics",
+"branch": "Boundary Layers and External Flow",
+"subtopic": "Terminal Velocity and Sphere Drag",
+"conf": "high",
+"how": "wave6-move-opus-outside-move",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Particle Settling and Separation"
+]
+},
+"21686": {
+"topic": "Fluid Mechanics",
+"branch": "Boundary Layers and External Flow",
+"subtopic": "Terminal Velocity and Sphere Drag",
+"conf": "medium",
+"how": "wave6-move-opus-outside-move",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Particle Settling and Separation"
+]
+},
+"21687": {
+"topic": "Fluid Mechanics",
+"branch": "Boundary Layers and External Flow",
+"subtopic": "Terminal Velocity and Sphere Drag",
+"conf": "high",
+"how": "wave6-move-opus-outside-move",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Particle Settling and Separation"
+]
+},
+"21688": {
+"topic": "Fluid Mechanics",
+"branch": "Boundary Layers and External Flow",
+"subtopic": "Terminal Velocity and Sphere Drag",
+"conf": "medium",
+"how": "wave6-move-opus-outside-move",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Particle Settling and Separation"
+]
+},
+"21690": {
+"topic": "Particle and Fluid-Solid Operations",
+"branch": "Settling, Filtration and Fluidisation",
+"subtopic": "Fluidisation and Packed-Bed Pressure Drop",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Fluidized and Packed Beds"
+]
+},
+"21691": {
+"topic": "Particle and Fluid-Solid Operations",
+"branch": "Settling, Filtration and Fluidisation",
+"subtopic": "Fluidisation and Packed-Bed Pressure Drop",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Fluidized and Packed Beds"
+]
+},
+"21692": {
+"topic": "Particle and Fluid-Solid Operations",
+"branch": "Settling, Filtration and Fluidisation",
+"subtopic": "Fluidisation and Packed-Bed Pressure Drop",
+"conf": "low",
+"how": "wave6-move-agree",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Particle Settling and Separation"
+]
+},
+"21693": {
+"topic": "Particle and Fluid-Solid Operations",
+"branch": "Settling, Filtration and Fluidisation",
+"subtopic": "Cyclones and Centrifugal Separators",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Particle Settling and Separation"
+]
+},
+"21694": {
+"topic": "Particle and Fluid-Solid Operations",
+"branch": "Settling, Filtration and Fluidisation",
+"subtopic": "Fluidisation and Packed-Bed Pressure Drop",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Fluidized and Packed Beds"
+]
+},
+"21697": {
+"topic": "Particle and Fluid-Solid Operations",
+"branch": "Settling, Filtration and Fluidisation",
+"subtopic": "Cyclones and Centrifugal Separators",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Fluid Mechanics",
+"Multiphase Flow, Particles and Mixing",
+"Particle Settling and Separation"
+]
+},
+"41507": {
+"topic": "Analog Electronics",
+"branch": "Transistor Amplifiers",
+"subtopic": "Common-Base, Common-Gate and Follower Stages",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Electromagnetism",
+"Electronic Circuits",
+"Transistor and Operational Amplifiers"
+]
+},
+"41820": {
+"topic": "Analog Electronics",
+"branch": "Transistor Amplifiers",
+"subtopic": "Common-Emitter and Common-Source Amplifiers",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Electromagnetism",
+"Electronic Circuits",
+"Transistor and Operational Amplifiers"
+]
+},
+"41888": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "medium",
+"how": "wave6-move-opus",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"41942": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Raman Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"41943": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"41947": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Vibrational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"41956": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Raman Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"41957": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Vibrational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"41990": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"41994": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42013": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Raman Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42029": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Vibrational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42070": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Vibrational Spectroscopy",
+"conf": "medium",
+"how": "wave6-move-agree",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42211": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Vibrational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42222": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42223": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42226": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42245": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42271": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Raman Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42281": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Raman Spectroscopy",
+"conf": "high",
+"how": "wave6-move-agree",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42292": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Raman Spectroscopy",
+"conf": "high",
+"how": "wave6-move-agree",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42315": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Vibrational Spectroscopy",
+"conf": "medium",
+"how": "wave6-move-agree",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42360": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Vibrational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42462": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-agree",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42469": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Raman Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42474": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42481": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42487": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42495": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "medium",
+"how": "wave6-move-agree",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42503": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Raman Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42512": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Electronic Spectroscopy and the Franck-Condon Principle",
+"conf": "high",
+"how": "wave6-move-agree",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42538": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Vibrational Spectroscopy",
+"conf": "medium",
+"how": "wave6-move-agree",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42539": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "medium",
+"how": "wave6-move-agree",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42541": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-agree",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42544": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"42553": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Raman Spectroscopy",
+"conf": "high",
+"how": "wave6-move-opus",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"43119": {
+"topic": "Analog Electronics",
+"branch": "Operational Amplifier Circuits",
+"subtopic": "Inverting and Non-Inverting Amplifiers",
+"conf": "medium",
+"how": "wave6-move-agree",
+"db": [
+"Electromagnetism",
+"Electronic Circuits",
+"Transistor and Operational Amplifiers"
+]
+},
+"43129": {
+"topic": "Analog Electronics",
+"branch": "Operational Amplifier Circuits",
+"subtopic": "Integrators and Differentiators",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Electromagnetism",
+"Electronic Circuits",
+"Transistor and Operational Amplifiers"
+]
+},
+"44397": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Vibrational Spectroscopy",
+"conf": "medium",
+"how": "wave6-move-agree",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"44476": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Vibrational Spectroscopy",
+"conf": "medium",
+"how": "wave6-move-agree",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"44512": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"44529": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"44600": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"44615": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"44653": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "medium",
+"how": "wave6-move-agree",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"44750": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "medium",
+"how": "wave6-move-opus",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"44776": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Vibrational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"44830": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "medium",
+"how": "wave6-move-agree",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"44839": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"44880": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "medium",
+"how": "wave6-move-agree",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"44910": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"44937": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Vibrational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"45052": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"45131": {
+"topic": "Physical Chemistry",
+"branch": "Chemical Thermodynamics and Thermochemistry",
+"subtopic": "Bond Enthalpies",
+"conf": "medium",
+"how": "wave6-move-opus",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"45459": {
+"topic": "Physical Chemistry",
+"branch": "Quantum Chemistry and Spectroscopy",
+"subtopic": "Rotational Spectroscopy",
+"conf": "high",
+"how": "wave6-move-high",
+"db": [
+"Quantum, Atomic and Nuclear Physics",
+"Atomic and Molecular Spectra",
+"Molecular Rotation and Vibration Spectra"
+]
+},
+"46905": {
+"topic": "Mass Transfer and Separation Processes",
+"branch": "Diffusion and Mass Transfer Coefficients",
+"subtopic": "Fick's Law and Diffusion Coefficients",
+"conf": "high",
+"how": "wave6-move-agree",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Steady Mass Diffusion"
+]
+},
+"46928": {
+"topic": "Mass Transfer and Separation Processes",
+"branch": "Diffusion and Mass Transfer Coefficients",
+"subtopic": "Fick's Law and Diffusion Coefficients",
+"conf": "high",
+"how": "wave6-move-agree",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Steady Mass Diffusion"
+]
+},
+"46944": {
+"topic": "Mass Transfer and Separation Processes",
+"branch": "Diffusion and Mass Transfer Coefficients",
+"subtopic": "Fick's Law and Diffusion Coefficients",
+"conf": "medium",
+"how": "wave6-move-agree",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Steady Mass Diffusion"
+]
+},
+"46957": {
+"topic": "Mass Transfer and Separation Processes",
+"branch": "Diffusion and Mass Transfer Coefficients",
+"subtopic": "Fick's Law and Diffusion Coefficients",
+"conf": "medium",
+"how": "wave6-move-agree",
+"db": [
+"Heat and Mass Transfer",
+"Mass Transfer",
+"Steady Mass Diffusion"
+]
+},
+"16414": {
+"topic": "Corporate Finance and Valuation",
+"branch": "Cost of Capital and Capital Structure",
+"subtopic": "Dividends, Buybacks and Corporate Actions",
+"conf": "high",
+"how": "wave6-split",
+"db": [
+"Portfolio Theory and Risk Management",
+"Corporate Finance",
+"Cost of Capital, Corporate Actions and Margin"
+]
+},
+"41403": {
+"topic": "Corporate Finance and Valuation",
+"branch": "Cost of Capital and Capital Structure",
+"subtopic": "Cost of Equity, Cost of Debt and WACC",
+"conf": "high",
+"how": "wave6-split",
+"db": [
+"Portfolio Theory and Risk Management",
+"Corporate Finance",
+"Cost of Capital, Corporate Actions and Margin"
+]
+},
+"41712": {
+"topic": "Derivatives Pricing",
+"branch": "Derivative Contracts and No-Arbitrage",
+"subtopic": "Margin and Marking to Market",
+"conf": "high",
+"how": "wave6-split",
+"db": [
+"Portfolio Theory and Risk Management",
+"Corporate Finance",
+"Cost of Capital, Corporate Actions and Margin"
+]
+}
+}

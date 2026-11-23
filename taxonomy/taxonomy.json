@@ -11277,20 +11277,6 @@
  {
   "group": "G6",
   "subject": "Quantitative Finance",
-  "topic": "Portfolio Theory and Risk Management",
-  "branch": "Corporate Finance",
-  "subtopic": "Cost of Capital, Corporate Actions and Margin",
-  "note": "WACC, stock splits and dividends, margin purchases and margin calls",
-  "est": 3,
-  "orig": [
-   "Portfolio Theory and Risk Management",
-   "Corporate Finance",
-   "Cost of Capital, Corporate Actions and Margin"
-  ]
- },
- {
-  "group": "G6",
-  "subject": "Quantitative Finance",
   "topic": "Trading and Market Making",
   "branch": "Market Making and Bid-Ask Quoting",
   "subtopic": "Pricing a Market on a Game",
@@ -14120,20 +14106,6 @@
   "group": "G7",
   "subject": "Electromagnetism and Special Relativity",
   "topic": "Electromagnetism",
-  "branch": "Electronic Circuits",
-  "subtopic": "Transistor and Operational Amplifiers",
-  "note": "BJT small-signal gain, emitter followers, op-amp feedback circuits, integrators, saturation",
-  "est": 4,
-  "orig": [
-   "Electromagnetism",
-   "Electronic Circuits",
-   "Transistor and Operational Amplifiers"
-  ]
- },
- {
-  "group": "G7",
-  "subject": "Electromagnetism and Special Relativity",
-  "topic": "Electromagnetism",
   "branch": "Maxwell's Equations and Electromagnetic Waves",
   "subtopic": "Maxwell's Equations",
   "note": "differential and integral forms, displacement current, continuity, gauge conditions",
@@ -14218,20 +14190,6 @@
   "group": "G7",
   "subject": "Electromagnetism and Special Relativity",
   "topic": "Electromagnetism",
-  "branch": "Maxwell's Equations and Electromagnetic Waves",
-  "subtopic": "Waveguides",
-  "note": "cut-off frequencies, TE and TM modes, guide wavelength",
-  "est": 9,
-  "orig": [
-   "Electromagnetism",
-   "Maxwell's Equations and Electromagnetic Waves",
-   "Waveguides"
-  ]
- },
- {
-  "group": "G7",
-  "subject": "Electromagnetism and Special Relativity",
-  "topic": "Electromagnetism",
   "branch": "Transmission Lines, Waveguides and Antennas",
   "subtopic": "Line Parameters and Propagation Constant",
   "note": "distributed RLGC, characteristic impedance, propagation constant, lossy lines, coaxial and microstrip geometry",
@@ -14310,6 +14268,20 @@
    "Electromagnetism",
    "Transmission Lines, Waveguides and Antennas",
    "Transients on Transmission Lines"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Electromagnetism and Special Relativity",
+  "topic": "Electromagnetism",
+  "branch": "Transmission Lines, Waveguides and Antennas",
+  "subtopic": "Waveguides",
+  "note": "cut-off frequencies, TE and TM modes, guide wavelength",
+  "est": 9,
+  "orig": [
+   "Electromagnetism",
+   "Maxwell's Equations and Electromagnetic Waves",
+   "Waveguides"
   ]
  },
  {
@@ -14954,20 +14926,6 @@
    "Quantum, Atomic and Nuclear Physics",
    "Atomic and Molecular Spectra",
    "X-Ray Spectra"
-  ]
- },
- {
-  "group": "G7",
-  "subject": "Quantum Mechanics",
-  "topic": "Quantum, Atomic and Nuclear Physics",
-  "branch": "Atomic and Molecular Spectra",
-  "subtopic": "Molecular Rotation and Vibration Spectra",
-  "note": "rotational and vibrational levels and spectra of molecules, Raman lines",
-  "est": 40,
-  "orig": [
-   "Quantum, Atomic and Nuclear Physics",
-   "Atomic and Molecular Spectra",
-   "Molecular Rotation and Vibration Spectra"
   ]
  },
  {
@@ -16157,48 +16115,6 @@
   "group": "G8",
   "subject": "Heat Transfer",
   "topic": "Heat and Mass Transfer",
-  "branch": "Mass Transfer",
-  "subtopic": "Steady Mass Diffusion",
-  "note": "concentrations, Fick's law in fluids, diffusion through walls and stagnant gas; solids see Material Science",
-  "est": 8,
-  "orig": [
-   "Heat and Mass Transfer",
-   "Mass Transfer",
-   "Steady Mass Diffusion"
-  ]
- },
- {
-  "group": "G8",
-  "subject": "Heat Transfer",
-  "topic": "Heat and Mass Transfer",
-  "branch": "Mass Transfer",
-  "subtopic": "Evaporation and Stefan Flow",
-  "note": "droplet evaporation, Stefan flow, evaporation from tubes and pools",
-  "est": 6,
-  "orig": [
-   "Heat and Mass Transfer",
-   "Mass Transfer",
-   "Evaporation and Stefan Flow"
-  ]
- },
- {
-  "group": "G8",
-  "subject": "Heat Transfer",
-  "topic": "Heat and Mass Transfer",
-  "branch": "Mass Transfer",
-  "subtopic": "Simultaneous Heat and Mass Transfer",
-  "note": "wet-bulb thermometer, evaporative cooling, heat-mass transfer analogy",
-  "est": 3,
-  "orig": [
-   "Heat and Mass Transfer",
-   "Mass Transfer",
-   "Simultaneous Heat and Mass Transfer"
-  ]
- },
- {
-  "group": "G8",
-  "subject": "Heat Transfer",
-  "topic": "Heat and Mass Transfer",
   "branch": "Heat Exchanger Analysis",
   "subtopic": "Heat Exchanger Types and Flow Arrangements",
   "note": "double-pipe, shell-and-tube, crossflow, compact; parallel versus counterflow",
@@ -17333,34 +17249,6 @@
    "Fluid Mechanics",
    "Multiphase Flow, Particles and Mixing",
    "Gas-Liquid Two-Phase Flow"
-  ]
- },
- {
-  "group": "G8",
-  "subject": "Fluid Mechanics",
-  "topic": "Fluid Mechanics",
-  "branch": "Multiphase Flow, Particles and Mixing",
-  "subtopic": "Particle Settling and Separation",
-  "note": "settling of suspensions and particle groups: hindered settling, elutriation, sedimentation, cyclones; single bodies see Terminal Velocity and Sphere Drag",
-  "est": 12,
-  "orig": [
-   "Fluid Mechanics",
-   "Multiphase Flow, Particles and Mixing",
-   "Particle Settling and Separation"
-  ]
- },
- {
-  "group": "G8",
-  "subject": "Fluid Mechanics",
-  "topic": "Fluid Mechanics",
-  "branch": "Multiphase Flow, Particles and Mixing",
-  "subtopic": "Fluidized and Packed Beds",
-  "note": "minimum fluidization, bed pressure drop, Ergun equation",
-  "est": 8,
-  "orig": [
-   "Fluid Mechanics",
-   "Multiphase Flow, Particles and Mixing",
-   "Fluidized and Packed Beds"
   ]
  },
  {
@@ -21337,20 +21225,6 @@
    "Power Systems",
    "High Voltage Engineering",
    "Generation and Measurement of High Voltages"
-  ]
- },
- {
-  "group": "G9b",
-  "subject": "Material Science",
-  "topic": "Structure of Materials",
-  "branch": "Atomic Structure and Bonding",
-  "subtopic": "Electron Configuration and the Periodic Table",
-  "note": "configurations, ionization energy, electron affinity, electronegativity",
-  "est": 8,
-  "orig": [
-   "Structure of Materials",
-   "Atomic Structure and Bonding",
-   "Electron Configuration and the Periodic Table"
   ]
  },
  {
