@@ -294,9 +294,10 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
     Accounts rotate as in run_sub.py (owner 2026-11-21: "port the rotation"): one account at a time, in
     pipeline/accounts.json's serving order, moving on when the active one reaches a stop. Only one of the
     two solvers runs at a time, so no two accounts ever serve together."""
-    if run_sub.LOCK.exists():
-        raise SystemExit(f"the math solver is running ({run_sub.LOCK.as_posix()}, pid {run_sub.LOCK.read_text().strip()}): "
-                         "one solver at a time, so that only one account serves; wait for it or remove a stale lock")
+    for other in (run_sub.LOCK, run_sub.CLASSIFY_LOCK):
+        if other.exists():
+            raise SystemExit(f"another run holds {other.as_posix()} (pid {other.read_text().strip()}): one at a time, "
+                             "so that only one account serves; wait for it or remove a stale lock")
     rotation = [a for a in run_sub.load_accounts() if a.get("enabled", True) and run_sub.account_id(a)]
     if rotation:  # account rotation: the request check runs under the first account in serving order
         run_sub._ACTIVE_DIR[0] = str(Path(rotation[0]["dir"]))

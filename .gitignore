@@ -55,6 +55,7 @@ pipeline/*.err
 pipeline/*.out
 pipeline/run_sub.lock
 pipeline/run_subjects.lock
+pipeline/run_classify.lock
 pipeline/usage_cap_state.*
 pipeline/accounts.json
 pipeline/accounts.tmp

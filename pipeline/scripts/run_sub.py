@@ -980,9 +980,13 @@ def save_failure(qid: int, attempt: int, out: dict, info: dict) -> str:
 
 
 SUBJECTS_LOCK = PIPELINE_DIR / "run_subjects.lock"  # run_subjects.py's: one solver at a time, so one account serves
+CLASSIFY_LOCK = PIPELINE_DIR / "run_classify.lock"  # run_classify.py's (classification batches on the same accounts)
 
 
 def acquire_lock(force: bool) -> None:
+    if CLASSIFY_LOCK.exists():
+        raise SystemExit(f"a classification run is going ({CLASSIFY_LOCK.as_posix()}, pid {CLASSIFY_LOCK.read_text().strip()}): "
+                         "one at a time, so that only one account serves; wait for it or remove a stale lock")
     if SUBJECTS_LOCK.exists():
         raise SystemExit(f"the subjects solver is running ({SUBJECTS_LOCK.as_posix()}, pid {SUBJECTS_LOCK.read_text().strip()}): "
                          "one solver at a time, so that only one account serves; wait for it or remove a stale lock")
