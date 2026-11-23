@@ -16,7 +16,8 @@ Wave folder layout (the prep scripts in the session scratchpad write it):
 
 usage: run_classify.py verify --wave W --in in --brief CLASSIFY.md --model M --effort E [--accept]
        run_classify.py run    --wave W --in in --out out --brief CLASSIFY.md --model M --effort E [--workers N] [--wait-on-limit]
-                              [--verify-in in]  (the start-up check sends that folder's first batch, whatever --in is)"""
+                              [--verify-in in]  (the start-up check sends that folder's first batch, whatever --in is)
+                              [--verify-batch FILE]  (or this batch file, e.g. the probe of a wave already accepted)"""
 
 from __future__ import annotations
 
@@ -91,7 +92,7 @@ def parse_reply(text: str, ids: list[int]) -> tuple[list[dict], list[int]]:
 def verify(cfg: dict, pc, a) -> bool:
     """run_sub's request check on the first batch: the request must pass every check and its wrapping must be one
     the owner accepted (--accept records that acceptance, as run_sub.py verify --accept does)."""
-    first = sorted((Path(a.wave) / a.inp).glob("*.txt"))[0]
+    first = Path(a.verify_batch) if getattr(a, "verify_batch", None) else sorted((Path(a.wave) / a.inp).glob("*.txt"))[0]
     trees, tags, body, _ = batch_parts(first)
     text = system_text(Path(a.wave) / a.brief, trees, tags)
     path = system_file("verify", text)
@@ -228,6 +229,7 @@ def main() -> None:
     ap.add_argument("--in", dest="inp", default="in")
     ap.add_argument("--out", default="out")
     ap.add_argument("--verify-in", default="in", help="run: folder whose first batch the start-up request check sends")
+    ap.add_argument("--verify-batch", help="batch file the request check sends instead (e.g. another wave's accepted probe)")
     ap.add_argument("--brief", required=True)
     ap.add_argument("--model", required=True)
     ap.add_argument("--effort", default="low")

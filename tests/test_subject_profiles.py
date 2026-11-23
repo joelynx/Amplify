@@ -49,3 +49,35 @@ def test_every_profile_builds_both_prompts(slug: str, mode: str, tmp_path: Path,
 def test_the_new_solvers_have_tool_notes() -> None:
     for slug in ("chemistry", "chemical_engineering", "electrical_engineering", "quantitative_finance"):
         assert subjects.load_profile(_cfg(slug), "Test Subject").get("tools"), slug
+
+
+def test_aids_only_subjects_and_skips() -> None:
+    """Maths subjects (config.subjects.aids_only) get aids only, and only when no generated solution exists; the
+    aids skip lists (owner 2026-11-23: no aids for extremely easy questions such as the SOA ones) apply to aids."""
+    import json
+    import sqlite3
+
+    nodes = json.loads((Path(__file__).resolve().parents[1] / "taxonomy" / "taxonomy.json").read_text("utf-8"))
+    node = {s: next(n for n in nodes if n["subject"] == s) for s in ("Probability and Stochastic Processes", "Chemistry")}
+    cfg = common.load_config()
+    cfg["subjects"] = dict(cfg["subjects"], profiles={"Probability and Stochastic Processes": "mathematics", "Chemistry": "chemistry"},
+                           aids_only=["Probability and Stochastic Processes"], aids_skip_sources=["Society Of Actuaries"],
+                           aids_skip_ids=[5], hold_ids=[])
+    app = sqlite3.connect(":memory:")
+    app.row_factory = sqlite3.Row
+    app.execute("CREATE TABLE questions (question_id INTEGER, source TEXT, topic TEXT, branch TEXT, subtopic TEXT, type TEXT, "
+                "latexcode TEXT, solution TEXT, generated_solution TEXT)")
+    book = "The book's worked solution."
+    rows = [(1, "Bertsekas", "Probability and Stochastic Processes", book, None),
+            (2, "Bertsekas", "Probability and Stochastic Processes", None, None),          # maths solve: run_sub's
+            (3, "Bertsekas", "Probability and Stochastic Processes", book, "generated"),   # has hints and takeaways
+            (4, "Society Of Actuaries", "Probability and Stochastic Processes", book, None),
+            (5, "Bertsekas", "Probability and Stochastic Processes", book, None),
+            (6, "OpenStax", "Chemistry", None, None),
+            (7, "OpenStax", "Chemistry", book, None),
+            (8, "Society Of Actuaries", "Chemistry", book, None)]
+    for qid, src, subj, sol, gen in rows:
+        n = node[subj]
+        app.execute("INSERT INTO questions VALUES (?,?,?,?,?,NULL,'Find x.',?,?)", (qid, src, n["topic"], n["branch"], n["subtopic"], sol, gen))
+    got = run_subjects.scope_rows(cfg, app)
+    assert [(x["id"], x["mode"]) for x in got] == [(6, "solve"), (1, "aids"), (7, "aids")]
