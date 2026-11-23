@@ -218,6 +218,13 @@ def tools_cfg(cfg: dict) -> dict:
     return cfg.get("tools") or {}
 
 
+def uses_tools(cfg: dict, source: str) -> bool:
+    """Tools mode for this solver (owner 2026-11-23: "Yes, add the calculator to the solver"): the questions of
+    config.tools.math_sources (finance and quant sets, where computation slips cost answers) get the calc tool."""
+    t = tools_cfg(cfg)
+    return bool(t.get("enabled")) and source in (t.get("math_sources") or ())
+
+
 def mcp_config(cfg: dict, tools_log: Path) -> Path:
     """A one-server MCP config for one run; the server appends every call to tools_log."""
     t = tools_cfg(cfg)
@@ -286,10 +293,13 @@ def child_env(cfg: dict, effort: str, base_url: str | None = None, tools: bool =
     return env
 
 
-def write_system_file(cfg: dict) -> tuple[Path, str]:
+def write_system_file(cfg: dict, tools: bool = False) -> tuple[Path, str]:
     system = system_prompt(cfg)
+    if tools:  # the solver's prompt, then how to use the calc tool
+        tp = REPO_DIR / tools_cfg(cfg).get("math_prompt", "pipeline/prompts/solver_tools.md")
+        system = system.rstrip() + "\n\n" + tp.read_text(encoding="utf-8").strip() + "\n"
     SUB_CWD.mkdir(parents=True, exist_ok=True)
-    path = SUB_CWD.parent / ".amplify-subscription-system-prompt.txt"  # outside the cwd: the cwd stays empty
+    path = SUB_CWD.parent / f".amplify-subscription-system-prompt{'-tools' if tools else ''}.txt"  # outside the cwd: the cwd stays empty
     path.write_bytes(system.encode("utf-8"))
     return path, system
 
@@ -567,6 +577,8 @@ def verify_samples(cfg: dict, app, pc) -> list[int]:
         row = get_status(pc, qid)
         kinds = ["retry" if row is not None and row["status"] == "retry" else "fresh",
                  "effort:" + effort_for(cfg, q["source"], qid), "model:" + model_for(cfg, qid)]
+        if uses_tools(cfg, q["source"]):
+            kinds.append("tools")
         if any(ord(ch) > 127 for ch in q["latexcode"]):
             kinds.append("non-ascii")
         if images:
@@ -598,17 +610,20 @@ def verify(cfg: dict, app, pc, qids: list[int] | None = None, accept: bool = Fal
         text = user_text(q, feedback)
         images, _skip = attachments(cfg, q)
         qc = ccfg if review else question_cfg(cfg, qid)
-        captured, out = capture_request(qc, system_file, text, effort, images)
-        rep = check_request(qc, system, text, effort, captured, out, shas, images)
+        tools = uses_tools(cfg, q["source"])
+        # (the tools prompt is the solver prompt plus the tool section: the API's prompt is checked on the others)
+        sf, sys_text = write_system_file(cfg, tools=True) if tools else (system_file, system)
+        captured, out = capture_request(qc, sf, text, effort, images, tools=tools)
+        rep = check_request(qc, sys_text, text, effort, captured, out, set() if tools else shas, images, tools=tools)
         rep.update({"question_id": qid, "source": q["source"], "effort": effort, "model": qc["solver"]["model"],
-                    "attempt": attempt, "with_feedback": bool(feedback), "images": len(images),
+                    "attempt": attempt, "with_feedback": bool(feedback), "images": len(images), "tools": tools,
                     "claude_code_version": rep["init"].get("claude_code_version")})
         reports.append(rep)
-    # Claude Code's environment block names the model, so each model has a wrapping of its own:
-    # one fingerprint per model, each of them accepted.
-    by_model: dict[str, set] = {}
+    # Claude Code's environment block names the model, so each model has a wrapping of its own (and the calc
+    # tool's definition is part of it): one fingerprint per model, with and without the tool, each accepted.
+    by_model: dict[tuple, set] = {}
     for r in reports:
-        by_model.setdefault(r["model"], set()).add(r["fingerprint"])
+        by_model.setdefault((r["model"], r.get("tools", False)), set()).add(r["fingerprint"])
     fps = sorted({f for r in reports if (f := r["fingerprint"])})
     versions = {r["claude_code_version"] for r in reports}
     ok = all(r["ok"] for r in reports) and all(len(v) == 1 for v in by_model.values())
@@ -627,7 +642,8 @@ def verify(cfg: dict, app, pc, qids: list[int] | None = None, accept: bool = Fal
         for r in reports:
             print(f"question {r['question_id']} ({r['source'][:40]}, {r['model']}, {r['effort']} effort, attempt {r['attempt']}"
                   f"{', with feedback' if r['with_feedback'] else ''}"
-                  f"{', ' + str(r['images']) + ' image(s)' if r['images'] else ''}):")
+                  f"{', ' + str(r['images']) + ' image(s)' if r['images'] else ''}"
+                  f"{', with the calc tool' if r.get('tools') else ''}):")
             for name, good, detail in r["checks"]:
                 print(f"  {'ok  ' if good else 'FAIL'} {name}" + (f"  [{detail}]" if detail and not good else ""))
         print(f"Claude Code {version}; wrapping fingerprint(s) {', '.join(f[:16] for f in fps) or None}; "
@@ -1478,6 +1494,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                          f"{' --review' if review else ''}` and read {VERIFY_REPORT.as_posix()}")
     version = pre["claude_code_version"]
     system_file, _ = write_system_file(cfg)
+    system_files = {False: system_file}  # tools mode's own, when a question of config.tools.math_sources goes
     acquire_lock(force_unlock)
     ccfg = review_cfg(cfg) if review else cfg  # the model the requests go to and the replies are stored under
     queue = review_rows(cfg, app, pc, ids) if review else candidates(cfg, app, pc, ids)
@@ -1617,7 +1634,11 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                         reset_for_redo(pc, qid, effort)
                         summary["redo"] += 1
                     qc = ccfg if review else question_cfg(cfg, qid)  # the question's own model, if assigned
-                    fut = ex.submit(call_claude, qc, system_file, user_text(q, feedback), effort, None, images)
+                    tools = uses_tools(cfg, q["source"])
+                    if tools not in system_files:
+                        system_files[tools] = write_system_file(cfg, tools=True)[0]
+                    fut = ex.submit(call_claude, qc, system_files[tools], user_text(q, feedback), effort, None, images,
+                                    **({"tools_log": q_dir(qid) / f"tools_{attempt}.jsonl"} if tools else {}))
                     running[fut] = (qid, attempt, effort, [n for n, _ in images], qc)
                     started[fut], account_of[fut] = time.time(), cap.account
                     tried.clear()
@@ -1668,6 +1689,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
                     print(json.dumps({"question_id": qid, "attempt": attempt, "model": qc["solver"]["model"],
                                       "effort": effort, "outcome": kind,
                                       **({"account": name_of.get(acct_of_reply)} if rotation else {}),
+                                      **({"tool_calls": info["tool_calls"]} if info.get("tool_calls") is not None else {}),
                                       "seconds": out.get("seconds"),
                                       **({"why": info["why"]} if kind != "ok" else {}), **({"raw": raw} if raw else {}),
                                       **({"usage": {w: u for w, (u, _) in readings.items()}} if readings else {}),

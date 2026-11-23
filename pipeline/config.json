@@ -26,6 +26,10 @@
     "prompt": "pipeline/prompts/subject/tools.md",
     "subjects": ["Conventional Energy Technologies", "Material Science", "Heat Transfer", "Electrical Machinery", "Mechanics", "Fluid Mechanics", "Power Systems and Power Electronics", "Thermodynamics", "Electromagnetism and Special Relativity", "Quantum Mechanics", "Chemistry", "Chemical Engineering", "Circuits and Electronics", "Signals, Systems and Control", "Quantitative Finance"],
     "modes": ["solve", "aids"],
+    "math_sources": ["FinanceMath", "QuantQA", "Academic Quant Interview Questions", "XFinBench", "TheoremQA",
+                     "Bester, Quantitative Primer"],
+    "math_prompt": "pipeline/prompts/solver_tools.md",
+    "math_note": "Owner 2026-11-23: 'Yes, add the calculator to the solver' (judge job 20261123-182431: of ~1,126 maths rows, ~14 finance/quant answers differed for what looked like computation slips, mostly FinanceMath and quant counting). run_sub.py gives the questions of math_sources the same calc tool (run_sub.uses_tools); the prompt adds math_prompt. Applies to their retries and every later solve; rows that already passed are not re-solved.",
     "max_turns": 30,
     "timeout_seconds": 60,
     "max_calls": 40
