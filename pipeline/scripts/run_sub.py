@@ -1010,6 +1010,7 @@ ACCOUNT_FILE = Path.home() / ".claude.json"  # Claude Code's settings: oauthAcco
 LOGIN_FILE = Path.home() / ".claude" / ".credentials.json"  # its timestamp names the login where there is no oauthAccount
 CAP_STATE = PIPELINE_DIR / "usage_cap_state.json"  # the readings so far, per account
 SHARED_WINDOWS = {"five_hour", "seven_day"}  # count every model's replies; other windows only their model's
+PERIOD = {"five_hour": 5 * 3600}  # a window's length: its period is the one ending at the reading's reset
 PROBE_SYSTEM, PROBE_TEXT = "Reply with the single word OK.", "OK?"
 PROBE_RETRY = 300  # seconds before a probe that brought no reading goes again
 
@@ -1173,6 +1174,9 @@ class UsageCap:
         raw = [dict(o, window=w) for w, o in raw.items()] if isinstance(raw, dict) else raw
         self.once = [(o["window"], float(o["max"]), datetime.fromisoformat(o["until"]).timestamp(), o.get("account"))
                      for o in raw]
+        # hours: [{"window": w, "max": m, "from": "HH:MM", "to": "HH:MM"}, ...]: standing rules for every account,
+        # a period of w that lies wholly between from and to of one day, local time, may reach m
+        self.hours = [(o["window"], float(o["max"]), o["from"], o["to"]) for o in conf.get("hours") or []]
         self.prior = {k: float(v) for k, v in (conf.get("prior_per_usd") or {}).items()}
         self.worst = {m: float(v) for m, v in (conf.get("reply_max_usd") or {}).items()}
         self.scale = float(conf.get("reply_cost_scale", 1.0))  # owner 2026-11-20: worst cases scaled down (0.5)
@@ -1332,10 +1336,19 @@ class UsageCap:
 
     def plan_for(self, w: str, now: float) -> float:
         """Where `w` stops: max less its margin, or an owner's one-off max until the time it names, on the
-        account it names (another account keeps the usual stop)."""
+        account it names (another account keeps the usual stop), or an hours rule's max when the current
+        period lies wholly within its hours."""
         for win, top, until, acct in self.once:
             if win == w and now < until and acct in (None, self.account):
                 return top
+        last = self._last(w, now)
+        if last is not None and last[2] is not None and w in PERIOD:
+            end = datetime.fromtimestamp(float(last[2]))
+            start = end - timedelta(seconds=PERIOD[w])
+            for win, top, frm, to in self.hours:
+                if (win == w and start.date() == end.date() and start.strftime("%H:%M:%S") >= f"{frm}:00"
+                        and end.strftime("%H:%M:%S") <= f"{to}:00"):
+                    return top
         return self.plans.get(w, self.plan)
 
     def over(self, model: str, running: list[tuple[str, float]], now: float | None = None,

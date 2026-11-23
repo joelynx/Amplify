@@ -11,6 +11,8 @@ import os
 import sys
 from pathlib import Path
 
+import pytest
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "pipeline" / "scripts"))
 
 import run_sub  # noqa: E402
@@ -102,6 +104,19 @@ def test_a_window_can_have_its_own_margin() -> None:
     cap.record(FABLE, NOW - 100, NOW - 10, readings, 0.0)
     assert cap.allows(FABLE, [], NOW)  # 0.5 + 0.05 * 3.6 = 0.68 in both
     assert [w for w, _ in cap.over(FABLE, [(FABLE, NOW)], NOW)] == ["five_hour"]  # 0.86: past 0.70, not past 0.89
+
+
+def test_a_window_wholly_in_the_rules_hours_may_reach_its_max() -> None:
+    """Owner 2026-11-22: a five-hour window wholly between 00:00 and 09:00 may go to 100%."""
+    hours = [{"window": "five_hour", "max": 1.0, "from": "00:00", "to": "09:00"}]
+    at = lambda s: run_sub.datetime.fromisoformat(s).timestamp()  # noqa: E731
+    for reset, stop in (("2026-11-23T09:00:00", 1.0), ("2026-11-23T05:00:00", 1.0),  # 04:00-09:00, 00:00-05:00
+                        ("2026-11-23T09:10:00", 0.70), ("2026-11-23T04:50:00", 0.70),  # past 09:00, from 23:50
+                        ("2026-11-23T14:00:00", 0.70)):
+        cap = run_sub.UsageCap(dict(CONF, margin_by_window={"five_hour": 0.2}, hours=hours))
+        cap.record(FABLE, at(reset) - 3600, at(reset) - 3590, {"five_hour": (0.5, at(reset)), "seven_day": (0.5, at(reset) + 9e4)}, 0.0)
+        assert cap.plan_for("five_hour", at(reset) - 3000) == pytest.approx(stop), reset
+        assert cap.plan_for("seven_day", at(reset) - 3000) == cap.plan  # other windows keep their stops
 
 
 def test_the_most_a_reply_costs_is_the_larger_of_config_and_seen() -> None:
