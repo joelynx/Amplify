@@ -1,0 +1,74 @@
+{
+ "fixes": [
+  {
+   "key": "SciBench chemmc 1-13",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "pulse at (a) $",
+     "pulse at $"
+    ]
+   ],
+   "note": "only part (a) is keyed"
+  },
+  {
+   "key": "SciBench chemmc 1-28",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "wavelength and the energy of a photon",
+     "wavelength of a photon"
+    ]
+   ],
+   "note": "only the wavelength is keyed"
+  },
+  {
+   "key": "SciBench chemmc 5-12",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "The Harmonic Oscillator and Vibrational Spectroscopy\n",
+     ""
+    ]
+   ],
+   "note": "textbook running header"
+  },
+  {
+   "key": "SciBench quan 14.29",
+   "field": "answer",
+   "fixes": [
+    [
+     "3\\frac{1}{3}",
+     "\\frac{10}{3}"
+    ]
+   ],
+   "note": "mixed number 3 1/3 = 10/3"
+  }
+ ],
+ "dropped": {
+  "ChemBench 75f82b65-8009-7b74-131a-f9bbda7f8fa7": "source text garbled (unbalanced braces, dollars or display delimiters)",
+  "ChemBench 5935c597-faad-202a-e8a0-fe079c01c06f": "source text garbled (unbalanced braces, dollars or display delimiters)",
+  "ChemBench 82813cb1-92c3-ad4a-8e7f-6c1ad750da28": "source text garbled (unbalanced braces, dollars or display delimiters)",
+  "ChemBench dc4f7446-8964-b217-cb47-736fd744148b": "source text garbled (unbalanced braces, dollars or display delimiters)",
+  "ChemBench c41e356f-745d-2743-3cd3-177757e99fb9": "source text garbled (unbalanced braces, dollars or display delimiters)",
+  "ChemBench ce116046-2cc7-66ae-1fc9-1ba37aef6b98": "source text garbled (unbalanced braces, dollars or display delimiters)",
+  "ChemBench 49b11e58-4442-c6da-4f57-f405a02ce415": "source text garbled (unbalanced braces, dollars or display delimiters)",
+  "SUPERChem 1eb40c47": "source text garbled (unbalanced braces, dollars or display delimiters)",
+  "SUPERChem 443dd1d3": "source text garbled (unbalanced braces, dollars or display delimiters)",
+  "SUPERChem 4c574180": "source text garbled (unbalanced braces, dollars or display delimiters)",
+  "SUPERChem 660ac69e": "source text garbled (unbalanced braces, dollars or display delimiters)",
+  "SUPERChem 8eccba60": "source text garbled (unbalanced braces, dollars or display delimiters)",
+  "SUPERChem cec92364": "source text garbled (unbalanced braces, dollars or display delimiters)",
+  "ChemBench 2e257514-af7f-510d-7ae4-70f3c2d9c8c7": "render check: an arrow with a label inside \\ce does not compile",
+  "ChemBench c65f753c-4153-f90a-369a-f608d78503e5": "render check: mhchem cannot parse the \\ce formula",
+  "ChemBench af50d429-94b7-03b4-1a59-778b35902298": "render check: source lost the escape of \\eta (control character)",
+  "ChemBench acd6ba04-414f-7e39-ed8c-9c6648564690": "render check: source lost the escape of \\frac (control character)",
+  "SUPERChem ee601a73": "render check: degree sign broken in the source"
+ },
+ "solution_dropped": {
+  "SciBench atkins 19.4": "source solution has an unbalanced $$",
+  "SUPERChem 08858fb3": "render check: the explanation's \text group is broken",
+  "SUPERChem 30c71a15": "render check: double subscripts in the explanation",
+  "SUPERChem ea02de57": "render check: the explanation uses \\lt, which LaTeX lacks"
+ }
+}

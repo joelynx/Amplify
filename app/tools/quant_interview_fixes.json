@@ -1,0 +1,536 @@
+{
+ "fixes": [
+  {
+   "key": "Primer rolltwodice",
+   "field": "solution",
+   "fixes": [
+    [
+     "Now, depending on what the interviewer meant by the question, the answer is one of the following:",
+     "Depending on what the question means, the answer is one of the following:"
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer rolltwodice",
+   "field": "solution",
+   "fixes": [
+    [
+     "If the interviewer wanted the probability of die $A$ being more than die $B$",
+     "If the question asks for the probability of die $A$ being more than die $B$"
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer bivariatenormalmax",
+   "field": "solution",
+   "fixes": [
+    [
+     "Now, the interviewer will point out that the two terms on the right-hand side are symmetric, thus they must be the same:",
+     "The two terms on the right-hand side are symmetric, thus they must be the same:"
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer bivariatenormalmax",
+   "field": "solution",
+   "fixes": [
+    [
+     "the integration that proves this is tedious and, again, it is easier to draw a picture.",
+     "by the symmetry of the bivariate normal about the line $y=x$."
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer bivariatenormalmax",
+   "field": "solution",
+   "fixes": [
+    [
+     "You can use Monte Carlo integration to convince yourself of this; I've included an R script elsewhere in the book to do just that.",
+     ""
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer bivariatenormalmax",
+   "field": "solution",
+   "fixes": [
+    [
+     "which is the same expectation as in the equation above, thus",
+     "which is the same expectation as before, thus"
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer coin100flipsgamble",
+   "field": "solution",
+   "fixes": [
+    [
+     "Given that you are in an interview, you need to evaluate $P(Y>60)$ without a calculator.",
+     "Evaluate $P(Y>60)$ without a calculator."
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer coin100flipsgamble",
+   "field": "solution",
+   "fixes": [
+    [
+     "is conveniently located at 60, as the following graph indicates:",
+     "is conveniently located at 60."
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer twournsallocateballs",
+   "field": "solution",
+   "fixes": [
+    [
+     "You need to find the values for $B_1$ and $R_1$ that minimise this.",
+     "You need to find the values for $B_1$ and $R_1$ that maximise this."
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer twournsallocateballs",
+   "field": "solution",
+   "fixes": [
+    [
+     "put just one red ball in it, and no blue balls",
+     "put just one blue ball in it, and no red balls"
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer twournsallocateballs",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\nLog into this pair-programming website and use Python or C++ to solve the problem while I watch.",
+     ""
+    ]
+   ],
+   "note": "programming instruction of the interview removed"
+  },
+  {
+   "key": "Primer epiandpie",
+   "field": "solution",
+   "fixes": [
+    [
+     "Below is a plot of the function with the important points highlighted.",
+     ""
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer epiandpie",
+   "field": "solution",
+   "fixes": [
+    [
+     "whether the equation above is increasing or decreasing",
+     "whether this function is increasing or decreasing"
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer epiandpie",
+   "field": "solution",
+   "fixes": [
+    [
+     "Writing it with the $k$ as in the equation above actually helps",
+     "Writing it with the $k$ as above actually helps"
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer ar1processmeanandvar",
+   "field": "solution",
+   "fixes": [
+    [
+     "During my interview I was not aware of the short way, but the interviewer seemed content with the answer below---which is the long answer.",
+     "The long answer is as follows."
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer iszerocovarianceindependent",
+   "field": "solution",
+   "fixes": [
+    [
+     "That is, let",
+     "Construct a counterexample. Let"
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer romeojuliet",
+   "field": "solution",
+   "fixes": [
+    [
+     "When $x<y$, you are in",
+     "Solve it visually on the unit square rather than by integration.\nWhen $x<y$, you are in"
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer romeojuliet",
+   "field": "solution",
+   "fixes": [
+    [
+     "which can be calculated quickly by breaking the square down into pieces (see below), revealing the answer as $\\frac{7}{16}$.",
+     "which is the unit square minus two triangles with legs $\\frac{3}{4}$: $1-\\left(\\frac{3}{4}\\right)^2=\\frac{7}{16}$."
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer simplerandomwalkhittingprobability",
+   "field": "solution",
+   "fixes": [
+    [
+     "use the first trick elsewhere in the book and start with the trivial case.",
+     "start with the trivial case."
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer simplerandomwalkhittingprobability",
+   "field": "solution",
+   "fixes": [
+    [
+     "This is how I started attempting the question and the interviewer seemed happy before I reached a clear answer, then moved on.",
+     ""
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer drop20cards",
+   "field": "solution",
+   "fixes": [
+    [
+     "Getting this question over the phone may be a hint that the answer can't be too complicated, but this is not a rule you can rely on.",
+     ""
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "Primer drop20cards",
+   "field": "solution",
+   "fixes": [
+    [
+     "Review the probabilities of card drawing as part of interview preparation; they aren't difficult but require some practise.",
+     ""
+    ]
+   ],
+   "note": "the book's narration of the interview or a figure/section reference removed"
+  },
+  {
+   "key": "QuantQA 55014715690399576843",
+   "field": "latexcode",
+   "fixes": [
+    [
+     " $What fraction of the creatures on the pavement are dogs?$",
+     " What fraction of the creatures on the pavement are dogs?"
+    ]
+   ],
+   "note": "math delimiters around a sentence"
+  },
+  {
+   "key": "QuantQA 66157823695107216060",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "\\text{min}{n : X_1 + \\dots + X_n > 2}",
+     "\\min\\{n : X_1 + \\dots + X_n > 2\\}"
+    ]
+   ],
+   "note": "braces of a set lost their backslash"
+  },
+  {
+   "key": "QuantQA 35113934683374353233",
+   "field": "latexcode",
+   "fixes": [
+    [
+     "(i.e., 2^10)",
+     "(i.e., $2^{10}$)"
+    ]
+   ],
+   "note": "exponent outside math"
+  },
+  {
+   "key": "Primer bivariatenormalmax",
+   "field": "solution",
+   "fixes": [
+    [
+     "Y & if $Y \\geq X$",
+     "Y & \\text{if } Y \\geq X"
+    ]
+   ],
+   "note": "text inside cases written as math"
+  },
+  {
+   "key": "Primer bivariatenormalmax",
+   "field": "solution",
+   "fixes": [
+    [
+     "X & if $X < Y$",
+     "X & \\text{if } X > Y"
+    ]
+   ],
+   "note": "text inside cases; the book wrote X < Y, a typo"
+  }
+ ],
+ "cuts": [
+  {
+   "key": "Primer rolltwodice",
+   "field": "solution",
+   "from": "(You don't actually have to fill in",
+   "to": "Now, depending on"
+  },
+  {
+   "key": "Primer rolltwodice",
+   "field": "solution",
+   "from": "When you're given a question like this",
+   "to": ""
+  },
+  {
+   "key": "Primer bivariatenormalmax",
+   "field": "solution",
+   "from": "Sometimes there isn't a quick",
+   "to": "For the current problem, write it into something easier first:"
+  },
+  {
+   "key": "Primer bivariatenormalmax",
+   "field": "solution",
+   "from": "Below is a contour plot",
+   "to": "Thus, the problem has been reduced to"
+  },
+  {
+   "key": "Primer bivariatenormalmax",
+   "field": "solution",
+   "from": "If you have got this far, the interviewer",
+   "to": "The quantity $\\operatorname{E}(X|X > Y)$ isn't immediately recognisable."
+  },
+  {
+   "key": "Primer normalfourthmoment",
+   "field": "solution",
+   "from": "Be sure to tell the interviewer",
+   "to": "The only candidate that gives"
+  },
+  {
+   "key": "Primer normalfourthmoment",
+   "field": "solution",
+   "from": "This was a very long journey",
+   "to": "A better approach might have been"
+  },
+  {
+   "key": "Primer normalfourthmoment",
+   "field": "solution",
+   "from": "Of course, you could just learn the moments",
+   "to": "Robert Tillman suggested"
+  },
+  {
+   "key": "Primer normalfourthmoment",
+   "field": "solution",
+   "from": "In my experience, interviewers from investment banks",
+   "to": ""
+  },
+  {
+   "key": "Primer normalestimatorssamplingdistribution",
+   "field": "solution",
+   "from": "When I wrote this down, my interviewer",
+   "to": "Here is the derivation:"
+  },
+  {
+   "key": "Primer normalestimatorssamplingdistribution",
+   "field": "solution",
+   "from": "Notice that I used $x$ in my derivation",
+   "to": ""
+  },
+  {
+   "key": "Primer twournsallocateballs",
+   "field": "solution",
+   "from": "The interviewer wanted me to explain",
+   "to": "You can also find the solution through reason."
+  },
+  {
+   "key": "Primer twournsallocateballs",
+   "field": "solution",
+   "from": "The hardest part about this question",
+   "to": ""
+  },
+  {
+   "key": "Primer bayeslawdisease",
+   "field": "solution",
+   "from": "Bayes' law questions are extremely common",
+   "to": "Start with what you want"
+  },
+  {
+   "key": "Primer bayeslawdisease",
+   "field": "solution",
+   "from": "Now, consider the information the interviewer gave",
+   "to": "``One percent of people"
+  },
+  {
+   "key": "Primer bayeslawdisease",
+   "field": "solution",
+   "from": "You can represent the situation in a picture",
+   "to": ""
+  },
+  {
+   "key": "Primer derivexpowx",
+   "field": "solution",
+   "from": "This is question 6.18",
+   "to": "The wrong answer is"
+  },
+  {
+   "key": "Primer epiandpie",
+   "field": "solution",
+   "from": "This is question 6.6",
+   "to": "There is no intuitive solution."
+  },
+  {
+   "key": "Primer epiandpie",
+   "field": "solution",
+   "from": "This makes it a beautiful question",
+   "to": "Now for the trick:"
+  },
+  {
+   "key": "Primer ar1processmeanandvar",
+   "field": "solution",
+   "from": "There is a long answer and a short answer.",
+   "to": "Start by assuming"
+  },
+  {
+   "key": "Primer ar1processmeanandvar",
+   "field": "solution",
+   "from": "This question allows the interviewer to test",
+   "to": ""
+  },
+  {
+   "key": "Primer constructzerocorrelation",
+   "field": "solution",
+   "from": "This is the same as elsewhere in the book.",
+   "to": "Determine the distribution of"
+  },
+  {
+   "key": "Primer iszerocovarianceindependent",
+   "field": "solution",
+   "from": "The interviewer gave you the answer",
+   "to": "That is, let"
+  },
+  {
+   "key": "Primer romeojuliet",
+   "field": "solution",
+   "from": "This is question 3.24 from",
+   "to": "It is easy to overcomplicate"
+  },
+  {
+   "key": "Primer romeojuliet",
+   "field": "solution",
+   "from": "It is almost certain that the interviewer",
+   "to": "When $x<y$, you are in"
+  },
+  {
+   "key": "Primer criminalsinfield",
+   "field": "solution",
+   "from": "The solution to this question requires many assumptions",
+   "to": "Start with $n=1$."
+  },
+  {
+   "key": "Primer criminalsinfield",
+   "field": "solution",
+   "from": "Though this is an illogical question",
+   "to": ""
+  },
+  {
+   "key": "Primer simplerandomwalkhittingprobability",
+   "field": "solution",
+   "from": "This is question 3.23",
+   "to": "It is appealing to suggest"
+  },
+  {
+   "key": "Primer simplerandomwalkhittingprobability",
+   "field": "solution",
+   "from": "The matrix $B$ is nearly diagonal",
+   "to": "Martingale theory provides"
+  },
+  {
+   "key": "Primer simplerandomwalkhittingprobability",
+   "field": "solution",
+   "from": "Martingale theory provides the elegant proof.",
+   "to": "For this question, you must realise"
+  },
+  {
+   "key": "Primer drop20cards",
+   "field": "solution",
+   "from": "During my interview, I first tried to use the method in",
+   "to": ""
+  },
+  {
+   "key": "Primer bayescoins",
+   "field": "solution",
+   "from": "This question is so well known",
+   "to": "Since Bayes' law is just the application"
+  },
+  {
+   "key": "Primer bayescoins",
+   "field": "solution",
+   "from": "My interviewer used this Bayes' law question",
+   "to": "You know the probability of choosing the rigged coin is"
+  }
+ ],
+ "dropped": {
+  "QuantQA 34717231749871901986": "key 5 does not fit E|Y-X| for these normals (about 1.78)",
+  "QuantQA 54813541971958564435": "key 20 is wrong: 12 bills suffice (4 ones, 3 fives, 4 twenties, 1 hundred)",
+  "QuantQA 38500868529587159411": "key contradicts the question: five unpainted faces means a face-centre cube, which has one painted face (probability 1)",
+  "QuantQA 64286194505061512519": "question does not say whose turn follows or what the first flip counts for",
+  "QuantQA 06006507726670598283": "colour-code puzzle with no derivable rule",
+  "QuantQA 47565495596637841320": "key 1 does not follow from the statement (the t statistic changes when every point is duplicated)",
+  "QuantQA 03441005862425494867": "asks for a described procedure, no checkable key",
+  "QuantQA 16338817931848323209": "asks for a described construction, no checkable key",
+  "QuantQA 46148353346785688287": "asks for a proof, no checkable key",
+  "QuantQA 53117012972557791800": "asks to justify and approximate a root, no definite key",
+  "QuantQA 00606879247068712867": "the question itself is missing",
+  "QuantQA 68558071413864370441": "the question itself is missing",
+  "QuantQA 26194681948525930033": "stopping rule incompletely stated",
+  "QuantQA 79878749318068043586": "key format (a portfolio) not checkable as stated",
+  "QuantQA 63964686896955271576": "statement contains the worked solution",
+  "QuantQA 26973919947008165763": "key 1 contradicts the question (the best split gives about 0.75)",
+  "QuantQA 13271655746405093970": "statement garbled",
+  "QuantQA 02890318476077698302": "three open parts, vague key",
+  "QuantQA 44012246166507807454": "statement ends in a hint and the quantity is unclear",
+  "QuantQA 14632883855973935340": "stopping time T never defined",
+  "QuantQA 59867451588642507300": "the question itself is missing",
+  "QuantQA 27214098312366593101": "rules too convoluted to state a single key",
+  "QuantQA 63682918248334817400": "the question itself is missing",
+  "QuantQA 35113934683374353234": "asks for two numbers, key is one",
+  "QuantQA 05250296373170154746": "rules of the game are muddled and the key is doubtful",
+  "AcademicQuant brainteasers-045": "asks for an interval 'that you can measure' with no single value",
+  "AcademicQuant brainteasers-056": "two-part question (who wins and the opening move) with one number as key",
+  "AcademicQuant brainteasers-058": "yes/no plus 'is the number of seconds finite', key 1 does not say which",
+  "QuantQA 10599772448630983748": "dollar signs of the statement are garbled in the dataset",
+  "QuantQA 40419513287113852820": "dollar signs of the statement are garbled in the dataset",
+  "QuantQA 30876110730821376743": "dollar signs of the statement are garbled in the dataset",
+  "QuantQA 94529873814091989329": "matrix lost its brackets and delimiters in the dataset",
+  "QuantQA 49015139176781193136": "covariance matrix garbled in the dataset"
+ }
+}
