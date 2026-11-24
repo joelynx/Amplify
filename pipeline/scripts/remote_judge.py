@@ -17,7 +17,7 @@ Usage (from the repo root):
   there:  git pull
           python pipeline/scripts/remote_judge.py run [--job NAME] [--workers N] [--push]
   here:   git pull
-          python pipeline/scripts/remote_judge.py import [--job NAME] [--dry-run]
+          python pipeline/scripts/remote_judge.py import [--job NAME] [--dry-run] [--leave IDS]
   either: python pipeline/scripts/remote_judge.py list | check | keygen
 
 The job carries this machine's config.json, and the other machine refuses to judge
@@ -490,6 +490,14 @@ def backup(src: sqlite3.Connection, dest: Path) -> None:
     out.close()
 
 
+def leave_ids(spec: str) -> list[int]:
+    """--leave: question ids, comma-separated or a JSON list in a file."""
+    path = Path(spec)
+    if path.exists():
+        return [int(q) for q in json.loads(path.read_text(encoding="utf-8"))]
+    return [int(q) for q in spec.split(",") if q.strip()]
+
+
 def import_job(a) -> None:
     import common
     from apply_fields import apply_pending
@@ -519,9 +527,15 @@ def import_job(a) -> None:
     unfinished = [q for q in take if (r := res["status"][str(q)])["status"] == "received"
                   or (r["status"] == "passed" and not r["assembled"])]
     take = [q for q in take if q not in set(unfinished)]
+    # --leave: verdicts not applied (a judge bug found in them, fixed since): the questions stay as exported,
+    # still `received`, and are judged again with the next job
+    leave = set(leave_ids(a.leave)) if getattr(a, "leave", None) else set()
+    left = [q for q in take if q in leave]
+    take = [q for q in take if q not in leave]
     verdicts = Counter(res["status"][str(q)]["status"] for q in take)
     print(json.dumps({"job": name, "judged_there": res["summary"], "passes": res.get("passes"), "seconds_there": res["seconds"],
                       "machine": res["env"].get("machine"), "to_apply": len(take), "unfinished": len(unfinished),
+                      "left_to_judge_again": len(left),
                       "changed_here_since": moved[:50], "verdicts": dict(verdicts)}), flush=True)
     if res.get("crashes"):
         print(json.dumps({"crashes_there": len(res["crashes"]),
@@ -560,7 +574,7 @@ def import_job(a) -> None:
     common.write_progress(pc)
     common.log_event(pc, None, "remote_judge", f"imported job {name}: {dict(verdicts)}; fills {fills}")
     done = {"at": common.now_iso(), "applied": len(take), "verdicts": dict(verdicts), "left_out": moved,
-            "unfinished": unfinished, "field_fills": fills}
+            "unfinished": unfinished, "left_to_judge_again": left, "field_fills": fills}
     (d / "imported.json").write_text(json.dumps(done, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(done))
 
@@ -616,6 +630,8 @@ def main() -> None:
     p = sub.add_parser("import")
     p.add_argument("--job")
     p.add_argument("--dry-run", action="store_true")
+    p.add_argument("--leave", help="ids (comma-separated, or a JSON list file) whose verdicts are not applied: "
+                                   "they stay received and are judged again with the next job")
     sub.add_parser("list")
     p = sub.add_parser("check")
     p.add_argument("--no-compile", action="store_true")

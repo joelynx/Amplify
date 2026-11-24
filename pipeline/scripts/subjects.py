@@ -433,21 +433,24 @@ def unit_latex(u: str) -> str:
 
 def option_count(latex: str) -> int | None:
     """How many options a multiple-choice question prints: the \\items of its first enumerate,
-    else (a), (b), ... labels, else (A), (B), ... labels that start a line (JEE and UGPhysics)."""
+    else (a), (b), ... labels, else (A), (B), ... labels that start a line (JEE and UGPhysics; MMLU-Pro and
+    SuperGPQA print up to ten or more, (A) to (J) and on: 2026-11-24, job 20261124-023422 refused 752 keys
+    whose option was past (H)). Labels count only in order, so statements (I), (II) are not options. With
+    both kinds, the run that ends last is the options: a stem's parts (a), (b), (c) come before them."""
     m = re.search(r"\\begin\{enumerate\}(.*?)\\end\{enumerate\}", latex, flags=re.S)
     if m:
         n = len(re.findall(r"\\item\b", m.group(1)))
         if n:
             return n
-    for labels, first in ((re.findall(r"\(([a-h])\)", latex), "a"),
-                          (re.findall(r"(?m)^[ \t]*\(([A-H])\)", latex), "A")):
-        seq = 0
-        for lab in labels:
-            if ord(lab) - ord(first) == seq:
-                seq += 1
-        if seq:
-            return seq
-    return None
+    best = None  # (where the run ends, how many labels)
+    for pattern, first in ((r"\(([a-h])\)", "a"), (r"(?m)^[ \t]*\(([A-Z])\)", "A")):
+        seq, end = 0, -1
+        for lab in re.finditer(pattern, latex):
+            if ord(lab.group(1)) - ord(first) == seq:
+                seq, end = seq + 1, lab.end()
+        if seq and (best is None or end > best[0]):
+            best = (end, seq)
+    return best[1] if best else None
 
 
 def parse_key(key_text: str, question_latex: str) -> tuple[dict | None, list[str]]:
