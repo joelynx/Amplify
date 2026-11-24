@@ -593,7 +593,11 @@ def verify(cfg: dict, app, pc, qids: list[int] | None = None, accept: bool = Fal
     """Capture the request Claude Code sends for a few real questions and check it. With review,
     the review solve's request (review model and effort) for up to two of its questions."""
     system_file, system = write_system_file(cfg)
-    qids = qids or (review_rows(cfg, app, pc)[:2] if review else verify_samples(cfg, app, pc))
+    if not qids and review:  # two review questions, and one that goes with the calc tool when any does
+        rows = review_rows(cfg, app, pc)
+        tooled = [q for q in rows if uses_tools(cfg, fetch_question(app, q)["source"])]
+        qids = list(dict.fromkeys(rows[:2] + tooled[:1]))
+    qids = qids or verify_samples(cfg, app, pc)
     if not qids:
         raise SystemExit("no candidate question to verify with; pass --qid")
     ccfg = review_cfg(cfg) if review else cfg
