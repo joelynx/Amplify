@@ -31965,6 +31965,20 @@
   "group": "G13",
   "subject": "Digital Logic and Computer Architecture",
   "topic": "Computer Architecture",
+  "branch": "Computer Arithmetic",
+  "subtopic": "Data Representation, Encodings and Units",
+  "note": "bits, bytes and storage-unit conversions, character codes (ASCII, Unicode, Chinese internal codes), endianness and alignment",
+  "est": 0,
+  "orig": [
+   "Computer Architecture",
+   "Computer Arithmetic",
+   "Data Representation, Encodings and Units"
+  ]
+ },
+ {
+  "group": "G13",
+  "subject": "Digital Logic and Computer Architecture",
+  "topic": "Computer Architecture",
   "branch": "Datapath and Control",
   "subtopic": "Single-Cycle Datapath",
   "note": "datapath elements, control signals per instruction class, critical path and clock period",
@@ -32267,6 +32281,34 @@
    "Computer Architecture",
    "Performance and Parallel Architectures",
    "SIMD, Vector and GPU Architectures"
+  ]
+ },
+ {
+  "group": "G13",
+  "subject": "Digital Logic and Computer Architecture",
+  "topic": "Computer Architecture",
+  "branch": "Computer Fundamentals",
+  "subtopic": "Basic Computer Organisation and History",
+  "note": "functional units (CPU, ALU, control unit, memory, I/O), stored-program concept, computer generations and historic machines",
+  "est": 0,
+  "orig": [
+   "Computer Architecture",
+   "Computer Fundamentals",
+   "Basic Computer Organisation and History"
+  ]
+ },
+ {
+  "group": "G13",
+  "subject": "Digital Logic and Computer Architecture",
+  "topic": "Computer Architecture",
+  "branch": "Computer Fundamentals",
+  "subtopic": "Microcontrollers and Embedded Systems",
+  "note": "embedded system components, microcontrollers such as the 8051, on-chip timers, counters and their flags",
+  "est": 0,
+  "orig": [
+   "Computer Architecture",
+   "Computer Fundamentals",
+   "Microcontrollers and Embedded Systems"
   ]
  },
  {
@@ -32771,6 +32813,48 @@
    "Operating Systems",
    "Protection and Security",
    "Multilevel Security Models"
+  ]
+ },
+ {
+  "group": "G14",
+  "subject": "Operating Systems",
+  "topic": "Operating Systems",
+  "branch": "System Structure and Virtualization",
+  "subtopic": "Booting, Power Management and Timekeeping",
+  "note": "boot process, bootloaders and init systems, kernel builds, sleep and hibernation, hardware clocks and timers",
+  "est": 0,
+  "orig": [
+   "Operating Systems",
+   "System Structure and Virtualization",
+   "Booting, Power Management and Timekeeping"
+  ]
+ },
+ {
+  "group": "G14",
+  "subject": "Operating Systems",
+  "topic": "Operating Systems",
+  "branch": "System Structure and Virtualization",
+  "subtopic": "Virtualization and Containers",
+  "note": "type 1 and type 2 hypervisors, full and para-virtualization, virtual machines, containers",
+  "est": 0,
+  "orig": [
+   "Operating Systems",
+   "System Structure and Virtualization",
+   "Virtualization and Containers"
+  ]
+ },
+ {
+  "group": "G14",
+  "subject": "Operating Systems",
+  "topic": "Operating Systems",
+  "branch": "System Structure and Virtualization",
+  "subtopic": "Distributed, Real-Time and Embedded Operating Systems",
+  "note": "distributed file systems, real-time scheduling guarantees, embedded and mobile operating system types",
+  "est": 0,
+  "orig": [
+   "Operating Systems",
+   "System Structure and Virtualization",
+   "Distributed, Real-Time and Embedded Operating Systems"
   ]
  },
  {
@@ -34597,6 +34681,20 @@
   "group": "G16",
   "subject": "Databases",
   "topic": "Database Systems",
+  "branch": "Data Modelling",
+  "subtopic": "Object and Object-Relational Databases",
+  "note": "object identity and OIDs, reference types, object query language and path expressions, object-relational features",
+  "est": 0,
+  "orig": [
+   "Database Systems",
+   "Data Modelling",
+   "Object and Object-Relational Databases"
+  ]
+ },
+ {
+  "group": "G16",
+  "subject": "Databases",
+  "topic": "Database Systems",
   "branch": "Query Languages",
   "subtopic": "Relational Algebra",
   "note": "selection, projection, joins, division, set operations, result sizes, equivalent expressions",
@@ -35029,6 +35127,146 @@
  },
  {
   "group": "G16",
+  "subject": "Databases",
+  "topic": "Database Systems",
+  "branch": "Database Fundamentals",
+  "subtopic": "Database System Concepts and Components",
+  "note": "what a database and a DBMS are, components of a database system (data, hardware, software, users, DBA), stages of data management (manual, file systems, databases), classifying DBMSs",
+  "est": 0,
+  "orig": [
+   "Database Systems",
+   "Database Fundamentals",
+   "Database System Concepts and Components"
+  ]
+ },
+ {
+  "group": "G16",
+  "subject": "Databases",
+  "topic": "Database Systems",
+  "branch": "Database Fundamentals",
+  "subtopic": "Data Models and Three-Schema Architecture",
+  "note": "the three components of a data model, hierarchical, network and relational models compared, external, conceptual and internal schemas and their mappings, logical and physical data independence",
+  "est": 0,
+  "orig": [
+   "Database Systems",
+   "Database Fundamentals",
+   "Data Models and Three-Schema Architecture"
+  ]
+ },
+ {
+  "group": "G16",
+  "subject": "Databases",
+  "topic": "Database Systems",
+  "branch": "Database Fundamentals",
+  "subtopic": "Database Design Life Cycle",
+  "note": "requirements analysis, conceptual, logical and physical design, implementation and maintenance stages",
+  "est": 0,
+  "orig": [
+   "Database Systems",
+   "Database Fundamentals",
+   "Database Design Life Cycle"
+  ]
+ },
+ {
+  "group": "G16",
+  "subject": "Databases",
+  "topic": "Database Systems",
+  "branch": "Database Fundamentals",
+  "subtopic": "SQL Overview and Data Types",
+  "note": "DDL, DML, DCL and transaction-control statement categories, SQL data types and how they are stored (dates, strings, numerics)",
+  "est": 0,
+  "orig": [
+   "Database Systems",
+   "Database Fundamentals",
+   "SQL Overview and Data Types"
+  ]
+ },
+ {
+  "group": "G16",
+  "subject": "Databases",
+  "topic": "Database Systems",
+  "branch": "Database Programming and Security",
+  "subtopic": "Embedded SQL and Call-Level Interfaces",
+  "note": "embedded SQL in a host language, host variables, cursors, CONNECT and DISCONNECT, ODBC and JDBC, SQL/CLI handles, descriptors and driver managers",
+  "est": 0,
+  "orig": [
+   "Database Systems",
+   "Database Programming and Security",
+   "Embedded SQL and Call-Level Interfaces"
+  ]
+ },
+ {
+  "group": "G16",
+  "subject": "Databases",
+  "topic": "Database Systems",
+  "branch": "Database Programming and Security",
+  "subtopic": "Database Security and Authorization",
+  "note": "GRANT and REVOKE, privilege granularity, roles, discretionary and mandatory access control, SQL injection, auditing",
+  "est": 0,
+  "orig": [
+   "Database Systems",
+   "Database Programming and Security",
+   "Database Security and Authorization"
+  ]
+ },
+ {
+  "group": "G16",
+  "subject": "Databases",
+  "topic": "Database Systems",
+  "branch": "Data Warehousing and Big Data",
+  "subtopic": "Data Warehousing and OLAP",
+  "note": "OLTP versus OLAP, warehouse architecture and data integration, ETL, star and snowflake schemas, data cubes and OLAP operations",
+  "est": 0,
+  "orig": [
+   "Database Systems",
+   "Data Warehousing and Big Data",
+   "Data Warehousing and OLAP"
+  ]
+ },
+ {
+  "group": "G16",
+  "subject": "Databases",
+  "topic": "Database Systems",
+  "branch": "Data Warehousing and Big Data",
+  "subtopic": "Big Data and Stream Processing",
+  "note": "volume, velocity and variety, MapReduce and the Hadoop ecosystem, distributed storage integrity, stream processing, big data applications",
+  "est": 0,
+  "orig": [
+   "Database Systems",
+   "Data Warehousing and Big Data",
+   "Big Data and Stream Processing"
+  ]
+ },
+ {
+  "group": "G16",
+  "subject": "Databases",
+  "topic": "Database Systems",
+  "branch": "DBMS Products and Tools",
+  "subtopic": "Desktop DBMS Tools",
+  "note": "Microsoft Access objects (tables, queries, forms, reports, macros, data access pages), Visual FoxPro commands and functions, PowerBuilder database connections",
+  "est": 0,
+  "orig": [
+   "Database Systems",
+   "DBMS Products and Tools",
+   "Desktop DBMS Tools"
+  ]
+ },
+ {
+  "group": "G16",
+  "subject": "Databases",
+  "topic": "Database Systems",
+  "branch": "DBMS Products and Tools",
+  "subtopic": "Commercial DBMS Administration",
+  "note": "Oracle, SQL Server and MySQL editions and features, tablespaces, logical and physical storage structures, product-specific users and privileges",
+  "est": 0,
+  "orig": [
+   "Database Systems",
+   "DBMS Products and Tools",
+   "Commercial DBMS Administration"
+  ]
+ },
+ {
+  "group": "G16",
   "subject": "Programming Languages and Compilers",
   "topic": "Programming Language Concepts",
   "branch": "Names, Binding and Storage",
@@ -35193,6 +35431,20 @@
    "Programming Language Concepts",
    "Control Flow and Evaluation",
    "Exception Handling"
+  ]
+ },
+ {
+  "group": "G16",
+  "subject": "Programming Languages and Compilers",
+  "topic": "Programming Language Concepts",
+  "branch": "Control Flow and Evaluation",
+  "subtopic": "Asynchronous and Concurrent Programming",
+  "note": "event loops, callbacks, promises and async/await, language-level threads and message passing",
+  "est": 0,
+  "orig": [
+   "Programming Language Concepts",
+   "Control Flow and Evaluation",
+   "Asynchronous and Concurrent Programming"
   ]
  },
  {
@@ -35655,6 +35907,34 @@
    "Compiler Design",
    "Code Generation and Runtime Environments",
    "Linking and Loading"
+  ]
+ },
+ {
+  "group": "G16",
+  "subject": "Programming Languages and Compilers",
+  "topic": "Compiler Design",
+  "branch": "Code Generation and Runtime Environments",
+  "subtopic": "Linking, Loading and Object Files",
+  "note": "object file formats (ELF headers, sections), static and dynamic linking, relocation, symbol resolution, loaders",
+  "est": 0,
+  "orig": [
+   "Compiler Design",
+   "Code Generation and Runtime Environments",
+   "Linking, Loading and Object Files"
+  ]
+ },
+ {
+  "group": "G16",
+  "subject": "Programming Languages and Compilers",
+  "topic": "Programming Language Concepts",
+  "branch": "Libraries and Language Standards",
+  "subtopic": "Standard Libraries and Frameworks",
+  "note": "standard-library and framework APIs (I/O streams, date and time, GUI toolkits, Windows Forms), language standard versions",
+  "est": 0,
+  "orig": [
+   "Programming Language Concepts",
+   "Libraries and Language Standards",
+   "Standard Libraries and Frameworks"
   ]
  },
  {
