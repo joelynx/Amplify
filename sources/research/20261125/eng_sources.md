@@ -1,0 +1,128 @@
+# Mechanical / Power / Nuclear / Electronics / Semiconductors / Communication / Game theory / Quantum mechanics: question sources
+
+Survey 2026-11-25. Research only; nothing imported, no repo file changed except this report. Samples (<=20 rows) are in `SP\research2\samples_*.jsonl` (SP = scratchpad). Downloads in `SP\research2\dl\<name>\`.
+Counts marked "counted" were computed from the downloaded data; "card" = dataset card; "est." = estimate.
+EE-side sources (GATE PDFs, EEE-Bench, Socratic Electronics, MIT OCW EECS, ElectroVizQA, Ellingson, WirelessMathBench, ControlBench, MMLU-Pro stemez) are in `sources\research\20261123\ee_cheme_sources.md`; not repeated except where they serve an area here.
+
+Honest headline: public machine-readable sets are thin outside SuperGPQA. Game theory is well served by one synthetic dataset; mechanical engineering, nuclear, semiconductor and power plant have no dedicated verified-answer set on HF. The practical plan is SuperGPQA's non-imported fields (1,875 rows), ERI (synthetic ME/EE/industrial calc rows, needs solving/verification), TeleMath, GameTheory-Bench, and a few small sets. Everything else is PDF (see the end).
+
+## 1. Summary table
+
+| # | Source | URL | Areas | Usable rows (counted) | Key | Solution | Format | Images | Licence | Rec | Pri |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | SuperGPQA, fields not yet imported | HF `m-a-p/SuperGPQA` (file already at `SP\dl\supergpqa\SuperGPQA-all.jsonl`) | ME, power/thermal, nuclear, mechanics, solid/fluid/rigid-body, optics, materials, mining etc. | Mechanical Eng 176, Power Eng & Thermophysics 684, Nuclear Sci 107, Mechanics 908 (sum 1,875; 1,458 calc); see sec. 2 for the rest | yes (letter + text) | no | JSONL, 10 options | 0 (some say "figure", see below) | ODC-BY | import | 1 |
+| 2 | GameTheory-Bench (Alogotron) | HF `Alogotron/GameTheory-Bench` | game theory (all areas) | 2,913 rows (2,827 unique problems) | yes, machine-verified (nashpy etc.) | yes (templated step solution) | parquet, markdown tables in text | 0 | Apache-2.0 | import | 1 |
+| 3 | TeleMath (via ymoslem copy) | HF `ymoslem/TeleMath-processed` (train 299 + test 201); original `netop/TeleMath` is gated | comms (telecom eng 153, signal processing 68, info theory 44, networking 24, EE 9), plus prob/stats 109, OR 93 | 500 | yes (number) | no | parquet | 0 | MIT (original) | import | 1 |
+| 4 | ERI Engineering Reasoning & Instruction | HF `mznaser/ERI-Engineering-Reasoning-and-Instruction` (`data/train.jsonl` 45,327 + val 2,580 + test 5,522) | ME 5,758 train (dynamics_vibrations, fluid, heat transfer, HVAC, machine_design, manufacturing, thermo), EE 4,955 (circuits, control, EM, electronics, power systems, signals), industrial 4,872 (OR, production planning, quality, reliability, ergonomics, statistics), materials 4,824 | CALC-type rows 6,574 train (ME CALC 838); all types 53k | LLM-written answer inside `response`, unverified | yes (LLM, short) | JSONL instruction/response | 0 | CC-BY-NC-4.0 | maybe (calc rows only, re-solve with pipeline) | 2 |
+| 5 | CMPhysBench, Semiconductors topic | HF `weidawang/CMPhysBench` (`CMPhysBench.json`) | semiconductor/solid-state physics (115 Semiconductors, 115 Magnetism, 55 Superconductivity, 110 theory) | 520 total, 115 semiconductors | final_answer yes (expression 341, numeric 100) | yes (textbook-style) | JSON | few | Apache-2.0 | import (semiconductor 115 + rest to Solid State) | 2 |
+| 6 | NuclearQA v1 (PNNL) | GitHub `pnnl/EXPERT2`, `benchmark/NuclearQA_v1.csv` (+ `_answers.txt`, `_questions.txt`, `_meta.csv`) | nuclear (physics/chemistry/materials, expert written) | ~100 (card; file sizes 19 KB, not parsed) | short reference answers | no | CSV/TXT | 0 | check repo LICENSE (PNNL/Battelle) | import (tiny, text) | 2 |
+| 7 | 0xZee CoT Engineering-574 | HF `0xZee/dataset-CoT-Engineering-574` | FE-exam style MCQ with worked solutions: thermo, fluids, EE, statics, ChemE (mixed) | 574 | yes ("The answer is (D)") | yes | parquet question/response/CoT | 0 (figures as `![...](#)` stubs, drop those) | none stated (derived from a commercial review book; personal use) | maybe | 2 |
+| 8 | TheoremQA leftovers | already local `dl/theoremqa` | comms: signals 47, information theory 29 | 76 | yes | partly | | few | MIT | import | 1 |
+| 9 | TeleQnA (mirror) | HF `ketchup123/TeleQnA_full` (10,000) ; original `netop/TeleQnA` gated (`TeleQnA.json`) | telecom knowledge: Research publications 4,500, Standards specs 2,000, Research overview 2,000, Standards overview 1,000, Lexicon 500 | 10,000, but only Lexicon 500 + overview 3,000 are textbook-like | yes (option n + text) | no (explanations only in original JSON) | parquet; 5 options | 0 | MIT | maybe (overview + lexicon only; skip 3GPP "standards specifications" and "research publications": many say "mentioned in the document") | 3 |
+| 10 | Engineering Numerical Methods Benchmark | HF `sportsvision/Engineering-Numerical-Methods-Benchmark` | solve-the-equation engineering numerics (fluids, thermo ...), 100 | 100 | `Ground_Truth` | no | parquet | 0 | Apache-2.0 | maybe (tiny; needs a calculator, all "solve Colebrook" style) | 3 |
+| 11 | GATE 2022 Multimodal | HF `jebish7/GATE_2022_Multimodal` (`<paper>_2022.json`, `images.zip`) | only the figure-based questions of each GATE 2022 paper (ME1 7, ME2 13, EE 16, EC 14, IN 9, PI 8, PE 7, MT 9, XE 32 ...) | ~130 in my areas | `answer` = option index | no | JSON + images.zip | 100% | "Education and Research" (GATE) | maybe (tiny, good figures with official answers) | 3 |
+| 12 | PHYSICS benchmark (Zheng et al.) | HF `desimfj/PHYSICS` (`data/test.jsonl`, `language=en` rows only) | QM sec. 6: Modern Physics 200; also Mechanics 200, Thermo 200, EM 200, Optics 200 | 1,000 en | yes (per-part list) | yes | JSONL | few | MIT | import (check overlap) | 2 |
+| 13 | 0xZee CoT Quantum-Mechanics-1224 and siblings | HF `0xZee/dataset-CoT-Quantum-Mechanics-1224`, `...-Atomic-Nuclear-Physics-144`, `...-Relativity-Astrophysics-Nuclear-Physics-313`, `...-Modern-Physics-177`, `...-Particle-Astroparticle-Physics-193` | QM, nuclear/particle | 1,224 + 144 + 313 + 177 + 193 | solution text as `response` | yes (textbook solutions, with LLM CoT) | parquet | 0 | none stated (textbook-derived) | import (check overlap with bank) | 1 for QM |
+| 14 | Quantum Mechanics 6-chapter sets | HF `themanaspandey/QuantumMechanics-6Chapters-Structured` (940) | QM | 940 | none (synthetic reasoning chains) | LLM | | 0 | none | skip | - |
+| 15 | MMLU-Pro non-stemez engineering | HF `TIGER-Lab/MMLU-Pro` | only `ori_mmlu-electrical_engineering` 67 left (all other engineering rows are stemez, already in) | 67 | yes | no | | 0 | MIT | skip (subset of MMLU EE; 145 test rows in `cais/mmlu` electrical_engineering are easy recall) | 4 |
+| 16 | JEEBench | HF `daman1209arora/jeebench` | physics QM/atomic only a few | 515 total (phy+chem+math) | yes | no | JSON | some | MIT | skip for these areas | 4 |
+| 17 | EngDesign, EngiBench, ERI-like | `opt1zer/EngDesign` (101 code/design tasks), EngiBench | | | | | | | | skip (programming / recycled) | - |
+
+## 2. SuperGPQA: full counts for the areas (field | subfield | rows | of them calculation)
+
+Counted from the 26,529-row file. "fig" = question text mentions figure/shown/diagram (drop or check). Fields not in the bank yet.
+
+Mechanical Engineering (176): Manufacturing Automation 126 (44 calc), Mechatronic Engineering 50 (20).
+Mechanics (908): Fundamentals of Dynamics and Control 347 (327 calc, 50 fig), Rigid Body Mechanics 173 (162, 35 fig), Theoretical Mechanics 155 (144, 18), Theoretical Fluid Mechanics 140 (107), Solid Mechanics 93 (71, 9). This is the best strength-of-materials / vibrations / theory-of-machines source here; Solid Mechanics is small though.
+Power Engineering and Engineering Thermophysics (684): Engineering Thermophysics 146 (129), Heat Transfer 129 (89), Thermal Energy Engineering 109 (81), Engineering Fluid Mechanics 84 (73), Fluid Machinery 64 (57), Power Machinery 52 (46), Internal Combustion Engineering 50 (20), Refrigeration and Cryogenic Engineering 50 (37). This covers IC engines, refrigeration, power plant (thermal energy engineering), turbomachinery.
+Nuclear Science and Technology (107): Nuclear Energy and Reactor Technology 57 (48 calc), Radiation Protection and Nuclear Technology Applications 50 (3 calc, mostly recall).
+Also usable and outside the bank: Materials Processing Engineering 90; Metallurgical Engineering 255 (4 subfields); Optical Engineering 376 (Applied Optics 124, Theoretical Optics 135, Optoelectronic Tech 67, Laser Technology 50); Aeronautical and Astronautical 119; Hydraulics and Hydrology 136; Water conservancy 82; Geotechnical 179; Structural 57; Marine/Naval 138; Transportation Engineering 251; Weapon Science 100; Management Science and Engineering 58; Systems Science 50; Environmental Engineering 89; Mining 100; Petroleum 112.
+Physics field (not requested; the coordinator imports the QM subfields): Semiconductor Physics 61 (59 calc) and Solid State Physics 147 belong to the semiconductors area; Particle and Nuclear Physics 225 (52 neutron/reactor keyword hits), Electrodynamics 583.
+Industrial engineering: only "Industrial Economics" 84 (Economics) and Management Science and Engineering 58; no real IE set here (use ERI).
+Game theory: SuperGPQA has about 34 keyword hits in total, mostly unrelated (Databases 4, Western Economics 3). Not usable. Operations Research and Cybernetics (50) is already in the bank (Control field).
+Semiconductors in the bank's fields (Microelectronics and Solid-State 50, Circuits and Systems 108) are already imported.
+Quality notes: no solutions; keys are letter+text. About 8% of ME/Mechanics rows mention a figure that is not shipped (drop rows with "figure"/"as shown" unless the statement is self-sufficient). OCR-style spacing in numbers. Mechanics rows with `is_calculation` are good for the pipeline to solve and judge against the key.
+Convert: statement = `question`; options = `options` (list); answer = `answer_letter` plus `answer`; subject/topic from `field`/`subfield`; no solution.
+
+## 3. Per-area sections
+
+### Mechanical engineering (machine design, strength of materials, theory of machines, vibrations, manufacturing, metrology, IC engines, refrigeration, industrial engineering)
+- Best: SuperGPQA (sec. 2): Mechanics 908 + Mechanical Eng 176 + Power Eng 684 (IC engines 50, refrigeration 50). Machine design, metrology and theory of machines have essentially no rows; Manufacturing Automation 126 is the manufacturing part.
+- ERI (CC-BY-NC, synthetic): `field=mechanical_engineering`, `subdomain` in dynamics_vibrations 787, fluid_mechanics 807, heat_transfer 838, hvac 850, machine_design 827, manufacturing 836, thermodynamics 813 (train; val and test add about 20%). `type` codes: CALC 6,574 overall (ME: 838 in train), also DES, CODE, DEF, EXP, CMP, TRB. Keep only `type=CALC` (statements with given numbers and a worked answer; sample `samples_eri_me.jsonl`). Quality: responses are LLM-written and computed in-line; some arithmetic and physics errors likely (the cutting-force sample checks out, the Rayleigh sample is plausible). Treat the response as a draft, not a key: run through the pipeline's solve + judge. Industrial engineering subdomains (operations_research, production_planning, quality_control, reliability, ergonomics, engineering_statistics, about 800 each; CALC share about 12%) are the only IE source found. Materials engineering (4,824) also there. DEF/EXP/TRB/CODE/DES types are recall or essays: skip.
+- `0xZee/dataset-CoT-Engineering-574`: FE exam MCQ with solutions (thermo, mixing tanks, accelerating voltage; mixed disciplines; figures replaced by `![Diagram A](#)` stubs: filter those out). "The answer is (X)" parses to the key.
+- `sportsvision/Engineering-Numerical-Methods-Benchmark`: 100 fluid/thermo equation-solving prompts; low value.
+- `zshiyi/Fluid-Mechanics-CoT`: only 2 rows. Skip. `Beifengdo/*` are Chinese course material dumps (PPT/DWG/images): skip.
+- Not found: any HF/GitHub set of machine-design (gears, bearings, shafts), vibrations or metrology problems with keys. MechVQA (arXiv 2605.30794, drawings) is multimodal drawing reading, not a fit. A Tian et al. mechanical-vibration exam (126 MCQ) is mentioned in a paper; no public release seen.
+
+### Power plant engineering
+- SuperGPQA: Thermal Energy Engineering 109, Power Machinery 52, Fluid Machinery 64, Engineering Thermophysics 146 (all in sec. 2). Bank already has P.K. Nag and R.K. Rajput (2,425 rows), so these only add depth.
+- ERI `hvac`/`thermodynamics` calc rows as fallback. `ccw7463/powerplant_glossary_dataset_ver0.1` is a glossary (not questions).
+
+### Nuclear engineering (reactor physics, diffusion, kinetics, thermal hydraulics, shielding, fuel cycle)
+- SuperGPQA Nuclear Sci 107 (57 reactor/48 calc; 50 radiation protection mostly recall). Plus Physics/"Particle and Nuclear Physics" 225 (coordinator's import; about 52 have reactor/neutron wording).
+- NuclearQA v1 (PNNL, `pnnl/EXPERT2/benchmark`): about 100 hand-written questions (physics/chemistry/materials) with answers; follow-up "NuclearQAv2" (arXiv 2606.27047, about 1,240 QA pairs) has no confirmed public release.
+- `0xZee/...Atomic-Nuclear-Physics-144` and `...Relativity-Astrophysics-Nuclear-Physics-313`: nuclear-physics textbook problems with solutions (sec. 6), not reactor engineering.
+- `itsarnf/thorium_nuclear_energy_qa_squad` (111 SQuAD-style, context-based, no licence): skip. `infinite-dataset-hub/NuclearQA` is synthetic junk.
+- Reactor physics/kinetics/thermal hydraulics problem sets exist only as PDFs (MIT OCW 22.01, 22.05, 22.06 problem sets with solutions; Navy NNPTC reactor dynamics practice problems; see end). The LaTeX notes repo `lilulu/nuclear-physics-notes` (MIT 22.211) is lecture notes, not questions. `munkm/npre247` (UIUC NPRE 247) is course code/notes; I did not open it.
+
+### Electronics engineering (analog/digital, amplifiers, op-amps, oscillators)
+Covered mostly by the EE report (EEE-Bench 2,860 incl. analog 583 and digital 496, Socratic Electronics, SuperGPQA Circuits and Systems already in, ElectroVizQA, CircuitSense). New here:
+- ERI `electrical_engineering/electronics` 813 and `circuits` 830 (CALC share small): maybe, same caveats as sec. 3 mechanical.
+- `theprint/Electronics-QA` (2,516, Apache-2.0): essay-style answers to conceptual analog-electronics questions, LLM-written, no verifiable key. Skip (or concept-only fallback).
+- MMLU `electrical_engineering` (145 test + 16 val + 5 dev, cais/mmlu, MIT): easy recall; 67 of them are the MMLU-Pro `ori_mmlu` rows. maybe, low priority.
+- `Beifengdo/Analog-Electronics` (Chinese exam scans, 934 images): skip.
+
+### Semiconductors (physics, pn junction, BJT/MOSFET, fabrication, VLSI)
+- CMPhysBench Semiconductors 115 (Apache): textbook-grade problems with full solutions and a `final_answer`; topic mix is band theory, carriers, doping, optical properties more than devices. Expression answers (341/520) need a judge, not string match.
+- SuperGPQA Physics: Semiconductor Physics 61 (59 calc), Solid State Physics 147 (in coordinator's scope? the Physics field is not imported; flag to coordinator), Microelectronics 50 already in.
+- EEE-Bench "devices" 219 (EE report), MIT OCW 6.012 exams, Fiore "Semiconductor Devices" (LibreTexts, CC BY-NC-SA, problems in HTML; EE report E11).
+- Fabrication/VLSI: nothing usable. HF hits are verilog/RTL code (programming, excluded), `So-oming/semiconductor8process_QA` (50 Korean), `kiranshivaraju/semiconductor-questions` (10 trivial). SemiKong (arXiv 2411.13802) has no data released that I could find. MMCircuitEval (EE report E18) covers chip design generally (42% images, open-ended); mention for VLSI only.
+
+### Communication engineering (modulation, noise, information theory, wireless/telecom)
+- SuperGPQA Information and Communication Engineering is already in. TheoremQA leftovers (sec. 1 row 8): signals 47, information theory 29, all numeric.
+- TeleMath 500 (sec. 1 row 3): clean numeric problems with `\boxed`-style numeric answers; categories Telecommunications Engineering 153, Probability and Statistics 109, Operations Research 93, Signal Processing 68, Information Theory 44, Computer Networking 24, EE 9. `difficulty` basic/advanced 250 each. Prob/stats and OR rows are also useful for Stochastic/Operations subjects. Convert: statement = `question`, answer = `answer` (numeric string, units in statement); no solution. The `ymoslem` copy is a faithful reformat of `netop/TeleMath` (MIT); fetch it, since the original is gated (needs HF login).
+- WirelessMathBench 587 (CC BY 4.0, ungated, in EE report): fill-the-equation MCQ.
+- TeleQnA (10,000): knowledge MCQ about 3GPP/papers. Lexicon 500 and the two "overview" categories (3,000) are recall questions suited as conceptual rows; "Standards specifications" 2,000 are 3GPP-release trivia. Statements are prefixed with an instruction line ("Please provide an answer ...") and `Answer` is "option n: text": strip both.
+- ERI electrical `signals_systems` 853 (CALC subset) as fallback.
+- EE-report items still relevant: Ellingson (antennas/waveguides), MIT OCW 6.450 comms (PDF).
+
+### Game theory
+- GameTheory-Bench (Apache-2.0), counted: 2,913 rows, 2,827 unique problem texts, 1,859 unique answers. Categories: normal_form_2x2 500, sequential_game 386, zero_sum 300, auction_theory 300, cooperative_game 300, bayesian_game 267, normal_form_3x3 220, 3x4 220, 4x4 220, mechanism_design 200. Subcategories include pure/mixed Nash, dominant strategy, IESDS, minimax/saddle, backward induction (three_stage, entry_deterrence), Stackelberg, signaling, ultimatum bargaining, first-price/second-price/all-pay/winner's-curse auctions, VCG single/multi-item, revenue equivalence, incentive compatibility, Shapley, core, voting power, two-type Bayesian. Fields: `problem` (markdown payoff tables), `solution` (step-by-step text), `answer` (compact string such as `[(Down, Right)]`, `Game value: 1.636364, P1=[...]`, `BNE: b(v)=(5/6)v`), `verification` (JSON with nashpy output), `difficulty`, `category`, `subcategory`.
+  Quality: answers come from solvers (checked by nashpy/closed forms), so keys are reliable; problems are templated and repetitive (same payoff pattern with variants; cap each subcategory at about 40 to avoid bank flooding, about 1,200 rows, but all 2,827 are unique text). Solutions are verbose templates and some say "Down" where the table label differs; solutions for random 2x2 games with mixed equilibria show the pure NE only in the prose (answer string has it all). Payoff tables are markdown pipe tables: convert to LaTeX `array` or keep as a table. No licence issue.
+- GameTheory-Formulator (`Alogotron/GameTheory-Formulator`, 1,215, Apache-2.0): business/politics/security scenarios to be modelled and solved (mostly prisoner's-dilemma/coordination templates, each domain repeated with new names). `solution` is a short prose answer. Low novelty: maybe, cap at about 150.
+- Others: `ebowwa/game-theory*` are concept lists (119, no questions), `Reza-11/game-theory-adversarial-mcq` is a log file, `Maitreyajayaraj/game_theory_math_reasoning` has 6 messages. Skip. Not found on HF/GitHub: textbook-style exercise sets with solutions in text form (they are PDFs, see end).
+- Also the CMT/econ side: TeleMath "Operations Research" 93 (LP/queueing mostly, not game theory).
+
+## 4. Quantum mechanics (bank subject "Quantum Mechanics": QM, atomic, nuclear, particle)
+Bank already has UGPhysics, MMLU-Pro stemez Physics, Kamal's 1000 Solved Problems, Gnadig, TheoremQA; SuperGPQA Physics is handled by the coordinator.
+1. `0xZee/dataset-CoT-Quantum-Mechanics-1224` (1,224 rows; `question`, `response` textbook solution, `CoT`): graduate QM, nuclear shell model, supersymmetric QM, operator proofs; numbering like "(4.12.86)" and cross-references "[221]" show it is scraped from a collected-problems textbook (looks like Galitski et al. or similar; not Kamal/Gnadig as far as I can tell, but I did not run a shingle overlap check against the bank because I could not locate the live DB; the importer should). Many are "show that" proofs with a long response; the "answer" must be derived (use the response as the reference solution). No licence declared; personal use. Siblings: Atomic-Nuclear-Physics-144, Relativity-Astrophysics-Nuclear-Physics-313, Modern-Physics-177, Particle-Astroparticle-Physics-193, Quantum-Computing-224 (the last is information, skip), Classical-Mechanics-343, Theoretical-Mechanics-307, Electromagnetism-580, Physics-2254 (broader; useful for other bank subjects). Sample: `samples_0xzee_Quantu.jsonl`. Estimated QM/atomic/nuclear/particle total about 2,050.
+2. `desimfj/PHYSICS` (MIT): 1,000 English problems with reference solutions and typed answers (`answer` is a list, one item per sub-question; `answer_type` Numerical/Expression/Equation/MCQ). Domain "Modern Physics" 200 (QM, atomic, nuclear; from Chinese PhD-qualifying and textbook problem collections). Rows are duplicated in `language=zh`/`translate` variants: keep `language=="en"` and `translate==False` or the translated English only once (the file has 2,000 rows: 1,000 zh, 1,000 en, 1,000 translated). Sample: `samples_physics_desimfj_modern.jsonl`.
+3. CMPhysBench (Apache-2.0): 520 condensed-matter problems incl. quantum content (Theoretical Foundations 110 is QM/statistical-mechanics heavy; Magnetism 115; Superconductivity 55; Strongly Correlated 15; Others 110), solutions yes, `final_answer` yes. Sample `samples_cmphysbench_semi.jsonl`.
+4. PHYBench (MIT, `Eureka-Lab/PHYBench`, 1,000 in `PHYBench-questions_v1.json`/`fullques`; tag MODERN about 7%, so roughly 70): small QM share; has solution + expression answer. maybe.
+5. TPBench (`ZhiqiGao/TPBench`, MIT): public split only 10 rows (domain QM at least 1). Skip.
+6. PhysReason (`zhibei1204/PhysReason`, MIT, zips `PhysReason-full.zip`/`-mini.zip`; 1,200 problems, with figures, mixed mechanics/EM/thermo/optics/modern): modern physics share small. Skip for QM.
+7. JEEBench (515 rows total, MIT), OlympiadBench physics (Hothan/OlympiadBench, OE_TO_physics en subset, around 2,000 with solutions, some atomic/QM): few QM rows; low priority.
+8. QuantumBench (NVIDIA/Tokyo, arXiv 2511.00092, 769 undergrad MCQ from MIT/TU Delft/LibreTexts): I could not find an ungated HF copy (`kanhatakeyama/QuantumBench` returned 401). Ask the owner whether to try with a HF login; high fit if reachable.
+9. Skip: `themanaspandey/QuantumMechanics-*` (synthetic chains, no key), 0xZee CoT Quantum Computing.
+Recommendation: import 1 (check overlap first), 2 (Modern Physics 200), 3.
+
+## 5. Overlap with the bank
+No live-bank overlap run for this report (the DB was not located read-only in the time budget; only `pipeline\archive\*.db` snapshots were visible). From the earlier report: SuperGPQA EE+ChemE had 0.6% overlap with the bank, so expect similar for the other SuperGPQA fields. Importers should shingle-check ERI, 0xZee and PHYSICS against the bank (5-word shingles, 60% containment) before import; 0xZee/Kamal and PHYSICS/UGPhysics are the likeliest collisions.
+
+## 6. PDF-only sources (wait for OCR)
+- GATE ME/ECE/EE/IN/PI/XE papers and keys 2007-2025 (`gate2026.iitg.ac.in/download.html`, `gate.iitkgp.ac.in/documents/gatepapers/<year>/<paper>.pdf`, e.g. 2022). No machine-readable full dump was found; `jebish7/GATE_2022_Multimodal` carries only figure questions; `Abhay557/indian-exams-rawdata` (GATE/JEE, licence unverified) returned errors/401 and could not be inspected.
+- UPSC ESE/IES papers (ME/EE/E&T): upsc.gov.in PDFs.
+- Bonanno, *Game Theory* (UC Davis, open access, about 165 exercises with full solutions), `faculty.econ.ucdavis.edu/faculty/bonanno/PDF/GT_book.pdf`. Best game-theory text-book source; no TeX source seen.
+- Osborne *Introduction to Game Theory* public solutions manual; MIT OCW 14.12 psets+solutions; UC3M game theory problem sets with solutions (`economia.uc3m.es/docencia/ME-MEIM-Game-Theory/exercises_files/`); Ferguson *Game Theory* (UCLA).
+- MIT OCW 22.01 Introduction to Nuclear Engineering (problem sets with solutions), 22.05, 22.06; Navy NNPTC reactor dynamics practice problems (`navsea.navy.mil/.../rd_sol.pdf`); BYU ChE 612 homework.
+- MIT OCW 2.001/2.002 (mechanics of materials), 2.003 (dynamics and vibration), 2.004, 2.005/2.006 (thermal), 2.008 (manufacturing); NPTEL ME/EC/EE assignments (see EE report).
+- Van Zeghbroeck *Principles of Semiconductor Devices* (ecee.colorado.edu/~bart/book; HTML with exercises but no solutions; not checked in detail).
+- MIT OCW 6.012, 6.720; Sze/Neamen exercises exist only in copyrighted books.
+- Tian et al. mechanical vibration exam (126 MCQ), paper arXiv 2603.02239 only.
+
+## 7. Open questions for the owner
+1. Is a HF login token available? It would unlock `netop/TeleQnA`, `netop/TeleMath` (originals), `AI4Manufacturing/manufacturing_knowledge_qa_training` (manual gate) and QuantumBench-like sets.
+2. May ERI CALC rows (CC-BY-NC, LLM-written answers) go into the bank? If yes, import with the response only as a hint and solve through the pipeline (about 1,000-2,000 rows after filtering for ME, EE, IE).
+3. Cap on GameTheory-Bench per subcategory (suggest about 40) to avoid templated flooding?
+4. New bank subjects needed (mechanical sub-branches, nuclear engineering, game theory, communication engineering, semiconductor devices) require owner approval; SuperGPQA Mechanics (908) alone would need Dynamics/Rigid body/Solid/Fluid subjects.
+5. Should 0xZee QM rows with "show that" proofs be kept (they have no short answer)? Suggest import only those with a final equation/number.

@@ -9,6 +9,14 @@ questions, mostly translated Chinese university material, up to 10 options and o
   * subfield Materials Physics and Chemistry of the field Materials Science and Engineering (199);
   * the electrical fields Electrical Engineering, Electronic Science and Technology, Information and
     Communication Engineering, Control Science and Engineering, Instrument Science and Technology (1,546).
+Wave 20261125 (--wave 20261125; owner 2026-11-24: expand mechanical, power plant and nuclear engineering,
+semiconductors, computer architecture, operating systems, machine learning, ...):
+  * fields Mechanical Engineering (176), Power Engineering and Engineering Thermophysics (684), Nuclear Science
+    and Technology (107), Mechanics (908), Computer Science and Technology (763; owner: "Databases, programming
+    languages and data structures WILL BE USEFUL, i need them TOO!");
+  * subfields Materials Processing Engineering (90), Optoelectronic Technology (67), and of the field Physics
+    (owner: "also ... quantum mechanics") Quantum Mechanics (206), Atomic and Molecular Physics (210), Particle and
+    Nuclear Physics (225), Subatomic and Atomic Physics (51), Semiconductor Physics (61), Solid State Physics (147).
 All rows go to group "subject": the classifier decides the subject afterwards. The dataset has no solutions.
 
 Source "SuperGPQA", subsource None (owner 2026-11-23: a subsource must not identify a question); idx is the full
@@ -30,8 +38,8 @@ On --apply: backup, insert (topic/branch/subtopic Uncategorized), append to benc
 into benchmarks_assignments.json (subject rows).
 
 Usage (repo root):
-  python -m app.tools.import_supergpqa --data DIR --dry-run [--dump rows.json] [--set-aside]
-  python -m app.tools.import_supergpqa --data DIR --apply
+  python -m app.tools.import_supergpqa --data DIR [--wave 20261125] --dry-run [--dump rows.json] [--set-aside]
+  python -m app.tools.import_supergpqa --data DIR [--wave 20261125] --apply
 DIR holds supergpqa/SuperGPQA-all.jsonl (or SuperGPQA-all.jsonl itself).
 """
 
@@ -62,6 +70,16 @@ FIELDS = {
     "Instrument Science and Technology",
 }
 EXTRA_SUBFIELDS = {"Materials Physics and Chemistry"}
+WAVES = {  # wave -> (fields, extra subfields, set-aside file)
+    "20261123": (FIELDS, EXTRA_SUBFIELDS, SET_ASIDE_PATH),
+    "20261125": (
+        {"Mechanical Engineering", "Power Engineering and Engineering Thermophysics", "Nuclear Science and Technology",
+         "Mechanics", "Computer Science and Technology"},
+        {"Materials Processing Engineering", "Optoelectronic Technology", "Quantum Mechanics", "Atomic and Molecular Physics",
+         "Particle and Nuclear Physics", "Subatomic and Atomic Physics", "Semiconductor Physics", "Solid State Physics"},
+        Path("app/data/appdata/supergpqa_set_aside_20261125.json"),
+    ),
+}
 NEAR_OWN = 0.85
 
 _FIXES = json.loads(Path(__file__).with_name("supergpqa_fixes.json").read_text(encoding="utf-8")) if Path(__file__).with_name("supergpqa_fixes.json").exists() else {"fixes": [], "dropped": {}}
@@ -286,12 +304,13 @@ def build_statement(stem: str, opts: list[str]) -> str:
     return "\n\n".join([stem, *note, *(f"({chr(65 + i)}) {o}" for i, o in enumerate(opts))])
 
 
-def load(data: Path) -> tuple[list[dict], dict[str, str]]:
+def load(data: Path, wave: str = "20261123") -> tuple[list[dict], dict[str, str]]:
     path = data if data.is_file() else next(data.rglob("SuperGPQA-all.jsonl"))
+    fields, subfields, _ = WAVES[wave]
     rows, dropped, seen = [], {}, {}
     for line in path.read_text(encoding="utf-8").splitlines():
         r = json.loads(line)
-        if r["field"] not in FIELDS and r["subfield"] not in EXTRA_SUBFIELDS:
+        if r["field"] not in fields and r["subfield"] not in subfields:
             continue
         key = r["uuid"][:12]
         lab = label(r["uuid"])
@@ -378,12 +397,14 @@ def main() -> None:
     p.add_argument("--dump", type=Path, help="write the rows to import as JSON")
     p.add_argument("--set-aside", action="store_true", help="leave out rows that fail the checks (listed in SET_ASIDE_PATH)")
     p.add_argument("--exclude", type=Path, help="with --set-aside: JSON {row label: why} of rows the render checks failed")
+    p.add_argument("--wave", choices=sorted(WAVES), default="20261123", help="which fields to import")
     g = p.add_mutually_exclusive_group(required=True)
     g.add_argument("--dry-run", action="store_true")
     g.add_argument("--apply", action="store_true")
     a = p.parse_args()
 
-    rows, dropped = load(a.data)
+    rows, dropped = load(a.data, a.wave)
+    set_aside_path = WAVES[a.wave][2]
     conn = sqlite3.connect(f"file:{DB_PATH.as_posix()}?mode=ro", uri=True)
     dup = duplicates(rows, conn)
     conn.close()
@@ -396,12 +417,12 @@ def main() -> None:
     if a.set_aside:
         excluded = json.loads(a.exclude.read_text(encoding="utf-8")) if a.exclude else {}
         why = {r["potd"]: check([r]) or [excluded[r["potd"]]] for r in new if check([r]) or r["potd"] in excluded}
-        SET_ASIDE_PATH.write_text(
+        set_aside_path.write_text(
             json.dumps([dict(r, problems=why[r["potd"]]) for r in new if r["potd"] in why], ensure_ascii=False, indent=1),
             encoding="utf-8",
         )
         new = [r for r in new if r["potd"] not in why]
-        print(f"set aside for a hand fix: {len(why)} rows in {SET_ASIDE_PATH}")
+        print(f"set aside for a hand fix: {len(why)} rows in {set_aside_path}")
         problems = check(new)
     reasons = collections.Counter(re.sub(r"\d+", "N", re.sub(r"of SuperGPQA \w+", "of X", v)) for v in dropped.values())
     print(
