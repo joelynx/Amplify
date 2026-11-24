@@ -124,3 +124,5 @@ def test_a_loss_is_compared_without_its_sign() -> None:
     assert same_answer("500", "-500", "By how much does the price change?") is False
     assert same_answer("500", "-500", "What is the profit or loss on the trade?") is False
     assert same_answer("500", "-500") is False
+    assert same_answer("288", "-288", "How many S&P futures contracts should be sold?") is True  # negative by name
+    assert same_answer("150", "-150", "What is the cost of the call option?") is True

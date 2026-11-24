@@ -42,7 +42,7 @@ from common import (  # noqa: E402
     hint_tier_of,
     is_blank,
     load_config,
-    names_loss,
+    negative_by_name,
     normalize_answer,
     now_iso,
     parse_solver_output,
@@ -343,10 +343,11 @@ _LEAD_SIGN = re.compile(r"^((?:\s|\$|\\\(|\\\[)*)[-−]")  # a leading minus, af
 
 
 def same_answer(stored: str, reply: str, question: str | None = None) -> bool | None:
-    """same_constant, except that when the question asks for a loss the sign is not compared
-    (owner 2026-11-24: "Accept the sign ONLY for losses"): -500 and 500 are the same loss."""
+    """same_constant, except that when the question asks for a quantity negative by its name (a
+    loss, a cost, a decrease, ...: common.negative_by_name) the sign is not compared: -500 and 500
+    are the same loss."""
     same = same_constant(stored, reply)
-    if same is False and names_loss(asked_sentence(question)):
+    if same is False and negative_by_name(asked_sentence(question)):
         def unsigned(s: str) -> str:
             return _LEAD_SIGN.sub(lambda m: m.group(1), str(s), 1)
 

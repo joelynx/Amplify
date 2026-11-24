@@ -40,7 +40,7 @@ from common import (
     kept_hint_tiers,
     log_event,
     model_display,
-    names_loss,
+    negative_by_name,
     now_iso,
     pipeline_wrote,
     q_dir,
@@ -751,8 +751,8 @@ def reference_mismatch(key: dict, ref: dict | None, question: str | None = None)
     """Why the key disagrees with the source's stored answer, or None (also when they cannot
     be compared). The comparison never skips a part silently: a stored option or true/false
     value the key has no part for is a mismatch, and differing numbers of values are matched
-    as _values_agree says. A loss (a part whose ask names one, or the only number of a question
-    asking for one) is compared without its sign (owner 2026-11-24)."""
+    as _values_agree says. A quantity negative by its name (common.negative_by_name: a part whose
+    ask names one, or the only number of a question asking for one) is compared without its sign."""
     if ref is None:
         return None
     parts = key["parts"]
@@ -771,12 +771,12 @@ def reference_mismatch(key: dict, ref: dict | None, question: str | None = None)
     if not nums:
         return None
     vals = ref["value"]
-    asks_loss = len(nums) == 1 and names_loss(asked_sentence(question))
-    loss = [names_loss(p.get("ask")) or asks_loss for p in nums]
+    asks_unsigned = len(nums) == 1 and negative_by_name(asked_sentence(question))
+    unsigned = [negative_by_name(p.get("ask")) or asks_unsigned for p in nums]
 
     def match(i: int, j: int) -> bool:
         a, b = float(nums[i]["value"]), vals[j]
-        if loss[i]:
+        if unsigned[i]:
             a, b = abs(a), abs(b)
         return value_matches(a, nums[i]["unit"], b, ref["units"][j], ref["half"][j])
 
@@ -790,7 +790,7 @@ def reference_mismatch(key: dict, ref: dict | None, question: str | None = None)
 def keys_agree(a: list[dict], b: list[dict]) -> bool:
     """Two answer keys give the same definite answers: as many numbers, each pair within
     JUDGE_REL_TOL (the solvers' own TOL plays no part), and the same options and true/false
-    values. A loss (either part's ask names one) is compared without its sign."""
+    values. A quantity negative by its name (either part's ask) is compared without its sign."""
     def pick(parts: list[dict], kind: str) -> list[dict]:
         return [p for p in parts if p["kind"] == kind]
 
@@ -799,7 +799,7 @@ def keys_agree(a: list[dict], b: list[dict]) -> bool:
 
     def same(x: dict, y: dict) -> bool:
         u, v = float(x["value"]), float(y["value"])
-        if names_loss(x.get("ask")) or names_loss(y.get("ask")):
+        if negative_by_name(x.get("ask")) or negative_by_name(y.get("ask")):
             u, v = abs(u), abs(v)
         return value_matches(u, x["unit"], v, y["unit"])
 

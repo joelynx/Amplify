@@ -149,28 +149,44 @@ def is_blank(value, sentinels=()) -> bool:
     return s.upper() in {x.upper() for x in sentinels}
 
 
-# --- losses: the one quantity whose sign the judge does not check -------------------------
-# Owner 2026-11-24: "Accept the sign ONLY for losses." A loss given as -500 or as 500 is the same
-# answer. A signed outcome (profit or loss, a gain, a change, an effect, "negative means ...") keeps
-# its sign, as do price changes, cash flows, positions and work.
-_LOSS = re.compile(r"\blos(?:s|ses|e|es|t|ing)\b", re.I)
-_SIGNED = re.compile(r"profit|gain|p\s*&\s*l|\bpnl\b|negative|positive|\bor\s+los|\blos\w*\s+or\b|/\s*los|los\w*\s*/"
-                     r"|\bchange|\beffect", re.I)
+# --- quantities negative by name: the judge does not check their sign -------------------
+# Owner 2026-11-24: "Accept the sign ONLY for losses", then "other things that are inherently
+# 'negative' can also be dealt with this way." A quantity whose name already says it goes down or
+# out (a loss, a cost, a payment, a decrease, contracts to sell, heat released, an enthalpy of
+# combustion) is the same answer given as -500 or as 500. A signed outcome (profit or loss, a gain, a
+# change, an effect, a return, "negative means ...", "increase or decrease") keeps its sign, as do
+# prices, values, positions, work and enthalpies in general.
+_NEGATIVE = re.compile(
+    r"\blos(?:s|ses|e|es|t|ing)\b|\bcosts?\b|\bexpen(?:se|ses|diture)\b|\boutflows?\b|\boutlays?\b"
+    r"|\bpaid\b|\bpayments?\b|\bwithdrawals?\b|\bdecreas(?:e|es|ed)\b|\bdeclines?\b|\bdrops?\b|\bfalls?\b"
+    r"|\breductions?\b|\bdepreciation\b|\bdeficits?\b|\bshortfalls?\b|\bdrawdowns?\b"
+    r"|\bsell\b|\bsold\b|\bshort\s+position"
+    r"|\b(?:released|evolved|liberated|given\s+off|rejected)\b|\b(?:enthalpy|heat)\s+of\s+combustion\b", re.I)
+_SIGNED = re.compile(
+    r"profit|gain|p\s*&\s*l|\bpnl\b|negative|positive|\bchange|\beffect|\breturn|\bdifference|\bvalue\b"
+    r"|\b(?:increase|rise|inflow|income|revenue|benefit|surplus)\w*\s*(?:or\b|/)"
+    r"|(?:\bor|/)\s*(?:an?\s+)?(?:increase|rise|inflow|income|revenue|benefit|surplus)", re.I)
 
 
-def names_loss(text: str | None) -> bool:
+def negative_by_name(text: str | None) -> bool:
     """Whether a description (an answer key part's 'ask', or the question's asking sentence)
-    asks for a loss, i.e. an amount lost, and not a signed outcome."""
-    return bool(text) and bool(_LOSS.search(text)) and not _SIGNED.search(text)
+    asks for a quantity that is negative by its name (an amount lost, paid, sold, released, ...)
+    and not for a signed outcome."""
+    return bool(text) and bool(_NEGATIVE.search(text)) and not _SIGNED.search(text)
 
 
 def asked_sentence(question: str | None) -> str:
-    """The last sentence of a question, leaving out answer-format instructions ('Give the
-    answer in dollars.'): the sentence that says what is asked."""
+    """What the question asks: its last sentence, leaving out answer-format instructions ('Give
+    the answer in dollars.'), from the last 'what', 'how much', 'calculate', ... on, so the
+    context before it ('with semiannual payments, what is its price?') is not read as the ask."""
     t = re.sub(r"\s+", " ", question or "").strip()
     sents = [s for s in re.split(r"(?<=[.?!])\s+", t) if s.strip()]
     sents = [s for s in sents if not re.match(r"(?:give|round|express|report|state|write|answer|provide)\b", s, re.I)]
-    return sents[-1] if sents else ""
+    if not sents:
+        return ""
+    cues = list(re.finditer(r"\b(?:what|which|how\s+(?:much|many|large|big)|calculate|compute|determine|find"
+                            r"|estimate|evaluate)\b", sents[-1], re.I))
+    return sents[-1][cues[-1].start():] if cues else sents[-1]
 
 
 # --- image detection (questions with images were skipped until config.attach_images) ---

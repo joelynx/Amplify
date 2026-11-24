@@ -132,13 +132,42 @@ def test_a_loss_is_compared_without_its_sign() -> None:
 @pytest.mark.parametrize(
     "ask",
     [
+        # owner 2026-11-24: "other things that are inherently 'negative' can also be dealt with this way"
+        "equivalent annual cost of the system",
+        "number of futures contracts to sell",
+        "monthly mortgage payment",
+        "pressure drop across the valve",
+        "heat released by the reaction",
+        "molar enthalpy of combustion of methane",
+    ],
+)
+def test_quantities_negative_by_name_are_compared_without_their_sign(ask: str) -> None:
+    assert mismatch(key(asking(-12.15, ask)), "12.15") is None
+    assert subjects.keys_agree([asking(-12.15, ask)], [asking(12.15, ask)])
+
+
+@pytest.mark.parametrize(
+    "ask",
+    [
         "percentage price change of Bond K when YTM rises",  # a change has a direction
         "profit or loss on the trade",  # a signed outcome
         "effect of basis on long hedger position, negative means loss",
-        "equivalent annual cost of the system",  # a cash flow
-        "number of futures contracts to sell",  # a position
+        "futures position (negative means short)",
+        "increase or decrease in inventory",
+        "price of the bond",  # a cash flow sign
+        "work done by the gas",  # a sign convention
+        "molar enthalpy of formation of diborane",
+        "value of the swap to the receive fixed pay equity party",  # 'pay' here names a leg, and a value is signed
     ],
 )
 def test_other_signs_still_count(ask: str) -> None:
     assert mismatch(key(asking(-12.15, ask)), "12.15") is not None
     assert not subjects.keys_agree([asking(-12.15, ask)], [asking(12.15, ask)])
+
+
+def test_only_the_asking_clause_of_the_question_counts() -> None:
+    q = "A bond pays 5% with semiannual payments over 10 years. If the YTM is 8%, what would be its price?"
+    assert mismatch(key(asking(79.6, "amount")), "-79.6") is not None
+    assert subjects.reference_mismatch(key(asking(79.6, "amount")), subjects.stored_reference("-79.6"), q) is not None
+    q = "A bond has a 15-year term, an annual payment rate of 10%, and a YTM of 12%, what is its cost?"
+    assert subjects.reference_mismatch(key(asking(86.378, "amount")), subjects.stored_reference("-86.378"), q) is None
