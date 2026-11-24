@@ -423,7 +423,7 @@ def judge_one(qid: int, cfg: dict, app, pc) -> str:
 
         res = subjects.validate_reply(qid, text, cfg, q, row["mode"], stored)
     else:
-        res = validate_solver_text(qid, text, cfg, stored)
+        res = validate_solver_text(qid, text, cfg, stored, q["latexcode"])
     tiebreak_note = None
     if review_from and res["ok"] and res.get("answer_mismatch"):
         # The review solve is final (subjects 2026-11-08, math 2026-11-11): it replaces a disagreeing

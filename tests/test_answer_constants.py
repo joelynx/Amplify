@@ -111,3 +111,16 @@ def test_numbers_past_the_float_range() -> None:
 def test_unreadable_answers_are_not_compared() -> None:
     assert same_constant("n-1", "n - 1") is None
     assert same_constant("\\frac{1}{2}", "\\text{half}") is None
+
+
+def test_a_loss_is_compared_without_its_sign() -> None:
+    # owner 2026-11-24: "Accept the sign ONLY for losses"
+    from validate import same_answer
+
+    loss = "A trader shorts 100 shares at \$50 and covers at \$55. What is the trader's loss? Give the answer in dollars."
+    assert same_answer("500", "-500", loss) is True
+    assert same_answer("$-500$", "\(500\)", loss) is True
+    assert same_answer("500", "-480", loss) is False  # the size still counts
+    assert same_answer("500", "-500", "By how much does the price change?") is False
+    assert same_answer("500", "-500", "What is the profit or loss on the trade?") is False
+    assert same_answer("500", "-500") is False

@@ -112,3 +112,33 @@ def test_two_solves_agree_only_within_the_judge_tolerance() -> None:
     assert subjects.keys_agree([num(1000, "s")], [num(1020, "s")])
     assert not subjects.keys_agree([num(1055, "s", tol=0.10)], [num(980, "s", tol=0.10)])
     assert not subjects.keys_agree([num(1.236, "kJ/kg")], [num(1236, "kJ/kg")])
+
+
+def asking(value: float, ask: str, unit: str = "USD") -> dict:
+    return {**num(value, unit), "ask": ask}
+
+
+def test_a_loss_is_compared_without_its_sign() -> None:
+    # owner 2026-11-24: "Accept the sign ONLY for losses"
+    assert mismatch(key(asking(-500, "maximum loss on the short position")), "500") is None
+    assert mismatch(key(asking(500, "loss on the hedge")), r"$-\$500$") is None
+    assert mismatch(key(asking(-480, "maximum loss on the short position")), "500") is not None  # the size still counts
+    q = "A trader shorts 100 shares at \$50 and covers at \$55. What is the trader's loss? Give the answer in dollars."
+    k = key(asking(-500, "amount"))
+    assert subjects.reference_mismatch(k, subjects.stored_reference("500"), q) is None  # the question asks for a loss
+    assert subjects.keys_agree([asking(-500, "loss on the trade")], [asking(500, "loss on the trade")])
+
+
+@pytest.mark.parametrize(
+    "ask",
+    [
+        "percentage price change of Bond K when YTM rises",  # a change has a direction
+        "profit or loss on the trade",  # a signed outcome
+        "effect of basis on long hedger position, negative means loss",
+        "equivalent annual cost of the system",  # a cash flow
+        "number of futures contracts to sell",  # a position
+    ],
+)
+def test_other_signs_still_count(ask: str) -> None:
+    assert mismatch(key(asking(-12.15, ask)), "12.15") is not None
+    assert not subjects.keys_agree([asking(-12.15, ask)], [asking(12.15, ask)])

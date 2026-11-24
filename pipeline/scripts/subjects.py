@@ -27,6 +27,7 @@ from pathlib import Path
 from common import (
     PROMPTS_DIR,
     REPO_DIR,
+    asked_sentence,
     check_web_parts,
     content_problems,
     drop_doubled_hint_ends,
@@ -39,6 +40,7 @@ from common import (
     kept_hint_tiers,
     log_event,
     model_display,
+    names_loss,
     now_iso,
     pipeline_wrote,
     q_dir,
@@ -745,11 +747,12 @@ def _values_agree(n_key: int, n_ref: int, match) -> bool:
     return ref_in_key if n_ref < n_key else key_in_ref
 
 
-def reference_mismatch(key: dict, ref: dict | None) -> str | None:
+def reference_mismatch(key: dict, ref: dict | None, question: str | None = None) -> str | None:
     """Why the key disagrees with the source's stored answer, or None (also when they cannot
     be compared). The comparison never skips a part silently: a stored option or true/false
     value the key has no part for is a mismatch, and differing numbers of values are matched
-    as _values_agree says."""
+    as _values_agree says. A loss (a part whose ask names one, or the only number of a question
+    asking for one) is compared without its sign (owner 2026-11-24)."""
     if ref is None:
         return None
     parts = key["parts"]
@@ -768,9 +771,14 @@ def reference_mismatch(key: dict, ref: dict | None) -> str | None:
     if not nums:
         return None
     vals = ref["value"]
+    asks_loss = len(nums) == 1 and names_loss(asked_sentence(question))
+    loss = [names_loss(p.get("ask")) or asks_loss for p in nums]
 
     def match(i: int, j: int) -> bool:
-        return value_matches(float(nums[i]["value"]), nums[i]["unit"], vals[j], ref["units"][j], ref["half"][j])
+        a, b = float(nums[i]["value"]), vals[j]
+        if loss[i]:
+            a, b = abs(a), abs(b)
+        return value_matches(a, nums[i]["unit"], b, ref["units"][j], ref["half"][j])
 
     if _values_agree(len(nums), len(vals), match):
         return None
@@ -782,16 +790,21 @@ def reference_mismatch(key: dict, ref: dict | None) -> str | None:
 def keys_agree(a: list[dict], b: list[dict]) -> bool:
     """Two answer keys give the same definite answers: as many numbers, each pair within
     JUDGE_REL_TOL (the solvers' own TOL plays no part), and the same options and true/false
-    values."""
+    values. A loss (either part's ask names one) is compared without its sign."""
     def pick(parts: list[dict], kind: str) -> list[dict]:
         return [p for p in parts if p["kind"] == kind]
 
     def norm(v):
         return sorted(v) if isinstance(v, list) else v
 
+    def same(x: dict, y: dict) -> bool:
+        u, v = float(x["value"]), float(y["value"])
+        if names_loss(x.get("ask")) or names_loss(y.get("ask")):
+            u, v = abs(u), abs(v)
+        return value_matches(u, x["unit"], v, y["unit"])
+
     na, nb = pick(a, "number"), pick(b, "number")
-    if len(na) != len(nb) or not all(value_matches(float(x["value"]), x["unit"], float(y["value"]), y["unit"])
-                                     for x, y in zip(na, nb)):
+    if len(na) != len(nb) or not all(same(x, y) for x, y in zip(na, nb)):
         return False
     for kind in ("choice", "truefalse"):
         ca, cb = pick(a, kind), pick(b, kind)
@@ -906,7 +919,7 @@ def validate_reply(qid: int, text: str, cfg: dict, q: dict, mode: str, stored_an
             (tier_errs[k] if k is not None else res["errors"]).append(f"web: {e}")
 
     if key is not None and not res["errors"]:
-        why = reference_mismatch(key, stored_reference(stored_answer))
+        why = reference_mismatch(key, stored_reference(stored_answer), q["latexcode"] if q else None)
         if why:
             res["answer_mismatch"] = True
             res["stored_answer"] = stored_answer

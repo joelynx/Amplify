@@ -32,6 +32,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from check_pdf import check_parts  # noqa: E402
 from common import (  # noqa: E402
     app_conn,
+    asked_sentence,
     check_web_parts,
     content_problems,
     fetch_question,
@@ -41,6 +42,7 @@ from common import (  # noqa: E402
     hint_tier_of,
     is_blank,
     load_config,
+    names_loss,
     normalize_answer,
     now_iso,
     parse_solver_output,
@@ -337,6 +339,22 @@ def same_constant(stored: str, reply: str) -> bool | None:
     return abs(float(a) - float(b)) <= max(rel, rnd or 0)
 
 
+_LEAD_SIGN = re.compile(r"^((?:\s|\$|\\\(|\\\[)*)[-−]")  # a leading minus, after $, \( or \[
+
+
+def same_answer(stored: str, reply: str, question: str | None = None) -> bool | None:
+    """same_constant, except that when the question asks for a loss the sign is not compared
+    (owner 2026-11-24: "Accept the sign ONLY for losses"): -500 and 500 are the same loss."""
+    same = same_constant(stored, reply)
+    if same is False and names_loss(asked_sentence(question)):
+        def unsigned(s: str) -> str:
+            return _LEAD_SIGN.sub(lambda m: m.group(1), str(s), 1)
+
+        if same_constant(unsigned(stored), unsigned(reply)):
+            return True
+    return same
+
+
 def hint_leak_errors(hint: str, answer_type: str, answer: str) -> list[str]:
     """The hint must not contain the final answer (normalised LaTeX, and for
     numerical answers the bare number)."""
@@ -354,7 +372,7 @@ def hint_leak_errors(hint: str, answer_type: str, answer: str) -> list[str]:
     return errs
 
 
-def validate_solver_text(qid: int, text: str, cfg: dict, stored_answer: str | None) -> dict:
+def validate_solver_text(qid: int, text: str, cfg: dict, stored_answer: str | None, question: str | None = None) -> dict:
     d = q_dir(qid)
     res: dict = {
         "question_id": qid,
@@ -422,7 +440,7 @@ def validate_solver_text(qid: int, text: str, cfg: dict, stored_answer: str | No
     # also when written with fractions, roots, powers or pi (since 2026-11-20); anything else
     # (variables, lists, words) is left to the solver.
     if cfg.get("check_stored_numeric_answer", True) and parts["answer_type"] != "NONE":
-        same = same_constant(stored_answer, parts["answer"])
+        same = same_answer(stored_answer, parts["answer"], question)
         if same is not None:
             sv = numeric_value(stored_answer)
             res["stored_answer"] = str(sv) if sv is not None else normalize_answer(str(stored_answer))

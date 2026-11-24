@@ -149,6 +149,30 @@ def is_blank(value, sentinels=()) -> bool:
     return s.upper() in {x.upper() for x in sentinels}
 
 
+# --- losses: the one quantity whose sign the judge does not check -------------------------
+# Owner 2026-11-24: "Accept the sign ONLY for losses." A loss given as -500 or as 500 is the same
+# answer. A signed outcome (profit or loss, a gain, a change, an effect, "negative means ...") keeps
+# its sign, as do price changes, cash flows, positions and work.
+_LOSS = re.compile(r"\blos(?:s|ses|e|es|t|ing)\b", re.I)
+_SIGNED = re.compile(r"profit|gain|p\s*&\s*l|\bpnl\b|negative|positive|\bor\s+los|\blos\w*\s+or\b|/\s*los|los\w*\s*/"
+                     r"|\bchange|\beffect", re.I)
+
+
+def names_loss(text: str | None) -> bool:
+    """Whether a description (an answer key part's 'ask', or the question's asking sentence)
+    asks for a loss, i.e. an amount lost, and not a signed outcome."""
+    return bool(text) and bool(_LOSS.search(text)) and not _SIGNED.search(text)
+
+
+def asked_sentence(question: str | None) -> str:
+    """The last sentence of a question, leaving out answer-format instructions ('Give the
+    answer in dollars.'): the sentence that says what is asked."""
+    t = re.sub(r"\s+", " ", question or "").strip()
+    sents = [s for s in re.split(r"(?<=[.?!])\s+", t) if s.strip()]
+    sents = [s for s in sents if not re.match(r"(?:give|round|express|report|state|write|answer|provide)\b", s, re.I)]
+    return sents[-1] if sents else ""
+
+
 # --- image detection (questions with images were skipped until config.attach_images) ---
 
 IMG_RE = re.compile(r"\\includegraphics\s*(?:\[[^\]]*\])?\s*\{([^}]+)\}")
