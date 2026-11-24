@@ -51,6 +51,10 @@ def mismatch(k: dict, stored: str) -> str | None:
         ([num(11.5, "MPa")], r"$11.3 \text{ MN m}^{-2}$"),  # the -2 belongs to the unit
         ([num(11929, "kW")], r"$16200\text{ H.P.}$"),  # metric horsepower
         ([num(89.6, "MPa")], r"914 \mathrm{kgf} / \mathrm{cm}^{2}"),
+        ([num(3978739, "USD")], r"$\$3{,}978{,}738.88$"),  # LaTeX thousands separators (XFinBench)
+        ([num(-724860, "USD")], r"$-\$724{,}860$"),  # the sign before the currency sign
+        ([num(3978738, "J")], r"3\,978\,738 J"),  # a thin space as the separator
+        ([num(10, "billion USD")], r"$\$10{,}000{,}000{,}000$"),  # a scale word in the key's unit
     ],
 )
 def test_agreeing_answers_pass(parts: list[dict], stored: str) -> None:
@@ -66,6 +70,8 @@ def test_agreeing_answers_pass(parts: list[dict], stored: str) -> None:
         ([num(1.236, "kJ/kg")], "1236 kJ/kg"),  # same unit: a factor of 1000 is an error
         ([num(5, "kW"), num(6.9, "kW")], "6.43 kW"),  # a different number of values is still compared
         ([num(1.5, "kW")], "1 kW"),  # a plain integer gets no rounding allowance
+        ([num(1051.02, "USD")], r"$-\$1051.02$"),  # a dropped sign is a different answer
+        ([num(4562500, "USD")], r"$\$12{,}102{,}500$"),
     ],
 )
 def test_disagreeing_answers_are_caught(parts: list[dict], stored: str) -> None:

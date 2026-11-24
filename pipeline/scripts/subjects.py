@@ -626,8 +626,10 @@ JUDGE_ROUNDING_CAP = 0.05
 # unit on both sides has to match as it stands (a factor of 1000 is then an error, not a unit).
 UNIT_FACTORS = (1, 10, 0.1, 1e3, 1e-3, 1e6, 1e-6, 100, 0.01, 3600, 1 / 3600, 60, 1 / 60)
 # Older units the books use, tried with the powers of ten only when one of the two units names
-# them: horsepower (metric and imperial) in kW, kilogram-force in N, kilocalories in kJ, atm in kPa.
-NAMED_UNIT_FACTORS = {"hp": (0.7355, 0.7457), "kgf": (9.80665,), "kcal": (4.1868,), "atm": (101.325,)}
+# them: horsepower (metric and imperial) in kW, kilogram-force in N, kilocalories in kJ, atm in kPa;
+# also the scale words a key's unit may carry (10 billion USD against \$10{,}000{,}000{,}000).
+NAMED_UNIT_FACTORS = {"hp": (0.7355, 0.7457), "kgf": (9.80665,), "kcal": (4.1868,), "atm": (101.325,),
+                      "billion": (1e9,), "trillion": (1e12,)}
 _POWERS_OF_TEN = (1, 10, 0.1, 100, 0.01, 1e3, 1e-3, 1e4, 1e-4, 1e6, 1e-6)
 
 
@@ -651,6 +653,8 @@ def _plain_stored(s: str) -> str:
     micro and angstrom as characters; subscripts (CO_{2}, T_1), part labels and thousands
     separators dropped."""
     t = re.sub(r"\\(?:text|mathrm|textrm|mbox|operatorname)\s*\{([^{}]*)\}", r" \1 ", s)
+    t = t.replace("\\$", "")  # a currency sign: -\$724 is -724
+    t = re.sub(r"(?<=\d)(?:\{,\}|\\,)(?=\d{3}(?!\d))", ",", t)  # 3{,}978 and 3\,978 are 3,978
     t = t.replace("\\%", "%").replace("$", " ").replace("−", "-").replace("μ", "µ")
     t = re.sub(r"\^\s*\{?\s*\\circ\s*\}?|\\circ\b|\\degree\b", "°", t)
     t = re.sub(r"\\AA\b|\\r\{A\}", "Å", t)
