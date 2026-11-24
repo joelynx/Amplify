@@ -1,5 +1,5 @@
 {
-"note": "Benchmark sets imported 2026-11-22 by app/tools/import_<set>.py (ThermoQA, JEEBench, TheoremQA, UGPhysics, UGMathBench; owner 2026-11-21: 'Go ahead with all recommendations'): the maths questions with the model and effort that solve them. Listing a question here puts it in run_sub.py's scope. Physics, engineering and economics questions are not listed: run_subjects.py takes them after classification. 2026-11-23: the sixth classification wave's maths rows (the day's imports: quant interview sets, MMLU econometrics, SuperGPQA and others; flagged rows held out) added with the same model and effort.",
+"note": "Benchmark sets imported 2026-11-22 by app/tools/import_<set>.py (ThermoQA, JEEBench, TheoremQA, UGPhysics, UGMathBench; owner 2026-11-21: 'Go ahead with all recommendations'): the maths questions with the model and effort that solve them. Listing a question here puts it in run_sub.py's scope. Physics, engineering and economics questions are not listed: run_subjects.py takes them after classification. 2026-11-23: the sixth classification wave's maths rows (the day's imports: quant interview sets, MMLU econometrics, SuperGPQA and others; flagged rows held out) added with the same model and effort. 2026-11-25: the seventh wave's maths rows (SuperGPQA CS and engineering fields: Combinatorics, Number Theory, Statistics; flagged rows held out) added at Opus high, as the earlier SuperGPQA maths rows.",
 "questions": {
 "38795": {
 "model": "claude-opus-5-5",
@@ -15982,6 +15982,270 @@
 "effort": "high"
 },
 "56000": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"61309": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"61318": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"61626": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"61700": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"61701": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"61702": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"61703": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"61704": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"61959": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"61960": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"61961": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"61962": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"61963": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"61964": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"61965": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"62150": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"62151": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"62152": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"62423": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"62539": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"62541": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"62542": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"62798": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"62799": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"62800": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"62801": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"62802": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"62803": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"62804": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"62805": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"62808": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63001": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63319": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63401": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63531": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63546": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63682": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63683": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63684": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63685": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63686": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63687": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63688": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63690": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63691": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63692": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63693": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63833": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63837": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"63838": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"64252": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"64260": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"64262": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"64263": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"64265": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"64267": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"64268": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"64284": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"64527": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"64528": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"64529": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"64530": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"64531": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"64532": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"64533": {
+"model": "claude-opus-5-5",
+"effort": "high"
+},
+"64534": {
 "model": "claude-opus-5-5",
 "effort": "high"
 }
