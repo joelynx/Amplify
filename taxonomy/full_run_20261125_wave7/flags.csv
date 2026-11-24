@@ -1,0 +1,99 @@
+question_id,flags,subject,note
+61331,needs_data,Quantum Mechanics,de Haas-van Alphen orbit; k-space area from an earlier problem not given
+61333,broken_text,Thermodynamics,Steady-flow energy equation; no open-system subtopic; state labels garbled
+61376,broken_text,Computer Networks,Degree-4 generator inconsistent with x^3 and 5-bit options
+61467,broken_text,Circuits and Electronics,Options unrelated to question (excess-128 code expected)
+61520,needs_data,Material Science,Eg and reference conductivity not given
+61583,broken_text,Thermodynamics,Condensation condition relative to saturation temperature
+61638,broken_text,Fluid Mechanics,Viscosity value and critical Re missing.
+61688,broken_text,Quantum Mechanics,Options H and I are cut off.
+61847,broken_text,Conventional Energy Technologies,Options are not efficiency values
+61928,needs_data,Mechanics,Braking torque law (constant k) not stated.
+61938,broken_text,Thermodynamics,Steady-flow turbine energy balance for air
+61951,needs_data,Semiconductor Devices,Relation between gain and current density not given
+62004,needs_data,Mechanics,Setup with h comes from an earlier problem
+62024,needs_data,Mechanics,Figure with incline geometry missing; height unknown.
+62040,broken_text,Mechanics,Question stem lacks what is asked; likely acceleration of blocks.
+62046,needs_data,Mechanics,Position of ball C not given.
+62054,broken_text,Mechanics,Torque cross product; options garbled
+62061,needs_data,Mechanics,Wedge incline angle figure not given.
+62063,broken_text,Mechanics,Total energy '21' likely means 2 J
+62072,broken_text,Electromagnetism and Special Relativity,Two conditions merged into one garbled stem
+62079,needs_data,Mechanics,Spring-mass arrangement figure missing.
+62083,broken_text,Mechanics,Option B incomplete; T_Q typo
+62093,broken_text,Mechanics,Question text cut off
+62172,needs_data,Heat Transfer,Depends on earlier questions 1-3 for window size and coefficients.
+62187,broken_text,Fluid Mechanics,P1 value garbled (10 Pa vs 70 Pa abs).
+62378,broken_text,Electromagnetism and Special Relativity,Thomson model; garbled translation of the charge condition
+62393,broken_text,Fluid Mechanics,Mean velocity over a flow cross-section; garbled translation
+62398,broken_text,Mechanical Engineering,Garbled HVAC maintenance procedure question
+62415,broken_text,Conventional Energy Technologies,Blanks replaced by repeated words; options meaningless.
+62467,broken_text,Machine Learning and Data Science,Statements I and II are identical
+62475,broken_text,Fluid Mechanics,Velocity profile expression missing from question
+62569,needs_data,Heat Transfer,"Setup (rod, sphere, P, T) refers to an absent preceding problem"
+62622,needs_data,Fluid Mechanics,Figure of pipe with tubes P and Q missing
+62710,broken_text,Mechanical Engineering,Two mass flows given ambiguously; question is unclear.
+62722,needs_data,Semiconductor Devices,Oxide charge density and thickness not given
+62743,needs_data,Mechanical Engineering,Young's modulus of granite is not given.
+62778,broken_text,Algorithms and Data Structures,Garbled translation; likely splay tree
+62806,needs_data,Algorithms and Data Structures,"Table T(n,k) not defined"
+62818,broken_text,Mechanics,Option strings are garbled
+62844,needs_data,Mechanics,Incline angle is not given.
+62916,broken_text,Mechanics,Question text cut off
+62926,needs_data,Quantum Mechanics,Ambiguous statement; second fraction's initial activity unclear.
+63009,broken_text,Mechanics,Unclear context; likely pressure vessel weld joints
+63018,broken_text,Quantum Mechanics,Open orbit period in k-space; most options have garbled exponents
+63025,broken_text,Thermodynamics,Options duplicate and garbled; enthalpy and entropy answers conflated.
+63050,needs_data,Semiconductor Devices,Refers to earlier resistivity data; given in-question though
+63078,broken_text,Thermodynamics,Quantity to compute is missing; likely heat added.
+63090,needs_data,Fluid Mechanics,Figure missing
+63121,needs_data,Quantum Mechanics,Doppler broadening in flame; no data; odd options.
+63208,broken_text,Material Science,Garbled text; cold-work and anneal sequence from charts.
+63209,broken_text,Material Science,First-case stress is garbled.
+63271,broken_text,Thermodynamics,Options reference undefined ΔS3; labels inconsistent.
+63278,broken_text,Circuits and Electronics,"Options garbled; expected 13 address, 8 data lines"
+63436,broken_text,Mechanics,Starting position cut off
+63465,needs_data,Mechanics,Figure missing; collision on sphere at point P.
+63529,needs_data,Mechanics,Graph of range vs angle not given.
+63623,needs_data;broken_text,Mechanics,Figure missing; options garbled.
+63631,broken_text,Mechanics,Longitudinal rod vibration with end mass; options garbled
+63638,broken_text,Mechanics,"Options are energy values, not moment of inertia."
+63652,key_conflict,Mechanics,"Options list eigenvalues, question asks tensor."
+63657,needs_data,Quantum Mechanics,Supernova neutrino output from earlier part not given
+63658,needs_data,Material Science,Needs Cu-Ni phase diagram; liquidus composition at 1300C.
+63659,needs_data,Material Science,Needs Al2O3-SiO2 phase diagram.
+63661,broken_text,Mechanics,Context of the potential missing
+63666,broken_text,Mechanics,Potential function and asked quantity missing
+63705,needs_data,Mechanics,Point B's position on rod not specified; figure missing
+63721,needs_data,Mechanics,Figure defining I1-I4 missing
+63726,needs_data,Mechanics,System/figure not described
+63727,needs_data,Mechanics,Indicated velocities in figure missing
+63733,broken_text,Mechanics,Angle symbol garbled; string constraint kinematics
+63752,needs_data,Mechanics,Arrangement figure not given
+63759,needs_data,Mechanics,Wedge figure (which side each mass) missing
+63782,broken_text,Mechanics,Question stem cut off after 'collides elastically with'
+63788,needs_data,Mechanics,Discs defined in the previous problem
+63840,needs_data,Thermodynamics,Primary reservoir temperature missing
+63853,needs_data,Quantum Mechanics,Proton NMR field strength not given.
+63879,broken_text,Quantum Mechanics,Emission wavelength value missing.
+63940,broken_text,Thermodynamics,Contradictory 'isentropic at constant pressure'; options in J are odd
+64028,needs_data,Mechanical Engineering,Gear and worktable data not given.
+64030,needs_data,Heat Transfer,Time duration not given
+64067,needs_data,Programming Languages and Compilers,ODL enum attribute type; the referenced line is missing
+64079,broken_text,Material Science,Average of a periodic potential; region labels in the formula are garbled
+64103,broken_text,Heat Transfer,Garbled temperature text; radiation coefficient asked
+64125,broken_text,Thermodynamics,Steady-flow heating of ammonia; mass flow statement garbled
+64197,broken_text,Conventional Energy Technologies,Garbled translation about acceleration control.
+64222,broken_text,Programming Languages and Compilers,JS comment syntax; options appear to have lost delimiters
+64297,broken_text,Mechanics,r^5 exponent inconsistent with options; likely r^6
+64366,needs_data,Heat Transfer,Likely answer 1.0 or area ratio; figure missing
+64392,broken_text,Material Science,Unclear phrase 'without smoke'
+64513,broken_text,Fluid Mechanics,Pressure values missing from text
+64520,needs_data,Semiconductor Devices,Incident optical power not given.
+64536,needs_data;broken_text,Material Science,Depends on Problem 16.8 data
+64541,broken_text,Mechanics,Problem setup missing; only the options are given
+64544,broken_text,Mechanics,Question stem truncated
+64621,broken_text,Quantum Mechanics,Garbled text in ratio and half-life
+64638,broken_text,Mechanics,"Rotating tilted rod (Irodov); setup missing, option E garbled"
+64654,broken_text,Quantum Mechanics,Garbled initial conditions
+64672,broken_text,Mechanics,Constant-force 2D motion; question stem garbled
