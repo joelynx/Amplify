@@ -1,0 +1,52 @@
+question_id,flags,subject,note
+64851,key_conflict,Algorithms and Data Structures,"Solution next array 0,1,1,2,3,4,2,2,3,4,5,6 matches no option."
+64908,key_conflict,Algorithms and Data Structures,solution text inconsistent about statement I; option D is correct
+65000,key_conflict,Algorithms and Data Structures,"Solution trace gives 6,9,10,11 which is B"
+65045,key_conflict,Algorithms and Data Structures,"Solution concludes quicksort, not among options"
+65124,mismatch,Algorithms and Data Structures,Question says degree 0; solution argues about degree 1.
+65127,needs_data,Algorithms and Data Structures,Refers to a tree/traversals not given.
+65192,needs_data,Algorithms and Data Structures,Number of leaves not given.
+65291,key_conflict,Digital Logic and Computer Architecture,Solution's right shift 9DH vs options; left shift F4H plausible.
+65292,key_conflict,Digital Logic and Computer Architecture,"BAH two's complement left shift gives 74H, not F4H."
+65432,key_conflict,Digital Logic and Computer Architecture,"Solution gives OF=0, CF=1, R[ax]=7FCEH (C) but OF/CF computed fine"
+65561,broken_text,Digital Logic and Computer Architecture,Option A is garbled; duplicate of 65423.
+65625,mismatch,Digital Logic and Computer Architecture,"Solution discusses transparency, not cost."
+65627,needs_data,Digital Logic and Computer Architecture,Machine memory size not given.
+65665,mismatch,Digital Logic and Computer Architecture,Solution refers to options of a different multiple-choice question.
+65766,needs_data,Digital Logic and Computer Architecture,Needs machine A's speed and clock frequencies from sibling question
+65857,key_conflict,"Signals, Systems and Control",Solution says B correct but also calls A incorrect inconsistently
+66188,key_conflict,Computer Networks,Solution cites 2^(n-1) but concludes 2^n-1=127
+66314,broken_text,Computer Networks,Vague question about connection release
+66383,broken_text,Computer Networks,Transmission delay value missing from question
+66411,key_conflict,Operating Systems,"Options garbled; solution picks I, III, IV"
+66493,key_conflict,Operating Systems,Question says 2 allowed but solution uses 3; values mismatch options.
+66702,needs_data,Operating Systems,Refers to a program segment not given
+66749,needs_data,Operating Systems,block size and allocation details not given
+66905,key_conflict,Algorithms and Data Structures,"Solution gives 39 nodes, assertion says 119"
+66921,key_conflict,Digital Logic and Computer Architecture,"Solution calls statement I correct, yet it is not an option; confused."
+66987,key_conflict,"Signals, Systems and Control",Solution gives 56kb/s but not matching option labels clearly
+67014,key_conflict,Computer Networks,Solution discusses P2P; options garbled
+67051,key_conflict,Operating Systems,Solution says C correct but options list C/D ambiguity; A reasoning odd
+67162,broken_text,Theory of Computation,Question text has garbled trailing lines.
+67888,needs_data,Computer Networks,Figure not given; counting subnets from topology
+67891,needs_data,Algorithms and Data Structures,Code segment is missing from the question text.
+68122,needs_data,Computer Networks,Figure with link weights not given
+68126,needs_data,Computer Networks,Routing table and groups are in missing images
+68160,needs_data,Digital Logic and Computer Architecture,Program segment is in missing figure
+68161,needs_data,Digital Logic and Computer Architecture,Program segment is in missing figure
+68164,needs_data,Databases,instance table is in missing figure
+68173,needs_data,Databases,relations and query are in missing figures
+68219,needs_data,Computer Networks,Figure with link costs missing
+68265,needs_data,Computer Networks,MTU values only in figure
+68467,needs_data,Operating Systems,LRU list figure not given in text
+68670,needs_data,Databases,Relation instance is in an image.
+68684,needs_data,Operating Systems,Job table figure not given
+68689,needs_data,Operating Systems,Alloc/request table figure not given
+68752,needs_data,Computer Networks,Topology diagram not given; TTL decrements per router
+68757,needs_data,Computer Networks,Routing table only in figure
+68800,needs_data,Databases,ER diagram is in an image.
+68809,needs_data,Databases,Schedule is in an image.
+68843,needs_data,Operating Systems,State diagram figure not given
+69286,needs_data,Operating Systems,Refers to part (a) not given.
+69376,needs_data,Algebra,Pie chart values not given.
+69494,needs_data,Combinatorics,Figure-based shape puzzle; figure missing.
