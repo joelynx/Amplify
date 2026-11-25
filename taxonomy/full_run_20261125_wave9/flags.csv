@@ -1,0 +1,172 @@
+question_id,flags,subject,note
+70576,needs_data,Algorithms and Data Structures,Table of f(n) and t not given
+70604,needs_data,Algorithms and Data Structures,Equation 3.16 not stated
+70612,needs_data,Algorithms and Data Structures,Table of expression pairs not given
+70860,needs_data,Algorithms and Data Structures,Equation 12.3 not given; likely binomial sum identity
+71013,broken_text,Databases,Join and split on 2-3-4 trees; split definition text duplicated
+71139,needs_data,Algorithms and Data Structures,Refers to Exercise 24.3-8 algorithm not given.
+71154,needs_data,Algorithms and Data Structures,Refers to Lemma 24.10 proof not given.
+71236,needs_data,Algorithms and Data Structures,Chess program work/span values come from the textbook text
+71238,needs_data,Algorithms and Data Structures,Refers to Exercise 27.2-1 and textbook pseudocode
+71277,needs_data,Calculus,LP (29.24)-(29.28) from text not given
+71278,needs_data,Calculus,LP (29.24)-(29.28) from text not given
+71279,needs_data,Calculus,Slack form (29.38)-(29.41) from text not given
+71286,needs_data,Calculus,LP (29.44)-(29.46) from text not given
+71288,needs_data,Calculus,LP (29.47)-(29.50) from text not given
+71291,needs_data,Calculus,Lemma 29.4 and its partial proof are in the text
+71299,needs_data,Calculus,"Refers to the LP of Exercise 29.3-5, not given."
+71312,needs_data,Calculus,LP (29.6)-(29.10) from the text is not given.
+71406,broken_text,Algorithms and Data Structures,Theta bound missing in question.
+71413,needs_data,Algorithms and Data Structures,Refers to ON-SEGMENT pseudocode not given.
+71416,broken_text,Algorithms and Data Structures,Only definitions of polygons; no actual question.
+71465,needs_data,Theory of Computation,Refers to Lemma 34.5 proof not given.
+71466,needs_data,Theory of Computation,Refers to Lemma 34.6 proof not given.
+71471,needs_data,Algorithms and Data Structures,Formula (34.3) not given
+71507,needs_data,Algorithms and Data Structures,Equation (35.23) not given
+71508,needs_data,Algorithms and Data Structures,Inequality (35.26) not given
+71509,needs_data,Algorithms and Data Structures,Inequality (35.29) not given
+73590,needs_data,Electrical Machinery,"Given E, pf and P are overdetermined; inconsistent data"
+74107,needs_data,Mechanical Engineering,No lot size or costs given; assumption is contradictory
+74147,needs_data,Mechanical Engineering,Process mean/centre line value not given.
+74207,needs_data,Mechanical Engineering,"Specification limits not given, only target"
+74987,broken_text,Mechanical Engineering,Garbled formula text with stray question marks.
+75571,broken_text,Programming Languages and Compilers,Choose correct BASIC program; options contain garbled characters
+75961,needs_data,Computer Networks,Refers to an upgraded system not described.
+76270,needs_data,Electromagnetism and Special Relativity,Slit spacing d symbolic; wavelength range of visible light assumed
+76272,needs_data,Electromagnetism and Special Relativity,Focal length not given; refers to Example 25.7
+76322,needs_data,Electromagnetism and Special Relativity,Refers to previous problem's angle and media
+76325,needs_data,Electromagnetism and Special Relativity,"Indices taken from previous problem, not given"
+76326,needs_data,Electromagnetism and Special Relativity,Indices of calcite and quartz not given
+76332,needs_data,Quantum Mechanics,Boltzmann population ratio; energy gap 0.01 eV from earlier problem
+76354,needs_data,Mechanics,Refers to previous question for orbit data
+76356,needs_data,Mechanics,Depends on previous problem's mechanism
+76357,needs_data,Mechanics,Depends on previous problem's setup
+76407,needs_data,Electromagnetism and Special Relativity,Ion densities and mobilities not given
+76408,needs_data,Electromagnetism and Special Relativity,References 'two methods mentioned above'
+76460,broken_text,Mechanics,Question stem missing; only solution analysis given
+76529,key_conflict,Electromagnetism and Special Relativity,"Solution ignores charge redistribution after connection, uses V=800 for C2."
+76531,needs_data,Electromagnetism and Special Relativity,Refers to 'above example' not given.
+76637,broken_text,Thermodynamics,"Question text is a solution fragment, no question asked"
+76659,key_conflict,Electromagnetism and Special Relativity,"Period ratio is 2 and radius ratio 2 (C), consistent; but solution's R ratio algebra garbled."
+76717,needs_data,Electromagnetism and Special Relativity,Polarizer angles and incident intensity not given
+76721,needs_data,Electromagnetism and Special Relativity,Refers to earlier parts for particle momentum and energies.
+76731,needs_data,Quantum Mechanics,Depends on earlier setup of input state and beam splitter.
+76739,needs_data,Quantum Mechanics,Singlet vs triplet ground state; potentials from missing context.
+76760,needs_data,Electromagnetism and Special Relativity,Accelerating observers A and B setup missing.
+76769,needs_data,Quantum Mechanics,Decay reaction not given in question.
+76773,needs_data,Mechanics,Depends on previous question's velocity-position result.
+76785,needs_data,Thermodynamics,Two-level Boltzmann populations; chi formula from earlier part.
+76810,needs_data,Quantum Mechanics,Hyperfine shift of deuterium; spin-1 nucleus.
+76837,needs_data,Electromagnetism and Special Relativity,Stellar aberration; observer setup and star distribution missing.
+76842,needs_data,Heat Transfer,Refers to 'same as above' calculation
+76864,needs_data,Fluid Mechanics,Mach number from pressure ratio; relies on earlier part
+76878,needs_data,Thermodynamics,Uses earlier mean free path ratio result
+76900,needs_data,Quantum Mechanics,Potential defined in earlier part
+76918,key_conflict,Electromagnetism and Special Relativity,Solution's closed form doesn't follow from stated equation
+76921,needs_data,Quantum Mechanics,Refers to unseen question (2)
+76933,needs_data,Quantum Mechanics,Refers to earlier equation; Gaussian form factor cross section
+76947,needs_data,Quantum Mechanics,Neutrino oscillation; omega_1 defined elsewhere
+76959,needs_data,Quantum Mechanics,Refers to three earlier calculations not given
+76961,needs_data,Thermodynamics,Refers to previous question's data.
+76992,needs_data,Electromagnetism and Special Relativity,cylinder setup from earlier parts missing
+76994,needs_data,Electromagnetism and Special Relativity,part (b); setup missing
+77009,needs_data,Electromagnetism and Special Relativity,Cases (a) and (b) refer to a missing earlier problem
+77017,broken_text,Quantum Mechanics,Probability of n scatterings without absorption; wording garbled
+77018,needs_data,Thermodynamics,Depends on earlier parts
+77031,needs_data,Electromagnetism and Special Relativity,Field B configuration not given
+77047,needs_data,Thermodynamics,Depends on unseen part (2).
+77063,needs_data,Quantum Mechanics,Pulse force on oscillator not specified in the question
+77070,needs_data,Quantum Mechanics,Spin-orbital wavefunction conditions not given
+77122,needs_data,Electromagnetism and Special Relativity,B not given; solution assumes 1 T
+77126,key_conflict,Mechanics,Part 5 result t1=L/V contradicts earlier t1 formula
+77142,key_conflict,Fluid Mechanics,Solution ignores 3 m head term; speed seems incomplete
+77185,broken_text,Electromagnetism and Special Relativity,Only a definition; no question asked
+77200,key_conflict,Quantum Mechanics,Solution's final line has sign typo versus statement
+77214,needs_data,Quantum Mechanics,Refers to previous problem
+77221,needs_data,Quantum Mechanics,Refers to previous problem
+77231,needs_data,Quantum Mechanics,Quadrupole tensor expectation; question text truncated
+77256,broken_text,Quantum Mechanics,Question states setup only; no task asked
+77315,needs_data,Quantum Mechanics,Wigner function defined in previous problem.
+77326,broken_text,Quantum Mechanics,"Only setup stated; question truncated, no actual ask."
+77356,needs_data,Quantum Mechanics,Refers to functions from previous problem.
+77481,broken_text,Electromagnetism and Special Relativity,Radiation-damped oscillator; question starts mid-sentence
+77530,needs_data,Quantum Mechanics,Refers to previous problem; momentum-space wavefunction of weakly bound state
+77673,needs_data,Quantum Mechanics,Refers to previous problem for context; momentum-space wavefunction
+77684,needs_data,Quantum Mechanics,Refers to previous problem; isospin decay branching ratios
+77728,broken_text,Quantum Mechanics,Only a fragment of part (a); no actual question.
+77811,broken_text,Quantum Mechanics,Operators N and D appear mistyped
+77977,broken_text,Quantum Mechanics,"Text is a solution fragment, no question stated"
+77993,needs_data,Quantum Mechanics,Refers to 18O level data and J^P values not given
+78156,needs_data,Quantum Mechanics,Refers to previous problem.
+78166,needs_data,Quantum Mechanics,Refers to previous question; Wigner d-matrix.
+78245,needs_data,Electromagnetism and Special Relativity,Refers to earlier context defining F and F0
+78300,broken_text,Thermodynamics,Ripplon gas; 'nitrogen' likely should be helium
+78309,needs_data,Material Science,Refers to previous question
+78328,needs_data,Material Science,Second material's data come from an earlier part that is not given.
+78335,needs_data,Semiconductor Devices,Light pulse setup not given.
+78337,needs_data,Semiconductor Devices,
+78338,needs_data,Semiconductor Devices,
+78339,needs_data,Semiconductor Devices,
+78340,needs_data,Semiconductor Devices,
+78342,needs_data,Semiconductor Devices,Surface potential Vs; setup missing.
+78343,needs_data,Semiconductor Devices,
+78344,needs_data,Material Science,Doping level not given.
+78346,needs_data,Material Science,
+78347,needs_data,Material Science,
+78348,needs_data,Material Science,
+78369,needs_data,Quantum Mechanics,Interaction not given; proton lifetime estimate
+78393,needs_data,Quantum Mechanics,Refers to previous sub-question setup
+78395,needs_data,Quantum Mechanics,Sudden perturbation overlap; prior sub-question setup
+78397,needs_data,Quantum Mechanics,Refers to equation in missing context
+78424,needs_data,Electromagnetism and Special Relativity,Surface impedance with thermoelectric effect; parameter a undefined
+78431,needs_data,Electromagnetism and Special Relativity,Gyrotropic medium dispersion; context missing
+78460,needs_data,Material Science,Optical phonon branch limits; lattice data missing
+78461,needs_data,Material Science,Phonon energy of optical branch; depends on earlier part
+78462,needs_data,Material Science,EM wavelength matching optical phonon; depends on earlier part
+78465,needs_data,Material Science,Material and data not given
+78466,needs_data,Material Science,Material and data not given
+78467,needs_data;broken_text,Quantum Mechanics,Fragment without system context
+78487,needs_data,Semiconductor Devices,Band dispersion not fully given.
+78491,needs_data,Material Science,Material data not given.
+78492,needs_data,Material Science,Hydrogenic impurity model.
+78493,needs_data,Material Science,
+78510,needs_data,Semiconductor Devices,Capture coefficient is missing from the question.
+78512,needs_data,Semiconductor Devices,Surface recombination; question fragment with no data.
+78513,needs_data,Semiconductor Devices,Question fragment with no data.
+78514,needs_data,Semiconductor Devices,Question fragment with no data.
+78515,needs_data,Semiconductor Devices,Question fragment with no data.
+78516,needs_data,Semiconductor Devices,Wafer parameters missing
+78517,needs_data,Semiconductor Devices,Wafer parameters missing
+78523,needs_data,Semiconductor Devices,Barrier width fragment; device data missing.
+78524,needs_data,Semiconductor Devices,Question fragment with no data.
+78525,needs_data,Semiconductor Devices,Question fragment with no data.
+78530,needs_data,Semiconductor Devices,Question fragment with no data.
+78531,needs_data,Semiconductor Devices,Barrier data missing
+78532,needs_data,Semiconductor Devices,Minority injection ratio of a Schottky diode; data missing.
+78535,needs_data,Semiconductor Devices,Oxide thickness missing
+78536,needs_data,Semiconductor Devices,Device parameters missing
+78537,needs_data,Semiconductor Devices,Device parameters missing
+78538,needs_data,Semiconductor Devices,Device parameters missing
+78543,needs_data,Semiconductor Devices,Sample and light data missing
+78544,needs_data,Semiconductor Devices,Sample data missing
+78545,needs_data,Semiconductor Devices,Sample data missing
+78553,needs_data,Material Science,Material parameters missing
+78554,needs_data,Material Science,Magnetoresistance; material data missing.
+78594,needs_data,Material Science,Depends on earlier setup of Q_q
+78595,needs_data,Material Science,Electron-phonon context missing
+78596,needs_data,Material Science,
+78600,needs_data,Quantum Mechanics,Polaron context from previous question
+78612,needs_data,Material Science,Likely LO/TO phonon frequency; context missing
+78618,broken_text;needs_data,Electromagnetism and Special Relativity,Title-only fragment
+78767,needs_data,"Signals, Systems and Control",Configuration A is not defined in the question.
+78792,needs_data,"Signals, Systems and Control",Configuration A is not defined in the question.
+78818,needs_data,"Signals, Systems and Control",Configuration B is not defined in the question.
+78870,needs_data,Probability and Stochastic Processes,Population limit K not given; lambda>mu.
+78954,needs_data,"Signals, Systems and Control",Bits per symbol not given
+78959,needs_data,"Signals, Systems and Control",Bits per symbol not given
+78968,needs_data,"Signals, Systems and Control",Bits per symbol not given
+78986,needs_data,"Signals, Systems and Control",Transmitted signal power not given.
+79055,needs_data,"Signals, Systems and Control",Configuration A is not defined in the question.
+79069,needs_data,"Signals, Systems and Control",Configuration B is not defined in the question.
+79076,needs_data,"Signals, Systems and Control",Configuration B is not defined in the question.
+79093,needs_data,Probability and Stochastic Processes,Context of 6:30 PM appointments not fully given
