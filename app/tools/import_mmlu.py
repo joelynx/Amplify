@@ -79,6 +79,63 @@ MMLU_SET = "MMLU"
 MMLU_SUBJECTS = ["college_chemistry", "high_school_chemistry", "econometrics"]
 SPLITS = ["test", "validation", "dev"]
 LETTERS = "ABCDEFGHIJ"
+# wave -> MMLU subjects, MMLU-Pro (category, src prefixes), set-aside file. The default wave is what was imported first.
+WAVES = {
+    "20261123": {
+        "subjects": MMLU_SUBJECTS,
+        "pro": [(cat, srcs) for cat, srcs in PRO_SRCS.items()],
+        "set_aside": SET_ASIDE_PATH,
+    },
+    "20261125": {
+        "subjects": [
+            "machine_learning",
+            "college_computer_science",
+            "high_school_computer_science",
+            "electrical_engineering",
+            "college_physics",
+        ],
+        # stemez-ComputerScience, and the TheoremQA computer-science rows (skipped by duplicates() when in the bank)
+        "pro": [("computer science", ["stemez-ComputerScience", "theoremQA-"])],
+        "set_aside": Path("app/data/appdata/mmlu_set_aside_20261125.json"),
+    },
+}
+# subjects and categories whose text is code or computing notation: no ce markup, identifiers go in texttt
+CODE_SUBJECTS = {"machine_learning", "college_computer_science", "high_school_computer_science", "computer science"}
+CHEM_SUBJECTS = {"college_chemistry", "high_school_chemistry", "chemistry"}
+# Wave 20261125 (computing, EE, physics): commands the first wave never met, allowed from that wave on
+EXTRA_OK = set(
+    "le ge in notin ell mathcal mathbb top lim max min sup inf argmax operatorname begin end left right quad hline odot "
+    "wedge vee neg cup cap exists subseteq subset Rightarrow Leftrightarrow langle rangle lVert rVert lceil rceil lfloor "
+    "rfloor neq Theta eta iota lg gcd mod bmod binom hbar not prod nu".split()
+)
+EXTRA_OPERATORS = {"in", "notin", "wedge", "vee", "cup", "cap", "subseteq", "subset", "Leftrightarrow", "odot", "le", "ge"}
+EXTRA_UNICODE = {
+    "←": r"\leftarrow ", "∧": r"\wedge ", "∨": r"\vee ", "¬": r"\neg ", "≠": r"\neq ",
+    "∈": r"\in ", "∉": r"\notin ", "∪": r"\cup ", "∩": r"\cap ", "∀": r"\forall ",
+    "∃": r"\exists ", "⇒": r"\Rightarrow ", "⇔": r"\Leftrightarrow ", "⊆": r"\subseteq ",
+    "⊂": r"\subset ", "⊕": r"\oplus ", "Θ": r"\Theta ", "Π": r"\Pi ", "η": r"\eta ",
+    "∑": r"\sum ", "∏": r"\prod ", "∂": r"\partial ", "∇": r"\nabla ", "κ": r"\kappa ",
+    "χ": r"\chi ", "ξ": r"\xi ", "ζ": r"\zeta ", "ψ": r"\psi ", "≡": r"\equiv ",
+    "∝": r"\propto ", "∼": r"\sim ", "∘": r"\circ ", "⋆": r"\ast ", "∗": r"\ast ",
+    "↔": r"\leftrightarrow ", "Φ": r"\Phi ", "Γ": r"\Gamma ", "Λ": r"\Lambda ", "Ψ": r"\Psi ",
+    "́": "", "�": "",
+}
+EXTRA_RE = re.compile("[" + "".join(EXTRA_UNICODE) + "]")
+# code shown in a verbatim block or \texttt: symbols the monospace font may lack become ASCII
+ASCII_FOLD = {"←": "<-", "→": "->", "≤": "<=", "≥": ">=", "≠": "!=", "×": "*", "−": "-",
+              "–": "-", "‘": "'", "’": "'", "“": '"', "”": '"', "\u00a0": " ", "∧": "AND",
+              "∨": "OR", "¬": "NOT "}
+CODE_LINE_RE = re.compile(
+    r"[{};]\s*$|^\s*[{}]|←|/\*|\*/|^\s*(?:IF|FOR|REPEAT|PROCEDURE|RETURN|DISPLAY|APPEND|ELSE|WHILE|UNTIL|INSERT|REMOVE|"
+    r"public|private|return|int|if|for|while)\b|^\s*Line \d+:"
+)
+KEYWORD_RE = re.compile(
+    r"\b(?:DIMENSION|SUBROUTINE|FUNCTION|INTEGER|REAL|CONTINUE|RETURN|END|DO|IF|THEN|ELSE|WRITE|READ|GO TO|GOTO|BEGIN|"
+    r"PROGRAM|VAR|WHILE|PRINT|FORMAT|STOP|CALL|DATA|LET|NEXT|FOR|DCL|DECLARE|INPUT)\b"
+)
+MATH_FUNCS = {"log", "ln", "sin", "cos", "tan", "exp", "lg", "sqrt", "max", "min", "sup", "inf", "gcd", "lim", "det", "arg"}
+TT_ESCAPES = {"\\": r"\textbackslash{}", "{": r"\{", "}": r"\}", "$": r"\$", "%": r"\%", "&": r"\&", "#": r"\#", "_": r"\_",
+              "^": r"\^{}", "~": r"\~{}"}
 
 _FIXES = json.loads(Path(__file__).with_name("mmlu_fixes.json").read_text(encoding="utf-8"))
 HAND_FIXES: dict[tuple[str, str], list[tuple[str, str]]] = {}
@@ -187,6 +244,7 @@ UNICODE = {
     "\u2026": "...",
     "\u0432": "v",
 }
+OPERATORS |= EXTRA_OPERATORS  # none of them is in ALLOWED: the first wave never meets them
 SYMBOL_RE = re.compile("[" + "".join(UNICODE) + "]")
 COMBINING = {"\u0302": "hat", "\u0304": "bar", "\u0305": "bar", "\u0307": "dot"}
 # a letter with a combining mark, or the precomposed forms the data uses
@@ -197,8 +255,13 @@ WORD_ELEMENT_EXCLUDE = {"A", "I", "In", "It", "If", "Is", "As", "At", "An", "Be"
 ELEMENT_OK = {"Ni", "Ne", "No", "He"}
 
 
-def repair_commands(s: str) -> str:
+def repair_commands(s: str, ext: bool = False) -> str:
     """Control characters that ate a backslash, glued commands, renamed commands."""
+    if ext:
+        s = re.sub(r"\\le(?![A-Za-z])", r"\\leq", s)
+        s = re.sub(r"\\ge(?![A-Za-z])", r"\\geq", s)
+        s = re.sub(r"\\arg(min|max)(?![A-Za-z])", r"\\operatorname{arg\\,\1}", s)
+        s = re.sub(r"\\norm\{([^{}]*)\}", r"\\lVert \1\\rVert", s)
     s = CTRL_RE.sub(lambda m: "\\" + CTRL[m.group(0)], s)
     s = re.sub(r"\\textquotedblleft\s*", "``", s)
     s = re.sub(r"\\textquotedblright\s*", "''", s)
@@ -210,7 +273,7 @@ def repair_commands(s: str) -> str:
         name = RENAME.get(name, name) if name in RENAME else name
         if name is None:
             return m.group(0)
-        if name in ALLOWED:
+        if name in ALLOWED or (ext and name in EXTRA_OK):
             return "\\" + name
         for key in ("textphi", "texttheta", "textasteriskcentered", "textbullet"):
             if name.startswith(key) and len(name) > len(key):
@@ -223,7 +286,7 @@ def repair_commands(s: str) -> str:
     return re.sub(r"\\([A-Za-z]+)", fix, s)
 
 
-def unicode_to_latex(s: str) -> str:
+def unicode_to_latex(s: str, ext: bool = False) -> str:
     s = COMB_RE.sub(lambda m: "\\" + COMBINING[m.group(2)] + "{" + m.group(1) + "}", s)
     for ch, (cmd, base) in PRECOMPOSED.items():
         s = s.replace(ch, "\\" + cmd + "{" + base + "}")
@@ -233,6 +296,8 @@ def unicode_to_latex(s: str) -> str:
         "\u221a\\s*(?:\\(([^()]*)\\)|([A-Za-z0-9.]+))", lambda m: "\\sqrt{" + (m.group(1) or m.group(2)) + "}", s
     )
     s = s.replace("\u221a", "\\surd ")
+    if ext:
+        s = EXTRA_RE.sub(lambda m: EXTRA_UNICODE[m.group(0)], s)
     return SYMBOL_RE.sub(lambda m: UNICODE[m.group(0)], s)
 
 
@@ -244,6 +309,7 @@ FORMULA_RE = re.compile(r"^(?:\^\{\d+\})?\d*(?:(?:[A-Z][a-z]?|\([A-Za-z0-9]+\))\
 FUNCTIONS = {"sin", "cos", "tan", "ln", "log", "exp"}
 OP_TOKENS = {"+", "=", "-", "/", "<", ">", "*"}
 PH_RE = re.compile("\x01(\\d+)\x02")
+PT_RE = re.compile("\x03(\\d+)\x04")
 LABEL_RE = re.compile(r"^\(?[a-z]\)$|^\([ivx]+\)$")
 QCHARS_RE = re.compile(r"^[\[\](){}A-Za-z0-9.*/+\-=|\\]*$")
 
@@ -314,6 +380,8 @@ def mathify(tok: str, chem: bool) -> str:
 
 def kind(core: str, chem: bool) -> str:
     """M mathy token, O operator, N number, F function name, E element-like word, Q short math-ish token, T text."""
+    if "\x03" in core:
+        return "T"
     m = re.fullmatch(r"\\([A-Za-z]+)\s*", core)
     if m and m.group(1) in OPERATORS:
         return "O"
@@ -358,7 +426,7 @@ def dehyphenate(s: str, vocab: collections.Counter) -> str:
     return re.sub(r"(?<![\w\\])([A-Za-z]{2,})-([a-z]{2,})(?![\w-])", join, s)
 
 
-def protect(s: str, store: list[str]) -> str:
+def protect(s: str, store: list[str], ext: bool = False) -> str:
     """Math the data already has (\\( \\), $ $, \\frac{}{}, ^{...}) goes behind placeholders."""
 
     def put(inner: str) -> str:
@@ -367,7 +435,16 @@ def protect(s: str, store: list[str]) -> str:
 
     s = re.sub(r"_{2,}", lambda m: put(r"\_\_\_\_"), s)  # a fill-in blank
     s = re.sub(r"\\\((.*?)\\\)", lambda m: put(m.group(1).strip()), s, flags=re.S)
+    if ext:
+        s = re.sub(r"\$\$(.*?)\$\$", lambda m: put("\\[" + m.group(1).strip() + "\\]"), s, flags=re.S)
     s = re.sub(r"\$([^$]*)\$", lambda m: put(m.group(1).strip()), s)
+    if ext:  # a table the data left outside math: an array in a display
+        s = re.sub(
+            r"\\begin\{(?:tabular|array)\}(\{[^{}]*\})(.*?)\\end\{(?:tabular|array)\}",
+            lambda m: put("\\[\\begin{array}" + m.group(1).replace("|", "") + m.group(2) + "\\end{array}\\]"),
+            s,
+            flags=re.S,
+        )
     s = re.sub(r"\\frac\s*\{[^{}]*\}\s*\{[^{}]*\}", lambda m: put(m.group(0)), s)
     s = re.sub(r"\\(?:sqrt|text|mathrm|textbf|hat|bar|dot)\s*\{[^{}]*\}", lambda m: put(m.group(0)), s)
     s = re.sub(r"[\^_]\{[^{}]*\}", lambda m: put(m.group(0)), s)
@@ -385,13 +462,17 @@ def expand(t: str, store: list[str]) -> str:
     return PH_RE.sub(lambda m: store[int(m.group(1))], t)
 
 
-def convert(text: str, chem: bool = False, vocab: collections.Counter | None = None) -> str:
-    s = repair_commands(text.replace("\r\n", "\n"))
+def convert(
+    text: str, chem: bool = False, vocab: collections.Counter | None = None, code: bool = False, ext: bool = False
+) -> str:
+    s = repair_commands(text.replace("\r\n", "\n"), ext)
     s = re.sub(r"(?<=[a-z]{2})\\(?=[A-Za-z])", r" \\", s)  # "and\Delta": a command glued to a word
     s = re.sub(r"(?<=[a-z0-9)])[.](?=[A-Z][a-z])", ". ", s)  # "C.Find": sentence end glued to the next one
-    s = unicode_to_latex(s)
+    s = unicode_to_latex(s, ext)
     store: list[str] = []
-    s = protect(s, store)
+    s = protect(s, store, ext)
+    if code:
+        s = code_spans(s, store)
     s = re.sub(r"(?<!\\)([{}])", r"\\\1", s)  # braces the data prints literally
     if vocab is not None:
         s = dehyphenate(s, vocab)
@@ -438,7 +519,7 @@ def convert(text: str, chem: bool = False, vocab: collections.Counter | None = N
             ):
                 e -= 1
                 changed = True
-        if a <= e and any(toks[j][3] == "M" for j in range(a, e + 1)):
+        if a <= e and any(toks[j][3] == "M" or (ext and not code and toks[j][1] == "=") for j in range(a, e + 1)):
             runs[a] = e
         k = b + 1
     out = []
@@ -464,7 +545,7 @@ def convert(text: str, chem: bool = False, vocab: collections.Counter | None = N
             out.append(ws + "$" + body + "$" + toks[e][2])
             j = e + 1
         else:
-            if kd == "O" and core in {"<", ">", "="} or (kd == "O" and core.startswith("\\")):
+            if kd == "O" and core in ({"<", ">"} if ext else {"<", ">", "="}) or (kd == "O" and core.startswith("\\")):
                 out.append(ws + "$" + core + "$" + tail)
             else:
                 out.append(ws + escape_text(core + tail))
@@ -472,11 +553,107 @@ def convert(text: str, chem: bool = False, vocab: collections.Counter | None = N
     res = "".join(out)
     for _ in range(3):
         res = PH_RE.sub(lambda m: store[int(m.group(1))], res)
+        res = PT_RE.sub(lambda m: store[int(m.group(1))], res)
     return re.sub(r"([\^_]\{[^{}]*\})(?=[\^_])", r"\1{}", res)  # two scripts in a row: 10^{-4}^{\circ}
 
 
-def unknown_commands(text: str) -> set[str]:
-    return {m for m in re.findall(r"\\([A-Za-z]+)", text)} - ALLOWED - {"ce", "mathrm", "textbf"}
+def tt(s: str) -> str:
+    """Code or an identifier as a texttt: ASCII-folded, every LaTeX special escaped."""
+    s = "".join(ASCII_FOLD.get(c, c) for c in s)
+    return "\\texttt{" + "".join(TT_ESCAPES.get(c, c) for c in s) + "}"
+
+
+def code_spans(s: str, store: list[str]) -> str:
+    """Code mode: identifiers, calls and operators of programs go behind text placeholders (a texttt),
+    big-O terms and graph edge sets behind math placeholders; nothing of them reaches the chemistry/physics converter."""
+
+    def put_m(x: str) -> str:
+        store.append(x)
+        return f"\x01{len(store) - 1}\x02"
+
+    def put_t(x: str) -> str:
+        store.append(tt(x))
+        return f"\x03{len(store) - 1}\x04"
+
+    edge = r"<\s*[A-Za-z0-9]+\s*,\s*[A-Za-z0-9]+\s*>"
+    s = re.sub(
+        rf"(?:[A-Z]\s*=\s*)?\{{\s*(?:{edge}\s*,?\s*)+\}}",
+        lambda m: put_m(
+            re.sub(r"<\s*([A-Za-z0-9]+)\s*,\s*([A-Za-z0-9]+)\s*>", lambda x: "\\langle " + x.group(1) + "," + x.group(2) + "\\rangle ", m.group(0))
+            .replace("{", r"\{")
+            .replace("}", r"\}")
+        ),
+        s,
+    )
+    s = re.sub(r"<\s*([A-Z0-9]+)\s*,\s*([A-Z0-9]+)\s*>", lambda m: put_m(rf"\langle {m.group(1)},{m.group(2)}\rangle"), s)
+
+    def bigo(m: re.Match) -> str:
+        inner = re.sub(r"\blog\b", lambda _: "\\log", m.group(2))
+        inner = re.sub(r"\bsqrt\(([^()]*)\)", lambda x: "\\sqrt{" + x.group(1) + "}", inner)
+        inner = re.sub(r"\^(\w+|\([^()]*\))", lambda x: "^{" + x.group(1).strip("()") + "}", inner)
+        return put_m(m.group(1).strip() + "(" + inner.replace("*", r"\cdot ") + ")")
+
+    s = re.sub(r"(?<![\w\\])(O|\\Omega ?|\\Theta ?)\(((?:[^()\x01-\x04]|\([^()]*\))*)\)", bigo, s)
+    s = re.sub(
+        r"(?<!\w)\w+(?:\s*(?:->|<-)\s*\w+)+",
+        lambda m: put_m(re.sub(r"\s*->\s*", lambda _: " \\rightarrow ", re.sub(r"\s*<-\s*", lambda _: " \\leftarrow ", m.group(0)))),
+        s,
+    )
+    s = re.sub(r"(?<![\w\\\x01-\x04])[A-Za-z]\w*_[A-Za-z]{2,}\w*", lambda m: put_t(m.group(0)), s)
+
+    def call(m: re.Match) -> str:
+        if m.group(1).lower() in MATH_FUNCS or m.group(2).strip() in {"s", "es", "ies", "are", "is"}:
+            return m.group(0)
+        return put_t(m.group(0))
+
+    s = re.sub(r"(?<![\w\\\x01-\x04])([A-Za-z_]\w+)\(((?:[^()\x01-\x04]|\([^()]*\))*)\)", call, s)
+    return re.sub(
+        r"(?<![\w<>=!&|*/+\-])(<<|>>|==|!=|<=|>=|\+\+|\*\*|//|&&|\|\|)(?![\w<>=!&|*/+\-])", lambda m: put_t(m.group(0)), s
+    )
+
+
+def is_code_line(ln: str) -> bool:
+    """An indented line of a program; a sentence that merely mentions code is prose."""
+    return bool(CODE_LINE_RE.search(ln)) and not (len(ln.split()) >= 6 and re.search(r"[.?:]\s*$", ln))
+
+
+def code_like(t: str) -> bool:
+    """An option that is a program fragment (FORTRAN, Pascal, ...): two different keywords."""
+    return len(t) >= 15 and len(set(KEYWORD_RE.findall(t))) >= 2
+
+
+def convert_lines(text: str, chem: bool, vocab: collections.Counter | None, code: bool) -> str:
+    """The statement of a wave-20261125 row: every source line is a paragraph, indented code lines a verbatim block."""
+    lines = text.replace("\r\n", "\n").split("\n")
+    out, k = [], 0
+    while k < len(lines):
+        ln = lines[k]
+        if not ln.strip():
+            k += 1
+        elif code and ln[:1].isspace() and is_code_line(ln):
+            blk = [ln]
+            k += 1
+            while k < len(lines) and lines[k][:1].isspace() and is_code_line(lines[k]):
+                blk.append(lines[k])
+                k += 1
+            body = "\n".join(blk)
+            ind = min(len(x) - len(x.lstrip()) for x in blk)
+            body = "\n".join(x[ind:].rstrip() for x in blk)
+            body = "".join(ASCII_FOLD.get(c, c) for c in body)
+            if body.isascii() and not re.search(r"[$\\]", body) and body.count("{") == body.count("}"):
+                out.append("\\begin{verbatim}\n" + body + "\n\\end{verbatim}")
+            else:
+                out += [tt(x[ind:].rstrip()) for x in blk]
+        else:
+            m = re.match(r"^\s*[\u00b0\u2022]\s*(.*)$", ln)
+            out.append(("$\\bullet$ " + convert(m.group(1), chem, vocab, code, True)) if m else convert(ln.strip(), chem, vocab, code, True))
+            k += 1
+    return "\n\n".join(out)
+
+
+def unknown_commands(text: str, ext: bool = False) -> set[str]:
+    ok = ALLOWED | EXTRA_OK | {"texttt", "textbackslash"} if ext else ALLOWED
+    return {m for m in re.findall(r"\\([A-Za-z]+)", text)} - ok - {"ce", "mathrm", "textbf"}
 
 
 # ---------------------------------------------------------------------------------------------------------
@@ -492,14 +669,21 @@ def stem_with_options(stem: str, opts: list[str]) -> str:
 
 
 def make_row(set_: str, potd: str, idx: str, source: str, subsource: str, raw_q: str, raw_opts: list[str],
-             letter: str, chem: bool, vocab: collections.Counter) -> tuple[dict | None, str | None]:
+             letter: str, chem: bool, vocab: collections.Counter, code: bool = False,
+             ext: bool = False) -> tuple[dict | None, str | None]:
     raw = " ".join([raw_q, *raw_opts])
-    if BAD_MARKUP.search(repair_commands(raw)):
+    if BAD_MARKUP.search(repair_commands(raw, ext)):
         return None, "OCR'd glyph command or drawing-dependent markup in the text"
     if NUCLIDE_RE.search(raw) and chem:
         return None, "nuclide notation the data garbled"
-    stem = convert(raw_q, chem, vocab)
-    opts = [convert(o, chem, vocab) for o in raw_opts]
+    if ext:  # wave 20261125: source lines are paragraphs, program fragments are code
+        stem = convert_lines(raw_q, chem, vocab, code)
+        opts = [
+            tt(norm(o)) if code and code_like(o) else convert(norm(o), chem, vocab, code, True) for o in raw_opts
+        ]
+    else:
+        stem = convert(raw_q, chem, vocab, code)
+        opts = [convert(o, chem, vocab, code) for o in raw_opts]
     text = stem_with_options(stem, opts)
     row = {
         "potd": potd,
@@ -523,7 +707,7 @@ def make_row(set_: str, potd: str, idx: str, source: str, subsource: str, raw_q:
             if row[fld].count(old) != 1:
                 raise SystemExit(f"HAND FIX {potd} {fld}: expected one {old!r}")
             row[fld] = row[fld].replace(old, new)
-    bad = unknown_commands(row["latexcode"])
+    bad = unknown_commands(row["latexcode"], ext)
     if bad:
         return None, "command neither LaTeX nor KaTeX knows: " + ", ".join(sorted(bad))
     return row, None
@@ -545,16 +729,16 @@ def norm(t: str) -> str:
     return re.sub(r"\s+", " ", t).strip()
 
 
-def load_pro(data: Path) -> tuple[list[dict], dict[str, str]]:
+def load_pro(data: Path, wave: str = "20261123") -> tuple[list[dict], dict[str, str]]:
     allrows = read_parquet(data / "mmlu_pro" / "test.parquet")
     vocab: collections.Counter = collections.Counter()
     for r in allrows:
         for t in [r["question"], *r["options"]]:
             vocab.update(w.lower() for w in re.findall(r"(?<![\w-])[A-Za-z]{3,}(?![\w-])", t))
     rows, dropped = [], {}
-    for cat, srcs in PRO_SRCS.items():
+    for cat, srcs in WAVES[wave]["pro"]:
         for r in allrows:
-            if r["category"] != cat or r["src"] not in srcs:
+            if r["category"] != cat or not any(r["src"] == x or (x.endswith("-") and r["src"].startswith(x)) for x in srcs):
                 continue
             potd = f"{PRO_SET} {r['question_id']}"
             if potd in DROPS:
@@ -562,7 +746,8 @@ def load_pro(data: Path) -> tuple[list[dict], dict[str, str]]:
                 continue
             row, why = make_row(
                 PRO_SET, potd, str(r["question_id"]), "MMLU-Pro", f"{cat}, {r['src']}, question {r['question_id']}",
-                r["question"], list(r["options"]), r["answer"], cat == "chemistry", vocab,
+                r["question"], list(r["options"]), r["answer"], cat in CHEM_SUBJECTS, vocab, cat in CODE_SUBJECTS,
+                wave != "20261123",
             )
             if row is None:
                 dropped[potd] = why
@@ -571,10 +756,10 @@ def load_pro(data: Path) -> tuple[list[dict], dict[str, str]]:
     return rows, dropped
 
 
-def load_mmlu(data: Path) -> tuple[list[dict], dict[str, str]]:
+def load_mmlu(data: Path, wave: str = "20261123") -> tuple[list[dict], dict[str, str]]:
     vocab: collections.Counter = collections.Counter()
     rows, dropped = [], {}
-    for subject in MMLU_SUBJECTS:
+    for subject in WAVES[wave]["subjects"]:
         redux = {
             (norm(x["question"]), tuple(norm(c) for c in x["choices"])): x
             for x in read_arrow(data / "mmlu_redux" / f"{subject}.arrow")
@@ -601,7 +786,8 @@ def load_mmlu(data: Path) -> tuple[list[dict], dict[str, str]]:
                     continue
             row, why = make_row(
                 MMLU_SET, potd, f"{subject}/{sp}/{n}", "MMLU", f"{subject.replace('_', ' ')}, question {n}",
-                r["question"], list(r["choices"]), letter, subject != "econometrics", vocab,
+                r["question"], list(r["choices"]), letter, subject in CHEM_SUBJECTS, vocab, subject in CODE_SUBJECTS,
+                wave != "20261123",
             )
             if row is None:
                 dropped[potd] = why
@@ -614,6 +800,7 @@ def main() -> None:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--data", type=Path, required=True)
     p.add_argument("--only", choices=["mmlu_pro", "mmlu"])
+    p.add_argument("--wave", choices=sorted(WAVES), default="20261123", help="which subjects and categories to import")
     p.add_argument("--dump", type=Path, help="write the rows to import as JSON")
     p.add_argument("--set-aside", action="store_true", help="leave out rows that fail the checks (listed in SET_ASIDE_PATH)")
     p.add_argument("--exclude", type=Path, help="with --set-aside: JSON {row label: why} of rows the render checks failed")
@@ -622,10 +809,11 @@ def main() -> None:
     g.add_argument("--apply", action="store_true")
     a = p.parse_args()
 
+    set_aside_path = WAVES[a.wave]["set_aside"]
     rows, dropped = [], {}
     for name, fn in (("mmlu_pro", load_pro), ("mmlu", load_mmlu)):
         if a.only in (None, name):
-            r_, d_ = fn(a.data)
+            r_, d_ = fn(a.data, a.wave)
             rows += r_
             dropped.update(d_)
     # the same question twice inside the datasets: keep the first
@@ -654,12 +842,12 @@ def main() -> None:
     if a.set_aside:
         excluded = json.loads(a.exclude.read_text(encoding="utf-8")) if a.exclude else {}
         why = {r["potd"]: check([r]) or [excluded[r["potd"]]] for r in new if check([r]) or r["potd"] in excluded}
-        SET_ASIDE_PATH.write_text(
+        set_aside_path.write_text(
             json.dumps([dict(r, problems=why[r["potd"]]) for r in new if r["potd"] in why], ensure_ascii=False, indent=1),
             encoding="utf-8",
         )
         new = [r for r in new if r["potd"] not in why]
-        print(f"set aside for a hand fix: {len(why)} rows in {SET_ASIDE_PATH}")
+        print(f"set aside for a hand fix: {len(why)} rows in {set_aside_path}")
         problems = check(new)
     reasons = collections.Counter(re.sub(r"\d+", "N", v) for v in dropped.values())
     print(
