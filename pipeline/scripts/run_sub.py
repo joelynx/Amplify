@@ -899,6 +899,9 @@ def interpret(out: dict, cfg: dict, version: str) -> dict:
     init = next((e for e in ev if e.get("type") == "system" and e.get("subtype") == "init"), {})
     result = next((e for e in reversed(ev) if e.get("type") == "result"), None)
     limits = [e.get("rate_limit_info") or {} for e in ev if e.get("type") == "rate_limit_event"]
+    if not init:  # claude never started (2026-11-25: exit 0xC0000142, Windows out of memory): a failure, tried again
+        return {"kind": "error", "why": f"claude did not start (exit {out.get('returncode')})"
+                                        + (f": {out['stderr'][:200]}" if out.get("stderr") else "")}
     if init.get("claude_code_version") != version:
         return {"kind": "stop", "why": f"Claude Code is now {init.get('claude_code_version')}, verified {version}"}
     if init.get("apiKeySource") != "none":
