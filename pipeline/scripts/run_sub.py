@@ -1221,7 +1221,10 @@ class UsageCap:
         # hours: [{"window": w, "max": m, "from": "HH:MM", "to": "HH:MM"}, ...]: standing rules for every account,
         # a period of w that lies wholly between from and to of one day, local time, may reach m
         self.hours = [(o["window"], float(o["max"]), o["from"], o["to"]) for o in conf.get("hours") or []]
-        self.prior = {k: float(v) for k, v in (conf.get("prior_per_usd") or {}).items()}
+        # near_reset: [{"window": w, "max": m, "minutes": n}, ...]: standing rules for every account, a period of
+        # w whose reset is at most n minutes away may reach m (what it has left would go unused)
+        self.near_reset = [(o["window"], float(o["max"]), 60 * float(o["minutes"])) for o in conf.get("near_reset") or []]
+        self.prior ={k: float(v) for k, v in (conf.get("prior_per_usd") or {}).items()}
         # account rotation: an account with room for fewer replies at once than this is near its stop, and the
         # rotation moves to one with room once its running replies are done (tail_move)
         self.room = max(1, int(conf.get("rotate_room", 1)))
@@ -1383,20 +1386,37 @@ class UsageCap:
 
     def plan_for(self, w: str, now: float) -> float:
         """Where `w` stops: max less its margin, or an owner's one-off max until the time it names, on the
-        account it names (another account keeps the usual stop), or an hours rule's max when the current
-        period lies wholly within its hours."""
+        account it names (another account keeps the usual stop), or else the highest of the standing rules
+        that apply: an hours rule's max when the current period lies wholly within its hours, a near_reset
+        rule's max when the period resets within its minutes."""
         for win, top, until, acct in self.once:
             if win == w and now < until and acct in (None, self.account):
                 return top
+        stop = self.plans.get(w, self.plan)
         last = self._last(w, now)
-        if last is not None and last[2] is not None and w in PERIOD:
-            end = datetime.fromtimestamp(float(last[2]))
-            start = end - timedelta(seconds=PERIOD[w])
-            for win, top, frm, to in self.hours:
-                if (win == w and start.date() == end.date() and start.strftime("%H:%M:%S") >= f"{frm}:00"
-                        and end.strftime("%H:%M:%S") <= f"{to}:00"):
-                    return top
-        return self.plans.get(w, self.plan)
+        if last is not None and last[2] is not None:
+            reset = float(last[2])
+            for win, top, secs in self.near_reset:
+                if win == w and 0 < reset - now <= secs:
+                    stop = max(stop, top)
+            if w in PERIOD:
+                end = datetime.fromtimestamp(reset)
+                start = end - timedelta(seconds=PERIOD[w])
+                for win, top, frm, to in self.hours:
+                    if (win == w and start.date() == end.date() and start.strftime("%H:%M:%S") >= f"{frm}:00"
+                            and end.strftime("%H:%M:%S") <= f"{to}:00"):
+                        stop = max(stop, top)
+        return stop
+
+    def resume_at(self, w: str, now: float) -> float | None:
+        """When window `w`, past its stop on its reading alone, may serve again: its reset, or the start of a
+        near_reset rule's stretch before the reset when the reading is under that rule's max."""
+        last = self._last(w, now)
+        if last is None or last[2] is None:
+            return None
+        reset = float(last[2])
+        early = [reset - secs for win, top, secs in self.near_reset if win == w and last[1] < top and reset - secs > now]
+        return min(early, default=reset)
 
     def over(self, model: str, running: list[tuple[str, float]], now: float | None = None,
              since: bool = True) -> list[tuple[str, float]]:
@@ -1440,8 +1460,8 @@ class UsageCap:
         if over:
             why = ", ".join(f"{w} at {self._last(w, now)[1]:.0%} ({p:.0%} projected)" for w, p in over)
             if self.over(model, [], now, since=False):
-                resets = [self._last(w, now)[2] for w, _ in over]
-                until = max(float(r) for r in resets) if all(r is not None for r in resets) else now + 1020
+                ends = [self.resume_at(w, now) for w, _ in over]
+                until = max(ends) if all(e is not None for e in ends) else now + 1020
             else:  # past the cap only by the replies since the reading: read again once it is stale
                 read = min(self._last(w, now)[0] for w, _ in over) + self.max_age + 1
                 until = max(read, now + 60, self.probed.get(model, now) + PROBE_RETRY)
