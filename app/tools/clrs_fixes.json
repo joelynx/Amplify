@@ -1,0 +1,9 @@
+{
+ "fixes": [
+  {"key": "Exercise 34.5-2", "field": "latexcode", "fixes": [["\\}$.)", ".)"]], "note": "stray closing brace and dollar in the source"},
+  {"key": "Exercise 31.8-2", "field": "latexcode", "fixes": [["if \\$\\lambda", "if $\\lambda"]], "note": "escaped dollar in the source"}
+ ],
+ "dropped": {
+  "Problem 3-6": "the source statement stops after the intro; the table to fill in sits in its solution text"
+ }
+}
