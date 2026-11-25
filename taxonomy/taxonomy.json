@@ -850,6 +850,20 @@
   "group": "G1",
   "subject": "Calculus",
   "topic": "Calculus",
+  "branch": "Optimization",
+  "subtopic": "Transportation and Assignment Problems",
+  "note": "northwest-corner, Vogel and MODI methods for transportation problems, balanced and unbalanced cases, the Hungarian method for assignment",
+  "est": 0,
+  "orig": [
+   "Calculus",
+   "Optimization",
+   "Transportation and Assignment Problems"
+  ]
+ },
+ {
+  "group": "G1",
+  "subject": "Calculus",
+  "topic": "Calculus",
   "branch": "Numerical Methods",
   "subtopic": "Numerical Differentiation and Integration",
   "note": "finite differences; trapezoidal, midpoint and Simpson rules with error estimates",
@@ -6957,6 +6971,62 @@
  },
  {
   "group": "G4",
+  "subject": "Combinatorics",
+  "topic": "Discrete Foundations",
+  "branch": "Sets, Relations and Functions",
+  "subtopic": "Set Algebra and Power Sets",
+  "note": "set identities, symmetric difference, power sets, images and preimages of unions and intersections",
+  "est": 0,
+  "orig": [
+   "Discrete Foundations",
+   "Sets, Relations and Functions",
+   "Set Algebra and Power Sets"
+  ]
+ },
+ {
+  "group": "G4",
+  "subject": "Combinatorics",
+  "topic": "Discrete Foundations",
+  "branch": "Sets, Relations and Functions",
+  "subtopic": "Binary Relations and Equivalence Relations",
+  "note": "reflexive, symmetric and transitive properties, equivalence classes, closures, composition of relations",
+  "est": 0,
+  "orig": [
+   "Discrete Foundations",
+   "Sets, Relations and Functions",
+   "Binary Relations and Equivalence Relations"
+  ]
+ },
+ {
+  "group": "G4",
+  "subject": "Combinatorics",
+  "topic": "Discrete Foundations",
+  "branch": "Sets, Relations and Functions",
+  "subtopic": "Partial Orders and Posets",
+  "note": "partial and total orders, minimal, maximal, least and greatest elements, preorders, lattices",
+  "est": 0,
+  "orig": [
+   "Discrete Foundations",
+   "Sets, Relations and Functions",
+   "Partial Orders and Posets"
+  ]
+ },
+ {
+  "group": "G4",
+  "subject": "Combinatorics",
+  "topic": "Discrete Foundations",
+  "branch": "Sets, Relations and Functions",
+  "subtopic": "Injective, Surjective and Composite Functions",
+  "note": "one-to-one and onto maps, composition and inverses, counting functions between finite sets",
+  "est": 0,
+  "orig": [
+   "Discrete Foundations",
+   "Sets, Relations and Functions",
+   "Injective, Surjective and Composite Functions"
+  ]
+ },
+ {
+  "group": "G4",
   "subject": "Geometry",
   "topic": "Plane Geometry",
   "branch": "Triangles",
@@ -11488,6 +11558,20 @@
   "group": "G6",
   "subject": "Quantitative Finance",
   "topic": "Corporate Finance and Valuation",
+  "branch": "Capital Budgeting",
+  "subtopic": "Annuities, Interest Factors and Time Value",
+  "note": "future and present worth of annuities, sinking funds, effective rates, compound interest factors, inflation-adjusted worth",
+  "est": 0,
+  "orig": [
+   "Corporate Finance and Valuation",
+   "Capital Budgeting",
+   "Annuities, Interest Factors and Time Value"
+  ]
+ },
+ {
+  "group": "G6",
+  "subject": "Quantitative Finance",
+  "topic": "Corporate Finance and Valuation",
   "branch": "Cost of Capital and Capital Structure",
   "subtopic": "Cost of Equity, Cost of Debt and WACC",
   "note": "cost of equity by CAPM or dividend growth, after-tax cost of debt, WACC, flotation costs",
@@ -15254,6 +15338,20 @@
   "group": "G7",
   "subject": "Quantum Mechanics",
   "topic": "Quantum Mechanics",
+  "branch": "Many-Particle and Field Problems",
+  "subtopic": "Green's Functions and Lattice Models",
+  "note": "Hubbard and Anderson models, equation-of-motion Green's functions, spectral poles, effective exchange interactions",
+  "est": 0,
+  "orig": [
+   "Quantum Mechanics",
+   "Many-Particle and Field Problems",
+   "Green's Functions and Lattice Models"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
   "branch": "Quantum Optics and Information",
   "subtopic": "Quantized Light and Coherent States",
   "note": "photon number and coherent states, beam splitters, photon statistics, atom-field interaction",
@@ -15276,6 +15374,90 @@
    "Quantum Mechanics",
    "Quantum Optics and Information",
    "Qubits, Entanglement and Quantum Gates"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Quantum Field Theory",
+  "subtopic": "Propagators and Spectral Representation",
+  "note": "retarded and Feynman propagators, the Kallen-Lehmann spectral representation, higher-derivative propagators",
+  "est": 0,
+  "orig": [
+   "Quantum Mechanics",
+   "Quantum Field Theory",
+   "Propagators and Spectral Representation"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Quantum Field Theory",
+  "subtopic": "Dirac Field and Gamma-Matrix Algebra",
+  "note": "Dirac equation and spinors, gamma-matrix traces, discrete symmetries of bilinears, quantization with anticommutators",
+  "est": 0,
+  "orig": [
+   "Quantum Mechanics",
+   "Quantum Field Theory",
+   "Dirac Field and Gamma-Matrix Algebra"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Quantum Field Theory",
+  "subtopic": "Tree-Level Amplitudes and Decay Rates",
+  "note": "Feynman rules, decay widths, tree-level cross sections, parton evolution",
+  "est": 0,
+  "orig": [
+   "Quantum Mechanics",
+   "Quantum Field Theory",
+   "Tree-Level Amplitudes and Decay Rates"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Quantum Field Theory",
+  "subtopic": "Loop Corrections and Renormalization Group",
+  "note": "one-loop diagrams, dimensional regularization, vacuum polarization, anomalous magnetic moment, beta functions, anomalous dimensions, effective potentials",
+  "est": 0,
+  "orig": [
+   "Quantum Mechanics",
+   "Quantum Field Theory",
+   "Loop Corrections and Renormalization Group"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Quantum Field Theory",
+  "subtopic": "Gauge Theories and the Higgs Mechanism",
+  "note": "Yang-Mills theory, spontaneous symmetry breaking and the Higgs mechanism, the electroweak sector, extended Higgs sectors",
+  "est": 0,
+  "orig": [
+   "Quantum Mechanics",
+   "Quantum Field Theory",
+   "Gauge Theories and the Higgs Mechanism"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Quantum Mechanics",
+  "topic": "Quantum Mechanics",
+  "branch": "Quantum Field Theory",
+  "subtopic": "Path Integrals and Grassmann Variables",
+  "note": "functional integrals, Berezin integration and fermionic Gaussian integrals, instantons, thermal field theory",
+  "est": 0,
+  "orig": [
+   "Quantum Mechanics",
+   "Quantum Field Theory",
+   "Path Integrals and Grassmann Variables"
   ]
  },
  {
@@ -24195,6 +24377,34 @@
   "group": "G10",
   "subject": "Chemistry",
   "topic": "Inorganic Chemistry",
+  "branch": "Atomic Structure and Periodicity",
+  "subtopic": "Subatomic Particles, Isotopes and Nuclide Notation",
+  "note": "protons, neutrons and electrons, isotopes, ion and nuclide symbols, counting particles",
+  "est": 0,
+  "orig": [
+   "Inorganic Chemistry",
+   "Atomic Structure and Periodicity",
+   "Subatomic Particles, Isotopes and Nuclide Notation"
+  ]
+ },
+ {
+  "group": "G10",
+  "subject": "Chemistry",
+  "topic": "Inorganic Chemistry",
+  "branch": "Atomic Structure and Periodicity",
+  "subtopic": "Periodic Table Classification and Symbols",
+  "note": "metals, nonmetals and metalloids, groups and periods, element names and symbols",
+  "est": 0,
+  "orig": [
+   "Inorganic Chemistry",
+   "Atomic Structure and Periodicity",
+   "Periodic Table Classification and Symbols"
+  ]
+ },
+ {
+  "group": "G10",
+  "subject": "Chemistry",
+  "topic": "Inorganic Chemistry",
   "branch": "Chemical Bonding and Molecular Structure",
   "subtopic": "Lewis Structures and Formal Charge",
   "note": "octet rule and its exceptions, formal charges, resonance structures",
@@ -24693,6 +24903,34 @@
    "Inorganic Chemistry",
    "Metallurgy and Extraction of Metals",
    "Refining of Metals"
+  ]
+ },
+ {
+  "group": "G10",
+  "subject": "Chemistry",
+  "topic": "Inorganic Chemistry",
+  "branch": "Chemical Foundations",
+  "subtopic": "Classification of Matter and Properties",
+  "note": "elements, compounds and mixtures, physical versus chemical change, extensive versus intensive properties",
+  "est": 0,
+  "orig": [
+   "Inorganic Chemistry",
+   "Chemical Foundations",
+   "Classification of Matter and Properties"
+  ]
+ },
+ {
+  "group": "G10",
+  "subject": "Chemistry",
+  "topic": "Inorganic Chemistry",
+  "branch": "Chemical Foundations",
+  "subtopic": "Naming Ionic and Binary Compounds",
+  "note": "names and formulas of ionic and simple covalent compounds, Roman numerals for variable charges, formulas from ion charges",
+  "est": 0,
+  "orig": [
+   "Inorganic Chemistry",
+   "Chemical Foundations",
+   "Naming Ionic and Binary Compounds"
   ]
  },
  {
@@ -25617,6 +25855,20 @@
    "Analytical Chemistry",
    "Instrumental Methods",
    "Thermal Analysis"
+  ]
+ },
+ {
+  "group": "G10",
+  "subject": "Chemistry",
+  "topic": "Analytical Chemistry",
+  "branch": "Instrumental Methods",
+  "subtopic": "Sample Preparation and Separation Techniques",
+  "note": "drying and ashing, preservation of samples, choosing a separation method, distillation-extraction and microextraction",
+  "est": 0,
+  "orig": [
+   "Analytical Chemistry",
+   "Instrumental Methods",
+   "Sample Preparation and Separation Techniques"
   ]
  },
  {
@@ -28660,6 +28912,62 @@
  {
   "group": "G11",
   "subject": "Signals, Systems and Control",
+  "topic": "Signals and Systems",
+  "branch": "Image and Video Processing",
+  "subtopic": "Colour Models and Image Representation",
+  "note": "RGB, HSI and luminance-chrominance models, quantisation and colour depth, sampling and interpolation of images",
+  "est": 0,
+  "orig": [
+   "Signals and Systems",
+   "Image and Video Processing",
+   "Colour Models and Image Representation"
+  ]
+ },
+ {
+  "group": "G11",
+  "subject": "Signals, Systems and Control",
+  "topic": "Signals and Systems",
+  "branch": "Image and Video Processing",
+  "subtopic": "Image Enhancement and Filtering",
+  "note": "histogram equalisation and specification, contrast stretching, convolution kernels, median filtering",
+  "est": 0,
+  "orig": [
+   "Signals and Systems",
+   "Image and Video Processing",
+   "Image Enhancement and Filtering"
+  ]
+ },
+ {
+  "group": "G11",
+  "subject": "Signals, Systems and Control",
+  "topic": "Signals and Systems",
+  "branch": "Image and Video Processing",
+  "subtopic": "Morphology, Segmentation and Shape Descriptors",
+  "note": "opening and closing, thresholding and segmentation, Fourier shape descriptors, neighbourhood operations",
+  "est": 0,
+  "orig": [
+   "Signals and Systems",
+   "Image and Video Processing",
+   "Morphology, Segmentation and Shape Descriptors"
+  ]
+ },
+ {
+  "group": "G11",
+  "subject": "Signals, Systems and Control",
+  "topic": "Signals and Systems",
+  "branch": "Image and Video Processing",
+  "subtopic": "Video Storage and Coding",
+  "note": "uncompressed video rates and storage with chroma subsampling, motion estimation by block matching, MPEG frame types and error propagation",
+  "est": 0,
+  "orig": [
+   "Signals and Systems",
+   "Image and Video Processing",
+   "Video Storage and Coding"
+  ]
+ },
+ {
+  "group": "G11",
+  "subject": "Signals, Systems and Control",
   "topic": "Control Systems",
   "branch": "Block Diagrams and Signal-Flow Graphs",
   "subtopic": "Transfer Functions of Physical Systems",
@@ -31360,6 +31668,20 @@
   ]
  },
  {
+  "group": "G12",
+  "subject": "Nuclear Engineering",
+  "topic": "Radiation Detection and Protection",
+  "branch": "Radiation Shielding and Dosimetry",
+  "subtopic": "Radiation Protection Regulation and Monitoring",
+  "note": "personal and environmental monitoring, classification of workplaces and sources, radionuclide toxicity groups, regulatory practice",
+  "est": 0,
+  "orig": [
+   "Radiation Detection and Protection",
+   "Radiation Shielding and Dosimetry",
+   "Radiation Protection Regulation and Monitoring"
+  ]
+ },
+ {
   "group": "G13",
   "subject": "Semiconductor Devices",
   "topic": "Semiconductor Device Physics",
@@ -31903,6 +32225,20 @@
    "Computer Architecture",
    "Instruction Set Architecture",
    "RISC and CISC Design"
+  ]
+ },
+ {
+  "group": "G13",
+  "subject": "Digital Logic and Computer Architecture",
+  "topic": "Computer Architecture",
+  "branch": "Instruction Set Architecture",
+  "subtopic": "8085 and 8086 Microprocessors",
+  "note": "8085 and 8086 registers and pins, machine and bus cycles, interrupts, wait states",
+  "est": 0,
+  "orig": [
+   "Computer Architecture",
+   "Instruction Set Architecture",
+   "8085 and 8086 Microprocessors"
   ]
  },
  {
@@ -32855,6 +33191,20 @@
    "Operating Systems",
    "System Structure and Virtualization",
    "Distributed, Real-Time and Embedded Operating Systems"
+  ]
+ },
+ {
+  "group": "G14",
+  "subject": "Operating Systems",
+  "topic": "Operating Systems",
+  "branch": "System Structure and Virtualization",
+  "subtopic": "Operating System Overview and Functions",
+  "note": "what an operating system is, the resources it manages, its basic functions, services and types",
+  "est": 0,
+  "orig": [
+   "Operating Systems",
+   "System Structure and Virtualization",
+   "Operating System Overview and Functions"
   ]
  },
  {
@@ -34031,6 +34381,48 @@
    "Data Structures",
    "Advanced Data Structures",
    "Skip Lists and Treaps"
+  ]
+ },
+ {
+  "group": "G15",
+  "subject": "Algorithms and Data Structures",
+  "topic": "Data Structures",
+  "branch": "Advanced Data Structures",
+  "subtopic": "van Emde Boas Trees",
+  "note": "proto-vEB and vEB structures, successor and predecessor queries, insertion and deletion, reduced-space variants",
+  "est": 0,
+  "orig": [
+   "Data Structures",
+   "Advanced Data Structures",
+   "van Emde Boas Trees"
+  ]
+ },
+ {
+  "group": "G15",
+  "subject": "Algorithms and Data Structures",
+  "topic": "Data Structures",
+  "branch": "Fundamentals",
+  "subtopic": "Data Structure and Algorithm Terminology",
+  "note": "data, data items and objects, logical versus storage structures, abstract data types, properties and goals of algorithms, space complexity",
+  "est": 0,
+  "orig": [
+   "Data Structures",
+   "Fundamentals",
+   "Data Structure and Algorithm Terminology"
+  ]
+ },
+ {
+  "group": "G15",
+  "subject": "Algorithms and Data Structures",
+  "topic": "Data Structures",
+  "branch": "Fundamentals",
+  "subtopic": "Strings and Lookup Tables",
+  "note": "string terminology and operations as an abstract data type, lookup tables, search length and average search length",
+  "est": 0,
+  "orig": [
+   "Data Structures",
+   "Fundamentals",
+   "Strings and Lookup Tables"
   ]
  },
  {
@@ -35451,6 +35843,20 @@
   "group": "G16",
   "subject": "Programming Languages and Compilers",
   "topic": "Programming Language Concepts",
+  "branch": "Control Flow and Evaluation",
+  "subtopic": "Structured Programming and Program Tracing",
+  "note": "output tracing of straight-line and loop programs, goto versus structured control, loop termination, debugging",
+  "est": 0,
+  "orig": [
+   "Programming Language Concepts",
+   "Control Flow and Evaluation",
+   "Structured Programming and Program Tracing"
+  ]
+ },
+ {
+  "group": "G16",
+  "subject": "Programming Languages and Compilers",
+  "topic": "Programming Language Concepts",
   "branch": "Programming Paradigms",
   "subtopic": "Functional Programming Concepts",
   "note": "pure functions, higher-order functions, map and fold, currying, closures, lazy evaluation",
@@ -35938,6 +36344,20 @@
   ]
  },
  {
+  "group": "G16",
+  "subject": "Programming Languages and Compilers",
+  "topic": "Programming Language Concepts",
+  "branch": "Legacy and Introductory Languages",
+  "subtopic": "FORTRAN, BASIC and PL/I Programs",
+  "note": "syntax, typing rules and tracing of FORTRAN, BASIC, PL/I and APL programs, arithmetic IF, statement functions",
+  "est": 0,
+  "orig": [
+   "Programming Language Concepts",
+   "Legacy and Introductory Languages",
+   "FORTRAN, BASIC and PL/I Programs"
+  ]
+ },
+ {
   "group": "G14",
   "subject": "Computer Networks",
   "topic": "Computer Networks",
@@ -35977,6 +36397,34 @@
    "Computer Networks",
    "Network Models and Performance",
    "Circuit, Packet and Message Switching"
+  ]
+ },
+ {
+  "group": "G14",
+  "subject": "Computer Networks",
+  "topic": "Computer Networks",
+  "branch": "Network Models and Performance",
+  "subtopic": "Network Topology and Classification",
+  "note": "what a network is, topologies and link counts, LAN, MAN and WAN, client-server versus peer-to-peer",
+  "est": 0,
+  "orig": [
+   "Computer Networks",
+   "Network Models and Performance",
+   "Network Topology and Classification"
+  ]
+ },
+ {
+  "group": "G14",
+  "subject": "Computer Networks",
+  "topic": "Computer Networks",
+  "branch": "Network Models and Performance",
+  "subtopic": "Physical Layer and Transmission Media",
+  "note": "twisted pair, coaxial and optical fibre, satellite links, repeaters, synchronous versus asynchronous transmission",
+  "est": 0,
+  "orig": [
+   "Computer Networks",
+   "Network Models and Performance",
+   "Physical Layer and Transmission Media"
   ]
  },
  {
@@ -36271,6 +36719,20 @@
    "Computer Networks",
    "Application Layer",
    "File Transfer Protocols"
+  ]
+ },
+ {
+  "group": "G14",
+  "subject": "Computer Networks",
+  "topic": "Computer Networks",
+  "branch": "Application Layer",
+  "subtopic": "Peer-to-Peer and Distributed Hash Tables",
+  "note": "peer-to-peer overlays, Chord and finger tables, distributed lookup",
+  "est": 0,
+  "orig": [
+   "Computer Networks",
+   "Application Layer",
+   "Peer-to-Peer and Distributed Hash Tables"
   ]
  },
  {
