@@ -1301,8 +1301,8 @@ class UsageCap:
                 over = self.over(m, [(m, now)] * (room - 1), now, since=False)
                 if not over:
                     return None
-                resets = [self._last(w, now)[2] for w, _ in over]
-                until = max(float(r) for r in resets) if all(r is not None for r in resets) else now + 1020
+                ends = [self.resume_at(w, now) for w, _ in over]  # a near_reset stretch frees it before the reset
+                until = max(ends) if all(e is not None for e in ends) else now + 1020
                 holds.append((until, ", ".join(f"{w} at {self._last(w, now)[1]:.0%}" for w, _ in over)))
             return min(holds) if holds else None
         finally:
