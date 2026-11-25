@@ -96,7 +96,7 @@ def load(data: Path) -> tuple[list[dict], dict[str, str]]:
         if ex and ex.suffix == ".txt" and ex.exists():
             ref = ex.read_text(encoding="utf-8", errors="replace").strip()
         rows.append({"potd": f"{SET} {key}", "set": SET, "idx": key, "orig": "", "source": SET,
-                     "subsource": f"{r['field']} / {r['subfield']} / {key}", "latexcode": tex, "answer": ans,
+                     "subsource": None, "subfield": r["subfield"], "latexcode": tex, "answer": ans,
                      "solution": None, "hints": None, "more_hints": None, "ref_solution": ref,
                      "group": "subject", "effort": None, "image": image})
     return rows, left
@@ -136,7 +136,7 @@ def main() -> None:
         print(f"left out: {key}: {why_left}")
     print("left out by reason:", json.dumps(collections.Counter(re.sub(r"\(.*", "", v).strip() for v in left.values()), ensure_ascii=False))
     print(json.dumps({"rows": len(rows), "in_bank": len(dup), "to_add": len(new), "check_problems": len(problems),
-                      "subfields": collections.Counter(r["subsource"].split(" / ")[1] for r in new),
+                      "subfields": collections.Counter(r["subfield"] for r in new),
                       "images": sum(bool(r["image"]) for r in new)}))
     if a.dump:
         a.dump.write_text(json.dumps([dict(r, image=[n for n, _ in r["image"]] if r["image"] else None) for r in new],
