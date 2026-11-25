@@ -17,6 +17,7 @@ Usage (from the repo root):
   python pipeline/scripts/run_subjects.py solve    [--n N] [--ids 1,2,3] [--workers W] [--wait-on-limit]
   python pipeline/scripts/run_subjects.py tiebreak [--list] [--workers W]   # third solve, high effort, after two disagreed with the stored answer
   python pipeline/scripts/run_subjects.py adjudicate [--list] [--workers W] # the review solve (review model) that replaces human review
+                                                     [--noisy-keys]         # ... also for the questions waiting for a tie-break
   python pipeline/scripts/run_subjects.py verify --review                  # the request check for it
   python pipeline/scripts/run_subjects.py precheck [--ids ...]   # structure and LaTeX rules only (no XeLaTeX)
   python pipeline/scripts/run_subjects.py review   [--ids ...]   # local HTML page of the replies
@@ -273,15 +274,17 @@ def tiebreak_rows(cfg: dict, app, pc, ids: list[int] | None = None) -> list[dict
     return out
 
 
-def review_rows(cfg: dict, app, pc, ids: list[int] | None = None) -> list[dict]:
+def review_rows(cfg: dict, app, pc, ids: list[int] | None = None, noisy_keys: bool = False) -> list[dict]:
     """Questions for the review solve that replaces human review (config.subjects.review_*), as
     solve-mode questions: every subject question in human review that has not had it (or whose
     review request never came back), except one still waiting for its tie-break, and review solves
-    the checks sent back (retry) or whose request failed (pending)."""
+    the checks sent back (retry) or whose request failed (pending). With noisy_keys, the questions
+    waiting for their tie-break are taken too (owner 2026-11-25: "go ahead with fable high solves for
+    the noisy keys": the review solve decides them instead of the tie-break)."""
     status = {r["question_id"]: r for r in pc.execute(
         "SELECT * FROM status WHERE mode IS NOT NULL AND status IN ('needs_human_review', 'retry', 'pending')")}
     rows = {x["id"]: x for x in scope_rows(cfg, app, set(status))}
-    waiting = {x["id"] for x in tiebreak_rows(cfg, app, pc, ids)}
+    waiting = set() if noisy_keys else {x["id"] for x in tiebreak_rows(cfg, app, pc, ids)}
     out = []
     for qid, r in sorted(status.items()):
         if (ids and qid not in ids) or qid not in rows or qid in waiting:
@@ -297,7 +300,7 @@ def review_rows(cfg: dict, app, pc, ids: list[int] | None = None) -> list[dict]:
 
 
 def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int | None, wait_on_limit: bool,
-          force_unlock: bool, tiebreak: bool = False, review: bool = False) -> None:
+          force_unlock: bool, tiebreak: bool = False, review: bool = False, noisy_keys: bool = False) -> None:
     """Send the unfinished questions; with tiebreak, a third solve at config.subjects.tiebreak_effort
     for the questions tiebreak_rows names; with review, the review solve (config.subjects.review_model
     at review_effort, solve mode) for the questions review_rows names. Neither sends the stored answer.
@@ -320,7 +323,7 @@ def solve(cfg: dict, app, pc, n: int | None, ids: list[int] | None, workers: int
         raise SystemExit(f"{LOCK.as_posix()} exists: another solve may be running (pid {LOCK.read_text().strip()})")
     LOCK.write_text(str(os.getpid()))
     if review:
-        queue = review_rows(cfg, app, pc, ids)
+        queue = review_rows(cfg, app, pc, ids, noisy_keys)
     else:
         queue = tiebreak_rows(cfg, app, pc, ids) if tiebreak else candidates(cfg, app, pc, ids)
     if n is not None:
@@ -729,6 +732,9 @@ def main() -> None:
         p.add_argument("--force-unlock", action="store_true")
         if name in ("tiebreak", "adjudicate"):
             p.add_argument("--list", action="store_true", help="only list the questions")
+        if name == "adjudicate":
+            p.add_argument("--noisy-keys", action="store_true",
+                           help="also the questions waiting for their tie-break (the review solve decides them)")
     for name in ("precheck", "review"):
         p = sp.add_parser(name)
         p.add_argument("--ids")
@@ -761,9 +767,10 @@ def main() -> None:
             solve(cfg, app, pc, a.n, ids, a.workers, a.wait_on_limit, a.force_unlock, tiebreak=True)
     elif a.cmd == "adjudicate":
         if a.list:
-            print(",".join(str(x["id"]) for x in review_rows(cfg, app, pc, ids)))
+            print(",".join(str(x["id"]) for x in review_rows(cfg, app, pc, ids, a.noisy_keys)))
         else:
-            solve(cfg, app, pc, a.n, ids, a.workers, a.wait_on_limit, a.force_unlock, review=True)
+            solve(cfg, app, pc, a.n, ids, a.workers, a.wait_on_limit, a.force_unlock, review=True,
+                  noisy_keys=a.noisy_keys)
     elif a.cmd == "precheck":
         precheck(cfg, app, pc, ids)
     elif a.cmd == "review":
