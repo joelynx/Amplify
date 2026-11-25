@@ -1,0 +1,37 @@
+{
+ "fixes": [
+  {"key": "es_1lff3cqfm", "field": "answer", "fixes": [["C, D", "C, D (the official key also accepts A, C, D)"]], "note": "official key 'A, C, D or C, D'"}
+ ],
+ "dropped": {
+  "es_23ryUaTGQwPgcI6aNE1klp775vm": "verbal aptitude (word analogy)",
+  "es_m80a2pax": "verbal aptitude (word analogy)",
+  "es_Q5evL6sbixkzUaXZ": "verbal aptitude (statement and courses of action)",
+  "es_Rvcrao0rbisHIMM5": "flawed as printed: the wording differs between sources and the key fits neither reading cleanly",
+  "es_wizoYqz4N9TOZno1": "flawed as printed: no option makes the program fully correct",
+  "es_9AgnxZs2rtLpSMfH": "flawed as printed: two options are valid",
+  "es_ORxw8KBtRUT6ztn1nK1kloyipwb": "flawed as printed: two options were officially accepted",
+  "es_tC42PPyBLNnlGB25": "flawed as printed: the code as written prints none of the options",
+  "es_5zelzlChCbm2BxZW": "flawed as printed: no option is exactly the product automaton",
+  "es_Z1nnOuFzpch7etI9": "flawed as printed: more than one option is defensible",
+  "es_UgyU8XjMRYrNzJlm": "flawed as printed: two options are necessarily true",
+  "es_PWyfIypFNtMVsW8E": "flawed as printed: two options are valid",
+  "es_vGvJkiM7qbXPFus4": "flawed as printed: the key's expression is misprinted and exact only for r = 3",
+  "go_v1_1.7.6": "flawed as printed: two options are algebraically identical",
+  "go_v1_4.13.1": "flawed as printed: the data are inconsistent",
+  "go_v2_2.12.17": "flawed as printed: the key holds only under an unusual reading",
+  "go_v2_3.15.3": "flawed as printed: the claim to prove is false",
+  "go_v2_6.5.24": "flawed as printed: two options are true",
+  "go_v2_6.9.4": "flawed as printed: part A depends on open questions about pi",
+  "go_v3_4.8.16": "the figure as transcribed does not give the key",
+  "go_v3_5.11.6": "flawed as printed: both readings are defensible and the stored key is the model's"
+ },
+ "no_answer": {
+  "es_DaToxDAB4Wr0fZEi": "the two source keys disagree and the stored key is the model's",
+  "go_v2_3.6.7": "the stored key is the model's (the source key is B only)",
+  "go_v3_1.16.7": "the stored key is the model's (the source key is B)",
+  "go_v3_2.12.1": "the stored answer is the model's (the source key reads 3 parity bits)"
+ },
+ "keep_key": {
+  "es_8cav6tAbKVhlLAuV": "the official key (A) is image (B) in the redrawn option images"
+ }
+}

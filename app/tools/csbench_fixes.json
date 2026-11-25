@@ -1,0 +1,42 @@
+{
+ "fixes": [
+  {
+   "key": "CS-Bench 26",
+   "field": "Question",
+   "fixes": [
+    [
+     "i*i*i<-n",
+     "i*i*i<=n"
+    ]
+   ],
+   "note": "typo in the dataset; the key (O(cube root n)) is for <= n"
+  },
+  {
+   "key": "CS-Bench 2199",
+   "field": "C",
+   "fixes": [
+    [
+     "amd",
+     "and"
+    ]
+   ],
+   "note": "typo"
+  },
+  {
+   "key": "CS-Bench 1235",
+   "field": "A",
+   "fixes": [
+    [
+     "\\(2^n-1\\)",
+     "2^n-1"
+    ]
+   ],
+   "note": "stray LaTeX delimiters in the option"
+  }
+ ],
+ "dropped": {
+  "CS-Bench 2129": "the statement has an answer pasted into it and the reference answer belongs to another question",
+  "CS-Bench 2161": "the statement has an answer pasted into it",
+  "CS-Bench 1805": "program listing garbled by the dataset (the two processes' code is run together)"
+ }
+}
