@@ -1,5 +1,5 @@
 {
-"note": "Benchmark sets imported 2026-11-22 by app/tools/import_<set>.py (ThermoQA, JEEBench, TheoremQA, UGPhysics, UGMathBench; owner 2026-11-21: 'Go ahead with all recommendations'): the maths questions with the model and effort that solve them. Listing a question here puts it in run_sub.py's scope. Physics, engineering and economics questions are not listed: run_subjects.py takes them after classification. 2026-11-23: the sixth classification wave's maths rows (the day's imports: quant interview sets, MMLU econometrics, SuperGPQA and others; flagged rows held out) added with the same model and effort. 2026-11-25: the seventh wave's maths rows (SuperGPQA CS and engineering fields: Combinatorics, Number Theory, Statistics; flagged rows held out) added at Opus high, as the earlier SuperGPQA maths rows. 2026-11-25: the eighth wave's maths rows (CS-Bench and GATE CS: engineering and discrete mathematics, aptitude; flagged rows held out) added at Opus medium (exam-level questions). 2026-11-25: the ninth wave's maths rows (CLRS, game theory, ERI industrial engineering, FE-574, MMLU, physics and communication sets; flagged rows held out) added at Opus medium.",
+"note": "Benchmark sets imported 2026-11-22 by app/tools/import_<set>.py (ThermoQA, JEEBench, TheoremQA, UGPhysics, UGMathBench; owner 2026-11-21: 'Go ahead with all recommendations'): the maths questions with the model and effort that solve them. Listing a question here puts it in run_sub.py's scope. Physics, engineering and economics questions are not listed: run_subjects.py takes them after classification. 2026-11-23: the sixth classification wave's maths rows (the day's imports: quant interview sets, MMLU econometrics, SuperGPQA and others; flagged rows held out) added with the same model and effort. 2026-11-25: the seventh wave's maths rows (SuperGPQA CS and engineering fields: Combinatorics, Number Theory, Statistics; flagged rows held out) added at Opus high, as the earlier SuperGPQA maths rows. 2026-11-25: the eighth wave's maths rows (CS-Bench and GATE CS: engineering and discrete mathematics, aptitude; flagged rows held out) added at Opus medium (exam-level questions). 2026-11-25: the ninth wave's maths rows (CLRS, game theory, ERI industrial engineering, FE-574, MMLU, physics and communication sets; flagged rows held out) added at Opus medium. 2026-11-25: the ERI ergonomics rows deleted (owner), their entries removed.",
 "questions": {
 "38795": {
 "model": "claude-opus-5-5",
@@ -19994,14 +19994,6 @@
 "effort": "medium"
 },
 "73781": {
-"model": "claude-opus-5-5",
-"effort": "medium"
-},
-"73843": {
-"model": "claude-opus-5-5",
-"effort": "medium"
-},
-"73861": {
 "model": "claude-opus-5-5",
 "effort": "medium"
 },

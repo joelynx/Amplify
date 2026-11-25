@@ -10,7 +10,7 @@ with unicode symbols, not LaTeX, and the responses were never checked by a solve
     machine_design, manufacturing, thermodynamics);
   * field electrical_engineering, subdomains circuits, electronics (devices, semiconductors) and power_systems
     (power and energy);
-  * field industrial_engineering (all six subdomains);
+  * field industrial_engineering (five subdomains: not ergonomics, whose questions the owner had deleted);
   * nuclear: the dataset has no nuclear subdomain (a keyword search for nuclear / reactor / fission / neutron finds
     only chemical reactors), so nothing is taken for it.
 
@@ -65,7 +65,9 @@ NEAR_OWN = 0.85
 MAX_ANSWER = 220
 GROUPS = {  # field -> subdomains (None: all)
     "mechanical_engineering": None,
-    "industrial_engineering": None,
+    # not ergonomics: owner 2026-11-25 "Delete all the ergonomics questions" (the 120 rows of that subdomain went)
+    "industrial_engineering": {"reliability", "quality_control", "engineering_statistics", "production_planning",
+                               "operations_research"},
     "electrical_engineering": {"circuits", "electronics", "power_systems"},
 }
 

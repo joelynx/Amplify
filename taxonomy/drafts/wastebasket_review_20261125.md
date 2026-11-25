@@ -42,9 +42,8 @@ with the classifiers' notes and alternatives, clustered by subject.
 
 ## For the owner
 
-- Ergonomics (109 questions, labelled "Other: Ergonomics"): one coherent, computational bank (anthropometry and
-  workstations, spinal and joint moments, the NIOSH lifting equation, hand-arm vibration, lighting, endurance). No
-  subject fits it; a new subject would need its own tree and solver profile.
+- Ergonomics: the owner had all 120 ERI ergonomics questions deleted (2026-11-25); import_eri.py no longer takes
+  that subdomain.
 - Software Engineering (26, "Other"): exam-recall life cycle, testing, UML and DFD questions; not enough for a subject.
 - About 270 questions look like noise: exam-recall trivia on software products, vehicles and tools, computing history,
   chemical-safety tables, truncated or context-free statements, and five identical rows (79506-79510).
