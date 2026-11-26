@@ -1,0 +1,832 @@
+# Reclassification with solutions (2026-11-26: rows first filed from the question alone, or whose solution changed)
+
+46516 rows: placed 46385, wastebasket 131, flagged 1428 (held from solving).
+Pass 1 Sonnet medium (solutions cut at 3,000 characters); low confidence, invalid nodes and wastebasket re-done by Opus medium.
+Placed rows move only on a valid label from Opus or a high/medium pass-1 label (bank_relabels.json); otherwise they stay.
+
+| subject | rows |
+|---|---|
+| Chemistry | 4583 |
+| Probability and Stochastic Processes | 3552 |
+| Quantitative Finance | 3289 |
+| Combinatorics | 2917 |
+| Number Theory | 2574 |
+| Calculus | 2500 |
+| Algebra | 2173 |
+| Geometry | 1826 |
+| Game Theory | 1784 |
+| Algorithms and Data Structures | 1688 |
+| Electromagnetism and Special Relativity | 1665 |
+| Quantum Mechanics | 1582 |
+| Mechanics | 1501 |
+| Linear Algebra and Differential Equations | 1359 |
+| Signals, Systems and Control | 1328 |
+| Thermodynamics | 1262 |
+| Material Science | 1099 |
+| Digital Logic and Computer Architecture | 882 |
+| Computer Networks | 792 |
+| Statistics | 788 |
+| Operating Systems | 768 |
+| Fluid Mechanics | 744 |
+| Mechanical Engineering | 744 |
+| Heat Transfer | 733 |
+| Circuits and Electronics | 642 |
+| Economics | 573 |
+| Programming Languages and Compilers | 475 |
+| Databases | 422 |
+| Theory of Computation | 373 |
+| Chemical Engineering | 350 |
+| Power Systems and Power Electronics | 312 |
+| Abstract Algebra | 271 |
+| Electrical Machinery | 229 |
+| Complex Analysis | 180 |
+| Nuclear Engineering | 141 |
+| Conventional Energy Technologies | 140 |
+| Semiconductor Devices | 74 |
+| Machine Learning and Data Science | 70 |
+
+## Dataset subfield -> subject
+
+- : Chemistry 3331, Quantitative Finance 3289, Probability and Stochastic Processes 2697, Calculus 1813, Number Theory 1784, Combinatorics 1711, Algebra 1309, Mechanics 1290, Electromagnetism and Special Relativity 1242, Material Science 963, Thermodynamics 872, Quantum Mechanics 841, Linear Algebra and Differential Equations 784, Statistics 610, Digital Logic and Computer Architecture 610, Fluid Mechanics 603, Heat Transfer 601, Geometry 577, Economics 565, Signals, Systems and Control 531, Computer Networks 531, Operating Systems 451, Algorithms and Data Structures 445, Chemical Engineering 336, Circuits and Electronics 255, Electrical Machinery 221, Power Systems and Power Electronics 201, Mechanical Engineering 161, Databases 161, Conventional Energy Technologies 138, Programming Languages and Compilers 132, wastebasket 107, Nuclear Engineering 103, Abstract Algebra 81, Machine Learning and Data Science 70, Semiconductor Devices 46, Theory of Computation 31, Complex Analysis 27, Game Theory 2
+- "Coffin" Problem: Geometry 1
+- "Say Red": Probability and Stochastic Processes 1
+- 10th edition, Senior league: Geometry 1
+- 11.0.6 (c): Algebra 1
+- 1952: Number Theory 1
+- 1964: Number Theory 1
+- 1968: Algebra 1
+- 1969: Number Theory 1
+- 1971: Number Theory 1, Combinatorics 1
+- 1972: Combinatorics 1
+- 1975: Number Theory 1
+- 1975, Grade 8, Day 2: Algebra 1
+- 1976: Combinatorics 1
+- 1977: Linear Algebra and Differential Equations 12, Calculus 11, Complex Analysis 9, Abstract Algebra 6, Algebra 2, Number Theory 2, Combinatorics 1
+- 1978: Abstract Algebra 10, Linear Algebra and Differential Equations 8, Calculus 7, Complex Analysis 7, Combinatorics 1, Number Theory 1
+- 1979: Calculus 11, Linear Algebra and Differential Equations 10, Abstract Algebra 10, Complex Analysis 5, Algebra 1
+- 1980: Calculus 12, Complex Analysis 10, Linear Algebra and Differential Equations 8, Abstract Algebra 8, Number Theory 2
+- 1981: Calculus 13, Linear Algebra and Differential Equations 11, Abstract Algebra 8, Complex Analysis 4, Number Theory 1, Geometry 1
+- 1982: Calculus 12, Complex Analysis 7, Abstract Algebra 5, Algebra 2, Linear Algebra and Differential Equations 2, Number Theory 1
+- 1983: Calculus 13, Complex Analysis 9, Linear Algebra and Differential Equations 8, Algebra 6, Abstract Algebra 6, Geometry 5, Number Theory 4, Combinatorics 2, Probability and Stochastic Processes 1
+- 1983, Grade 3/4: Algebra 1
+- 1984: Linear Algebra and Differential Equations 15, Calculus 12, Algebra 10, Abstract Algebra 10, Complex Analysis 5, Number Theory 4, Geometry 2, Probability and Stochastic Processes 1
+- 1985: Abstract Algebra 11, Linear Algebra and Differential Equations 10, Calculus 9, Complex Analysis 6, Algebra 5, Number Theory 4, Geometry 2, Probability and Stochastic Processes 1, Combinatorics 1
+- 1986: Algebra 9, Linear Algebra and Differential Equations 9, Calculus 7, Number Theory 5, Abstract Algebra 5, Combinatorics 4, Complex Analysis 4, Geometry 1
+- 1987: Calculus 14, Combinatorics 10, Theory of Computation 10, Digital Logic and Computer Architecture 7, Algorithms and Data Structures 7, Algebra 6, Complex Analysis 6, Circuits and Electronics 6, Number Theory 5, Linear Algebra and Differential Equations 5, Programming Languages and Compilers 5, Abstract Algebra 4, Geometry 3, Operating Systems 2, Probability and Stochastic Processes 1, Databases 1
+- 1988: Programming Languages and Compilers 8, Complex Analysis 7, Algebra 6, Combinatorics 6, Abstract Algebra 6, Databases 6, Calculus 5, Circuits and Electronics 5, Linear Algebra and Differential Equations 4, Algorithms and Data Structures 4, Geometry 3, Operating Systems 3, Theory of Computation 3, Number Theory 2, Digital Logic and Computer Architecture 2, Probability and Stochastic Processes 1
+- 1989: Abstract Algebra 9, Combinatorics 8, Calculus 7, Number Theory 6, Linear Algebra and Differential Equations 6, Programming Languages and Compilers 6, Circuits and Electronics 5, Algorithms and Data Structures 4, Algebra 3, Complex Analysis 3, Geometry 3, Operating Systems 3, Theory of Computation 3, Probability and Stochastic Processes 2, Databases 2, Digital Logic and Computer Architecture 1
+- 1989, Grade 8: Combinatorics 1
+- 1990: Combinatorics 9, Algebra 9, Abstract Algebra 8, Circuits and Electronics 8, Calculus 7, Algorithms and Data Structures 7, Programming Languages and Compilers 7, Operating Systems 7, Digital Logic and Computer Architecture 6, Geometry 5, Number Theory 5, Linear Algebra and Differential Equations 5, Complex Analysis 5, Theory of Computation 5, Databases 4
+- 1990, Grade 11: Algebra 1
+- 1991: Combinatorics 10, Calculus 10, Operating Systems 10, Programming Languages and Compilers 9, Algorithms and Data Structures 7, Number Theory 6, Complex Analysis 6, Circuits and Electronics 5, Theory of Computation 5, Linear Algebra and Differential Equations 4, Abstract Algebra 4, Algebra 3, Digital Logic and Computer Architecture 3, Geometry 2, Databases 2, Probability and Stochastic Processes 1
+- 1992: Combinatorics 9, Programming Languages and Compilers 9, Calculus 8, Abstract Algebra 8, Theory of Computation 8, Geometry 6, Complex Analysis 6, Algorithms and Data Structures 6, Linear Algebra and Differential Equations 5, Digital Logic and Computer Architecture 5, Operating Systems 5, Number Theory 3, Algebra 3, Circuits and Electronics 3, Signals, Systems and Control 1, Databases 1
+- 1993: Combinatorics 9, Linear Algebra and Differential Equations 8, Calculus 7, Geometry 5, Circuits and Electronics 5, Operating Systems 5, Algebra 4, Number Theory 4, Algorithms and Data Structures 4, Digital Logic and Computer Architecture 3, Programming Languages and Compilers 3, Probability and Stochastic Processes 2, Complex Analysis 2, Abstract Algebra 2, Theory of Computation 2, Databases 2
+- 1993, grade XI: Calculus 1
+- 1994: Combinatorics 11, Linear Algebra and Differential Equations 11, Algorithms and Data Structures 10, Programming Languages and Compilers 9, Abstract Algebra 8, Number Theory 7, Calculus 6, Databases 6, Theory of Computation 6, Complex Analysis 5, Operating Systems 5, Probability and Stochastic Processes 4, Circuits and Electronics 4, Geometry 3, Algebra 2, Digital Logic and Computer Architecture 1, Signals, Systems and Control 1
+- 1994, Round 2: Algebra 1
+- 1995: Calculus 11, Programming Languages and Compilers 10, Algebra 9, Algorithms and Data Structures 9, Operating Systems 9, Linear Algebra and Differential Equations 8, Combinatorics 8, Abstract Algebra 7, Number Theory 6, Circuits and Electronics 6, Digital Logic and Computer Architecture 5, Probability and Stochastic Processes 4, Geometry 4, Complex Analysis 4, Theory of Computation 3, Databases 2, Signals, Systems and Control 1
+- 1996: Algorithms and Data Structures 13, Calculus 8, Operating Systems 8, Circuits and Electronics 8, Number Theory 7, Theory of Computation 7, Digital Logic and Computer Architecture 7, Algebra 6, Combinatorics 6, Abstract Algebra 5, Linear Algebra and Differential Equations 5, Probability and Stochastic Processes 3, Complex Analysis 3, Programming Languages and Compilers 3, Geometry 1, Databases 1
+- 1996, Day 2: Algebra 1
+- 1997: Combinatorics 11, Operating Systems 11, Algorithms and Data Structures 11, Theory of Computation 9, Geometry 6, Circuits and Electronics 6, Number Theory 5, Programming Languages and Compilers 5, Databases 5, Linear Algebra and Differential Equations 4, Abstract Algebra 4, Digital Logic and Computer Architecture 4, Algebra 3, Calculus 3, Probability and Stochastic Processes 2, wastebasket 2, Complex Analysis 1
+- 1997, Grade 1: Algebra 1
+- 1997, M1600: Combinatorics 1
+- 1997, Round 1: Algebra 1
+- 1998: Operating Systems 12, Combinatorics 10, Theory of Computation 10, Programming Languages and Compilers 9, Algorithms and Data Structures 8, Databases 7, Digital Logic and Computer Architecture 6, Number Theory 5, Geometry 5, Algebra 5, Linear Algebra and Differential Equations 5, Circuits and Electronics 5, Probability and Stochastic Processes 3, Calculus 3, Abstract Algebra 2
+- 1998, Day 3: Abstract Algebra 1
+- 1999: Combinatorics 11, Databases 10, Algorithms and Data Structures 10, Operating Systems 10, Theory of Computation 8, Geometry 7, Number Theory 6, Programming Languages and Compilers 6, Digital Logic and Computer Architecture 6, Circuits and Electronics 5, Probability and Stochastic Processes 4, Abstract Algebra 3, Algebra 2
+- 2000: Algorithms and Data Structures 11, Programming Languages and Compilers 8, Databases 7, Geometry 6, Combinatorics 6, Theory of Computation 6, Algebra 5, Circuits and Electronics 5, Operating Systems 5, Digital Logic and Computer Architecture 5, Number Theory 3, Linear Algebra and Differential Equations 2, Abstract Algebra 1, Probability and Stochastic Processes 1, wastebasket 1, Calculus 1
+- 2000, Second Round: Combinatorics 1
+- 2000, Test 8: Geometry 1
+- 2001: Operating Systems 11, Databases 10, Theory of Computation 10, Programming Languages and Compilers 8, Algorithms and Data Structures 7, Combinatorics 6, Circuits and Electronics 6, Digital Logic and Computer Architecture 6, Number Theory 3, Algebra 3, Geometry 3, Abstract Algebra 1, Calculus 1, Linear Algebra and Differential Equations 1, Probability and Stochastic Processes 1
+- 2001, Grade 3: Combinatorics 1
+- 2001, Round 1: Number Theory 2
+- 2001, Round 3: Number Theory 1
+- 2001/02: Number Theory 1
+- 2002: Combinatorics 12, Algorithms and Data Structures 11, Circuits and Electronics 10, Digital Logic and Computer Architecture 9, Operating Systems 8, Theory of Computation 8, Databases 5, Number Theory 4, Programming Languages and Compilers 4, Algebra 3, Geometry 2, Linear Algebra and Differential Equations 2, Probability and Stochastic Processes 1, Calculus 1, Abstract Algebra 1
+- 2002, Day 1: Number Theory 1
+- 2003: Algorithms and Data Structures 15, Programming Languages and Compilers 12, Combinatorics 11, Theory of Computation 10, Operating Systems 5, Computer Networks 5, Number Theory 4, Geometry 4, Digital Logic and Computer Architecture 4, Circuits and Electronics 4, Databases 4, Algebra 2, Probability and Stochastic Processes 2, Linear Algebra and Differential Equations 2, Calculus 1, Abstract Algebra 1, wastebasket 1
+- 2004: Algorithms and Data Structures 19, Combinatorics 13, Programming Languages and Compilers 10, Circuits and Electronics 9, Digital Logic and Computer Architecture 8, Operating Systems 7, Computer Networks 7, Databases 6, Theory of Computation 5, Number Theory 4, Geometry 4, Probability and Stochastic Processes 4, Algebra 3, Abstract Algebra 2, Linear Algebra and Differential Equations 2
+- 2004, Day 1: Algebra 1
+- 2004, Final Round: Combinatorics 1, Algebra 1
+- 2004, Problem 22 (adapted): Geometry 1
+- 2005: Algorithms and Data Structures 14, Combinatorics 12, Programming Languages and Compilers 11, Digital Logic and Computer Architecture 10, Computer Networks 8, Circuits and Electronics 8, Databases 7, Number Theory 6, Theory of Computation 6, Operating Systems 5, Abstract Algebra 3, Probability and Stochastic Processes 3, Algebra 2, Linear Algebra and Differential Equations 2, Geometry 1
+- 2005, Day 2: Combinatorics 1
+- 2005, Final Round: Number Theory 1
+- 2005, Grade 4: Algebra 1
+- 2005, Round 3, Day 1: Number Theory 1
+- 2005, Test 1: Algebra 1
+- 2005/06: Number Theory 1, Geometry 1
+- 2006: Combinatorics 16, Algorithms and Data Structures 15, Digital Logic and Computer Architecture 9, Theory of Computation 9, Operating Systems 8, Circuits and Electronics 7, Programming Languages and Compilers 6, Number Theory 5, Computer Networks 5, Databases 5, Geometry 4, Algebra 2, Linear Algebra and Differential Equations 1, Probability and Stochastic Processes 1
+- 2006, Day 3: Algebra 1
+- 2007: Algorithms and Data Structures 16, Combinatorics 13, Theory of Computation 9, Operating Systems 8, Algebra 7, Computer Networks 7, Circuits and Electronics 7, Digital Logic and Computer Architecture 7, Geometry 6, Databases 6, Programming Languages and Compilers 5, Abstract Algebra 3, Linear Algebra and Differential Equations 2, Number Theory 1, Probability and Stochastic Processes 1, Calculus 1, Signals, Systems and Control 1
+- 2007, Chapter 11: Geometry 1
+- 2007, Day 2: Combinatorics 1
+- 2007, Secondary: Combinatorics 1
+- 2007/08: Geometry 1
+- 2008: Algorithms and Data Structures 14, Combinatorics 12, Digital Logic and Computer Architecture 11, Theory of Computation 9, Operating Systems 8, Programming Languages and Compilers 8, Algebra 7, Computer Networks 7, Databases 6, Geometry 5, Circuits and Electronics 5, Number Theory 4, Linear Algebra and Differential Equations 3, Calculus 2, Probability and Stochastic Processes 2
+- 2008, Chapter 60: Algebra 1
+- 2008, Round 1: Algebra 1
+- 2008, Round 2: Combinatorics 1
+- 2009: Combinatorics 9, Algorithms and Data Structures 9, Operating Systems 9, Algebra 8, Theory of Computation 6, Number Theory 5, Geometry 4, Circuits and Electronics 4, Digital Logic and Computer Architecture 4, Programming Languages and Compilers 3, Computer Networks 3, Databases 2, Abstract Algebra 2, Probability and Stochastic Processes 1, Calculus 1
+- 2009, Final Round: Algebra 1
+- 2009, Test 2: Algebra 1
+- 2010: Combinatorics 15, Algebra 8, Algorithms and Data Structures 8, Programming Languages and Compilers 6, Geometry 5, Operating Systems 5, Number Theory 4, Theory of Computation 4, Databases 4, Digital Logic and Computer Architecture 4, Circuits and Electronics 4, Probability and Stochastic Processes 2, Computer Networks 2, Abstract Algebra 1, Calculus 1, Linear Algebra and Differential Equations 1
+- 2010, Day 1: Number Theory 1
+- 2010, July: Combinatorics 1
+- 2010, Test 2: Combinatorics 1
+- 2010, Test 4: Geometry 1
+- 2010/11: Geometry 1
+- 2011: Algebra 8, Number Theory 8, Geometry 7, Programming Languages and Compilers 7, Algorithms and Data Structures 7, Combinatorics 5, Circuits and Electronics 5, Operating Systems 5, Digital Logic and Computer Architecture 5, Theory of Computation 4, Probability and Stochastic Processes 3, Databases 2, Computer Networks 2, Linear Algebra and Differential Equations 1, Statistics 1, Calculus 1
+- 2011, Day 2: Number Theory 1
+- 2012: Combinatorics 13, Algebra 9, Geometry 8, Databases 7, Number Theory 6, Computer Networks 6, Algorithms and Data Structures 6, Programming Languages and Compilers 5, Theory of Computation 4, Operating Systems 4, Digital Logic and Computer Architecture 3, Circuits and Electronics 3, Probability and Stochastic Processes 3, Abstract Algebra 1, Calculus 1, wastebasket 1, Linear Algebra and Differential Equations 1, Statistics 1
+- 2012, Grade 10: Geometry 1
+- 2012, Round 1: Number Theory 1
+- 2012, Senior: Algebra 1
+- 2013: Combinatorics 13, Number Theory 12, Algebra 10, Geometry 9, Algorithms and Data Structures 7, Theory of Computation 6, Computer Networks 5, Operating Systems 5, Digital Logic and Computer Architecture 4, Circuits and Electronics 4, Programming Languages and Compilers 4, Databases 4, Calculus 2, Probability and Stochastic Processes 2, Linear Algebra and Differential Equations 1, Abstract Algebra 1
+- 2013, Category B: Geometry 1
+- 2013, Classification NMO: Combinatorics 1
+- 2013, Combinatorics Round: Probability and Stochastic Processes 1
+- 2013, Div A NT: Number Theory 1
+- 2013, Fall: Probability and Stochastic Processes 1
+- 2013, Grade 10: Geometry 1
+- 2013, Regional Grade 9: Geometry 1
+- 2013/14: Geometry 2, Combinatorics 1, Number Theory 1
+- 2014: Combinatorics 14, Algebra 8, Geometry 7, Number Theory 6
+- 2014, Paper 3: Geometry 1
+- 2014/15: Number Theory 1
+- 2015: Number Theory 18, Combinatorics 13, Geometry 11, Algebra 10
+- 2015, Day 1: Number Theory 1, Geometry 1
+- 2015, Grade 11: Geometry 1
+- 2015, Individual: Algebra 1
+- 2015, Third Round: Geometry 1
+- 2015/16: Combinatorics 1
+- 2016: Number Theory 13, Geometry 13, Algebra 9, Combinatorics 8, Abstract Algebra 1
+- 2016, Day 4: Algebra 1
+- 2016, Feb Combi: Probability and Stochastic Processes 1
+- 2016, Final Round, Day 2: Combinatorics 1
+- 2016, IMO TST 2: Algebra 1
+- 2017: Number Theory 16, Geometry 16, Combinatorics 14, Algebra 3, Probability and Stochastic Processes 1
+- 2017, Chapter 5: Algebra 1
+- 2017, Finals, Chapter 9: Geometry 1
+- 2017, Grade 11: Combinatorics 1
+- 2017, IMO TST, Day 3: Geometry 1
+- 2017, Individual: Algebra 1
+- 2017, Problem 24 (adapted): Combinatorics 1
+- 2017, Problem 4 (modified): Number Theory 1
+- 2017, Round 1: Combinatorics 1
+- 2017, Round 2, Part B: Algebra 1
+- 2017, Senior: Algebra 1
+- 2017/18: Number Theory 1
+- 2018: Combinatorics 21, Geometry 17, Algebra 15, Number Theory 13, Programming Languages and Compilers 7, Algorithms and Data Structures 7, Digital Logic and Computer Architecture 6, Theory of Computation 5, Computer Networks 5, Databases 4, Operating Systems 4, Circuits and Electronics 3, Probability and Stochastic Processes 3, Linear Algebra and Differential Equations 2, Abstract Algebra 1, Calculus 1
+- 2018, Day 1: Combinatorics 1
+- 2018, Feb Team: Combinatorics 1
+- 2018, JMO: Algebra 1
+- 2018, Pre-eliminary Round: Geometry 1
+- 2018, Problem 10 (adapted): Algebra 1
+- 2018, Round 1: Geometry 1
+- 2018, Round 2: Geometry 1
+- 2018, set by Australia for UK: Geometry 1
+- 2019: Combinatorics 27, Geometry 24, Number Theory 22, Algebra 20, Programming Languages and Compilers 9, Circuits and Electronics 6, Operating Systems 6, Theory of Computation 5, Computer Networks 4, Algorithms and Data Structures 4, Probability and Stochastic Processes 3, Databases 3, Linear Algebra and Differential Equations 2, Digital Logic and Computer Architecture 2, wastebasket 1, Abstract Algebra 1, Calculus 1
+- 2019, Algebra/Number Theory: Calculus 1
+- 2019, Day 1: Number Theory 1
+- 2019, Day 4: Number Theory 1
+- 2019, Fall: Number Theory 1
+- 2019, Feb: Number Theory 1
+- 2019, Final Round, Day 1: Number Theory 1
+- 2019, Grade 11: Number Theory 1
+- 2019, Grade 8--9: Geometry 1
+- 2019, Intermediate: Algebra 1
+- 2019, Issue 3: Geometry 1
+- 2019, National Oral: Number Theory 1
+- 2019, Prelim Round: Algebra 1
+- 2019, Problem 3 (generalised): Algebra 1
+- 2019, Senior: Geometry 1
+- 2019, Team: Combinatorics 1
+- 2019, part b: Number Theory 1
+- 2019, set by Australia for UK: Combinatorics 1
+- 2019, set by UK for Australia: Geometry 1
+- 2020: Geometry 31, Combinatorics 27, Algebra 20, Number Theory 18, Algorithms and Data Structures 11, Digital Logic and Computer Architecture 7, Operating Systems 6, Programming Languages and Compilers 6, Databases 5, Theory of Computation 5, Computer Networks 4, Circuits and Electronics 3, wastebasket 1, Linear Algebra and Differential Equations 1, Probability and Stochastic Processes 1, Abstract Algebra 1, Calculus 1
+- 2020 (adapted): Combinatorics 1
+- 2020, 3rd Round Geometry: Geometry 1
+- 2020, Final Round: Number Theory 1
+- 2020, Geometry Round: Geometry 1
+- 2020, IMO TST Day 1: Geometry 1
+- 2020, Individual: Algebra 1
+- 2020, Main Exam: Combinatorics 1
+- 2020, Proof: Combinatorics 1
+- 2020, Proof Round: Combinatorics 1
+- 2020, Shortlist: Algebra 1
+- 2020, Shortlist, Discrete Mathematics: Combinatorics 1
+- 2020, Spring: Combinatorics 1
+- 2020, Team: Number Theory 1
+- 2020, Team Round: Combinatorics 1
+- 2020, Test 2: Combinatorics 1
+- 2020, set by Australia for UK: Combinatorics 1, Number Theory 1
+- 2021: Geometry 28, Combinatorics 26, Number Theory 21, Algebra 17, Calculus 1
+- 2021, (Exam 2 of Prelims): Number Theory 1
+- 2021, Feb Team: Number Theory 1
+- 2021, Grade 11: Combinatorics 1
+- 2021, Round 1: Combinatorics 1
+- 2021, Shortlist: Algebra 1
+- 2021, TST Day 1: Geometry 1
+- 2021, Test 1: Geometry 1
+- 2022: Combinatorics 40, Number Theory 25, Geometry 22, Algebra 21, Programming Languages and Compilers 6, Algorithms and Data Structures 6, Operating Systems 6, Databases 5, Digital Logic and Computer Architecture 5, Theory of Computation 5, Computer Networks 4, Circuits and Electronics 3, Probability and Stochastic Processes 2, Linear Algebra and Differential Equations 2, Calculus 1, Abstract Algebra 1
+- 2022, 3rd Round: Algebra 1
+- 2022, 3rd round C3: Combinatorics 1
+- 2022, Algebra/Number Theory: Algebra 1
+- 2022, Day 1: Algebra 1
+- 2022, Day 2, Problem 1 (adapted): Combinatorics 1
+- 2022, Day 4: Algebra 1
+- 2022, Exam 2: Geometry 1
+- 2022, Grade 10-11: Algebra 1
+- 2022, Grade 12: Geometry 1
+- 2022, IMO TST: Combinatorics 1
+- 2022, IMOTST: Algebra 1, Geometry 1
+- 2022, Individual: Combinatorics 1
+- 2022, Juniors: Geometry 1
+- 2022, Local Indiv: Combinatorics 1
+- 2022, Round 1: Combinatorics 1
+- 2022, Shortlist: Combinatorics 1, Algebra 1
+- 2022, Team: Number Theory 1, Geometry 1
+- 2022, Test 1: Geometry 1
+- 2022, set by Australia for UK: Geometry 1
+- 2023: Geometry 33, Combinatorics 31, Algebra 22, Number Theory 15, Algorithms and Data Structures 8, Programming Languages and Compilers 5, Digital Logic and Computer Architecture 5, Theory of Computation 5, Operating Systems 5, Circuits and Electronics 5, Computer Networks 4, Databases 2, Calculus 2, Linear Algebra and Differential Equations 1, Abstract Algebra 1, Probability and Stochastic Processes 1
+- 2023, APMO TST: Algebra 1
+- 2023, Beginner Contest 193: Combinatorics 1
+- 2023, Christmas Edition: Algebra 1
+- 2023, Day 1: Geometry 1, Algebra 1
+- 2023, Finals: Geometry 1
+- 2023, Grade 9: Geometry 1
+- 2023, Practice Test 2: Algebra 1
+- 2023, Round 1: Geometry 1
+- 2023, Round 2: Combinatorics 4, Geometry 2, Number Theory 1, Algebra 1
+- 2023, Secondary: Combinatorics 1
+- 2023, Shortlist: Algebra 1
+- 2023, TST: Algebra 1
+- 2023, Team: Algebra 1
+- 2023, set by Australia for UK: Algebra 1, Combinatorics 1
+- 2024: Combinatorics 25, Algebra 24, Geometry 22, Number Theory 19
+- 2024, BxMO/EGMO TST: Geometry 1
+- 2024, Category A: Number Theory 1
+- 2024, Day 1: Combinatorics 1
+- 2024, Grade 10-11: Geometry 1
+- 2024, Higher Secondary: Algebra 1
+- 2024, IMO TST, Day 2: Geometry 1
+- 2024, Individual: Algebra 1
+- 2024, Junior: Geometry 1
+- 2024, Round 2: Number Theory 1, Combinatorics 1
+- 2024, Round 4: Geometry 1
+- 2024, Squad Selection Test: Number Theory 1
+- 2024, TST: Combinatorics 1, Algebra 1, Geometry 1
+- 2024, Team: Number Theory 2, Geometry 1
+- 2024, Test 1: Geometry 1
+- 2024/25, Algebra and Number Theory Round: Number Theory 1
+- 2025: Combinatorics 24, Geometry 23, Number Theory 20, Algebra 17, Probability and Stochastic Processes 1
+- 2025, Algebra and Number Theory Round: Number Theory 1
+- 2025, Beginner Contest 034: Number Theory 1
+- 2025, Beginner Contest 036: Combinatorics 1
+- 2025, Beginner Contest 049: Geometry 1
+- 2025, Beginner Contest 061: Algebra 1
+- 2025, Beginner Contest 063: Probability and Stochastic Processes 1
+- 2025, Category B: Combinatorics 1
+- 2025, Day 3: Algebra 1
+- 2025, Grade 10-11: Geometry 1
+- 2025, IMO TST, Day 3: Number Theory 1
+- 2025, Problem 22 of 53: Geometry 1
+- 2025, Problem 5 (part c): Combinatorics 1
+- 2025, Problem 6 of 53: Geometry 1
+- 2025, Round 1: Geometry 1
+- 2025, Team Round: Number Theory 1
+- 2025, set by UK for Australia: Algebra 1
+- 2026: Number Theory 12, Algebra 11, Geometry 10, Combinatorics 10
+- 2026, Area Stage Part II: Number Theory 1
+- 2026, Beginner Contest 067: Combinatorics 1
+- 2026, Day 2: Geometry 1, Combinatorics 1
+- 2026, Day 3: Combinatorics 2
+- 2026, Finals: Number Theory 1
+- 2026, National Stage: Algebra 1
+- 2026, Revenge Day 1: Combinatorics 1
+- 2026, Round 2: Geometry 1
+- 2x2, classic battle of the sexes: Game Theory 2
+- 2x2, classic battle of the sexes dominant: Game Theory 1
+- 2x2, classic battle of the sexes scaled: Game Theory 3
+- 2x2, classic chicken: Game Theory 2
+- 2x2, classic chicken dominant: Game Theory 1
+- 2x2, classic chicken scaled: Game Theory 3
+- 2x2, classic matching pennies: Game Theory 2
+- 2x2, classic matching pennies dominant: Game Theory 1
+- 2x2, classic matching pennies scaled: Game Theory 3
+- 2x2, classic prisoner's dilemma: Game Theory 2
+- 2x2, classic prisoner's dilemma dominant: Game Theory 1
+- 2x2, classic prisoner's dilemma scaled: Game Theory 3
+- 2x2, classic stag hunt: Game Theory 2
+- 2x2, classic stag hunt dominant: Game Theory 1
+- 2x2, classic stag hunt scaled: Game Theory 3
+- 2x2, dominant strategy: Game Theory 40
+- 2x2, mixed nash equilibrium: Game Theory 40
+- 2x2, pure nash equilibrium: Game Theory 40
+- 2x2, random extra: Game Theory 37
+- 2x2, random payoffs: Game Theory 40
+- 321-avoiding permutations: Combinatorics 1
+- 3rd edition: Number Theory 1, Geometry 1
+- 3rd edition, IMO/RMM category: Geometry 1
+- 3rd edition, PorMO/BMO category: Geometry 1
+- 3x3, 3x3 dominant: Game Theory 30
+- 3x3, 3x3 iesds: Game Theory 40
+- 3x3, 3x3 mixed ne: Game Theory 40
+- 3x3, 3x3 multi eq: Game Theory 40
+- 3x3, 3x3 pure ne: Game Theory 40
+- 3x4, 3x4 dominant: Game Theory 30
+- 3x4, 3x4 iesds: Game Theory 40
+- 3x4, 3x4 mixed ne: Game Theory 40
+- 3x4, 3x4 multi eq: Game Theory 40
+- 3x4, 3x4 pure ne: Game Theory 40
+- 4th edition: Geometry 3
+- 4x4, 4x4 dominant: Game Theory 30
+- 4x4, 4x4 iesds: Game Theory 40
+- 4x4, 4x4 mixed ne: Game Theory 40
+- 4x4, 4x4 multi eq: Game Theory 40
+- 4x4, 4x4 pure ne: Game Theory 40
+- 5th edition: Number Theory 1
+- 9th edition, Senior league: Algebra 1
+- A Theorem of Akiva Weinberger: Probability and Stochastic Processes 1
+- A conjecture of Erdős: Combinatorics 1
+- A conversation with my sister: Combinatorics 1
+- A result of Danzer and Grünbaum: Combinatorics 1
+- A result of Erdős: Number Theory 1
+- A result of M. Perles: Combinatorics 1
+- A result of Silverman: Number Theory 1
+- A special case of Napoleon's theorem: Geometry 1
+- A theorem of De Bruijn: Combinatorics 1
+- A theorem of Erdős-Ko-Rado: Combinatorics 1
+- A theorem of Nash-Williams: Combinatorics 1
+- A theorem on irrationality of powers of e: Calculus 1
+- AHSME: Geometry 117, Algebra 4, Number Theory 3, Combinatorics 2, Probability and Stochastic Processes 1
+- AHSME, Problem 7 (adapted): Number Theory 1
+- AIME I: Algebra 75, Number Theory 67, Geometry 55, Combinatorics 44, Probability and Stochastic Processes 30
+- AIME I, Problem 7 (adapted): Combinatorics 1
+- AIME II: Algebra 81, Number Theory 56, Combinatorics 53, Geometry 52, Probability and Stochastic Processes 24, Calculus 1
+- AJHSME: Geometry 40, Algebra 23, Combinatorics 13, Probability and Stochastic Processes 3, Number Theory 2
+- AMC 10: Geometry 5, Combinatorics 3
+- AMC 10A: Geometry 32, Combinatorics 6, Number Theory 2, Algebra 1
+- AMC 10B: Geometry 36, Probability and Stochastic Processes 2, Combinatorics 2, Number Theory 2, Algebra 1
+- AMC 12: Geometry 3, Combinatorics 2
+- AMC 12, Problem 18 (adapted): Number Theory 1
+- AMC 12A: Geometry 34, Algebra 4, Combinatorics 3, Probability and Stochastic Processes 1, Number Theory 1
+- AMC 12A, Problem 19 (adapted): Combinatorics 1
+- AMC 12B: Geometry 33, Combinatorics 7, Algebra 3, Probability and Stochastic Processes 1, Number Theory 1
+- AMC 12B, Problem 17 (adapted): Combinatorics 1
+- AMC 8: Geometry 107, Algebra 34, Combinatorics 29, Probability and Stochastic Processes 11, Number Theory 5
+- Advanced: Geometry 10, Combinatorics 2
+- Alternate Segment Theorem: Geometry 1
+- Amateur Geometer's Olympiad: Geometry 1
+- Andreescu and Pohoata's 110 Geometry Problems for the International Mathematical Olympiad: Geometry 1
+- AoPS (actual source unknown): Combinatorics 1
+- Assignment from last week: Combinatorics 1
+- Athemath Camp Application Problems: Probability and Stochastic Processes 1
+- Atomic and nuclear physics: Quantum Mechanics 50, Electromagnetism and Special Relativity 8, Nuclear Engineering 3, Thermodynamics 2, Chemistry 1, Mechanics 1, wastebasket 1
+- Autumn Junior A-level Paper: Combinatorics 1
+- Autumn, Senior A-Level: Number Theory 1
+- Baltic Way: Combinatorics 1
+- Banach fixed-point theorem: Calculus 1
+- Beginners' Competition: Algebra 1
+- Beginners' Competitions: Geometry 1
+- Benelux Mathematical Olympiad: Combinatorics 1
+- Bertrand's postulate: Number Theory 1
+- Bode Analysis: Signals, Systems and Control 3
+- Broken Chord Theorem: Geometry 1
+- Bronze Contest 8: Number Theory 1
+- CEMC Fermat Contest: Probability and Stochastic Processes 1
+- Catriona Shearer's Twitter: Geometry 1
+- Cauchy's Functional Equation: Algebra 1
+- Cauchy's Rigidity Theorem: Combinatorics 1
+- Cayley: Number Theory 2, Combinatorics 2
+- Cayley's Formula: Combinatorics 1
+- Centroid: Geometry 1
+- Centroid of a tetrahedron: Geometry 1
+- Chapter 1: Chemistry 55, Thermodynamics 7, Algorithms and Data Structures 3, Calculus 1, Number Theory 1, Probability and Stochastic Processes 1, Mechanics 1
+- Chapter 10: Chemistry 39, Algorithms and Data Structures 29, Thermodynamics 16, Material Science 14, Electromagnetism and Special Relativity 8, Chemical Engineering 4, wastebasket 3, Algebra 1, Fluid Mechanics 1, Quantum Mechanics 1, Linear Algebra and Differential Equations 1, Signals, Systems and Control 1
+- Chapter 11: Chemistry 55, Algorithms and Data Structures 26, Number Theory 1, Geometry 1, Thermodynamics 1
+- Chapter 12: Chemistry 53, Algorithms and Data Structures 25, Quantum Mechanics 5, Chemical Engineering 3
+- Chapter 13: Chemistry 73, Algorithms and Data Structures 22, Statistics 6, Probability and Stochastic Processes 3, Combinatorics 1
+- Chapter 14: Chemistry 84, Algorithms and Data Structures 19, Combinatorics 1
+- Chapter 15: Chemistry 83, Algorithms and Data Structures 38, Combinatorics 1
+- Chapter 16: Chemistry 45, Algorithms and Data Structures 32, Combinatorics 1
+- Chapter 17: Chemistry 30, Algorithms and Data Structures 21, Material Science 3
+- Chapter 18: Chemistry 92, Databases 11, Algorithms and Data Structures 2, Thermodynamics 1
+- Chapter 19: Chemistry 39, Algorithms and Data Structures 8
+- Chapter 2: Algorithms and Data Structures 19, Chemistry 16, Number Theory 2, Geometry 2, Linear Algebra and Differential Equations 1
+- Chapter 20: Chemistry 19, Algorithms and Data Structures 4
+- Chapter 21: Quantum Mechanics 41, Algorithms and Data Structures 21, Chemistry 4, Combinatorics 1, Conventional Energy Technologies 1
+- Chapter 22: Algorithms and Data Structures 39
+- Chapter 23: Algorithms and Data Structures 23
+- Chapter 24: Algorithms and Data Structures 38
+- Chapter 25: Algorithms and Data Structures 24
+- Chapter 26: Algorithms and Data Structures 36, Calculus 1
+- Chapter 27: Algorithms and Data Structures 25
+- Chapter 28: Linear Algebra and Differential Equations 17, Algorithms and Data Structures 4, Calculus 1
+- Chapter 29: Calculus 33, Algorithms and Data Structures 1
+- Chapter 3: Chemistry 73, Algorithms and Data Structures 16, Linear Algebra and Differential Equations 3, Number Theory 3, Combinatorics 2, Electromagnetism and Special Relativity 2, Chemical Engineering 2, Geometry 1
+- Chapter 30: Algorithms and Data Structures 24
+- Chapter 31: Number Theory 35, Algorithms and Data Structures 10
+- Chapter 32: Algorithms and Data Structures 21
+- Chapter 33: Algorithms and Data Structures 32
+- Chapter 34: Theory of Computation 21, Algorithms and Data Structures 16
+- Chapter 35: Algorithms and Data Structures 28
+- Chapter 4: Chemistry 85, Algorithms and Data Structures 43, Number Theory 1, Geometry 1, Linear Algebra and Differential Equations 1, wastebasket 1
+- Chapter 5: Chemistry 41, Thermodynamics 15, Algorithms and Data Structures 15, Probability and Stochastic Processes 9, Electromagnetism and Special Relativity 5, Complex Analysis 4
+- Chapter 6: Chemistry 44, Algorithms and Data Structures 33, Quantum Mechanics 26, Electromagnetism and Special Relativity 7, Abstract Algebra 2, Number Theory 1, Combinatorics 1
+- Chapter 7: Chemistry 60, Algorithms and Data Structures 24, Linear Algebra and Differential Equations 1, Number Theory 1, Electromagnetism and Special Relativity 1
+- Chapter 8: Chemistry 29, Algorithms and Data Structures 24, Electromagnetism and Special Relativity 2, Probability and Stochastic Processes 1
+- Chapter 9: Thermodynamics 52, Chemistry 27, Algorithms and Data Structures 19, Chemical Engineering 3, Number Theory 1, Mechanics 1, Electromagnetism and Special Relativity 1
+- Chen's OTIS Anti-Problems: Combinatorics 1
+- Chevalley's Theorem: Abstract Algebra 1
+- Christmas Junior Mathematical Olympiad: Combinatorics 1
+- Chvátal's Art Gallery Theorem: Combinatorics 1
+- Circuits: Electromagnetism and Special Relativity 67, Circuits and Electronics 45, Power Systems and Power Electronics 2
+- Classic: Combinatorics 1, Geometry 1
+- Coffin Problems: Combinatorics 1
+- Coffin problems: Geometry 1, Number Theory 1
+- Computer Networking: Computer Networks 24
+- Cono Sur Olympiad: Combinatorics 1
+- Control System Design: Signals, Systems and Control 2
+- David Monk: Geometry 1
+- Day 1: Number Theory 1, Combinatorics 1
+- Day 2: Number Theory 2, Algebra 2, Combinatorics 1
+- Day 3: Number Theory 1
+- Day 5: Combinatorics 1
+- Dr Barker: Algebra 1
+- Dynamics Vibrations: Mechanics 81, Mechanical Engineering 33
+- East: Algebra 1, Geometry 1, Number Theory 1
+- Easy questions: Quantum Mechanics 17, Chemistry 9, Nuclear Engineering 4
+- Edition 1 Gold Medal Match, Problem 7 (skipped): Geometry 1
+- Electrical Engineering: Circuits and Electronics 3, Signals, Systems and Control 3, Electromagnetism and Special Relativity 3
+- Electromagnetism: Electromagnetism and Special Relativity 54, Mechanics 1, Circuits and Electronics 1, Quantum Mechanics 1
+- Electronics: Circuits and Electronics 75, Electromagnetism and Special Relativity 33, Signals, Systems and Control 1, Semiconductor Devices 1
+- Elementary: Geometry 1
+- Engineering Statistics: Statistics 101, Mechanical Engineering 12, Probability and Stochastic Processes 7
+- Erdős-Mordell Inequality: Geometry 1
+- Euclidean Algorithm: Number Theory 1
+- Euler's result on odd perfect numbers: Number Theory 1
+- Euler's totient function: Number Theory 1
+- Exam 1: Geometry 1
+- Exam 2: Algebra 1
+- F01K10R3: Number Theory 1
+- Fall, AMC 12B, Problem 24 (adapted): Geometry 1
+- Fall, Junior: Combinatorics 1, Algebra 1
+- Fall, Senior: Combinatorics 2, Algebra 1, Geometry 1
+- Fall, Senior A: Geometry 1
+- February: Combinatorics 8, Calculus 1, Geometry 1
+- February 2024, Problem 21 of 30: Geometry 1
+- Fermat point: Geometry 1
+- Fermat's Christmas Theorem (adapted): Number Theory 1
+- Fifteen Puzzle: Combinatorics 1
+- Final Round: Geometry 2, Combinatorics 1, Number Theory 1, Algebra 1
+- Five colour theorem: Combinatorics 1
+- Fluid Mechanics: Fluid Mechanics 119, Chemical Engineering 1
+- Folklore: Combinatorics 17, Number Theory 16, Geometry 11, Algebra 5, Calculus 2, Abstract Algebra 1, Probability and Stochastic Processes 1, Thermodynamics 1
+- Folklore (https://www.whitman.edu/mathematics/cgt_online/book/section05.02.html): Combinatorics 1
+- Folklore (result from cubic residues): Number Theory 1
+- Folklore — Gersonides (1343): Number Theory 1
+- GGG4 Mock Geometry Contest: Geometry 1
+- Gain/Phase Margins: Signals, Systems and Control 1
+- Gauss (1801): Algebra 1
+- Geometry 1 Problem Bounty Hunt Contest: Geometry 1
+- Golberg's Olympiad Handout: Number Theory 1
+- Grade 10: Combinatorics 5, Geometry 2, Algebra 1
+- Grade 10, Day 1: Geometry 1
+- Grade 11: Combinatorics 4, Geometry 3, Number Theory 2
+- Grade 9: Combinatorics 4, Number Theory 1
+- HVAC: Mechanical Engineering 90, Heat Transfer 10, Thermodynamics 9, wastebasket 1
+- Hamilton: Geometry 1, Number Theory 1
+- Hamiltonian Cycle in the Hyper-cube: Combinatorics 1
+- Happy ending problem: Combinatorics 1
+- Hard questions: Quantum Mechanics 18, Nuclear Engineering 16, Chemistry 2
+- Harvard-MIT Mathematics Tournament: Combinatorics 3, Geometry 1
+- Heat Transfer: Heat Transfer 110
+- Hilbert's third problem: Combinatorics 1
+- ISAC (fill in the equation): Signals, Systems and Control 50, wastebasket 3
+- ISAC (multiple choice): Signals, Systems and Control 12, wastebasket 1
+- IT paper: Computer Networks 47, Algorithms and Data Structures 46, Theory of Computation 36, Databases 31, Digital Logic and Computer Architecture 28, Operating Systems 28, Combinatorics 24, Circuits and Electronics 21, Programming Languages and Compilers 14, Probability and Stochastic Processes 9, Linear Algebra and Differential Equations 5, Calculus 3, Number Theory 1, Abstract Algebra 1
+- Information Theory: Signals, Systems and Control 41, Electromagnetism and Special Relativity 2
+- Instagram reels: Number Theory 1
+- Intermediate: Geometry 4
+- International Mathematical Olympiad: Combinatorics 2
+- Iranian Geometry Olympiad: Geometry 2
+- JMO: Number Theory 2
+- Japanese theorem for cyclic polygons: Geometry 1
+- Junior: Number Theory 2, Geometry 2, Combinatorics 2
+- Junior A: Combinatorics 1
+- Junior O-Level: Number Theory 1
+- Junior Round 2: Combinatorics 1, Algebra 1, Number Theory 1
+- Kaczor and Nowak I: Calculus 44, Algebra 2
+- KoMaL (Kozepiskolai Matematikai es Fizikai Lapok): Combinatorics 2, Number Theory 1
+- Kronecker: Algebra 1
+- Kruskal's Algorithm: Combinatorics 1
+- Kőnig's theorem: Combinatorics 1
+- Lagrange's Four Square Theorem: Number Theory 1
+- Leader's Introductory Problems: Combinatorics 1
+- Longlist, West German proposal: Geometry 1
+- Longlist, YUG4: Algebra 1
+- Lore: Number Theory 1
+- MAL110/120: Complex Analysis 35, Calculus 10, Algebra 5, Linear Algebra and Differential Equations 2
+- MAN 001 (2020-21): Calculus 76, Linear Algebra and Differential Equations 10, Algebra 4
+- MIMO (fill in the equation): Signals, Systems and Control 73
+- MIMO (multiple choice): Signals, Systems and Control 19
+- MTH 101: Calculus 186, Linear Algebra and Differential Equations 19, Geometry 4, Abstract Algebra 1
+- MTH 102: Linear Algebra and Differential Equations 93, Abstract Algebra 1
+- MTH102: Linear Algebra and Differential Equations 75, Abstract Algebra 2
+- MTL 106: Probability and Stochastic Processes 285, Statistics 39, Calculus 9, Linear Algebra and Differential Equations 4, Geometry 1
+- MTL101: Linear Algebra and Differential Equations 77, Calculus 3, Algebra 2
+- Machine Design: Mechanical Engineering 103, Mechanics 17
+- Maclaurin: Combinatorics 3, Number Theory 2, Geometry 2, Algebra 1
+- Maclaurin, Problem 1 (adapted): Number Theory 1
+- Maclaurin, part (b): Combinatorics 1
+- Magnetism: Electromagnetism and Special Relativity 71, Material Science 20, Thermodynamics 6, Quantum Mechanics 1
+- Manufacturing: Mechanical Engineering 115, Material Science 2, Heat Transfer 1
+- Mathematics Stack Exchange: Algebra 1
+- Mechanics: Mechanics 40, Fluid Mechanics 5, Material Science 4, Electromagnetism and Special Relativity 1, Thermodynamics 1
+- Medium questions: Nuclear Engineering 14, Quantum Mechanics 13, Chemistry 6
+- Mersenne Primes: Number Theory 1
+- Minkowski's Theorem: Combinatorics 1
+- Modern Physics: Quantum Mechanics 23, Electromagnetism and Special Relativity 9, Thermodynamics 3, Material Science 1, wastebasket 1, Nuclear Engineering 1
+- Monge's Theorem: Geometry 1
+- Monsky's Theorem: Combinatorics 1
+- Morley's Trisector Theorem: Geometry 1
+- My Friend: Geometry 1
+- NOMA (fill in the equation): Signals, Systems and Control 15, Linear Algebra and Differential Equations 4
+- NOMA (multiple choice): Signals, Systems and Control 4, Linear Algebra and Differential Equations 1
+- Nim: Combinatorics 1
+- November 2025, Problem 3 of 30: Combinatorics 1
+- OEIS: Combinatorics 1
+- One of those "99% cannot solve" quizzes | (??): Combinatorics 1
+- Open: Combinatorics 2, Geometry 2, Number Theory 1, Algebra 1
+- Open Round 2: Combinatorics 1, Number Theory 1
+- Operations Research: Probability and Stochastic Processes 100, Mechanical Engineering 47, Computer Networks 3
+- Optics: Electromagnetism and Special Relativity 55, Mechanics 7, Quantum Mechanics 2
+- Original: Geometry 5, Number Theory 3, Algebra 2, Combinatorics 2
+- Others: Quantum Mechanics 20, Thermodynamics 15, Material Science 4, Electromagnetism and Special Relativity 1
+- POGCHAMP Mock Olympiad: Geometry 1
+- Paper 1: Chemistry 65, Geometry 35, Algebra 29, Calculus 28, Mechanics 21, Linear Algebra and Differential Equations 18, Quantum Mechanics 16, Electromagnetism and Special Relativity 16, Probability and Stochastic Processes 12, Thermodynamics 11, Combinatorics 5, Fluid Mechanics 4, Heat Transfer 4, Number Theory 1, Statistics 1, Material Science 1
+- Paper 2: Chemistry 71, Calculus 39, Mechanics 22, Geometry 21, Linear Algebra and Differential Equations 17, Quantum Mechanics 13, Algebra 12, Electromagnetism and Special Relativity 11, Combinatorics 11, Probability and Stochastic Processes 7, Thermodynamics 5, Fluid Mechanics 4, Heat Transfer 2, wastebasket 2, Material Science 2
+- Paper 2, Problem 8 (adapted): Combinatorics 1
+- Paper 4, Problem 5 (adapted): Combinatorics 1
+- Part I: Combinatorics 1
+- Pentagonal Number Theorem: Combinatorics 1
+- Physical Chemistry, Chapter 1: Thermodynamics 31, Chemistry 3, wastebasket 1
+- Physical Chemistry, Chapter 19: Quantum Mechanics 1
+- Physical Chemistry, Chapter 2: Thermodynamics 21, Chemistry 11, Mechanics 2
+- Physical Chemistry, Chapter 3: Thermodynamics 29, Chemistry 6
+- Physical Chemistry: A Molecular Approach, Chapter 1: Quantum Mechanics 16, Electromagnetism and Special Relativity 6, Thermodynamics 3, Chemistry 1
+- Physical Chemistry: A Molecular Approach, Chapter 5: Chemistry 5
+- Physical Chemistry: A Molecular Approach, Chapter 9: Quantum Mechanics 1
+- Pi: Geometry 1, Calculus 1
+- Pitot's theorem: Geometry 1
+- Post 8700, adapted: Geometry 1
+- Power Systems: Power Systems and Power Electronics 109, Electrical Machinery 8
+- Power of a Point: Geometry 1
+- Preliminary Round: Number Theory 1
+- Probability and Statistics: Probability and Stochastic Processes 83, Computer Networks 7, Signals, Systems and Control 5
+- Problem 2 (modified): Number Theory 1
+- Problem of Apollonius: Geometry 1
+- Problems in Set Theory (author unknown): Combinatorics 1
+- Production Planning: Mechanical Engineering 100, Probability and Stochastic Processes 6
+- Protassov's lemma: Geometry 1
+- Quality Control: Mechanical Engineering 80, Statistics 23, Probability and Stochastic Processes 15
+- Quanta, Matter and Change, Chapter 10: Quantum Mechanics 1
+- Quanta, Matter and Change, Chapter 11: Quantum Mechanics 1, Chemistry 1
+- Quanta, Matter and Change, Chapter 17: Quantum Mechanics 1
+- Quanta, Matter and Change, Chapter 18: Quantum Mechanics 1
+- Quanta, Matter and Change, Chapter 2: Electromagnetism and Special Relativity 1, Mechanics 1
+- Quanta, Matter and Change, Chapter 34: Chemistry 1
+- Quanta, Matter and Change, Chapter 35: Electromagnetism and Special Relativity 1
+- Quanta, Matter and Change, Chapter 36: Thermodynamics 2
+- Quanta, Matter and Change, Chapter 37: Material Science 2
+- Quanta, Matter and Change, Chapter 38: Material Science 1
+- Quanta, Matter and Change, Chapter 39: Material Science 1
+- Quanta, Matter and Change, Chapter 4: Quantum Mechanics 1
+- Quanta, Matter and Change, Chapter 40: Chemistry 1, Electromagnetism and Special Relativity 1
+- Quanta, Matter and Change, Chapter 48: Chemistry 1
+- Quanta, Matter and Change, Chapter 49: Chemistry 1
+- Quanta, Matter and Change, Chapter 5: Quantum Mechanics 1
+- Quanta, Matter and Change, Chapter 50: Chemistry 1
+- Quanta, Matter and Change, Chapter 51: Thermodynamics 1
+- Quanta, Matter and Change, Chapter 52: Thermodynamics 2
+- Quanta, Matter and Change, Chapter 55: Thermodynamics 1
+- Quanta, Matter and Change, Chapter 56: Chemistry 1
+- Quanta, Matter and Change, Chapter 57: Chemistry 2
+- Quanta, Matter and Change, Chapter 60: Thermodynamics 1
+- Quanta, Matter and Change, Chapter 64: Thermodynamics 1
+- Quanta, Matter and Change, Chapter 66: Thermodynamics 2, Chemistry 1
+- Quanta, Matter and Change, Chapter 69: Thermodynamics 2, Chemistry 1
+- Quanta, Matter and Change, Chapter 70: Chemistry 1
+- Quanta, Matter and Change, Chapter 73: Chemistry 1
+- Quanta, Matter and Change, Chapter 77: Chemistry 1
+- Quanta, Matter and Change, Chapter 78: Thermodynamics 3
+- Quanta, Matter and Change, Chapter 8: Quantum Mechanics 1
+- Quanta, Matter and Change, Chapter 81: Thermodynamics 1
+- Quanta, Matter and Change, Chapter 9: Quantum Mechanics 1
+- Quantum Chemistry, Chapter 1: Quantum Mechanics 3, Electromagnetism and Special Relativity 1
+- Quantum Chemistry, Chapter 10: Quantum Mechanics 3
+- Quantum Chemistry, Chapter 11: Quantum Mechanics 1
+- Quantum Chemistry, Chapter 13: Chemistry 3
+- Quantum Chemistry, Chapter 14: Chemistry 2, Quantum Mechanics 1
+- Quantum Chemistry, Chapter 15: Chemistry 1, Thermodynamics 1
+- Quantum Chemistry, Chapter 16: Chemistry 2
+- Quantum Chemistry, Chapter 17: Chemistry 2
+- Quantum Chemistry, Chapter 2: Quantum Mechanics 4
+- Quantum Chemistry, Chapter 3: Quantum Mechanics 1
+- Quantum Chemistry, Chapter 4: Quantum Mechanics 1
+- Quantum Chemistry, Chapter 5: Probability and Stochastic Processes 1
+- Quantum Chemistry, Chapter 6: Quantum Mechanics 2, Electromagnetism and Special Relativity 1, Chemistry 1
+- Quantum Chemistry, Chapter 7: Quantum Mechanics 1
+- Quantum Chemistry, Chapter 9: Quantum Mechanics 1
+- Quantum mechanics: Quantum Mechanics 375, Chemistry 1, Electromagnetism and Special Relativity 1
+- RAZING THUNDER: Algebra 1
+- RIS (fill in the equation): Signals, Systems and Control 167, wastebasket 1
+- RIS (multiple choice): Signals, Systems and Control 43, wastebasket 1
+- RIS, ISAC (fill in the equation): Signals, Systems and Control 8
+- RIS, ISAC (multiple choice): Signals, Systems and Control 2
+- Rayleigh's Theorem: Number Theory 1
+- Rearrangement Inequality: Algebra 1
+- Redei's Theorem: Combinatorics 1
+- Regional Competition: Combinatorics 1, Algebra 1
+- Regional Competition for Advanced Students: Number Theory 1
+- Reliability: Probability and Stochastic Processes 114, Statistics 5
+- Robbins' Theorem: Combinatorics 1
+- Round 1: Combinatorics 7, Number Theory 5, Geometry 2, Calculus 1, Algebra 1
+- Round 1, Independent Study 2-G: Geometry 1
+- Round 1, Mock 2: Geometry 1
+- Round 1, Quiz 2: Algebra 1
+- Round 2: Combinatorics 6, Geometry 5, Algebra 4, Number Theory 3, Probability and Stochastic Processes 1
+- Round 2, Independent Study 1-G: Geometry 1
+- Round 2, Problem 2 (adapted): Combinatorics 1
+- Round 2, Quiz 1: Geometry 1
+- Round 2, Quiz 2 A: Algebra 1
+- Round 3: Geometry 4, Number Theory 3, Combinatorics 2, Algebra 2
+- Round 3, Independent Study 1-G: Geometry 1
+- Round 3, Independent Study 2-C: Combinatorics 1
+- Round 3, Independent Study 2-G: Geometry 1
+- Round 3, Quiz 3: Geometry 1, Algebra 1
+- Round 4: Number Theory 1
+- SIM (fill in the equation): Signals, Systems and Control 40
+- SIM (multiple choice): Signals, Systems and Control 10
+- Satellite (fill in the equation): Signals, Systems and Control 29
+- Satellite (multiple choice): Signals, Systems and Control 9
+- Schur's Theorem: Combinatorics 1
+- Semiconductors: Material Science 35, Semiconductor Devices 27
+- Senior: Geometry 3, Combinatorics 2, Algebra 1, Number Theory 1
+- Senior A: Combinatorics 3
+- Senior A Level: Combinatorics 1
+- Senior A-level: Combinatorics 1
+- Senior Division Round 2: Algebra 1
+- Senior O: Combinatorics 1
+- Senior O Level: Combinatorics 2
+- Senior O-Level: Geometry 1
+- Senior O-Level Paper: Geometry 1, Combinatorics 1
+- Senior Round 2: Geometry 1
+- Set 1: Algorithms and Data Structures 60, Programming Languages and Compilers 51, Operating Systems 40, Combinatorics 39, Theory of Computation 37, Databases 35, Digital Logic and Computer Architecture 35, Computer Networks 35, Circuits and Electronics 30, Probability and Stochastic Processes 25, Algebra 20, Linear Algebra and Differential Equations 15, Calculus 11, Abstract Algebra 4, Statistics 1, wastebasket 1, Signals, Systems and Control 1
+- Set 2: Algorithms and Data Structures 61, Programming Languages and Compilers 49, Combinatorics 40, Theory of Computation 40, Computer Networks 40, Databases 34, Digital Logic and Computer Architecture 33, Circuits and Electronics 32, Operating Systems 32, Algebra 21, Probability and Stochastic Processes 19, Linear Algebra and Differential Equations 15, Calculus 10, Abstract Algebra 2
+- Set 3: Algorithms and Data Structures 17, Programming Languages and Compilers 10, Computer Networks 9, Circuits and Electronics 8, Combinatorics 8, Theory of Computation 8, Databases 7, Operating Systems 7, Digital Logic and Computer Architecture 6, Linear Algebra and Differential Equations 4, Calculus 4, Algebra 3, Abstract Algebra 2, Probability and Stochastic Processes 2, Number Theory 1
+- Shortlist: Combinatorics 98, Geometry 78, Number Theory 69, Algebra 53, Calculus 1
+- Shortlist, C1 (generalised): Combinatorics 1
+- Shortlist, G3 v1: Geometry 1
+- Shortlist, Hungary 1: Combinatorics 1
+- Shortlist, N5 (generalised): Number Theory 1
+- Shortlist, N6 (generalised): Number Theory 1
+- Sierpinski's 250 Problems in Elementary Number Theory: Number Theory 1
+- Signal Processing: Signals, Systems and Control 61, Probability and Stochastic Processes 4
+- Simson Line: Geometry 1
+- Smetaniuk's Theorem: Combinatorics 1
+- Space-filling curve: Calculus 1
+- Spring Junior O-level: Number Theory 1
+- Spring, A-paper: Geometry 1
+- Spring, AMC 10B: Algebra 1
+- Spring, Junior: Combinatorics 2, Geometry 1
+- Spring, Senior: Combinatorics 1
+- Spring, Senior A-level: Algebra 1
+- Strongly Correlated Systems: Thermodynamics 2
+- Sum of factor formula: Number Theory 1
+- Superconductivity: Material Science 41, Thermodynamics 3, Quantum Mechanics 3
+- Symmedians: Geometry 1
+- Taiwan IMOC Mathematical Olympiad: Number Theory 2
+- Telecommunications Engineering: Signals, Systems and Control 109, Electromagnetism and Special Relativity 20, Computer Networks 18
+- Test 1: Algebra 4, Number Theory 3, Combinatorics 3, Geometry 3
+- Test 1, Day 1: Geometry 1, Number Theory 1
+- Test 10: Algebra 1, Geometry 1
+- Test 2: Combinatorics 5, Algebra 2, Number Theory 2, Geometry 1
+- Test 3: Combinatorics 4, Algebra 2, Number Theory 2
+- Test 3, Day 2: Geometry 1
+- Test 4: Number Theory 2, Combinatorics 2, Geometry 1
+- Test 5: Algebra 1
+- Test 6: Geometry 1, Combinatorics 1, Algebra 1
+- Test 7: Combinatorics 1
+- Test 8: Combinatorics 1, Geometry 1
+- Test 9: Number Theory 1
+- The Friendship Theorem: Combinatorics 1
+- The Incenter-Excenter Lemma: Geometry 1
+- The slope problem: Combinatorics 1
+- Theoretical Foundations: Quantum Mechanics 71, Electromagnetism and Special Relativity 5, Material Science 5, Thermodynamics 1
+- Thermodynamics: Thermodynamics 137, Mechanical Engineering 3, Heat Transfer 3, Fluid Mechanics 2, Chemical Engineering 1
+- Time Response of Dynamical Systems: Signals, Systems and Control 3
+- Took it from an Autocad Class : ): Geometry 1
+- Tournament of Towns: Combinatorics 1
+- Tuymaada Olympiad: Combinatorics 1
+- Two-Player Nim: Combinatorics 1
+- Typo: Number Theory 1
+- UAV (fill in the equation): Signals, Systems and Control 62
+- UAV (multiple choice): Signals, Systems and Control 19
+- UK IMO Team Training: Number Theory 1
+- UPC 2010: Mechanics 2
+- UPC 2011: Mechanics 2
+- UPC 2012: Heat Transfer 1, Fluid Mechanics 1
+- UPC 2013: Mechanics 1
+- UPC 2014: Mechanics 1
+- UPC 2015: Mechanics 1, Fluid Mechanics 1
+- UPC 2016: Mechanics 1
+- UPC 2017: Electromagnetism and Special Relativity 2
+- UPC 2018: Electromagnetism and Special Relativity 1, Heat Transfer 1
+- UPC 2019: Quantum Mechanics 1, Mechanics 1
+- UPC 2020: Mechanics 1, Fluid Mechanics 1
+- UPC 2021: Thermodynamics 1, Fluid Mechanics 1
+- UPC 2022: Mechanics 1, Fluid Mechanics 1
+- UPC 2023: Mechanics 2
+- UPC 2024: Fluid Mechanics 1, Conventional Energy Technologies 1
+- United States of America Mathematical Olympiad: Combinatorics 2, Geometry 1
+- Unknown: Algebra 3, Combinatorics 3, Geometry 2, Number Theory 1
+- Van Der Waerden's Theorem: Combinatorics 1
+- Varignon's Theorem: Geometry 1
+- Vasawat Rawangwong's Inequality: Algebra 1
+- Vietnam Team Selection Test: Number Theory 1
+- Week 24: Number Theory 1
+- Week 25: Combinatorics 1
+- West Australian Geometry Olympiad: Geometry 1
+- Winkler's Mathematical Puzzles: Number Theory 1
+- Wythoff's game (1907): Combinatorics 1
+- X+Y (2014 Movie): Combinatorics 2
+- Year 30 Round 1: Combinatorics 1
+- Year 30 Round 3: Combinatorics 1
+- advanced: Geometry 2
+- all pay: Game Theory 25
+- all pay auction: Game Theory 2
+- astrophysics and nuclear physics: Electromagnetism and Special Relativity 26, Mechanics 3
+- attacker defender: Game Theory 6
+- bank run: Game Theory 6
+- battle of sexes: Game Theory 6
+- bertrand competition: Economics 2
+- chicken: Game Theory 6
+- coalition formation: Game Theory 6
+- colonel blotto: Game Theory 3
+- common value: Game Theory 6
+- coordination: Game Theory 6
+- core analysis: Game Theory 40
+- cournot competition: Economics 6
+- dutch descending: Game Theory 2
+- english ascending: Game Theory 5
+- entry deterrence: Game Theory 46
+- first mover: Game Theory 6
+- first price sealed: Game Theory 40
+- first price sealed bid: Game Theory 5
+- game value: Game Theory 40
+- hotelling electoral: Game Theory 5
+- how-did-i-get-here.com: Algebra 1
+- incentive compatibility: Game Theory 40
+- inspection game: Game Theory 5
+- investment game: Game Theory 5
+- minimax: Game Theory 40
+- mixed strategy minimax: Game Theory 40
+- prisoners dilemma: Game Theory 5
+- public goods: Game Theory 5
+- pursuit evasion: Game Theory 5
+- rent seeking: Game Theory 5
+- revenue equivalence: Game Theory 41
+- saddle point: Game Theory 40
+- shapley value: Game Theory 40
+- signaling: Game Theory 5
+- signaling game: Game Theory 40
+- simple 2player: Game Theory 40
+- stackelberg: Game Theory 5
+- stackelberg competition: Game Theory 39
+- stag hunt: Game Theory 5
+- strategic voting: Game Theory 5
+- three stage: Game Theory 40
+- tragedy of commons: Game Theory 5
+- two sided market: Game Theory 2
+- two type bayesian: Game Theory 40
+- ultimatum bargaining: Game Theory 23
+- van Aubel's Theorem: Geometry 1
+- vcg multi item: Game Theory 40
+- vcg single item: Game Theory 40
+- vickrey second price: Game Theory 45
+- volunteers dilemma: Game Theory 2
+- voting power: Game Theory 40
+- weakest link: Game Theory 1
+- winners curse: Game Theory 36
+
+## Wastebasket ids
+
+8046, 9926, 13274, 13793, 16523, 23018, 23023, 23024, 27384, 28076, 38746, 38897, 38900, 41312, 41317, 41425, 41475, 41685, 41687, 41699, 42540, 47490, 48296, 49308, 49555, 49627, 49690, 49916, 49917, 49918, 49926, 50692, 50693, 50694, 51667, 53381, 53392, 53398, 53416, 53441, 56851, 56959, 57014, 57124, 57147, 57291, 57636, 58084, 58892, 59503, 59787, 59798, 59863, 60422, 60423, 60424, 60443, 60444, 60445, 60447, 60466, 60467, 60484, 60485, 60486, 60487, 60488, 60489, 60490, 60511, 60512, 60513, 60514, 60515, 60532, 60533, 60534, 60535, 60536, 60538, 60556, 60557, 60558, 60559, 60574, 60575, 60576, 60577, 60578, 60579, 60580, 60604, 60605, 60628, 60629, 60631, 60632, 60647, 60648, 60649, 60651, 60652, 60658, 60672, 60673, 60674, 60675, 60692, 61553, 61622, 61872, 62420, 62540, 63318, 65718, 65830, 68272, 69255, 69727, 69728, 69862, 70013, 74712, 77081, 78005, 79565, 79566, 79567, 79568, 79574, 79575
+
+## Placed rows
+
+moved 7143, unchanged 39093, kept where they were 280 (no confident new label: {'wastebasket': 131, 'pass1-low': 149}).

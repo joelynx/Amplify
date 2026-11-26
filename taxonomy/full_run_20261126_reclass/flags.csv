@@ -1,0 +1,1429 @@
+question_id,flags,subject,note
+1202,key_conflict,Geometry,"Solution computes K=24/35 so answer 59, consistent; no real conflict suspected"
+1445,key_conflict,Calculus,Solution shows statement fails for a<e; claim not true for all a.
+1973,broken_text,Calculus,Recursion likely typo; solution reads sqrt(a_{n-1}).
+1974,key_conflict,Calculus,"Sequence is decreasing, not increasing as the statement claims."
+1977,key_conflict,Calculus,"Limit is geometric mean, not Gauss AGM as stated."
+2162,needs_data,Probability and Stochastic Processes,Problem no. 1 not given; solution assumes a model
+2196,needs_data,Probability and Stochastic Processes,Chain not given; solution assumed two-urn model.
+2345,broken_text,Probability and Stochastic Processes,Question garbled; solution proves memoryless implies exponential.
+2456,broken_text,Calculus,Question statement truncated; task inferred from solution.
+2458,broken_text,Calculus,Question lacks the instruction; absolute extrema on region inferred.
+2459,broken_text,Calculus,Instruction missing; extrema inferred.
+2464,broken_text,Calculus,Definition of u missing from question; inferred from solution.
+2467,broken_text,Calculus,Question lacks explicit task; solution assumes functional dependence via Jacobian.
+2468,broken_text,Calculus,Question is only an expression; solution assumes the Spivak min-formula exercise
+2471,broken_text,Calculus,Question lacks task; solution assumes partials exist but f discontinuous.
+2473,broken_text,Calculus,"Question lacks task; solution checks continuity, partials, differentiability, C1."
+2474,broken_text,Linear Algebra and Differential Equations,Question is only a matrix; no instruction given.
+2475,broken_text,Linear Algebra and Differential Equations,Question is only a set of vectors; no instruction given.
+2498,needs_data,Calculus,Refers to Q.1 comparison; counterexample given
+2705,broken_text,Linear Algebra and Differential Equations,"Clairaut equation, singular solution; part 2 is missing derivatives"
+2757,broken_text,Linear Algebra and Differential Equations,"Clairaut equation, singular solution; part 2 is missing derivatives"
+3104,needs_data,Number Theory,Depends on user's unknown birth date.
+3258,needs_data,Number Theory,"Needs Baudot table, not given."
+3259,needs_data,Number Theory,"Needs Baudot table, not given."
+3447,key_conflict,Calculus,Printed statement false at h=0; true expansion 2-8π|h|+O(h²).
+6146,needs_data,Electromagnetism and Special Relativity,Turns and radii read from figure.
+6195,needs_data,Electrical Machinery,Loading not stated; solution assumes rated 500 MW.
+6252,mismatch,Conventional Energy Technologies,Solution solves blade angles instead of blade heights; data missing
+6625,broken_text,Number Theory,Items 1 and 5 lack the overline bar.
+7916,mismatch,Material Science,Question says PMMA; figure is polyisobutylene.
+8014,needs_data,Material Science,Reads saturation fields from a figure not provided
+8201,key_conflict,Number Theory,"Solution shows correct condition is cube-free, not squarefree"
+8364,broken_text,Number Theory,Exponent garbled; intended a^(φ(n)/p).
+8403,broken_text,Linear Algebra and Differential Equations,Two unrelated problems merged; main part is idempotent invertible matrix
+8428,broken_text,Number Theory,Exponent printed without -1; solution corrects it. Powers of 5 mod 2^m.
+8673,mismatch,Number Theory,Solution shows statement false; counterexample a_n=4n
+8676,broken_text,Number Theory,Fraction garbled; read as (a^c-b^c)/(a-b)
+8684,broken_text,Number Theory,Factorial sign lost; solution reads q!
+8691,broken_text,Number Theory,Garbled statement; lattice of solutions mod p
+8739,broken_text,Economics,Exponents printed as 5 instead of 0.5
+8742,broken_text,Economics,Exponents printed as 5 instead of 0.5
+8915,needs_data,Economics,Refers to preceding scenario's GDP numbers not given.
+8917,needs_data,Economics,"Depends on first scenario's GDP path, not given."
+8961,needs_data,Economics,Asks to consult newspaper; covered interest parity explains forward-spot gap.
+9951,key_conflict,Probability and Stochastic Processes,"Solution finds H_n, contradicting the stated n(3/4)^(n-1)."
+9974,key_conflict,Probability and Stochastic Processes,Solution says printed sign in second formula of (b) is a typo.
+9976,key_conflict,Probability and Stochastic Processes,Solution finds printed formula wrong; correct is 1/λ-(1-e^-λ)/λ².
+9978,key_conflict,Probability and Stochastic Processes,"Solution finds density 1/(π√(y(1-y))), not the printed one."
+10103,mismatch,Probability and Stochastic Processes,"Solution says literal angle at O gives 1/2, proves triangle obtuse 5/8."
+10180,key_conflict,Probability and Stochastic Processes,Solution says printed identity in (c) fails at n=2.
+10214,key_conflict,Probability and Stochastic Processes,Solution says the statement as written is false.
+10297,key_conflict,Probability and Stochastic Processes,Printed numerator 4 is a misprint; solution proves 2.
+10398,needs_data,Probability and Stochastic Processes,Graph figure missing; degrees assumed.
+10927,mismatch,Probability and Stochastic Processes,"Solution derives an OU transition density, not geometric Brownian motion"
+11302,broken_text,Number Theory,Notation garbled; pigeonhole on remainders.
+11373,broken_text,Algebra,Exponents printed as 8 instead of 3.
+11379,broken_text,Algebra,Stray footnote text appended to the question.
+11421,key_conflict,Number Theory,Solution finds no valid pair; question expects a product.
+11425,key_conflict,Number Theory,Solution says 11 primes impossible; answer uses 211 primes.
+11456,broken_text,Number Theory,Operator missing in equation; solution reconstructs it.
+11557,key_conflict,Algebra,Printed expression gives -2.28; intended version gives 0.
+11579,broken_text,Algebra,Question text cut off after 'has a unique'
+11599,broken_text,Number Theory,Printed third equation has typo; solution uses corrected system.
+11763,key_conflict,Algebra,Statement says non-decreasing; solution solves non-increasing version
+11836,broken_text,Combinatorics,Piece shape image missing; assumed L-tromino
+11877,broken_text,Combinatorics,Figure missing; solution assumes 2x2 squares
+12008,broken_text,Combinatorics,Question text includes unrelated coin-game fragment.
+12183,key_conflict,Combinatorics,Statement says >=16 but solution proves <=16
+12280,key_conflict,Combinatorics,Solution claims the 40 statement is false; proves 22 instead.
+12384,mismatch,Combinatorics,Solution says literal statement false; proves strong orientation instead.
+12717,broken_text,Probability and Stochastic Processes,Penny diameter garbled; solution assumes 3/4 inch.
+12748,broken_text,Probability and Stochastic Processes,'wins 3 of the plays' garbled; solution assumes 2/3.
+13248,needs_data,Calculus,"Refers to result 1.5.1(c), not given"
+13461,needs_data,Calculus,Refers to theorem 2.3.20 not stated; solution guesses it
+13525,needs_data,Calculus,"Refers to result 2.5.4, not given; solution assumes Euler-summation estimates"
+13574,key_conflict,Combinatorics,Solution admits the given data is inconsistent.
+13774,broken_text,Geometry,Question only defines focus; no actual task stated.
+13802,broken_text,Combinatorics,Question cut off mid-sentence
+13838,open_problem,Combinatorics,Collatz conjecture.
+13839,open_problem,Probability and Stochastic Processes,Chvatal-Sankoff constant; superadditivity and first-moment bounds
+13841,open_problem,Number Theory,Lonely Runner Conjecture; solution proves only weaker versions
+13843,open_problem,Geometry,Dürer's unfolding problem is open.
+14666,needs_data,Combinatorics,Refers to recurrence (1) not given
+14864,broken_text,Number Theory,Missing comma: 2n+1 and 3n+1; squares mod 8 and 5
+14887,broken_text,Number Theory,"Symbol lost: should be 7 ∤ ab(a+b), IMO 1984."
+15144,key_conflict,Calculus,Discrete convexity; statement has sign error per solution.
+15333,key_conflict,Geometry,Solution says statement false for arbitrary hexagon; true only if affine-regular.
+15508,key_conflict,Geometry,"Solution says part (a) with k=8 is unprovable, likely misprint."
+15641,needs_data,Combinatorics,Thue-Morse non-periodicity; preceding sequence not given
+16393,mismatch,Quantitative Finance,Question has a second unrelated yield-regression problem appended
+16436,needs_data,Quantitative Finance,Requires self-chosen price data
+16437,needs_data,Quantitative Finance,Compares lognormal model with interest rate data
+16515,needs_data,Quantitative Finance,Needs market bond price data
+16516,needs_data,Quantitative Finance,Needs market bond price data
+16563,needs_data,Number Theory,c(n) not defined in the question; solution assumes the Carmichael function
+16648,needs_data,Algebra,Operator S undefined; solution assumes neighbour averaging
+16651,needs_data,Linear Algebra and Differential Equations,System 29.32 not given; solution assumes tridiagonal 1-4-1 spline system
+16662,broken_text,Calculus,Coefficient array garbled in question.
+17549,broken_text,Statistics,Hodges superefficient estimator; definition garbled in question.
+17889,broken_text,Quantitative Finance,Payoff formula garbled; solution assumes weighted sum of stock prices.
+17918,broken_text,Quantitative Finance,"Table garbled; B details missing, solution assumes Greeks as given."
+18076,broken_text,Calculus,Power tower exponents garbled in statement.
+18427,key_conflict,Fluid Mechanics,"Solution says zero flow at alpha=-3, not +3"
+18436,broken_text,Fluid Mechanics,Extraneous sphere Nusselt text appended to question
+18521,needs_data,Chemical Engineering,Tube height from figure not given in text.
+20424,needs_data,Mechanics,Figure angle and dimensions not given in text.
+20432,key_conflict,Mechanics,Stated e=A/B lacks R and B coefficient differs from solution.
+20445,key_conflict,Mechanics,Solution's 234 kN m disagrees with printed answer 273.44.
+20456,needs_data,Mechanics,External pressure value only in figure.
+20475,broken_text,Mechanics,Question contaminated with unrelated column-buckling text.
+20482,broken_text,Mechanics,Assumed deflection curve missing; stray composite-material text.
+20485,broken_text,Mechanics,Question cut off after 'Express'.
+20499,needs_data,Mechanics,Fracture toughness not given; yielding governs via Lame stresses.
+21510,needs_data,Fluid Mechanics,Figure with manometer heights missing
+21533,needs_data,Fluid Mechanics,Siphon crest pressure at vapour pressure; vat dimensions missing
+21542,needs_data,Fluid Mechanics,Pipe length not given
+21553,mismatch,Fluid Mechanics,Question garbled; solution finds pressure difference given flow
+21558,needs_data,Fluid Mechanics,New speed not stated in question
+21580,broken_text,Fluid Mechanics,Question omits what to find; solution assumes pressure drop.
+26534,key_conflict,Geometry,Solution says statement fails when AC>2AB; internal vs external bisector.
+26904,broken_text,Number Theory,Variable n missing in statement; answer n=1 apparently.
+27865,open_problem,Combinatorics,"Circulant Hadamard conjecture; only n=1,4 known"
+27955,key_conflict,Combinatorics,Statement false for distinct parts; solution proves for ordinary partitions.
+30323,broken_text,Algebra,Answer options are missing from the question text.
+30867,needs_data,Geometry,Omits equal-dough and Art's 12 cookies conditions.
+32746,needs_data,Combinatorics,Answer choices missing from question.
+39123,key_conflict,Algebra,"Solution gives roots sqrt3 and 3sqrt3-6, sum 4sqrt3-6 (C); key unseen."
+40697,broken_text,Quantitative Finance,Asks for δ_t but wants accumulated value; exponent likely typo
+41023,broken_text,Probability and Stochastic Processes,Third given probability garbled; solution assumes 0.081.
+41380,needs_data,Thermodynamics,Temperature not given; assumed 300 K.
+41413,needs_data,Thermodynamics,Temperature not given; assumed 300 K.
+41415,key_conflict,Probability and Stochastic Processes,"Solution says transient; key convention 0 for transient fine, no conflict evident."
+41481,broken_text,Calculus,Number of subintervals n missing from question.
+41596,needs_data,Thermodynamics,Temperature not given; assumed 300 K.
+41632,key_conflict,Linear Algebra and Differential Equations,"Solution shows only one shared eigenvalue needed, yet answers [2,3]"
+41802,broken_text,Complex Analysis,Exponent missing in integrand; solution reads z^2+4.
+41807,needs_data,Thermodynamics,Mercury expansion coefficient not given; table value used.
+42373,key_conflict,Electromagnetism and Special Relativity,Solution computes field at wire; likely ~1.5e7 V/cm vs stated B.
+42565,broken_text,Mechanics,Stem seems to lack the printed value of alpha
+42569,key_conflict,Quantum Mechanics,Solution mentions options (a)/(b) labels; answer B consistent.
+42826,needs_data,Electromagnetism and Special Relativity,Cross-section shape not given; drift velocity of electrons
+43052,needs_data,Electromagnetism and Special Relativity,No charge or source voltage given.
+43057,needs_data,Electromagnetism and Special Relativity,Circuit figure missing; solution assumes two parallel batteries.
+43058,needs_data,Electromagnetism and Special Relativity,Gap geometry not given; solution assumes standard version.
+43092,needs_data,Electromagnetism and Special Relativity,Refers to part (c) for coil resistance.
+44530,needs_data,Quantum Mechanics,"Directions n_A, n_C not given."
+45210,key_conflict,Electromagnetism and Special Relativity,Given E and B inconsistent by factor 10; solution notes misplaced decimal.
+45467,needs_data,Material Science,E_A defined only by assumption; absorption intercept
+46135,needs_data,Thermodynamics,Blackbody area not given; solution assumes 1 cm^2.
+46403,needs_data,Electromagnetism and Special Relativity,Force on plate from stored energy; setup figure missing
+46432,needs_data,Mechanics,"Needs Sun's angular diameter, not given"
+46449,needs_data,Mechanics,Boundary conditions not given; assumed x(0)=x(1)=0
+46545,broken_text,Mechanics,Garbled; actual unknown is chain position angle
+46547,needs_data,Mechanics,Figure missing; solution assumes a pinned rod
+46810,needs_data,Thermodynamics,Amount of nitrogen not given
+47200,needs_data,Electromagnetism and Special Relativity,Mirror reflectance not given; assumed 0.98.
+47270,needs_data,Electromagnetism and Special Relativity,Reflectance R not given; solution assumes R=0.98.
+47453,needs_data,Thermodynamics,Final volume and pressure from the first part of the exercise are missing.
+47476,needs_data,Thermodynamics,Joule-Thomson coefficient not given; graph missing
+47482,needs_data,Chemistry,Needs benzene formation enthalpy and boiling data not given.
+47488,needs_data,Chemistry,"Needs tabulated ΔfH of CO2, H2O and element entropies."
+47491,needs_data,Chemistry,Needs benzene formation enthalpy and boiling data not given.
+47500,needs_data,Chemistry,Max non-expansion work equals ΔrG; needs tabulated ΔfG values.
+47523,needs_data,Chemistry,Needs tabulated ΔfH and ΔfG of NH3; Gibbs-Helmholtz.
+47537,needs_data,Chemistry,Needs ΔfH of CO2 and H2O(l).
+47538,needs_data,Chemistry,Needs ΔfH of NH3 and SO2.
+47544,needs_data,Chemistry,Needs combustion enthalpies of naphthalene and phenol.
+47574,needs_data,Chemistry,Cp table missing from question; solution supplied textbook data.
+47642,needs_data,Chemistry,Requires running a computational chemistry program.
+47926,key_conflict,Chemistry,Solution admits three planar species yet picks BrF4-.
+48133,needs_data,Chemistry,Back titration; free-acid titre from earlier part missing
+48174,key_conflict,Chemistry,"Solution reasoning gives 1<4<2<3, option A; consistent with phenol > methanol."
+48317,key_conflict,Chemistry,Options A and C identical; solution picks D against chemistry
+48380,key_conflict,Chemistry,"Solution picks (a) but its ordering is decreasing, not increasing; option (B) is correct"
+48501,broken_text,Chemistry,SMILES typo 'a1' in starting material.
+48533,key_conflict,Chemistry,Pharmacokinetic accumulation; computed 4.8 vs chosen 4.5.
+48755,key_conflict,Chemistry,Kf given as 1e-8 but solution uses 1e8
+49498,needs_data,Combinatorics,Blocked square position not given; solution assumes centre.
+50322,needs_data,Thermodynamics,Specific heat of steam not given.
+50993,needs_data,Chemistry,Ka1 not given in question
+50994,needs_data,Chemistry,Ka of acetic acid not given
+50995,needs_data,Chemistry,Kb of NH3 not given
+50997,needs_data,Chemistry,Kb of NH3 not given
+51020,needs_data,Chemistry,Ksp of gypsum not given in question.
+51021,needs_data,Chemistry,Ksp of AgBr not given.
+51025,needs_data,Chemistry,Ksp of TlCl not given.
+51026,needs_data,Chemistry,Ksp of BaSO4 not given.
+51027,needs_data,Chemistry,Ksp of SrCrO4 not given.
+51028,needs_data,Chemistry,Ksp of Ag3PO4 not given.
+51029,needs_data,Chemistry,Ksp of CaF2 not given.
+51030,needs_data,Chemistry,Ksp of Ag2CO3 not given.
+51031,needs_data,Chemistry,Ksp of Ag2CO3 not given.
+51032,needs_data,Chemistry,Ksp of CaF2 not given.
+51033,needs_data,Chemistry,Ksp of BaSO4 not given.
+51035,needs_data,Chemistry,Ksp of Fe(OH)2 not given.
+51036,needs_data,Chemistry,Ksp of CuS and CdS not given.
+51056,needs_data,Chemistry,Kf of Co(NH3)6 2+ taken from appendix table not given.
+51061,needs_data,Chemistry,Ksp of AgCN and Kf of Ag(CN)2- not given.
+51062,needs_data,Chemistry,Ksp of AgBr and Kf of Ag(NH3)2+ not given.
+51063,needs_data,Chemistry,Ksp of AgBr not given in the question.
+51065,needs_data,Chemistry,Kf of HgCl4 2- not given.
+51067,needs_data,Chemistry,Ksp and Kf values not given.
+51070,needs_data,Chemistry,Kf of Ni(NH3)6 2+ from appendix not given.
+51071,needs_data,Chemistry,Kf of Zn(CN)4 2- from appendix not given.
+51121,needs_data,Chemistry,Needs thermodynamic table data not given.
+51123,needs_data,Chemistry,Uses tabulated thermodynamic data not given.
+51125,needs_data,Chemistry,Needs formation data tables.
+51126,needs_data,Chemistry,Needs formation data tables.
+51127,needs_data,Chemistry,Needs formation data tables.
+51128,needs_data,Chemistry,Needs formation data tables.
+51129,needs_data,Chemistry,Needs thermodynamic table data not given.
+51491,needs_data,"Signals, Systems and Control",Sigma-delta modulator signal and noise transfer functions compared in z-domain.
+51820,needs_data,Quantitative Finance,"Needs 2007 US corporate tax schedule, not given"
+51822,key_conflict,Quantitative Finance,"Question answer is stated $350,000; solution also compares premium future value."
+51825,needs_data,Quantitative Finance,Best-case range of ±10% not given in question.
+51840,needs_data,Quantitative Finance,Derivative unspecified; solution assumes put strike 51.
+51863,needs_data,Quantitative Finance,Option prices not given in question.
+51886,needs_data,Quantitative Finance,Put quote of $3 missing from question.
+51895,needs_data,Quantitative Finance,Needs Hull PCA factor loadings and standard deviations not given.
+51899,needs_data,Quantitative Finance,Salvage price and depreciation method missing.
+51904,needs_data,Quantitative Finance,"Price, cost, units and depreciation not given."
+51907,needs_data,Quantitative Finance,Option prices omitted from question.
+51910,needs_data,Quantitative Finance,"Corporate tax bill; tax schedule not given, answer depends on it"
+51929,needs_data,Quantitative Finance,Needs DerivaGem to calibrate sigma on lognormal tree
+51986,needs_data,Quantitative Finance,"Face value not given; assumed $1,000"
+51988,needs_data,Quantitative Finance,Tax rate and discount rate missing
+51999,needs_data,Quantitative Finance,Option prices missing from question.
+52013,needs_data,Economics,Velocity level needs money and GDP data not given.
+52019,needs_data,Quantitative Finance,"Corporate tax bill; tax schedule not given, answer depends on it"
+52118,needs_data,Quantitative Finance,Quotes missing; solution assumes futures higher.
+52138,needs_data,Quantitative Finance,EBIT and debt interest data missing from question
+52140,needs_data,Quantitative Finance,Tax rate not given in question
+52143,needs_data,Economics,Only growth rates given; levels come from a missing table
+52146,needs_data,Quantitative Finance,Collection and payment assumptions missing from question
+52148,needs_data,Quantitative Finance,LIBOR swap rates missing; only OIS curve given
+52168,needs_data,Quantitative Finance,Subscription price missing; solution assumes $55.
+52177,needs_data,Economics,Only growth rates given; levels come from a missing table
+52231,needs_data,Quantitative Finance,EBIT and pre-recap value missing.
+52232,needs_data,Quantitative Finance,LIBOR swap rates not given.
+52260,needs_data,Quantitative Finance,Call price not given in question
+52261,needs_data,Quantitative Finance,Worst-case range (±10%) not stated in question
+52269,needs_data,Quantitative Finance,Tax rate missing from question.
+52291,needs_data,Quantitative Finance,Missing EBIT and original value; solution gives only a formula.
+52303,needs_data,Quantitative Finance,Share count and price missing from question; solution supplies them.
+52313,needs_data,Quantitative Finance,Payoff not stated in question; solution assumes squared put payoff.
+52316,needs_data,Quantitative Finance,Payables-to-debt ratio missing; solution assumes textbook 0.20.
+52323,needs_data,Quantitative Finance,Subscription price missing; solution assumes $55.
+52359,needs_data,Quantitative Finance,"Crash size, volatility, rates missing from question."
+52376,needs_data,Quantitative Finance,5 percent stake not stated in question.
+52378,needs_data,Quantitative Finance,Tax rate not given.
+52382,needs_data,Economics,Initial investment level not given in question
+52397,needs_data,Quantitative Finance,Initial stock price and delivery terms from earlier part
+52400,needs_data,Quantitative Finance,Best-case scenario range of ±10% not given in question
+52441,needs_data,Quantitative Finance,Bond's current price or yield missing.
+52446,needs_data,Quantitative Finance,Underlying firm data not given in question.
+52496,needs_data,Quantitative Finance,Next year's Q1 sales forecast missing
+52531,needs_data,Quantitative Finance,Cash budget; receivables and purchases data absent from question
+52532,needs_data,Economics,Needs historical returns table not provided.
+52543,needs_data,Quantitative Finance,Corporate tax schedule not given; solution assumes pre-2018 US schedule.
+52545,needs_data,Quantitative Finance,"MM Prop II needs D/E, which is not given."
+52556,needs_data,Economics,AD schedule and export/import changes not given.
+52560,needs_data,Quantitative Finance,Option price not given in question.
+52589,needs_data,Quantitative Finance,Last LIBOR fixing missing from question.
+52624,needs_data,Quantitative Finance,Requires historical-simulation loss table from the book.
+52625,needs_data,Quantitative Finance,Put price not given in question.
+52644,needs_data,Quantitative Finance,Missing LIBOR rate set two months ago.
+52645,needs_data,Quantitative Finance,LIBOR swap rates not given.
+52691,needs_data,Quantitative Finance,Face value and maturity date missing.
+52695,needs_data,Quantitative Finance,Principal not given; solution assumes $100 million
+52710,needs_data,Quantitative Finance,Question omits the ±10% range; solution assumes it
+52721,broken_text,Quantitative Finance,Garbled spot price; currency option Garman-Kohlhagen
+52723,broken_text;needs_data,Quantitative Finance,Spot garbled and strike missing
+52779,needs_data,Economics,Balance sheets not given; reserve shortfall computation.
+52786,needs_data,Quantitative Finance,Order size rule (30% of next quarter sales) missing from question.
+52787,needs_data,Quantitative Finance,"Crash size, volatility, rates missing from question."
+52804,needs_data,Quantitative Finance,Withdrawal period missing; solution assumes 25 years.
+52809,needs_data,Quantitative Finance,Notional missing; solution assumes 100 million.
+52849,needs_data,Quantitative Finance,"Put price missing from question; Black's model, solve numerically."
+52869,needs_data,Quantitative Finance,Beta table missing from question
+52892,broken_text,Quantitative Finance,Spot garbled (US 80.95 should be 0.95); solution uses Garman-Kohlhagen call plus parity.
+52898,needs_data,Quantitative Finance,Corporate tax schedule not given in question
+52926,needs_data,Economics,"Needs Ibbotson historical average returns and inflation, not given."
+52960,needs_data,Quantitative Finance,Worst-case needs ±10% range not stated in question.
+52962,needs_data,Quantitative Finance,Volatility and rates not given; assumed estimates.
+52991,needs_data,Quantitative Finance,"Volatility, rate, dividend yield assumed; not given."
+52996,needs_data,Quantitative Finance,EBIT and pre-recap equity not given.
+53001,needs_data,Quantitative Finance,Sale-date required return of 8% missing from question.
+53040,needs_data,Quantitative Finance,"Recession EBIT and debt interest come from earlier problem parts, not given."
+53073,needs_data,Quantitative Finance,Needs spreadsheet of historical scenarios
+53107,needs_data,Quantitative Finance,"Price, cost and sales volumes missing."
+53128,needs_data,Quantitative Finance,Table of investments and betas missing; solution assumes it.
+53171,needs_data,Quantitative Finance,EBIT and unlevered value missing from question
+53179,needs_data,Quantitative Finance,Option prices not given in question
+53180,needs_data,Quantitative Finance,Notional principal not given; assumed 100 million
+53193,needs_data,Quantitative Finance,"Collection, payment and expense assumptions missing from the question."
+53204,key_conflict,Economics,"Approximation gives 10%, exact 9.1%; solution notes both."
+53207,needs_data,Quantitative Finance,Tax rate missing from question; solution assumes 34%.
+53251,needs_data,Quantitative Finance,Dividend information from earlier problem is missing.
+53297,needs_data,Quantitative Finance,Option market price missing from question; solution supplies it
+53321,needs_data,Quantitative Finance,EBIT and debt amount missing; recapitalization ROE
+53351,needs_data,Quantitative Finance,"Question omits the option type and strike; solution assumes put, K=51"
+53383,broken_text,Quantitative Finance,"Cost printed as S$40,000; solution assumes 540,000."
+53400,broken_text,Quantitative Finance,"Cost misprinted as S40,000; solution assumes 540,000."
+53409,needs_data,Quantitative Finance,Next year's Q1 sales not given; assumed 870.
+53431,needs_data,Quantitative Finance,Best-case range of 10% missing from question text.
+53463,needs_data,Quantitative Finance,"Needs r=12% and mu=16% from Hull example, not given."
+53464,needs_data,Quantitative Finance,Principal not given; solution assumes $100 million.
+53465,needs_data,Quantitative Finance,Table of stock amounts and betas omitted from question.
+53476,needs_data,Quantitative Finance,Needs stock price and dividends from first half of problem.
+53481,needs_data,Quantitative Finance,Long-term debt change not given; assumes no new debt.
+53527,needs_data,Quantitative Finance,Futures hedge; price data from Hull table not given.
+53548,needs_data,Quantitative Finance,Bond table not given; conversion factor needed
+53559,needs_data,Quantitative Finance,Tax rate missing from question
+53571,needs_data,Quantitative Finance,Depreciation method (MACRS) omitted from question
+53578,needs_data,Quantitative Finance,Weekly prices omitted from question; solution supplies Hull data.
+53618,key_conflict,Economics,"Options claim downward slope or flat; solution says upward slope, matching none."
+53619,needs_data,Quantitative Finance,Price data omitted from the question.
+53659,needs_data,Quantitative Finance,"Cheapest-to-deliver; bond table missing, solution assumes Hull data"
+53663,needs_data,Quantitative Finance,Original CTD duration not given; duration-based futures hedge.
+53664,needs_data,Quantitative Finance,Volatility not given; u = exp(sigma*sqrt(dt)).
+53665,needs_data,Quantitative Finance,Best-case ranges not given in question.
+53674,needs_data,Quantitative Finance,Volatility not given; d depends on earlier part.
+53718,needs_data,Game Theory,Bids are missing; the solution assumes the Hull textbook data
+53722,needs_data,Economics,Required reserve ratio not given; 10% assumed.
+53736,broken_text,Quantitative Finance,Question truncated; $54M floor assumed in solution
+53740,needs_data,Quantitative Finance,"Needs Example 26.4 data (variance strike, index, rates)"
+53741,needs_data,Quantitative Finance,Post-ruling volatilities missing from question; assumed from Hull
+53750,needs_data,Quantitative Finance,Spot gold price not given.
+53757,needs_data,Quantitative Finance,Maturity and call/put type missing.
+53768,needs_data,Quantitative Finance,Balance sheet not given but answer is repurchase amount.
+53773,needs_data,Quantitative Finance,Fraction taking discount not given.
+53798,needs_data,Economics,Required reserve ratio not given; 10% assumed.
+53814,needs_data,Economics,Required reserve ratio not given; 10% assumed.
+53823,key_conflict,Quantitative Finance,88 million vs options sized for 8; solution picks short 8.
+53886,key_conflict,Quantitative Finance,Solution says DVA and income increase (not offered option); options lack it.
+53910,needs_data,Quantitative Finance,Balance sheet not provided
+53928,needs_data,Quantitative Finance,"Salary, pain and suffering amounts missing."
+53937,needs_data,Quantitative Finance,Worst-case scenario ranges not stated in question.
+53959,needs_data,Quantitative Finance,Dividend timing not given; solution assumes 2 months.
+54002,needs_data,Quantitative Finance,Futures price table from Hull not given
+54014,needs_data,Quantitative Finance,Refers to company financial statements not provided; answerable by elimination.
+54217,broken_text,Quantitative Finance,Question text cut off at the end.
+54303,needs_data,Quantitative Finance,Bond Z not defined; only Bond C given. Backward induction on rate tree.
+54377,needs_data,Quantitative Finance,Exhibit 1 data for SM bond inconsistent with Ayrault; rate 1% mismatches tree.
+54390,needs_data,Quantitative Finance,Bond M terms missing; solution assumes 3-year 3% bond.
+54443,key_conflict,Quantitative Finance,Question text garbled; solution reinterprets as TVPI.
+54557,needs_data,Quantitative Finance,Answer options not given
+54652,needs_data,Quantitative Finance,Exhibit tree missing; effective duration of callable bond.
+54890,key_conflict,Quantitative Finance,"Exhibit NOI grows 3%, solution answers 2% from cap rate; inconsistent"
+54900,key_conflict,Chemistry,Result 1.54e12 kcal; options omit the power of ten.
+54902,key_conflict,Chemistry,"Solution gets 222 g, picks nearest option 220."
+54912,key_conflict,Chemistry,"Given Kw typo; solution gives pH 8.87, options don't match"
+54917,key_conflict,Thermodynamics,Computed 1.36 g/L; solution picks nearest option A 1.32
+54927,needs_data,Chemistry,Needs naphthalene melting point and fusion enthalpy
+54933,key_conflict,Chemistry,"Solution gets 47.3%, option says 47.2%; equation garbled."
+54946,needs_data,Chemistry,Kp at 20 C not given in question.
+54947,key_conflict,Chemistry,"Solution derives C23H30ClN3O, which no option literally matches."
+54959,broken_text,Chemistry,Mass printed as 4512 g; intended 0.4512 g.
+54963,key_conflict,Chemistry,Computed 73.4 g with 1000 min; option intended is 7.34 g.
+54988,key_conflict,Chemistry,Solution picks (a) but option A is the IE choice; check key letters.
+55018,key_conflict,Chemistry,Options in litres but correct volume is 13440 L; unit mismatch.
+55020,needs_data,Chemistry,Average residue mass (~120 g/mol) not given in question.
+55024,key_conflict,Chemistry,"Solution computes 1.378, matches option A 1.37 loosely."
+55052,key_conflict,Thermodynamics,Solution's computed 4.22e5 l doesn't match option E's 4.35e5
+55055,needs_data,Quantum Mechanics,"Needs standard modern 14C activity and half-life, not given"
+55057,key_conflict,Quantum Mechanics,Solution gets 22.3 min; nearest option F is 22.6
+55061,key_conflict,Material Science,Given z=3 used; FCC actually has z=4
+55070,key_conflict,Chemistry,Result 0.122 F matches no option; solution picks G by digits.
+55075,key_conflict,Chemistry,Solution gets 0.323 ton O2; option H states 0.646 ton.
+55095,broken_text,Chemistry,Reaction typed with errors; cp coefficient garbled
+55102,needs_data,Chemistry,Cell length not given; solution assumes 2 micrometres
+55114,key_conflict,Chemistry,Correct order not among options per solution; closest chosen.
+55143,key_conflict,Thermodynamics,Result 33.6 matches no option; solution picks 34.7
+55145,key_conflict,Chemistry,"Part b computes +15.2, all options negative"
+55171,key_conflict,Chemistry,"Solution finds -0.178 V, matching no option."
+55192,key_conflict,Thermodynamics,"Solution computes 19.8 and 1621 atm; option (G) says 1617, near but unclear"
+55220,key_conflict,Chemistry,"Solution finds Ca2+, Sc3+, Se2-; matches option C, unlike distractor wording"
+55238,needs_data,Chemistry,Needs water formation enthalpy; solution -2060 not among options.
+55239,key_conflict,Chemistry,Solution computes 1.73e-2 but picks option with 1.73e-3.
+55270,broken_text,Chemistry,Minus signs lost; option E also garbled.
+55275,broken_text,Chemistry,Tin concentration exponent missing; solution assumes 1.0e-4.
+55279,key_conflict,Thermodynamics,"Solution computes 89.4 L, not keyed 84.4 L."
+55281,key_conflict,Chemistry,Computed 163 mL not an option; solution guesses 154 mL.
+55288,key_conflict,Chemistry,"Data give 4e-11, options 1000x larger; solution picks D"
+55298,key_conflict,Thermodynamics,Solution's vdW work 171 kJ matches no option; ideal 204.7 kJ matches C and J.
+55319,broken_text,Chemistry,Exponents garbled in K and options.
+55328,needs_data,Quantum Mechanics,Radiocarbon dating; needs A0 and half-life not given.
+55336,key_conflict,Fluid Mechanics,Literal r=1mm gives 2.9e-4; solution assumes diameter 1mm to match option.
+55361,key_conflict,Chemistry,"Solution gets 0.26 V, not among options."
+55387,key_conflict,Chemistry,Solution's own result 0.012 V differs from chosen option 0.06 V.
+55389,key_conflict,Chemistry,Random-coil chain statistics; physical answer 0.755 nm differs from keyed 0.377 nm.
+55397,key_conflict,Chemistry,Solution gives ~15 mg/L with 0.21 O2; the options lack that; key ambiguous.
+55413,key_conflict,Chemistry,"Computed ~976,000 kg; closest option 979,000 kg."
+55417,key_conflict,Thermodynamics,Work P*dV on vaporization; sign convention discussed.
+55470,key_conflict,Chemistry,Solution gets -170 but options all positive; reads as magnitude.
+55476,key_conflict,Chemistry,"Solution result 0.35 M; option C printed as 35 M, treated as typo."
+55478,key_conflict,Thermodynamics,Solution gives 84.4 and 61.4 C; option F matches roughly.
+55487,key_conflict,Thermodynamics,Computed 793.1 vs option 7931; decimal mismatch.
+55489,key_conflict,Chemistry,Part (a) cannot reproduce option value from data given.
+55493,key_conflict,Chemistry,Computed 32.4 mg; chosen option shows 32.6 mg.
+55512,key_conflict,Chemistry,Printed K gives no option; solution assumes 2.37e-3
+55552,needs_data,Chemistry,Cp data not given in question
+55556,key_conflict,Quantum Mechanics,"Solution gets 0.38 Ci/g, not among options."
+55577,key_conflict,Chemistry,"Solution computes 851, picks nearest option 843."
+55611,needs_data,Electrical Machinery,kVA rating and power factor missing from question
+55617,key_conflict,"Signals, Systems and Control",Correct h[n] not among options exactly; solution picks D as misprint.
+55619,key_conflict,Electromagnetism and Special Relativity,Solution gets 272 dB/m but picks 545 by source convention.
+55646,needs_data,Fluid Mechanics,Pipeline figure data missing; answer not derivable from text.
+55654,needs_data,"Signals, Systems and Control",Needs FCC 25 kHz maximum TV audio deviation.
+55692,key_conflict,"Signals, Systems and Control",Option F sidebands inconsistent with its own bandwidth.
+55707,key_conflict,Electrical Machinery,"Solution gives 0.913 with brush drop, 0.920 without; options differ"
+55724,needs_data,Electromagnetism and Special Relativity,Load impedance missing from question
+55727,key_conflict,Linear Algebra and Differential Equations,Options A and F are both equal to sinh x.
+55750,needs_data,Electrical Machinery,Winding pitch and slots per pole per phase not given
+55761,key_conflict,Heat Transfer,Solution says correct method gives ~660; no option matches.
+55774,key_conflict,"Signals, Systems and Control",Solution's beta=0.2 value 0.98 matches no option; picks A anyway.
+55789,needs_data,Electrical Machinery,kVA rating missing from question
+55790,key_conflict,Power Systems and Power Electronics,Rotary converter; solution's option G has misprinted 6.25 A.
+55794,needs_data,Electromagnetism and Special Relativity,V0 and a not given; energy conservation then integrate dt=dx/v.
+55813,key_conflict,Chemical Engineering,Strict calculation gives ~0.001; option chosen by back-fitting.
+55826,needs_data,Heat Transfer,"Question omits sky temperature, emissivity and h; solution assumes them."
+55838,needs_data,Heat Transfer,Safe-temperature criterion (212F) not stated in question.
+55862,broken_text,Linear Algebra and Differential Equations,Determinant garbled; solution reconstructs rows.
+55870,key_conflict,"Signals, Systems and Control",Solution says no option fully matches; picks F despite wrong rates.
+55878,key_conflict,Fluid Mechanics,Solution's own result (~123 hp) matches no option.
+55896,key_conflict,Electrical Machinery,"Solution computes 89.2%, 188 hp; options listed differ, no exact match."
+55914,broken_text,Linear Algebra and Differential Equations,Matrices garbled; solution reconstructs them.
+55919,needs_data,Heat Transfer,Steam temperature and oil properties not given.
+55953,broken_text,Electromagnetism and Special Relativity,Question opening cut off; voltage across inductor in three cases.
+55958,needs_data,Electromagnetism and Special Relativity,Core cross-section area not given.
+56007,key_conflict,Electromagnetism and Special Relativity,"Solution says literal reading gives 3.41d, not an option; picks 1.77d."
+56016,broken_text,Heat Transfer,Absorbing-emitting gas layer between walls; garbled wording
+56026,key_conflict,Probability and Stochastic Processes,Exact value 3.7e-6; option B printed 3.7e-5.
+56069,key_conflict,Fluid Mechanics,"Solution computes 0.37 hp, not an option; intended key differs."
+56075,key_conflict,Chemical Engineering,"Solution finds ~17.4 C, not among options."
+56090,key_conflict,Electromagnetism and Special Relativity,"Solution cites option g, which is not the listed option letter."
+56092,needs_data,Electromagnetism and Special Relativity,No dimensions or dielectric constant given.
+56113,key_conflict,Chemical Engineering,Solution computes ~180 hours; options in minutes.
+56129,key_conflict,Electrical Machinery,Solution computes 92.8% but picks 93.5% by omitting series-field loss.
+56131,key_conflict,Electrical Machinery,"Solution computes 3730 W, 88.1% yet selects option A (3600 W, 85%)."
+56184,needs_data,Heat Transfer,Water temperature missing; solution assumes 98 C from parent example.
+56188,key_conflict,"Signals, Systems and Control",Solution's computed 5 kHz and M=4 matches no option exactly.
+56195,needs_data,Chemical Engineering,Molar mass of fuel not given; flat-plate Sherwood correlation used.
+56212,key_conflict,Chemistry,Option A text is a formula; solution picks 56.6 s (C).
+56257,needs_data,Chemistry,References equations 5.3 and 5.4 not given
+56306,key_conflict,Chemistry,"Solution gets 8 lines, not among options."
+56310,broken_text,Chemistry,Question omits which element; solution assumes nitrogen.
+56325,key_conflict,Chemistry,Solution picks A; options B/D-style framing; Gibbs link via K.
+56329,needs_data,Chemistry,K value not given in question; solution assumes 4.2e52.
+56376,key_conflict,Chemistry,Solution admits Br-N also has negative end last; picks P-Cl.
+56521,broken_text,Chemistry,Stem truncated; presumably asks for magnesium's radius and IE
+56544,key_conflict,Quantitative Finance,Solution picks C; option D also not a feature of log-returns per se
+56556,key_conflict,Statistics,Printed coefficients give different roots than keyed option B.
+56656,broken_text,Statistics,Model equation missing from question text.
+56681,key_conflict,Calculus,"Solution's optimum 778,367 matches no option"
+56687,broken_text,Electromagnetism and Special Relativity,Phasor forms; arguments scrambled in question
+56700,key_conflict,"Signals, Systems and Control",Solution gives h±1=1/2 (option E); samples h at Ts.
+56708,key_conflict,"Signals, Systems and Control",No option matches computed 7.51 kHz; solution picks G anyway
+56724,key_conflict,Electromagnetism and Special Relativity,Solution Q about 5700 disagrees with option E's 3390.
+56737,key_conflict,Material Science,"Solution computes 0.83 MPa, matching no option."
+56743,key_conflict,"Signals, Systems and Control",Solution says no option matches the correct design
+56745,key_conflict,Electromagnetism and Special Relativity,Solution gives 0.27 µW/m² along z; options are W/m² along x.
+56753,key_conflict,Electromagnetism and Special Relativity,"Solution gives n=sqrt(NR/r0), m=sqrt(N r0/R); option F matches."
+56759,needs_data,Chemical Engineering,Filter area/original capacity missing; solution infers option.
+56779,key_conflict,Material Science,Solution gives octahedral 0.414 and tetrahedral 0.225; options pair differently.
+56781,key_conflict,Material Science,Strict count 6.07e27 not an option; solution infers option E.
+56802,key_conflict,Quantum Mechanics,"Solution gives 1.56 ratio, not matching 29% options clearly"
+56807,needs_data,Mechanics,Needs chart values for explosive source level and noise.
+56812,key_conflict,Electromagnetism and Special Relativity,Computed amplitude 31.1 A matches no option; intended 311 A.
+56816,key_conflict,Material Science,"WLF viscosity; literal reading gives no option, intended reading gives H"
+56827,key_conflict,Electrical Machinery,"Solution gets 4.58 ohm; nearest option (J) 4.53, solution stops without choosing."
+56836,key_conflict,Heat Transfer,Solution's exact Fo ~0.65 vs options built on chart reading 0.9
+56839,key_conflict,Material Science,Solution's 1868 K disagrees with option temperatures; 9.09e-6 matches J
+56849,key_conflict,Material Science,"Solution gets 232 modes, not among options"
+56854,key_conflict,Electromagnetism and Special Relativity,Asks reflected and transmitted; options only fit transmitted 66.7
+56856,needs_data,Electromagnetism and Special Relativity,Angle of incidence missing; depends on earlier part (Brewster angle)
+56858,broken_text,Electromagnetism and Special Relativity,Small loop radiation resistance; question wording garbled
+56880,needs_data,Material Science,Needs steel modulus and breaking stress from tables not given.
+56882,key_conflict,Chemistry,"Options list heat capacity units, not kJ/mol; mismatch with question."
+56884,key_conflict,Chemistry,Printed concentration gives value not in options; solution assumes typo.
+56887,needs_data,Material Science,Electronegativity values must be looked up.
+56896,needs_data,Material Science,Needs tabulated electron mobility of silicon.
+56898,needs_data,Material Science,Needs copper expansion coefficient; free thermal expansion fits poorly.
+56913,key_conflict,"Signals, Systems and Control","Stated 0.01 ms gives 100/50 kHz, not in options; solution assumes 1 ms"
+56932,key_conflict,Circuits and Electronics,"Solution picks (A) though question order is source, complement, inverse."
+56981,key_conflict,Chemistry,Solution's rigorous 11.3 differs from keyed 8.9
+57026,key_conflict,Electromagnetism and Special Relativity,Solution gets 0.5 h; no option matches
+57032,key_conflict,Chemistry,Third-law absolute entropy from Cp data; solution gets 12.36 vs option 12.186.
+57054,key_conflict,"Signals, Systems and Control","Solution computes block I(X^n;Y^n)=n-1, limit 1, though written I(X_n;Y_n)."
+57064,broken_text,Chemistry,Misprints: 'acacia' for acylation; option C repeats I.
+57067,needs_data,Electromagnetism and Special Relativity,Circuit figure missing; heat shares by current division.
+57070,key_conflict,Electromagnetism and Special Relativity,"Computed 0.46 W, not among options."
+57076,key_conflict,Electromagnetism and Special Relativity,Exact current at t is ~0; key intends peak value.
+57087,key_conflict,Thermodynamics,"Printed RT=2.0 gives 4, solution assumes misprint RT=25."
+57094,needs_data,Electromagnetism and Special Relativity,Figure with resistor arrangement missing
+57105,needs_data,Electromagnetism and Special Relativity,Circuit figure missing
+57108,key_conflict,Chemistry,Solution admits no strictly isotonic pair as printed.
+57111,key_conflict,Electromagnetism and Special Relativity,P1=16 W and P2=4 W both options true; single key
+57114,key_conflict,Electromagnetism and Special Relativity,"Computed K=2.34; no option matches, solution guesses nearest"
+57115,key_conflict,Mechanics,"Solution gets 20.4 m; no option matches, intended (A) 2.043 m."
+57126,needs_data,Electromagnetism and Special Relativity,Grid figure missing; solution assumes 4x4 grid
+57149,key_conflict,"Signals, Systems and Control","Solution gets e_ss phase +18.43°, matching no listed option."
+57155,key_conflict,"Signals, Systems and Control","Solution gives -4<K<8√2, option C; solution text sets it that way."
+57161,key_conflict,Chemistry,Several oxides cannot oxidise HCl; intended answer Fe2O3.
+57169,key_conflict,Chemical Engineering,"Solution gets 0.126, picks 0.16 as nearest option."
+57177,key_conflict,Chemistry,Solution's own result 0.21 is not among the options.
+57179,needs_data,Chemistry,Amount of weak acid not given.
+57181,needs_data,Chemistry,Saturated H2S concentration assumed 0.10 M; options list ambiguous.
+57182,needs_data,Electromagnetism and Special Relativity,Waveguide radius not given; assumed
+57184,needs_data,Chemistry,Gas-space volume not given.
+57202,key_conflict,Chemical Engineering,Question asks mole fraction; options are kmol/h flow rates.
+57206,key_conflict,Electromagnetism and Special Relativity,Computed 10.8% not an option; solution picks one-face value
+57207,key_conflict,Chemical Engineering,"Solution gets 739.7; no option matches exactly, picks nearest."
+57219,key_conflict,Chemistry,Solution assumes concentration misprint; as printed answer matches no option.
+57223,needs_data,Chemistry,Cell diagram missing; solution assumes textbook cell.
+57236,key_conflict,Quantum Mechanics,Option D says per milligram but result is per millimole.
+57237,broken_text,Quantum Mechanics,Garbled question; secular equilibrium daughters separated by half-lives.
+57240,key_conflict,Quantum Mechanics,"Solution computes ~10% loss, matching no option."
+57243,key_conflict,Power Systems and Power Electronics,Solution yields kA current; options in kV
+57245,needs_data,Power Systems and Power Electronics,Allowable field and wall model assumed; not given in question.
+57247,needs_data,Power Systems and Power Electronics,SF6 gas density and liquefaction temperature from state chart.
+57250,key_conflict,Electromagnetism and Special Relativity,"As printed (2 dm) gives 35.5%, no option; solution assumes 1 dm."
+57253,key_conflict,Chemistry,Result 6.3e-41 matches no option exponent; solution picks J by mantissa.
+57255,key_conflict,Chemistry,"Tafel gives ~1.3-1.4 A/cm2, solution text cut off before choosing option."
+57277,key_conflict,Chemistry,Printed Ea 230 and sign are misprints; solution reads 23.0 with minus sign.
+57278,key_conflict,Chemistry,Stokes radius 2.63e-8 cm; solution picks A (2.63e-9) by digits.
+57323,key_conflict,Power Systems and Power Electronics,Radial layout naming; solution picks point-to-multipoint despite trunk/branch distinction.
+57345,needs_data,Material Science,Mobility must be read from a chart not given.
+57348,needs_data,Chemistry,Gibbs-Helmholtz extrapolation; solution gives -647 but options lack it?
+57363,broken_text,Chemistry,Conductivity exponent garbled; intended 3.75e-8
+57374,key_conflict,Chemistry,Solution finds both A and D correct
+57376,key_conflict,Chemistry,"Solution gives 1.5e-2 M, not among listed options"
+57383,broken_text,Chemistry,Options have typos; hex-3-ene symmetry is the key
+57384,key_conflict,Chemistry,Multiple options equivalent; resonance shortens C-Cl in vinyl chloride.
+57409,needs_data,Electromagnetism and Special Relativity,Figure missing; solution assumes parallel branches.
+57435,key_conflict,Electromagnetism and Special Relativity,Solution gives W2/W1=4 and i1/i2=1/4; V ratio 1/4 absent.
+57448,key_conflict,Chemistry,"Solution gets about +2 kJ/mol, matching no option."
+57450,key_conflict,Chemistry,Coulometric titration; arsenic mass 3.75e-4 g is not among options.
+57456,key_conflict,Chemistry,"Detailed balance k_f=K_b k_r; printed data typo, mantissa matches."
+57462,key_conflict,Electromagnetism and Special Relativity,412 V is likely typo for 12 V; options fit only 12 V
+57463,key_conflict,Chemistry,Solution finds four true options despite single-answer claim
+57467,broken_text,Chemistry,K2 equation and value garbled; solution repairs it
+57492,key_conflict,Electromagnetism and Special Relativity,Solution finds two true options (H and I)
+57497,key_conflict,Electromagnetism and Special Relativity,"Solution gets 84.5 C, matching no option"
+57505,key_conflict,Chemistry,"Solution finds ~57%, not among options unless setter's R convention"
+57510,key_conflict,Thermodynamics,Solution gets 124.50 kJ (option I) after reinterpreting wording.
+57515,key_conflict,Chemistry,Solution gives 30 ohm-1 cm2/mol; options given in 1e-5 units mostly
+57517,key_conflict,Chemistry,Solution gets 0.011 M but picks 0.022 (moles) to match options.
+57525,key_conflict,Electromagnetism and Special Relativity,Solution gives 15.9 ohm; nearest option 15 ohm
+57529,broken_text,Chemistry,Garbled charge symbols in options; resonance structure stability ranking.
+57539,needs_data,Chemistry,Scheme missing; Y assumed phenol; several options true despite single-answer claim
+57542,key_conflict,Chemistry,"Options B, E, F all equal 0.02 mol KMnO4."
+57554,key_conflict,Chemistry,Options A/B and F/H are duplicates; answer k equal is ambiguous among them.
+57556,key_conflict,Chemistry,"Solution finds three basic salts (A, F, H) despite single-answer claim."
+57577,key_conflict,Chemistry,Two options (g) and (h) both valid; question claims exactly one.
+57581,key_conflict,Chemistry,"Printed Kf gives 88%, not among options; Kf=14 gives 80%."
+57586,key_conflict,Chemistry,Computed 109.67 not an option; nearest H chosen provisionally.
+57596,needs_data;broken_text,Heat Transfer,Outer temp 777 typo; pre-wrapping wall data missing
+57640,key_conflict,Electromagnetism and Special Relativity,"Solution gives 1.3e-5 W, options show different numbers"
+57649,key_conflict,Electromagnetism and Special Relativity,Solution's 4.49/5.44 µF not clearly matching an option
+57660,key_conflict,Power Systems and Power Electronics,"Solution computes 50°,64.6A and 96°,45.3A; option choice unclear."
+57666,key_conflict,Chemistry,"Solution gets 1.2e35, not among options; none matches"
+57672,key_conflict,Electromagnetism and Special Relativity,Solution admits power figure of chosen option contradicts its own result.
+57676,key_conflict,Electromagnetism and Special Relativity,Solution's computed values match no option; chosen option inconsistent.
+57678,key_conflict,Chemistry,Solution's correct Kc 0.436 not in options; key chosen via unit slip
+57688,key_conflict,"Signals, Systems and Control",Options B and F are identical; solution picks F.
+57690,key_conflict,"Signals, Systems and Control","Solution computes 0.0675 and -1.143, not exactly option H values."
+57691,key_conflict,Electromagnetism and Special Relativity,Solution picks negative peak time; positive crest time matches no option.
+57692,key_conflict,Electromagnetism and Special Relativity,Options are fields in kV/cm; solution computes ~10.6 MW power.
+57702,key_conflict,Electromagnetism and Special Relativity,"Solution gives 8.85 N/m2; option H is 8.8, fine, but fixed-V state ambiguous."
+57703,key_conflict,Heat Transfer,"Solution gets 30 mm thickness, not matching option thicknesses"
+57708,key_conflict,Chemistry,"Given data yield 0.0745 M, no option; solution assumes misprint"
+57711,key_conflict,Electromagnetism and Special Relativity,"Solution computes 6.83 (8.34 dB is wrong; 6.83 is 8.34 dB, but text confused)."
+57731,key_conflict,Circuits and Electronics,Solution's R_eq 1.349 differs from option J's 1.256.
+57737,key_conflict,Electromagnetism and Special Relativity,Computed E0 matches no option's first value.
+57743,key_conflict,Chemical Engineering,"Solution computes 3.670e-5 but also says x1*/1.5 from 5.505e-5, consistent; option J."
+57754,broken_text,Chemistry,Isotope dilution; '500 ml' read as 500 mg
+57766,needs_data,Material Science,Spring modulus E missing from question.
+57770,key_conflict,Electrical Machinery,Solution computes 440 A but picks 391 A option.
+57771,key_conflict,Electrical Machinery,Solution's computed values match no option; picks (d) anyway.
+57787,key_conflict,Electromagnetism and Special Relativity,"Option matches radius, not diameter asked."
+57816,key_conflict,"Signals, Systems and Control",Solution says no option has positive exponents; picks (e) by pattern.
+57819,broken_text,Chemistry,Question statement cut off; multiple proportions ratio.
+57856,key_conflict,Electromagnetism and Special Relativity,Solution's transient coefficient likely not 1; options' key unclear.
+57864,key_conflict,"Signals, Systems and Control",Decoded value 4.625 V not among options; option b value inconsistent.
+57867,key_conflict,"Signals, Systems and Control",Options B and F are identical waveforms; solution picks B.
+57884,key_conflict,Circuits and Electronics,Computed S=258.8-j965.9 matches no option; solution picks J.
+57904,key_conflict,"Signals, Systems and Control",Solution computes (3/2)e^{-3t} but text says option (I); consistent actually; check minor
+57917,key_conflict,Material Science,Solution says Ni15 Zn20 is (C) in one place but earlier option letters mislabelled
+57961,key_conflict,"Signals, Systems and Control",Solution gives 1.02 but picks 1.00 as nearest
+57975,key_conflict,Circuits and Electronics,Solution picks CS then CC; option J matches.
+58006,key_conflict,Chemistry,Correct result is -322 kJ; options built on sign error.
+58007,key_conflict,Mechanics,Solution gives 6.28 kg; options lack it (nearest 7.5 or 9).
+58008,key_conflict,Electromagnetism and Special Relativity,Several options true; solution admits multiple correct.
+58013,broken_text,Chemistry,H percentage and ester type misprinted; solution corrects them.
+58022,key_conflict,Mechanics,Solution says f_h=375 Hz but options list none; keys c (f1=75).
+58024,key_conflict,Chemistry,"Solution gets Ka ~1.25e-2, not among options."
+58040,key_conflict,Heat Transfer,"Solution gives 80, not among options"
+58045,key_conflict,Chemistry,"Computed k=1.12e-2, options are e-3; likely None of these."
+58048,key_conflict,Electromagnetism and Special Relativity,"Solution gives y=x^2=(iB0l/2mg)^2, option E; check key."
+58052,key_conflict,Chemistry,Strict result 30%/13.25% matches no option; key assumes 35/13.5.
+58056,needs_data,Electromagnetism and Special Relativity,Circuit figure missing; solution assumes layout.
+58091,key_conflict,"Signals, Systems and Control","Solution gives K<pi/4, option F; check key consistency."
+58096,key_conflict,"Signals, Systems and Control",Solution finds infinite gain margin; no option matches.
+58097,key_conflict,"Signals, Systems and Control","Solution gives k=[6,16/3]; no option matches."
+58102,key_conflict,Chemistry,Solution's computed values match no option; data mismatch
+58116,key_conflict,Electrical Machinery,Solution gives 173.6 V at 1400 rpm; listed 186 V needs 1500.
+58128,needs_data,Chemistry,Solution assumes density 1.015 g/cm3 not given in question.
+58130,key_conflict,Chemistry,"Computed K at 610 K is 2.81e-3, not among options."
+58132,mismatch,Chemistry,Options are molar conductivities; question asks degree of dissociation and Kw.
+58143,key_conflict,Chemical Engineering,"PFR gives 63 L, not an option; 123 L is CSTR."
+58148,broken_text,Electromagnetism and Special Relativity,Question never defines U; Hall-type voltage from self-field pinch.
+58150,key_conflict,Chemical Engineering,Solution says no option satisfies the salt balance.
+58161,needs_data,Chemistry,"Needs stepwise formation constants of AlF complexes, not given."
+58166,needs_data,Chemistry,Needs indicator absorptivities and Ka not given in question.
+58168,needs_data,Electromagnetism and Special Relativity,Transmitter power not given; solution assumes 10 W.
+58170,key_conflict,Chemical Engineering,Solution gets 3.53e4 s; picks option G (4.21e4)? unclear.
+58178,key_conflict,Quantum Mechanics,Solution says units mismatch; options in mCi vs microcurie.
+58183,key_conflict,Quantum Mechanics,Literal answer 1e-2 mL not an option; solution picks 1e-3.
+58187,key_conflict,Power Systems and Power Electronics,Solution says no option matches its exact result.
+58192,key_conflict,Material Science,Computed 0.01 not in options; solution assumes typo to pick 0.1.
+58206,key_conflict,Chemical Engineering,Solution gives 4.81 h but option G lists 4.18 h.
+58210,needs_data,Chemical Engineering,Tracer data not given in question; solution supplies it.
+58270,key_conflict,Electromagnetism and Special Relativity,Solution favours D (90°) while option A also arguably true.
+58279,key_conflict,Power Systems and Power Electronics,Options B and I both state P and Q; solution picks I.
+58290,key_conflict,Electromagnetism and Special Relativity,"Solution derives conductance, picks conductivity; textbook answer likely resistance."
+58320,broken_text,Electromagnetism and Special Relativity,Current amplitude and phase sign lost in question text.
+58345,key_conflict,Chemistry,Printed S(g) formation sign is wrong; solution corrects it.
+58347,broken_text;key_conflict,Chemistry,Exponent minus signs lost; options D and G both numerically fit.
+58348,broken_text,Electromagnetism and Special Relativity,Time variable missing in printed expressions; phase comparison gives current leads by 60°.
+58352,broken_text,Chemistry,Volume '21' and 'M-NaCl' are misprints.
+58361,key_conflict,Chemistry,"Multiple statements true (E, H, I, J) despite single-answer claim."
+58369,key_conflict,Chemistry,"Printed equation unbalanced; balanced ratio gives 0.02 M, key uses 0.04."
+58393,key_conflict,Chemistry,"Solution gives A=sp2,B=sp,C=9; no option matches labels exactly."
+58396,key_conflict,Chemistry,Solution result ~71% matches no option exactly.
+58403,key_conflict,Chemistry,"Solution finds multiple true options (A, B, D, I)."
+58426,key_conflict,Chemistry,Solution gives K about 49; no option matches.
+58429,key_conflict,Chemistry,Solution derives (3Ksp/Kc)^(1/4); no option has factor 3.
+58444,key_conflict,Chemistry,Literal 3 L gives about 1.05 g; solution picks per-litre 0.354 g.
+58454,key_conflict,Chemistry,Options contain nonexistent statement 5; four-statement evaluation.
+58456,broken_text,Chemistry,Printed mass and water amounts inconsistent with density; data reconstructed.
+58460,key_conflict,Chemistry,Asks for false statement; solution gives the true statement.
+58463,broken_text,Chemistry,Garbled matching question; no printed option is correct.
+58464,broken_text,Chemistry,Several strong electrolytes listed; HCl duplicated.
+58472,key_conflict,Material Science,Computed 0.96/0.04 matches no option; solution picks closest.
+58487,key_conflict,Chemistry,"Solution gets 0.333 M, near E option 3.3e-2 vs 3.33e-1; unclear"
+58491,key_conflict,Electromagnetism and Special Relativity,"Solution: assertion false, reason true; several options ambiguously worded."
+58521,key_conflict,Chemistry,Solution gives 0.128; assumes misprint to match option 1.28.
+58526,needs_data,Chemistry,Needs standard potentials not given; several options appear valid.
+58534,key_conflict,Chemistry,"Plain solution gives 1e-18, not an option; 1e-21 assumes extra acid."
+58539,key_conflict,Chemistry,"Solution computes 1.056 V, which matches no option."
+58551,key_conflict,Circuits and Electronics,"Solution says literal data gives 11.5%, matches no option; picks 1.28% assuming 5 mm."
+58558,key_conflict,"Signals, Systems and Control","Solution gives (1/2)^n - 2^n, option I; no conflict unless key differs."
+58590,key_conflict,Power Systems and Power Electronics,Solution derives 0.294–0.652 but picks option C anyway; no option matches.
+58603,needs_data,Electromagnetism and Special Relativity,"Cavity Q; dimensions not given, solution assumes a=d=2b."
+58609,key_conflict,Chemistry,"Solution gives CH4 75.3%, H2 21.5%, N2 3.2%; check against option H."
+58639,key_conflict,Electromagnetism and Special Relativity,Literal interval 1.02 s matches no option; solution picks 0.31 s.
+58648,key_conflict,Chemistry,Solution gives 6.59 eV; option E lists 6.55.
+58651,key_conflict,Electromagnetism and Special Relativity,Solution's full result 9.21 V/m not among options; picks (I) by convention.
+58656,needs_data,Electromagnetism and Special Relativity,Operating wavelength not given; power capacity depends on it.
+58676,key_conflict,Electromagnetism and Special Relativity,Solution finds no exact option match; chooses closest.
+58681,key_conflict,Chemistry,Solution says x_e is 6.427e-6 but option prints e-4.
+58684,key_conflict,Electromagnetism and Special Relativity,Correct result matches no option; solution picks D.
+58687,needs_data,Material Science,"Magnetostriction; nickel yield strength assumed, not given"
+58689,key_conflict,Chemistry,Solution corrects printed -68600 to -686000 cal.
+58693,key_conflict,Chemistry,"Solution gets 500 at 50% conversion, but options all say 1000."
+58696,key_conflict,Material Science,"As printed concentration gives ~2.8e8, matching no option; likely misprint."
+58721,key_conflict,"Signals, Systems and Control","Solution gives 123.1 dB, option F is 123.50; weighting model approximate."
+58725,needs_data,Electromagnetism and Special Relativity,Required output power not given; solution assumes 0.3 µW.
+58734,key_conflict,"Signals, Systems and Control","Solution's strict count gives 560 kHz, but chosen option uses 640."
+58750,needs_data,Fluid Mechanics,Cone geometry from missing figure; solution assumes it.
+58764,key_conflict,Chemistry,Solution result 3367.3 matches no option exactly; closest 3369.08 (F).
+58766,needs_data,Fluid Mechanics,Figure missing; layout assumed in solution.
+58793,broken_text,Chemistry,"Garbled stem; aromatic molecular ion stable, base peak."
+58800,key_conflict,"Signals, Systems and Control","Solution finds 1 MHz spacing, matches no option; picks E anyway."
+58803,key_conflict,"Signals, Systems and Control",Options D and G are textually equivalent; solution picks G.
+58807,key_conflict,Chemistry,Solution says several options correct despite single-answer claim.
+58829,key_conflict,"Signals, Systems and Control",Solution says no option is truly correct; picks F for delay.
+58848,key_conflict,"Signals, Systems and Control","Solution gives z/(z^2-z+0.5), matching option G, not the quoted options' form."
+58900,key_conflict,"Signals, Systems and Control",Options F and J both equal 3 bits; solution picks F.
+58915,key_conflict,Chemistry,"Solution computes 0.496, picks 0.491; options do not match exactly."
+58923,key_conflict,Electromagnetism and Special Relativity,"Solution gives 4.67 mm, matching option F; fine, but verify key"
+58945,key_conflict,Electromagnetism and Special Relativity,"Solution gets 36 A, matching no option"
+58946,needs_data,Electromagnetism and Special Relativity,Figure missing; solution assumes circuit.
+58955,key_conflict,Thermodynamics,Solution gets -1212 or 1659 cal; sign issue in equation.
+58959,needs_data,Circuits and Electronics,Circuit figure missing; solution assumes standard configuration.
+58961,key_conflict,Electromagnetism and Special Relativity,"Solution gives R=r2-r1, contradicting stated r1>r2."
+58976,key_conflict,Chemistry,Options (E) and (F) both true as printed.
+58980,key_conflict,Electromagnetism and Special Relativity,Multiple options are true; solution picks one.
+58985,key_conflict,Electromagnetism and Special Relativity,Options B and E are equivalent.
+58993,key_conflict,Material Science,Solution gives e^-5.32 ≈ e^-5 (option C) but its options garbled; typos in question.
+58997,key_conflict,Chemistry,"Solution finds C, D, G all true despite single-answer wording."
+59006,key_conflict,Electromagnetism and Special Relativity,Solution says V=1.497 gives MFD not in options.
+59025,key_conflict,Linear Algebra and Differential Equations,Solution's correct condition matches no listed option.
+59047,key_conflict,Chemistry,"Solution gives 2.51e5 g/mol; options listed are near 249618, approximate match."
+59059,key_conflict,Chemistry,"Solution's computed values (0.898, 1.005) match no option; it picks option I."
+59079,key_conflict,Heat Transfer,"Solution computes ~185 kPa, matching no option."
+59098,needs_data,Electromagnetism and Special Relativity,Distance (60 km) missing from question.
+59114,key_conflict,Electromagnetism and Special Relativity,Physical parallel model gives 0.00725; solution picks series 0.048.
+59147,key_conflict,Chemical Engineering,Solution notes inconsistency in option b's f value.
+59148,key_conflict,Thermodynamics,Solution suggests stated T gives value not among options
+59150,needs_data,Chemistry,Primary kinetic salt effect; molality value 0.15 looks misprinted.
+59151,key_conflict,Chemistry,Change in pH is about 0.01; options look like pH values.
+59157,needs_data,Chemistry,Henry's constants not given in question.
+59162,key_conflict,Thermodynamics,Computed +29.8 J; key option differs by factor 100
+59189,broken_text,Chemistry,Question truncated; ambiguous intended answer
+59223,needs_data,Chemistry,K from partition functions; spectroscopic constants of I2 not given.
+59226,needs_data,Chemistry,Equilibrium constant not given; solution supplies it
+59229,key_conflict,Chemical Engineering,Solution computes K≈474 ft/hr but option prints 47 lb/ft²hr.
+59233,broken_text,Chemistry,Exponent minus signs lost in Ksp and Ka values
+59237,key_conflict,Electromagnetism and Special Relativity,"Solution's own value 2.4π×10^-4 H, then says ≈7.5e-4; consistent with B."
+59245,key_conflict,Chemistry,"Options a, b both true per solution; temperature dependence of K."
+59246,key_conflict,Chemistry,Printed Kc gives 6e-7; options match Kc=10^2.
+59265,key_conflict,Chemistry,As printed gives 85 kJ; solution assumes misprint to reach 10.
+59271,needs_data,Electromagnetism and Special Relativity,Figure of conductor shape missing.
+59278,key_conflict,Chemistry,Solution gets 0.52; no option matches
+59284,key_conflict,Chemistry,"Solution gives 5.19 kJ, 17.12 kJ, 40 J/K; no option matches"
+59292,key_conflict,Chemistry,Printed HCl concentration gives no matching option.
+59293,key_conflict,Chemistry,"Correct working gives 0.001 mol, not an option."
+59306,key_conflict,Chemistry,Solution computes 5.81e-2 and picks closest E; ok but approximate.
+59309,key_conflict,Chemistry,Solution gives 2e-3 M; check option D versus listed options.
+59311,needs_data,Electromagnetism and Special Relativity,Figure missing; solution assumes circuit arrangement.
+59327,key_conflict,Chemistry,"Printed P/6 gives 2/27, not an option; solution assumes P/9 typo."
+59331,needs_data,Electromagnetism and Special Relativity,Figure missing; solution assumes circuit arrangement.
+59341,needs_data,Chemistry,Temperature not given; solution assumes 1200 K.
+59345,key_conflict,Chemistry,Computed +0.530 V not an option; sign convention ambiguity.
+59356,key_conflict,Chemistry,Solution pH 0.82 not among options.
+59362,key_conflict,Chemistry,Asks for false statement but solution says (E) true.
+59366,key_conflict,Chemistry,"Computed Cl-Cl is 60, not among options; solution picks 108."
+59367,key_conflict,Chemistry,Printed expression gives no matching option; solution assumes beta ln T - gamma/T.
+59369,key_conflict,Chemistry,Computed pH 3.75 matches no option; solution picks nearest 3.70.
+59386,needs_data,Electromagnetism and Special Relativity,Figure missing; angle assumed 37 degrees.
+59390,key_conflict,Thermodynamics,Printed pressure gives 0.974; intended answer assumes 0.1 atm
+59398,needs_data,Electromagnetism and Special Relativity,Charge value missing; -2 microC assumed.
+59400,key_conflict,Chemistry,"Solution gives NaOH 22.3, Na2CO3 23.2; option A matches, check key"
+59401,needs_data,Electromagnetism and Special Relativity,Figure missing; circuit assumed.
+59402,needs_data;key_conflict,Electromagnetism and Special Relativity,Solution finds several options true; exactly-one claim fails.
+59409,needs_data,Electromagnetism and Special Relativity,Position of P unspecified; perpendicular geometry assumed.
+59410,needs_data,Chemistry,"Reaction scheme figure missing; labels 1,2,3 assumed"
+59418,key_conflict,Chemistry,Solution gets 6; no option equals 6
+59424,key_conflict,Chemistry,Solution gives ~705.8 kJ; option 706.4 kJ nearest.
+59432,key_conflict,Chemistry,Printed data gives 1e-11; solution picks 1e-10 assuming typo.
+59440,key_conflict,Chemistry,Solution finds several options qualify; exactly one expected.
+59442,needs_data;key_conflict,Electromagnetism and Special Relativity,"Solution gets R1R3=R2R4, but options key differs by labelling."
+59444,needs_data,Electromagnetism and Special Relativity,Galvanometer to multirange voltmeter; figure missing.
+59447,key_conflict,Chemistry,Options (B) and (F) are algebraically equivalent; exactly-one claim fails.
+59449,needs_data,Electromagnetism and Special Relativity,Field direction missing; vertical field assumed.
+59457,key_conflict,Chemistry,Solution result +3.99 kJ matches no listed option.
+59458,broken_text,Chemistry,Reaction equation lost arrow and products.
+59459,needs_data,Electromagnetism and Special Relativity,Initial liquid height and resistor assumed.
+59470,needs_data,Chemistry,Ksp of Cu2S not given in question.
+59471,key_conflict,Chemistry,"Solution finds two incorrect statements (A, D) despite single-answer format."
+59522,key_conflict,Chemistry,Solution gives 3.81e-3 (option D) but later calls option A correct? unclear options
+59539,key_conflict,Electromagnetism and Special Relativity,"Solution finds shift ~67 Hz; no option matches, picks J anyway."
+59542,needs_data,Power Systems and Power Electronics,"Load resistance 10 ohm inferred from options, not stated."
+59549,key_conflict,Chemistry,"Solution computes 69% but says option a correct; options list A=69%, consistent"
+59552,key_conflict,Electromagnetism and Special Relativity,Computed 83.78 matches no option exactly; solution picks nearest.
+59596,key_conflict,Chemistry,Solution says no option matches computed value.
+59601,needs_data,Electromagnetism and Special Relativity,Operating frequency taken from the source textbook problem
+59602,broken_text,Electromagnetism and Special Relativity,Broadside field request lost; theta=300 is a typo for 30 degrees
+59604,needs_data,Electromagnetism and Special Relativity,Distance to point P missing from the question.
+59620,key_conflict,"Signals, Systems and Control",Solution picks J but temperature garbled; computed 1.28/12.8
+59627,needs_data,Electromagnetism and Special Relativity,Antenna separation distance missing from the question.
+59639,needs_data,Circuits and Electronics,"Circuit layout from Problem 3-55 assumed, not given"
+59642,key_conflict,Mechanics,Solution says no option fully consistent; picks J anyway.
+59646,key_conflict,Chemistry,Computed 0.633% not among options; solution picks nearest.
+59652,key_conflict,Material Science,"Solution gets Xn about 51; options match r, so (H) is chosen"
+59653,key_conflict,Material Science,Radical polymerization kinetic chain length with Mayo transfer; computed value matches no option.
+59654,key_conflict,Chemistry,Flory-Huggins mixing entropy; result 0.079 matches no option exactly
+59672,key_conflict,Material Science,"Careful result 0.462 nm, 2.01 g/cm3 matches no option."
+59679,key_conflict,Electromagnetism and Special Relativity,"Solution says 28.4 µm is radius, diameter would be 56.8; not an option."
+59682,key_conflict,Electromagnetism and Special Relativity,Given data give a=3.4 µm; solution picks option with 34 µm by assumed typo.
+59686,needs_data,Electromagnetism and Special Relativity,Coordinates of point P not given.
+59693,broken_text,Electromagnetism and Special Relativity,Question asks for H but options give E; direction typo (-e1).
+59694,needs_data,Chemical Engineering,Conversion target missing from question text
+59712,key_conflict,Chemistry,"Solution result a=1, gamma 5.56e3; options mismatched in powers of ten"
+59714,key_conflict,Chemistry,"Computed 0.73, 0.90; no option matches exactly"
+59755,key_conflict,"Signals, Systems and Control",Solution says option text has typo x^1 instead of x^0
+59765,key_conflict,Electrical Machinery,Result 16.7 A not among options; solution picks 18 A.
+59776,key_conflict,Circuits and Electronics,"Exact result 5.3125 V, option shows 5.32 V."
+59781,key_conflict,"Signals, Systems and Control","Solution finds height 1; no option matches, picks (B)."
+59793,broken_text,"Signals, Systems and Control","Option D truncated; solution answer is Pole, Zero, N-M (B)."
+59794,key_conflict,Chemistry,"Solution says Bucherer, which is not among the options."
+59843,key_conflict,"Signals, Systems and Control",Result -KT/(1+ω²T²) matches no option.
+59858,key_conflict,Chemistry,Solution cites experimental 1.41 D yet picks 1.65 D.
+59870,key_conflict,Chemistry,Computed 1.975e24 matches H/J; solution picks D (19.7e23).
+59877,broken_text,Mechanics,Alpha is misprinted; computed 9.6e4 N matches no option.
+59878,key_conflict,Electromagnetism and Special Relativity,"Data as printed give 7e6 ohm, not an option; solution picks 7e-3."
+59880,key_conflict,Electromagnetism and Special Relativity,"Solution finds three options linear, contradicting single-answer statement."
+59885,key_conflict,Electromagnetism and Special Relativity,Derived B has -8 i-hat component; no option contains i-hat.
+59897,key_conflict,Mechanics,Solution finds two true options (B and D).
+59901,needs_data,Electromagnetism and Special Relativity,Figure missing; solution assumes geometry.
+59902,needs_data,Electromagnetism and Special Relativity,Circuit figure missing; ring arrangement assumed.
+59907,needs_data,Electromagnetism and Special Relativity,"Figure missing; points A, B assumed across LC."
+59916,key_conflict,Chemistry,"Strict stoichiometry gives 2M, not an option; intended M"
+59921,key_conflict,Chemistry,Given E° sign of O2 half-cell is misprinted; solution uses +1.23 V
+59923,needs_data,Electromagnetism and Special Relativity,Circuit figure missing; standard charge-discharge assumed.
+59932,mismatch,Material Science,Solution is for sulfur-vulcanization question instead (Flory-Rehner swelling asked)
+59968,key_conflict,Chemistry,Computed 0.1498 M; chosen option 0.1497 M is not exact.
+59969,needs_data,Chemistry,"Needs CaCO3 decomposition pressure at 800 C, not given."
+59989,key_conflict,Chemistry,Computed p=0.985 does not match options exactly; solution picks H.
+59995,broken_text;key_conflict,Fluid Mechanics,Units garbled (m vs mm Hg); nested gauge readings add to 60 kPa vacuum.
+60003,needs_data,Fluid Mechanics,Pump curve missing; valve loss is pump head minus system head.
+60020,key_conflict,Chemical Engineering,Solution gives 5.39e-6 vs unit mismatch; Knudsen diffusion flux.
+60021,key_conflict,Quantum Mechanics,Solution computes 1.33 J/s; option E unit is per minute.
+60022,broken_text,Quantum Mechanics,Counter dead-time correction; options garbled.
+60024,needs_data,Quantum Mechanics,Needs gamma constant of Co-60 and lead attenuation coefficient.
+60025,needs_data,Quantum Mechanics,"Needs K-40 half-life, branching ratio, atmospheric argon mass."
+60027,key_conflict,Quantum Mechanics,Solution gets 8.9e4; options are about 90.
+60029,key_conflict,Quantum Mechanics,"Neutron activation: cross section, flux, buildup and decay; no option matches."
+60034,key_conflict,Power Systems and Power Electronics,Solution gives 1000 s but picks 1 hour; recombination lifetime.
+60037,key_conflict,Power Systems and Power Electronics,"Solution's own SF6 result ~1.6-2.0 MV, not matching options."
+60039,needs_data,Chemistry,Mean activity needs tabulated gamma± not given.
+60042,needs_data,Chemistry,Concentration polarization; solution needs reference potential from companion part.
+60047,key_conflict,Chemical Engineering,Computed 9.87e-3 but picks E 9.98e-3 as closest.
+60053,needs_data,Chemical Engineering,Tracer data missing from question; solution assumes textbook data.
+60058,key_conflict,Chemistry,"Solution gets 0.0024 K; option G is 0.00245 K, rounding differs."
+60060,key_conflict,Chemistry,Computed A ≈3.3e10 doesn't match the chosen option (h) A.
+60070,key_conflict,Chemistry,Solution's fraction 0.81 differs from option J's 0.79
+60094,broken_text,Mechanics,"Surface tension ring method tilt error; fluid topic, garbled '1%'"
+60118,broken_text,Power Systems and Power Electronics,"Condition garbled; solution's ranking is 2LL > 2LG > SLG > 3ph, option A."
+60125,key_conflict,Fluid Mechanics,Rotameter density correction; computed max 2.835 conflicts with option 2.205.
+60128,key_conflict,Chemistry,Solution says option A's HCO3- coefficient is misprint (1/4 not 1/6).
+60133,key_conflict,Thermodynamics,Computed 33.6 g/mol matches no option; closest is 34.7.
+60135,key_conflict,Chemistry,Result 0.35 M; options lost decimal point.
+60146,key_conflict,Thermodynamics,"Boyle temperature via van der Waals gives 73.8 K, nearest option 75 K."
+60152,key_conflict,Chemistry,Printed Kp gives 5e-5 atm; intended Kp 31.25e-13.
+60156,key_conflict,Chemistry,Solution's computed K ~3.6e37 vs 3.599e37 option; mantissa inconsistencies in text.
+60170,needs_data,Electromagnetism and Special Relativity,Field strength B missing from question.
+60173,key_conflict,Electromagnetism and Special Relativity,Solution says no option matches computed 5e-10 ohm.
+60176,key_conflict,Electromagnetism and Special Relativity,Solution says no option matches computed 6e4 ln(6/5) J.
+60198,key_conflict,Chemistry,"Hofmann degradation; option C's Y is ethylamine, not propanamide-derived mismatch unclear."
+60204,key_conflict,Chemistry,"Solution gets 0.133, picks 'None of these'; data typo (-34 C)."
+60218,key_conflict,Chemistry,"Solution gets Kc=32, not among options."
+60219,needs_data,Electromagnetism and Special Relativity,Circuit figure not given; solution assumes standard arrangement.
+60225,key_conflict,Chemistry,Rigorous result 0.888 V; no option matches.
+60229,broken_text;needs_data,Chemistry,Reaction scheme missing; isotopic labelling of hydride reduction.
+60230,key_conflict,Chemistry,Result -395.75 kJ matches no option exactly.
+60236,broken_text,Chemistry,Chromate ion omitted from question text.
+60245,broken_text,Chemistry,Question stem incomplete; options differ only in molar mass
+60261,key_conflict,Chemistry,No option matches derived result; (e) chosen as misprint.
+60266,key_conflict,Chemistry,"Solution gives ~4765; options list 4763 as closest, key unclear"
+60270,key_conflict,Chemistry,Solution result K_p(RT)^2 equals option A form; ok but verify sign
+60273,key_conflict,Chemistry,Solution pH 8.30 matches no option
+60278,key_conflict,Chemistry,"Solution computes -669.7, no option matches exactly"
+60280,key_conflict,Electromagnetism and Special Relativity,Solution's computed 5.6e-7 matches no option; typo assumed in data.
+60283,needs_data,Electromagnetism and Special Relativity,Capacitance value missing from figure.
+60286,key_conflict,Chemistry,Exact result sqrt(Kp/(Kp+P)) not an option; solution picks approximate F.
+60292,needs_data,Electromagnetism and Special Relativity,Circuit figure missing; values assumed.
+60299,broken_text,Chemistry,Formula printed as CgHg; options contain misprints.
+60302,key_conflict,Chemistry,No printed options truly equal; solution picks D as intended answer.
+60305,needs_data,Chemistry,Reaction not printed; ethene hydrogenation assumed.
+60310,key_conflict,Chemistry,Options B and G/C duplicates; (B) correct but also H gives 0.1 M NaOH.
+60312,key_conflict,Chemistry,"Printed Ksp gives 1.1e-3, not an option; solution assumes 1.1e-16."
+60319,key_conflict,Chemistry,Solution picks F but also says option C would lower NH3.
+60346,needs_data,Electromagnetism and Special Relativity,Circuit figure not given.
+60351,key_conflict,Chemistry,Solution finds several options true despite single-answer format
+60358,needs_data,Electromagnetism and Special Relativity,Sign depends on figure orientation of B.
+60360,needs_data,Chemistry,Refers to an unseen vapour pressure-composition graph.
+60369,broken_text,Chemistry,"Options garbled, mixed element and configuration labels."
+60373,key_conflict,Chemistry,"Solution gives 10(V2-2V1), which is option I; question's key unclear."
+60374,key_conflict,Electromagnetism and Special Relativity,Literal data gives absurd force; units garbled.
+60376,broken_text,Chemistry,Multiple options are false; 'exactly one correct' is inconsistent.
+60412,key_conflict,Thermodynamics,Solution gives 330 but entropy value mismatches options; best option I
+60418,needs_data,Fluid Mechanics,Throat diameter missing; solution assumes 3x1.5 in venturi
+60433,key_conflict,Chemical Engineering,"Solution gets ~147%, not matching any option; likely 186% intended."
+60436,key_conflict,Thermodynamics,Solution needs B^2=0.16; printed field gives pi^3 not in options.
+60452,key_conflict,Thermodynamics,Solution could not reproduce keyed option; got ~7.1e4 kJ.
+60461,key_conflict,Fluid Mechanics,Solution result 374 matches no option exactly; picks nearest
+60462,key_conflict,Fluid Mechanics,Solution thickness 0.00334 ft matches no option's 0.0102
+60529,key_conflict,Fluid Mechanics,Computed 357 rpm for (d); chosen option lists 365
+60530,key_conflict,Fluid Mechanics,Computed 145.4 Pa; chosen option 143.4 with unit typo
+60543,key_conflict,Chemical Engineering,"Solution gives ~72%, not among options; option J 54% likely intended."
+60544,broken_text,Thermodynamics,Moles of nitrogen missing from question; inferred from options.
+60555,key_conflict,Fluid Mechanics,"Options are head loss, not change; solution picks D though calc gives ~465 m"
+60573,broken_text,Fluid Mechanics,Model scale missing from question; solution assumes 1/10
+60587,key_conflict,Thermodynamics,Question says 30 lbm; solution assumes 3 lbm.
+60609,key_conflict,Thermodynamics,Question says compression but pressure falls; options include unit-mismatched answers.
+60611,needs_data;key_conflict,Chemistry,Needs Gibbs tables; solution's computed K 1.05e5 doesn't match chosen option.
+60617,key_conflict,Chemical Engineering,"Solution finds dew point ~123F, option B states 138F."
+60634,needs_data,Thermodynamics,Final state second property missing; steam tables needed
+60636,needs_data,Thermodynamics,Copper expansivity and compressibility not given
+60655,broken_text,Chemical Engineering,Data table garbled.
+60666,key_conflict,Thermodynamics,Solution's ideal-gas values match no option; heat capacity data missing.
+60668,key_conflict,Fluid Mechanics,Solution computes Cd about 0.58 but states no clear option; 0.585 vs 0.575 ambiguous.
+60685,key_conflict,Thermodynamics,"Solution computes 346 Btu, not the keyed 396."
+60716,broken_text,Mechanics,"Distance printed 2e5 m, should be 2e-15 m."
+60718,key_conflict,Chemistry,Solution computes 1.05e19 s then picks 3.3e11 years; arithmetic inconsistent.
+60720,key_conflict,Electromagnetism and Special Relativity,"Computed 1.73e5 J; options all 1e4, solution picks D by assumed misprint."
+60721,broken_text,Quantum Mechanics,Photon energy E=hv; frequency garbled in text.
+60722,key_conflict,Mechanics,"Solution gives 2.31 pi, not matching listed options exactly."
+60727,key_conflict,Electromagnetism and Special Relativity,"Solution gets 3540 pF, 3.54e-5 C; options print uF and 1e5, units garbled."
+60741,key_conflict,Electromagnetism and Special Relativity,Solution derives 0.0175 but picks 0.175 as presumed misprint.
+60745,key_conflict,Mechanics,"Solution gets a_n about 1.50, matching no listed option."
+60772,key_conflict,Electromagnetism and Special Relativity,"Solution states 750,000 cm but its concentric-face result differs; thick-lens formula"
+60779,key_conflict,Electromagnetism and Special Relativity,Solution says no option matches exactly; picks E with double-pass indices
+60788,key_conflict,Electromagnetism and Special Relativity,"Solution computes 4.0e-13, not matching any option exactly; picks C."
+60802,broken_text;key_conflict,Chemistry,Options labelled in metres; solution gets 0.048 m² and reinterprets.
+60826,key_conflict,Electromagnetism and Special Relativity,"Solution gets +5 D, no option matches; picks -5 D."
+60837,needs_data,Quantum Mechanics,Rest masses not given in question
+60851,needs_data,Quantum Mechanics,Isotope and masses not given in question
+60874,key_conflict,Electromagnetism and Special Relativity,Solution gets 2.60e10; chosen option 2.664e10 is off.
+60897,key_conflict,Quantum Mechanics,"Solution gets 1.49e-2 cm; options print 10^2, exponent typo."
+60916,needs_data,Electromagnetism and Special Relativity,Requires tabulated rotatory power of quartz
+60924,key_conflict,Electromagnetism and Special Relativity,"Options B, F, I all equal 1.07e-7 m; solution picks F."
+60938,key_conflict,Mechanics,Computed 6.0 rad/s^2; no option matches exactly.
+60939,key_conflict,Electromagnetism and Special Relativity,Solution gives v=0.9c=2.70e8; no option lists that exactly.
+60942,key_conflict,Quantum Mechanics,Secular equilibrium gives 1.6e-4 s; options print 10^4.
+60955,key_conflict,Mechanics,Solution gets 3.8e7 dynes; no option matches.
+60958,key_conflict,Electromagnetism and Special Relativity,Computed 0.40e-12; closest option 0.5e-12 chosen.
+60985,key_conflict,Thermodynamics,"Solution picks 461 m/s using 273 K, not room temperature"
+61034,key_conflict,Quantum Mechanics,"Modern masses give 1.91 MeV; options in eV, key ambiguous."
+61049,key_conflict,Electromagnetism and Special Relativity,"Solution gives 83°37'; no option matches exactly, picks (D)."
+61087,key_conflict,Thermodynamics,Correct answer is -100°C; option G lacks the minus sign
+61098,key_conflict,Electromagnetism and Special Relativity,Given diameter yields 1.7e-4; solution assumes typo to pick (E).
+61100,key_conflict,Mechanics,Solution computes 7.82e3 but picks 7.91e3 option.
+61103,key_conflict,Chemistry,"Exact result 5.79e10 Hz; solution picks nearest option, 2.7% off."
+61107,needs_data,Electromagnetism and Special Relativity,"Needs quartz rotatory power, not given."
+61108,key_conflict,Electromagnetism and Special Relativity,"Solution finds pi=-0.722, matching no option."
+61125,key_conflict,Mechanics,Computed 603 W; chosen option 605 W is a rounding match.
+61141,key_conflict,Chemistry,Result 2.23e25 matches option J only with exponent sign typo.
+61154,key_conflict,Electromagnetism and Special Relativity,"Solution finds 0.45 cm; none of options match, picks 20 cm."
+61176,key_conflict,Thermodynamics,"Solution gives 1625 J, not among options."
+61182,broken_text,Mechanics,Several options truncated; answer J (166 2/3 ft)
+61194,key_conflict,Mechanics,"Solution gives -1.04 lb, option E; consistent. Options list ambiguity minor"
+61224,key_conflict,Mechanics,"Solution gives 1.66e4, matching option I, not clearly stated"
+61237,key_conflict,Quantum Mechanics,Solution says Cu and Zn (H) but also contradicts itself; threshold analysis yields H.
+61243,key_conflict,Electromagnetism and Special Relativity,Solution finds 40 cm real image; options lack +40 cm.
+61284,key_conflict,Electromagnetism and Special Relativity,"Solution gets 40 cm with transmitted condition, then adopts option's 39 cm."
+61294,key_conflict,Quantum Mechanics,Derived result involves psi_{n±2}; options show psi_{n±1}.
+61312,key_conflict,Material Science,Solution computes 165.6 then claims 164.8 option; interpolation approximate
+61326,broken_text,Quantum Mechanics,Fermi energy of degenerate electron gas; radius unit misprinted (m for cm)
+61327,key_conflict,Material Science,Computed 5.46e-9 matches no option exactly; option I differs by power of ten
+61332,key_conflict,Thermodynamics,"Integral gives 1.76e4 J; no option matches, nearest off by ten."
+61334,key_conflict,Thermodynamics,Result 0.6 MPa matches no option.
+61337,key_conflict,Mechanical Engineering,Capacity exponent misprint; solution picks nearest option.
+61342,broken_text,Material Science,D0 garbled in question; solution assumes 0.23 cm2/s.
+61359,key_conflict,Heat Transfer,Given h_i exponent misprinted; options only fit 1.82e4.
+61369,key_conflict,Fluid Mechanics,Summer/winter ratio is 1.032; keyed option 0.969 is the inverse.
+61378,broken_text,Operating Systems,Options lack /n; answer 30/n s
+61382,needs_data,Mechanics,Figure missing; blade assumed perpendicular to groove.
+61385,key_conflict,Thermodynamics,Solution corrects typo p2; steady-flow technical work
+61387,key_conflict,Thermodynamics,Printed p2 gives 26 kg; option matches only if p2=4.6 MPa
+61388,key_conflict,Thermodynamics,Printed data gives 94 C; option needs p2=0.4 MPa
+61389,key_conflict,Thermodynamics,Solution result about -127 kJ matches no option
+61402,broken_text,Fluid Mechanics,Pressure exponent misprinted; intended 10.8e5 Pa.
+61404,needs_data,Electromagnetism and Special Relativity,Needs the omitted 80% generator efficiency; transmission-line loss sets the turns ratios.
+61407,key_conflict,Mechanical Engineering,Solution only nearest-matches option; not exact.
+61413,key_conflict,Fluid Mechanics,Solution's own result 30 not an option; picks 57.09 by assuming 985 m3/s.
+61445,key_conflict,Quantum Mechanics,Solution's 476.9/590.4 nm differs from chosen option by ~1 nm.
+61451,broken_text,Nuclear Engineering,"Left intensity printed as 10, likely 10^12; reaction rate Sigma times flux."
+61453,key_conflict,Nuclear Engineering,"Solution's result (0.37 m, 0.76 kg) matches no option."
+61460,key_conflict,Fluid Mechanics,Local derivative is -4/3 pi k c a^3; matches option A only if c=3.
+61465,key_conflict,Material Science,Solution picks option A though it asks time and distance; plausible.
+61474,key_conflict,Digital Logic and Computer Architecture,"Printed 5 MB/s gives 25%, not an option; intended 0.5 MB/s gives 2.5% (H)."
+61479,key_conflict,"Signals, Systems and Control","Solution finds three orthogonal options b, d, g; question says one"
+61488,key_conflict,Mechanics,Computed phase difference 82.5° matches no option; J's 45° disagrees.
+61584,key_conflict,Thermodynamics,Solution result ~121.4 kJ; matches option A only approximately.
+61628,broken_text,Digital Logic and Computer Architecture,Speedup and efficiency of parallel systems; several options truncated.
+61655,key_conflict,Operating Systems,Windows uses R0 and R3; solution picks R0 despite R3 also listed
+61679,key_conflict,Fluid Mechanics,Solution picks laminar though true answer is subcritical flow; none of the options fit.
+61713,needs_data,Quantum Mechanics,Density of U-238 not given.
+61719,key_conflict,Fluid Mechanics,"Computed 3006 lbf, 481 hp; option E is 3025/484 via g=32."
+61730,key_conflict,Mechanics,"Options B, F, G all appear true; solution says SHM and T=pi/5."
+61735,key_conflict,Quantum Mechanics,Derived result h^2/(4π²m²r³) not among options; solution picks H.
+61746,key_conflict,Fluid Mechanics,"Solution gives P2 = 8P1, not among options."
+61747,key_conflict,Quantum Mechanics,Correct value is 62.1 pm; options state nm.
+61749,key_conflict,Quantum Mechanics,Derived E ∝ n^6 m^-3; options offer m^-3 (F) and n^-6 etc.
+61750,key_conflict,Quantum Mechanics,"As printed gives 5.27e-11 cm, not in options."
+61753,needs_data,Mechanics,Setup given only implicitly; man walking on raft.
+61754,key_conflict,Quantum Mechanics,"Several options (A, C, E, H) true, not exactly one."
+61757,key_conflict,Material Science,Computed 1.01 g/cc matches no option; options are absurd.
+61758,needs_data,Mechanics,Setup (sphere on moving belt) not stated in question.
+61767,key_conflict,Mechanics,"Result is about -2 W; option H is +2 W, -2 absent."
+61771,key_conflict,Thermodynamics,"Solution gets 26.5 J, not matching listed options."
+61775,broken_text,Material Science,Ratio 5 likely 0.5; decimal lost.
+61792,key_conflict,Mechanics,"Result I_A=I_B/64; options F,G,H; solution picks H, F wrong."
+61803,key_conflict,Quantum Mechanics,"Solution says several options true, not exactly one."
+61804,key_conflict,Quantum Mechanics,Both Z=2 and E_B=54.4 eV are correct options.
+61805,needs_data,Thermodynamics,Process description missing from question.
+61810,key_conflict,Mechanics,"Solution shows two options (B and F) both true, contradicting single-answer claim."
+61873,needs_data,Fluid Mechanics,Pump speed/NPSH required not given; solution assumes values.
+61876,key_conflict,Semiconductor Devices,"Solution gets 289 lx, not among options."
+61877,key_conflict,Semiconductor Devices,"Solution says printed doping gives 1.61 V, not in options; picks E with altered doping."
+61880,key_conflict,Semiconductor Devices,Printed G gives ~1e6 flux; options match G=1e17.
+61893,needs_data,Mechanics,Figure missing; overhanging shaft layout assumed; statistical error propagation of deflection.
+61910,key_conflict,Electromagnetism and Special Relativity,Solution's values lack 10^6 factor in options; matches H only by digits.
+61912,key_conflict,Semiconductor Devices,Computed 7.16e-7 uJ; option exponent is e-9.
+61915,needs_data,Nuclear Engineering,Thermal cross sections not given in question
+61916,mismatch,Nuclear Engineering,"Stem is cylinder, options are rectangular block formula"
+61917,needs_data,Thermodynamics,Needs nitrogen property tables; pressure likely typo.
+61935,key_conflict,Mechanics,Literal reading gives 15 J; intended option 60 J.
+61936,key_conflict,Databases,Options C and H both match the solution's decomposition.
+61953,key_conflict,Electromagnetism and Special Relativity,Correct value -3e11 fs^3 not listed; solution picks I by assumed unit error.
+61970,key_conflict,Mechanics,"Solution gives 8*2/sqrt20=3.58 m/s, near option A 3.57."
+61972,needs_data;key_conflict,Mechanics,Figure missing; solution's value matches no option.
+61977,needs_data,Mechanics,Refers to an earlier question for setup.
+61983,needs_data,Mechanics,Cone angle from figure not given; solution assumes 37 degrees.
+61986,needs_data,Mechanics,Rod lengths missing from the question.
+61987,key_conflict,Quantum Mechanics,Option A also true; solution picks D.
+61990,key_conflict,Mechanics,Solution gives about 3.4 i m; options listed nearest 3 i.
+61991,broken_text,Mechanics,Bar length misprinted; options incomplete for all quantities.
+62001,needs_data,Mechanics,Lengths of AB and BC come from a missing figure.
+62006,key_conflict,Mechanics,Option G is ill-posed; solution reads combined options differently.
+62008,key_conflict,Mechanics,Printed t=2 s gives 47 m/s; solution assumes t=-2 s.
+62009,key_conflict,Mechanics,"Solution says options C, D and I are all true."
+62010,key_conflict,Mechanics,"Solution gets 0.25 m, not among the options."
+62013,needs_data,Mechanics,Point positions depend on a missing figure.
+62015,needs_data,Mechanics,Position of point C comes from a missing figure.
+62018,broken_text,Mechanics,Speed of A should be sqrt(2)v; the symbol v is lost.
+62020,key_conflict,Mechanics,"Multiple options true; solution picks G, F also true."
+62022,needs_data,Mechanics,Graph of P vs x^2 missing; reconstructed.
+62023,key_conflict,Mechanics,Derived V matches no printed option.
+62045,key_conflict,Mechanics,Solution gets 8.8 but earlier flagged g uncertainty; answer unclear.
+62053,key_conflict,Mechanics,"Options A, C, E all true; question says exactly one."
+62057,key_conflict,Mechanical Engineering,"Solution result 10(2a1-a2) is option J, but it picks A"
+62058,key_conflict,Mechanics,Exact distance 4√5≈8.94 m; no option matches exactly.
+62060,key_conflict,Mechanics,Both (C) and (D) true; solution picks D.
+62065,key_conflict,Mechanics,Computed diameter 0.01 m not among options.
+62069,broken_text,Quantum Mechanics,Distractor options make several choices incorrect; intended answer (I)
+62073,key_conflict,Quantum Mechanics,"Solution gives 1200, not among options."
+62074,key_conflict,Mechanics,"Solution finds A, C, D all true."
+62078,key_conflict,Mechanics,Result sqrt(30) matches no option exactly.
+62096,needs_data,Mechanics,Elevator setup and w0 direction missing from question.
+62100,key_conflict,Databases,Several single-attribute-key options qualify; solution says options flawed.
+62103,key_conflict,Theory of Computation,Option G equals E as a language; solution picks E.
+62121,needs_data,Mechanical Engineering,Evaporative condenser; needs enthalpy-based coefficient from textbook data.
+62145,key_conflict,Mechanics,Result 3/10 MR^2 matches no listed option.
+62164,key_conflict,Thermodynamics,Printed p1 inconsistent with options; solution assumes 1e5 Pa.
+62175,key_conflict,Quantum Mechanics,Result 0.53 µm not among options.
+62178,broken_text,Quantum Mechanics,Options garbled (missing 'times 1'); hyperfine splitting listed under this subtopic.
+62193,key_conflict,Heat Transfer,Solution says computed answer matches no option as printed.
+62194,key_conflict,Heat Transfer,Solution's careful value 4396 W not an option; picks E via simplification.
+62196,key_conflict,Fluid Mechanics,"Solution gets ~11 m/s; options off by 1000, picks F by assumed unit slip."
+62198,key_conflict,Heat Transfer,Strict outer-area result 322.4 not an option; key uses flat-wall approximation.
+62216,key_conflict,Digital Logic and Computer Architecture,Computed 8 MHz not in options; solution picks D
+62218,key_conflict,Mechanics,"Solution finds rho 45.3 cm, matching no option; picks option by v only."
+62219,key_conflict,Mechanics,"Solution gets v_a 193 km/h, not in options."
+62220,needs_data,Mechanical Engineering,Figure missing; solution assumes 30 degree geometry.
+62221,key_conflict,Fluid Mechanics,Gauge vacuum times area; diameter treated as radius to match options.
+62234,broken_text,Mechanics,Coordinate 'V12' is garbled sqrt(12).
+62245,key_conflict,Fluid Mechanics,"Rectangular weir gives 2.08, not offered; solution picks V-notch value."
+62246,key_conflict,Fluid Mechanics,"Solution finds Q=3.87, option's flow rate 7.72 disagrees."
+62266,key_conflict,Nuclear Engineering,Solution's computed powers of ten disagree with option J printed
+62271,key_conflict,Quantum Mechanics,Solution's 492.26 MeV differs slightly from option I's 492.31.
+62280,broken_text,Electromagnetism and Special Relativity,Larmor formula; omega 10^5 misprint for 10^15
+62283,key_conflict,Quantum Mechanics,"Given 0.1 kg yields 6.6e-37 m, matching no option; solution picks E."
+62289,key_conflict,Electromagnetism and Special Relativity,Beam collimation with antenna; solution's spot size disagrees with printed options.
+62290,needs_data,Nuclear Engineering,Thermal cross sections must be looked up
+62295,key_conflict,Nuclear Engineering,"Solution computes 15.8 kg, not an option; picks D via inconsistency."
+62302,needs_data,Electromagnetism and Special Relativity,Acousto-optic Bragg angle; sound speed in quartz not given
+62308,key_conflict,Material Science,"Bandwidth 2ħ²/(ma²); no option matches exactly, solution picks dimensionally wrong H."
+62325,key_conflict,Computer Networks,Solution says correct answer absent; picks J by hub convention
+62341,key_conflict,Operating Systems,"Solution gives 50, 5000 for P=200; matches option J pattern."
+62349,key_conflict,Fluid Mechanics,"Solution gets 15.16 kN, picks B by changing gamma"
+62357,needs_data,Material Science,Needs Callister cold-work chart reading for 1040 steel.
+62360,key_conflict,Material Science,"As-printed D0 gives 2.37e-14, not an option; solution picks G via altered D0."
+62361,needs_data,Heat Transfer,Brass conductivity not given; handbook value assumed.
+62367,key_conflict,Databases,"Options F and H both declare composite primary key (a,b)."
+62373,key_conflict,Databases,"Solution picks E but expresses doubt versus D, the original key."
+62383,broken_text,Mechanical Engineering,'12 of the original speed' garbled for one half.
+62386,key_conflict,Mechanical Engineering,"Solution cites option (i); options A, E, I all say tension side, ambiguous."
+62521,key_conflict,Material Science,Solution picks PETG though standard bottle polymer is PET
+62556,key_conflict,Electromagnetism and Special Relativity,Relativistic speed 1.64e8 not an option; keyed to Newtonian value.
+62557,needs_data,Fluid Mechanics,Throat diameter not given; assumed 1.5 in.
+62563,key_conflict,Thermodynamics,"Availability of heat via Carnot factor; solution gets 346 Btu, not an option."
+62570,needs_data,Mechanics,Wedge figure missing; chain energy conservation on smooth wedge.
+62571,key_conflict,Quantum Mechanics,"Solution finds two options (A and B) valid, not one."
+62583,key_conflict,Quantum Mechanics,Given ionization potential 36 eV inconsistent; solution substitutes 13.6 eV.
+62585,key_conflict,Quantum Mechanics,"Solution finds Brackett, but options label the right wavelength Paschen."
+62591,needs_data,Thermodynamics,No amount of gas given; heat per mole computed.
+62593,key_conflict,Quantum Mechanics,Printed work function 19 eV; solution assumes 1.9 eV.
+62599,key_conflict,Quantum Mechanics,"Printed data give 0.34 eV, matching no option."
+62601,key_conflict,Mechanics,"Solution finds A, F, H, I all true; one option expected."
+62603,key_conflict,Quantum Mechanics,Printed 54 nm gives negative work function; solution assumes 540 nm.
+62627,key_conflict,Quantum Mechanics,Options print pi where mass m belongs; D matches derivation only if misprint.
+62632,key_conflict,Quantum Mechanics,Correct 12.09 eV matches no option.
+62653,broken_text,Mechanics,
+62709,key_conflict,Quantum Mechanics,Printed masses give 0.84 MeV; solution picks 0.862 using outside data.
+62712,key_conflict,Thermodynamics,"Solution gives 200 kJ, not among options."
+62719,key_conflict,Material Science,"Solution gives p=1.69e13 (option E), but states n=9e11 as carrier density."
+62721,key_conflict,Semiconductor Devices,"Options are generation rate, not a quantum efficiency."
+62729,key_conflict,Heat Transfer,Solution says correct steam value matches no option.
+62731,needs_data,Mechanics,
+62733,key_conflict,Thermodynamics,Solution c_v=3.123 and R=2.077; options list one value.
+62752,key_conflict,Electromagnetism and Special Relativity,Stationary-target reading gives ~8 PeV; keyed to collider 45.6 GeV.
+62760,key_conflict,Thermodynamics,"Solution gets 17.99 kW, not among options."
+62762,needs_data,Thermodynamics,Expander inlet temperature missing; Claude cycle.
+62764,key_conflict,Fluid Mechanics,Solution says computed pair matches no option
+62790,needs_data,Electromagnetism and Special Relativity,Photonic band gap underdetermined; solution only gives a heuristic estimate
+62803,key_conflict,Combinatorics,Solution's computed terms match no option.
+62815,key_conflict,Mechanics,Derived ratio sqrt(M/(M+m)) not among options; A is reciprocal.
+62816,key_conflict,Mechanics,Derived 5.9 cm not among options.
+62825,key_conflict,Mechanics,Solution gives 5cos10t; options have amplitude 10 except H.
+62828,key_conflict,Quantum Mechanics,Options F and H are both true; solution picks F.
+62835,key_conflict,Mechanics,Solution gives a_B=0 (option I); check against key.
+62840,key_conflict,Quantum Mechanics,Options G and C-type statements overlap; several options may be true.
+62847,needs_data,Mechanics,Figure with rays OA..OH not provided.
+62850,needs_data,Mechanics,Figure missing; arrangement assumed.
+62853,needs_data,Mechanics,Figure of pulley-spring arrangement missing.
+62859,needs_data,Mechanics,Figure of double wedge missing.
+62866,key_conflict,Mechanics,Options D and J are both equivalent; solution says exactly-one claim fails.
+62882,key_conflict,Mechanics,"Options B, D, I all true; solution keys I."
+62887,needs_data,Mechanics,Figure of belt incline missing; assumed 30 degrees.
+62896,needs_data,Mechanics,Crate mass missing; solution assumes 50 kg.
+62902,key_conflict,Mechanics,Derived k/2m matches no listed option.
+62904,key_conflict,Mechanics,"Printed t=2 s gives e^2-1, not an option; intended t=ln2 gives 1 m."
+62905,needs_data,Mechanics,Figure geometry assumed; Atwood tension then torque balance.
+62908,key_conflict,Mechanics,"Asks incorrect statement but says one correct; solution finds J, I true."
+62909,key_conflict,Mechanics,Result 2√2 v0; options garbled with sqrt(v0).
+62913,broken_text,Material Science,Options reference nonexistent statement (iv).
+62922,broken_text,Mechanics,Acceleration '59/4' is garbled 5g/4.
+62924,key_conflict,Mechanics,Solution gives 6 coefficient (G) after assuming side a; question prints 4a'.
+62928,needs_data,Mechanics,Figure missing; spring arrangement assumed.
+62937,key_conflict,Mechanics,Printed force gives 2 m/s; key needs +4j.
+62940,needs_data,Mechanics,String length from missing figure assumed.
+62942,key_conflict,Mechanics,Solution result M^2 g b v0^2/(2(k+Mgb)) matches no option exactly.
+62943,needs_data,Mechanics,Figure missing; geometry assumed.
+62951,key_conflict,Mechanics,Printed 8j gives no listed answer; solution assumes 8i.
+62954,needs_data,Mechanics,Figure needed for launch directions.
+62955,key_conflict,Mechanics,"g=1 gives 2/9 m, not an option; solution assumes g=10."
+62975,needs_data,Circuits and Electronics,Bridge supply voltage not given
+62976,key_conflict,Circuits and Electronics,"Solution gets 120.1, options say 121.1; picks D"
+62978,key_conflict,Mechanical Engineering,"Solution gets 3480 kcal/h, options in kW; reads 4.05."
+62982,key_conflict,Algorithms and Data Structures,Solution gives CDFBEGA; check option key
+63016,needs_data,Material Science,fcc lattice sums not given; question text has -8 exponent typo.
+63022,key_conflict,Thermodynamics,"Solution gets 85.25 kJ, not among options."
+63030,key_conflict,Heat Transfer,"Solution gives 3.15 s, matching no listed option."
+63032,needs_data,Heat Transfer,Wall area not given; per unit area assumed.
+63035,key_conflict,Electromagnetism and Special Relativity,Solution gives Z in numerator; only Z=1 option (G) matches.
+63080,key_conflict,Thermodynamics,Solution's computed values (~222 kJ) don't match listed options cleanly.
+63081,key_conflict,Thermodynamics,"Solution gets -127 kJ/kg with given formula, matching no option."
+63118,needs_data,Nuclear Engineering,Densities not given; boron part inconsistent with options.
+63120,key_conflict,Quantum Mechanics,Solution derives coefficient 1/2 but picks option with 1/48.
+63124,key_conflict,Nuclear Engineering,Computed 3.12e18; chosen option 3.5e18 is only nearest.
+63160,key_conflict,Digital Logic and Computer Architecture,"Solution computes -0.10001111; picks (B) with opposite sign, a guess."
+63173,key_conflict,Computer Networks,"Solution says 0.01/0.02 ms, matching no option."
+63211,needs_data,Material Science,Needs low-frequency dielectric constant 6.9 from table.
+63225,key_conflict,Material Science,Solution finds 1.70 eV; no option matches.
+63265,key_conflict,Fluid Mechanics,"Solution reasoning gives option G (different, decreases) but concludes (B)."
+63281,key_conflict,Algorithms and Data Structures,"Question has a[23,58] vs row 32; solution picks 32."
+63290,key_conflict,Algorithms and Data Structures,Solution says (b) correct; options (b) and others near-duplicate; unclear key.
+63293,key_conflict,Databases,Options A and H both equal intersection; solution picks H.
+63317,key_conflict,Mechanical Engineering,Options B and J both state periodic variation of driven shaft speed.
+63319,key_conflict,Statistics,Options F and J are synonyms; solution picks F.
+63336,key_conflict,Databases,Options B and E both describe the same index; solution admits ambiguity.
+63381,key_conflict,Quantum Mechanics,"Solution computes 2.56 eV, not an option; picks 3.41 eV as intended."
+63388,key_conflict,Mechanical Engineering,Solution picks E; J has the same structure with matching subscripts.
+63449,key_conflict;broken_text,Quantum Mechanics,Third wavelength misprinted; option labels mismatch standard shell notation.
+63469,broken_text,Quantum Mechanics,Plotted quantity (wave number) missing from question text.
+63472,key_conflict,Mechanics,Printed data give 1.8; solution assumes misprint to reach 0.8.
+63477,broken_text;needs_data,Mechanics,Distance of 80 m missing from question.
+63481,key_conflict,Chemistry,Solution finds two valid options (G and H).
+63482,key_conflict,Mechanics,"Options D, F, H all true per solution; ambiguous key."
+63485,key_conflict,Quantum Mechanics,Result 5 mA but options listed in A; units mismatch.
+63491,broken_text,Quantum Mechanics,Given Δx misprinted; solution substitutes 1e-10 m.
+63492,key_conflict,Thermodynamics,Printed density gives -71.7 J; solution assumes altered density.
+63493,key_conflict,Quantum Mechanics,Options A and H identical; both correct.
+63502,key_conflict,Quantum Mechanics,"Solution gets 1e-26 N·m, not among options."
+63513,key_conflict,Mechanics,Printed data give 1.47 mm; solution assumes Y misprint to match option.
+63514,key_conflict,Quantum Mechanics,Solution finds P (group 15); option list lacks clear match.
+63526,key_conflict,Mechanics,Solution gives y=-2.25; options lack negative sign.
+63531,key_conflict,Statistics,Options E and J both true; solution picks by source.
+63552,needs_data,Quantum Mechanics,Requires recalled tabulated half-life.
+63575,key_conflict,Digital Logic and Computer Architecture,Keyed shuffle value disagrees with standard definition; answer chosen by elimination
+63578,key_conflict,Conventional Energy Technologies,"Solution's own result 12 cm, 2220 rpm contradicts chosen option."
+63588,broken_text,Thermodynamics,Options are kJ/kg values unrelated to the kW capacity asked
+63591,needs_data,Fluid Mechanics,Diffuser loss coefficient K must be read from a chart.
+63596,needs_data,Material Science,Resistivity not given; mobility undeterminable.
+63601,key_conflict,Semiconductor Devices,"Solution finds 1.81e-4 cm, matching no option."
+63611,key_conflict,Mechanics,"Computed 0.0052 matches option J, not stated otherwise."
+63619,key_conflict,Material Science,"Solution gives K n^(n+1)/(n+1) in J/m^3; option I has wrong units, E/J differ."
+63627,key_conflict,Nuclear Engineering,"Solution finds hydrogen gives ~2.6 pairs, assumes argon to match options."
+63641,key_conflict,Electromagnetism and Special Relativity,Solution reinterprets permittivity as susceptibility to match an option.
+63644,needs_data,Nuclear Engineering,Eta for enriched uranium; cross sections not given.
+63646,key_conflict,Thermodynamics,Rigorous COP 0.362 not among options; solution forces (B).
+63665,mismatch,Conventional Energy Technologies,Likely IC-engine intake swirl generation; solution treats aero inlet ground vortices
+63675,key_conflict,Electromagnetism and Special Relativity,"Bragg condition gives 3500 nm, not among options."
+63676,key_conflict,"Signals, Systems and Control","Solution derives 1e-4 rad, not among options; guesses F"
+63678,key_conflict,Electromagnetism and Special Relativity,Result 900 ps; option 0.9 only matches in ns.
+63682,needs_data,Combinatorics,Coordination sequence of krs net; solution uses parity guess.
+63701,key_conflict,Mechanics,Result f ∝ v^3 matches no printed option.
+63709,key_conflict,Mechanics,Tangential plus centripetal acceleration; computed answer not among options.
+63711,key_conflict,Mechanics,Solution says both (B) and (C) true.
+63713,key_conflict,Mechanics,Solution result 1/16 not among options.
+63717,needs_data,Mechanics,"Figure geometry assumed (hinge at wall, string to wall)."
+63718,key_conflict,Mechanics,"Two valid roots, tan=1 and 3.8, both listed."
+63722,key_conflict,Mechanics,Options (c) and (f) describe the same launch.
+63723,needs_data,Mechanics,Peg geometry assumed; figure not given.
+63724,needs_data,Mechanics,Fluid mass assumed equal to m.
+63734,key_conflict,Mechanics,"Solution gets t0=10 s, 120 m; no option matches both."
+63735,key_conflict,Fluid Mechanics,"Solution derives 2gh, but options list gh multiples; no match."
+63736,key_conflict,Mechanics,"Average velocity is 1 m/s, not among options."
+63739,key_conflict,Mechanics,Given sin55 value wrong; tangential acceleration interpretation assumed.
+63751,needs_data,Mechanics,Incline angle missing from question text
+63753,key_conflict,Mechanics,Solution gives max speed at 1/(2a); option H
+63763,key_conflict,Mechanics,Solution finds both B and I correct
+63774,key_conflict,Mechanics,Solution finds two true options (A) and (F); single-answer stated.
+63779,needs_data,Mechanics,Block mass read from missing figure.
+63792,needs_data,Mechanics,Figure and incline angle not given in text.
+63793,broken_text,Mechanics,Options garbled and duplicated; figure missing.
+63794,needs_data,Mechanics,Figure not given.
+63800,key_conflict,Mechanics,"Solution gives 66 m, not among options."
+63803,broken_text,Mechanics,String length symbol and options garbled (l missing).
+63806,broken_text,Theory of Computation,Production sets missing from question text.
+63821,key_conflict,Mechanical Engineering,Solution says no option matches its computed 24.9%.
+63824,key_conflict,Mechanical Engineering,"Solution's own people-load count gives 20,870 W, not an option; forced to D."
+63841,broken_text,Circuits and Electronics,Printed binary lacks last three bits; options need 17 bits
+63847,key_conflict,Circuits and Electronics,"Solution gets 110 (option D) but option D is 110; consistent, though solution labels letters inconsistently."
+63854,key_conflict,Quantum Mechanics,"Solution computes 333 pm, picks J 331 pm; fine."
+63863,key_conflict,Thermodynamics,"Computed 3.44e3 J, not among options."
+63866,key_conflict,Thermodynamics,Printed t1=-27C gives no option; solution assumes +27C.
+63870,key_conflict,Thermodynamics,Capacity 10^8 kJ/h inconsistent with options; solution assumes 10^5.
+63880,key_conflict,Quantum Mechanics,"Solution gives ~8e10 Z^3, no option matches."
+63882,broken_text,Quantum Mechanics,Options garbled exponents.
+63893,key_conflict,Heat Transfer,Options in W/m^2 but loss per length asked; chosen option is convection flux.
+63894,needs_data,Heat Transfer,Time (5 min) missing from question.
+63897,key_conflict,Heat Transfer,"Given k=84 gives 15.9 m2, not an option; solution assumes 840."
+63908,key_conflict,Fluid Mechanics,"Computed T2≈46.6°C, p2≈124 kPa; options list ~20°C temperatures, mismatched."
+63913,key_conflict,Digital Logic and Computer Architecture,"Solution derives set 4, absent from options; picks 5 by 1-based counting."
+63918,mismatch,Thermodynamics,Options are masses; question asks work.
+63921,key_conflict,Thermodynamics,Isentropic gives ΔS=0; solution reinterprets as free expansion.
+63923,key_conflict,Thermodynamics,"Solution finds ΔU≈-3196, not among options; picks ΔH."
+63930,key_conflict,Fluid Mechanics,"Solution gets 3.11 kN·m; option I is 31.1, off by factor ten."
+63932,key_conflict,Mechanics,Data give amplitude 0.008; every option prints 0.0008
+63936,key_conflict,Fluid Mechanics,Solution gets ~324 m/s; no option matches.
+63947,key_conflict,Fluid Mechanics,Solution gives 8320 kN but option c says 8320 N
+63950,key_conflict,Fluid Mechanics,Options list three values for four stations; solution values don't match options
+63968,key_conflict,Mechanics,Computed 0.0464 J vs chosen 0.045 J option.
+63969,needs_data,Mechanics,Circular membrane Bessel modes; steel density assumed.
+63971,key_conflict,Electromagnetism and Special Relativity,Solution finds length ~200 m; no option matches.
+63980,key_conflict,Quantum Mechanics,Solution says no option matches the Balmer values.
+63987,broken_text;key_conflict,Semiconductor Devices,Einstein A/B ratio; no option matches the physical result
+63991,needs_data,Nuclear Engineering,Cross section data not given.
+63992,needs_data;key_conflict,Nuclear Engineering,"Fission cross section missing; printed flux gives 1081 kg, not options."
+64008,key_conflict,Digital Logic and Computer Architecture,"Trace gives q=-0.1011, r=0.0111e-4; option D differs in sign."
+64009,broken_text,Digital Logic and Computer Architecture,x=-6.8 likely typo for -68 to match options
+64022,key_conflict,Computer Networks,"Solution finds two valid options, A and C, in subnet."
+64034,key_conflict,Quantum Mechanics,Solution finds B about 27 T; no option matches.
+64048,key_conflict,Material Science,"Solution computes 1.5e3 atoms, picks (j) 1e3; fine. Density-volume atom count."
+64069,key_conflict,Databases,Solution picks INTERSECT while admitting UNION is intended
+64115,broken_text,Thermodynamics,Question truncated; solution reconstructs it via mean temperatures of Otto cycle.
+64116,broken_text,Thermodynamics,"Throttling of ideal gas: h and T equal, entropy rises."
+64156,key_conflict,Heat Transfer,Options D and I are equivalent; solution picks D.
+64167,key_conflict,Mechanical Engineering,Solution gives friction; verify option key
+64180,broken_text,Operating Systems,"Bernstein's conditions; options D, F, J are cut off"
+64189,key_conflict,Programming Languages and Compilers,No option prints 2; intended answer D
+64193,needs_data,Fluid Mechanics,Journal-bearing lab Reynolds equation; experiment not described.
+64208,key_conflict,Computer Networks,Options B and D list same set; solution admits ambiguity.
+64253,key_conflict,Semiconductor Devices,"Pure arithmetic; true area 18.66 m^2, intended option is width"
+64291,key_conflict,Quantum Mechanics,"Options are wavenumber forms, not a wavelength shift; solution picks 5/36 R_H."
+64292,needs_data,Thermodynamics,PV diagram missing; work on C to A read from figure.
+64295,key_conflict,Quantum Mechanics,"Solution gives 7.2e4 m/s, not among options."
+64296,key_conflict,Mechanics,Solution gives v=(1/2)(i+2j) i.e. E; torque and displacement options also checked.
+64304,key_conflict,Heat Transfer,"Solution gets 21 h, which is more than 14 h (option C); ice-growth quasi-steady conduction."
+64314,key_conflict,Quantum Mechanics,"Careful Zeff=1.5 gives 27/64 RH, not an option; picks A."
+64315,broken_text;needs_data,Thermodynamics,Final state not stated; solution assumes compression to quarter volume.
+64317,key_conflict,Electromagnetism and Special Relativity,"Solution gives 6000 Å, option E; check key consistency."
+64323,key_conflict,Mechanics,"Printed sign gives option G; solution intends minus sign, option I."
+64328,key_conflict,Chemistry,Solution's chain is reversed relative to option F; stated answer F reads literally wrong.
+64332,broken_text,Thermodynamics,Time span of one day assumed; pendulum period change from expansion.
+64333,needs_data,Quantum Mechanics,Graph not given; solution assumes A is steeper.
+64346,key_conflict,Quantum Mechanics,Two-shorter-wavelength condition unmet by solution's analysis; options ambiguous.
+64350,key_conflict,Quantum Mechanics,"Options E, G, H all true; solution picks E."
+64351,key_conflict,Mechanics,True ratio is 19/7; no option states it; E only matches 19/12 loosely.
+64359,key_conflict,Mechanics,"Solution gets 5L/9, not an option; says L/2 for uniform case."
+64369,key_conflict,Mechanics,Derived 2x^3=9y^2; no option matches exactly.
+64428,key_conflict,Material Science,"Computed d=0.239 nm, not among options."
+64436,key_conflict,Fluid Mechanics,"Solution says options assume 60 mph, not km/h as printed"
+64442,key_conflict,Semiconductor Devices,"Seebeck emf; solution gets about 38 mV, options are a few mV"
+64446,key_conflict,Semiconductor Devices,Solution says printed mobility is likely a typo.
+64447,key_conflict,Semiconductor Devices,Computed generation rate matches no option.
+64464,needs_data,Mechanical Engineering,Allowable stress and material not given.
+64472,key_conflict,Chemistry,Solution gives 1:3.00:4.98; no option matches exactly.
+64478,key_conflict,Electromagnetism and Special Relativity,Solution gives 9.3e-13 s; options 6.4e-13 and 8.2e-13 differ.
+64487,needs_data,Thermodynamics,"Needs ammonia property tables for h_f, h_g."
+64488,key_conflict,Thermodynamics,Solution finds no option matches; COPs exceed Carnot.
+64489,needs_data,Mechanical Engineering,Needs R-23 property tables.
+64492,key_conflict,Fluid Mechanics,Derived difference 28 not among options
+64496,key_conflict,Mechanics,"Solution gives r=2Rcosθ-a, x²+y²=R²; no option matches both."
+64501,key_conflict,Quantum Mechanics,Solution result 1.4e9 g matches no option.
+64511,needs_data,Chemistry,"Needs hydrogen atom ionisation energy, not given."
+64518,key_conflict,Mechanical Engineering,Solution says upward convex (A) but wording ambiguity; option naming inconsistent.
+64521,key_conflict,Semiconductor Devices,Computed 80 nA matches no option.
+64538,needs_data,Heat Transfer,Water temperature not given; assumed 98 C; series resistances with free convection outside.
+64542,needs_data,Mechanics,Figure with acceleration direction missing; solution infers it.
+64548,needs_data,Mechanics,"Figure missing; blocks with floor friction, contact force."
+64549,needs_data,Mechanics,Figure missing; torque balance on beam about hinge.
+64564,key_conflict,Mechanics,Solution result 25u/8R matches no listed option.
+64569,key_conflict,Mechanics,Solution disputes the commonly printed 45 s key.
+64571,needs_data,Mechanics,Figure with links and angles not given.
+64575,needs_data,Mechanics,Figure needed for point labels.
+64580,needs_data,Mechanics,Angle convention depends on missing figure.
+64583,key_conflict,Thermodynamics,Solution gets 23.3 kW; no option matches exactly.
+64587,needs_data,Mechanics,Incline angle missing from question.
+64600,key_conflict,Mechanics,"Solution finds D, F, I all true."
+64605,needs_data,Mechanics,Figure not given; arrangement assumed.
+64606,needs_data;key_conflict,Mechanics,Figure missing; solution says options B and F both true.
+64608,key_conflict,Mechanics,Options H and I identical; solution picks A.
+64610,key_conflict,Mechanics,Option A also true per solution; intended answer G.
+64613,key_conflict,Mechanics,Solution finds no option matches computed pair.
+64618,key_conflict,Mechanics,Integration of a(t); solution uses x=2t+t^2 etc.; answer given not visible.
+64619,needs_data,Mechanics,Figure with block masses missing.
+64631,key_conflict,Mechanics,Printed x=2 at rest gives no oscillation; sign lost.
+64632,key_conflict,Fluid Mechanics,Printed surface tension and options inconsistent.
+64634,needs_data,Mechanics,Figure missing; IAR 2R/3 from B.
+64635,key_conflict,Mechanics,"Solution finds 0.13 cm, not among options; options use 1 cm ice CM drop."
+64643,broken_text,Mechanics,"Garbled statement; solution gives l/(2v0)+(pi/2)sqrt(m/k), option E."
+64645,key_conflict,Quantum Mechanics,"Solution result matches option D; solution text mislabels as option d correctly, fine."
+64648,key_conflict,Mechanics,Printed data inconsistent; solution corrects sign of V1 to match option.
+64649,needs_data,Mechanics,Figure missing; A and B positions assumed.
+64655,key_conflict,Mechanics,"Solution gives 33.3 ft/s, not among options."
+64656,needs_data,Mechanics,Figure missing; solution assumes standard arrangement.
+64662,needs_data,Mechanics,Setup missing; solution assumes Irodov 1.80.
+64663,key_conflict,Mechanics,Result 2u²h/g; option E literally equals u²h/g.
+64670,needs_data,Mechanics,Incline angle and launch direction assumed; figure missing.
+64675,key_conflict,Theory of Computation,Solution says no option is correct; picks I anyway.
+64677,key_conflict,Theory of Computation,"Options B, F, I are all valid pumping arguments; intended I."
+64684,needs_data,Conventional Energy Technologies,Fuel properties not given; energy balance for evaporation.
+64732,key_conflict,Algorithms and Data Structures,solution reasons index i-1 but labels it (b) inconsistent with options
+64839,key_conflict,Programming Languages and Compilers,Options A and C both true; solution picks A.
+64957,broken_text,Algorithms and Data Structures,Vertex f missing from V in the question.
+65272,key_conflict,Digital Logic and Computer Architecture,Solution says several options literally true; picks b.
+65712,key_conflict,Digital Logic and Computer Architecture,Question's pattern 11111111 doesn't give -128 in any code.
+65994,key_conflict,Computer Networks,As printed no option works; solution assumes typo
+66520,key_conflict,Operating Systems,Stem says critical section; solution picks I/O operations.
+66830,needs_data,Operating Systems,Memory access time from part one not given in question.
+66844,needs_data,Operating Systems,Word length not given in question; 32-bit assumed.
+66981,key_conflict,Computer Networks,Options B and D identical; solution picks B.
+67281,needs_data,Computer Networks,Figure not given; spanning tree of bridges
+67456,needs_data,Combinatorics,Contour map figure reading; figure not given
+67582,needs_data,Theory of Computation,DFA figure; solution reconstructs it
+67623,needs_data,Algorithms and Data Structures,Graph figure not in text; solution supplies edge weights
+67658,key_conflict,Combinatorics,"Solution gives A; listed options: A is P only, matches, so check key"
+67664,key_conflict,Computer Networks,"Solution gives P=8 via Y, Q=7 via X; check which options listed correct."
+67670,needs_data,Programming Languages and Compilers,Control flow graph figure content is not given in question.
+67701,key_conflict,Computer Networks,"Solution trace gives 7 MSS, hedged about the standard key."
+67825,needs_data,Algorithms and Data Structures,Graph figure not given; solution reads it as longest simple path.
+67964,needs_data,Algebra,Bar chart values not given in text
+68225,needs_data,Algorithms and Data Structures,Figure not given; solution reads edge weights from it.
+68239,needs_data,Algebra,Pie chart values not given in text
+68483,needs_data,Operating Systems,Graph figure needed; solution reads it into matrices.
+68538,needs_data,Digital Logic and Computer Architecture,Depends on datapath figure.
+68642,needs_data,Digital Logic and Computer Architecture,Stage-cycle table is a figure not given.
+68946,key_conflict,Algorithms and Data Structures,"Solution shows SLLdel O(n), DLLdel O(1), which is option D."
+69036,key_conflict,Algorithms and Data Structures,"Derived order log n, n^(1/3), 2^log n, log n! matches (A) and (C) labels inconsistent? Solution says (a)."
+69057,key_conflict,Algorithms and Data Structures,"Solution gives (7,4) = option B; options C and D identical."
+69138,needs_data,Digital Logic and Computer Architecture,Figure with interrupt cycle timings not shown; solution supplies them.
+69224,needs_data,Operating Systems,Job table is in a figure
+69240,key_conflict,Circuits and Electronics,solution gives 19.2 by convention but detailed timing 12.0
+69251,needs_data,Algorithms and Data Structures,Cycle property; edge weights come from the figure.
+69313,needs_data,Algorithms and Data Structures,Graph edges given only in figure.
+69475,key_conflict,Calculus,"Solution finds 12π−2π³, matching no option."
+69569,key_conflict,Theory of Computation,Options (a) and (c) are identical claims; both true.
+69597,key_conflict,Computer Networks,"Solution gives 500 ms, 65535x2^14 (C); options A, B, D oddly duplicated."
+69698,key_conflict,Abstract Algebra,"Solution finds 2 solutions, option labelled C but options list 2 as C absent"
+69773,key_conflict,Combinatorics,"Solution reasons box labeled mixed; matches option B, fine"
+69980,key_conflict,Programming Languages and Compilers,"Solution gives 3, 6, which is option A; verify key."
+70118,key_conflict,Theory of Computation,"Solution finds odd length, which matches none of the options cleanly"
+70241,key_conflict,Digital Logic and Computer Architecture,Solution's 1.155 vs 7/6.061 = 1.155 fine; options unverifiable
+70258,key_conflict,"Signals, Systems and Control","Solution says 4 parity bits, notes published key says 3."
+70281,needs_data,Computer Networks,Count to infinity trace
+70289,key_conflict,Computer Networks,"Solution gets 160 bits, option d; wording consistent, but solution mentions 20 bytes"
+70508,key_conflict,Operating Systems,Solution gets 0.0194 but option reads 0.194
+71317,key_conflict,Calculus,Statement's y<=0 sign makes lemma false; solution proves y>=0 version.
+71350,mismatch;needs_data,Number Theory,CLRS 31.6-31.10 are gcd properties; solution derives Vasicek/CIR bond prices
+73561,needs_data,Power Systems and Power Electronics,Line voltage not given; solution assumes 400 V.
+74217,needs_data,Mechanical Engineering,Plan not unique; consumer point missing.
+74504,needs_data,Fluid Mechanics,Free-stream velocity not given.
+74520,needs_data,Fluid Mechanics,Orifice area not given.
+74562,needs_data,Fluid Mechanics,Refers to earlier problem; viscosity not given
+74620,needs_data,Heat Transfer,Thermal conductivity of steel not given; Biot check needs k.
+74707,key_conflict,Heat Transfer,Hot and cold side energy balances disagree (84 vs 50.16 kW); data inconsistent
+74840,needs_data,Mechanics,Second moment of area I not given.
+74862,needs_data,Mechanical Engineering,Key length not given; shear area needs it.
+74918,key_conflict,Mechanical Engineering,Printed torque formula has extra pi; solution corrects it
+75024,needs_data,Mechanical Engineering,Width of cut not given; answer in terms of b.
+75027,needs_data,Mechanical Engineering,Feed rate not given for MRR.
+75036,needs_data,Mechanical Engineering,Rod diameter not given for traverse grinding MRR.
+75039,needs_data,Mechanical Engineering,Workpiece diameter not given.
+75087,needs_data,Thermodynamics,Needs s_g and s_fg not given in question.
+75095,needs_data,Thermodynamics,Needs s_fg and h_fg at 10 kPa not given.
+75615,broken_text,Algorithms and Data Structures,Negation symbols lost in question text
+75678,key_conflict,Algorithms and Data Structures,Two shortest paths (F and G) exist; exactly-one-correct claim fails.
+76072,broken_text,Circuits and Electronics,Option A text garbled.
+76213,key_conflict,Quantum Mechanics,Solution computes 9.4 eV but labels 10 eV as option C; the key letter is inconsistent.
+76244,broken_text,Thermodynamics,Wien displacement law; the printed options are garbled.
+76412,key_conflict,Material Science,Printed modulus exponent likely misprint; solution flags it.
+76775,broken_text,Electromagnetism and Special Relativity,Illuminance '21x' garbled lux value.
+77531,broken_text,Quantum Mechanics,Question truncated; parity of spherical harmonics.
+77571,key_conflict,Quantum Mechanics,Printed formula has dimensional and sign errors per solution.
+77793,needs_data,Quantum Mechanics,"L1, L2 matrices not given in question."
+77933,needs_data,Quantum Mechanics,Vibration frequency of H2 not given
+78318,broken_text;needs_data,Semiconductor Devices,E(k) relation missing from question; solution assumes tight-binding cosine band.
+78319,broken_text;needs_data,Semiconductor Devices,E(k) missing from question; solution assumes textbook dispersion.
+78320,needs_data,Material Science,Dispersion not given; solution assumes 1D tight-binding chain.
+78324,needs_data,Material Science,Dispersion missing; solution assumes simple cubic tight-binding.
+78325,needs_data,Material Science,Group velocity v = (1/hbar) dE/dk; E(k) not given.
+78457,key_conflict,Material Science,Given epsilon is a typo; solution substitutes a different value.
+78484,needs_data,Quantum Mechanics,C_j+ definition from earlier part not given in question.
+78603,needs_data,Material Science,Tc not given in question
+78605,needs_data,Material Science,Refers to previous results
+78607,broken_text,Material Science,Question truncated
+78723,broken_text,Computer Networks,Garbled parameter; interpreted as a = tau/Tp.
+78727,needs_data,Computer Networks,Frame length missing; propagation delay unit lost.
+78730,needs_data,Computer Networks,Frame length missing; propagation delay unit lost.
+78778,needs_data,Probability and Stochastic Processes,Original arrival rate not given; answer left as formula in lambda.
+78836,needs_data,"Signals, Systems and Control","Constellation figure not given; solution assumes points (±A,±B)."
+78845,needs_data,"Signals, Systems and Control","Constellation figure not given; solution assumes points (±A,±B)."
+78887,mismatch,"Signals, Systems and Control",Question says E_yz but only x and y given; solution computes E_xy.
+78938,needs_data,"Signals, Systems and Control",Constellation figure missing; solution assumes rectangular 4-point.
+78940,needs_data,"Signals, Systems and Control",Nominal amplitude A not given; assumes design point Pbit=1e-6.
+79000,needs_data,"Signals, Systems and Control",Number of bits per sample and M not given.
+79140,needs_data,"Signals, Systems and Control",required SQNR target missing from question
+79172,needs_data,"Signals, Systems and Control",Transmit level not given
+79265,needs_data,"Signals, Systems and Control",Terrestrial term symbol not defined in question
+79269,key_conflict,"Signals, Systems and Control","Solution omits beta_k, unlike sibling solutions' LoS amplitude"
+79447,needs_data,"Signals, Systems and Control",Notation of source paper not given
+79448,needs_data,"Signals, Systems and Control",RIS-aided massive MIMO SINR; model not stated
+79461,needs_data,"Signals, Systems and Control",Effective channel of stacked intelligent metasurface; symbols undefined
+79519,key_conflict,"Signals, Systems and Control","Solution picks (c), whose option has extra rho_k factor inside; the boxed slot is already squared."
+79547,needs_data,"Signals, Systems and Control",Theorem 1 of an unnamed paper; cell-free MRC SINR
+79600,broken_text,"Signals, Systems and Control",Garbled \pm b{\phi} for bold phi in options
+79601,broken_text,"Signals, Systems and Control",Garbled \pm b{\phi}; solution uses unit noise instead of sigma_a^2
+79602,broken_text,"Signals, Systems and Control",Garbled \pm b{\phi} in the given equation
+79734,key_conflict,"Signals, Systems and Control",Missing covariance R; solution notes printed Phi lacks H
+79786,needs_data,"Signals, Systems and Control",Cell-free massive MIMO SINR with MR combining; source notation assumed
+79787,needs_data,"Signals, Systems and Control",Use-and-then-forget SINR bound; source notation assumed
