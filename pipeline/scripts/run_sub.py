@@ -1113,10 +1113,11 @@ def account_id(a: dict) -> str | None:
 
 
 def pick_account(accounts: list[dict], cap: "UsageCap", models, now: float | None = None,
-                 skip=(), strict: bool = False) -> tuple[dict | None, tuple[float, str] | None]:
+                 skip=(), strict: bool = False, since: bool = False) -> tuple[dict | None, tuple[float, str] | None]:
     """The first account in serving order that is on, logged in, not in `skip` and not blocked by its
     own readings for `models`, else (None, (the earliest time one of them frees, why)). An account with
-    room for cap.room replies at once goes before one near its stop; with strict, only such an account."""
+    room for cap.room replies at once goes before one near its stop; with strict, only such an account.
+    With since, an account's replies that ended after its last reading count against it (UsageCap.blocked)."""
     holds, near = [], None
     for a in accounts:
         if not a.get("enabled", True) or a["name"] in skip:
@@ -1124,10 +1125,10 @@ def pick_account(accounts: list[dict], cap: "UsageCap", models, now: float | Non
         acct = account_id(a)
         if acct is None:
             continue
-        b = cap.blocked(acct, models, now)
+        b = cap.blocked(acct, models, now, since=since)
         if b is not None:
             holds.append((b[0], f"{a['name']}: {b[1]}"))
-        elif cap.room <= 1 or cap.blocked(acct, models, now, cap.room) is None:
+        elif cap.room <= 1 or cap.blocked(acct, models, now, cap.room, since=since) is None:
             return a, None
         else:
             near = near or a
@@ -1142,12 +1143,14 @@ def tail_move(cap: "UsageCap", active: dict, models, now: float | None = None) -
     time), the first other account with room for cap.room, to move to once the running replies are done;
     else None. The stretch left is not lost: a later stop takes the account back while its window lasts.
     (2026-11-23: a 6-worker run spent 20 min under one reply a minute on an account at 68% of its 70%
-    stop while three accounts sat free.)"""
+    stop while three accounts sat free.) The other account is judged as the one in use is, with the replies
+    since its last reading (2026-11-26: judged without them, an account just left at its stop looked free,
+    and two accounts handed the run back and forth, each move waiting for the running replies.)"""
     now = now if now is not None else time.time()
     if cap.room <= 1 or not models or any(cap.unread(m, now) or not cap.over(m, [(m, now)] * (cap.room - 1), now)
                                           for m in models):
         return None
-    return pick_account(load_accounts(), cap, models, now, skip={active["name"]}, strict=True)[0]
+    return pick_account(load_accounts(), cap, models, now, skip={active["name"]}, strict=True, since=True)[0]
 
 
 def use_account(a: dict, cap: "UsageCap") -> None:
@@ -1292,16 +1295,18 @@ class UsageCap:
         self.probed = {}
         self._save()
 
-    def blocked(self, account: str, models, now: float | None = None, room: int = 1) -> tuple[float, str] | None:
+    def blocked(self, account: str, models, now: float | None = None, room: int = 1,
+                since: bool = False) -> tuple[float, str] | None:
         """Account rotation: (when it frees, why) if `account`'s last readings alone keep every one of
         `models` from going (`room` replies of it at once), else None. A reading that is old, or past the
-        stop only by the replies since, does not block: the probe after a switch reads the account again."""
+        stop only by the replies since, does not block: the probe after a switch reads the account again.
+        With since, the replies that ended after the reading count too (at their estimated cost)."""
         now = now if now is not None else time.time()
         saved, self.account = self.account, account
         try:
             holds = []
             for m in models:
-                over = self.over(m, [(m, now)] * (room - 1), now, since=False)
+                over = self.over(m, [(m, now)] * (room - 1), now, since=since)
                 if not over:
                     return None
                 ends = [self.resume_at(w, now) for w, _ in over]  # a near_reset stretch frees it before the reset
