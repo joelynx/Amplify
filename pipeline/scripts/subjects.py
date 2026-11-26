@@ -650,6 +650,12 @@ _STORED_UNIT = re.compile(r"[ \t]*(%|°\s*[CFK]?|Å|[A-Za-zµΩ][A-Za-z0-9µΩ/^
 _UNIT_POWER = re.compile(r"(?<=[A-Za-zµΩ)}])\^\s*\{?\s*-?\d+\s*\}?")  # m^{3}, s^-1: part of a unit
 
 
+# A number that names one of several players, bidders, options and the like (2026-11-26: GameTheory-Bench's
+# "Winner: Bidder 2 (\$95), Price: \$10" read as the values 2, 95, 10 failed 91 correct keys)
+_ENTITY_LABEL = re.compile(r"(?i)\b(bidders?|players?|firms?|agents?|buyers?|sellers?|candidates?|voters?|options?"
+                           r"|strateg(?:y|ies)|alternatives?|projects?|machines?|workers?|jobs?|nodes?|items?)\s+\d+\b")
+
+
 def _plain_stored(s: str) -> str:
     """A stored answer as plain text for reading values off it: LaTeX wrappers, degrees, ohms,
     micro and angstrom as characters; subscripts (CO_{2}, T_1), part labels and thousands
@@ -666,6 +672,7 @@ def _plain_stored(s: str) -> str:
     t = re.sub(r"\\[()\[\]]", " ", t)
     t = re.sub(r"_\s*\{[^{}]*\}|_\s*[A-Za-z0-9]", " ", t)
     t = re.sub(r"\(\s*(?:[a-h]|i{1,3}|iv|v|vi{0,3}|\d)\s*\)", " ", t)  # part labels
+    t = _ENTITY_LABEL.sub(r"\1", t)  # "Winner: Bidder 2 (\$95)": the 2 names a bidder, it is not a value
     t = re.sub(r"\s+\^", "^", t)  # "m ^{-3}": the power belongs to the unit before it
     return re.sub(r"(?<=\d),(?=\d{3}\b)", "", t)  # thousands separators
 
