@@ -180,6 +180,11 @@ def run(cfg: dict, pc, a) -> None:
                     if not a.wait_on_limit:
                         print(json.dumps({"stopped": "every account is held", "left": len(queue)}), flush=True)
                         break
+                    # the account in use frees too (the pick above skips it): 2026-11-26 16:22 the wait ran to
+                    # 16:56 on seventh's hold although sixth, in use, reset at 16:40
+                    own = cap.blocked(run_sub.account_id(active), [model]) if active else None
+                    if own and (hold is None or own[0] < hold[0]):
+                        hold = (own[0], f"{active['name']}: {own[1]}")
                     secs = max(60, min(int((hold[0] if hold else time.time() + 900) - time.time()) + 120, 1020))
                     print(f"every account is held ({hold[1] if hold else 'cap'}); waiting {secs // 60} min", flush=True)
                     deadline = time.time() + secs
