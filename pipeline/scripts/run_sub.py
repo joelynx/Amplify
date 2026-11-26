@@ -1286,7 +1286,14 @@ class UsageCap:
                                    "tokens": self.tokens, "hist": {m: xs[-2000:] for m, xs in self.hist.items()},
                                    "active": {"account": self.account, "name": self.active_name}}),
                        encoding="utf-8")
-        tmp.replace(self.state_file)
+        for i in range(20):  # a reader holding the file denies the replace on Windows (2026-11-26 17:04: a status
+            try:             # check's open() stopped the reclassification); it lets go within moments
+                tmp.replace(self.state_file)
+                return
+            except PermissionError:
+                if i == 19:
+                    raise
+                time.sleep(0.5)
 
     def switch(self, account_file: Path, login_file: Path, name: str | None = None) -> None:
         """Account rotation: another account's login from now on, with its own readings and probes."""
