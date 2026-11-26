@@ -170,8 +170,11 @@ def run(cfg: dict, pc, a) -> None:
                 if not running:
                     if not queue:
                         break
+                    # since: the replies after an account's reading count, as cap.allows counts them; without it
+                    # two accounts each past their stop only by those replies took turns several times a second
+                    # (2026-11-26 19:15, the reclassification's Opus pass; run_sub.tail_move had the same, 83aff72)
                     nxt, hold = run_sub.pick_account(run_sub.load_accounts(), cap, [model],
-                                                     skip={active["name"]} if active else ())
+                                                     skip={active["name"]} if active else (), since=True)
                     if nxt is not None:
                         print(json.dumps({"rotate": {"from": active and active["name"], "to": nxt["name"]}, "at": now_iso()}), flush=True)
                         run_sub.use_account(nxt, cap)
@@ -182,7 +185,7 @@ def run(cfg: dict, pc, a) -> None:
                         break
                     # the account in use frees too (the pick above skips it): 2026-11-26 16:22 the wait ran to
                     # 16:56 on seventh's hold although sixth, in use, reset at 16:40
-                    own = cap.blocked(run_sub.account_id(active), [model]) if active else None
+                    own = cap.blocked(run_sub.account_id(active), [model], since=True) if active else None
                     if own and (hold is None or own[0] < hold[0]):
                         hold = (own[0], f"{active['name']}: {own[1]}")
                     secs = max(60, min(int((hold[0] if hold else time.time() + 900) - time.time()) + 120, 1020))
@@ -191,7 +194,7 @@ def run(cfg: dict, pc, a) -> None:
                     while time.time() < deadline:
                         time.sleep(min(60, max(1, deadline - time.time())))
                     if rotation:
-                        active = run_sub.pick_account(run_sub.load_accounts(), cap, [model])[0] or active
+                        active = run_sub.pick_account(run_sub.load_accounts(), cap, [model], since=True)[0] or active
                         run_sub.use_account(active, cap)
                     continue
                 for fut in wait(running, return_when=FIRST_COMPLETED)[0]:
