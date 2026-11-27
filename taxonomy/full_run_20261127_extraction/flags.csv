@@ -1,0 +1,37 @@
+question_id,flags,subject,note
+80422,broken_text,Combinatorics,No explicit question asked; presumably which player wins.
+80620,mismatch,Combinatorics,"Solution cites Monsky: dissection is impossible, contradicting the request"
+80879,broken_text,Algebra,Two unrelated problems are merged; filed by the first.
+81055,needs_data,Algebra,Graph of g not given
+81395,needs_data,Mechanics,Refers to earlier problem's formulas and figure
+81825,needs_data,Electromagnetism and Special Relativity,Circuit figure not given; steady state with ideal C and L
+82313,needs_data,Electromagnetism and Special Relativity,Circuit figure not given; answer depends on it.
+82355,needs_data,Electromagnetism and Special Relativity,Circuit figure not given; R2 value missing from text.
+82483,mismatch,Algebra,Solution reinterprets the ambiguous recursion definition
+82546,key_conflict,Combinatorics,Solution gives 2^(n-2) vs stated 2^(2n-2).
+82623,open_problem,Combinatorics,Asymptotics of rhombus tilings of a 2n-gon.
+82631,open_problem,Combinatorics,General case open; m=5 case reduced to counting integer solutions.
+82639,open_problem,Combinatorics,Growth-rate bounds for counting binary strings; part (b) open.
+82647,open_problem,Combinatorics,Singer perfect difference set from finite fields; part (b) open.
+82655,open_problem,Algebra,Part (b) is the open Casas-Alvero case.
+82687,open_problem,Algebra,Part (b) only has partial results in the solution.
+83381,key_conflict,Calculus,"Correct t=-1.2, distance sqrt(5.6)≈2.37, not 4.63"
+83392,key_conflict,Calculus,"r_C should be 2i+2j+k, solution prints 2i-2j+k"
+83400,broken_text,Calculus,"Solution uses Φ=4x²yz²+2, garbled in question"
+83401,key_conflict,Calculus,Plane should be 2x-y+2z-5=0; printed +z
+83414,key_conflict,Calculus,"Solution uses A_z=-z²x; with stated A, div A(2,1,1)=10"
+83418,key_conflict,Calculus,"Disc area is 25π, solution prints 25²π"
+83493,needs_data,Mechanics,Figure-dependent; only final answer given
+83658,needs_data,Thermodynamics,Figure of path ABC not given
+83664,mismatch,Thermodynamics,"Solution treats CO2 heat at constant V and P, not this cycle."
+83733,needs_data,Electromagnetism and Special Relativity,Circuit figure with capacitor values needed
+83783,needs_data,Electromagnetism and Special Relativity,Figure not given; generator arrangement unknown.
+83966,broken_text,Probability and Stochastic Processes,Question text lacks a stated ask; only the recursion is given
+84346,key_conflict,Probability and Stochastic Processes,Solution computes L_A with mu=20 instead of 30; should be 1/2 anyway.
+84353,needs_data,Probability and Stochastic Processes,Figure 9.21 not provided in text
+84356,needs_data,Probability and Stochastic Processes,Figure 9.21 not provided in text
+84363,needs_data,Probability and Stochastic Processes,Figures for structures not provided
+84386,broken_text,Quantitative Finance,Martingale definition from the next problem appended to the question
+84477,key_conflict,Probability and Stochastic Processes,"P({0}) could be 1/3, so answer is No, not Yes."
+85028,key_conflict,Statistics,Stated mean 15 but data sum gives 25/15.
+85579,key_conflict,Algebra,Stated claim is false; solution gives a counterexample.

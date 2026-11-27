@@ -1119,14 +1119,14 @@ def pick_account(accounts: list[dict], cap: "UsageCap", models, now: float | Non
     room for cap.room replies at once goes before one near its stop; with strict, only such an account.
     With since, an account's replies that ended after its last reading count against it (UsageCap.blocked)."""
     holds, near = [], None
-    # an account marked off_at_stop goes off once its own reading puts its five-hour window at its stop (owner
-    # 2026-11-27 of first: "switch on first too, but stop at the regular 70%, and then switch it off")
+    # an account marked off_at_stop goes off once its own reading puts a window at its stop (owner 2026-11-27 of
+    # first: "switch on first too, but stop at the regular 70%, and then switch it off"; its weekly stop may come first)
     ending = [a for a in accounts if a.get("enabled", True) and a.get("off_at_stop") and account_id(a)
-              and cap.at_stop(account_id(a), "five_hour", models, now)]
+              and cap.at_stop(account_id(a), None, models, now)]
     if ending:
         for a in ending:
             a["enabled"] = False
-            print(json.dumps({"account_off": a["name"], "why": "five_hour at its stop (off_at_stop)", "at": now_iso()}), flush=True)
+            print(json.dumps({"account_off": a["name"], "why": "a window at its stop (off_at_stop)", "at": now_iso()}), flush=True)
         listed = load_accounts()
         for x in listed:
             if any(x["name"] == a["name"] for a in ending):
@@ -1481,13 +1481,13 @@ class UsageCap:
     def allows(self, model: str, running: list[tuple[str, float]], now: float | None = None) -> bool:
         return not self.unread(model, now) and not self.over(model, running, now)
 
-    def at_stop(self, account: str, w: str, models, now: float | None = None) -> bool:
-        """Whether `account`'s last reading alone puts window `w` at its stop for any of `models` (one more
-        reply of it would pass the stop)."""
+    def at_stop(self, account: str, w: str | None, models, now: float | None = None) -> bool:
+        """Whether `account`'s last reading alone puts window `w` (None: any window) at its stop for any of
+        `models` (one more reply of it would pass the stop)."""
         now = now if now is not None else time.time()
         saved, self.account = self.account, account
         try:
-            return any(win == w for m in models for win, _ in self.over(m, [], now, since=False))
+            return any(w in (None, win) for m in models for win, _ in self.over(m, [], now, since=False))
         finally:
             self.account = saved
 
