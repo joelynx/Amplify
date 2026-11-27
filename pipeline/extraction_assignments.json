@@ -1,0 +1,4 @@
+{
+"note": "Owner 2026-11-27 (the dataset.zip import: 'routing unsolved questions to their suitable solvers'): the Extraction import's maths rows without a solution of their own (app/tools/import_extraction.py), each with its solving model and effort: competition and olympiad problems Opus 5.5 high, textbook exercises (Ross, Dekking et al., Evans and Rosenthal) Opus 5.5 medium. Listing a question here puts it in run_sub.py's scope. Written by the import's chain after classification (held rows left out).",
+"questions": {}
+}

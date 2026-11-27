@@ -1119,6 +1119,19 @@ def pick_account(accounts: list[dict], cap: "UsageCap", models, now: float | Non
     room for cap.room replies at once goes before one near its stop; with strict, only such an account.
     With since, an account's replies that ended after its last reading count against it (UsageCap.blocked)."""
     holds, near = [], None
+    # an account marked off_at_stop goes off once its own reading puts its five-hour window at its stop (owner
+    # 2026-11-27 of first: "switch on first too, but stop at the regular 70%, and then switch it off")
+    ending = [a for a in accounts if a.get("enabled", True) and a.get("off_at_stop") and account_id(a)
+              and cap.at_stop(account_id(a), "five_hour", models, now)]
+    if ending:
+        for a in ending:
+            a["enabled"] = False
+            print(json.dumps({"account_off": a["name"], "why": "five_hour at its stop (off_at_stop)", "at": now_iso()}), flush=True)
+        listed = load_accounts()
+        for x in listed:
+            if any(x["name"] == a["name"] for a in ending):
+                x["enabled"] = False
+        save_accounts(listed)
     for a in accounts:
         if not a.get("enabled", True) or a["name"] in skip:
             continue
@@ -1467,6 +1480,16 @@ class UsageCap:
 
     def allows(self, model: str, running: list[tuple[str, float]], now: float | None = None) -> bool:
         return not self.unread(model, now) and not self.over(model, running, now)
+
+    def at_stop(self, account: str, w: str, models, now: float | None = None) -> bool:
+        """Whether `account`'s last reading alone puts window `w` at its stop for any of `models` (one more
+        reply of it would pass the stop)."""
+        now = now if now is not None else time.time()
+        saved, self.account = self.account, account
+        try:
+            return any(win == w for m in models for win, _ in self.over(m, [], now, since=False))
+        finally:
+            self.account = saved
 
     def held_until(self, model: str, now: float | None = None) -> tuple[float, str] | None:
         """With nothing running: (when a question of `model` may go, why), or None if it may go now."""
