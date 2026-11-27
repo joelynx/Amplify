@@ -1247,6 +1247,9 @@ class UsageCap:
         # account rotation: an account with room for fewer replies at once than this is near its stop, and the
         # rotation moves to one with room once its running replies are done (tail_move)
         self.room = max(1, int(conf.get("rotate_room", 1)))
+        # reset_at: {account label: ISO time}: the owner reset that account's limits then, so its readings from before
+        # are left out (a stale reading past a stop would hold the account until the old reset, never probed again)
+        self.reset_at = {a: datetime.fromisoformat(t).timestamp() for a, t in (conf.get("reset_at") or {}).items()}
         self.worst = {m: float(v) for m, v in (conf.get("reply_max_usd") or {}).items()}
         self.scale = float(conf.get("reply_cost_scale", 1.0))  # owner 2026-11-20: worst cases scaled down (0.5)
         self.max_age = 60 * float(conf.get("reading_max_age_min", 20))  # older: the account's owner may have used it since
@@ -1269,7 +1272,10 @@ class UsageCap:
 
     @property
     def points(self) -> list:
-        return self._acct()["points"]
+        """The account's readings, those taken before an owner's reset of it (reset_at) left out."""
+        cut = self.reset_at.get(self.account)
+        pts = self._acct()["points"]
+        return pts if cut is None else [p for p in pts if p[0] >= cut]
 
     @property
     def done(self) -> list:
