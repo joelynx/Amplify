@@ -1,4 +1,110 @@
-# Solver handoff: run the solution pipeline on the subscription
+# Solver handoff
+
+## Status 2026-11-28 15:40 (written when the subscription limits ran out)
+
+Everything is stopped:
+- No solver, classification or embedding is running.
+- No judge job is out: the last, `20261128-145909`, is imported.
+- Everything is committed and pushed.
+- The subscription ends soon, so this section is the plan for when it resets.
+
+### The Extraction import (dataset.zip and the three extra-books zips)
+
+- **Rows:** 10,104 are in the bank.
+  - dataset.zip: 6,278, after the owner deleted 41 held rows.
+  - Extra books part 1 (Euclid, Fermat and Hypatia contests): 877.
+  - Parts 2 and 3: 2,949, after the owner deleted 23 flagged rows.
+  - The import map is `app/data/appdata/extraction_map.csv` (git-ignored). The importer is
+    `app/tools/import_extraction.py`; its `DELETED` set keeps the deleted rows out of a re-import.
+- **Progress:** 10,070 passed judging. None is Uncategorized. Every row with a solution is embedded. Every row is
+  classified with its solution in view, except the 46 below.
+- **Open:** 34 rows.
+
+  | What | Rows | Next step |
+  |---|---|---|
+  | Book solution flagged by the judge (aids mode) | 86736, 86737 (Fermat), 89609 (Fomin) | review solve (step 2) |
+  | Review reply received, not judged | 89093 | goes in the next judge job (step 3) |
+  | Cut off at the output limit after their attempts | 80126, 80155, 80157, 80437, 80965 (Canadian IMO camp), 83072 (Olymon), 85739, 85767, 85870 (Tournament of Towns), 89266, 89952, 89956 (Fomin), 82622 (Simon Marais, three times) | owner: leave for a person, or retry with a larger output cap |
+  | Answer disagrees with the book after two solves | 84426 (Evans and Rosenthal), 86315 (Euclid), 87033, 87146, 87164, 87350, 87376, 87381, 87480, 87482, 87483, 87487, 87490 (Castañeda et al.), 89111, 89434, 89514, 89517 (Fomin) | owner (human review) |
+
+- **Not yet reclassified:** 46 rows of parts 2 and 3 that passed in jobs `20261128-142030` and `-145909` and were
+  labelled from the question alone. They are embedded and wait for step 5.
+- **Statements false or garbled as printed** (flagged by the reclassification; each solution proves a corrected
+  version). The owner has not decided whether to delete or fix them:
+  - waves A and B: 80433, 80686, 80733, 80787, 80906, 80917, 84668, 84671, 85046, 85435, 85498;
+  - parts 2 and 3: 87352, 88486, 88742, 88749, 89282, 89626, 89854, 89910, 89957
+    (`taxonomy/full_run_20261128_reclass_extra23/flags.csv`).
+
+### Accounts (pipeline/accounts.json, git-ignored)
+
+- **On:** seventh and third. Both had spent their five-hour windows at the end.
+- **Off:**
+  - fourth: its login expired at 13:11, "OAuth session expired and could not be refreshed"; owner: "turn off the
+    fourth account for now".
+  - sixth: its login failed at 14:50; owner: "turn off sixth as well".
+  - eighth and second: owner, "Turn off eighth as well as this account". Second is the interactive session's login.
+  - first (stops at 70%, then off) and fifth: already off before.
+- **To bring one back:** run `/login` with `CLAUDE_CONFIG_DIR=C:/Users/<you>/.claude-accounts/<name>`, then set its
+  `"enabled": true`.
+- **Usage caps** (`config.subscription.usage_cap`): every account's five-hour window may run to 100% until 2026-12-31,
+  except first, which stops at 70%. Weekly windows keep the usual stop.
+
+### After the reset, in order
+
+1. **Accounts.** Log back in the ones the owner wants, and enable them.
+   - Check: `python pipeline/scripts/run_subjects.py verify --review` must end with `accepted`.
+   - `run_subjects.py`'s request check runs under the **first enabled account**. A broken login there fails every
+     solve with "the request check failed or the wrapping is not accepted", even when `verify` passes under another
+     account.
+2. **Review solve** of the three book flags, Fable 5.2 high:
+   `python -u pipeline/scripts/run_subjects.py adjudicate --ids 86736,86737,89609 --workers 4 --wait-on-limit --force-unlock`
+3. **Judge job.** `python pipeline/scripts/remote_judge.py export --push` sends 89093 and the three reviews.
+   - The owner judges on their machine. Then `git pull` and `remote_judge.py import --job <job>`.
+   - **No pushes while a job is out.**
+4. **Embed:** `python -m app.tools.reembed_solved --apply`. It embeds rows with a question and a solution only; no
+   approval needed.
+5. **Reclassify** the 46 rows, plus any question-only rows step 3 passes, with `taxonomy/tools/reclass_kit/`
+   (README there). Then commit and push.
+6. **Owner decisions:** the cut-off and disagreeing rows above, and the 20 false-as-printed statements.
+
+### Rules and lessons from 2026-11-27/28
+
+- **Classify only solved questions** (owner 2026-11-28).
+  - An import's unsolved rows go to their solver first, routed by source with no classifier call.
+  - They are classified after judging and embedding.
+  - A source that mixes subjects so the solver profile can't be chosen from the source: ask the owner.
+- **The judge cycle:** export, then the owner judges, then import, then re-embed. Push before an export, never while a
+  job is out.
+- **Disk.** Every judge import and every re-embed first copies `amplify.db`: 2.65 GB a copy.
+  - On 2026-11-28 fifteen copies filled the disk. The maths solve crashed with OSError 28.
+  - Keep at least 12 GB free before long runs, and ask the owner before pruning `amplify.db.bak-*`.
+  - The owner pruned to the newest two that day.
+- **Workers:** 16 (owner: "Bump up the workers").
+  - Each worker commits about 315 MB.
+  - Free virtual memory dipped to 1.1 GB once.
+  - More workers need a larger page file.
+- **Multiple-choice options must each start their own line** as `(A) ...`: `subjects.option_count` counts labels only
+  there, in order.
+  - Fermat printed them inline, and judge job `20261128-103645` refused 499 correct keys.
+  - The importer now runs `option_lines` on Fermat statements.
+- **Stale feedback.** A retry carries the previous check's feedback. When a statement or check changes between
+  attempts, that feedback can be wrong.
+  - Here 497 second attempts followed "the question prints no options" after the options were fixed.
+  - The fix was a corrected `feedback_3.json` and status `retry` (archive
+    `pipeline/archive/pipeline_before_fermat_retry3_*.db`). 495 then passed.
+- **Logins can expire mid-run.** A failed usage probe makes the rotation skip the account. The request-check point
+  above still applies.
+- **Deletions** go through a backup and an archive in `pipeline/archive/deleted_*.json` (rows, tags, reasons). The
+  rows are removed from `hold_ids`, marked in the import map, and added to the importer's `DELETED`.
+
+Memory files with the full history: `project_extraction_import.md`, `project_account_rotation.md`,
+`feedback_embed_then_reclassify.md`.
+
+---
+
+The sections below are the original handoff of 2026-11-04, kept for reference.
+
+## 2026-11-04: run the solution pipeline on the subscription
 
 > **Status 2026-11-04 19:38:** done as described below. The pilot (21 questions) passed
 > judging, and the full run is going under `pipeline/scripts/run_sub_supervise.py`; see
@@ -11,7 +117,7 @@ then `pipeline/README.md` (section "On the subscription instead of the API"), th
 the pre-flight checklist below. **Do not start solving or judging until the owner says
 go**: the owner explicitly asked to approve the start.
 
-## 1. Goal
+### 1. Goal
 
 Run the existing v5 solution pipeline (until now the Claude Message Batches API,
 `pipeline/scripts/run.py`) on the owner's **Claude subscription**, with **no drift**
@@ -27,7 +133,7 @@ Two deliberate differences, both owner decisions:
    **every question in them is redone**, including the ones the API already solved at
    medium.
 
-## 2. Owner rules that apply
+### 2. Owner rules that apply
 
 - No `run_sub.py solve` and no `run.py judge` (XeLaTeX) without the owner's go-ahead.
   The owner wants a pilot first; suggest 20 questions, then judge those 20.
@@ -41,7 +147,7 @@ Two deliberate differences, both owner decisions:
   `pipeline/scripts/{run.py, run_sub.py (new), assemble.py, apply_fields.py, common.py}`.
 - The API route stays closed (`config.submissions_closed: true`). Do not flip it.
 
-## 3. What was built
+### 3. What was built
 
 `pipeline/scripts/run_sub.py`:
 - **One process per question.** Each question is a fresh single-turn `claude -p` process.
@@ -91,7 +197,7 @@ uv run python -I pipeline/scripts/run_sub.py solve --wait-on-limit      # full r
 uv run python -I pipeline/scripts/run.py judge                          # XeLaTeX + KaTeX checks, assemble, app-db writes (ASK FIRST)
 ```
 
-### How "no drift" is enforced
+#### How "no drift" is enforced
 
 - **`verify`** sets `ANTHROPIC_BASE_URL` to a local stand-in HTTP server, runs Claude
   Code exactly as `solve` would, and checks the captured request field by field. It
@@ -123,7 +229,7 @@ uv run python -I pipeline/scripts/run.py judge                          # XeLaTe
   the owner the new boilerplate (`pipeline/outputs/_sub_verify.json`). Only after they
   agree, run `verify --accept`.
 
-### Redo mechanics (hard sources)
+#### Redo mechanics (hard sources)
 
 - **When.** A question in a source listed in `subscription.effort_by_source` is redone
   when its stored generated solution, or its latest attempt, came from a lower effort.
@@ -142,7 +248,7 @@ uv run python -I pipeline/scripts/run.py judge                          # XeLaTe
 
   Values from the source or the owner are never touched.
 
-### Not yet exercised with a real reply (the pilot will be the first test)
+#### Not yet exercised with a real reply (the pilot will be the first test)
 
 Only fake replies from the stand-in server have gone through so far. The following run
 for the first time in the pilot:
@@ -159,7 +265,7 @@ After the pilot, check:
   Hint cells that the API run filled were replaced.
 - For AIME-style numeric checks, only source answers act as references.
 
-## 4. Configuration (pipeline/config.json, key `subscription`)
+### 4. Configuration (pipeline/config.json, key `subscription`)
 
 - `sources`, in priority order:
   - first the missing/Gemini sources: IITD, IITD-AD, IITK, IITG, IITR, IITM, Burton,
@@ -188,7 +294,7 @@ About 160 of these have images and get skipped, so about 7,300 replies, roughly 
 high effort. That is a lot of subscription usage; expect usage-limit pauses
 (`--wait-on-limit`).
 
-## 5. Pre-flight checklist for the new session
+### 5. Pre-flight checklist for the new session
 
 1. **Wait for the reference fixes.** The owner is fixing missing references (theorems,
    figures, other-exercise references) in another session. Confirm with the owner that
@@ -235,7 +341,7 @@ high effort. That is a lot of subscription usage; expect usage-limit pauses
    - Update the memory file `project_subscription_solver.md`.
    - Commit only if asked.
 
-## 6. Why these sources are "hard" (research of 2026-11-04, summary)
+### 6. Why these sources are "hard" (research of 2026-11-04, summary)
 
 The analysis scripts lived in that session's scratchpad and are gone; the numbers are here.
 
@@ -265,7 +371,7 @@ The analysis scripts lived in that session's scratchpad and are gone; the number
   - The vectors cluster by **who wrote the solution** (rows embedded from Claude's
     solution have 99% Claude-solution neighbours) and grow with how big a source is.
 
-## 7. Pointers
+### 7. Pointers
 
 - Memory: `project_subscription_solver.md`, `project_solution_pipeline.md`,
   `project_embeddings_provenance.md`, `feedback_pipeline_scope_and_resources.md`.
