@@ -1,0 +1,6 @@
+question_id,flags,subject,note
+81774,needs_data,Material Science,Layer spacing must be looked up externally
+82567,key_conflict,Linear Algebra and Differential Equations,Final condition should be mn ≤ -3/4; the stated 'except mn<-3/4' is reversed.
+83366,key_conflict,Linear Algebra and Differential Equations,"Part b: determinant 41 is nonzero, so vectors are independent, not dependent."
+83424,key_conflict,Calculus,"Solution uses A_z=3z^3y, not 3z^3; part b sign should be 9z^2-2z."
+84215,mismatch,Machine Learning and Data Science,Part (d) solution tail concerns average-reward limits from another exercise.
