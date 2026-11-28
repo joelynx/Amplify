@@ -33,6 +33,11 @@ Kept as the bank stores them:
     sheet), near-duplicates inside the set (85% of 5-word shingles), and problems the bank has
     (import_answer_sets.duplicates) are not added; the bank's matches are listed and kept in the map.
 
+The extra books, part 1 (owner 2026-11-28: "C:\\Users\\Lenovo\\Downloads\\dataset-extra-part1.zip Extract the questions
+from this as well, and integrate them into the database the same way"): the same format, folder dataset-extra-part1/,
+1,062 problems of the CEMC's Euclid, Fermat and Hypatia contests with their solutions (collection extra_books). The
+printed instruction of Fermat's Part C (answers coded as two digits) is left out; each question says what it asks for.
+
 On --apply: backup, figures copied, rows inserted Uncategorized, MAP_PATH written (question_id, set, number, collection,
 bank_duplicate). Classification, the solver queues (unsolved maths rows to run_sub through an assignments file,
 the other subjects to run_subjects), judging and embedding follow in the pipeline.
@@ -87,6 +92,10 @@ SOURCES = {  # the data set's source -> the bank's
         "Evans and Rosenthal's Probability and Statistics: The Science of Uncertainty",
     "University of New South Wales School Mathematics Competition":
         "University of New South Wales School Mathematics Competition",
+    # the extra books, part 1 (CEMC, University of Waterloo): one paper a year, so the subsource is the year
+    "Euclid Contest": "Euclid Mathematics Contest",
+    "Fermat Contest": "Fermat Mathematics Contest",
+    "Hypatia Contest": "Hypatia Mathematics Contest",
 }
 PHYSICS = {"Fyziklani", "Physics Brawl Online", "Chenlo Romero's 400 Solved Exercises of University Physics"}
 # sources the bank already had before this import: none of their rows is added (owner 2026-11-27: "Are there any sources
@@ -193,6 +202,13 @@ def _group_end(t: str, i: int) -> int:
 
 
 BIG_GROUP_RE = re.compile(r"(\\[bB]igg?[lrm]?)\s*\{(\\[a-zA-Z]+|\\.|[^{}\\])\}")
+ARRAY_SPEC_RE = re.compile(r"(\\begin\{array\}\{)((?:[^{}]|\{[^{}]*\}|\{[^{}]*\{[^{}]*\}[^{}]*\})*)\}")
+STAR_RE = re.compile(r"\*\{(\d+)\}\{([^{}]*)\}")
+
+
+def expand_columns(t: str) -> str:
+    """An array's column spec as KaTeX reads it: *{17}{c} (which KaTeX cannot parse) written out as 17 c's."""
+    return ARRAY_SPEC_RE.sub(lambda m: m.group(1) + STAR_RE.sub(lambda s: s.group(2) * int(s.group(1)), m.group(2)) + "}", t)
 
 
 def plain_cells(t: str) -> str:
@@ -270,7 +286,7 @@ def load(data: Path) -> tuple[list[dict], dict[str, str], Figures]:
     figs = Figures(data)
 
     def fix(t: str, where: str) -> str:  # \Big{(}: KaTeX takes a sized delimiter only bare, \Big(
-        return BIG_GROUP_RE.sub(r"\1\2", plain_cells(figs.rewrite(t, where)))
+        return expand_columns(BIG_GROUP_RE.sub(r"\1\2", plain_cells(figs.rewrite(t, where))))
 
     rows = []
     for i in sorted(kept_idx):
@@ -302,6 +318,8 @@ def main() -> None:
     p.add_argument("--only", help="the rows of this (bank) source only")
     p.add_argument("--set-aside", action="store_true", help="leave out rows that fail the checks (listed in SET_ASIDE_PATH)")
     p.add_argument("--exclude", type=Path, help="with --set-aside: JSON {row label: why} of rows the render checks failed")
+    p.add_argument("--bank-matches", type=Path, help="JSON {\"matches\": {data set id: bank question id}}: rows the bank "
+                   "holds reworded (the text check misses them), left out as bank duplicates")
     g = p.add_mutually_exclusive_group(required=True)
     g.add_argument("--dry-run", action="store_true")
     g.add_argument("--apply", action="store_true")
@@ -319,8 +337,14 @@ def main() -> None:
         if not same_problem(rows[k]["latexcode"], bank_text):
             variants[k] = dup.pop(k)
     conn.close()
+    if a.bank_matches:  # e.g. the extra set's Fermat problems that Omni-MATH holds reworded, without their options
+        matched = json.loads(a.bank_matches.read_text(encoding="utf-8"))["matches"]
+        for k, r in enumerate(rows):
+            if r["idx"] in matched and k not in dup:
+                variants.pop(k, None)
+                dup[k] = (matched[r["idx"]], 0.0)
     for k, (q, share) in sorted(dup.items()):
-        print(f"in the bank: {rows[k]['potd']} = question {q} ({share:.0%})")
+        print(f"in the bank: {rows[k]['potd']} = question {q} ({f'{share:.0%}' if share else 'reworded'})")
     for k, (q, share) in sorted(variants.items()):
         print(f"variant of a bank question, added: {rows[k]['potd']} ~ question {q} ({share:.0%})")
     new = [r for k, r in enumerate(rows) if k not in dup]
