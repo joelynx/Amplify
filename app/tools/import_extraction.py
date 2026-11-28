@@ -37,6 +37,12 @@ The extra books, part 1 (owner 2026-11-28: "C:\\Users\\Lenovo\\Downloads\\datase
 from this as well, and integrate them into the database the same way"): the same format, folder dataset-extra-part1/,
 1,062 problems of the CEMC's Euclid, Fermat and Hypatia contests with their solutions (collection extra_books). The
 printed instruction of Fermat's Part C (answers coded as two digits) is left out; each question says what it asks for.
+Part 2 (owner 2026-11-28: "C:\\Users\\Lenovo\\Downloads\\dataset-extra-part2.zip Extract and integrate these questions in
+the same way"), folder dataset-extra-part2/: 1,971 problems of eight finished books: Andreescu and Feng's 102
+Combinatorial and 103 Trigonometry Problems, Castañeda et al. and Meshalkin on probability, Howell's Algorithms, the
+Russian Physics Olympiad (2005-2017), Holics's physics problems and discrete-structures course papers (IIT Kharagpur,
+IIT Delhi, Berkeley; source the institution, subsource the course, as for the bank's IITD rows). Most of the
+probability, algorithms and physics problems come without a solution and go to the solvers.
 
 On --apply: backup, figures copied, rows inserted Uncategorized, MAP_PATH written (question_id, set, number, collection,
 bank_duplicate). Classification, the solver queues (unsolved maths rows to run_sub through an assignments file,
@@ -96,8 +102,31 @@ SOURCES = {  # the data set's source -> the bank's
     "Euclid Contest": "Euclid Mathematics Contest",
     "Fermat Contest": "Fermat Mathematics Contest",
     "Hypatia Contest": "Hypatia Mathematics Contest",
+    # the extra books, part 2
+    "102 Combinatorial Problems: From the Training of the USA IMO Team": "Andreescu and Feng's 102 Combinatorial Problems",
+    "103 Trigonometry Problems: From the Training of the USA IMO Team": "Andreescu and Feng's 103 Trigonometry Problems",
+    "Introduction to Probability and Stochastic Processes with Applications":
+        "Castañeda et al.'s Introduction to Probability and Stochastic Processes with Applications",
+    "Algorithms: A Top-Down Approach": "Howell's Algorithms: A Top-Down Approach",
+    "Collection of Problems in Probability Theory": "Meshalkin's Collection of Problems in Probability Theory",
+    "Russian Physics Olympiads 2005-2017": "Russian Physics Olympiad",
+    "300 Creative Physics Problems with Solutions": "Holics's 300 Creative Physics Problems with Solutions",
 }
-PHYSICS = {"Fyziklani", "Physics Brawl Online", "Chenlo Romero's 400 Solved Exercises of University Physics"}
+# course papers go under their institution, as the bank's IITD rows do (subsource the course): COL202 is IIT Delhi's,
+# CS21001 IIT Kharagpur's (also on the papers that do not print the institution), CS70 Berkeley's
+COURSE_PAPERS = "Discrete Structures course papers (IIT Kharagpur CS21001 and others)"
+COURSES = {"COL202": "IITD", "CS21001": "IITKGP", "CS70": "UC Berkeley"}
+PHYSICS = {"Fyziklani", "Physics Brawl Online", "Chenlo Romero's 400 Solved Exercises of University Physics",
+           "Russian Physics Olympiad", "Holics's 300 Creative Physics Problems with Solutions"}
+
+
+def course(r: dict) -> str:
+    """The course code of a course paper: "COL202", "CS21001" (the CS21201/CS21001 papers too) or "CS70"."""
+    return next(c for c in COURSES if c in r["subsource"]["course"])
+
+
+def bank_source(r: dict) -> str:
+    return COURSES[course(r)] if r["source"] == COURSE_PAPERS else SOURCES[r["source"]]
 # sources the bank already had before this import: none of their rows is added (owner 2026-11-27: "Are there any sources
 # that are repeated in the bank and the import? if so, discard those import-questions."), unless the bank held under
 # 10% of the import's count ("If there is a CLEAR mismatch (<10%) in the number of questions imported and in the bank,
@@ -126,6 +155,20 @@ def digits(t: str) -> collections.Counter:
     return collections.Counter(ch for ch in t if ch.isdigit())
 
 
+CONTENT_STOP = set("the a an of and to in is are what which that be by for with if on as at it its this from or then let "
+                   "prove show find each all any there such".split())
+
+
+def content_overlap(a: str, b: str) -> float:
+    """Jaccard share of two statements' content words (TeX commands and frame words left out). A copy shares most of
+    them (the part 2 matches: 0.80 and up); two short statements that only share "Prove that" share none."""
+    def words(t: str) -> set[str]:
+        return {w for w in re.findall(r"[a-z]+|\d+", re.sub(r"\\[a-zA-Z]+", " ", t).lower())
+                if w not in CONTENT_STOP and len(w) > 1}
+    wa, wb = words(a), words(b)
+    return len(wa & wb) / max(1, len(wa | wb))
+
+
 def same_problem(a: str, b: str) -> bool:
     """Two statements that share (nearly) all their 5-word shingles are one problem unless each has digits the other
     lacks (a citation or a year added on one side only does not count)."""
@@ -137,6 +180,17 @@ def subsource(r: dict) -> str | None:
     """The group the problem belongs to (owner 2026-11-23: year, paper or round, chapter; never the problem)."""
     s, col = r["subsource"], r["collection"]
     y = s.get("year")
+    src = r["source"]
+    if col == "extra_books" and src == COURSE_PAPERS:
+        return course(r)
+    if col == "extra_books" and src.startswith(("102 Combinatorial", "103 Trigonometry")):
+        return s["section"]  # "Introductory Problems", "Advanced Problems"
+    if col == "extra_books" and src.startswith("Russian Physics"):
+        return f"{y}, {s['round']}"  # "2005, Final stage"
+    if col == "extra_books" and src.startswith("300 Creative"):
+        return f"Chapter {s.get('chapter') or 4}"  # Optics, the fourth chapter, prints no number
+    if col == "extra_books" and s.get("chapter"):  # Castañeda et al., Howell, Meshalkin
+        return f"Chapter {s['chapter']}"
     if col == "uncategorized_books":
         if r["source"].startswith("400 Solved"):  # exercises 1-64 open the book under Topic 1, whose title page it lacks
             return f"Topic {s.get('topic') or 1}"
@@ -254,7 +308,7 @@ def load(data: Path) -> tuple[list[dict], dict[str, str], Figures]:
     for r in raw:
         if r["subsource"].get("language", "en") != "en":  # owner 2026-11-27: "Delete non-english questions"
             left[r["id"]] = f"not in English ({r['subsource']['language']})"
-        elif SOURCES[r["source"]] in IN_BANK:
+        elif bank_source(r) in IN_BANK:
             left[r["id"]] = "source already in the bank"
     # same_problem_as: one row of each group
     def rank(r: dict) -> tuple:
@@ -291,7 +345,7 @@ def load(data: Path) -> tuple[list[dict], dict[str, str], Figures]:
     rows = []
     for i in sorted(kept_idx):
         r = keep[i]
-        source = SOURCES[r["source"]]
+        source = bank_source(r)
         sol = solution_text(r)
         notes = (r.get("notes") or "").strip()
         row = {
@@ -334,7 +388,9 @@ def main() -> None:
     variants = {}
     for k, (q, _share) in list(dup.items()):  # a variant with other numbers is a problem of its own
         bank_text = conn.execute("SELECT latexcode FROM questions WHERE question_id = ?", (q,)).fetchone()[0]
-        if not same_problem(rows[k]["latexcode"], bank_text):
+        if content_overlap(rows[k]["latexcode"], bank_text) < 0.3:  # a short "Prove that ..." matched on its frame alone
+            dup.pop(k)
+        elif not same_problem(rows[k]["latexcode"], bank_text):
             variants[k] = dup.pop(k)
     conn.close()
     if a.bank_matches:  # e.g. the extra set's Fermat problems that Omni-MATH holds reworded, without their options
