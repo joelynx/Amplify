@@ -111,7 +111,37 @@ SOURCES = {  # the data set's source -> the bank's
     "Collection of Problems in Probability Theory": "Meshalkin's Collection of Problems in Probability Theory",
     "Russian Physics Olympiads 2005-2017": "Russian Physics Olympiad",
     "300 Creative Physics Problems with Solutions": "Holics's 300 Creative Physics Problems with Solutions",
+    # the extra books, part 3
+    "Mathematical Circles (Russian Experience)": "Fomin et al.'s Mathematical Circles (Russian Experience)",
 }
+# Mathematical Circles sets a run of problems under one sentence of its running text (the data set's subsource
+# context); the problem alone is then a bare word or equation ("``VECTOR''."). Each gets the sentence it needs, as a
+# standalone statement says it: without "the next eight problems", the book's problem numbers or its bibliography.
+CIRCLES = "Mathematical Circles (Russian Experience)"
+CIRCLES_CONTEXT = [  # (the context's opening words, the statement's opening, what joins it to the problem)
+    ("Problems 10 and 11 concern a set of dominoes",
+     r"Consider a set of dominoes consisting of \(2\times1\) rectangles with 0 to 6 spots on each square. All 28 possible"
+     " pairs of numbers of spots (including doubles) are represented. The game is played by forming a chain in which"
+     " squares of adjacent dominoes have equal numbers of spots.", "\n\n"),
+    ("For convenience of notation we introduce",
+     "Any finite sequence of English letters is called a ``word'' (whether or not it can be found in a dictionary). For"
+     " example, we can form six words using the letters A, B, and C each exactly once: ABC, ACB, BAC, BCA, CAB, and CBA."
+     " Calculate the number of different words that can be obtained by rearranging the letters of the word", " "),
+    ("The next eight problems take place on an island",
+     "On an island, all the inhabitants are either ``knights'' who always tell the truth or ``knaves'' who always lie.",
+     "\n\n"),
+    ("Prove that for any natural number n", "Prove that for any natural number \\(n\\),", " "),
+    ("Our trio of standard MMI themes", "Prove the inequality", " "),
+    ("Solve, for integer values of the variables", "Solve, for integer values of the variables:", " "),
+]
+
+
+def circles_statement(r: dict) -> str:
+    q, ctx = r["question"].strip(), (r["subsource"].get("context") or "").strip()
+    if r["source"] != CIRCLES or not ctx:
+        return q
+    lead, joiner = next((lead, j) for start, lead, j in CIRCLES_CONTEXT if ctx.startswith(start))
+    return lead + joiner + q
 # course papers go under their institution, as the bank's IITD rows do (subsource the course): COL202 is IIT Delhi's,
 # CS21001 IIT Kharagpur's (also on the papers that do not print the institution), CS70 Berkeley's
 COURSE_PAPERS = "Discrete Structures course papers (IIT Kharagpur CS21001 and others)"
@@ -189,7 +219,9 @@ def subsource(r: dict) -> str | None:
         return f"{y}, {s['round']}"  # "2005, Final stage"
     if col == "extra_books" and src.startswith("300 Creative"):
         return f"Chapter {s.get('chapter') or 4}"  # Optics, the fourth chapter, prints no number
-    if col == "extra_books" and s.get("chapter"):  # Castañeda et al., Howell, Meshalkin
+    if col == "extra_books" and src == CIRCLES and s.get("chapter") is None:
+        return "Appendix A"  # the sample contest problems
+    if col == "extra_books" and s.get("chapter") is not None:  # Castañeda et al., Howell, Meshalkin, Fomin et al.
         return f"Chapter {s['chapter']}"
     if col == "uncategorized_books":
         if r["source"].startswith("400 Solved"):  # exercises 1-64 open the book under Topic 1, whose title page it lacks
@@ -351,7 +383,7 @@ def load(data: Path) -> tuple[list[dict], dict[str, str], Figures]:
         row = {
             "potd": f"{SET} {r['id']}", "set": SET, "idx": r["id"], "orig": r["collection"], "source": source,
             "subsource": subsource(r),
-            "latexcode": fix(r["question"].strip(), r["id"]),
+            "latexcode": fix(circles_statement(r), r["id"]),
             "answer": fix(r["answer"].strip(), r["id"]) if (r.get("answer") or "").strip() else None,
             "solution": fix(sol, r["id"]) if sol else None,
             "hints": fix(notes, r["id"]) if notes and not sol else None,
