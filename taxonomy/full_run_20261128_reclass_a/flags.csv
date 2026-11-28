@@ -1,0 +1,7 @@
+question_id,flags,subject,note
+80433,key_conflict,Geometry,Statement as written is false; solution proves concyclic instead of collinear.
+80686,broken_text,Algebra,Statement false as written; solution proves corrected Fibonacci-equality version
+80733,key_conflict,Combinatorics,Solution computes 33 per girl but states final answer 66.
+80787,mismatch,Geometry,Statement false as given; solution adds opposite-sides-equal hypothesis.
+80906,mismatch,Algebra,Statement as given is false; solution proves strict inequality instead.
+80917,key_conflict,Number Theory,Part (a) as printed is false (28); solution proves 3|n version

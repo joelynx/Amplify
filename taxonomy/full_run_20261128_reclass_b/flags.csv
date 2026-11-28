@@ -1,0 +1,6 @@
+question_id,flags,subject,note
+84668,key_conflict,Probability and Stochastic Processes,Box-Muller; question lacks factor sqrt2 (solution notes c1=3√2).
+84671,key_conflict,Probability and Stochastic Processes,Given density integrates to 1/2; solution assumes 3/2 constant.
+85046,needs_data,Statistics,Requires generating a random sample; compares order-statistic and parametric percentile estimates.
+85435,mismatch,Statistics,"Part (d) mentions calculus/statistics marks, copied from another problem"
+85498,key_conflict,Probability and Stochastic Processes,"Constraints force mean 4, contradicting martingale mean 5; no valid answer."

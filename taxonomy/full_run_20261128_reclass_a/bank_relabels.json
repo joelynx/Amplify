@@ -1,0 +1,3134 @@
+{
+"79810": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "Euclidean Algorithm and Bézout's Identity",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Games and Processes",
+"Processes on Boards and Tokens",
+"Chip Moves and Reachability"
+]
+},
+"79811": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "Divisibility of Integer Expressions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Congruences",
+"Congruence Properties and Residue Systems"
+]
+},
+"79812": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Cyclic Quadrilaterals and Ptolemy's Theorem",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Chords, Arcs and Inscribed Angles"
+]
+},
+"79815": {
+"topic": "Algebraic Inequalities",
+"branch": "Mean Inequalities",
+"subtopic": "AM-GM Inequality",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Theory of Polynomials",
+"Roots of Polynomials",
+"Vieta's Formulas"
+]
+},
+"79816": {
+"topic": "Theory of Polynomials",
+"branch": "Roots of Polynomials",
+"subtopic": "Vieta's Formulas",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Designs and Number Arrays",
+"Number Tables with Row and Column Conditions"
+]
+},
+"79958": {
+"topic": "Sequences, Sums and Functional Equations",
+"branch": "Functional Equations",
+"subtopic": "Cauchy's Functional Equation",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Sequences, Sums and Functional Equations",
+"Functional Equations",
+"Equations over the Reals"
+]
+},
+"79966": {
+"topic": "Extremal Combinatorics",
+"branch": "Arrangements and Sequences",
+"subtopic": "Rearrangements of Arrays",
+"conf": "low",
+"how": "reclass-opus",
+"db": [
+"Enumerative Combinatorics",
+"Basic Counting Principles",
+"Pigeonhole Principle"
+]
+},
+"79972": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Rotations",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Cyclic Quadrilaterals and Ptolemy's Theorem"
+]
+},
+"79973": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Power of a Point and Radical Axes",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Altitudes and Orthocentre"
+]
+},
+"79975": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Homothety and Spiral Similarity",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Tangent Lines and Tangent Circles"
+]
+},
+"79979": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "Euclidean Algorithm and Bézout's Identity",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Primes and Prime Factorization",
+"Legendre's Formula and Factorials"
+]
+},
+"79980": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Chinese Remainder Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Divisibility and Greatest Common Divisor",
+"GCD and LCM"
+]
+},
+"79982": {
+"topic": "Enumerative Combinatorics",
+"branch": "Binomial Coefficients",
+"subtopic": "Binomial Identities",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Binomial Coefficients",
+"Binomial Theorem"
+]
+},
+"80043": {
+"topic": "Combinatorial Geometry",
+"branch": "Point Configurations",
+"subtopic": "Lines and Collinearity in Point Sets",
+"conf": "low",
+"how": "reclass-opus",
+"db": [
+"Combinatorial Geometry",
+"Point Configurations",
+"Convex Position and Helly's Theorem"
+]
+},
+"80045": {
+"topic": "Diophantine Equations",
+"branch": "Classical Diophantine Equations",
+"subtopic": "Pythagorean Triples",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Diophantine Equations",
+"Polynomial Diophantine Equations",
+"Quadratic Equations in Integers"
+]
+},
+"80047": {
+"topic": "Elementary Number Theory",
+"branch": "Digits and Number Bases",
+"subtopic": "Repunits and Digit Patterns",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Digits and Number Bases",
+"Digit Equations and Cryptarithms"
+]
+},
+"80048": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Chords, Arcs and Inscribed Angles",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Cyclic Quadrilaterals and Ptolemy's Theorem"
+]
+},
+"80049": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Homothety and Spiral Similarity",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Tangent Lines and Tangent Circles"
+]
+},
+"80050": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Power of a Point and Radical Axes",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Cyclic Quadrilaterals and Ptolemy's Theorem"
+]
+},
+"80056": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Congruence Properties and Residue Systems",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Theory of Polynomials",
+"Polynomial Division and Integer Coefficients",
+"Integer Polynomials and Divisibility"
+]
+},
+"80060": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Reflections and Isometries",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Cyclic Quadrilaterals and Ptolemy's Theorem"
+]
+},
+"80061": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Reflections and Isometries",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Tangent Lines and Tangent Circles"
+]
+},
+"80070": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "Euclidean Algorithm and Bézout's Identity",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Special Numbers and Integer Sequences",
+"Divisibility in Integer Recurrences"
+]
+},
+"80079": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Reflections and Isometries",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Angle Bisectors, Incircle and Excircles"
+]
+},
+"80082": {
+"topic": "Plane Geometry",
+"branch": "Triangles",
+"subtopic": "Medians and Centroids",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Altitudes and Orthocentre"
+]
+},
+"80085": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Congruence Properties and Residue Systems",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Elementary Number Theory",
+"Arithmetic Functions",
+"Number of Divisors"
+]
+},
+"80086": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Linear Congruences",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Counting with Restrictions",
+"Counting Subsets with Conditions"
+]
+},
+"80110": {
+"topic": "Theory of Polynomials",
+"branch": "Roots of Polynomials",
+"subtopic": "Location of Complex Roots",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Theory of Polynomials",
+"Polynomial Identities and Bounds",
+"Coefficients of Polynomial Expansions"
+]
+},
+"80120": {
+"topic": "Algebraic Inequalities",
+"branch": "Mean Inequalities",
+"subtopic": "AM-GM Inequality",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Symmetric, Cyclic and Extremal Inequalities",
+"Cyclic and Fractional Inequalities"
+]
+},
+"80124": {
+"topic": "Extremal Combinatorics",
+"branch": "Arrangements and Sequences",
+"subtopic": "Number Arrangements with Adjacency Conditions",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Designs and Number Arrays",
+"Number Tables with Row and Column Conditions"
+]
+},
+"80127": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Chords, Arcs and Inscribed Angles",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Angle Bisectors, Incircle and Excircles"
+]
+},
+"80128": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Cyclic Quadrilaterals and Ptolemy's Theorem",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Tangent Lines and Tangent Circles"
+]
+},
+"80129": {
+"topic": "Plane Geometry",
+"branch": "Triangles",
+"subtopic": "Angle Bisectors, Incircle and Excircles",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Power of a Point and Radical Axes"
+]
+},
+"80130": {
+"topic": "Plane Geometry",
+"branch": "Analytic Geometry",
+"subtopic": "Lines and Distances in Coordinates",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Altitudes and Orthocentre"
+]
+},
+"80131": {
+"topic": "Extremal Combinatorics",
+"branch": "Designs and Number Arrays",
+"subtopic": "Number Tables with Row and Column Conditions",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Elementary Number Theory",
+"Primes and Prime Factorization",
+"Legendre's Formula and Factorials"
+]
+},
+"80133": {
+"topic": "Elementary Number Theory",
+"branch": "Orders and Primitive Roots",
+"subtopic": "Order of an Integer Modulo n",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Special Numbers and Integer Sequences",
+"Divisibility in Integer Recurrences"
+]
+},
+"80134": {
+"topic": "Enumerative Combinatorics",
+"branch": "Basic Counting Principles",
+"subtopic": "Lattice Paths",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Counting with Restrictions",
+"Counting Subsets with Conditions"
+]
+},
+"80141": {
+"topic": "Combinatorial Geometry",
+"branch": "Covering and Packing",
+"subtopic": "Packing Shapes in Regions",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Geometry",
+"Covering and Packing",
+"Covering by Discs and Polygons"
+]
+},
+"80144": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Chords, Arcs and Inscribed Angles",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Circumcircle of a Triangle"
+]
+},
+"80145": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Reflections and Isometries",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Analytic Geometry",
+"Sums of Squared Distances"
+]
+},
+"80146": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Power of a Point and Radical Axes",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Circumcircle of a Triangle"
+]
+},
+"80150": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Wilson's Theorem",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Orders and Primitive Roots",
+"Order of an Integer Modulo n"
+]
+},
+"80151": {
+"topic": "Elementary Number Theory",
+"branch": "Quadratic Residues and Sums of Squares",
+"subtopic": "Quadratic Residues and Euler's Criterion",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Diophantine Equations",
+"Exponential and Divisibility Equations",
+"Integrality of Rational Expressions"
+]
+},
+"80153": {
+"topic": "Elementary Number Theory",
+"branch": "Quadratic Residues and Sums of Squares",
+"subtopic": "Legendre Symbol and Quadratic Reciprocity",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Special Numbers and Integer Sequences",
+"Mersenne and Fermat Numbers"
+]
+},
+"80162": {
+"topic": "Diophantine Equations",
+"branch": "Polynomial Diophantine Equations",
+"subtopic": "Quadratic Equations in Integers",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Diophantine Equations",
+"Exponential and Divisibility Equations",
+"Integrality of Rational Expressions"
+]
+},
+"80167": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Bounding Sums and Products",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Cauchy-Schwarz and Related Inequalities",
+"Cauchy-Schwarz Inequality"
+]
+},
+"80168": {
+"topic": "Theory of Polynomials",
+"branch": "Polynomial Division and Integer Coefficients",
+"subtopic": "Polynomial Division and Remainders",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Theory of Polynomials",
+"Polynomial Identities and Bounds",
+"Polynomial Functional Equations"
+]
+},
+"80169": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Chords, Arcs and Inscribed Angles",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Tangent Lines and Tangent Circles"
+]
+},
+"80170": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Circumcircle of a Triangle",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Angle Bisectors, Incircle and Excircles"
+]
+},
+"80171": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Reflections and Isometries",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Angle Bisectors, Incircle and Excircles"
+]
+},
+"80172": {
+"topic": "Plane Geometry",
+"branch": "Triangles",
+"subtopic": "Ceva's and Menelaus' Theorems",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Angle Bisectors, Incircle and Excircles"
+]
+},
+"80174": {
+"topic": "Graph Theory",
+"branch": "Extremal Graph Theory",
+"subtopic": "Ramsey's Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Graph Theory",
+"Planarity, Coloring and Matching",
+"Graph Coloring"
+]
+},
+"80178": {
+"topic": "Diophantine Equations",
+"branch": "Polynomial Diophantine Equations",
+"subtopic": "Quadratic Equations in Integers",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Diophantine Equations",
+"Classical Diophantine Equations",
+"Pell's Equation"
+]
+},
+"80180": {
+"topic": "Probability",
+"branch": "Expectation",
+"subtopic": "Expected Value",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditioning and Compounding",
+"Conditional Expectation"
+]
+},
+"80181": {
+"topic": "Algebraic Inequalities",
+"branch": "Cauchy-Schwarz and Related Inequalities",
+"subtopic": "Triangle and Minkowski Inequalities",
+"conf": "high",
+"how": "reclass-opus",
+"db": [
+"Algebraic Inequalities",
+"Symmetric, Cyclic and Extremal Inequalities",
+"Extremal Values and Best Constants"
+]
+},
+"80182": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Cyclic and Fractional Inequalities",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Floor Function and Rational Approximation",
+"Floor Function Identities and Sums"
+]
+},
+"80185": {
+"topic": "Plane Geometry",
+"branch": "Analytic Geometry",
+"subtopic": "Geometry in the Complex Plane",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Geometric Transformations",
+"Rotations"
+]
+},
+"80186": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Homothety and Spiral Similarity",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Circumcircle of a Triangle"
+]
+},
+"80189": {
+"topic": "Graph Theory",
+"branch": "Extremal Graph Theory",
+"subtopic": "Ramsey's Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Graph Theory",
+"Planarity, Coloring and Matching",
+"Graph Coloring"
+]
+},
+"80194": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "GCD and LCM",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Elementary Number Theory",
+"Special Numbers and Integer Sequences",
+"Divisibility in Integer Recurrences"
+]
+},
+"80195": {
+"topic": "Sequences, Sums and Functional Equations",
+"branch": "Functional Equations",
+"subtopic": "Iterated Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Algebra",
+"Algebraic Expressions and Radicals",
+"Rationality of Algebraic Numbers"
+]
+},
+"80200": {
+"topic": "Plane Geometry",
+"branch": "Analytic Geometry",
+"subtopic": "Lines and Distances in Coordinates",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Geometric Transformations",
+"Rotations"
+]
+},
+"80201": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Reflections and Isometries",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Angle Bisectors, Incircle and Excircles"
+]
+},
+"80203": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Power of a Point and Radical Axes",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Altitudes and Orthocentre"
+]
+},
+"80204": {
+"topic": "Extremal Combinatorics",
+"branch": "Chessboards and Grids",
+"subtopic": "Knight's Tours and Piece Moves",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Graph Theory",
+"Graph Structure and Traversal",
+"Hamiltonian Paths and Cycles"
+]
+},
+"80208": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Congruence Properties and Residue Systems",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Divisibility and Greatest Common Divisor",
+"Division Algorithm and Residue Forms"
+]
+},
+"80210": {
+"topic": "Elementary Number Theory",
+"branch": "Quadratic Residues and Sums of Squares",
+"subtopic": "Sums of Two Squares and Binary Quadratic Forms",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Special Numbers and Integer Sequences",
+"Triangular Numbers and Consecutive Sums"
+]
+},
+"80217": {
+"topic": "Plane Geometry",
+"branch": "Triangles",
+"subtopic": "Law of Sines and Cosines",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Chords, Arcs and Inscribed Angles"
+]
+},
+"80219": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Circumcircle of a Triangle",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Angle Bisectors, Incircle and Excircles"
+]
+},
+"80246": {
+"topic": "Combinatorial Geometry",
+"branch": "Point Configurations",
+"subtopic": "Distances in Finite Point Sets",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Counting Geometric Configurations",
+"Counting Triangles and Polygons"
+]
+},
+"80247": {
+"topic": "Combinatorial Games and Processes",
+"branch": "Processes on Numbers",
+"subtopic": "Labelled Polygons and Circles",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Graph Theory",
+"Graph Structure and Traversal",
+"Directed Graphs and Tournaments"
+]
+},
+"80255": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Bounding Sums and Products",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Diophantine Equations",
+"Exponential and Divisibility Equations",
+"Integrality of Rational Expressions"
+]
+},
+"80256": {
+"topic": "Plane Geometry",
+"branch": "Basic Measurement",
+"subtopic": "Angle Sums and Angle Measures",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Plane Geometry",
+"Quadrilaterals and Polygons",
+"Equiangular and Equilateral Polygons"
+]
+},
+"80257": {
+"topic": "Plane Geometry",
+"branch": "Triangles",
+"subtopic": "Law of Sines and Cosines",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Geometric Transformations",
+"Rotations"
+]
+},
+"80275": {
+"topic": "Diophantine Equations",
+"branch": "Exponential and Divisibility Equations",
+"subtopic": "Integrality of Rational Expressions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Theory of Polynomials",
+"Polynomial Division and Integer Coefficients",
+"Integer Polynomials and Divisibility"
+]
+},
+"80276": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "Divisibility of Integer Expressions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Arithmetic Functions",
+"Conditions on the Divisors of n"
+]
+},
+"80281": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Fermat's Little Theorem",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Primes and Prime Factorization",
+"Prime Divisors of Sequences and Polynomials"
+]
+},
+"80282": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Wilson's Theorem",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Congruences",
+"Congruence Properties and Residue Systems"
+]
+},
+"80283": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Wilson's Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Congruences",
+"Fermat's Little Theorem"
+]
+},
+"80286": {
+"topic": "Elementary Number Theory",
+"branch": "Primes and Prime Factorization",
+"subtopic": "Primality Conditions on Expressions",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Divisibility and Greatest Common Divisor",
+"Divisibility of Integer Expressions"
+]
+},
+"80287": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Chinese Remainder Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Congruences",
+"Fermat's Little Theorem"
+]
+},
+"80289": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Linear Congruences",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Divisibility and Greatest Common Divisor",
+"GCD and LCM"
+]
+},
+"80294": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Chinese Remainder Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Primes and Prime Factorization",
+"Prime Divisors of Sequences and Polynomials"
+]
+},
+"80306": {
+"topic": "Plane Geometry",
+"branch": "Geometric Inequalities",
+"subtopic": "Distance Inequalities for Points",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Right Triangles and the Pythagorean Theorem"
+]
+},
+"80310": {
+"topic": "Plane Geometry",
+"branch": "Triangles",
+"subtopic": "Similar Triangles",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Basic Measurement",
+"Angle Sums and Angle Measures"
+]
+},
+"80312": {
+"topic": "Diophantine Equations",
+"branch": "Polynomial Diophantine Equations",
+"subtopic": "Cubic and Higher-Degree Equations",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Diophantine Equations",
+"Classical Diophantine Equations",
+"Pell's Equation"
+]
+},
+"80318": {
+"topic": "Plane Geometry",
+"branch": "Triangles",
+"subtopic": "Angle Bisectors, Incircle and Excircles",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Circumcircle of a Triangle"
+]
+},
+"80322": {
+"topic": "Plane Geometry",
+"branch": "Analytic Geometry",
+"subtopic": "Lines and Distances in Coordinates",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Loci and Constructions",
+"Loci of Points"
+]
+},
+"80328": {
+"topic": "Elementary Number Theory",
+"branch": "Digits and Number Bases",
+"subtopic": "Digit Sums",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Digits and Number Bases",
+"Repunits and Digit Patterns"
+]
+},
+"80330": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Cyclic Quadrilaterals and Ptolemy's Theorem",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Plane Geometry",
+"Quadrilaterals and Polygons",
+"Parallelograms and Trapezoids"
+]
+},
+"80334": {
+"topic": "Plane Geometry",
+"branch": "Geometric Inequalities",
+"subtopic": "Inequalities for Triangle Sides",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Geometric Optimization",
+"Maximal Area and Perimeter"
+]
+},
+"80377": {
+"topic": "Enumerative Combinatorics",
+"branch": "Inclusion-Exclusion",
+"subtopic": "Derangements",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Permutations and Symmetry",
+"Permutations with Restrictions"
+]
+},
+"80379": {
+"topic": "Extremal Combinatorics",
+"branch": "Extremal Set Theory",
+"subtopic": "Set Families with Intersection Conditions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Designs and Number Arrays",
+"Error-Correcting Codes"
+]
+},
+"80381": {
+"topic": "Extremal Combinatorics",
+"branch": "Extremal Set Theory",
+"subtopic": "Set Families with Intersection Conditions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Designs and Number Arrays",
+"Block Designs and Finite Projective Planes"
+]
+},
+"80397": {
+"topic": "Sequences, Sums and Functional Equations",
+"branch": "Functional Equations",
+"subtopic": "Cauchy's Functional Equation",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Sequences, Sums and Functional Equations",
+"Functional Equations",
+"Equations over the Reals"
+]
+},
+"80401": {
+"topic": "Sequences, Sums and Functional Equations",
+"branch": "Functional Equations",
+"subtopic": "Cauchy's Functional Equation",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Sequences, Sums and Functional Equations",
+"Functional Equations",
+"Equations over the Reals"
+]
+},
+"80427": {
+"topic": "Plane Geometry",
+"branch": "Analytic Geometry",
+"subtopic": "Geometry in the Complex Plane",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Circumcircle of a Triangle"
+]
+},
+"80429": {
+"topic": "Plane Geometry",
+"branch": "Triangles",
+"subtopic": "Ceva's and Menelaus' Theorems",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Geometric Transformations",
+"Homothety and Spiral Similarity"
+]
+},
+"80430": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Cyclic Quadrilaterals and Ptolemy's Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Power of a Point and Radical Axes"
+]
+},
+"80431": {
+"topic": "Plane Geometry",
+"branch": "Analytic Geometry",
+"subtopic": "Lines and Distances in Coordinates",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Tangent Lines and Tangent Circles"
+]
+},
+"80433": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Power of a Point and Radical Axes",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Quadrilaterals and Polygons",
+"Parallelograms and Trapezoids"
+]
+},
+"80435": {
+"topic": "Theory of Polynomials",
+"branch": "Roots of Polynomials",
+"subtopic": "Location of Complex Roots",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Algebra",
+"Complex Numbers",
+"Roots of Unity"
+]
+},
+"80436": {
+"topic": "Algebraic Inequalities",
+"branch": "Ordering and Convexity Inequalities",
+"subtopic": "Rearrangement and Chebyshev Sum Inequalities",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Theory of Polynomials",
+"Roots of Polynomials",
+"Real Roots and Descartes' Rule of Signs"
+]
+},
+"80439": {
+"topic": "Theory of Polynomials",
+"branch": "Roots of Polynomials",
+"subtopic": "Multiple Roots",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Theory of Polynomials",
+"Polynomial Identities and Bounds",
+"Coefficients of Polynomial Expansions"
+]
+},
+"80447": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Extremal Values and Best Constants",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Cauchy-Schwarz and Related Inequalities",
+"Cauchy-Schwarz Inequality"
+]
+},
+"80449": {
+"topic": "Algebraic Inequalities",
+"branch": "Ordering and Convexity Inequalities",
+"subtopic": "Jensen's Inequality",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Ordering and Convexity Inequalities",
+"Rearrangement and Chebyshev Sum Inequalities"
+]
+},
+"80450": {
+"topic": "Elementary Number Theory",
+"branch": "Quadratic Residues and Sums of Squares",
+"subtopic": "Quadratic Residues and Euler's Criterion",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Elementary Number Theory",
+"Floor Function and Rational Approximation",
+"Diophantine Approximation"
+]
+},
+"80451": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Bounding Sums and Products",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Floor Function and Rational Approximation",
+"Floor Function Identities and Sums"
+]
+},
+"80452": {
+"topic": "Extremal Combinatorics",
+"branch": "Arrangements and Sequences",
+"subtopic": "Rearrangements of Arrays",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Arrangements and Sequences",
+"Number Arrangements with Adjacency Conditions"
+]
+},
+"80455": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Symmetric Polynomial Inequalities",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Ordering and Convexity Inequalities",
+"Schur's Inequality"
+]
+},
+"80456": {
+"topic": "Plane Geometry",
+"branch": "Geometric Inequalities",
+"subtopic": "Area and Perimeter Inequalities",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Geometric Inequalities",
+"Inequalities for Triangle Sides"
+]
+},
+"80458": {
+"topic": "Theory of Polynomials",
+"branch": "Roots of Polynomials",
+"subtopic": "Vieta's Formulas",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Symmetric, Cyclic and Extremal Inequalities",
+"Symmetric Polynomial Inequalities"
+]
+},
+"80459": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Extremal Values and Best Constants",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Cauchy-Schwarz and Related Inequalities",
+"Cauchy-Schwarz Inequality"
+]
+},
+"80463": {
+"topic": "Combinatorial Games and Processes",
+"branch": "Processes on Numbers",
+"subtopic": "Iterated Sequence Transformations",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Games and Processes",
+"Processes on Numbers",
+"Blackboard Number Operations"
+]
+},
+"80474": {
+"topic": "Sequences, Sums and Functional Equations",
+"branch": "Functional Equations",
+"subtopic": "Iterated Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Games and Processes",
+"Processes on Numbers",
+"Iterated Sequence Transformations"
+]
+},
+"80484": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Reflections and Isometries",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Games and Processes",
+"Processes on Boards and Tokens",
+"Chip Moves and Reachability"
+]
+},
+"80492": {
+"topic": "Elementary Number Theory",
+"branch": "Floor Function and Rational Approximation",
+"subtopic": "Floor Function Identities and Sums",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Floor Function and Rational Approximation",
+"Diophantine Approximation"
+]
+},
+"80496": {
+"topic": "Combinatorial Geometry",
+"branch": "Point Configurations",
+"subtopic": "Convex Position and Helly's Theorem",
+"conf": "low",
+"how": "reclass-opus",
+"db": [
+"Combinatorial Geometry",
+"Polygons, Curves and Visibility",
+"Curves and Topological Arguments"
+]
+},
+"80498": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Extremal Values and Best Constants",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Symmetric, Cyclic and Extremal Inequalities",
+"Bounding Sums and Products"
+]
+},
+"80499": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Extremal Values and Best Constants",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Symmetric, Cyclic and Extremal Inequalities",
+"Bounding Sums and Products"
+]
+},
+"80500": {
+"topic": "Graph Theory",
+"branch": "Graph Structure and Traversal",
+"subtopic": "Vertex Degrees and the Handshake Lemma",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Graph Theory",
+"Graph Structure and Traversal",
+"Directed Graphs and Tournaments"
+]
+},
+"80501": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Bounding Sums and Products",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Arrangements and Sequences",
+"Rearrangements of Arrays"
+]
+},
+"80502": {
+"topic": "Combinatorial Games and Processes",
+"branch": "Two-Player Games",
+"subtopic": "Take-Away Games",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Games and Processes",
+"Two-Player Games",
+"Nim and Wythoff's Game"
+]
+},
+"80514": {
+"topic": "Elementary Number Theory",
+"branch": "Digits and Number Bases",
+"subtopic": "Digit Equations and Cryptarithms",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Diophantine Equations",
+"Exponential and Divisibility Equations",
+"Factorial Equations"
+]
+},
+"80518": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Congruence Properties and Residue Systems",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Divisibility and Greatest Common Divisor",
+"Divisibility of Integer Expressions"
+]
+},
+"80519": {
+"topic": "Combinatorial Geometry",
+"branch": "Point Configurations",
+"subtopic": "Vector Sums and Sign Choices",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Extremal Set Theory",
+"Chains, Antichains and Monotone Subsequences"
+]
+},
+"80520": {
+"topic": "Elementary Algebra",
+"branch": "Equations and Systems",
+"subtopic": "Systems of Nonlinear Equations",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Mean Inequalities",
+"AM-GM Inequality"
+]
+},
+"80526": {
+"topic": "Elementary Number Theory",
+"branch": "Quadratic Residues and Sums of Squares",
+"subtopic": "Sums of Two Squares and Binary Quadratic Forms",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Geometry",
+"Point Configurations",
+"Lattice Points and Lattice Polygons"
+]
+},
+"80527": {
+"topic": "Algebraic Inequalities",
+"branch": "Cauchy-Schwarz and Related Inequalities",
+"subtopic": "Triangle and Minkowski Inequalities",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Mean Inequalities",
+"AM-GM Inequality"
+]
+},
+"80538": {
+"topic": "Elementary Algebra",
+"branch": "Algebraic Expressions and Radicals",
+"subtopic": "Simplifying and Denesting Radicals",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Digits and Number Bases",
+"Decimal Expansions"
+]
+},
+"80541": {
+"topic": "Theory of Polynomials",
+"branch": "Roots of Polynomials",
+"subtopic": "Vieta's Formulas",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Algebra",
+"Functions and Graphs",
+"Equations with a Parameter"
+]
+},
+"80544": {
+"topic": "Extremal Combinatorics",
+"branch": "Extremal Set Theory",
+"subtopic": "Chains, Antichains and Monotone Subsequences",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Extremal Combinatorics",
+"Designs and Number Arrays",
+"Error-Correcting Codes"
+]
+},
+"80551": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "Divisibility of Integer Expressions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Diophantine Equations",
+"Polynomial Diophantine Equations",
+"Reciprocal Sums and Egyptian Fractions"
+]
+},
+"80555": {
+"topic": "Plane Geometry",
+"branch": "Triangles",
+"subtopic": "Right Triangles and the Pythagorean Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Law of Sines and Cosines"
+]
+},
+"80557": {
+"topic": "Graph Theory",
+"branch": "Graph Structure and Traversal",
+"subtopic": "Vertex Degrees and the Handshake Lemma",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Quadrilaterals and Polygons",
+"Regular Polygons"
+]
+},
+"80559": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Circumcircle of a Triangle",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Tangent Lines and Tangent Circles"
+]
+},
+"80564": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Extremal Values and Best Constants",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Symmetric, Cyclic and Extremal Inequalities",
+"Bounding Sums and Products"
+]
+},
+"80565": {
+"topic": "Algebraic Inequalities",
+"branch": "Ordering and Convexity Inequalities",
+"subtopic": "Jensen's Inequality",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Symmetric, Cyclic and Extremal Inequalities",
+"Symmetric Polynomial Inequalities"
+]
+},
+"80572": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Power of a Point and Radical Axes",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Cyclic Quadrilaterals and Ptolemy's Theorem"
+]
+},
+"80575": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Homothety and Spiral Similarity",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Tangent Lines and Tangent Circles"
+]
+},
+"80578": {
+"topic": "Combinatorial Geometry",
+"branch": "Polygons, Curves and Visibility",
+"subtopic": "Curves and Topological Arguments",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Geometric Inequalities",
+"Area and Perimeter Inequalities"
+]
+},
+"80579": {
+"topic": "Plane Geometry",
+"branch": "Analytic Geometry",
+"subtopic": "Geometry in the Complex Plane",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Circumcircle of a Triangle"
+]
+},
+"80581": {
+"topic": "Graph Theory",
+"branch": "Planarity, Coloring and Matching",
+"subtopic": "Euler's Formula for Polyhedra",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Graph Theory",
+"Graph Structure and Traversal",
+"Directed Graphs and Tournaments"
+]
+},
+"80583": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "Divisibility of Integer Expressions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Quadratic Residues and Sums of Squares",
+"Quadratic Congruences"
+]
+},
+"80584": {
+"topic": "Algebraic Inequalities",
+"branch": "Mean Inequalities",
+"subtopic": "AM-GM Inequality",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Ordering and Convexity Inequalities",
+"Rearrangement and Chebyshev Sum Inequalities"
+]
+},
+"80586": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Circumcircle of a Triangle",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Cyclic Quadrilaterals and Ptolemy's Theorem"
+]
+},
+"80589": {
+"topic": "Elementary Number Theory",
+"branch": "Primes and Prime Factorization",
+"subtopic": "Primality Conditions on Expressions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Diophantine Equations",
+"Polynomial Diophantine Equations",
+"Perfect Squares and Perfect Powers"
+]
+},
+"80590": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Chords, Arcs and Inscribed Angles",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Power of a Point and Radical Axes"
+]
+},
+"80594": {
+"topic": "Diophantine Equations",
+"branch": "Exponential and Divisibility Equations",
+"subtopic": "Integrality of Rational Expressions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Diophantine Equations",
+"Exponential and Divisibility Equations",
+"Exponential Diophantine Equations"
+]
+},
+"80595": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Homothety and Spiral Similarity",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Similar Triangles"
+]
+},
+"80596": {
+"topic": "Enumerative Combinatorics",
+"branch": "Basic Counting Principles",
+"subtopic": "Combinations and Committee Selection",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Permutations and Symmetry",
+"Permutations with Restrictions"
+]
+},
+"80598": {
+"topic": "Combinatorial Geometry",
+"branch": "Point Configurations",
+"subtopic": "Distances in Finite Point Sets",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Basic Counting Principles",
+"Pigeonhole Principle"
+]
+},
+"80605": {
+"topic": "Elementary Number Theory",
+"branch": "Primes and Prime Factorization",
+"subtopic": "Primality Conditions on Expressions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Primes and Prime Factorization",
+"Distribution of Primes"
+]
+},
+"80621": {
+"topic": "Algebraic Inequalities",
+"branch": "Mean Inequalities",
+"subtopic": "AM-GM Inequality",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Games and Processes",
+"Processes on Numbers",
+"Blackboard Number Operations"
+]
+},
+"80625": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Extremal Values and Best Constants",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Symmetric, Cyclic and Extremal Inequalities",
+"Cyclic and Fractional Inequalities"
+]
+},
+"80627": {
+"topic": "Plane Geometry",
+"branch": "Geometric Inequalities",
+"subtopic": "Distance Inequalities for Points",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Altitudes and Orthocentre"
+]
+},
+"80629": {
+"topic": "Combinatorial Games and Processes",
+"branch": "Processes on Boards and Tokens",
+"subtopic": "Chip Moves and Reachability",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Chessboards and Grids",
+"Knight's Tours and Piece Moves"
+]
+},
+"80631": {
+"topic": "Extremal Combinatorics",
+"branch": "Chessboards and Grids",
+"subtopic": "Colorings of Grids",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Counting with Restrictions",
+"Counting Grid Fillings and Colorings"
+]
+},
+"80635": {
+"topic": "Plane Geometry",
+"branch": "Triangles",
+"subtopic": "Law of Sines and Cosines",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Angle Bisectors, Incircle and Excircles"
+]
+},
+"80636": {
+"topic": "Plane Geometry",
+"branch": "Triangles",
+"subtopic": "Ceva's and Menelaus' Theorems",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Geometric Inequalities",
+"Inequalities for Triangle Sides"
+]
+},
+"80638": {
+"topic": "Combinatorial Games and Processes",
+"branch": "Processes on Boards and Tokens",
+"subtopic": "Chip Moves and Reachability",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Chessboards and Grids",
+"Knight's Tours and Piece Moves"
+]
+},
+"80641": {
+"topic": "Sequences, Sums and Functional Equations",
+"branch": "Functional Equations",
+"subtopic": "Iterated Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Sequences, Sums and Functional Equations",
+"Functional Equations",
+"Equations over the Reals"
+]
+},
+"80642": {
+"topic": "Sequences, Sums and Functional Equations",
+"branch": "Progressions and Finite Sums",
+"subtopic": "Geometric Progressions and Series",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Sequences, Sums and Functional Equations",
+"Progressions and Finite Sums",
+"Arithmetic Progressions"
+]
+},
+"80644": {
+"topic": "Combinatorial Games and Processes",
+"branch": "Two-Player Games",
+"subtopic": "Number and Digit Games",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Combinatorial Games and Processes",
+"Two-Player Games",
+"Selection and Sharing Games"
+]
+},
+"80651": {
+"topic": "Enumerative Combinatorics",
+"branch": "Recurrences and Generating Functions",
+"subtopic": "Generating Functions for Counting",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Binomial Coefficients",
+"Binomial Identities"
+]
+},
+"80652": {
+"topic": "Theory of Polynomials",
+"branch": "Roots of Polynomials",
+"subtopic": "Symmetric Polynomials and Newton's Sums",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Algebra",
+"Trigonometric Identities and Equations",
+"Trigonometric Sums and Products"
+]
+},
+"80656": {
+"topic": "Extremal Combinatorics",
+"branch": "Designs and Number Arrays",
+"subtopic": "Number Tables with Row and Column Conditions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Arrangements and Sequences",
+"Rearrangements of Arrays"
+]
+},
+"80658": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Homothety and Spiral Similarity",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Tangent Lines and Tangent Circles"
+]
+},
+"80665": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "GCD and LCM",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Divisibility and Greatest Common Divisor",
+"Divisibility of Integer Expressions"
+]
+},
+"80666": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Fermat's Little Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Quadratic Residues and Sums of Squares",
+"Quadratic Residues and Euler's Criterion"
+]
+},
+"80675": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Fermat's Little Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Congruences",
+"Euler's Theorem"
+]
+},
+"80676": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Congruence Properties and Residue Systems",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Special Numbers and Integer Sequences",
+"Divisibility in Integer Recurrences"
+]
+},
+"80677": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "GCD and LCM",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Diophantine Equations",
+"Exponential and Divisibility Equations",
+"Factorial Equations"
+]
+},
+"80678": {
+"topic": "Elementary Number Theory",
+"branch": "Floor Function and Rational Approximation",
+"subtopic": "Floor and Fractional Part Equations",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Floor Function and Rational Approximation",
+"Floor Function Identities and Sums"
+]
+},
+"80682": {
+"topic": "Algebraic Inequalities",
+"branch": "Cauchy-Schwarz and Related Inequalities",
+"subtopic": "Cauchy-Schwarz Inequality",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Symmetric, Cyclic and Extremal Inequalities",
+"Extremal Values and Best Constants"
+]
+},
+"80684": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Bounding Sums and Products",
+"conf": "low",
+"how": "reclass-opus",
+"db": [
+"Sequences, Sums and Functional Equations",
+"Functional Equations",
+"Functional Equations on the Integers"
+]
+},
+"80686": {
+"topic": "Sequences, Sums and Functional Equations",
+"branch": "Recursive Sequences",
+"subtopic": "Linear Recurrences with Constant Coefficients",
+"conf": "low",
+"how": "reclass-opus",
+"db": [
+"Algebraic Inequalities",
+"Symmetric, Cyclic and Extremal Inequalities",
+"Bounding Sums and Products"
+]
+},
+"80688": {
+"topic": "Algebraic Inequalities",
+"branch": "Mean Inequalities",
+"subtopic": "AM-GM Inequality",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Symmetric, Cyclic and Extremal Inequalities",
+"Extremal Values and Best Constants"
+]
+},
+"80694": {
+"topic": "Extremal Combinatorics",
+"branch": "Arrangements and Sequences",
+"subtopic": "Rearrangements of Arrays",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Ordering and Convexity Inequalities",
+"Rearrangement and Chebyshev Sum Inequalities"
+]
+},
+"80695": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Bounding Sums and Products",
+"conf": "low",
+"how": "reclass-opus",
+"db": [
+"Algebraic Inequalities",
+"Symmetric, Cyclic and Extremal Inequalities",
+"Extremal Values and Best Constants"
+]
+},
+"80696": {
+"topic": "Diophantine Equations",
+"branch": "Polynomial Diophantine Equations",
+"subtopic": "Quadratic Equations in Integers",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Diophantine Equations",
+"Exponential and Divisibility Equations",
+"Integrality of Rational Expressions"
+]
+},
+"80699": {
+"topic": "Extremal Combinatorics",
+"branch": "Additive Combinatorics",
+"subtopic": "Extremal Subsets of Integers",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Additive Combinatorics",
+"Divisibility and Coprimality in Integer Subsets"
+]
+},
+"80704": {
+"topic": "Elementary Number Theory",
+"branch": "Orders and Primitive Roots",
+"subtopic": "Primitive Roots",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Elementary Number Theory",
+"Orders and Primitive Roots",
+"Order of an Integer Modulo n"
+]
+},
+"80706": {
+"topic": "Diophantine Equations",
+"branch": "Exponential and Divisibility Equations",
+"subtopic": "Integrality of Rational Expressions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Diophantine Equations",
+"Exponential and Divisibility Equations",
+"Exponential Diophantine Equations"
+]
+},
+"80708": {
+"topic": "Enumerative Combinatorics",
+"branch": "Inclusion-Exclusion",
+"subtopic": "Derangements",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Binomial Coefficients",
+"Binomial Identities"
+]
+},
+"80715": {
+"topic": "Plane Geometry",
+"branch": "Quadrilaterals and Polygons",
+"subtopic": "Regular Polygons",
+"conf": "low",
+"how": "reclass-opus",
+"db": [
+"Enumerative Combinatorics",
+"Basic Counting Principles",
+"Pigeonhole Principle"
+]
+},
+"80717": {
+"topic": "Plane Geometry",
+"branch": "Analytic Geometry",
+"subtopic": "Lines and Distances in Coordinates",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Arithmetic Functions",
+"Number of Divisors"
+]
+},
+"80721": {
+"topic": "Plane Geometry",
+"branch": "Analytic Geometry",
+"subtopic": "Geometry in the Complex Plane",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Altitudes and Orthocentre"
+]
+},
+"80723": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Power of a Point and Radical Axes",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Tangent Lines and Tangent Circles"
+]
+},
+"80725": {
+"topic": "Plane Geometry",
+"branch": "Quadrilaterals and Polygons",
+"subtopic": "Areas of Quadrilaterals and Polygons",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Geometric Inequalities",
+"Area and Perimeter Inequalities"
+]
+},
+"80726": {
+"topic": "Plane Geometry",
+"branch": "Geometric Inequalities",
+"subtopic": "Area and Perimeter Inequalities",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Quadrilaterals and Polygons",
+"Areas of Quadrilaterals and Polygons"
+]
+},
+"80727": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Reflections and Isometries",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Quadrilaterals and Polygons",
+"Midpoint Polygons and Varignon's Theorem"
+]
+},
+"80730": {
+"topic": "Algebraic Inequalities",
+"branch": "Cauchy-Schwarz and Related Inequalities",
+"subtopic": "Cauchy-Schwarz Inequality",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Symmetric, Cyclic and Extremal Inequalities",
+"Cyclic and Fractional Inequalities"
+]
+},
+"80731": {
+"topic": "Sequences, Sums and Functional Equations",
+"branch": "Functional Equations",
+"subtopic": "Cauchy's Functional Equation",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Sequences, Sums and Functional Equations",
+"Functional Equations",
+"Equations over the Reals"
+]
+},
+"80738": {
+"topic": "Plane Geometry",
+"branch": "Triangles",
+"subtopic": "Angle Bisectors, Incircle and Excircles",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Altitudes and Orthocentre"
+]
+},
+"80739": {
+"topic": "Elementary Number Theory",
+"branch": "Quadratic Residues and Sums of Squares",
+"subtopic": "Sums of Two Squares and Binary Quadratic Forms",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Geometry",
+"Point Configurations",
+"Lattice Points and Lattice Polygons"
+]
+},
+"80742": {
+"topic": "Elementary Number Theory",
+"branch": "Quadratic Residues and Sums of Squares",
+"subtopic": "Quadratic Residues and Euler's Criterion",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Designs and Number Arrays",
+"Number Tables with Row and Column Conditions"
+]
+},
+"80744": {
+"topic": "Theory of Polynomials",
+"branch": "Polynomial Division and Integer Coefficients",
+"subtopic": "Polynomial Division and Remainders",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Theory of Polynomials",
+"Roots of Polynomials",
+"Multiple Roots"
+]
+},
+"80745": {
+"topic": "Elementary Algebra",
+"branch": "Complex Numbers",
+"subtopic": "Algebraic and Polar Form",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Algebra",
+"Algebraic Expressions and Radicals",
+"Conditional Evaluation of Expressions"
+]
+},
+"80753": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Cyclic Quadrilaterals and Ptolemy's Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Power of a Point and Radical Axes"
+]
+},
+"80755": {
+"topic": "Elementary Number Theory",
+"branch": "Digits and Number Bases",
+"subtopic": "Decimal Expansions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Congruences",
+"Congruence Properties and Residue Systems"
+]
+},
+"80757": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Wilson's Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Special Numbers and Integer Sequences",
+"Fibonacci and Lucas Numbers"
+]
+},
+"80769": {
+"topic": "Enumerative Combinatorics",
+"branch": "Basic Counting Principles",
+"subtopic": "Pigeonhole Principle",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Designs and Number Arrays",
+"Number Tables with Row and Column Conditions"
+]
+},
+"80775": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "Divisibility of Integer Expressions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Divisibility and Greatest Common Divisor",
+"Division Algorithm and Residue Forms"
+]
+},
+"80776": {
+"topic": "Enumerative Combinatorics",
+"branch": "Basic Counting Principles",
+"subtopic": "Pigeonhole Principle",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Additive Combinatorics",
+"Extremal Subsets of Integers"
+]
+},
+"80780": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Chords, Arcs and Inscribed Angles",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Analytic Geometry",
+"Lines and Distances in Coordinates"
+]
+},
+"80781": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Tangent Lines and Tangent Circles",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Analytic Geometry",
+"Lines and Distances in Coordinates"
+]
+},
+"80787": {
+"topic": "Plane Geometry",
+"branch": "Quadrilaterals and Polygons",
+"subtopic": "Equiangular and Equilateral Polygons",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Basic Measurement",
+"Angle Sums and Angle Measures"
+]
+},
+"80793": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Power of a Point and Radical Axes",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Cyclic Quadrilaterals and Ptolemy's Theorem"
+]
+},
+"80797": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Circumcircle of a Triangle",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Power of a Point and Radical Axes"
+]
+},
+"80806": {
+"topic": "Plane Geometry",
+"branch": "Analytic Geometry",
+"subtopic": "Lines and Distances in Coordinates",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Analytic Geometry",
+"Sums of Squared Distances"
+]
+},
+"80809": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Power of a Point and Radical Axes",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Cyclic Quadrilaterals and Ptolemy's Theorem"
+]
+},
+"80815": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Cyclic Quadrilaterals and Ptolemy's Theorem",
+"conf": "low",
+"how": "reclass-opus",
+"db": [
+"Plane Geometry",
+"Circles",
+"Power of a Point and Radical Axes"
+]
+},
+"80821": {
+"topic": "Enumerative Combinatorics",
+"branch": "Recurrences and Generating Functions",
+"subtopic": "Recurrence Relations for Counting",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Enumerative Combinatorics",
+"Basic Counting Principles",
+"Lattice Paths"
+]
+},
+"80823": {
+"topic": "Stochastic Processes",
+"branch": "Random Walks",
+"subtopic": "Gambler's Ruin",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Stochastic Processes",
+"Random Walks",
+"Random Walks on Graphs"
+]
+},
+"80835": {
+"topic": "Theory of Polynomials",
+"branch": "Polynomial Identities and Bounds",
+"subtopic": "Nonnegative Polynomials",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Algebra",
+"Algebraic Expressions and Radicals",
+"Factoring and Algebraic Identities"
+]
+},
+"80837": {
+"topic": "Theory of Polynomials",
+"branch": "Polynomial Identities and Bounds",
+"subtopic": "Lagrange Interpolation and Finite Differences",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Theory of Polynomials",
+"Polynomial Identities and Bounds",
+"Chebyshev Polynomials and Minimax Bounds"
+]
+},
+"80841": {
+"topic": "Theory of Polynomials",
+"branch": "Roots of Polynomials",
+"subtopic": "Multiple Roots",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Theory of Polynomials",
+"Polynomial Identities and Bounds",
+"Polynomial Functional Equations"
+]
+},
+"80843": {
+"topic": "Theory of Polynomials",
+"branch": "Roots of Polynomials",
+"subtopic": "Multiple Roots",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Theory of Polynomials",
+"Polynomial Identities and Bounds",
+"Polynomial Functional Equations"
+]
+},
+"80848": {
+"topic": "Theory of Polynomials",
+"branch": "Roots of Polynomials",
+"subtopic": "Location of Complex Roots",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Theory of Polynomials",
+"Roots of Polynomials",
+"Symmetric Polynomials and Newton's Sums"
+]
+},
+"80851": {
+"topic": "Sequences, Sums and Functional Equations",
+"branch": "Progressions and Finite Sums",
+"subtopic": "Sums of Powers and Closed Forms",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Sequences, Sums and Functional Equations",
+"Recursive Sequences",
+"Linear Recurrences with Constant Coefficients"
+]
+},
+"80857": {
+"topic": "Sequences, Sums and Functional Equations",
+"branch": "Recursive Sequences",
+"subtopic": "Nonlinear Recursive Sequences",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Sequences, Sums and Functional Equations",
+"Recursive Sequences",
+"Linear Recurrences with Constant Coefficients"
+]
+},
+"80859": {
+"topic": "Sequences, Sums and Functional Equations",
+"branch": "Functional Equations",
+"subtopic": "Iterated Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Sequences, Sums and Functional Equations",
+"Recursive Sequences",
+"Nonlinear Recursive Sequences"
+]
+},
+"80867": {
+"topic": "Extremal Combinatorics",
+"branch": "Arrangements and Sequences",
+"subtopic": "Constrained Sequences and Words",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Basic Counting Principles",
+"Pigeonhole Principle"
+]
+},
+"80875": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Bounding Sums and Products",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Sequences, Sums and Functional Equations",
+"Recursive Sequences",
+"Nonlinear Recursive Sequences"
+]
+},
+"80881": {
+"topic": "Extremal Combinatorics",
+"branch": "Arrangements and Sequences",
+"subtopic": "Constrained Sequences and Words",
+"conf": "low",
+"how": "reclass-opus",
+"db": [
+"Combinatorial Geometry",
+"Point Configurations",
+"Vector Sums and Sign Choices"
+]
+},
+"80882": {
+"topic": "Combinatorial Games and Processes",
+"branch": "Processes on Numbers",
+"subtopic": "Blackboard Number Operations",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Sequences, Sums and Functional Equations",
+"Recursive Sequences",
+"Nonlinear Recursive Sequences"
+]
+},
+"80883": {
+"topic": "Sequences, Sums and Functional Equations",
+"branch": "Recursive Sequences",
+"subtopic": "Linear Recurrences with Constant Coefficients",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Cauchy-Schwarz and Related Inequalities",
+"Triangle and Minkowski Inequalities"
+]
+},
+"80888": {
+"topic": "Discrete Foundations",
+"branch": "Sets, Relations and Functions",
+"subtopic": "Injective, Surjective and Composite Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Discrete Foundations",
+"Sets, Relations and Functions",
+"Set Algebra and Power Sets"
+]
+},
+"80892": {
+"topic": "Plane Geometry",
+"branch": "Analytic Geometry",
+"subtopic": "Geometry in the Complex Plane",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Geometric Transformations",
+"Homothety and Spiral Similarity"
+]
+},
+"80895": {
+"topic": "Solid Geometry",
+"branch": "Polyhedra",
+"subtopic": "Prisms and Pyramids",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Solid Geometry",
+"Polyhedra",
+"Nets and Unfoldings"
+]
+},
+"80907": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Cyclic Quadrilaterals and Ptolemy's Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Altitudes and Orthocentre"
+]
+},
+"80910": {
+"topic": "Elementary Number Theory",
+"branch": "Primes and Prime Factorization",
+"subtopic": "p-adic Valuation and Lifting the Exponent",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Additive Combinatorics",
+"Partitions of Integer Sets"
+]
+},
+"80912": {
+"topic": "Extremal Combinatorics",
+"branch": "Extremal Set Theory",
+"subtopic": "Intervals on a Line",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Algebraic Inequalities",
+"Symmetric, Cyclic and Extremal Inequalities",
+"Bounding Sums and Products"
+]
+},
+"80915": {
+"topic": "Combinatorial Games and Processes",
+"branch": "Processes on Numbers",
+"subtopic": "Blackboard Number Operations",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Divisibility and Greatest Common Divisor",
+"GCD and LCM"
+]
+},
+"80917": {
+"topic": "Elementary Number Theory",
+"branch": "Arithmetic Functions",
+"subtopic": "Sum of Divisors",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Special Numbers and Integer Sequences",
+"Perfect and Amicable Numbers"
+]
+},
+"80924": {
+"topic": "Plane Geometry",
+"branch": "Analytic Geometry",
+"subtopic": "Lines and Distances in Coordinates",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Angle Bisectors, Incircle and Excircles"
+]
+},
+"80928": {
+"topic": "Logic and Algorithmic Puzzles",
+"branch": "Weighing and Search Puzzles",
+"subtopic": "Measuring with Jugs, Fuses and Hourglasses",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Extremal Combinatorics",
+"Additive Combinatorics",
+"Sumsets and Pairwise Sums"
+]
+},
+"80933": {
+"topic": "Diophantine Equations",
+"branch": "Classical Diophantine Equations",
+"subtopic": "Pell's Equation",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Divisibility and Greatest Common Divisor",
+"Division Algorithm and Residue Forms"
+]
+},
+"80934": {
+"topic": "Diophantine Equations",
+"branch": "Classical Diophantine Equations",
+"subtopic": "Pythagorean Triples",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Diophantine Equations",
+"Polynomial Diophantine Equations",
+"Perfect Squares and Perfect Powers"
+]
+},
+"80936": {
+"topic": "Theory of Polynomials",
+"branch": "Roots of Polynomials",
+"subtopic": "Vieta's Formulas",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Elementary Algebra",
+"Functions and Graphs",
+"Equations with a Parameter"
+]
+},
+"80937": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Euler's Theorem",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Primes and Prime Factorization",
+"p-adic Valuation and Lifting the Exponent"
+]
+},
+"80939": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Extremal Values and Best Constants",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Cauchy-Schwarz and Related Inequalities",
+"Cauchy-Schwarz Inequality"
+]
+},
+"80963": {
+"topic": "Graph Theory",
+"branch": "Extremal Graph Theory",
+"subtopic": "Cliques and Independent Sets",
+"conf": "low",
+"how": "reclass-opus",
+"db": [
+"Extremal Combinatorics",
+"Chessboards and Grids",
+"Marked Cells in Grids"
+]
+},
+"80964": {
+"topic": "Plane Geometry",
+"branch": "Triangles",
+"subtopic": "Altitudes and Orthocentre",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Chords, Arcs and Inscribed Angles"
+]
+},
+"80971": {
+"topic": "Elementary Algebra",
+"branch": "Algebraic Modeling",
+"subtopic": "Rate, Time and Distance",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Graph Theory",
+"Graph Structure and Traversal",
+"Directed Graphs and Tournaments"
+]
+},
+"80975": {
+"topic": "Logic and Algorithmic Puzzles",
+"branch": "Algorithmic Puzzles",
+"subtopic": "List and Array Algorithms",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Arrangements and Sequences",
+"Constrained Sequences and Words"
+]
+},
+"80979": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Cyclic Quadrilaterals and Ptolemy's Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Chords, Arcs and Inscribed Angles"
+]
+},
+"80980": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Power of a Point and Radical Axes",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Tangent Lines and Tangent Circles"
+]
+},
+"81002": {
+"topic": "Graph Theory",
+"branch": "Extremal Graph Theory",
+"subtopic": "Ramsey's Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Algebra",
+"Algebraic Expressions and Radicals",
+"Rationality of Algebraic Numbers"
+]
+},
+"81003": {
+"topic": "Combinatorial Geometry",
+"branch": "Point Configurations",
+"subtopic": "Distances in Finite Point Sets",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Geometric Inequalities",
+"Distance Inequalities for Points"
+]
+},
+"81007": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "Euclidean Algorithm and Bézout's Identity",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Games and Processes",
+"Processes on Numbers",
+"Blackboard Number Operations"
+]
+},
+"81011": {
+"topic": "Plane Geometry",
+"branch": "Analytic Geometry",
+"subtopic": "Lines and Distances in Coordinates",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Medians and Centroids"
+]
+},
+"81013": {
+"topic": "Elementary Number Theory",
+"branch": "Primes and Prime Factorization",
+"subtopic": "Distribution of Primes",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Congruences",
+"Chinese Remainder Theorem"
+]
+},
+"81014": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Congruence Properties and Residue Systems",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Digits and Number Bases",
+"Number Bases"
+]
+},
+"81015": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Fermat's Little Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Theory of Polynomials",
+"Polynomial Division and Integer Coefficients",
+"Integer Polynomials and Divisibility"
+]
+},
+"83390": {
+"topic": "Classical Mechanics",
+"branch": "Statics",
+"subtopic": "Center of Mass",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Statics",
+"Equilibrium of Rigid Bodies"
+]
+},
+"83515": {
+"topic": "Oscillations and Waves",
+"branch": "Sound",
+"subtopic": "Beats",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Oscillations and Waves",
+"Linear Oscillations",
+"Simple Harmonic Motion"
+]
+},
+"83529": {
+"topic": "Classical Mechanics",
+"branch": "Gravitation",
+"subtopic": "Acceleration Due to Gravity",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Gravitation",
+"Newton's Law of Gravitation"
+]
+},
+"83640": {
+"topic": "Heat and Thermodynamics",
+"branch": "Phase Change and Moist Air",
+"subtopic": "Latent Heat and Phase Change",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Heat and Thermodynamics",
+"Laws of Thermodynamics",
+"First Law for Closed Systems"
+]
+},
+"83747": {
+"topic": "Electromagnetism",
+"branch": "Magnetostatics",
+"subtopic": "Magnetic Force on Currents",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Electromagnetism",
+"Magnetostatics",
+"Magnetic Dipoles"
+]
+}
+}
