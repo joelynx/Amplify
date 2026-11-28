@@ -136,6 +136,48 @@ CIRCLES_CONTEXT = [  # (the context's opening words, the statement's opening, wh
 ]
 
 
+OPT_LABEL_RE = re.compile(r"\\textbf\{\s*\(\s*([A-E])\s*\)\s*\}|\(\s*\\textbf\{\s*([A-E])\s*\}\s*\)|\(\s*([A-E])\s*\)")
+OPT_IN_MATH = [  # a label the OCR set inside math, "\(\mathbf{(A)}60^{\circ}\)" or "\((\mathbf {E}) \frac{3}{2}\)", or
+    (re.compile(r"\\\(\s*\\mathbf\s*\{\s*\(\s*([A-E])\s*\)\s*\}"), r"(\1) \\("),  # with its parenthesis inside the
+    (re.compile(r"\\\(\s*\(\s*\\mathbf\s*\{\s*([A-E])\s*\}\s*\)"), r"(\1) \\("),  # bold, "(\textbf{C)}": taken out
+    (re.compile(r"\(\s*\\textbf\{\s*([A-E])\s*\)\s*\}"), r"(\1)"),
+    (re.compile(r"\\\(\s*\\\)"), ""),
+]
+
+
+def option_lines(t: str) -> str:
+    """Fermat's options (A) to (E), printed inline as "(A)11 (B)8", "\\textbf{(A)} 28" or "(\\textbf{A}) 22.5", each
+    on a line of its own with a plain label: the solvers' answer-key check counts options only where a label starts
+    a line, in order (subjects.option_count), and judge job 20261128-103645 sent back 499 Fermat keys for it. The last
+    five labels count when they are A to E: in that order, each takes the text up to the next; out of order (a two
+    column layout the OCR read down a column), each takes its first paragraph, in order A to E, and the rest follows
+    them. A run inside a table is left alone."""
+    s = t
+    for pat, rep in OPT_IN_MATH:
+        s = pat.sub(rep, s)
+    labs = list(OPT_LABEL_RE.finditer(s))[-5:]
+    letters = [m.group(1) or m.group(2) or m.group(3) for m in labs]
+    if sorted(letters) != list("ABCDE"):
+        return t
+    before = s[:labs[0].start()]
+    if before.count(r"\begin{tabular}") > before.count(r"\end{tabular}"):
+        return t
+    ends = [m.start() for m in labs[1:]] + [len(s)]
+    if letters == list("ABCDE"):
+        opts = [s[m.end():e].strip() for m, e in zip(labs, ends)]
+        rest = [opts[-1].split("\n\n", 1)[1]] if "\n\n" in opts[-1] else []
+        opts[-1] = opts[-1].split("\n\n", 1)[0]
+    else:
+        opts, rest = {}, []
+        for m, e, c in zip(labs, ends, letters):
+            paras = [p for p in s[m.end():e].strip().split("\n\n") if p.strip()] or [""]
+            opts[c] = paras[0].strip()
+            rest += paras[1:]
+        opts = [opts[c] for c in "ABCDE"]
+    lines = [before.rstrip()] + [f"({c}) {o}".rstrip() for c, o in zip("ABCDE", opts)] + [p.strip() for p in rest]
+    return "\n\n".join(x for x in lines if x)
+
+
 def circles_statement(r: dict) -> str:
     q, ctx = r["question"].strip(), (r["subsource"].get("context") or "").strip()
     if r["source"] != CIRCLES or not ctx:
@@ -164,6 +206,22 @@ def bank_source(r: dict) -> str:
 # (left out); Tournament of Towns 35 vs 480 (its rows the bank lacks are added).
 IN_BANK = {"Dekking et al.'s A Modern Introduction to Probability and Statistics", CMO_,
            "University of Toronto Mathematics Competitions"}
+# rows the owner deleted (2026-11-28: "Delete the flagged rows.": the extra books' rows the classification flagged for an
+# answer that contradicts the problem, missing data or broken text; archive pipeline/archive/deleted_extra23_flagged_*)
+DELETED = {
+    "extra_books/castaneda-exercises/chapter-2-2-26", "extra_books/castaneda-exercises/chapter-4-4-48",
+    "extra_books/castaneda-exercises/chapter-5-5-11", "extra_books/castaneda-exercises/chapter-11-11-23",
+    "extra_books/castaneda-exercises/chapter-11-11-28", "extra_books/castaneda-exercises/chapter-12-12-1",
+    "extra_books/howell-algorithms/chapter-3-analyzing-algorithms-3-24",
+    *(f"extra_books/howell-algorithms/chapter-16-np-completeness-16-{n}" for n in range(31, 39)),
+    "extra_books/imo-trigonometry/advanced-problems-20", "extra_books/lazlo-300-creative/1-mechanics-problems-7",
+    "extra_books/lazlo-300-creative/1-mechanics-problems-1-2-dynamics-16",
+    "extra_books/probability-collection/2-1-conditional-probability-independence-88",
+    "extra_books/probability-collection/2-1-conditional-probability-independence-92",
+    "extra_books/probability-collection/6-3-series-of-independent-random-variables-351",
+    "extra_books/mathematical-circles/chapter-3-divisibility-and-remainders-56",
+    "extra_books/mathematical-circles/chapter-16-inequalities-36",
+}
 # a same_problem_as group keeps its competition's row before a camp sheet's copy
 COLLECTION_RANK = {"CMO": 0, "tott": 1, "torontoolymon": 2, "CIMO": 9}
 
@@ -342,6 +400,8 @@ def load(data: Path) -> tuple[list[dict], dict[str, str], Figures]:
             left[r["id"]] = f"not in English ({r['subsource']['language']})"
         elif bank_source(r) in IN_BANK:
             left[r["id"]] = "source already in the bank"
+        elif r["id"] in DELETED:
+            left[r["id"]] = "deleted by the owner"
     # same_problem_as: one row of each group
     def rank(r: dict) -> tuple:
         return (not r["solutions"], COLLECTION_RANK.get(r["collection"], 5), raw.index(r))
@@ -383,7 +443,7 @@ def load(data: Path) -> tuple[list[dict], dict[str, str], Figures]:
         row = {
             "potd": f"{SET} {r['id']}", "set": SET, "idx": r["id"], "orig": r["collection"], "source": source,
             "subsource": subsource(r),
-            "latexcode": fix(circles_statement(r), r["id"]),
+            "latexcode": (option_lines if source == "Fermat Mathematics Contest" else str)(fix(circles_statement(r), r["id"])),
             "answer": fix(r["answer"].strip(), r["id"]) if (r.get("answer") or "").strip() else None,
             "solution": fix(sol, r["id"]) if sol else None,
             "hints": fix(notes, r["id"]) if notes and not sol else None,

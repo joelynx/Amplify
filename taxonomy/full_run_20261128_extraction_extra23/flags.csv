@@ -1,0 +1,24 @@
+question_id,flags,subject,note
+87090,broken_text,Probability and Stochastic Processes,CDF intervals inconsistent (2 ≤ x < 3/5)
+87228,key_conflict,Probability and Stochastic Processes,Source answer says inverse of pdf; should be inverse of cdf
+87247,key_conflict,Probability and Stochastic Processes,"Source's answer table sums to 1.1, inconsistent with the given marginals."
+87467,key_conflict,Probability and Stochastic Processes,"Source answer a) drift should be 3B_t dt, not B_t/2"
+87472,mismatch,Probability and Stochastic Processes,Source answer belongs to the previous question
+87477,needs_data,Quantitative Finance,"Time to expiry not given; parity with T=1 gives about 2%, not 8%."
+87532,needs_data,Algorithms and Data Structures,"Refers to recurrence (3.7), not given"
+87687,needs_data,Theory of Computation,Cook-Levin construction; predicates defined elsewhere in text.
+87688,needs_data,Theory of Computation,Cook-Levin construction; predicates defined elsewhere in text.
+87689,needs_data,Theory of Computation,Cook-Levin construction; predicates defined elsewhere in text.
+87690,needs_data,Theory of Computation,Cook-Levin construction; predicates defined elsewhere in text.
+87691,needs_data,Theory of Computation,Cook-Levin construction; predicates defined elsewhere in text.
+87692,needs_data,Theory of Computation,Cook-Levin construction; predicates defined elsewhere in text.
+87693,needs_data,Theory of Computation,Cook-Levin construction; predicates defined elsewhere in text.
+87694,needs_data,Theory of Computation,Cook-Levin construction; predicates defined elsewhere in text.
+87851,key_conflict,Algebra,Question asks a_2004; solution works with a_1998
+88131,needs_data,Mechanics,Positions of A and B in figure not given
+88140,needs_data,Mechanics,Track geometry only in figure
+88475,broken_text,Probability and Stochastic Processes,Conclusion garbled: P(A)P(B) missing P(A∩B)=.
+88479,broken_text,Probability and Stochastic Processes,Underdetermined as stated; a condition on the events seems missing.
+88738,broken_text,Probability and Stochastic Processes,Condition on the step size is garbled; continuous-state recurrence.
+89097,mismatch,Number Theory,Solution answer covers both this and next problem
+89745,broken_text,Algebra,Stated inequality fails at x=1; text likely garbled
