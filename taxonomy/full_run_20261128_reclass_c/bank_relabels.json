@@ -1,0 +1,26 @@
+{
+"80044": {
+"topic": "Elementary Number Theory",
+"branch": "Digits and Number Bases",
+"subtopic": "Divisibility Rules",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Digits and Number Bases",
+"Digit Equations and Cryptarithms"
+]
+},
+"85927": {
+"topic": "Combinatorial Geometry",
+"branch": "Covering and Packing",
+"subtopic": "Packing Shapes in Regions",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Geometry",
+"Tilings and Dissections",
+"Packing Bricks and Rectangles"
+]
+}
+}
