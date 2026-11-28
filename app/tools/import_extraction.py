@@ -221,6 +221,24 @@ DELETED = {
     "extra_books/probability-collection/6-3-series-of-independent-random-variables-351",
     "extra_books/mathematical-circles/chapter-3-divisibility-and-remainders-56",
     "extra_books/mathematical-circles/chapter-16-inequalities-36",
+    # owner 2026-11-28: "Delete the held rows": the dataset.zip rows its classification held for the same reasons
+    # (archive pipeline/archive/deleted_held_extraction_*)
+    "CIMO/games-2004winter/7", "CIMO/mock-solutions/9", "CIMO/seq-ineq/easier-problems-imo-0-1-4-level-5",
+    "COMC/exam2001/part-a-8", "fyziklani/fyziksolutions-13/db", "physbrawl/2013-sol/x-3", "physbrawl/2014-sol/e-4",
+    "physbrawl/2022-sol/41", "physbrawl/2023-sol/14", "purdue_POW/solution02-3/2", "purdue_POW/solution10-4/10",
+    "purdue_POW/solution12-4/12", "simon_marais/smmc-2017-solutions-preliminary-1/session-b-b4",
+    *(f"simon_marais/smmc-{y}-solutions-1/session-b-b4" for y in range(2018, 2022)),
+    "simon_marais/smmc2023solutions/session-b-b4",
+    *(f"uncategorized_books/gregorio-chenlo-400-solved-exercises-of-university-physics-2/{n}"
+      for n in (4, 19, 31, 39, 40, 53, 57, 63, "topic-2-classic-mechanics-136",
+                "topic-5-thermometry-calorimetry-and-thermodynamics-303",
+                "topic-5-thermometry-calorimetry-and-thermodynamics-309",
+                "topic-6-electric-field-magnetic-field-and-direct-current-381", "topic-7-alternating-current-435")),
+    *(f"uncategorized_books/processed-introduction-to-probability-models/chapter-{c}"
+      for c in ("8-52", "4-77", "8-3", "9-8", "9-11", "9-21", "10-15")),
+    "uncategorized_books/processed-probability-and-statistics-the-science-of-uncertai/section-1-6-continuity-of-p-1-6-9",
+    "uncategorized_books/processed-probability-and-statistics-the-science-of-uncertai/section-5-5-some-basic-inferences-5-5-1",
+    "unsw_school_comp/2013-unsw-school-mathematics-competition-problems-answers-v2/senior-division-4",
 }
 # a same_problem_as group keeps its competition's row before a camp sheet's copy
 COLLECTION_RANK = {"CMO": 0, "tott": 1, "torontoolymon": 2, "CIMO": 9}
