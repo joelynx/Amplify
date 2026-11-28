@@ -1,0 +1,3950 @@
+{
+"87007": {
+"topic": "Probability",
+"branch": "Events and Probability Spaces",
+"subtopic": "Sigma-Fields and Probability Axioms",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Events and Probability Spaces",
+"Addition Rule and Venn Diagrams"
+]
+},
+"87011": {
+"topic": "Probability",
+"branch": "Events and Probability Spaces",
+"subtopic": "Inclusion-Exclusion and Bonferroni Inequalities",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Events and Probability Spaces",
+"Addition Rule and Venn Diagrams"
+]
+},
+"87012": {
+"topic": "Probability",
+"branch": "Random Variables and Their Distributions",
+"subtopic": "Probability Mass Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Discrete Distributions",
+"Geometric Distribution"
+]
+},
+"87029": {
+"topic": "Probability",
+"branch": "Conditional Probability and Independence",
+"subtopic": "Bayes' Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditional Probability and Independence",
+"Conditional Probability"
+]
+},
+"87034": {
+"topic": "Stochastic Processes",
+"branch": "Random Walks",
+"subtopic": "Reflection Principle",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Stochastic Processes",
+"Random Walks",
+"Simple Random Walk"
+]
+},
+"87035": {
+"topic": "Probability",
+"branch": "Conditional Probability and Independence",
+"subtopic": "Bayes' Theorem",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditional Probability and Independence",
+"Law of Total Probability"
+]
+},
+"87051": {
+"topic": "Probability",
+"branch": "Discrete Distributions",
+"subtopic": "Binomial Distribution",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditional Probability and Independence",
+"Independence of Events"
+]
+},
+"87055": {
+"topic": "Probability",
+"branch": "Events and Probability Spaces",
+"subtopic": "Inclusion-Exclusion and Bonferroni Inequalities",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Events and Probability Spaces",
+"Addition Rule and Venn Diagrams"
+]
+},
+"87071": {
+"topic": "Probability",
+"branch": "Random Variables and Their Distributions",
+"subtopic": "Cumulative Distribution Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Random Variables and Their Distributions",
+"Functions of a Random Variable"
+]
+},
+"87092": {
+"topic": "Probability",
+"branch": "Random Variables and Their Distributions",
+"subtopic": "Cumulative Distribution Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Expectation",
+"Variance and Standard Deviation"
+]
+},
+"87093": {
+"topic": "Probability",
+"branch": "Random Variables and Their Distributions",
+"subtopic": "Functions of a Random Variable",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Expectation",
+"Expected Value"
+]
+},
+"87095": {
+"topic": "Probability",
+"branch": "Random Variables and Their Distributions",
+"subtopic": "Probability Mass Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Expectation",
+"Expected Value"
+]
+},
+"87098": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Order Statistics",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Expectation",
+"Expected Value"
+]
+},
+"87099": {
+"topic": "Probability",
+"branch": "Random Variables and Their Distributions",
+"subtopic": "Probability Density Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Expectation",
+"Variance and Standard Deviation"
+]
+},
+"87100": {
+"topic": "Probability",
+"branch": "Random Variables and Their Distributions",
+"subtopic": "Probability Density Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Expectation",
+"Variance and Standard Deviation"
+]
+},
+"87104": {
+"topic": "Probability",
+"branch": "Random Variables and Their Distributions",
+"subtopic": "Probability Mass Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Combinatorial Probability",
+"Urn Models"
+]
+},
+"87110": {
+"topic": "Probability",
+"branch": "Expectation",
+"subtopic": "Variance and Standard Deviation",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Expectation",
+"Expected Value"
+]
+},
+"87148": {
+"topic": "Probability",
+"branch": "Conditional Probability and Independence",
+"subtopic": "Independence of Events",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Discrete Distributions",
+"Hypergeometric Distribution"
+]
+},
+"87168": {
+"topic": "Probability",
+"branch": "Discrete Distributions",
+"subtopic": "Poisson Distribution",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Expectation",
+"Expected Value"
+]
+},
+"87169": {
+"topic": "Probability",
+"branch": "Discrete Distributions",
+"subtopic": "Poisson Distribution",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Expectation",
+"Expected Value"
+]
+},
+"87180": {
+"topic": "Stochastic Processes",
+"branch": "Poisson Processes",
+"subtopic": "Homogeneous Poisson Process",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Discrete Distributions",
+"Poisson Distribution"
+]
+},
+"87185": {
+"topic": "Probability",
+"branch": "Geometric Probability",
+"subtopic": "Meeting Problem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Continuous Distributions",
+"Uniform Distribution"
+]
+},
+"87191": {
+"topic": "Probability",
+"branch": "Random Variables and Their Distributions",
+"subtopic": "Functions of a Random Variable",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Continuous Distributions",
+"Uniform Distribution"
+]
+},
+"87199": {
+"topic": "Probability",
+"branch": "Random Variables and Their Distributions",
+"subtopic": "Functions of a Random Variable",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Continuous Distributions",
+"Normal Distribution"
+]
+},
+"87202": {
+"topic": "Probability",
+"branch": "Discrete Distributions",
+"subtopic": "Binomial Distribution",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Normal Approximation to the Binomial"
+]
+},
+"87220": {
+"topic": "Probability",
+"branch": "Random Variables and Their Distributions",
+"subtopic": "Functions of a Random Variable",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Random Variables and Their Distributions",
+"Hazard Rates and Survival Functions"
+]
+},
+"87235": {
+"topic": "Probability",
+"branch": "Random Variables and Their Distributions",
+"subtopic": "Functions of a Random Variable",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Random Variables and Their Distributions",
+"Cumulative Distribution Functions"
+]
+},
+"87243": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Transformations of Random Vectors",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Joint Density Functions"
+]
+},
+"87259": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Independence of Random Variables",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Discrete Distributions",
+"Binomial Distribution"
+]
+},
+"87262": {
+"topic": "Probability",
+"branch": "Combinatorial Probability",
+"subtopic": "Balls into Bins",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Joint Probability Mass Functions"
+]
+},
+"87268": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Covariance and Correlation",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Expectation",
+"Variance and Standard Deviation"
+]
+},
+"87273": {
+"topic": "Probability",
+"branch": "Inequalities and Limit Theorems",
+"subtopic": "Moment Inequalities",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Covariance and Correlation"
+]
+},
+"87281": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Independence of Random Variables",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Bivariate Normal Distribution"
+]
+},
+"87284": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Joint Density Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Geometric Probability",
+"Random Points in Plane Regions"
+]
+},
+"87296": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Transformations of Random Vectors",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Order Statistics"
+]
+},
+"87297": {
+"topic": "Probability",
+"branch": "Continuous Distributions",
+"subtopic": "Gamma Distribution",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Sums of Independent Random Variables"
+]
+},
+"87303": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Covariance and Correlation",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Independence of Random Variables"
+]
+},
+"87309": {
+"topic": "Mathematical Statistics",
+"branch": "Sampling Distributions",
+"subtopic": "Chi-Squared, t and F Distributions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Mathematical Statistics",
+"Sampling Distributions",
+"Sampling Distribution of the Mean"
+]
+},
+"87312": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Joint Density Functions",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Conditional Distributions"
+]
+},
+"87320": {
+"topic": "Probability",
+"branch": "Conditioning and Compounding",
+"subtopic": "Law of Total Variance",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditioning and Compounding",
+"Conditional Expectation"
+]
+},
+"87323": {
+"topic": "Probability",
+"branch": "Continuous Distributions",
+"subtopic": "Exponential Distribution",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditioning and Compounding",
+"Conditional Expectation"
+]
+},
+"87325": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Joint Probability Mass Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditioning and Compounding",
+"Conditional Expectation"
+]
+},
+"87327": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Conditional Distributions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditioning and Compounding",
+"Conditional Expectation"
+]
+},
+"87329": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Covariance and Correlation",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditioning and Compounding",
+"Conditional Expectation"
+]
+},
+"87330": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Conditional Distributions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditioning and Compounding",
+"Conditional Expectation"
+]
+},
+"87332": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Conditional Distributions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditioning and Compounding",
+"Law of Total Variance"
+]
+},
+"87333": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Conditional Distributions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditioning and Compounding",
+"Conditional Expectation"
+]
+},
+"87335": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Conditional Distributions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditioning and Compounding",
+"Conditional Expectation"
+]
+},
+"87336": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Conditional Distributions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditioning and Compounding",
+"Conditional Expectation"
+]
+},
+"87337": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Conditional Distributions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditioning and Compounding",
+"Conditional Expectation"
+]
+},
+"87339": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Joint Density Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditioning and Compounding",
+"Conditional Expectation"
+]
+},
+"87341": {
+"topic": "Probability",
+"branch": "Discrete Distributions",
+"subtopic": "Geometric Distribution",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditioning and Compounding",
+"Conditional Expectation"
+]
+},
+"87344": {
+"topic": "Probability",
+"branch": "Conditioning and Compounding",
+"subtopic": "Law of Total Variance",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditioning and Compounding",
+"Conditional Expectation"
+]
+},
+"87365": {
+"topic": "Probability",
+"branch": "Generating Functions and Transforms",
+"subtopic": "Moment Generating Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Central Limit Theorem"
+]
+},
+"87368": {
+"topic": "Probability",
+"branch": "Discrete Distributions",
+"subtopic": "Poisson Distribution",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Central Limit Theorem"
+]
+},
+"87377": {
+"topic": "Probability",
+"branch": "Discrete Distributions",
+"subtopic": "Poisson Approximation",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Normal Approximation to the Binomial"
+]
+},
+"87380": {
+"topic": "Probability",
+"branch": "Inequalities and Limit Theorems",
+"subtopic": "Markov and Chebyshev Inequalities",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Central Limit Theorem"
+]
+},
+"87385": {
+"topic": "Probability",
+"branch": "Inequalities and Limit Theorems",
+"subtopic": "Borel-Cantelli Lemmas",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Modes of Convergence"
+]
+},
+"87425": {
+"topic": "Stochastic Processes",
+"branch": "Continuous-Time Markov Chains",
+"subtopic": "Stationary Distributions (Continuous Time)",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Stochastic Processes",
+"Queueing Theory",
+"Multi-Server and Loss Queues"
+]
+},
+"87432": {
+"topic": "Stochastic Processes",
+"branch": "Continuous-Time Markov Chains",
+"subtopic": "Birth-Death Processes",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Stochastic Processes",
+"Queueing Theory",
+"Multi-Server and Loss Queues"
+]
+},
+"87435": {
+"topic": "Stochastic Processes",
+"branch": "Continuous-Time Markov Chains",
+"subtopic": "Birth-Death Processes",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Stochastic Processes",
+"Queueing Theory",
+"Single-Server Markovian Queues"
+]
+},
+"87495": {
+"topic": "Algorithms",
+"branch": "Algorithm Analysis",
+"subtopic": "Loop Invariants and Correctness Proofs",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Algorithms",
+"Sorting and Searching",
+"Binary Search"
+]
+},
+"87496": {
+"topic": "Algorithms",
+"branch": "Algorithm Analysis",
+"subtopic": "Loop Invariants and Correctness Proofs",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Algorithms",
+"Sorting and Searching",
+"Binary Search"
+]
+},
+"87510": {
+"topic": "Algorithms",
+"branch": "Sorting and Searching",
+"subtopic": "Elementary Sorting Algorithms",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algorithms",
+"Algorithm Analysis",
+"Loop Invariants and Correctness Proofs"
+]
+},
+"87560": {
+"topic": "Data Structures",
+"branch": "Advanced Data Structures",
+"subtopic": "Binary Heaps",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algorithms",
+"Greedy Algorithms",
+"Interval and Job Scheduling"
+]
+},
+"87609": {
+"topic": "Algorithms",
+"branch": "Divide and Conquer",
+"subtopic": "Fast Multiplication Algorithms",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algorithms",
+"Divide and Conquer",
+"Divide-and-Conquer Design"
+]
+},
+"87615": {
+"topic": "Algorithms",
+"branch": "Greedy Algorithms",
+"subtopic": "Interval and Job Scheduling",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Algorithms",
+"Greedy Algorithms",
+"Greedy Choice and Exchange Arguments"
+]
+},
+"87616": {
+"topic": "Algorithms",
+"branch": "Greedy Algorithms",
+"subtopic": "Interval and Job Scheduling",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Algorithms",
+"Greedy Algorithms",
+"Greedy Choice and Exchange Arguments"
+]
+},
+"87630": {
+"topic": "Algorithms",
+"branch": "Dynamic Programming",
+"subtopic": "Dynamic Programming on Trees and DAGs",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algorithms",
+"Dynamic Programming",
+"Longest Common Subsequence and Edit Distance"
+]
+},
+"87633": {
+"topic": "Algorithms",
+"branch": "Dynamic Programming",
+"subtopic": "Principles of Dynamic Programming",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algorithms",
+"Dynamic Programming",
+"Dynamic Programming on Trees and DAGs"
+]
+},
+"87648": {
+"topic": "Algorithms",
+"branch": "Graph Algorithms",
+"subtopic": "Breadth-First Search",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algorithms",
+"Graph Algorithms",
+"Depth-First Search"
+]
+},
+"87663": {
+"topic": "Algorithms",
+"branch": "Graph Algorithms",
+"subtopic": "Graph Representations",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Computability and Complexity",
+"Computational Complexity",
+"P, NP and co-NP"
+]
+},
+"87916": {
+"topic": "Linear Algebra",
+"branch": "Bilinear and Quadratic Forms",
+"subtopic": "Positive Definite Matrices",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Discrete Foundations",
+"Sets, Relations and Functions",
+"Partial Orders and Posets"
+]
+},
+"87920": {
+"topic": "Linear Algebra",
+"branch": "Bilinear and Quadratic Forms",
+"subtopic": "Positive Definite Matrices",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Discrete Foundations",
+"Sets, Relations and Functions",
+"Partial Orders and Posets"
+]
+},
+"87929": {
+"topic": "Discrete Foundations",
+"branch": "Sets, Relations and Functions",
+"subtopic": "Injective, Surjective and Composite Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Extremal Set Theory",
+"Infinite Combinatorics"
+]
+},
+"87930": {
+"topic": "Real Analysis",
+"branch": "Real Numbers",
+"subtopic": "Countable and Uncountable Sets",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Extremal Set Theory",
+"Infinite Combinatorics"
+]
+},
+"87931": {
+"topic": "Real Analysis",
+"branch": "Real Numbers",
+"subtopic": "Countable and Uncountable Sets",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Extremal Set Theory",
+"Infinite Combinatorics"
+]
+},
+"87932": {
+"topic": "Real Analysis",
+"branch": "Real Numbers",
+"subtopic": "Countable and Uncountable Sets",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Extremal Set Theory",
+"Infinite Combinatorics"
+]
+},
+"87933": {
+"topic": "Real Analysis",
+"branch": "Real Numbers",
+"subtopic": "Countable and Uncountable Sets",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Extremal Set Theory",
+"Infinite Combinatorics"
+]
+},
+"87934": {
+"topic": "Real Analysis",
+"branch": "Real Numbers",
+"subtopic": "Infimum and Supremum",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Extremal Set Theory",
+"Infinite Combinatorics"
+]
+},
+"87935": {
+"topic": "Discrete Foundations",
+"branch": "Sets, Relations and Functions",
+"subtopic": "Partial Orders and Posets",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Extremal Set Theory",
+"Infinite Combinatorics"
+]
+},
+"87936": {
+"topic": "Real Analysis",
+"branch": "Real Numbers",
+"subtopic": "Countable and Uncountable Sets",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Extremal Set Theory",
+"Infinite Combinatorics"
+]
+},
+"87937": {
+"topic": "Real Analysis",
+"branch": "Real Numbers",
+"subtopic": "Countable and Uncountable Sets",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Extremal Set Theory",
+"Infinite Combinatorics"
+]
+},
+"87940": {
+"topic": "Discrete Foundations",
+"branch": "Sets, Relations and Functions",
+"subtopic": "Injective, Surjective and Composite Functions",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Basic Counting Principles",
+"Sum and Product Rules"
+]
+},
+"87945": {
+"topic": "Enumerative Combinatorics",
+"branch": "Basic Counting Principles",
+"subtopic": "Pigeonhole Principle",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Additive Combinatorics",
+"Divisibility and Coprimality in Integer Subsets"
+]
+},
+"87946": {
+"topic": "Enumerative Combinatorics",
+"branch": "Basic Counting Principles",
+"subtopic": "Pigeonhole Principle",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Additive Combinatorics",
+"Extremal Subsets of Integers"
+]
+},
+"87956": {
+"topic": "Enumerative Combinatorics",
+"branch": "Recurrences and Generating Functions",
+"subtopic": "Recurrence Relations for Counting",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Enumerative Combinatorics",
+"Counting with Restrictions",
+"Selections without Adjacent Elements"
+]
+},
+"87971": {
+"topic": "Logic and Algorithmic Puzzles",
+"branch": "Logic and Knowledge Puzzles",
+"subtopic": "Propositional Logic and Deduction",
+"conf": "low",
+"how": "reclass-opus",
+"db": [
+"Discrete Foundations",
+"Sets, Relations and Functions",
+"Injective, Surjective and Composite Functions"
+]
+},
+"87986": {
+"topic": "Group Theory",
+"branch": "Groups and Subgroups",
+"subtopic": "Subgroups, Cosets and Lagrange's Theorem",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Group Theory",
+"Groups and Subgroups",
+"Cyclic Groups and Element Orders"
+]
+},
+"87997": {
+"topic": "Group Theory",
+"branch": "Groups and Subgroups",
+"subtopic": "Binary Operations and Group Axioms",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Group Theory",
+"Homomorphisms and Group Structure",
+"Abelian Groups and Direct Products"
+]
+},
+"88003": {
+"topic": "Extremal Combinatorics",
+"branch": "Extremal Set Theory",
+"subtopic": "Infinite Combinatorics",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Discrete Foundations",
+"Sets, Relations and Functions",
+"Injective, Surjective and Composite Functions"
+]
+},
+"88011": {
+"topic": "Group Theory",
+"branch": "Groups and Subgroups",
+"subtopic": "Cyclic Groups and Element Orders",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Orders and Primitive Roots",
+"Primitive Roots"
+]
+},
+"88017": {
+"topic": "Ring and Field Theory",
+"branch": "Polynomial Rings",
+"subtopic": "Ideals in Polynomial Rings",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Ring and Field Theory",
+"Rings and Ideals",
+"Rings, Subrings and Units"
+]
+},
+"88042": {
+"topic": "Enumerative Combinatorics",
+"branch": "Basic Counting Principles",
+"subtopic": "Pigeonhole Principle",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Permutations and Symmetry",
+"Permutations with Restrictions"
+]
+},
+"88053": {
+"topic": "Enumerative Combinatorics",
+"branch": "Basic Counting Principles",
+"subtopic": "Sum and Product Rules",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Discrete Foundations",
+"Sets, Relations and Functions",
+"Injective, Surjective and Composite Functions"
+]
+},
+"88069": {
+"topic": "Enumerative Combinatorics",
+"branch": "Basic Counting Principles",
+"subtopic": "Pigeonhole Principle",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Permutations and Symmetry",
+"Permutations with Restrictions"
+]
+},
+"88071": {
+"topic": "Theory of Polynomials",
+"branch": "Polynomial Division and Integer Coefficients",
+"subtopic": "Integer Polynomials and Divisibility",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Divisibility and Greatest Common Divisor",
+"Divisibility of Integer Expressions"
+]
+},
+"88087": {
+"topic": "Ring and Field Theory",
+"branch": "Rings and Ideals",
+"subtopic": "Rings, Subrings and Units",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Recurrences and Generating Functions",
+"Generating Functions for Counting"
+]
+},
+"88092": {
+"topic": "Group Theory",
+"branch": "Homomorphisms and Group Structure",
+"subtopic": "Normal Subgroups and Quotient Groups",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Group Theory",
+"Finite Groups and Group Actions",
+"Group Actions and Conjugacy Classes"
+]
+},
+"88103": {
+"topic": "Group Theory",
+"branch": "Groups and Subgroups",
+"subtopic": "Cyclic Groups and Element Orders",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Group Theory",
+"Homomorphisms and Group Structure",
+"Abelian Groups and Direct Products"
+]
+},
+"88108": {
+"topic": "Ring and Field Theory",
+"branch": "Polynomial Rings",
+"subtopic": "Factorization over Finite Fields",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Ring and Field Theory",
+"Rings and Ideals",
+"Integral Domains, PIDs and UFDs"
+]
+},
+"88112": {
+"topic": "Ring and Field Theory",
+"branch": "Rings and Ideals",
+"subtopic": "Rings, Subrings and Units",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Ring and Field Theory",
+"Rings and Ideals",
+"Integral Domains, PIDs and UFDs"
+]
+},
+"88120": {
+"topic": "Ring and Field Theory",
+"branch": "Polynomial Rings",
+"subtopic": "Factorization over Finite Fields",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Ring and Field Theory",
+"Fields and Extensions",
+"Finite Fields"
+]
+},
+"88123": {
+"topic": "Ring and Field Theory",
+"branch": "Fields and Extensions",
+"subtopic": "Finite Fields",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Theory of Polynomials",
+"Polynomial Identities and Bounds",
+"Lagrange Interpolation and Finite Differences"
+]
+},
+"88124": {
+"topic": "Theory of Polynomials",
+"branch": "Polynomial Identities and Bounds",
+"subtopic": "Lagrange Interpolation and Finite Differences",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Extremal Combinatorics",
+"Designs and Number Arrays",
+"Error-Correcting Codes"
+]
+},
+"88128": {
+"topic": "Classical Mechanics",
+"branch": "Kinematics",
+"subtopic": "Rectilinear Motion",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Newton's Laws of Motion",
+"Variable Forces in One Dimension"
+]
+},
+"88137": {
+"topic": "Classical Mechanics",
+"branch": "Momentum and Collisions",
+"subtopic": "Conservation of Linear Momentum",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Kinematics",
+"Projectile Motion"
+]
+},
+"88151": {
+"topic": "Classical Mechanics",
+"branch": "Newton's Laws of Motion",
+"subtopic": "Friction",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Newton's Laws of Motion",
+"Motion in a Vertical Circle"
+]
+},
+"88158": {
+"topic": "Classical Mechanics",
+"branch": "Newton's Laws of Motion",
+"subtopic": "Motion in a Vertical Circle",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Work and Energy",
+"Work-Energy Theorem and Power"
+]
+},
+"88162": {
+"topic": "Classical Mechanics",
+"branch": "Kinematics",
+"subtopic": "Curvilinear Motion and Polar Coordinates",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Newton's Laws of Motion",
+"Uniform Circular Motion"
+]
+},
+"88170": {
+"topic": "Classical Mechanics",
+"branch": "Rotation of Rigid Bodies",
+"subtopic": "General Plane Motion",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Classical Mechanics",
+"Statics",
+"Equilibrium of Rigid Bodies"
+]
+},
+"88174": {
+"topic": "Classical Mechanics",
+"branch": "Non-Inertial Reference Frames",
+"subtopic": "Linearly Accelerating Frames",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Newton's Laws of Motion",
+"Friction"
+]
+},
+"88176": {
+"topic": "Classical Mechanics",
+"branch": "Statics",
+"subtopic": "Equilibrium of Rigid Bodies",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Newton's Laws of Motion",
+"Newton's Laws and Connected Bodies"
+]
+},
+"88177": {
+"topic": "Classical Mechanics",
+"branch": "Non-Inertial Reference Frames",
+"subtopic": "Linearly Accelerating Frames",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Newton's Laws of Motion",
+"Friction"
+]
+},
+"88186": {
+"topic": "Classical Mechanics",
+"branch": "Momentum and Collisions",
+"subtopic": "Collisions in the Center-of-Mass Frame",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Momentum and Collisions",
+"Conservation of Linear Momentum"
+]
+},
+"88187": {
+"topic": "Classical Mechanics",
+"branch": "Momentum and Collisions",
+"subtopic": "Rocket Motion",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Momentum and Collisions",
+"Conservation of Linear Momentum"
+]
+},
+"88196": {
+"topic": "Classical Mechanics",
+"branch": "Statics",
+"subtopic": "Center of Mass",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Momentum and Collisions",
+"Conservation of Linear Momentum"
+]
+},
+"88204": {
+"topic": "Classical Mechanics",
+"branch": "Rotation of Rigid Bodies",
+"subtopic": "Conservation of Angular Momentum",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Rotation of Rigid Bodies",
+"Fixed-Axis Rotation"
+]
+},
+"88215": {
+"topic": "Classical Mechanics",
+"branch": "Rotation of Rigid Bodies",
+"subtopic": "Impulsive Motion of Rigid Bodies",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Rotation of Rigid Bodies",
+"Conservation of Angular Momentum"
+]
+},
+"88216": {
+"topic": "Classical Mechanics",
+"branch": "Rotation of Rigid Bodies",
+"subtopic": "Impulsive Motion of Rigid Bodies",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Rotation of Rigid Bodies",
+"Conservation of Angular Momentum"
+]
+},
+"88224": {
+"topic": "Classical Mechanics",
+"branch": "Momentum and Collisions",
+"subtopic": "Inelastic Collisions and Restitution",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Rotation of Rigid Bodies",
+"Conservation of Angular Momentum"
+]
+},
+"88225": {
+"topic": "Classical Mechanics",
+"branch": "Rotation of Rigid Bodies",
+"subtopic": "Conservation of Angular Momentum",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Rotation of Rigid Bodies",
+"Fixed-Axis Rotation"
+]
+},
+"88227": {
+"topic": "Classical Mechanics",
+"branch": "Rotation of Rigid Bodies",
+"subtopic": "Impulsive Motion of Rigid Bodies",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Rotation of Rigid Bodies",
+"Sliding and Rolling with Friction"
+]
+},
+"88235": {
+"topic": "Classical Mechanics",
+"branch": "Rotation of Rigid Bodies",
+"subtopic": "Fixed-Axis Rotation",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Rotation of Rigid Bodies",
+"Rolling Without Slipping"
+]
+},
+"88248": {
+"topic": "Classical Mechanics",
+"branch": "Rotation of Rigid Bodies",
+"subtopic": "Rolling Without Slipping",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Rotation of Rigid Bodies",
+"General Plane Motion"
+]
+},
+"88249": {
+"topic": "Oscillations and Waves",
+"branch": "Linear Oscillations",
+"subtopic": "Spring-Mass Systems",
+"conf": "high",
+"how": "reclass-opus",
+"db": [
+"Classical Mechanics",
+"Momentum and Collisions",
+"Conservation of Linear Momentum"
+]
+},
+"88251": {
+"topic": "Oscillations and Waves",
+"branch": "Linear Oscillations",
+"subtopic": "Spring-Mass Systems",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Oscillations and Waves",
+"Linear Oscillations",
+"Simple Harmonic Motion"
+]
+},
+"88261": {
+"topic": "Oscillations and Waves",
+"branch": "Sound",
+"subtopic": "Speed of Sound",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Oscillations and Waves",
+"Sound",
+"Resonance in Air Columns"
+]
+},
+"88263": {
+"topic": "Classical Mechanics",
+"branch": "Kinematics",
+"subtopic": "Relative Motion",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Oscillations and Waves",
+"Sound",
+"Speed of Sound"
+]
+},
+"88264": {
+"topic": "Oscillations and Waves",
+"branch": "Sound",
+"subtopic": "Speed of Sound",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Oscillations and Waves",
+"Mechanical Waves",
+"Traveling Waves and the Wave Equation"
+]
+},
+"88272": {
+"topic": "Electromagnetism",
+"branch": "Maxwell's Equations and Electromagnetic Waves",
+"subtopic": "Radiation Pressure",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Rotation of Rigid Bodies",
+"Fixed-Axis Rotation"
+]
+},
+"88273": {
+"topic": "Classical Mechanics",
+"branch": "Newton's Laws of Motion",
+"subtopic": "Newton's Laws and Connected Bodies",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Statics",
+"Equilibrium of Rigid Bodies"
+]
+},
+"88276": {
+"topic": "Classical Mechanics",
+"branch": "Statics",
+"subtopic": "Equilibrium of Rigid Bodies",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Newton's Laws of Motion",
+"Constrained Motion on Curves and Surfaces"
+]
+},
+"88278": {
+"topic": "Classical Mechanics",
+"branch": "Work and Energy",
+"subtopic": "Work-Energy Theorem and Power",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Statics",
+"Ropes, Cables and Catenaries"
+]
+},
+"88283": {
+"topic": "Fluid Mechanics",
+"branch": "Fluid Statics",
+"subtopic": "Hydrostatic Pressure Distribution",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Fluid Mechanics",
+"Fluid Statics",
+"Buoyancy"
+]
+},
+"88284": {
+"topic": "Fluid Mechanics",
+"branch": "Fluid Statics",
+"subtopic": "Stability of Floating Bodies",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Fluid Mechanics",
+"Fluid Statics",
+"Buoyancy"
+]
+},
+"88303": {
+"topic": "Heat and Thermodynamics",
+"branch": "Ideal Gases and Kinetic Theory",
+"subtopic": "Gas Laws and Equations of State",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Heat and Thermodynamics",
+"Laws of Thermodynamics",
+"Ideal-Gas Processes"
+]
+},
+"88307": {
+"topic": "Heat and Thermodynamics",
+"branch": "Temperature and Calorimetry",
+"subtopic": "Calorimetry and Specific Heat",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Heat and Thermodynamics",
+"Phase Change and Moist Air",
+"Latent Heat and Phase Change"
+]
+},
+"88312": {
+"topic": "Heat and Thermodynamics",
+"branch": "Laws of Thermodynamics",
+"subtopic": "Ideal-Gas Processes",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Heat and Thermodynamics",
+"Ideal Gases and Kinetic Theory",
+"Gas Laws and Equations of State"
+]
+},
+"88323": {
+"topic": "Oscillations and Waves",
+"branch": "Linear Oscillations",
+"subtopic": "Simple Harmonic Motion",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Heat and Thermodynamics",
+"Laws of Thermodynamics",
+"Ideal-Gas Processes"
+]
+},
+"88324": {
+"topic": "Heat and Thermodynamics",
+"branch": "Ideal Gases and Kinetic Theory",
+"subtopic": "Specific Heats of Gases",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Heat and Thermodynamics",
+"Laws of Thermodynamics",
+"Ideal-Gas Processes"
+]
+},
+"88325": {
+"topic": "Heat and Thermodynamics",
+"branch": "Laws of Thermodynamics",
+"subtopic": "First Law for Closed Systems",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Heat and Thermodynamics",
+"Laws of Thermodynamics",
+"Ideal-Gas Processes"
+]
+},
+"88328": {
+"topic": "Heat and Thermodynamics",
+"branch": "Laws of Thermodynamics",
+"subtopic": "Ideal-Gas Processes",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Heat and Thermodynamics",
+"Laws of Thermodynamics",
+"First Law for Closed Systems"
+]
+},
+"88334": {
+"topic": "Heat and Thermodynamics",
+"branch": "Laws of Thermodynamics",
+"subtopic": "Ideal-Gas Processes",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Heat and Thermodynamics",
+"Laws of Thermodynamics",
+"First Law for Closed Systems"
+]
+},
+"88335": {
+"topic": "Heat and Thermodynamics",
+"branch": "Laws of Thermodynamics",
+"subtopic": "Ideal-Gas Processes",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Heat and Thermodynamics",
+"Laws of Thermodynamics",
+"First Law for Closed Systems"
+]
+},
+"88336": {
+"topic": "Heat and Thermodynamics",
+"branch": "Ideal Gases and Kinetic Theory",
+"subtopic": "Specific Heats of Gases",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Heat and Thermodynamics",
+"Ideal Gases and Kinetic Theory",
+"Gas Laws and Equations of State"
+]
+},
+"88338": {
+"topic": "Heat and Thermodynamics",
+"branch": "Laws of Thermodynamics",
+"subtopic": "First Law for Closed Systems",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Heat and Thermodynamics",
+"Laws of Thermodynamics",
+"Ideal-Gas Processes"
+]
+},
+"88339": {
+"topic": "Heat and Thermodynamics",
+"branch": "Laws of Thermodynamics",
+"subtopic": "First Law for Closed Systems",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Heat and Thermodynamics",
+"Laws of Thermodynamics",
+"Ideal-Gas Processes"
+]
+},
+"88346": {
+"topic": "Classical Mechanics",
+"branch": "Newton's Laws of Motion",
+"subtopic": "Motion in a Vertical Circle",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Classical Mechanics",
+"Work and Energy",
+"Conservation of Mechanical Energy"
+]
+},
+"88348": {
+"topic": "Classical Mechanics",
+"branch": "Gravitation",
+"subtopic": "Two-Body Problem and Binary Stars",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Electromagnetism",
+"Electrostatics",
+"Coulomb's Law"
+]
+},
+"88353": {
+"topic": "Classical Mechanics",
+"branch": "Central-Force Motion",
+"subtopic": "Scattering in a Central Field",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Electromagnetism",
+"Electrostatics",
+"Electric Potential"
+]
+},
+"88357": {
+"topic": "Electromagnetism",
+"branch": "Electrostatics",
+"subtopic": "Gauss's Law",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Electromagnetism",
+"Electrostatics",
+"Electric Field of Charge Distributions"
+]
+},
+"88359": {
+"topic": "Electromagnetism",
+"branch": "Capacitance and Dielectrics",
+"subtopic": "Capacitor Networks",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Electromagnetism",
+"Electrostatics",
+"Conductors in Electrostatic Equilibrium"
+]
+},
+"88368": {
+"topic": "Electromagnetism",
+"branch": "Capacitance and Dielectrics",
+"subtopic": "Capacitor Networks",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Electromagnetism",
+"Transient and AC Circuits",
+"RC and RL Transients"
+]
+},
+"88372": {
+"topic": "Electromagnetism",
+"branch": "Direct-Current Circuits",
+"subtopic": "EMF and Internal Resistance",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Electromagnetism",
+"Direct-Current Circuits",
+"Kirchhoff's Rules"
+]
+},
+"88373": {
+"topic": "Electromagnetism",
+"branch": "Transient and AC Circuits",
+"subtopic": "Resonance in AC Circuits",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Electromagnetism",
+"Transient and AC Circuits",
+"AC Circuits and Phasors"
+]
+},
+"88374": {
+"topic": "Electromagnetism",
+"branch": "Transient and AC Circuits",
+"subtopic": "Resonance in AC Circuits",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Electromagnetism",
+"Transient and AC Circuits",
+"AC Circuits and Phasors"
+]
+},
+"88375": {
+"topic": "Electromagnetism",
+"branch": "Transient and AC Circuits",
+"subtopic": "AC Circuits and Phasors",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Electromagnetism",
+"Direct-Current Circuits",
+"Measuring Instruments and Bridges"
+]
+},
+"88399": {
+"topic": "Probability",
+"branch": "Events and Probability Spaces",
+"subtopic": "Addition Rule and Venn Diagrams",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditional Probability and Independence",
+"Conditional Probability"
+]
+},
+"88401": {
+"topic": "Probability",
+"branch": "Events and Probability Spaces",
+"subtopic": "Inclusion-Exclusion and Bonferroni Inequalities",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Events and Probability Spaces",
+"Addition Rule and Venn Diagrams"
+]
+},
+"88402": {
+"topic": "Probability",
+"branch": "Events and Probability Spaces",
+"subtopic": "Inclusion-Exclusion and Bonferroni Inequalities",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Events and Probability Spaces",
+"Addition Rule and Venn Diagrams"
+]
+},
+"88403": {
+"topic": "Probability",
+"branch": "Events and Probability Spaces",
+"subtopic": "Inclusion-Exclusion and Bonferroni Inequalities",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Events and Probability Spaces",
+"Addition Rule and Venn Diagrams"
+]
+},
+"88405": {
+"topic": "Probability",
+"branch": "Events and Probability Spaces",
+"subtopic": "Inclusion-Exclusion and Bonferroni Inequalities",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Events and Probability Spaces",
+"Addition Rule and Venn Diagrams"
+]
+},
+"88406": {
+"topic": "Probability",
+"branch": "Events and Probability Spaces",
+"subtopic": "Inclusion-Exclusion and Bonferroni Inequalities",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Events and Probability Spaces",
+"Addition Rule and Venn Diagrams"
+]
+},
+"88409": {
+"topic": "Probability",
+"branch": "Events and Probability Spaces",
+"subtopic": "Inclusion-Exclusion and Bonferroni Inequalities",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Events and Probability Spaces",
+"Addition Rule and Venn Diagrams"
+]
+},
+"88411": {
+"topic": "Probability",
+"branch": "Events and Probability Spaces",
+"subtopic": "Addition Rule and Venn Diagrams",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditional Probability and Independence",
+"Independence of Events"
+]
+},
+"88413": {
+"topic": "Probability",
+"branch": "Random Variables and Their Distributions",
+"subtopic": "Probability Mass Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Joint Probability Mass Functions"
+]
+},
+"88429": {
+"topic": "Probability",
+"branch": "Combinatorial Probability",
+"subtopic": "Equally Likely Outcomes",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Discrete Distributions",
+"Hypergeometric Distribution"
+]
+},
+"88433": {
+"topic": "Probability",
+"branch": "Discrete Distributions",
+"subtopic": "Binomial Distribution",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Combinatorial Probability",
+"Equally Likely Outcomes"
+]
+},
+"88450": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Joint Density Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Geometric Probability",
+"Random Points in Plane Regions"
+]
+},
+"88451": {
+"topic": "Probability",
+"branch": "Geometric Probability",
+"subtopic": "Random Points in Plane Regions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Random Variables and Their Distributions",
+"Functions of a Random Variable"
+]
+},
+"88452": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Joint Density Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Geometric Probability",
+"Random Points in Plane Regions"
+]
+},
+"88460": {
+"topic": "Probability",
+"branch": "Conditional Probability and Independence",
+"subtopic": "Independence of Events",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditional Probability and Independence",
+"Conditional Probability"
+]
+},
+"88467": {
+"topic": "Probability",
+"branch": "Conditional Probability and Independence",
+"subtopic": "Conditional Probability",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditional Probability and Independence",
+"Bayes' Theorem"
+]
+},
+"88478": {
+"topic": "Probability",
+"branch": "Events and Probability Spaces",
+"subtopic": "Addition Rule and Venn Diagrams",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditional Probability and Independence",
+"Independence of Events"
+]
+},
+"88483": {
+"topic": "Probability",
+"branch": "Discrete Distributions",
+"subtopic": "Geometric Distribution",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditional Probability and Independence",
+"Independence of Events"
+]
+},
+"88507": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Sums of Independent Random Variables",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Continuous Distributions",
+"Uniform Distribution"
+]
+},
+"88510": {
+"topic": "Probability",
+"branch": "Conditional Probability and Independence",
+"subtopic": "Law of Total Probability",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Combinatorial Probability",
+"Urn Models"
+]
+},
+"88515": {
+"topic": "Probability",
+"branch": "Conditional Probability and Independence",
+"subtopic": "Law of Total Probability",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Discrete Distributions",
+"Hypergeometric Distribution"
+]
+},
+"88542": {
+"topic": "Probability",
+"branch": "Geometric Probability",
+"subtopic": "Meeting Problem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Sums of Independent Random Variables"
+]
+},
+"88545": {
+"topic": "Probability",
+"branch": "Expectation",
+"subtopic": "Expected Value",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Conditioning and Compounding",
+"Conditional Expectation"
+]
+},
+"88555": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Independence of Random Variables",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Expectation",
+"Variance and Standard Deviation"
+]
+},
+"88562": {
+"topic": "Probability",
+"branch": "Expectation",
+"subtopic": "Higher Moments",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Random Variables and Their Distributions",
+"Functions of a Random Variable"
+]
+},
+"88564": {
+"topic": "Probability",
+"branch": "Inequalities and Limit Theorems",
+"subtopic": "Markov and Chebyshev Inequalities",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Expectation",
+"Higher Moments"
+]
+},
+"88577": {
+"topic": "Probability",
+"branch": "Random Variables and Their Distributions",
+"subtopic": "Cumulative Distribution Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Sums of Independent Random Variables"
+]
+},
+"88589": {
+"topic": "Probability",
+"branch": "Random Variables and Their Distributions",
+"subtopic": "Cumulative Distribution Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Continuous Distributions",
+"Uniform Distribution"
+]
+},
+"88590": {
+"topic": "Probability",
+"branch": "Random Variables and Their Distributions",
+"subtopic": "Simulation of Random Variables",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Transformations of Random Vectors"
+]
+},
+"88621": {
+"topic": "Probability",
+"branch": "Discrete Distributions",
+"subtopic": "Poisson Approximation",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Discrete Distributions",
+"Binomial Distribution"
+]
+},
+"88626": {
+"topic": "Probability",
+"branch": "Inequalities and Limit Theorems",
+"subtopic": "Weak Law of Large Numbers",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Normal Approximation to the Binomial"
+]
+},
+"88630": {
+"topic": "Probability",
+"branch": "Discrete Distributions",
+"subtopic": "Poisson Approximation",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Expectation",
+"Expected Payoff and Fair Games"
+]
+},
+"88631": {
+"topic": "Probability",
+"branch": "Discrete Distributions",
+"subtopic": "Poisson Approximation",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Central Limit Theorem"
+]
+},
+"88636": {
+"topic": "Probability",
+"branch": "Inequalities and Limit Theorems",
+"subtopic": "Modes of Convergence",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Uniform Integrability"
+]
+},
+"88648": {
+"topic": "Probability",
+"branch": "Inequalities and Limit Theorems",
+"subtopic": "Markov and Chebyshev Inequalities",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Central Limit Theorem"
+]
+},
+"88652": {
+"topic": "Probability",
+"branch": "Continuous Distributions",
+"subtopic": "Normal Distribution",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Central Limit Theorem"
+]
+},
+"88659": {
+"topic": "Probability",
+"branch": "Inequalities and Limit Theorems",
+"subtopic": "Normal Approximation to the Binomial",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Central Limit Theorem"
+]
+},
+"88663": {
+"topic": "Probability",
+"branch": "Inequalities and Limit Theorems",
+"subtopic": "Central Limit Theorem",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Probability",
+"Combinatorial Probability",
+"Equally Likely Outcomes"
+]
+},
+"88666": {
+"topic": "Probability",
+"branch": "Discrete Distributions",
+"subtopic": "Negative Binomial Distribution",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Central Limit Theorem"
+]
+},
+"88687": {
+"topic": "Probability",
+"branch": "Discrete Distributions",
+"subtopic": "Poisson Approximation",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Generating Functions and Transforms",
+"Probability Generating Functions"
+]
+},
+"88704": {
+"topic": "Probability",
+"branch": "Generating Functions and Transforms",
+"subtopic": "Characteristic Functions",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Independence of Random Variables"
+]
+},
+"88706": {
+"topic": "Probability",
+"branch": "Generating Functions and Transforms",
+"subtopic": "Characteristic Functions",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Independence of Random Variables"
+]
+},
+"88758": {
+"topic": "Probability",
+"branch": "Conditioning and Compounding",
+"subtopic": "Conditional Expectation",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Conditional Distributions"
+]
+},
+"88774": {
+"topic": "Probability",
+"branch": "Inequalities and Limit Theorems",
+"subtopic": "Central Limit Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Stable and Infinitely Divisible Distributions"
+]
+},
+"88775": {
+"topic": "Probability",
+"branch": "Inequalities and Limit Theorems",
+"subtopic": "Stable and Infinitely Divisible Distributions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Discrete Distributions",
+"Poisson Approximation"
+]
+},
+"88776": {
+"topic": "Probability",
+"branch": "Inequalities and Limit Theorems",
+"subtopic": "Modes of Convergence",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Probability",
+"Geometric Probability",
+"Random Points in Plane Regions"
+]
+},
+"88789": {
+"topic": "Probability",
+"branch": "Generating Functions and Transforms",
+"subtopic": "Characteristic Functions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Stable and Infinitely Divisible Distributions"
+]
+},
+"88790": {
+"topic": "Probability",
+"branch": "Joint Distributions",
+"subtopic": "Transformations of Random Vectors",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Joint Density Functions"
+]
+},
+"88791": {
+"topic": "Probability",
+"branch": "Random Variables and Their Distributions",
+"subtopic": "Functions of a Random Variable",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Transformations of Random Vectors"
+]
+},
+"88799": {
+"topic": "Probability",
+"branch": "Generating Functions and Transforms",
+"subtopic": "Characteristic Functions",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Joint Distributions",
+"Transformations of Random Vectors"
+]
+},
+"88802": {
+"topic": "Stochastic Processes",
+"branch": "Discrete-Time Markov Chains",
+"subtopic": "Classification of States",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Stochastic Processes",
+"Discrete-Time Markov Chains",
+"Markov Property and Transition Matrices"
+]
+},
+"88819": {
+"topic": "Stochastic Processes",
+"branch": "Discrete-Time Markov Chains",
+"subtopic": "Reversibility and Detailed Balance",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Stochastic Processes",
+"Discrete-Time Markov Chains",
+"Stationary Distributions"
+]
+},
+"88835": {
+"topic": "Stochastic Processes",
+"branch": "Discrete-Time Markov Chains",
+"subtopic": "Stationary Distributions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Stochastic Processes",
+"Discrete-Time Markov Chains",
+"Classification of States"
+]
+},
+"88836": {
+"topic": "Stochastic Processes",
+"branch": "Discrete-Time Markov Chains",
+"subtopic": "Stationary Distributions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Weak Law of Large Numbers"
+]
+},
+"88838": {
+"topic": "Stochastic Processes",
+"branch": "Discrete-Time Markov Chains",
+"subtopic": "Stationary Distributions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Central Limit Theorem"
+]
+},
+"88839": {
+"topic": "Stochastic Processes",
+"branch": "Discrete-Time Markov Chains",
+"subtopic": "Stationary Distributions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Central Limit Theorem"
+]
+},
+"88840": {
+"topic": "Stochastic Processes",
+"branch": "Discrete-Time Markov Chains",
+"subtopic": "Stationary Distributions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Probability",
+"Inequalities and Limit Theorems",
+"Central Limit Theorem"
+]
+},
+"89036": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "GCD and LCM",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Primes and Prime Factorization",
+"Fundamental Theorem of Arithmetic"
+]
+},
+"89037": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "GCD and LCM",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Primes and Prime Factorization",
+"Fundamental Theorem of Arithmetic"
+]
+},
+"89038": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "Division Algorithm and Residue Forms",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Primes and Prime Factorization",
+"Fundamental Theorem of Arithmetic"
+]
+},
+"89039": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "Divisibility of Integer Expressions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Divisibility and Greatest Common Divisor",
+"GCD and LCM"
+]
+},
+"89040": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "GCD and LCM",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Primes and Prime Factorization",
+"Fundamental Theorem of Arithmetic"
+]
+},
+"89041": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "GCD and LCM",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Primes and Prime Factorization",
+"Fundamental Theorem of Arithmetic"
+]
+},
+"89065": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Congruence Properties and Residue Systems",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Quadratic Residues and Sums of Squares",
+"Quadratic Residues and Euler's Criterion"
+]
+},
+"89068": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "Division Algorithm and Residue Forms",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Quadratic Residues and Sums of Squares",
+"Sums of Three and Four Squares"
+]
+},
+"89075": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Fermat's Little Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Congruences",
+"Remainders and Last Digits of Powers"
+]
+},
+"89088": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "Divisibility of Integer Expressions",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Congruences",
+"Congruence Properties and Residue Systems"
+]
+},
+"89159": {
+"topic": "Plane Geometry",
+"branch": "Geometric Inequalities",
+"subtopic": "Inequalities for Triangle Sides",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Geometric Inequalities",
+"Distance Inequalities for Points"
+]
+},
+"89222": {
+"topic": "Logic and Algorithmic Puzzles",
+"branch": "Logic and Knowledge Puzzles",
+"subtopic": "Knights and Knaves",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Logic and Algorithmic Puzzles",
+"Logic and Knowledge Puzzles",
+"Propositional Logic and Deduction"
+]
+},
+"89225": {
+"topic": "Logic and Algorithmic Puzzles",
+"branch": "Logic and Knowledge Puzzles",
+"subtopic": "Common Knowledge and Rational Deduction",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Logic and Algorithmic Puzzles",
+"Logic and Knowledge Puzzles",
+"Hat Guessing Strategies"
+]
+},
+"89236": {
+"topic": "Combinatorial Games and Processes",
+"branch": "Processes on Boards and Tokens",
+"subtopic": "Chip Moves and Reachability",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Games and Processes",
+"Processes on Numbers",
+"Blackboard Number Operations"
+]
+},
+"89238": {
+"topic": "Logic and Algorithmic Puzzles",
+"branch": "Algorithmic Puzzles",
+"subtopic": "Sorting and Selection by Comparisons",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Combinatorial Games and Processes",
+"Processes on Numbers",
+"Card Shuffling and Elimination"
+]
+},
+"89249": {
+"topic": "Combinatorial Games and Processes",
+"branch": "Processes on Boards and Tokens",
+"subtopic": "Lamp and Switch Toggling",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Games and Processes",
+"Processes on Boards and Tokens",
+"Cell Operations on Boards and Tables"
+]
+},
+"89250": {
+"topic": "Combinatorial Geometry",
+"branch": "Point Configurations",
+"subtopic": "Distances in Finite Point Sets",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Combinatorial Geometry",
+"Covering and Packing",
+"Packing Shapes in Regions"
+]
+},
+"89251": {
+"topic": "Logic and Algorithmic Puzzles",
+"branch": "Algorithmic Puzzles",
+"subtopic": "Sorting and Selection by Comparisons",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Combinatorial Games and Processes",
+"Processes on Boards and Tokens",
+"Chip Moves and Reachability"
+]
+},
+"89260": {
+"topic": "Logic and Algorithmic Puzzles",
+"branch": "Weighing and Search Puzzles",
+"subtopic": "Identification with Minimal Tests",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Logic and Algorithmic Puzzles",
+"Weighing and Search Puzzles",
+"Counterfeit Coin Weighing"
+]
+},
+"89275": {
+"topic": "Plane Geometry",
+"branch": "Basic Measurement",
+"subtopic": "Angle Sums and Angle Measures",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Similar Triangles"
+]
+},
+"89276": {
+"topic": "Plane Geometry",
+"branch": "Triangles",
+"subtopic": "Altitudes and Orthocentre",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Ceva's and Menelaus' Theorems"
+]
+},
+"89277": {
+"topic": "Plane Geometry",
+"branch": "Quadrilaterals and Polygons",
+"subtopic": "Parallelograms and Trapezoids",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Quadrilaterals and Polygons",
+"Equiangular and Equilateral Polygons"
+]
+},
+"89278": {
+"topic": "Plane Geometry",
+"branch": "Triangles",
+"subtopic": "Medians and Centroids",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Triangles",
+"Altitudes and Orthocentre"
+]
+},
+"89279": {
+"topic": "Plane Geometry",
+"branch": "Basic Measurement",
+"subtopic": "Angle Sums and Angle Measures",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Plane Geometry",
+"Geometric Inequalities",
+"Distance Inequalities for Points"
+]
+},
+"89280": {
+"topic": "Plane Geometry",
+"branch": "Geometric Inequalities",
+"subtopic": "Inequalities for Triangle Sides",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Plane Geometry",
+"Basic Measurement",
+"Angle Sums and Angle Measures"
+]
+},
+"89284": {
+"topic": "Elementary Algebra",
+"branch": "Algebraic Modeling",
+"subtopic": "Ages, Money and Sharing",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Algebra",
+"Arithmetic and Pre-Algebra",
+"Linear Equations and Small Systems"
+]
+},
+"89287": {
+"topic": "Diophantine Equations",
+"branch": "Polynomial Diophantine Equations",
+"subtopic": "Cubic and Higher-Degree Equations",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Divisibility and Greatest Common Divisor",
+"Divisibility of Integer Expressions"
+]
+},
+"89290": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "GCD and LCM",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Primes and Prime Factorization",
+"Proving Numbers Composite"
+]
+},
+"89291": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "GCD and LCM",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Divisibility and Greatest Common Divisor",
+"Divisibility of Integer Expressions"
+]
+},
+"89295": {
+"topic": "Diophantine Equations",
+"branch": "Classical Diophantine Equations",
+"subtopic": "Linear Diophantine Equations",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Congruences",
+"Congruence Properties and Residue Systems"
+]
+},
+"89309": {
+"topic": "Enumerative Combinatorics",
+"branch": "Basic Counting Principles",
+"subtopic": "Combinations and Committee Selection",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Enumerative Combinatorics",
+"Basic Counting Principles",
+"Sum and Product Rules"
+]
+},
+"89310": {
+"topic": "Extremal Combinatorics",
+"branch": "Designs and Number Arrays",
+"subtopic": "Magic Squares",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Extremal Combinatorics",
+"Designs and Number Arrays",
+"Number Tables with Row and Column Conditions"
+]
+},
+"89311": {
+"topic": "Extremal Combinatorics",
+"branch": "Arrangements and Sequences",
+"subtopic": "Constrained Sequences and Words",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Arrangements and Sequences",
+"Number Arrangements with Adjacency Conditions"
+]
+},
+"89312": {
+"topic": "Diophantine Equations",
+"branch": "Polynomial Diophantine Equations",
+"subtopic": "Quadratic Equations in Integers",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Diophantine Equations",
+"Polynomial Diophantine Equations",
+"Cubic and Higher-Degree Equations"
+]
+},
+"89313": {
+"topic": "Elementary Algebra",
+"branch": "Exponentials and Logarithms",
+"subtopic": "Laws of Logarithms",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Algebra",
+"Arithmetic and Pre-Algebra",
+"Exponents and Scientific Notation"
+]
+},
+"89325": {
+"topic": "Elementary Algebra",
+"branch": "Algebraic Expressions and Radicals",
+"subtopic": "Conditional Evaluation of Expressions",
+"conf": "low",
+"how": "reclass-opus",
+"db": [
+"Elementary Algebra",
+"Algebraic Expressions and Radicals",
+"Factoring and Algebraic Identities"
+]
+},
+"89327": {
+"topic": "Extremal Combinatorics",
+"branch": "Chessboards and Grids",
+"subtopic": "Colorings of Grids",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Basic Counting Principles",
+"Pigeonhole Principle"
+]
+},
+"89329": {
+"topic": "Enumerative Combinatorics",
+"branch": "Basic Counting Principles",
+"subtopic": "Pigeonhole Principle",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Digits and Number Bases",
+"Digit Sums"
+]
+},
+"89331": {
+"topic": "Enumerative Combinatorics",
+"branch": "Counting Geometric Configurations",
+"subtopic": "Counting Figures in Grids",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Geometry",
+"Covering and Packing",
+"Lines and Strips Crossing Figures"
+]
+},
+"89332": {
+"topic": "Extremal Combinatorics",
+"branch": "Arrangements and Sequences",
+"subtopic": "Number Arrangements with Adjacency Conditions",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Arrangements and Sequences",
+"Rearrangements of Arrays"
+]
+},
+"89337": {
+"topic": "Graph Theory",
+"branch": "Planarity, Coloring and Matching",
+"subtopic": "Graph Coloring",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Counting Geometric Configurations",
+"Regions Formed by Lines and Curves"
+]
+},
+"89339": {
+"topic": "Elementary Number Theory",
+"branch": "Primes and Prime Factorization",
+"subtopic": "Proving Numbers Composite",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Primes and Prime Factorization",
+"Primality Conditions on Expressions"
+]
+},
+"89394": {
+"topic": "Elementary Number Theory",
+"branch": "Quadratic Residues and Sums of Squares",
+"subtopic": "Quadratic Congruences",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Elementary Number Theory",
+"Congruences",
+"Congruence Properties and Residue Systems"
+]
+},
+"89409": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Remainders and Last Digits of Powers",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Congruences",
+"Congruence Properties and Residue Systems"
+]
+},
+"89439": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Chinese Remainder Theorem",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Congruences",
+"Remainders and Last Digits of Powers"
+]
+},
+"89474": {
+"topic": "Elementary Number Theory",
+"branch": "Divisibility and Greatest Common Divisor",
+"subtopic": "Divisibility of Integer Expressions",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Congruences",
+"Fermat's Little Theorem"
+]
+},
+"89480": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Fermat's Little Theorem",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Digits and Number Bases",
+"Repunits and Digit Patterns"
+]
+},
+"89500": {
+"topic": "Enumerative Combinatorics",
+"branch": "Basic Counting Principles",
+"subtopic": "Sum and Product Rules",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Basic Counting Principles",
+"Permutations of Distinct Objects"
+]
+},
+"89502": {
+"topic": "Enumerative Combinatorics",
+"branch": "Counting with Restrictions",
+"subtopic": "Counting Subsets with Conditions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Discrete Foundations",
+"Sets, Relations and Functions",
+"Set Algebra and Power Sets"
+]
+},
+"89592": {
+"topic": "Graph Theory",
+"branch": "Planarity, Coloring and Matching",
+"subtopic": "Euler's Formula for Polyhedra",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Graph Theory",
+"Planarity, Coloring and Matching",
+"Planar Graphs"
+]
+},
+"89605": {
+"topic": "Graph Theory",
+"branch": "Extremal Graph Theory",
+"subtopic": "Cliques and Independent Sets",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Graph Theory",
+"Graph Structure and Traversal",
+"Hamiltonian Paths and Cycles"
+]
+},
+"89618": {
+"topic": "Graph Theory",
+"branch": "Graph Structure and Traversal",
+"subtopic": "Eulerian Trails and Circuits",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Graph Theory",
+"Graph Structure and Traversal",
+"Directed Graphs and Tournaments"
+]
+},
+"89628": {
+"topic": "Plane Geometry",
+"branch": "Geometric Inequalities",
+"subtopic": "Inequalities for Medians, Altitudes and Radii",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Geometric Inequalities",
+"Inequalities for Triangle Sides"
+]
+},
+"89639": {
+"topic": "Plane Geometry",
+"branch": "Geometric Inequalities",
+"subtopic": "Area and Perimeter Inequalities",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Geometric Inequalities",
+"Inequalities for Triangle Sides"
+]
+},
+"89647": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Reflections and Isometries",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Loci and Constructions",
+"Ruler-and-Compass Constructions"
+]
+},
+"89650": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Homothety and Spiral Similarity",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Quadrilaterals and Polygons",
+"Parallelograms and Trapezoids"
+]
+},
+"89652": {
+"topic": "Plane Geometry",
+"branch": "Geometric Transformations",
+"subtopic": "Rotations",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Loci and Constructions",
+"Ruler-and-Compass Constructions"
+]
+},
+"89657": {
+"topic": "Plane Geometry",
+"branch": "Loci and Constructions",
+"subtopic": "Loci of Points",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Geometric Transformations",
+"Rotations"
+]
+},
+"89675": {
+"topic": "Plane Geometry",
+"branch": "Triangles",
+"subtopic": "Area of a Triangle",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Quadrilaterals and Polygons",
+"Parallelograms and Trapezoids"
+]
+},
+"89686": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Chords, Arcs and Inscribed Angles",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Circles",
+"Cyclic Quadrilaterals and Ptolemy's Theorem"
+]
+},
+"89708": {
+"topic": "Extremal Combinatorics",
+"branch": "Additive Combinatorics",
+"subtopic": "Arithmetic Progressions and van der Waerden's Theorem",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Additive Combinatorics",
+"Extremal Subsets of Integers"
+]
+},
+"89713": {
+"topic": "Algebraic Inequalities",
+"branch": "Mean Inequalities",
+"subtopic": "Bernoulli's Inequality",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Elementary Algebra",
+"Arithmetic and Pre-Algebra",
+"Estimation and Comparing Numbers"
+]
+},
+"89723": {
+"topic": "Elementary Algebra",
+"branch": "Exponentials and Logarithms",
+"subtopic": "Laws of Logarithms",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Algebra",
+"Arithmetic and Pre-Algebra",
+"Estimation and Comparing Numbers"
+]
+},
+"89740": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Symmetric Polynomial Inequalities",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Mean Inequalities",
+"AM-GM Inequality"
+]
+},
+"89744": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Extremal Values and Best Constants",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Mean Inequalities",
+"Power Means and Weighted Means"
+]
+},
+"89759": {
+"topic": "Sequences, Sums and Functional Equations",
+"branch": "Progressions and Finite Sums",
+"subtopic": "Telescoping Sums and Products",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Symmetric, Cyclic and Extremal Inequalities",
+"Bounding Sums and Products"
+]
+},
+"89769": {
+"topic": "Elementary Algebra",
+"branch": "Exponentials and Logarithms",
+"subtopic": "Exponential Equations and Inequalities",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Algebra",
+"Equations and Systems",
+"Solving Inequalities in One Variable"
+]
+},
+"89770": {
+"topic": "Elementary Algebra",
+"branch": "Exponentials and Logarithms",
+"subtopic": "Exponential Equations and Inequalities",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Symmetric, Cyclic and Extremal Inequalities",
+"Bounding Sums and Products"
+]
+},
+"89775": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Tangent Lines and Tangent Circles",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Logic and Algorithmic Puzzles",
+"Brainteasers",
+"Fermi Estimation"
+]
+},
+"89779": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Bounding Sums and Products",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Mean Inequalities",
+"AM-GM Inequality"
+]
+},
+"89781": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Cyclic and Fractional Inequalities",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Algebra",
+"Algebraic Expressions and Radicals",
+"Factoring and Algebraic Identities"
+]
+},
+"89782": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Symmetric Polynomial Inequalities",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Algebra",
+"Algebraic Expressions and Radicals",
+"Factoring and Algebraic Identities"
+]
+},
+"89783": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Extremal Values and Best Constants",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Mean Inequalities",
+"Power Means and Weighted Means"
+]
+},
+"89790": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Symmetric Polynomial Inequalities",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Mean Inequalities",
+"AM-GM Inequality"
+]
+},
+"89792": {
+"topic": "Algebraic Inequalities",
+"branch": "Mean Inequalities",
+"subtopic": "AM-GM Inequality",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Algebraic Inequalities",
+"Symmetric, Cyclic and Extremal Inequalities",
+"Symmetric Polynomial Inequalities"
+]
+},
+"89797": {
+"topic": "Extremal Combinatorics",
+"branch": "Arrangements and Sequences",
+"subtopic": "Number Arrangements with Adjacency Conditions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Counting with Restrictions",
+"Selections without Adjacent Elements"
+]
+},
+"89802": {
+"topic": "Combinatorial Geometry",
+"branch": "Point Configurations",
+"subtopic": "Vector Sums and Sign Choices",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Geometry",
+"Point Configurations",
+"Lattice Points and Lattice Polygons"
+]
+},
+"89803": {
+"topic": "Combinatorial Games and Processes",
+"branch": "Processes on Boards and Tokens",
+"subtopic": "Sliding Tiles and Token Swaps",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Games and Processes",
+"Processes on Boards and Tokens",
+"Chip Moves and Reachability"
+]
+},
+"89804": {
+"topic": "Enumerative Combinatorics",
+"branch": "Basic Counting Principles",
+"subtopic": "Pigeonhole Principle",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Geometry",
+"Point Configurations",
+"Colorings of the Plane and Space"
+]
+},
+"89807": {
+"topic": "Extremal Combinatorics",
+"branch": "Chessboards and Grids",
+"subtopic": "Colorings of Grids",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Geometry",
+"Point Configurations",
+"Colorings of the Plane and Space"
+]
+},
+"89808": {
+"topic": "Enumerative Combinatorics",
+"branch": "Basic Counting Principles",
+"subtopic": "Pigeonhole Principle",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Logic and Algorithmic Puzzles",
+"Algorithmic Puzzles",
+"River Crossing and Scheduling"
+]
+},
+"89809": {
+"topic": "Combinatorial Geometry",
+"branch": "Covering and Packing",
+"subtopic": "Packing Shapes in Regions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Graph Theory",
+"Graph Structure and Traversal",
+"Connectivity and Distances"
+]
+},
+"89812": {
+"topic": "Combinatorial Geometry",
+"branch": "Covering and Packing",
+"subtopic": "Points in Bounded Regions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Basic Counting Principles",
+"Pigeonhole Principle"
+]
+},
+"89815": {
+"topic": "Combinatorial Geometry",
+"branch": "Covering and Packing",
+"subtopic": "Packing Shapes in Regions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Geometry",
+"Tilings and Dissections",
+"Packing Bricks and Rectangles"
+]
+},
+"89817": {
+"topic": "Extremal Combinatorics",
+"branch": "Arrangements and Sequences",
+"subtopic": "Constrained Sequences and Words",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Basic Counting Principles",
+"Pigeonhole Principle"
+]
+},
+"89823": {
+"topic": "Combinatorial Games and Processes",
+"branch": "Two-Player Games",
+"subtopic": "Board Games",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Games and Processes",
+"Two-Player Games",
+"Nim and Wythoff's Game"
+]
+},
+"89827": {
+"topic": "Combinatorial Games and Processes",
+"branch": "Two-Player Games",
+"subtopic": "Selection and Sharing Games",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Games and Processes",
+"Two-Player Games",
+"Number and Digit Games"
+]
+},
+"89848": {
+"topic": "Plane Geometry",
+"branch": "Circles",
+"subtopic": "Chords, Arcs and Inscribed Angles",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Geometry",
+"Covering and Packing",
+"Covering by Discs and Polygons"
+]
+},
+"89853": {
+"topic": "Plane Geometry",
+"branch": "Geometric Inequalities",
+"subtopic": "Distance Inequalities for Points",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Geometry",
+"Point Configurations",
+"Distances in Finite Point Sets"
+]
+},
+"89860": {
+"topic": "Solid Geometry",
+"branch": "Polyhedra",
+"subtopic": "Cubes and Rectangular Boxes",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Graph Theory",
+"Graph Structure and Traversal",
+"Hamiltonian Paths and Cycles"
+]
+},
+"89866": {
+"topic": "Elementary Number Theory",
+"branch": "Digits and Number Bases",
+"subtopic": "Digit Sums",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Diophantine Equations",
+"Polynomial Diophantine Equations",
+"Perfect Squares and Perfect Powers"
+]
+},
+"89870": {
+"topic": "Elementary Number Theory",
+"branch": "Digits and Number Bases",
+"subtopic": "Digit Equations and Cryptarithms",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Congruences",
+"Congruence Properties and Residue Systems"
+]
+},
+"89878": {
+"topic": "Combinatorial Geometry",
+"branch": "Point Configurations",
+"subtopic": "Convex Position and Helly's Theorem",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Combinatorial Geometry",
+"Point Configurations",
+"Lines and Collinearity in Point Sets"
+]
+},
+"89894": {
+"topic": "Combinatorial Games and Processes",
+"branch": "Processes on Boards and Tokens",
+"subtopic": "Chip Moves and Reachability",
+"conf": "low",
+"how": "reclass-opus",
+"db": [
+"Combinatorial Geometry",
+"Polygons, Curves and Visibility",
+"Curves and Topological Arguments"
+]
+},
+"89896": {
+"topic": "Sequences, Sums and Functional Equations",
+"branch": "Recursive Sequences",
+"subtopic": "Nonlinear Recursive Sequences",
+"conf": "low",
+"how": "reclass-opus",
+"db": [
+"Extremal Combinatorics",
+"Arrangements and Sequences",
+"Constrained Sequences and Words"
+]
+},
+"89897": {
+"topic": "Plane Geometry",
+"branch": "Analytic Geometry",
+"subtopic": "Lines and Distances in Coordinates",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Geometry",
+"Point Configurations",
+"Lattice Points and Lattice Polygons"
+]
+},
+"89899": {
+"topic": "Combinatorial Geometry",
+"branch": "Point Configurations",
+"subtopic": "Convex Position and Helly's Theorem",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Geometry",
+"Tilings and Dissections",
+"Dissections of Polygons and Polyhedra"
+]
+},
+"89904": {
+"topic": "Graph Theory",
+"branch": "Graph Structure and Traversal",
+"subtopic": "Vertex Degrees and the Handshake Lemma",
+"conf": "low",
+"how": "reclass-opus",
+"db": [
+"Elementary Number Theory",
+"Divisibility and Greatest Common Divisor",
+"Division Algorithm and Residue Forms"
+]
+},
+"89909": {
+"topic": "Extremal Combinatorics",
+"branch": "Arrangements and Sequences",
+"subtopic": "Constrained Sequences and Words",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Logic and Algorithmic Puzzles",
+"Logic and Knowledge Puzzles",
+"Propositional Logic and Deduction"
+]
+},
+"89910": {
+"topic": "Algebraic Inequalities",
+"branch": "Symmetric, Cyclic and Extremal Inequalities",
+"subtopic": "Extremal Values and Best Constants",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Algebra",
+"Equations and Systems",
+"Quadratic Equations and Functions"
+]
+},
+"89915": {
+"topic": "Combinatorial Geometry",
+"branch": "Polygons, Curves and Visibility",
+"subtopic": "Diagonals and Triangulations of Polygons",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Combinatorial Geometry",
+"Tilings and Dissections",
+"Dissections of Polygons and Polyhedra"
+]
+},
+"89919": {
+"topic": "Enumerative Combinatorics",
+"branch": "Counting Geometric Configurations",
+"subtopic": "Counting Diagonals and Intersection Points",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Counting Geometric Configurations",
+"Regions Formed by Lines and Curves"
+]
+},
+"89922": {
+"topic": "Enumerative Combinatorics",
+"branch": "Basic Counting Principles",
+"subtopic": "Pigeonhole Principle",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Permutations and Symmetry",
+"Permutations with Restrictions"
+]
+},
+"89924": {
+"topic": "Elementary Algebra",
+"branch": "Algebraic Modeling",
+"subtopic": "Ages, Money and Sharing",
+"conf": "low",
+"how": "reclass-opus",
+"db": [
+"Enumerative Combinatorics",
+"Special Counting Numbers",
+"Integer Partitions"
+]
+},
+"89925": {
+"topic": "Elementary Number Theory",
+"branch": "Primes and Prime Factorization",
+"subtopic": "Fundamental Theorem of Arithmetic",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Extremal Combinatorics",
+"Arrangements and Sequences",
+"Number Arrangements with Adjacency Conditions"
+]
+},
+"89929": {
+"topic": "Enumerative Combinatorics",
+"branch": "Counting with Restrictions",
+"subtopic": "Counting Subsets with Conditions",
+"conf": "medium",
+"how": "reclass-opus",
+"db": [
+"Extremal Combinatorics",
+"Arrangements and Sequences",
+"Constrained Sequences and Words"
+]
+},
+"89936": {
+"topic": "Graph Theory",
+"branch": "Extremal Graph Theory",
+"subtopic": "Cliques and Independent Sets",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Graph Theory",
+"Graph Structure and Traversal",
+"Vertex Degrees and the Handshake Lemma"
+]
+},
+"89940": {
+"topic": "Elementary Number Theory",
+"branch": "Congruences",
+"subtopic": "Remainders and Last Digits of Powers",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Digits and Number Bases",
+"Repunits and Digit Patterns"
+]
+},
+"89941": {
+"topic": "Plane Geometry",
+"branch": "Geometric Inequalities",
+"subtopic": "Inequalities for Triangle Sides",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Plane Geometry",
+"Geometric Inequalities",
+"Distance Inequalities for Points"
+]
+},
+"89942": {
+"topic": "Extremal Combinatorics",
+"branch": "Designs and Number Arrays",
+"subtopic": "Number Tables with Row and Column Conditions",
+"conf": "high",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Basic Counting Principles",
+"Pigeonhole Principle"
+]
+},
+"89943": {
+"topic": "Enumerative Combinatorics",
+"branch": "Basic Counting Principles",
+"subtopic": "Combinations with Repetition (Stars and Bars)",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Enumerative Combinatorics",
+"Basic Counting Principles",
+"Sum and Product Rules"
+]
+},
+"89948": {
+"topic": "Sequences, Sums and Functional Equations",
+"branch": "Progressions and Finite Sums",
+"subtopic": "Arithmetic Progressions",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Diophantine Equations",
+"Classical Diophantine Equations",
+"Linear Diophantine Equations"
+]
+},
+"89954": {
+"topic": "Elementary Algebra",
+"branch": "Arithmetic and Pre-Algebra",
+"subtopic": "Order of Operations and Numerical Evaluation",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Digits and Number Bases",
+"Digit Equations and Cryptarithms"
+]
+},
+"89955": {
+"topic": "Elementary Algebra",
+"branch": "Arithmetic and Pre-Algebra",
+"subtopic": "Order of Operations and Numerical Evaluation",
+"conf": "medium",
+"how": "reclass-pass1",
+"db": [
+"Elementary Number Theory",
+"Digits and Number Bases",
+"Digit Equations and Cryptarithms"
+]
+}
+}

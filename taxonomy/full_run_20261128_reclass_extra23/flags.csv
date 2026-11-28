@@ -1,0 +1,10 @@
+question_id,flags,subject,note
+87352,key_conflict,Probability and Stochastic Processes,Stated formulas are wrong; solution proves corrected version.
+88486,key_conflict,Probability and Stochastic Processes,Solution says 'decreases' is a misprint; shows it increases.
+88742,key_conflict,Probability and Stochastic Processes,Solution says statement with 1+eps is false; proves 2+eps version.
+88749,key_conflict,Probability and Stochastic Processes,Solution says statement false without centering; proves LIL for S_n - np.
+89282,key_conflict,Algebra,Statement as given is false; intended version needs both bounds.
+89626,key_conflict,Combinatorics,"Solution claims the statement is false (pair A,B may need four roads)."
+89854,key_conflict,Combinatorics,"Statement says ≤1; solution proves ≥1, calling it mistranslation"
+89910,key_conflict,Algebra,"Strict inequality false; equality at x=400,y=100."
+89957,broken_text,Combinatorics,Stated condition garbled; solution reads it as non-attacking maharajas
