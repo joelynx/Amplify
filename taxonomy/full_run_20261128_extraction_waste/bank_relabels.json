@@ -1,0 +1,62 @@
+{
+ "85365": {
+  "topic": "Mathematical Statistics",
+  "branch": "Statistical Models and Data Collection",
+  "subtopic": "Study Design and Experiments",
+  "conf": "medium",
+  "how": "low-confidence review",
+  "db": [
+   "Mathematical Statistics",
+   "Linear Models",
+   "Regression Diagnostics"
+  ]
+ },
+ "85366": {
+  "topic": "Mathematical Statistics",
+  "branch": "Statistical Models and Data Collection",
+  "subtopic": "Study Design and Experiments",
+  "conf": "medium",
+  "how": "low-confidence review",
+  "db": [
+   "Mathematical Statistics",
+   "Linear Models",
+   "Regression Diagnostics"
+  ]
+ },
+ "85367": {
+  "topic": "Mathematical Statistics",
+  "branch": "Statistical Models and Data Collection",
+  "subtopic": "Study Design and Experiments",
+  "conf": "medium",
+  "how": "low-confidence review",
+  "db": [
+   "Mathematical Statistics",
+   "Hypothesis Testing",
+   "Tests for Means"
+  ]
+ },
+ "85368": {
+  "topic": "Mathematical Statistics",
+  "branch": "Statistical Models and Data Collection",
+  "subtopic": "Study Design and Experiments",
+  "conf": "medium",
+  "how": "low-confidence review",
+  "db": [
+   "Mathematical Statistics",
+   "Hypothesis Testing",
+   "Size and Power of Tests"
+  ]
+ },
+ "85381": {
+  "topic": "Mathematical Statistics",
+  "branch": "Statistical Models and Data Collection",
+  "subtopic": "Study Design and Experiments",
+  "conf": "medium",
+  "how": "low-confidence review",
+  "db": [
+   "Mathematical Statistics",
+   "Linear Models",
+   "Inference in Linear Models"
+  ]
+ }
+}

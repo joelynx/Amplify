@@ -10505,6 +10505,34 @@
   ]
  },
  {
+  "group": "G5",
+  "subject": "Statistics",
+  "topic": "Mathematical Statistics",
+  "branch": "Statistical Models and Data Collection",
+  "subtopic": "Statistical Models and Parameterization",
+  "note": "specifying the family of distributions for observed data, parameter spaces, parameterizations and identifiability, models for summarized or partially observed data",
+  "est": 0,
+  "orig": [
+   "Mathematical Statistics",
+   "Statistical Models and Data Collection",
+   "Statistical Models and Parameterization"
+  ]
+ },
+ {
+  "group": "G5",
+  "subject": "Statistics",
+  "topic": "Mathematical Statistics",
+  "branch": "Statistical Models and Data Collection",
+  "subtopic": "Study Design and Experiments",
+  "note": "observational studies versus controlled experiments, response and predictor variables, cause and effect and confounding, randomization, blocking and interaction in designed experiments",
+  "est": 0,
+  "orig": [
+   "Mathematical Statistics",
+   "Statistical Models and Data Collection",
+   "Study Design and Experiments"
+  ]
+ },
+ {
   "group": "G6",
   "subject": "Quantitative Finance",
   "topic": "Derivatives Pricing",
@@ -14520,6 +14548,20 @@
    "Optics",
    "Geometrical Optics",
    "Photometry"
+  ]
+ },
+ {
+  "group": "G7",
+  "subject": "Electromagnetism and Special Relativity",
+  "topic": "Optics",
+  "branch": "Geometrical Optics",
+  "subtopic": "Reflection and Plane Mirrors",
+  "note": "law of reflection, plane-mirror images and fields of view, multiple and rotating mirrors, rays bouncing inside curved mirrors; image formation by spherical mirrors see Lenses and Spherical Refracting Surfaces",
+  "est": 0,
+  "orig": [
+   "Optics",
+   "Geometrical Optics",
+   "Reflection and Plane Mirrors"
   ]
  },
  {

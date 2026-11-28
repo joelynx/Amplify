@@ -1,0 +1,62 @@
+{
+ "81640": {
+  "topic": "Optics",
+  "branch": "Geometrical Optics",
+  "subtopic": "Reflection and Plane Mirrors",
+  "conf": "medium",
+  "how": "low-confidence review",
+  "db": [
+   "Optics",
+   "Geometrical Optics",
+   "Refraction and Total Internal Reflection"
+  ]
+ },
+ "81963": {
+  "topic": "Optics",
+  "branch": "Geometrical Optics",
+  "subtopic": "Reflection and Plane Mirrors",
+  "conf": "medium",
+  "how": "low-confidence review",
+  "db": [
+   "Optics",
+   "Geometrical Optics",
+   "Refraction and Total Internal Reflection"
+  ]
+ },
+ "81905": {
+  "topic": "Optics",
+  "branch": "Geometrical Optics",
+  "subtopic": "Reflection and Plane Mirrors",
+  "conf": "medium",
+  "how": "low-confidence review",
+  "db": [
+   "Optics",
+   "Geometrical Optics",
+   "Refraction and Total Internal Reflection"
+  ]
+ },
+ "81342": {
+  "topic": "Heat and Mass Transfer",
+  "branch": "Thermal Radiation",
+  "subtopic": "Blackbody Radiation Laws",
+  "conf": "medium",
+  "how": "low-confidence review",
+  "db": [
+   "Heat and Thermodynamics",
+   "Laws of Thermodynamics",
+   "First Law for Closed Systems"
+  ]
+ },
+ "81812": {
+  "topic": "Heat and Mass Transfer",
+  "branch": "Thermal Radiation",
+  "subtopic": "Blackbody Radiation Laws",
+  "conf": "medium",
+  "how": "low-confidence review",
+  "db": [
+   "Heat and Thermodynamics",
+   "Phase Change and Moist Air",
+   "Latent Heat and Phase Change"
+  ]
+ }
+}
